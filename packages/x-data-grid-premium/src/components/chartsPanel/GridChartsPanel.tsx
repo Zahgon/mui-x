@@ -79,59 +79,7 @@ function GridChartsPanelChartSelector(props: {
   activeChartId: string;
   chartEntries: [string, ChartState][];
 }) {
-  const apiRef = useGridApiContext();
-  const rootProps = useGridRootProps();
-  const { activeChartId, chartEntries } = props;
-  const triggerRef = React.useRef<HTMLButtonElement>(null);
-  const [open, setOpen] = React.useState(false);
-  const menuId = useId();
-  const triggerId = useId();
-  const activeChart = chartEntries.find(([chartId]) => chartId === activeChartId);
-
-  return (
-    <React.Fragment>
-      <GridChartsPanelChartSelection
-        id={triggerId}
-        aria-haspopup="true"
-        aria-controls={open ? menuId : undefined}
-        aria-expanded={open ? 'true' : undefined}
-        ownerState={rootProps}
-        onClick={() => setOpen(!open)}
-        ref={triggerRef}
-      >
-        {activeChart?.[1]?.label}
-        <rootProps.slots.promptChangesToggleIcon fontSize="small" />
-      </GridChartsPanelChartSelection>
-      <GridMenu
-        open={open}
-        target={triggerRef.current}
-        onClose={() => setOpen(false)}
-        position="bottom-start"
-      >
-        <rootProps.slots.baseMenuList
-          id={menuId}
-          aria-labelledby={triggerId}
-          autoFocusItem
-          {...rootProps.slotProps?.baseMenuList}
-        >
-          {chartEntries.map(([chartId, chartState]) => (
-            <rootProps.slots.baseMenuItem
-              key={chartId}
-              value={chartId}
-              onClick={() => {
-                apiRef.current.setActiveChartId(chartId);
-                setOpen(false);
-              }}
-              selected={chartId === activeChartId}
-              {...rootProps.slotProps?.baseMenuItem}
-            >
-              {chartState.label || chartId}
-            </rootProps.slots.baseMenuItem>
-          ))}
-        </rootProps.slots.baseMenuList>
-      </GridMenu>
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }
 
 GridChartsPanelChartSelector.propTypes /* remove-proptypes */ = {
@@ -182,58 +130,31 @@ function GridChartsPanel(props: GridChartsPanelProps) {
   const { chartStateLookup } = useGridChartsIntegrationContext();
   const [activeTab, setActiveTab] = React.useState('chart');
 
-  const chartEntries = React.useMemo(() => Object.entries(chartStateLookup), [chartStateLookup]);
+  const chartEntries = React.useMemo(() => { throw new Error("STUB"); }, [chartStateLookup]);
   const activeChartType = React.useMemo(
-    () => chartStateLookup[activeChartId]?.type || '',
+    () => { throw new Error("STUB"); },
     [chartStateLookup, activeChartId],
   );
   const currentChartConfiguration: GridChartsConfigurationOptions[string] = React.useMemo(() => {
-    return schema[activeChartType] || {};
+      throw new Error("STUB");
   }, [schema, activeChartType]);
 
   const handleChartSyncChange = React.useCallback(
     (newSyncState: boolean) => {
-      apiRef.current.setChartSynchronizationState(activeChartId, newSyncState);
-    },
+          throw new Error("STUB");
+      },
     [apiRef, activeChartId],
   );
 
   const handleChartTypeChange = React.useCallback(
     (type: string) => {
-      apiRef.current.setChartType(activeChartId, type);
-    },
+          throw new Error("STUB");
+      },
     [apiRef, activeChartId],
   );
 
   const tabItems = React.useMemo(
-    () => [
-      {
-        value: 'chart',
-        label: apiRef.current.getLocaleText('chartsTabChart'),
-        children: (
-          <GridChartsPanelChart
-            schema={schema}
-            selectedChartType={chartStateLookup[activeChartId]?.type}
-            onChartTypeChange={handleChartTypeChange}
-          />
-        ),
-      },
-      {
-        value: 'data',
-        label: apiRef.current.getLocaleText('chartsTabFields'),
-        children: <GridChartsPanelData />,
-      },
-      {
-        value: 'customize',
-        label: apiRef.current.getLocaleText('chartsTabCustomize'),
-        children: (
-          <GridChartsPanelCustomize
-            activeChartId={activeChartId}
-            sections={currentChartConfiguration.customization || []}
-          />
-        ),
-      },
-    ],
+    () => { throw new Error("STUB"); },
     [
       apiRef,
       activeChartId,
@@ -259,7 +180,7 @@ function GridChartsPanel(props: GridChartsPanelProps) {
               aria-label={rootProps.localeText.chartsSyncButtonLabel}
               selected={chartStateLookup[activeChartId]?.synced}
               onClick={() => {
-                handleChartSyncChange(!chartStateLookup[activeChartId]?.synced);
+                  throw new Error("STUB");
               }}
             >
               {chartStateLookup[activeChartId]?.synced ? (
@@ -272,8 +193,8 @@ function GridChartsPanel(props: GridChartsPanelProps) {
         )}
         <rootProps.slots.baseIconButton
           onClick={() => {
-            apiRef.current.setChartsPanelOpen(false);
-          }}
+                      throw new Error("STUB");
+                  }}
           aria-label={apiRef.current.getLocaleText('chartsCloseButton')}
           {...rootProps.slotProps?.baseIconButton}
         >
@@ -285,7 +206,7 @@ function GridChartsPanel(props: GridChartsPanelProps) {
           items={tabItems}
           value={activeTab}
           onChange={(_event, value) => {
-            setActiveTab(value);
+              throw new Error("STUB");
           }}
           {...rootProps.slotProps?.baseTabs}
         />

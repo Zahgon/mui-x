@@ -22,44 +22,13 @@ export interface ChatTypingIndicatorProps extends TypingIndicatorProps {
 const ChatTypingIndicatorStyled = styled('div', {
   name: 'MuiChatTypingIndicator',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: theme.spacing(0.5),
-  padding: theme.spacing(0.5, 1.5),
-  fontSize: theme.typography.caption.fontSize,
-  color: (theme.vars || theme).palette.text.secondary,
-  fontStyle: 'italic',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatTypingIndicator = React.forwardRef<HTMLDivElement, ChatTypingIndicatorProps>(
   function ChatTypingIndicator(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatTypingIndicator' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatTypingIndicatorUtilityClasses(classesProp);
-
-    return (
-      <TypingIndicator
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          root: slots?.root ?? ChatTypingIndicatorStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          root: mergeSlotProps(
-            {
-              className: clsx(classes.root, className),
-              sx,
-            },
-            slotProps?.root,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatTypingIndicator.propTypes /* remove-proptypes */ = {

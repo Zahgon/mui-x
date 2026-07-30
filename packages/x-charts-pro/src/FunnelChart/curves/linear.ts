@@ -47,28 +47,16 @@ export class Linear implements FunnelCurveGenerator {
       pointShape,
     }: CurveOptions,
   ) {
-    this.context = context;
-    this.isHorizontal = isHorizontal ?? false;
-    this.gap = gap ?? 0;
-    this.position = position ?? 0;
-    this.sections = sections ?? 1;
-    this.borderRadius = borderRadius ?? 0;
-    this.isIncreasing = isIncreasing ?? false;
-    this.min = min ?? { x: 0, y: 0 };
-    this.max = max ?? { x: 0, y: 0 };
-    this.pointShape = pointShape ?? 'square';
-
-    if (isIncreasing) {
-      const currentMin = this.min;
-      const currentMax = this.max;
-      this.min = currentMax;
-      this.max = currentMin;
-    }
+      throw new Error("STUB");
   }
 
-  areaStart(): void {}
+  areaStart(): void {
+      throw new Error("STUB");
+  }
 
-  areaEnd(): void {}
+  areaEnd(): void {
+      throw new Error("STUB");
+  }
 
   lineStart(): void {}
 
@@ -114,60 +102,7 @@ export class Linear implements FunnelCurveGenerator {
   }
 
   processPoints(points: Point[]): Point[] {
-    // Add gaps where they are needed.
-    const processedPoints = points.map((point, index) => {
-      const slopeStart = points.at(index <= 1 ? 0 : 3)!;
-      const slopeEnd = points.at(index <= 1 ? 1 : 2)!;
-
-      if (this.isHorizontal) {
-        const yGetter = lerpY(slopeStart.x - this.gap, slopeStart.y, slopeEnd.x, slopeEnd.y);
-
-        return {
-          x: point.x,
-          y: yGetter(point.x),
-        };
-      }
-
-      const xGetter = lerpX(slopeStart.x, slopeStart.y - this.gap, slopeEnd.x, slopeEnd.y);
-
-      return {
-        x: xGetter(point.y),
-        y: point.y,
-      };
-    });
-
-    if (this.pointShape === 'sharp') {
-      // In the last section, to form a triangle we need 3 points instead of 4
-      // Else the algorithm will break.
-      const isLastSection = this.position === this.sections - 1;
-      const isFirstSection = this.position === 0;
-
-      let firstPoint: Point | null = null;
-      let secondPoint: Point | null = null;
-
-      if (isFirstSection && this.isIncreasing) {
-        firstPoint = processedPoints[1];
-        secondPoint = processedPoints[2];
-      }
-
-      if (isLastSection && !this.isIncreasing) {
-        firstPoint = processedPoints[3];
-        secondPoint = processedPoints[0];
-      }
-
-      if (firstPoint && secondPoint) {
-        return [
-          // Sharp point at the start
-          this.isHorizontal
-            ? { x: this.max.x, y: (this.max.y + this.min.y) / 2 }
-            : { x: (this.max.x + this.min.x) / 2, y: this.max.y },
-          // Then other points
-          firstPoint,
-          secondPoint,
-        ];
-      }
-    }
-    return processedPoints;
+      throw new Error("STUB");
   }
 
   point(xIn: number, yIn: number): void {

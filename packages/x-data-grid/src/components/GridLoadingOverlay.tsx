@@ -32,34 +32,23 @@ const LOADING_VARIANTS: Record<
   }
 > = {
   'circular-progress': {
-    component: (rootProps: DataGridProcessedProps) => rootProps.slots.baseCircularProgress,
+    component: (rootProps: DataGridProcessedProps) => { throw new Error("STUB"); },
     style: {},
   },
   'linear-progress': {
-    component: (rootProps: DataGridProcessedProps) => rootProps.slots.baseLinearProgress,
+    component: (rootProps: DataGridProcessedProps) => { throw new Error("STUB"); },
     style: { display: 'block' },
   },
   skeleton: {
-    component: () => GridSkeletonLoadingOverlay,
+    component: () => { throw new Error("STUB"); },
     style: { display: 'block' },
   },
 };
 
 const GridLoadingOverlay = forwardRef<HTMLDivElement, GridLoadingOverlayProps>(
   function GridLoadingOverlay(props, ref) {
-    const { variant = 'linear-progress', noRowsVariant = 'skeleton', style, ...other } = props;
-    const apiRef = useGridApiContext();
-    const rootProps = useGridRootProps();
-    const rowsCount = useGridSelector(apiRef, gridRowCountSelector);
-    const activeVariant = LOADING_VARIANTS[rowsCount === 0 ? noRowsVariant : variant];
-    const Component = activeVariant.component(rootProps);
-
-    return (
-      <GridOverlay style={{ ...activeVariant.style, ...style }} {...other} ref={ref}>
-        <Component />
-      </GridOverlay>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridLoadingOverlay.propTypes /* remove-proptypes */ = {

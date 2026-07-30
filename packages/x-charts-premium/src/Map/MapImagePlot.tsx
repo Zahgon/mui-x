@@ -59,55 +59,19 @@ function MapImagePlot(props: MapImagePlotProps) {
   // Keep the latest `onReady` without making it a reprojection dependency.
   const onReadyRef = React.useRef(onReady);
   React.useEffect(() => {
-    onReadyRef.current = onReady;
+      throw new Error("STUB");
   });
 
   // Load (decode) the source image only when `href` changes. Clearing the image
   // first hides the now-stale raster until the new one is ready.
   React.useEffect(() => {
-    setImage(null);
-    if (!href) {
-      return undefined;
-    }
-    let cancelled = false;
-    const nextImage = new Image();
-    nextImage.crossOrigin = 'anonymous';
-    nextImage.onload = () => {
-      if (!cancelled) {
-        setImage(nextImage);
-      }
-    };
-    nextImage.src = href;
-    return () => {
-      cancelled = true;
-    };
+      throw new Error("STUB");
   }, [href]);
 
   // Reproject whenever the decoded image, projection, drawing area, or bounds
   // change. This is synchronous, so switching projection does not reload `href`.
   React.useEffect(() => {
-    if (
-      !image ||
-      !projection ||
-      typeof projection.invert !== 'function' ||
-      width <= 0 ||
-      height <= 0
-    ) {
-      setDataUrl(null);
-      onReadyRef.current?.(null);
-      return;
-    }
-    const url = reprojectEquirectangularImage({
-      image,
-      projection,
-      area: { left, top, width, height },
-      imageBounds: [
-        [west, south],
-        [east, north],
-      ],
-    });
-    setDataUrl(url);
-    onReadyRef.current?.(url);
+      throw new Error("STUB");
   }, [image, projection, left, top, width, height, west, south, east, north]);
 
   if (!dataUrl) {

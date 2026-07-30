@@ -94,20 +94,7 @@ function DayCalendarSkeleton(inProps: DayCalendarSkeletonProps) {
       ownerState={props}
       {...other}
     >
-      {monthMap.map((week, index) => (
-        <DayCalendarSkeletonWeek key={index} className={classes.week}>
-          {week.map((dayInMonth, index2) => (
-            <DayCalendarSkeletonDay
-              key={index2}
-              variant="circular"
-              width={DAY_SIZE}
-              height={DAY_SIZE}
-              className={classes.daySkeleton}
-              data-day-in-month={dayInMonth}
-            />
-          ))}
-        </DayCalendarSkeletonWeek>
-      ))}
+      {monthMap.map((week, index) => { throw new Error("STUB"); })}
     </DayCalendarSkeletonRoot>
   );
 }

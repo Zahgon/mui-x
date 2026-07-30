@@ -111,7 +111,7 @@ export function buildSamplingPyramid(
 
 /** Number of stored levels (finest `bucketSize 2` to coarsest). */
 export function getSamplingLevelCount(pyramid: SamplingPyramid): number {
-  return pyramid.offsets.length - 1;
+    throw new Error("STUB");
 }
 
 /**

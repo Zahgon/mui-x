@@ -73,33 +73,19 @@ const GridQuickFilterRoot = styled('div', {
 const GridQuickFilterTrigger = styled(ToolbarButton, {
   name: 'MuiDataGrid',
   slot: 'ToolbarQuickFilterTrigger',
-})(({ ownerState }: { ownerState: OwnerState }) => ({
-  gridArea: '1 / 1',
-  width: 'min-content',
-  height: 'min-content',
-  zIndex: 1,
-  opacity: ownerState.expanded ? 0 : 1,
-  pointerEvents: ownerState.expanded ? 'none' : 'auto',
-  transition: vars.transition(['opacity']),
-}));
+})(({ ownerState }: { ownerState: OwnerState }) => { throw new Error("STUB"); });
 
 // TODO: Use NotRendered from /utils/assert
 // Currently causes react-docgen to fail
 const GridQuickFilterTextField = styled(
   (_props: GridSlotProps['baseTextField']) => {
-    throw new Error('MUI X: Failed assertion: should not be rendered');
-  },
+        throw new Error("STUB");
+    },
   {
     name: 'MuiDataGrid',
     slot: 'ToolbarQuickFilterControl',
   },
-)(({ ownerState }: { ownerState: OwnerState }) => ({
-  gridArea: '1 / 1',
-  overflowX: 'clip',
-  width: ownerState.expanded ? 260 : 'var(--trigger-width)',
-  opacity: ownerState.expanded ? 1 : 0,
-  transition: vars.transition(['width', 'opacity']),
-}));
+)(({ ownerState }: { ownerState: OwnerState }) => { throw new Error("STUB"); });
 
 /**
  * @deprecated Use the {@link https://mui.com/x/react-data-grid/components/quick-filter/ Quick Filter} component instead. This component will be removed in a future major release.
@@ -122,71 +108,7 @@ function GridToolbarQuickFilter(props: GridToolbarQuickFilterProps) {
       formatter={quickFilterFormatter}
       debounceMs={debounceMs}
       render={(quickFilterProps, state) => {
-        const currentOwnerState = {
-          ...ownerState,
-          expanded: state.expanded,
-        };
-        return (
-          <GridQuickFilterRoot {...quickFilterProps} className={clsx(classes.root, className)}>
-            <QuickFilterTrigger
-              render={(triggerProps) => (
-                <rootProps.slots.baseTooltip
-                  title={apiRef.current.getLocaleText('toolbarQuickFilterLabel')}
-                  enterDelay={0} // Prevents tooltip lagging behind transitioning trigger element
-                >
-                  <GridQuickFilterTrigger
-                    className={classes.trigger}
-                    {...triggerProps}
-                    ownerState={currentOwnerState}
-                    color="default"
-                    aria-disabled={state.expanded}
-                  >
-                    <rootProps.slots.quickFilterIcon fontSize="small" />
-                  </GridQuickFilterTrigger>
-                </rootProps.slots.baseTooltip>
-              )}
-            />
-            <QuickFilterControl
-              render={({ ref, slotProps: controlSlotProps, ...controlProps }) => (
-                <GridQuickFilterTextField
-                  as={rootProps.slots.baseTextField}
-                  className={classes.control}
-                  ownerState={currentOwnerState}
-                  inputRef={ref}
-                  aria-label={apiRef.current.getLocaleText('toolbarQuickFilterLabel')}
-                  placeholder={apiRef.current.getLocaleText('toolbarQuickFilterPlaceholder')}
-                  size="small"
-                  slotProps={{
-                    input: {
-                      startAdornment: <rootProps.slots.quickFilterIcon fontSize="small" />,
-                      endAdornment: controlProps.value ? (
-                        <QuickFilterClear
-                          render={
-                            <rootProps.slots.baseIconButton
-                              size="small"
-                              edge="end"
-                              aria-label={apiRef.current.getLocaleText(
-                                'toolbarQuickFilterDeleteIconLabel',
-                              )}
-                            >
-                              <rootProps.slots.quickFilterClearIcon fontSize="small" />
-                            </rootProps.slots.baseIconButton>
-                          }
-                        />
-                      ) : null,
-                      ...controlSlotProps?.input,
-                    },
-                    ...controlSlotProps,
-                  }}
-                  {...rootProps.slotProps?.baseTextField}
-                  {...controlProps}
-                  {...slotProps?.root}
-                  {...other}
-                />
-              )}
-            />
-          </GridQuickFilterRoot>
-        );
+          throw new Error("STUB");
       }}
     />
   );

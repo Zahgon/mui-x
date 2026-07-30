@@ -132,10 +132,7 @@ export class TapGesture<GestureName extends string> extends PointerGesture<Gestu
   }
 
   protected updateOptions(options: typeof this.mutableOptionsType): void {
-    super.updateOptions(options);
-
-    this.maxDistance = options.maxDistance ?? this.maxDistance;
-    this.taps = options.taps ?? this.taps;
+      throw new Error("STUB");
   }
 
   protected resetState(): void {
@@ -159,113 +156,7 @@ export class TapGesture<GestureName extends string> extends PointerGesture<Gestu
     pointers: Map<number, PointerData>,
     event: PointerEvent,
   ): void => {
-    const pointersArray = Array.from(pointers.values());
-
-    // Find which element (if any) is being targeted
-    const targetElement = this.getTargetElement(event);
-    if (!targetElement) {
-      return;
-    }
-
-    // Filter pointers to only include those targeting our element or its children
-    const relevantPointers = this.getRelevantPointers(pointersArray, targetElement);
-
-    if (
-      this.shouldPreventGesture(targetElement, event.pointerType) ||
-      !this.isWithinPointerCount(relevantPointers, event.pointerType)
-    ) {
-      if (this.isActive) {
-        // Cancel the gesture if it was active
-        this.cancelTap(targetElement, relevantPointers, event);
-      }
-      return;
-    }
-
-    switch (event.type) {
-      case 'pointerdown':
-        if (!this.isActive) {
-          // Calculate and store the starting centroid
-          this.state.startCentroid = calculateCentroid(relevantPointers);
-          this.state.lastPosition = { ...this.state.startCentroid };
-          this.isActive = true;
-
-          // Store the original target element
-          this.originalTarget = targetElement;
-        }
-        break;
-
-      case 'pointermove':
-        if (this.isActive && this.state.startCentroid) {
-          // Calculate current position
-          const currentPosition = calculateCentroid(relevantPointers);
-          this.state.lastPosition = currentPosition;
-
-          // Calculate distance from start position
-          const deltaX = currentPosition.x - this.state.startCentroid.x;
-          const deltaY = currentPosition.y - this.state.startCentroid.y;
-          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-          // If moved too far, cancel the tap gesture
-          if (distance > this.maxDistance) {
-            this.cancelTap(targetElement, relevantPointers, event);
-          }
-        }
-        break;
-
-      case 'pointerup':
-        if (this.isActive) {
-          // For valid tap: increment tap count
-          this.state.currentTapCount += 1;
-
-          // Make sure we have a valid position before firing the tap event
-          const position = this.state.lastPosition || this.state.startCentroid;
-          if (!position) {
-            this.cancelTap(targetElement, relevantPointers, event);
-            return;
-          }
-
-          // Check if we've reached the desired number of taps
-          if (this.state.currentTapCount >= this.taps) {
-            // The complete tap sequence has been detected - fire the tap event
-            this.fireTapEvent(targetElement, relevantPointers, event, position);
-
-            // Reset state after successful tap
-            this.resetState();
-          } else {
-            // Store the time of this tap for multi-tap detection
-            this.state.lastTapTime = event.timeStamp;
-
-            // Reset active state but keep the tap count for multi-tap detection
-            this.isActive = false;
-
-            // For multi-tap detection: keep track of the last tap position
-            // but clear the start centroid to prepare for next tap
-            this.state.startCentroid = null;
-
-            // Start a timeout to reset the tap count if the next tap doesn't come soon enough.
-            // Track the id so it can be cleared on destroy/reset to avoid leaks and stale firings.
-            if (this.state.multiTapResetTimeoutId !== null) {
-              clearTimeout(this.state.multiTapResetTimeoutId);
-            }
-            this.state.multiTapResetTimeoutId = setTimeout(() => {
-              this.state.multiTapResetTimeoutId = null;
-              if (this.state.currentTapCount > 0 && this.state.currentTapCount < this.taps) {
-                this.state.currentTapCount = 0;
-              }
-            }, 300); // 300ms is a typical double-tap detection window
-          }
-        }
-        break;
-
-      case 'pointercancel':
-      case 'forceCancel':
-        // Cancel the gesture
-        this.cancelTap(targetElement, relevantPointers, event);
-        break;
-
-      default:
-        break;
-    }
+      throw new Error("STUB");
   };
 
   /**
@@ -277,83 +168,13 @@ export class TapGesture<GestureName extends string> extends PointerGesture<Gestu
     event: PointerEvent,
     position: { x: number; y: number },
   ): void {
-    // Get list of active gestures
-    const activeGestures = this.gesturesRegistry.getActiveGestures(element);
-
-    // Create custom event data for the tap event
-    const customEventData: TapGestureEventData = {
-      gestureName: this.name,
-      centroid: position,
-      target: event.target,
-      srcEvent: event,
-      phase: 'end', // The tap is complete, so we use 'end' state for the event data
-      pointers,
-      timeStamp: event.timeStamp,
-      x: position.x,
-      y: position.y,
-      tapCount: this.state.currentTapCount,
-      activeGestures,
-      customData: this.customData,
-    };
-
-    // Dispatch a single 'tap' event (not 'tapStart', 'tapEnd', etc.)
-    const domEvent = new CustomEvent(this.name, {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: customEventData,
-    });
-
-    element.dispatchEvent(domEvent);
-
-    // Apply preventDefault/stopPropagation if configured
-    if (this.preventDefault) {
-      event.preventDefault();
-    }
-
-    if (this.stopPropagation) {
-      event.stopPropagation();
-    }
+      throw new Error("STUB");
   }
 
   /**
    * Cancel the current tap gesture
    */
   private cancelTap(element: TargetElement, pointers: PointerData[], event: PointerEvent): void {
-    if (this.state.startCentroid || this.state.lastPosition) {
-      const position = this.state.lastPosition || this.state.startCentroid;
-
-      // Get list of active gestures
-      const activeGestures = this.gesturesRegistry.getActiveGestures(element);
-
-      // Create custom event data for the cancel event
-      const customEventData: TapGestureEventData = {
-        gestureName: this.name,
-        centroid: position!,
-        target: event.target,
-        srcEvent: event,
-        phase: 'cancel',
-        pointers,
-        timeStamp: event.timeStamp,
-        x: position!.x,
-        y: position!.y,
-        tapCount: this.state.currentTapCount,
-        activeGestures,
-        customData: this.customData,
-      };
-
-      // Dispatch a 'tapCancel' event
-      const eventName = createEventName(this.name, 'cancel');
-      const domEvent = new CustomEvent(eventName, {
-        bubbles: true,
-        cancelable: true,
-        composed: true,
-        detail: customEventData,
-      });
-
-      element.dispatchEvent(domEvent);
-    }
-
-    this.resetState();
+      throw new Error("STUB");
   }
 }

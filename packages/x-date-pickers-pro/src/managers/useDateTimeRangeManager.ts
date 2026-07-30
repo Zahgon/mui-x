@@ -25,15 +25,7 @@ export function useDateTimeRangeManager(
   const { dateSeparator } = parameters;
 
   return React.useMemo(
-    () => ({
-      valueType: 'date-time',
-      validator: validateDateTimeRange,
-      internal_valueManager: rangeValueManager,
-      internal_fieldValueManager: getRangeFieldValueManager({ dateSeparator }),
-      internal_useApplyDefaultValuesToFieldInternalProps:
-        useApplyDefaultValuesToDateTimeRangeFieldInternalProps,
-      internal_useOpenPickerButtonAriaLabel: useOpenPickerButtonAriaLabel,
-    }),
+    () => { throw new Error("STUB"); },
     [dateSeparator],
   );
 }
@@ -43,31 +35,14 @@ function useOpenPickerButtonAriaLabel(value: PickerRangeValue) {
   const translations = usePickerTranslations();
 
   return React.useMemo(() => {
-    return translations.openRangePickerDialogue(formatRange(adapter, value, 'fullDate'));
+      throw new Error("STUB");
   }, [value, translations, adapter]);
 }
 
 function useApplyDefaultValuesToDateTimeRangeFieldInternalProps(
   internalProps: DateTimeRangeManagerFieldInternalProps,
 ): PickerManagerFieldInternalPropsWithDefaults<UseDateTimeRangeManagerReturnValue> {
-  const adapter = usePickerAdapter();
-  const validationProps = useApplyDefaultValuesToDateTimeValidationProps(internalProps);
-
-  const ampm = React.useMemo(
-    () => internalProps.ampm ?? adapter.is12HourCycleInCurrentLocale(),
-    [internalProps.ampm, adapter],
-  );
-
-  return React.useMemo(
-    () => ({
-      ...internalProps,
-      ...validationProps,
-      format:
-        internalProps.format ??
-        (ampm ? adapter.formats.keyboardDateTime12h : adapter.formats.keyboardDateTime24h),
-    }),
-    [internalProps, validationProps, ampm, adapter],
-  );
+    throw new Error("STUB");
 }
 
 export interface UseDateTimeRangeManagerParameters extends RangeFieldSeparatorProps {}

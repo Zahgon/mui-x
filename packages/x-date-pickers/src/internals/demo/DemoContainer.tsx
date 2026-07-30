@@ -70,32 +70,7 @@ interface DemoItemProps extends Omit<StackProps, 'component'> {
  * Please do not use it in your application.
  */
 export function DemoItem(props: DemoItemProps) {
-  const { label, children, component, sx: sxProp } = props;
-
-  let spacing: StackProps['spacing'];
-  let sx: SxProps<Theme> = {};
-
-  if (component && getChildTypeFromChildName(component) === 'multi-input-range-field') {
-    spacing = 1.5;
-    sx = {
-      [`& .${textFieldClasses.root}`]: {
-        flexGrow: 1,
-      },
-    };
-  } else {
-    spacing = 1;
-  }
-
-  return (
-    <Stack
-      direction="column"
-      spacing={spacing}
-      sx={[...(Array.isArray(sxProp) ? sxProp : [sxProp]), sx]}
-    >
-      {label && <Typography variant="body2">{label}</Typography>}
-      {children}
-    </Stack>
-  );
+    throw new Error("STUB");
 }
 
 DemoItem.displayName = 'DemoItem';
@@ -118,8 +93,7 @@ export function DemoContainer(props: DemoGridProps) {
   const childrenSupportedSections = new Set<PickersSupportedSections>();
 
   components.forEach((childName) => {
-    childrenTypes.add(getChildTypeFromChildName(childName));
-    childrenSupportedSections.add(getSupportedSectionFromChildName(childName));
+      throw new Error("STUB");
   });
 
   const getSpacing = (direction: 'column' | 'row') => {
@@ -199,17 +173,7 @@ export function DemoContainer(props: DemoGridProps) {
   return (
     <Stack direction={direction} spacing={spacing} sx={finalSx}>
       {React.Children.map(children, (child) => {
-        if (React.isValidElement(child) && isDemoItem(child)) {
-          // Inject sx styles to the `DemoItem` if it is a direct child of `DemoContainer`.
-          // @ts-ignore
-          return React.cloneElement(child, {
-            sx: [
-              { ...extraSx, ...demoItemSx },
-              ...(Array.isArray(child.props.sx) ? child.props.sx : [child.props.sx]),
-            ],
-          });
-        }
-        return child;
+          throw new Error("STUB");
       })}
     </Stack>
   );

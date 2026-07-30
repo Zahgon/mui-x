@@ -121,8 +121,8 @@ export class CrossParentLeafOperation extends BaseReorderOperation {
     const sourceChildren = sourceGroup.children;
     const targetChildren = targetGroup.children;
 
-    const sourceIndex = sourceChildren.findIndex((row) => row === sourceRowId);
-    const targetIndex = targetChildren.findIndex((row) => row === target.id);
+    const sourceIndex = sourceChildren.findIndex((row) => { throw new Error("STUB"); });
+    const targetIndex = targetChildren.findIndex((row) => { throw new Error("STUB"); });
 
     if (sourceIndex === -1 || targetIndex === -1) {
       return;
@@ -179,65 +179,7 @@ export class CrossParentLeafOperation extends BaseReorderOperation {
     const finalSourceRow = updates[0];
 
     apiRef.current.setState((state: any) => {
-      const updatedSourceChildren = sourceChildren.filter((rowId) => rowId !== sourceRowId);
-      const updatedTree = { ...state.rows.tree };
-      const removedGroups = new Set<GridRowId>();
-      let rootLevelRemovals = 0;
-
-      if (updatedSourceChildren.length === 0) {
-        removedGroups.add(sourceGroup.id);
-        rootLevelRemovals = rowReorderUtils.removeEmptyAncestors(
-          sourceGroup.parent!,
-          updatedTree,
-          removedGroups,
-        );
-      }
-
-      removedGroups.forEach((groupId) => {
-        const group = updatedTree[groupId] as GridGroupNode;
-        if (group && group.parent && updatedTree[group.parent]) {
-          const parent = updatedTree[group.parent] as GridGroupNode;
-          updatedTree[group.parent] = {
-            ...parent,
-            children: parent.children.filter((childId) => childId !== groupId),
-          };
-        }
-        delete updatedTree[groupId];
-      });
-
-      if (!removedGroups.has(sourceGroup.id)) {
-        updatedTree[sourceNode.parent!] = {
-          ...sourceGroup,
-          children: updatedSourceChildren,
-        };
-      }
-
-      const updatedTargetChildren = isLastChild
-        ? [...targetChildren, sourceRowId]
-        : [
-            ...targetChildren.slice(0, targetIndex),
-            sourceRowId,
-            ...targetChildren.slice(targetIndex),
-          ];
-
-      updatedTree[target.parent!] = {
-        ...targetGroup,
-        children: updatedTargetChildren,
-      };
-
-      updatedTree[sourceNode.id] = {
-        ...sourceNode,
-        parent: target.parent,
-      };
-
-      return {
-        ...state,
-        rows: {
-          ...state.rows,
-          totalTopLevelRowCount: state.rows.totalTopLevelRowCount - rootLevelRemovals,
-          tree: updatedTree,
-        },
-      };
+        throw new Error("STUB");
     });
 
     apiRef.current.updateRows([finalSourceRow]);
@@ -369,7 +311,7 @@ export class CrossParentGroupOperation extends BaseReorderOperation {
       for (let depth = 0; depth < targetParentPath.length; depth += 1) {
         const pathItem = targetParentPath[depth];
         if (pathItem.field) {
-          const groupingRule = groupingRules.find((rule) => rule.field === pathItem.field);
+          const groupingRule = groupingRules.find((rule) => { throw new Error("STUB"); });
           if (groupingRule) {
             const colDef = columnsLookup[groupingRule.field];
             if (groupingRule.groupingValueSetter && colDef) {
@@ -393,134 +335,7 @@ export class CrossParentGroupOperation extends BaseReorderOperation {
 
     if (successful.length > 0) {
       apiRef.current.setState((state: any) => {
-        const updatedTree = { ...state.rows.tree };
-        const treeDepths = { ...state.rows.treeDepths };
-        let rootLevelRemovals = 0;
-
-        if (failed.length === 0) {
-          const sourceParentNode = updatedTree[sourceNode.parent!] as GridGroupNode;
-
-          if (!sourceParentNode) {
-            const targetParentNode = updatedTree[targetNode.parent!] as GridGroupNode;
-            const targetIndex = targetParentNode.children.indexOf(targetNode.id);
-            const newTargetChildren = [...targetParentNode.children];
-
-            if (isLastChild) {
-              newTargetChildren.push(sourceNode.id);
-            } else {
-              newTargetChildren.splice(targetIndex, 0, sourceNode.id);
-            }
-
-            updatedTree[targetNode.parent!] = {
-              ...targetParentNode,
-              children: newTargetChildren,
-            };
-
-            updatedTree[sourceNode.id] = {
-              ...sourceNode,
-              parent: targetNode.parent,
-            };
-          } else {
-            const updatedSourceParentChildren = sourceParentNode.children.filter(
-              (id) => id !== sourceNode.id,
-            );
-
-            if (updatedSourceParentChildren.length === 0) {
-              const removedGroups = new Set<GridRowId>();
-              removedGroups.add(sourceNode.parent!);
-
-              const parentOfSourceParent = (updatedTree[sourceNode.parent!] as GridGroupNode)
-                .parent;
-              if (parentOfSourceParent) {
-                rootLevelRemovals = rowReorderUtils.removeEmptyAncestors(
-                  parentOfSourceParent,
-                  updatedTree,
-                  removedGroups,
-                );
-              }
-
-              removedGroups.forEach((groupId) => {
-                const group = updatedTree[groupId] as GridGroupNode;
-                if (group && group.parent && updatedTree[group.parent]) {
-                  const parent = updatedTree[group.parent] as GridGroupNode;
-                  updatedTree[group.parent] = {
-                    ...parent,
-                    children: parent.children.filter((childId) => childId !== groupId),
-                  };
-                }
-                delete updatedTree[groupId];
-              });
-            } else {
-              updatedTree[sourceNode.parent!] = {
-                ...sourceParentNode,
-                children: updatedSourceParentChildren,
-              };
-            }
-
-            const targetParentNode = updatedTree[targetNode.parent!] as GridGroupNode;
-            const sourceGroupNode = sourceNode as GridGroupNode;
-
-            const existingGroup =
-              sourceGroupNode.groupingKey !== null && sourceGroupNode.groupingField !== null
-                ? rowReorderUtils.findExistingGroupWithSameKey(
-                    targetParentNode,
-                    sourceGroupNode.groupingKey,
-                    sourceGroupNode.groupingField,
-                    updatedTree,
-                  )
-                : null;
-
-            if (existingGroup) {
-              const updatedExistingGroup = {
-                ...existingGroup,
-                children: [...existingGroup.children, ...sourceGroupNode.children],
-              };
-
-              updatedTree[existingGroup.id] = updatedExistingGroup;
-
-              sourceGroupNode.children.forEach((childId) => {
-                const childNode = updatedTree[childId];
-                if (childNode) {
-                  updatedTree[childId] = {
-                    ...childNode,
-                    parent: existingGroup.id,
-                  };
-                }
-              });
-
-              delete updatedTree[sourceNode.id];
-            } else {
-              const targetIndex = targetParentNode.children.indexOf(targetNode.id);
-              const newTargetChildren = [...targetParentNode.children];
-
-              if (isLastChild) {
-                newTargetChildren.push(sourceNode.id);
-              } else {
-                newTargetChildren.splice(targetIndex, 0, sourceNode.id);
-              }
-
-              updatedTree[targetNode.parent!] = {
-                ...targetParentNode,
-                children: newTargetChildren,
-              };
-
-              updatedTree[sourceNode.id] = {
-                ...sourceNode,
-                parent: targetNode.parent,
-              };
-            }
-          }
-        }
-
-        return {
-          ...state,
-          rows: {
-            ...state.rows,
-            totalTopLevelRowCount: state.rows.totalTopLevelRowCount - rootLevelRemovals,
-            tree: updatedTree,
-            treeDepths,
-          },
-        };
+          throw new Error("STUB");
       });
 
       apiRef.current.updateRows(updates);

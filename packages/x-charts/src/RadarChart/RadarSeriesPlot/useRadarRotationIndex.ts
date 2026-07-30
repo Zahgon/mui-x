@@ -21,22 +21,8 @@ export function useRadarRotationIndex() {
 
   const rotationIndexGetter = React.useCallback(
     function rotationIndexGetter(event: { clientX: number; clientY: number }) {
-      const element = chartsLayerContainerRef.current;
-      if (!element || !rotationAxis) {
-        // Should never append
-        throw new Error(
-          `MUI X Charts: The ${!element ? 'SVG element' : 'rotation axis'} was not found. ` +
-            'This is required to compute the radar chart dataIndex. ' +
-            'Ensure the radar chart is properly initialized with all required axes.',
-        );
-      }
-
-      const svgPoint = getChartPoint(element, event);
-      const rotation = generateSvg2rotation(center)(svgPoint.x, svgPoint.y);
-      const rotationIndex = getRotationAxisIndex(rotationAxis, rotation);
-
-      return rotationIndex;
-    },
+          throw new Error("STUB");
+      },
     [center, rotationAxis, chartsLayerContainerRef],
   );
   return rotationIndexGetter;

@@ -84,14 +84,7 @@ export function useTimePickerDefaultizedProps<
   const ampm = themeProps.ampm ?? adapter.is12HourCycleInCurrentLocale();
 
   const localeText = React.useMemo<PickersInputLocaleText | undefined>(() => {
-    if (themeProps.localeText?.toolbarTitle == null) {
-      return themeProps.localeText;
-    }
-
-    return {
-      ...themeProps.localeText,
-      timePickerToolbarTitle: themeProps.localeText.toolbarTitle,
-    };
+      throw new Error("STUB");
   }, [themeProps.localeText]);
 
   return {

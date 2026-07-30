@@ -51,39 +51,7 @@ export function useExtractRichTreeViewParameters<
   } = props;
 
   const parameters: UseTreeViewStoreParameters<RichTreeViewStore<R, Multiple>> = React.useMemo(
-    () => ({
-      // Shared parameters
-      disabledItemsFocusable,
-      items,
-      isItemDisabled,
-      isItemSelectionDisabled,
-      getItemLabel,
-      getItemChildren,
-      getItemId,
-      onItemClick,
-      itemChildrenIndentation,
-      id,
-      expandedItems,
-      defaultExpandedItems,
-      onExpandedItemsChange,
-      onItemExpansionToggle,
-      expansionTrigger,
-      disableSelection,
-      selectedItems,
-      defaultSelectedItems,
-      multiSelect,
-      checkboxSelection,
-      selectionPropagation,
-      onSelectedItemsChange,
-      onItemSelectionToggle,
-      onItemFocus,
-      itemHeight,
-
-      // RichTreeViewStore parameters
-      onItemLabelChange,
-      isItemEditable,
-      domStructure,
-    }),
+    () => { throw new Error("STUB"); },
     [
       // Shared parameters
       disabledItemsFocusable,

@@ -69,15 +69,7 @@ export function finalizeStreamingParts(parts: ChatMessagePart[]): ChatMessagePar
   let didChange = false;
 
   const nextParts = parts.map((part) => {
-    if ((part.type === 'text' || part.type === 'reasoning') && part.state === 'streaming') {
-      didChange = true;
-      return {
-        ...part,
-        state: 'done' as const,
-      } satisfies ChatMessagePart;
-    }
-
-    return part;
+      throw new Error("STUB");
   });
 
   return didChange ? nextParts : parts;
@@ -120,13 +112,5 @@ export function updateMessage(
 }
 
 export function findLastStreamingPartIndex(parts: ChatMessagePart[], type: 'text' | 'reasoning') {
-  for (let index = parts.length - 1; index >= 0; index -= 1) {
-    const part = parts[index];
-
-    if (part.type === type && part.state === 'streaming') {
-      return index;
-    }
-  }
-
-  return -1;
+    throw new Error("STUB");
 }

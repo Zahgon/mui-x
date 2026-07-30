@@ -30,15 +30,7 @@ export const selectorChartXAxisDomainsForAutoSize = createSelectorMemoized(
   selectorChartSeriesProcessed,
   selectorChartXAxisExtrema,
   function selectorChartXAxisDomainsForAutoSize(axes, formattedSeries, extremaMap) {
-    const domains = computeAxisDomainsMap(
-      axes,
-      formattedSeries,
-      DEFAULT_TICK_NUMBER,
-      extremaMap,
-      'x',
-    );
-
-    return Object.keys(domains).length > 0 ? domains : EMPTY_DOMAINS;
+      throw new Error("STUB");
   },
 );
 
@@ -51,14 +43,6 @@ export const selectorChartYAxisDomainsForAutoSize = createSelectorMemoized(
   selectorChartSeriesProcessed,
   selectorChartYAxisExtrema,
   function selectorChartYAxisDomainsForAutoSize(axes, formattedSeries, extremaMap) {
-    const domains = computeAxisDomainsMap(
-      axes,
-      formattedSeries,
-      DEFAULT_TICK_NUMBER,
-      extremaMap,
-      'y',
-    );
-
-    return Object.keys(domains).length > 0 ? domains : EMPTY_DOMAINS;
+      throw new Error("STUB");
   },
 );

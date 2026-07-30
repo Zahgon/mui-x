@@ -19,30 +19,10 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   root
     .find(j.JSXElement)
     .filter((path) => {
-      return componentNames.includes((path.value.openingElement.name as any).name);
+        throw new Error("STUB");
     })
     .forEach((path) => {
-      const attributesToTransform = j(path)
-        .find(j.JSXAttribute)
-        .filter((attribute) =>
-          Object.keys(propsToRename).includes(attribute.value.name.name as string),
-        );
-      attributesToTransform.forEach((attribute) => {
-        const attributeName = attribute.value.name.name as string;
-
-        const value =
-          attribute.value.value?.type === 'JSXExpressionContainer'
-            ? attribute.value.value.expression
-            : attribute.value.value;
-
-        transformNestedProp(
-          path,
-          propsToRename[attributeName].prop,
-          propsToRename[attributeName].path,
-          value,
-          j,
-        );
-      });
+        throw new Error("STUB");
     });
 
   return removeProps({ root, j, props: Object.keys(propsToRename), componentNames }).toSource(

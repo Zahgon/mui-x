@@ -17,26 +17,7 @@ const AreaPlotRoot = styled('g', {
 interface AreaPreviewPlotProps extends Pick<PreviewPlotProps, 'axisId' | 'seriesIds'> {}
 
 export function AreaPreviewPlot({ axisId, seriesIds }: AreaPreviewPlotProps) {
-  const completedData = useAreaPreviewData(axisId);
-  const seriesIdsSet = seriesIds ? new Set(seriesIds) : undefined;
-
-  return (
-    <AreaPlotRoot>
-      {completedData.map(
-        ({ d, seriesId, color, area, gradientId }) =>
-          !!area &&
-          (!seriesIdsSet || seriesIdsSet.has(seriesId)) && (
-            <PreviewAreaElement
-              key={seriesId}
-              seriesId={seriesId}
-              d={d}
-              color={color}
-              gradientId={gradientId}
-            />
-          ),
-      )}
-    </AreaPlotRoot>
-  );
+    throw new Error("STUB");
 }
 
 export interface PreviewAreaElementProps extends Omit<
@@ -60,21 +41,9 @@ function PreviewAreaElement({
   onClick,
   ...other
 }: PreviewAreaElementProps) {
-  return (
-    <path
-      fill={gradientId ? `url(#${gradientId})` : color}
-      stroke="none"
-      data-series={seriesId}
-      {...other}
-    />
-  );
+    throw new Error("STUB");
 }
 
 function useAreaPreviewData(axisId: AxisId) {
-  const store = useStore();
-
-  const xAxes = store.use(selectorChartPreviewComputedXAxis, axisId);
-  const yAxes = store.use(selectorChartPreviewComputedYAxis, axisId);
-
-  return useAreaPlotData(xAxes, yAxes);
+    throw new Error("STUB");
 }

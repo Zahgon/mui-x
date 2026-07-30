@@ -21,7 +21,7 @@ export const buildCombinedLogger = (
   fsOps: {
     statSize: (path: string) => number;
     truncate: (path: string) => void;
-  } = { statSize: (path) => statSync(path).size, truncate: (path) => truncateSync(path, 0) },
+  } = { statSize: (path) => { throw new Error("STUB"); }, truncate: (path) => { throw new Error("STUB"); } },
 ) => {
   // Truncate on startup if the log has grown past the cap.
   try {
@@ -32,13 +32,6 @@ export const buildCombinedLogger = (
     // File may not exist yet (first run) or be inaccessible; nothing to truncate.
   }
   return (message: string, error?: unknown): void => {
-    consoleErr(message, error);
-    try {
-      appendFile(logPath, `[${new Date().toISOString()}] ${message}${formatError(error)}\n`);
-    } catch (writeErr) {
-      // Surface the reason once (permission denied, disk full, …) so users aren't left wondering
-      // why the log is empty. Logging must never crash the host.
-      consoleErr(`log file write failed (${logPath})`, writeErr);
-    }
+      throw new Error("STUB");
   };
 };

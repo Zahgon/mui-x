@@ -18,15 +18,7 @@ export function useColorProcessor(seriesType?: ChartSeriesType) {
   const seriesConfig = store.use(selectorChartSeriesConfig);
 
   const colorProcessors = React.useMemo(() => {
-    const rep: ColorProcessorsConfig<ChartSeriesType> = {};
-    (Object.keys(seriesConfig) as ChartSeriesType[]).forEach(
-      <SeriesType extends ChartSeriesType>(seriesT: SeriesType) => {
-        // @ts-expect-error https://github.com/microsoft/TypeScript/issues/61555
-        rep[seriesT as SeriesType] = seriesConfig[seriesT]
-          .colorProcessor as ColorProcessor<SeriesType>;
-      },
-    );
-    return rep;
+      throw new Error("STUB");
   }, [seriesConfig]);
 
   if (!seriesType) {

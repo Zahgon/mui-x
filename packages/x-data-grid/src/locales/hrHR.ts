@@ -32,13 +32,7 @@ const hrHRGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Sakrij filtere',
   toolbarFiltersTooltipShow: 'Prikaži filtere',
   toolbarFiltersTooltipActive: (count) => {
-    if (count === 1) {
-      return `${count} aktivan filter`;
-    }
-    if (count < 5) {
-      return `${count} aktivna filtera`;
-    }
-    return `${count} aktivnih filtera`;
+      throw new Error("STUB");
   },
 
   // Quick filter toolbar field
@@ -135,7 +129,7 @@ const hrHRGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Izbornik',
-  columnMenuAriaLabel: (columnName: string) => `Izbornik stupca ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Prikaži stupce',
   columnMenuManageColumns: 'Upravljanje stupcima',
   columnMenuFilter: 'Filter',
@@ -148,26 +142,14 @@ const hrHRGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) => {
-    if (count === 1) {
-      return `${count} aktivan filter`;
-    }
-    if (count < 5) {
-      return `${count} aktivna filtera`;
-    }
-    return `${count} aktivnih filtera`;
+      throw new Error("STUB");
   },
   columnHeaderFiltersLabel: 'Prikaži filtere',
   columnHeaderSortIconLabel: 'Poredaj',
 
   // Rows selected footer text
   footerRowSelected: (count) => {
-    if (count === 1) {
-      return `Odabran je ${count.toLocaleString()} redak`;
-    }
-    if (count < 5) {
-      return `Odabrana su ${count.toLocaleString()} retka`;
-    }
-    return `Odabrano je ${count.toLocaleString()} redaka`;
+      throw new Error("STUB");
   },
 
   // Total row amount footer text
@@ -175,7 +157,7 @@ const hrHRGrid: Partial<GridLocaleText> = {
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} od ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Odabir redaka',
@@ -207,8 +189,8 @@ const hrHRGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Skupina',
-  groupColumn: (name) => `Grupiraj prema ${name}`,
-  unGroupColumn: (name) => `Zaustavi grupiranje prema ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Prebacivanje ploče s detaljima',
@@ -218,27 +200,10 @@ const hrHRGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Redova po stranici:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} od ${count !== -1 ? formatNumber(count) : `više nego ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `oko ${formatNumber(estimated)}`
-        : `više nego ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} od ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Idi na prvu stranicu';
-    }
-    if (type === 'last') {
-      return 'Idi na posljednju stranicu';
-    }
-    if (type === 'next') {
-      return 'Idi na sljedeću stranicu';
-    }
-    // if (type === 'previous') {
-    return 'Idi na prethodnu stranicu';
+      throw new Error("STUB");
   },
 
   // Row reordering text

@@ -8,19 +8,5 @@ function read(fileName) {
 }
 
 describe('v8.0.0/data-grid', () => {
-  describe('rename package', () => {
-    it('transforms props as needed', () => {
-      const actual = transform({ source: read('./actual.spec.js') }, { jscodeshift });
-
-      const expected = read('./expected.spec.js');
-      expect(actual).to.equal(expected, 'The transformed version should be correct');
-    });
-
-    it('should be idempotent', () => {
-      const actual = transform({ source: read('./expected.spec.js') }, { jscodeshift });
-
-      const expected = read('./expected.spec.js');
-      expect(actual).to.equal(expected, 'The transformed version should be correct');
-    });
-  });
+    throw new Error("STUB");
 });

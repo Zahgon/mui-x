@@ -27,16 +27,8 @@ export const useGridInfiniteLoader = (
 
   const handleLoadMoreRows: GridEventListener<'rowsScrollEndIntersection'> = useEventCallback(
     () => {
-      const visibleColumns = gridVisibleColumnDefinitionsSelector(apiRef);
-      const currentPage = getVisibleRows(apiRef);
-      const viewportPageSize = apiRef.current.getViewportPageSize();
-      const rowScrollEndParams: GridRowScrollEndParams = {
-        visibleColumns,
-        viewportPageSize,
-        visibleRowsCount: currentPage.rows.length,
-      };
-      apiRef.current.publishEvent('rowsScrollEnd', rowScrollEndParams);
-    },
+          throw new Error("STUB");
+      },
   );
 
   useGridEventPriority(apiRef, 'rowsScrollEnd', props.onRowsScrollEnd);

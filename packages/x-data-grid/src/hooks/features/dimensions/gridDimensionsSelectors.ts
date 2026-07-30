@@ -2,7 +2,7 @@ import { createSelector, createRootSelector } from '../../../utils/createSelecto
 import type { GridStateCommunity } from '../../../models/gridStateCommunity';
 
 export const gridDimensionsSelector = createRootSelector(
-  (state: GridStateCommunity) => state.dimensions,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 /**
@@ -11,70 +11,63 @@ export const gridDimensionsSelector = createRootSelector(
  */
 export const gridColumnsTotalWidthSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => dimensions.columnsTotalWidth,
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridRowHeightSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => dimensions.rowHeight,
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridContentHeightSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => dimensions.contentSize.height,
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridHasScrollXSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => dimensions.hasScrollX,
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridHasScrollYSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => dimensions.hasScrollY,
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridHasFillerSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => dimensions.columnsTotalWidth < dimensions.viewportOuterSize.width,
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridHeaderHeightSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => dimensions.headerHeight,
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridGroupHeaderHeightSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => dimensions.groupHeaderHeight,
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridHeaderFilterHeightSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => dimensions.headerFilterHeight,
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridHorizontalScrollbarHeightSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => (dimensions.hasScrollX ? dimensions.scrollbarSize : 0),
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridVerticalScrollbarWidthSelector = createSelector(
   gridDimensionsSelector,
-  (dimensions) => (dimensions.hasScrollY ? dimensions.scrollbarSize : 0),
+  (dimensions) => { throw new Error("STUB"); },
 );
 
 export const gridHasBottomFillerSelector = createSelector(
   gridDimensionsSelector,
   gridHorizontalScrollbarHeightSelector,
   (dimensions, height) => {
-    const needsLastRowBorder =
-      dimensions.viewportOuterSize.height - dimensions.minimumSize.height > 0;
-
-    if (height === 0 && !needsLastRowBorder) {
-      return false;
-    }
-
-    return true;
+      throw new Error("STUB");
   },
 );

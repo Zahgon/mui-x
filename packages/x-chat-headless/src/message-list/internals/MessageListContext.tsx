@@ -10,16 +10,16 @@ export interface MessageListContextValue {
 const MessageListContext = React.createContext<MessageListContextValue>({
   isAtBottom: true,
   unseenMessageCount: 0,
-  scrollToBottom: () => {},
+  scrollToBottom: () => {
+      throw new Error("STUB");
+  },
 });
 
 export function MessageListContextProvider(props: {
   children: React.ReactNode;
   value: MessageListContextValue;
 }) {
-  const { children, value } = props;
-
-  return <MessageListContext.Provider value={value}>{children}</MessageListContext.Provider>;
+    throw new Error("STUB");
 }
 
 export function useMessageListContext() {

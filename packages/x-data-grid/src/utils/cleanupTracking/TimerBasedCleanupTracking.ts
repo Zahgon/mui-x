@@ -18,10 +18,7 @@ export class TimerBasedCleanupTracking implements CleanupTracking {
     }
 
     const timeout = setTimeout(() => {
-      if (typeof unsubscribe === 'function') {
-        unsubscribe();
-      }
-      this.timeouts!.delete(unregisterToken.cleanupToken);
+        throw new Error("STUB");
     }, this.cleanupTimeout);
 
     this.timeouts!.set(unregisterToken!.cleanupToken, timeout);
@@ -38,7 +35,7 @@ export class TimerBasedCleanupTracking implements CleanupTracking {
   reset() {
     if (this.timeouts) {
       this.timeouts.forEach((value, key) => {
-        this.unregister({ cleanupToken: key });
+          throw new Error("STUB");
       });
       this.timeouts = undefined;
     }

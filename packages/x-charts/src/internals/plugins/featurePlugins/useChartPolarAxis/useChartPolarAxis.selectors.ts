@@ -8,16 +8,16 @@ import type { ChartDrawingArea } from '../../../../hooks/useDrawingArea';
 import { selectorChartSeriesConfig } from '../../corePlugins/useChartSeriesConfig';
 
 export const selectorChartPolarAxisState = (state: ChartState<[], [UseChartPolarAxisSignature]>) =>
-  state.polarAxis;
+  { throw new Error("STUB"); };
 
 export const selectorChartRawRotationAxis = createSelector(
   selectorChartPolarAxisState,
-  (axis) => axis?.rotation,
+  (axis) => { throw new Error("STUB"); },
 );
 
 export const selectorChartRawRadiusAxis = createSelector(
   selectorChartPolarAxisState,
-  (axis) => axis?.radius,
+  (axis) => { throw new Error("STUB"); },
 );
 
 /**
@@ -30,13 +30,7 @@ export const selectorChartRotationAxis = createSelectorMemoized(
   selectorChartSeriesProcessed,
   selectorChartSeriesConfig,
   (axis, drawingArea, formattedSeries, seriesConfig) =>
-    computeAxisValue({
-      drawingArea,
-      formattedSeries,
-      axis,
-      seriesConfig,
-      axisDirection: 'rotation',
-    }),
+    { throw new Error("STUB"); },
 );
 
 export const selectorChartRadiusAxis = createSelectorMemoized(
@@ -45,13 +39,7 @@ export const selectorChartRadiusAxis = createSelectorMemoized(
   selectorChartSeriesProcessed,
   selectorChartSeriesConfig,
   (axis, drawingArea, formattedSeries, seriesConfig) =>
-    computeAxisValue({
-      drawingArea,
-      formattedSeries,
-      axis,
-      seriesConfig,
-      axisDirection: 'radius',
-    }),
+    { throw new Error("STUB"); },
 );
 
 export function getDrawingAreaCenter(drawingArea: ChartDrawingArea) {

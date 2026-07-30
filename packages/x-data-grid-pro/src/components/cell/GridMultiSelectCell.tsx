@@ -50,31 +50,12 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const GridMultiSelectCellPopperContent = styled('div', {
   name: 'MuiDataGrid',
   slot: 'MultiSelectCellPopperContent',
-})(({ theme }) => ({
-  ...theme.typography.body2,
-  letterSpacing: 'normal',
-  padding: theme.spacing(1),
-  maxHeight: 52 * 4,
-  overflow: 'auto',
-  width: 'var(--_width)',
-  border: `1px solid ${(theme.vars || theme).palette.divider}`,
-  boxSizing: 'border-box',
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: theme.spacing(0.5),
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const GridMultiSelectCellPopper = styled(NotRendered<GridSlotProps['basePopper']>, {
   name: 'MuiDataGrid',
   slot: 'MultiSelectCellPopper',
-})<{ ownerState: OwnerState }>(({ theme }) => ({
-  zIndex: vars.zIndex.menu,
-  background: (theme.vars || theme).palette.background.paper,
-  '&[data-popper-reference-hidden]': {
-    visibility: 'hidden',
-    pointerEvents: 'none',
-  },
-}));
+})<{ ownerState: OwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 export interface GridMultiSelectCellProps<
   V extends ValueOptions = ValueOptions,
@@ -121,7 +102,7 @@ function GridMultiSelectCell<V extends ValueOptions = ValueOptions>(
   const rowHeight = useGridSelector(apiRef, gridRowHeightSelector);
   const filterModel = useGridSelector(apiRef, gridFilterModelSelector);
   const isAutoHeight = useGridSelector(privateApiRef, () =>
-    privateApiRef.current.rowHasAutoHeight(id),
+    { throw new Error("STUB"); },
   );
 
   const [popupOpen, setPopupOpen] = React.useState(false);
@@ -132,40 +113,12 @@ function GridMultiSelectCell<V extends ValueOptions = ValueOptions>(
   const getOptionLabel = (colDef as GridMultiSelectColDef).getOptionLabel!;
   const valueOptions = isMultiSelectColDef(colDef) ? getValueOptions(colDef, { id, row }) : null;
   const optionByValue = React.useMemo(() => {
-    const map = new Map<any, ValueOptions>();
-    if (valueOptions) {
-      for (const opt of valueOptions) {
-        map.set(getOptionValue(opt), opt);
-      }
-    }
-    return map;
+      throw new Error("STUB");
   }, [valueOptions, getOptionValue]);
 
   // Reorder array to show filtered value first (improves UX when filtering).
   const arrayValue = React.useMemo(() => {
-    const rawArrayValue = Array.isArray(value) ? value : [];
-    if (rawArrayValue.length === 0) {
-      return rawArrayValue;
-    }
-    const activeFilter = filterModel.items.find(
-      (item) =>
-        item.field === colDef.field &&
-        item.operator === 'contains' &&
-        Array.isArray(item.value) &&
-        item.value.length > 0,
-    );
-    if (!activeFilter) {
-      return rawArrayValue;
-    }
-    const filterValues: any[] = activeFilter.value;
-    const index = rawArrayValue.findIndex((v) => filterValues.includes(v));
-    if (index <= 0) {
-      return rawArrayValue;
-    }
-    const reordered = [...rawArrayValue];
-    const [match] = reordered.splice(index, 1);
-    reordered.unshift(match);
-    return reordered;
+      throw new Error("STUB");
   }, [value, filterModel.items, colDef.field]);
 
   // Focus the overflow chip when the cell is focused, and close the popup on focus loss.
@@ -173,45 +126,19 @@ function GridMultiSelectCell<V extends ValueOptions = ValueOptions>(
   // cell (EventManager warns past 20). Covers mount-with-focus (e.g. after exiting edit
   // mode via Escape, which doesn't publish a focus event) and popup-close-while-focused.
   React.useEffect(() => {
-    if (isAutoHeight) {
-      return;
-    }
-    if (!hasFocus) {
-      setPopupOpen(false);
-      return;
-    }
-    if (popupOpen) {
-      return;
-    }
-    if (overflowChipRef.current && overflowChipRef.current !== document.activeElement) {
-      overflowChipRef.current.focus();
-    }
+      throw new Error("STUB");
   }, [hasFocus, popupOpen, isAutoHeight]);
 
   const handleOverflowClick = (event: React.MouseEvent) => {
-    // event.detail === 0 means keyboard-triggered click (Enter keyup on focused button).
-    // Ignore these to prevent popup from opening when focus moves to this cell via Enter.
-    if (event.detail === 0) {
-      return;
-    }
-    event.stopPropagation();
-    setPopupOpen(true);
+      throw new Error("STUB");
   };
 
   const handleOverflowKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === ' ' && !event.shiftKey) {
-      event.preventDefault();
-      event.stopPropagation();
-      setPopupOpen((prev) => !prev);
-    }
-    if (event.key === 'Escape' && popupOpen) {
-      event.stopPropagation();
-      setPopupOpen(false);
-    }
+      throw new Error("STUB");
   };
 
   const handleClickAway = () => {
-    setPopupOpen(false);
+      throw new Error("STUB");
   };
 
   if (arrayValue.length === 0) {
@@ -281,11 +208,7 @@ function GridMultiSelectCell<V extends ValueOptions = ValueOptions>(
           <GridMultiSelectCellPopperContent
             tabIndex={-1}
             onKeyDown={(event) => {
-              if (event.key === 'Escape') {
-                event.stopPropagation();
-                setPopupOpen(false);
-                apiRef.current.getCellElement(id, colDef.field)?.focus();
-              }
+                throw new Error("STUB");
             }}
             {...slotProps?.popperContent}
             className={clsx(classes.popperContent, slotProps?.popperContent?.className)}
@@ -297,21 +220,7 @@ function GridMultiSelectCell<V extends ValueOptions = ValueOptions>(
             }
           >
             {arrayValue.map((v, index) => {
-              const option = optionByValue.get(v) ?? v;
-              const chipProps =
-                typeof slotProps?.chip === 'function'
-                  ? slotProps.chip(option, index)
-                  : slotProps?.chip;
-              return (
-                <rootProps.slots.baseChip
-                  key={index}
-                  label={getOptionLabel(option)}
-                  size="small"
-                  variant="outlined"
-                  {...chipProps}
-                  className={clsx(classes.chip, chipProps?.className)}
-                />
-              );
+                throw new Error("STUB");
             })}
           </GridMultiSelectCellPopperContent>
         </GridMultiSelectCellPopper>
@@ -385,15 +294,5 @@ export { GridMultiSelectCell };
 export const renderMultiSelectCell = (
   params: GridMultiSelectCellProps & { aggregation?: GridAggregationCellMeta },
 ) => {
-  if (params.aggregation) {
-    if (params.aggregation.position === 'footer') {
-      return <GridFooterCell {...params} />;
-    }
-    return params.formattedValue ?? params.value;
-  }
-  // On group rows, `value` is the grouping key (string) from `groupingValueGetter`, not the array.
-  if (params.rowNode.type === 'group') {
-    return params.formattedValue ?? params.value;
-  }
-  return <GridMultiSelectCell {...params} />;
+    throw new Error("STUB");
 };

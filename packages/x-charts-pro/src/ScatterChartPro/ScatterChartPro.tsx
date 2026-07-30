@@ -88,59 +88,7 @@ const ScatterChartPro = React.forwardRef(function ScatterChartPro(
   inProps: ScatterChartProProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiScatterChartPro' });
-  const { initialZoom, zoomData, onZoomChange, apiRef, showToolbar, ...other } = props;
-  const {
-    chartsWrapperProps,
-    chartsContainerProps,
-    chartsAxisProps,
-    gridProps,
-    scatterPlotProps,
-    overlayProps,
-    legendProps,
-    axisHighlightProps,
-    children,
-  } = useScatterChartProps(other);
-  const { chartsDataProviderProProps, chartsSurfaceProps } = useChartsContainerProProps<
-    'scatter',
-    ScatterChartProPluginSignatures
-  >({
-    ...chartsContainerProps,
-    initialZoom,
-    zoomData,
-    onZoomChange,
-    apiRef,
-    plugins: SCATTER_CHART_PRO_PLUGINS,
-  });
-
-  const Tooltip = props.slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = props.slots?.toolbar ?? ChartsToolbarPro;
-
-  return (
-    <ChartsDataProviderPro<'scatter', ScatterChartProPluginSignatures>
-      {...chartsDataProviderProProps}
-    >
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {showToolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!props.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <ChartsAxis {...chartsAxisProps} />
-          <ChartsZoomSlider />
-          <ChartsGrid {...gridProps} />
-          <g data-drawing-container>
-            {/* The `data-drawing-container` indicates that children are part of the drawing area. Ref: https://github.com/mui/mui-x/issues/13659 */}
-            <ScatterPlot {...scatterPlotProps} />
-          </g>
-          <ChartsOverlay {...overlayProps} />
-          <ChartsAxisHighlight {...axisHighlightProps} />
-          <FocusedScatterMark />
-          <ChartsBrushOverlay />
-          {children}
-        </ChartsSurface>
-        {!props.loading && <Tooltip trigger="item" {...props.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProviderPro>
-  );
+    throw new Error("STUB");
 });
 
 ScatterChartPro.propTypes /* remove-proptypes */ = {

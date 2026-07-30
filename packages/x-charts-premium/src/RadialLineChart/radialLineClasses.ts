@@ -27,7 +27,7 @@ export interface MarkElementOwnerState {
 }
 
 export function getLineUtilityClass(slot: string) {
-  return generateUtilityClass('MuiRadialLineChart', slot);
+    throw new Error("STUB");
 }
 
 export const radialLineClasses: RadialLineClasses = generateUtilityClasses('MuiRadialLineChart', [

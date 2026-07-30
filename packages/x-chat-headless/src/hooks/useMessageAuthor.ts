@@ -12,15 +12,7 @@ export function useMessageAuthor(messageId: string) {
   // Inject locale-driven role display names into the resolver parameters so the
   // fallback when no author signal is available reflects the active locale.
   const parametersWithLocale = React.useMemo(
-    () => ({
-      ...store.parameters,
-      roleDisplayNames: {
-        user: localeText.messageAuthorUserLabel,
-        assistant: localeText.messageAuthorAssistantLabel,
-        system: localeText.messageAuthorSystemLabel,
-        ...store.parameters.roleDisplayNames,
-      },
-    }),
+    () => { throw new Error("STUB"); },
     [
       store.parameters,
       localeText.messageAuthorUserLabel,

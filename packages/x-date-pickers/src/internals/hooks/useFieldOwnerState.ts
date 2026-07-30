@@ -9,13 +9,7 @@ export function useFieldOwnerState(parameters: UseFieldOwnerStateParameters) {
   const isRtl = useRtl();
 
   return React.useMemo<FieldOwnerState>(
-    () => ({
-      ...pickerOwnerState,
-      isFieldDisabled: parameters.disabled ?? false,
-      isFieldReadOnly: parameters.readOnly ?? false,
-      isFieldRequired: parameters.required ?? false,
-      fieldDirection: isRtl ? 'rtl' : 'ltr',
-    }),
+    () => { throw new Error("STUB"); },
     [pickerOwnerState, parameters.disabled, parameters.readOnly, parameters.required, isRtl],
   );
 }

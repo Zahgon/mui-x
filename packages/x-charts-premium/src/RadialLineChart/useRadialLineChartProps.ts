@@ -49,25 +49,12 @@ export const useRadialLineChartProps = (props: RadialLineChartProps) => {
 
   const seriesWithDefault = React.useMemo(
     () =>
-      series.map((s) => ({
-        disableHighlight: !!disableLineItemHighlight,
-        type: 'radialLine' as const,
-        ...s,
-      })),
+      { throw new Error("STUB"); },
     [disableLineItemHighlight, series],
   );
 
   const defaultRotationAxis = React.useMemo(() => {
-    return [
-      {
-        id: DEFAULT_ROTATION_AXIS_KEY,
-        scaleType: 'point' as const,
-        data: Array.from(
-          { length: Math.max(...series.map((s) => (s.data ?? dataset ?? []).length)) },
-          (_, index) => index,
-        ),
-      },
-    ];
+      throw new Error("STUB");
   }, [series, dataset]);
 
   const chartsContainerProps: ChartsRadialDataProviderProps<

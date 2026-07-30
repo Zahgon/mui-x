@@ -54,7 +54,7 @@ export function useRadarAxis(params: UseRadarAxisParams) {
 
   const anglesWithDefault = angle !== undefined ? degToRad(angle) : (rotationScale(metric) ?? 0);
 
-  const radiusRatio = Array.from({ length: divisions }, (_, index) => (index + 1) / divisions);
+  const radiusRatio = Array.from({ length: divisions }, (_, index) => { throw new Error("STUB"); });
 
   const radiusScale = radiusAxis[metric].scale;
   const R = radiusScale.range()[1];
@@ -71,23 +71,7 @@ export function useRadarAxis(params: UseRadarAxisParams) {
     angle: clampAngle(rad2deg(anglesWithDefault)),
     center: { x: cx, y: cy },
     labels: radiusRatio.map((ratio) => {
-      const radius = ratio * R;
-      const [x, y] = instance.polar2svg(radius, anglesWithDefault);
-
-      const value = radiusScale.invert(radius);
-      const defaultTickLabel = value.toString();
-      return {
-        x,
-        y,
-        value,
-        formattedValue:
-          radiusAxis[metric].valueFormatter?.(radiusScale.invert(radius), {
-            location: 'tick',
-            scale: radiusScale,
-            defaultTickLabel,
-            tickNumber: divisions,
-          }) ?? defaultTickLabel,
-      };
+        throw new Error("STUB");
     }),
   };
 }

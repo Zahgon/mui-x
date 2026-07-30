@@ -2,7 +2,7 @@ import generateUtilityClass from '@mui/utils/generateUtilityClass';
 import generateUtilityClasses from '@mui/utils/generateUtilityClasses';
 
 export function getMonthCalendarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiMonthCalendar', slot);
+    throw new Error("STUB");
 }
 
 export interface MonthCalendarClasses {

@@ -45,18 +45,7 @@ const GridOverlayRoot = styled('div', {
 });
 
 const GridOverlay = forwardRef<HTMLDivElement, GridOverlayProps>(function GridOverlay(props, ref) {
-  const { className, ...other } = props;
-  const rootProps = useGridRootProps();
-  const classes = useUtilityClasses(rootProps);
-
-  return (
-    <GridOverlayRoot
-      className={clsx(classes.root, className)}
-      ownerState={rootProps}
-      {...other}
-      ref={ref}
-    />
-  );
+    throw new Error("STUB");
 });
 
 GridOverlay.propTypes /* remove-proptypes */ = {

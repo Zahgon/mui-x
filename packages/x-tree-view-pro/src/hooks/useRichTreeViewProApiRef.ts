@@ -13,7 +13,5 @@ import type { RichTreeViewProStore } from '../internals/RichTreeViewProStore';
 export function useRichTreeViewProApiRef<
   R extends TreeViewValidItem<R> = TreeViewDefaultItemModelProperties,
 >() {
-  return React.useRef(undefined) as React.RefObject<
-    TreeViewPublicAPI<RichTreeViewProStore<R, boolean>> | undefined
-  >;
+    throw new Error("STUB");
 }

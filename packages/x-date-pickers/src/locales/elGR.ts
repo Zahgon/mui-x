@@ -18,9 +18,7 @@ const elGRPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Άνοίγμα προηγούμενης προβολή',
   openNextView: 'Άνοίγμα επόμενης προβολή',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'η προβολή έτους είναι ανοιχτή, μεταβείτε στην προβολή ημερολογίου'
-      : 'η προβολή ημερολογίου είναι ανοιχτή, μεταβείτε στην προβολή έτους',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Αρχή',
@@ -46,27 +44,25 @@ const elGRPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Επιλέξτε ${views[view]}. ${!formattedTime ? 'Δεν έχει επιλεγεί ώρα' : `Η επιλεγμένη ώρα είναι ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} ώρες`,
-  minutesClockNumberText: (minutes) => `${minutes} λεπτά`,
-  secondsClockNumberText: (seconds) => `${seconds} δευτερόλεπτα`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Επιλέξτε ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Αριθμός εβδομάδας',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Εβδομάδα ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate
-      ? `Επιλέξτε ημερομηνία, η επιλεγμένη ημερομηνία είναι ${formattedDate}`
-      : 'Επιλέξτε ημερομηνία',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Επιλέξτε ώρα, η επιλεγμένη ώρα είναι ${formattedTime}` : 'Επιλέξτε ώρα',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   // fieldClearLabel: 'Clear',
 
@@ -75,14 +71,14 @@ const elGRPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'επιλέξτε ημερομηνία',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Χρόνος',

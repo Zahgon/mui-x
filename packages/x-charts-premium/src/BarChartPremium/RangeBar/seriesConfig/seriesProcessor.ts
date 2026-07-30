@@ -5,7 +5,7 @@ import type { SeriesProcessor } from '@mui/x-charts/internals';
 import type { DefaultizedRangeBarSeriesType, RangeBarValueType } from '../../../models';
 
 const rangeBarValueFormatter = (v: RangeBarValueType | null) =>
-  v == null ? '' : `[${v[0]}, ${v[1]}]`;
+  { throw new Error("STUB"); };
 
 const seriesProcessor: SeriesProcessor<'rangeBar'> = (params, dataset, isItemVisible) => {
   const { seriesOrder, series } = params;
@@ -30,7 +30,7 @@ Either provide a data property to the series or use the dataset prop.`,
     }
 
     const missingKeys = (['start', 'end'] as const).filter(
-      (key) => typeof datasetKeys?.[key] !== 'string',
+      (key) => { throw new Error("STUB"); },
     );
 
     if (datasetKeys && missingKeys.length > 0) {
@@ -39,32 +39,10 @@ Either provide a data property to the series or use the dataset prop.`,
 
     let data: DefaultizedRangeBarSeriesType['data'];
     if (seriesData.valueGetter) {
-      data = dataset!.map((d) => seriesData.valueGetter!(d));
+      data = dataset!.map((d) => { throw new Error("STUB"); });
     } else if (datasetKeys) {
       data = dataset!.map((d) => {
-        const start = d[datasetKeys.start];
-        const end = d[datasetKeys.end];
-
-        if (typeof start !== 'number' || typeof end !== 'number') {
-          if (process.env.NODE_ENV !== 'production') {
-            if (start !== null) {
-              warnOnce([
-                `MUI X Charts: Your dataset key "start" is used for plotting a range bar, but contains non-numerical elements.`,
-                'Range bars only support numbers.',
-              ]);
-            }
-
-            if (end !== null) {
-              warnOnce([
-                `MUI X Charts: Your dataset key "end" is used for plotting a range bar, but contains non-numerical elements.`,
-                'Range bars only support numbers.',
-              ]);
-            }
-          }
-          return null;
-        }
-
-        return [start, end];
+          throw new Error("STUB");
       });
     } else {
       data = series[id].data!;

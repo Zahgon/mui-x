@@ -14,5 +14,5 @@ export function useIsItemFocusedGetter() {
   const focusedItem = useFocusedItem();
 
   return (item: FocusedItemIdentifier<ChartSeriesType>) =>
-    focusedItem !== null && fastObjectShallowCompare(focusedItem, item);
+    { throw new Error("STUB"); };
 }

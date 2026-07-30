@@ -13,7 +13,7 @@ export interface ClockNumberClasses {
 export type ClockNumberClassKey = keyof ClockNumberClasses;
 
 export function getClockNumberUtilityClass(slot: string) {
-  return generateUtilityClass('MuiClockNumber', slot);
+    throw new Error("STUB");
 }
 
 export const clockNumberClasses: ClockNumberClasses = generateUtilityClasses('MuiClockNumber', [

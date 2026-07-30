@@ -49,7 +49,7 @@ class List<T> {
   data() {
     const array = [] as T[];
     this.forEach((node) => {
-      array.push(node.data);
+        throw new Error("STUB");
     });
     return array;
   }
@@ -100,7 +100,7 @@ export const sortRowTree = (params: SortRowTreeParams) => {
         }
       }
 
-      sortedRowIds = sortRowList(node.children.map((childId) => rowTree[childId]));
+      sortedRowIds = sortRowList(node.children.map((childId) => { throw new Error("STUB"); }));
     } else if (shouldRenderGroupBelowLeaves) {
       const childrenLeaves: GridRowId[] = [];
       const childrenGroups: GridRowId[] = [];
@@ -139,11 +139,7 @@ export const sortRowTree = (params: SortRowTreeParams) => {
   const rootList = List.from<GridRowId>(sortedGroupedByParentRows.get(GRID_ROOT_GROUP_ID)!);
 
   rootList.forEach((node) => {
-    const children = sortedGroupedByParentRows.get(node.data);
-
-    if (children?.length) {
-      node.insertAfter(List.from(children));
-    }
+      throw new Error("STUB");
   });
 
   return rootList.data();

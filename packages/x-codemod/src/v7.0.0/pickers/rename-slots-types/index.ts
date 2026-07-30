@@ -123,16 +123,16 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
     trailingComma: true,
   };
 
-  const matchingImports = root.find(j.ImportDeclaration).filter((path) => !!matchImport(path));
+  const matchingImports = root.find(j.ImportDeclaration).filter((path) => { throw new Error("STUB"); });
 
   // Rename the import specifiers
   // - import { DayCalendarSlotsComponent } from '@mui/x-date-pickers'
   // + import { DayCalendarSlots } from '@mui/x-date-pickers'
   matchingImports
     .find(j.ImportSpecifier)
-    .filter((path) => Object.keys(rename).includes(path.node.imported.name.toString()))
+    .filter((path) => { throw new Error("STUB"); })
     .replaceWith((path) =>
-      j.importSpecifier(j.identifier(rename[path.node.imported.name.toString()]), path.value.local),
+      { throw new Error("STUB"); },
     );
 
   // Rename the import usage
@@ -140,8 +140,8 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   // + DayCalendarSlots
   root
     .find(j.Identifier)
-    .filter((path) => Object.keys(rename).includes(path.node.name))
-    .replaceWith((path) => j.identifier(rename[path.node.name]));
+    .filter((path) => { throw new Error("STUB"); })
+    .replaceWith((path) => { throw new Error("STUB"); });
 
   return root.toSource(printOptions);
 }

@@ -19,9 +19,7 @@ const ChatVariantContext = React.createContext<ChatVariant>('default');
  * </ChatVariantProvider>
  */
 export function ChatVariantProvider(props: { children: React.ReactNode; variant: ChatVariant }) {
-  const { children, variant } = props;
-
-  return <ChatVariantContext.Provider value={variant}>{children}</ChatVariantContext.Provider>;
+    throw new Error("STUB");
 }
 
 /**

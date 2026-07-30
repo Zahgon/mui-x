@@ -105,43 +105,8 @@ export const ScrollbarCorner = styled(Scrollbar, {
 
 const GridVirtualScrollbar = forwardRef<HTMLDivElement, GridVirtualScrollbarProps>(
   function GridVirtualScrollbar(props, ref) {
-    const apiRef = useGridPrivateApiContext();
-    const rootProps = useGridRootProps();
-    const classes = useUtilityClasses(rootProps, props.position);
-    const dimensions = useGridSelector(apiRef, gridDimensionsSelector);
-
-    const propertyDimension = props.position === 'vertical' ? 'height' : 'width';
-
-    const scrollbarInnerSize =
-      props.position === 'horizontal'
-        ? dimensions.minimumSize.width
-        : dimensions.minimumSize.height - dimensions.headersTotalHeight;
-
-    const Container = props.position === 'vertical' ? ScrollbarVertical : ScrollbarHorizontal;
-
-    const scrollbarInnerStyle = React.useMemo(
-      () => ({
-        [propertyDimension]: `${scrollbarInnerSize}px`,
-      }),
-      [propertyDimension, scrollbarInnerSize],
-    );
-
-    return (
-      <Container
-        ref={ref}
-        className={classes.root}
-        tabIndex={-1}
-        aria-hidden="true"
-        // tabIndex does not prevent focus with a mouse click, throwing a console error
-        // https://github.com/mui/mui-x/issues/16706
-        onFocus={(event) => {
-          event.target.blur();
-        }}
-      >
-        <div className={classes.content} style={scrollbarInnerStyle} />
-      </Container>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 export { GridVirtualScrollbar };

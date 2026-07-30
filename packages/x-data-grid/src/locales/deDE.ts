@@ -34,7 +34,7 @@ const deDEGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Verberge Filter',
   toolbarFiltersTooltipShow: 'Zeige Filter',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktive Filter` : `${count} aktiver Filter`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Suchen…',
@@ -130,7 +130,7 @@ const deDEGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Menü',
-  columnMenuAriaLabel: (columnName: string) => `${columnName} Spaltenmenü`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Zeige alle Spalten',
   columnMenuManageColumns: 'Spalten verwalten',
   columnMenuFilter: 'Filter',
@@ -143,22 +143,20 @@ const deDEGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktive Filter` : `${count} aktiver Filter`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Zeige Filter',
   columnHeaderSortIconLabel: 'Sortieren',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1
-      ? `${count.toLocaleString()} Einträge ausgewählt`
-      : `${count.toLocaleString()} Eintrag ausgewählt`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Gesamt:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} von ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Checkbox Auswahl',
@@ -190,8 +188,8 @@ const deDEGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Gruppierung',
-  groupColumn: (name) => `Gruppieren nach ${name}`,
-  unGroupColumn: (name) => `Gruppierung nach ${name} aufheben`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Detailansicht Kippschalter',
@@ -201,27 +199,10 @@ const deDEGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Zeilen pro Seite:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} von ${count !== -1 ? formatNumber(count) : `mehr als ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `ungefähr ${formatNumber(estimated)}`
-        : `mehr als ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} von ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Zur ersten Seite';
-    }
-    if (type === 'last') {
-      return 'Zur letzten Seite';
-    }
-    if (type === 'next') {
-      return 'Zur nächsten Seite';
-    }
-    // if (type === 'previous') {
-    return 'Zur vorherigen Seite';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -316,34 +297,28 @@ const deDEGrid: Partial<GridLocaleText> = {
   promptAppliedChanges: 'Änderungen angewendet',
 
   // Prompt changes
-  promptChangeGroupDescription: (column: string) => `Gruppieren nach ${column}`,
+  promptChangeGroupDescription: (column: string) => { throw new Error("STUB"); },
   promptChangeAggregationLabel: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeAggregationDescription: (column: string, aggregation: string) =>
-    `${column} aggregieren (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeFilterLabel: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `${column} entspricht einem der Werte: ${value}`;
-    }
-    return `${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeFilterDescription: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `Filtern, bei dem ${column} einem der folgenden Werte entspricht: ${value}`;
-    }
-    return `Filtern wo ${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeSortDescription: (column: string, direction: string) =>
-    `Sortieren nach ${column} (${direction})`,
+    { throw new Error("STUB"); },
   promptChangePivotEnableLabel: 'Pivot',
   promptChangePivotEnableDescription: 'Pivot aktivieren',
-  promptChangePivotColumnsLabel: (count: number) => `Spalten (${count})`,
+  promptChangePivotColumnsLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotColumnsDescription: (column: string, direction: string) =>
-    `${column}${direction ? ` (${direction})` : ''}`,
-  promptChangePivotRowsLabel: (count: number) => `Zeilen (${count})`,
-  promptChangePivotValuesLabel: (count: number) => `Werte (${count})`,
+    { throw new Error("STUB"); },
+  promptChangePivotRowsLabel: (count: number) => { throw new Error("STUB"); },
+  promptChangePivotValuesLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotValuesDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   // promptChangeChartsLabel: (dimensionsCount: number, valuesCount: number) => `Dimensions (${dimensionsCount}), Values (${valuesCount})`,
 };
 

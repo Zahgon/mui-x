@@ -25,50 +25,7 @@ const EventCalendar = React.forwardRef(function EventCalendar<
   inProps: EventCalendarProps<TEvent, TResource>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiEventCalendar' });
-
-  const {
-    parameters,
-    forwardedProps: { className, classes: classesProp, ...forwardedProps },
-  } = useExtractEventCalendarParameters<TEvent, TResource, typeof props>(props);
-  const store = useEventCalendar(parameters);
-  const classes = useEventCalendarUtilityClasses(classesProp);
-
-  const { localeText, apiRef, ...other } = forwardedProps;
-  useInitializeApiRef(store, apiRef);
-
-  const schedulerId = useId();
-
-  const mergedLocaleText = React.useMemo(
-    () => ({ ...EVENT_CALENDAR_DEFAULT_LOCALE_TEXT, ...localeText }),
-    [localeText],
-  );
-
-  const calendarStyledContextValue = React.useMemo(
-    () => ({ schedulerId, classes, localeText: mergedLocaleText }),
-    [schedulerId, classes, mergedLocaleText],
-  );
-
-  const dialogStyledContextValue = React.useMemo(
-    () => ({ schedulerId, classes, localeText: mergedLocaleText }),
-    [schedulerId, classes, mergedLocaleText],
-  );
-
-  const sharedComponentsStyledContextValue = React.useMemo(() => ({ classes }), [classes]);
-
-  return (
-    <SchedulerStoreContext.Provider value={store as any}>
-      <EventCalendarStyledContext.Provider value={calendarStyledContextValue}>
-        <EventDialogStyledContext.Provider value={dialogStyledContextValue}>
-          <SharedComponentsStyledContext.Provider value={sharedComponentsStyledContextValue}>
-            <EventDialogProvider>
-              <EventCalendarRoot className={className} {...other} ref={forwardedRef} />
-            </EventDialogProvider>
-          </SharedComponentsStyledContext.Provider>
-        </EventDialogStyledContext.Provider>
-      </EventCalendarStyledContext.Provider>
-    </SchedulerStoreContext.Provider>
-  );
+    throw new Error("STUB");
 }) as EventCalendarComponent;
 
 EventCalendar.propTypes /* remove-proptypes */ = {

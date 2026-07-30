@@ -11,68 +11,22 @@ function waitForAnimationFrame() {
   let resolve: (_: void) => void;
 
   const promise = new Promise((res) => {
-    resolve = res;
+      throw new Error("STUB");
   });
 
   window.requestAnimationFrame(() => {
-    resolve();
+      throw new Error("STUB");
   });
 
   return promise;
 }
 
 export const useChartProExport: ChartPlugin<UseChartProExportSignature> = ({ instance }) => {
-  const { chartRootRef, chartsLayerContainerRef } = instance;
-  const exportAsPrint = async (options?: ChartPrintExportOptions) => {
-    const chartRoot = chartRootRef.current;
-
-    if (chartRoot) {
-      const enableAnimation = instance.disableAnimation();
-      try {
-        // Wait for animation frame to ensure the animation finished
-        await waitForAnimationFrame();
-        printChart(chartRoot, options);
-      } catch (error) {
-        console.error('MUI X Charts: Error exporting chart as print:', error);
-      } finally {
-        enableAnimation();
-      }
-    }
-  };
-
-  const exportAsImage = async (options?: ChartImageExportOptions) => {
-    const chartRoot = chartRootRef.current;
-    const svg = chartsLayerContainerRef.current;
-
-    if (chartRoot && svg) {
-      const enableAnimation = instance.disableAnimation();
-
-      try {
-        // Wait for animation frame to ensure the animation finished
-        await waitForAnimationFrame();
-        await exportImage(chartRoot, svg, options);
-      } catch (error) {
-        console.error('MUI X Charts: Error exporting chart as image:', error);
-      } finally {
-        enableAnimation();
-      }
-    }
-  };
-
-  return {
-    publicAPI: {
-      exportAsPrint,
-      exportAsImage,
-    },
-    instance: {
-      exportAsPrint,
-      exportAsImage,
-    },
-  };
+    throw new Error("STUB");
 };
 
 useChartProExport.params = {};
 
-useChartProExport.getDefaultizedParams = ({ params }) => ({ ...params });
+useChartProExport.getDefaultizedParams = ({ params }) => { throw new Error("STUB"); };
 
-useChartProExport.getInitialState = () => ({ export: {} });
+useChartProExport.getInitialState = () => { throw new Error("STUB"); };

@@ -20,8 +20,12 @@ function createPointSink(): PointSink {
     },
     lineStart() {},
     lineEnd() {},
-    polygonStart() {},
-    polygonEnd() {},
+    polygonStart() {
+        throw new Error("STUB");
+    },
+    polygonEnd() {
+        throw new Error("STUB");
+    },
   };
   return sink;
 }
@@ -49,29 +53,6 @@ export function createGetVisibleCoordinate(projection: GeoProjection) {
   const clipStream = postClip?.(clipSink);
 
   return ([deviceX, deviceY]: [number, number]): [number, number] | null => {
-    if (clipStream) {
-      clipSink.hit = false;
-      clipStream.point(deviceX, deviceY);
-      if (!clipSink.hit) {
-        return null;
-      }
-    }
-
-    const coordinates = invert([deviceX, deviceY]);
-    if (!coordinates) {
-      return null;
-    }
-
-    forwardSink.hit = false;
-    forwardStream.point(coordinates[0], coordinates[1]);
-    if (
-      !forwardSink.hit ||
-      Math.abs(forwardSink.x - deviceX) > 0.5 ||
-      Math.abs(forwardSink.y - deviceY) > 0.5
-    ) {
-      return null;
-    }
-
-    return coordinates;
+      throw new Error("STUB");
   };
 }

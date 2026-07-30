@@ -29,20 +29,7 @@ const useUtilityClasses = <R extends {}, Multiple extends boolean | undefined>(
   const { classes } = ownerState;
 
   return React.useMemo(() => {
-    const slots = {
-      root: ['root'],
-      item: ['item'],
-      itemContent: ['itemContent'],
-      itemGroupTransition: ['itemGroupTransition'],
-      itemIconContainer: ['itemIconContainer'],
-      itemLabel: ['itemLabel'],
-      itemLabelInput: ['itemLabelInput'],
-      itemCheckbox: ['itemCheckbox'],
-      itemDragAndDropOverlay: ['itemDragAndDropOverlay'],
-      itemErrorIcon: ['itemErrorIcon'],
-    };
-
-    return composeClasses(slots, getRichTreeViewProUtilityClass, classes);
+      throw new Error("STUB");
   }, [classes]);
 };
 
@@ -85,74 +72,7 @@ const RichTreeViewPro = React.forwardRef(function RichTreeViewPro<
   R extends {},
   Multiple extends boolean | undefined = undefined,
 >(inProps: RichTreeViewProProps<R, Multiple>, forwardedRef: React.Ref<HTMLUListElement>) {
-  const props = useThemeProps({ props: inProps, name: 'MuiRichTreeViewPro' });
-
-  useLicenseVerifier(packageInfo);
-
-  if (process.env.NODE_ENV !== 'production') {
-    if ((props as any).children != null) {
-      warnOnce([
-        'MUI X: The `<RichTreeViewPro />` component does not support JSX children.',
-        'If you want to add items, you need to use the `items` prop.',
-        'Check the documentation for more details: https://mui.com/x/react-tree-view/rich-tree-view/items/.',
-      ]);
-    }
-  }
-
-  const {
-    slots: inSlots,
-    slotProps,
-    apiRef,
-    parameters,
-    forwardedProps,
-  } = useExtractRichTreeViewProParameters(props);
-
-  if (process.env.NODE_ENV !== 'production') {
-    if (parameters.itemHeight === null && !parameters.disableVirtualization) {
-      warnOnce([
-        'MUI X: `itemHeight={null}` is not compatible with virtualization.',
-        'Please use `disableVirtualization` when using `itemHeight={null}`.',
-      ]);
-    }
-  }
-
-  // Context hooks
-  const store = useTreeViewStore(RichTreeViewProStore, parameters);
-
-  // Ref hooks
-  const ref = React.useRef<HTMLUListElement | null>(null);
-  const handleRef = useMergedRefs(forwardedRef, ref);
-
-  // Selector hooks
-  const isVirtualizationEnabled = useStore(store, virtualizationSelectors.enabled);
-
-  // Feature hooks
-  const classes = useUtilityClasses(props);
-  const slots = React.useMemo(() => ({ root: RichTreeViewProRoot, ...inSlots }), [inSlots]);
-
-  const Renderer = isVirtualizationEnabled ? RichTreeViewVirtualizedItems : RichTreeViewItems;
-
-  return (
-    <TreeViewProvider
-      store={store}
-      classes={classes}
-      slots={slots}
-      slotProps={slotProps}
-      apiRef={apiRef}
-      rootRef={ref}
-    >
-      <TreeViewItemDepthContext.Provider value={itemsSelectors.itemDepth}>
-        <Renderer
-          slots={slots}
-          slotProps={slotProps}
-          forwardedProps={forwardedProps}
-          ownerState={props}
-          rootRef={handleRef}
-        />
-        <Watermark packageInfo={packageInfo} />
-      </TreeViewItemDepthContext.Provider>
-    </TreeViewProvider>
-  );
+    throw new Error("STUB");
 }) as RichTreeViewProComponent;
 
 RichTreeViewPro.propTypes /* remove-proptypes */ = {

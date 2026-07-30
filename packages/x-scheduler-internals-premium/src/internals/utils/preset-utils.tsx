@@ -12,11 +12,11 @@ type FormatDate = (adapter: TemporalAdapter, date: TemporalSupportedObject) => s
 
 const DAY_AND_HOUR_DAYS = 4;
 
-const formatYear: FormatDate = (adapter, date) => String(adapter.getYear(date));
+const formatYear: FormatDate = (adapter, date) => { throw new Error("STUB"); };
 
-const formatMonth3Letters: FormatDate = (adapter, date) => adapter.format(date, 'month3Letters');
+const formatMonth3Letters: FormatDate = (adapter, date) => { throw new Error("STUB"); };
 
-const formatWeekday1Letter: FormatDate = (adapter, date) => adapter.format(date, 'weekday1Letter');
+const formatWeekday1Letter: FormatDate = (adapter, date) => { throw new Error("STUB"); };
 
 function formatWeekDayMonthAndDayOfMonth(adapter: TemporalAdapter, date: TemporalSupportedObject) {
   const f = adapter.formats;
@@ -24,8 +24,7 @@ function formatWeekDayMonthAndDayOfMonth(adapter: TemporalAdapter, date: Tempora
 }
 
 function formatMonthAndYear(adapter: TemporalAdapter, date: TemporalSupportedObject) {
-  const f = adapter.formats;
-  return adapter.formatByString(date, `${f.monthFullLetter} ${f.yearPadded}`);
+    throw new Error("STUB");
 }
 
 function formatHourLabel(adapter: TemporalAdapter, date: TemporalSupportedObject, ampm: boolean) {
@@ -45,22 +44,22 @@ export const EVENT_TIMELINE_PREMIUM_PRESET_CONFIGS: Readonly<
     headers: [
       {
         unit: 'day',
-        renderCell: ({ adapter, start }) => formatWeekDayMonthAndDayOfMonth(adapter, start),
+        renderCell: ({ adapter, start }) => { throw new Error("STUB"); },
       },
       {
         unit: 'hour',
-        renderCell: ({ adapter, date, ampm }) => formatHourLabel(adapter, date, ampm),
+        renderCell: ({ adapter, date, ampm }) => { throw new Error("STUB"); },
       },
     ],
     unitCount: DAY_AND_HOUR_DAYS,
-    getStartDate: (adapter, visibleDate) => adapter.startOfDay(visibleDate),
+    getStartDate: (adapter, visibleDate) => { throw new Error("STUB"); },
     getEndDate: (adapter, start, unitCount) =>
-      adapter.endOfDay(adapter.addDays(start, unitCount - 1)),
+      { throw new Error("STUB"); },
     // `unitCount` is in days (the navigation step), but the grid ticks in hours. Pin
     // the CSS tick count to `4 × 24` so the grid width stays stable across DST and
     // matches the 24 hour cells `iterate()` emits per day.
-    getCssUnitCount: () => DAY_AND_HOUR_DAYS * 24,
-    navigate: (adapter, date, amount) => adapter.addDays(date, amount),
+    getCssUnitCount: () => { throw new Error("STUB"); },
+    navigate: (adapter, date, amount) => { throw new Error("STUB"); },
   },
   dayAndMonth: {
     timeResolution: 'day',
@@ -69,19 +68,14 @@ export const EVENT_TIMELINE_PREMIUM_PRESET_CONFIGS: Readonly<
       { unit: 'month', formatDate: formatMonthAndYear },
       {
         unit: 'day',
-        renderCell: ({ adapter, date }) => (
-          <span data-slot="dayCell">
-            <span data-slot="weekday">{adapter.format(date, 'weekday1Letter')}</span>
-            <span data-slot="dayOfMonth">{adapter.format(date, 'dayOfMonth')}</span>
-          </span>
-        ),
+        renderCell: ({ adapter, date }) => { throw new Error("STUB"); },
       },
     ],
     unitCount: 8 * 7, // 8 weeks
-    getStartDate: (adapter, visibleDate) => adapter.startOfDay(visibleDate),
+    getStartDate: (adapter, visibleDate) => { throw new Error("STUB"); },
     getEndDate: (adapter, start, unitCount) =>
-      adapter.endOfDay(adapter.addDays(start, unitCount - 1)),
-    navigate: (adapter, date, amount) => adapter.addDays(date, amount),
+      { throw new Error("STUB"); },
+    navigate: (adapter, date, amount) => { throw new Error("STUB"); },
   },
   dayAndWeek: {
     timeResolution: 'day',
@@ -90,17 +84,17 @@ export const EVENT_TIMELINE_PREMIUM_PRESET_CONFIGS: Readonly<
       {
         unit: 'week',
         renderCell: ({ adapter, start, end }) =>
-          `${formatWeekDayMonthAndDayOfMonth(adapter, start)} - ${formatWeekDayMonthAndDayOfMonth(adapter, adapter.addDays(end, -1))}`,
+          { throw new Error("STUB"); },
       },
       { unit: 'day', formatDate: formatWeekday1Letter },
     ],
     unitCount: 16, // 16 weeks
     getStartDate: (adapter, visibleDate, weekStartsOn) =>
-      getStartOfWeek(adapter, visibleDate, weekStartsOn),
+      { throw new Error("STUB"); },
     getEndDate: (adapter, start, unitCount, weekStartsOn) =>
-      getEndOfWeek(adapter, adapter.addWeeks(start, unitCount - 1), weekStartsOn),
-    getCssUnitCount: (adapter, start, end) => adapter.differenceInDays(end, start) + 1,
-    navigate: (adapter, date, amount) => adapter.addWeeks(date, amount),
+      { throw new Error("STUB"); },
+    getCssUnitCount: (adapter, start, end) => { throw new Error("STUB"); },
+    navigate: (adapter, date, amount) => { throw new Error("STUB"); },
   },
   monthAndYear: {
     timeResolution: 'day',
@@ -110,21 +104,21 @@ export const EVENT_TIMELINE_PREMIUM_PRESET_CONFIGS: Readonly<
       { unit: 'month', formatDate: formatMonth3Letters },
     ],
     unitCount: 3 * 12, // 3 years
-    getStartDate: (adapter, visibleDate) => adapter.startOfMonth(visibleDate),
+    getStartDate: (adapter, visibleDate) => { throw new Error("STUB"); },
     getEndDate: (adapter, start, unitCount) =>
-      adapter.endOfMonth(adapter.addMonths(start, unitCount - 1)),
-    getCssUnitCount: (adapter, start, end) => adapter.differenceInDays(end, start) + 1,
-    navigate: (adapter, date, amount) => adapter.addMonths(date, amount),
+      { throw new Error("STUB"); },
+    getCssUnitCount: (adapter, start, end) => { throw new Error("STUB"); },
+    navigate: (adapter, date, amount) => { throw new Error("STUB"); },
   },
   year: {
     timeResolution: 'year',
     tickWidth: 200,
     headers: [{ unit: 'year', formatDate: formatYear }],
     unitCount: 30, // 30 years
-    getStartDate: (adapter, visibleDate) => adapter.startOfYear(visibleDate),
+    getStartDate: (adapter, visibleDate) => { throw new Error("STUB"); },
     getEndDate: (adapter, start, unitCount) =>
-      adapter.endOfYear(adapter.addYears(start, unitCount - 1)),
-    navigate: (adapter, date, amount) => adapter.addYears(date, amount),
+      { throw new Error("STUB"); },
+    navigate: (adapter, date, amount) => { throw new Error("STUB"); },
   },
 };
 

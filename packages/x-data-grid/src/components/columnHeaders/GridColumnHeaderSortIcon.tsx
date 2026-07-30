@@ -7,11 +7,7 @@ import type { GridColumnSortButtonProps } from '../GridColumnSortButton';
 export interface GridColumnHeaderSortIconProps extends GridColumnSortButtonProps {}
 
 function GridColumnHeaderSortIconRaw(props: GridColumnHeaderSortIconProps) {
-  return (
-    <GridIconButtonContainer>
-      <GridColumnSortButton {...props} tabIndex={-1} />
-    </GridIconButtonContainer>
-  );
+    throw new Error("STUB");
 }
 
 const GridColumnHeaderSortIcon = React.memo(GridColumnHeaderSortIconRaw);

@@ -30,7 +30,7 @@ const trTRGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: 'Filtreleri göster',
   toolbarFiltersTooltipHide: 'Filtreleri gizle',
   toolbarFiltersTooltipShow: 'Filtreleri göster',
-  toolbarFiltersTooltipActive: (count) => `${count} aktif filtre`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Ara…',
@@ -138,19 +138,19 @@ const trTRGrid: Partial<GridLocaleText> = {
   // columnMenuManageCharts: 'Manage charts',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) => `${count} filtre aktif`,
+  columnHeaderFiltersTooltipActive: (count) => { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Filtreleri göster',
   columnHeaderSortIconLabel: 'Sırala',
 
   // Rows selected footer text
-  footerRowSelected: (count) => `${count.toLocaleString()} satır seçildi`,
+  footerRowSelected: (count) => { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Toplam Satır:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} / ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Seçim',
@@ -182,8 +182,8 @@ const trTRGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Grup',
-  groupColumn: (name) => `${name} için grupla`,
-  unGroupColumn: (name) => `${name} için gruplamayı kaldır`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Detay görünümüne geçiş',
@@ -206,17 +206,7 @@ const trTRGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'İlk sayfaya git';
-    }
-    if (type === 'last') {
-      return 'Son sayfaya git';
-    }
-    if (type === 'next') {
-      return 'Sonraki sayfaya git';
-    }
-    // if (type === 'previous') {
-    return 'Önceki sayfaya git';
+      throw new Error("STUB");
   },
 
   // Row reordering text

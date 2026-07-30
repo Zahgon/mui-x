@@ -22,7 +22,7 @@ export class RichTreeViewProStore<
   public itemsReordering = new TreeViewItemsReorderingPlugin(this);
 
   public mountEffect = () => {
-    this.lazyLoading.initEffect();
+      throw new Error("STUB");
   };
 
   public constructor(parameters: RichTreeViewProStoreParameters<R, Multiple>) {

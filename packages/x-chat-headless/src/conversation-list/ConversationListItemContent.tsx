@@ -30,36 +30,5 @@ export const ConversationListItemContent = React.forwardRef(function Conversatio
   props: ConversationListItemContentProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    children,
-    conversation,
-    selected = false,
-    unread = false,
-    focused = false,
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    ...other
-  } = props as ConversationListItemContentProps & {
-    ownerState?: ConversationListItemContentOwnerState;
-  };
-  const ownerState: ConversationListItemContentOwnerState = {
-    conversation,
-    selected,
-    unread,
-    focused,
-  };
-  void ownerStateProp;
-  const Root = slots?.root ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  return <Root {...rootProps}>{children}</Root>;
+    throw new Error("STUB");
 }) as ConversationListItemContentComponent;

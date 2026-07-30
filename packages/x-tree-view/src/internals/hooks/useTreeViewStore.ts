@@ -22,10 +22,10 @@ export function useTreeViewStore<TStore extends TreeViewAnyStore>(
   parameters: UseTreeViewStoreParameters<TStore>,
 ): TStore {
   const isRtl = useRtl();
-  const store = useDisposable(() => new StoreClass({ ...parameters, isRtl }));
+  const store = useDisposable(() => { throw new Error("STUB"); });
 
   useIsoLayoutEffect(
-    () => store.updateStateFromParameters({ ...parameters, isRtl }),
+    () => { throw new Error("STUB"); },
     [store, isRtl, parameters],
   );
 

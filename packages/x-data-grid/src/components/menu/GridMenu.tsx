@@ -71,26 +71,15 @@ function GridMenu(props: GridMenuProps) {
 
   const savedFocusRef = React.useRef<HTMLElement | null>(null);
   useEnhancedEffect(() => {
-    if (open) {
-      savedFocusRef.current =
-        document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    } else {
-      savedFocusRef.current?.focus?.();
-      savedFocusRef.current = null;
-    }
+      throw new Error("STUB");
   }, [open]);
 
   React.useEffect(() => {
-    // Emit menuOpen or menuClose events
-    const eventName = open ? 'menuOpen' : 'menuClose';
-    apiRef.current.publishEvent(eventName, { target });
+      throw new Error("STUB");
   }, [apiRef, open, target]);
 
   const handleClickAway = (event: MouseEvent | TouchEvent) => {
-    if (event.target && (target === event.target || target?.contains(event.target as Node))) {
-      return;
-    }
-    onClose(event);
+      throw new Error("STUB");
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {

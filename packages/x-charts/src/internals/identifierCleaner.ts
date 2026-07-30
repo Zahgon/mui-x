@@ -14,9 +14,5 @@ export const identifierCleanerSeriesIdDataIndex = <
 >(
   identifier: T,
 ): Pick<T, 'type' | 'seriesId' | 'dataIndex'> => {
-  return {
-    type: identifier.type,
-    seriesId: identifier.seriesId,
-    dataIndex: identifier.dataIndex,
-  };
+    throw new Error("STUB");
 };

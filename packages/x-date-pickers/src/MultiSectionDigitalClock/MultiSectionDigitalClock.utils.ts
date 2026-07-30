@@ -109,15 +109,7 @@ export const getTimeSectionOptions = ({
 
   return [
     ...Array.from({ length: Math.ceil(60 / timeStep) }, (_, index) => {
-      const timeValue = timeStep * index;
-      return {
-        value: timeValue,
-        label: adapter.formatNumber(resolveLabel(timeValue)),
-        isDisabled,
-        isSelected,
-        isFocused,
-        ariaLabel: resolveAriaLabel(timeValue.toString()),
-      };
+        throw new Error("STUB");
     }),
   ];
 };

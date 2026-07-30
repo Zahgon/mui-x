@@ -6,36 +6,28 @@ import { commonReorderConditions as conditions } from '../rowReorder/commonReord
 const validationRules: ValidationRule[] = [
   {
     name: 'same-position',
-    applies: (ctx) => ctx.sourceNode.id === ctx.targetNode.id,
-    isInvalid: () => true,
+    applies: (ctx) => { throw new Error("STUB"); },
+    isInvalid: () => { throw new Error("STUB"); },
     message: 'Source and target are the same',
   },
   {
     name: 'adjacent-position',
-    applies: (ctx) => conditions.isAdjacentPosition(ctx),
-    isInvalid: () => true,
+    applies: (ctx) => { throw new Error("STUB"); },
+    isInvalid: () => { throw new Error("STUB"); },
     message: 'Source and target are adjacent',
   },
   {
     name: 'to-descendent',
-    applies: (ctx) => conditions.isGroupToLeaf(ctx) || conditions.isGroupToGroup(ctx),
+    applies: (ctx) => { throw new Error("STUB"); },
     isInvalid: (ctx) => {
-      let currentNode = ctx.targetNode;
-      const rowTree = gridRowTreeSelector(ctx.apiRef);
-      while (currentNode.parent) {
-        currentNode = rowTree[currentNode.parent];
-        if (currentNode.id === ctx.sourceNode.id) {
-          return true;
-        }
-      }
-      return false;
+        throw new Error("STUB");
     },
     message: 'Cannot drop group on one of its descendents',
   },
   {
     name: 'group-to-group-above-leaf-belongs-to-source',
     applies: (ctx) =>
-      conditions.isGroupToGroup(ctx) && conditions.isDropAbove(ctx) && conditions.prevIsLeaf(ctx),
+      { throw new Error("STUB"); },
     isInvalid: conditions.prevBelongsToSource,
     message: 'Previous leaf belongs to source group or its descendants',
   },

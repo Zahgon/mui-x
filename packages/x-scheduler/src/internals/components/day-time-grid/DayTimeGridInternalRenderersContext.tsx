@@ -21,5 +21,5 @@ export const DayTimeGridInternalRenderersContext =
   React.createContext<DayTimeGridInternalRenderers>({ timeGridEvent: TimeGridEvent });
 
 export function useDayTimeGridInternalRenderers(): DayTimeGridInternalRenderers {
-  return React.useContext(DayTimeGridInternalRenderersContext);
+    throw new Error("STUB");
 }

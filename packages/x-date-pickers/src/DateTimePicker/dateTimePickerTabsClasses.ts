@@ -9,7 +9,7 @@ export interface DateTimePickerTabsClasses {
 export type DateTimePickerTabsClassKey = keyof DateTimePickerTabsClasses;
 
 export function getDateTimePickerTabsUtilityClass(slot: string) {
-  return generateUtilityClass('MuiDateTimePickerTabs', slot);
+    throw new Error("STUB");
 }
 
 export const dateTimePickerTabsClasses: DateTimePickerTabsClasses = generateUtilityClasses(

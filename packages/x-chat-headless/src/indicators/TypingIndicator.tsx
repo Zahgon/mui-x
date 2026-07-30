@@ -15,8 +15,8 @@ function resolveTypingUser(
   messageAuthors: ChatUser[],
 ) {
   return (
-    participants?.find((participant) => participant.id === userId) ??
-    messageAuthors.find((author) => author.id === userId) ?? { id: userId }
+    participants?.find((participant) => { throw new Error("STUB"); }) ??
+    messageAuthors.find((author) => { throw new Error("STUB"); }) ?? { id: userId }
   );
 }
 
@@ -44,66 +44,5 @@ export const TypingIndicator = React.forwardRef(function TypingIndicator(
   props: TypingIndicatorProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { slots, slotProps, ...other } = props;
-  const { activeConversationId, conversations, messages } = useChat();
-  const { typingUserIds } = useChatStatus();
-  const localeText = useChatLocaleText();
-  const conversation = React.useMemo(
-    () =>
-      activeConversationId == null
-        ? null
-        : (conversations.find((candidate) => candidate.id === activeConversationId) ?? null),
-    [activeConversationId, conversations],
-  );
-  const messageAuthors = React.useMemo(
-    () =>
-      messages.reduce<ChatUser[]>((authors, message) => {
-        if (message.author && !authors.some((author) => author.id === message.author!.id)) {
-          authors.push(message.author);
-        }
-
-        return authors;
-      }, []),
-    [messages],
-  );
-  const users = React.useMemo(
-    () =>
-      typingUserIds.map((userId) =>
-        resolveTypingUser(userId, conversation?.participants, messageAuthors),
-      ),
-    [conversation?.participants, messageAuthors, typingUserIds],
-  );
-  const label = React.useMemo(
-    () => (users.length === 0 ? '' : localeText.typingIndicatorLabel(users)),
-    [localeText, users],
-  );
-  const ownerState = React.useMemo<TypingIndicatorOwnerState>(
-    () => ({
-      activeConversationId,
-      users,
-      count: users.length,
-      label,
-    }),
-    [activeConversationId, label, users],
-  );
-  const Root = slots?.root ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-      'aria-live': 'polite',
-      ...getDataAttributes({
-        count: ownerState.count,
-      }),
-    },
-  });
-
-  if (users.length === 0) {
-    return null;
-  }
-
-  return <Root {...rootProps}>{label}</Root>;
+    throw new Error("STUB");
 }) as TypingIndicatorComponent;

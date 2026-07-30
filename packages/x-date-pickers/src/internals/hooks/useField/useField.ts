@@ -84,16 +84,7 @@ export const useField = <
   const handleSectionListRef = useForkRef(sectionListRefProp, sectionListRef);
 
   const domGetters = React.useMemo<UseFieldDOMGetters>(
-    () => ({
-      isReady: () => sectionListRef.current != null,
-      getRoot: () => sectionListRef.current!.getRoot(),
-      getSectionContainer: (sectionIndex: number) =>
-        sectionListRef.current!.getSectionContainer(sectionIndex),
-      getSectionContent: (sectionIndex: number) =>
-        sectionListRef.current!.getSectionContent(sectionIndex),
-      getSectionIndexFromDOMElement: (element: Element | null | undefined) =>
-        sectionListRef.current!.getSectionIndexFromDOMElement(element),
-    }),
+    () => { throw new Error("STUB"); },
     [sectionListRef],
   );
 
@@ -159,158 +150,54 @@ export const useField = <
   });
 
   const handleRootKeyDown = useEventCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    onKeyDown?.(event);
-    rootProps.onKeyDown(event);
+      throw new Error("STUB");
   });
 
   const handleRootBlur = useEventCallback((event: React.FocusEvent<HTMLDivElement>) => {
-    rootProps.onBlur(event);
-    // Skip the user callback when focus is only moving to another element inside the field
-    // (e.g. the section that gains focus after the focusable root gives it up).
-    const next = event.relatedTarget;
-    if (domGetters.isReady() && next instanceof Node && domGetters.getRoot().contains(next)) {
-      return;
-    }
-    onBlur?.(event);
+      throw new Error("STUB");
   });
 
   const handleRootFocus = useEventCallback((event: React.FocusEvent<HTMLDivElement>) => {
-    rootProps.onFocus(event);
-    // Skip the user callback when focus is only arriving from another element inside the field
-    // (e.g. the focusable root receiving it before it is forwarded to a section, and the section
-    // focus event bubbling back up to the root).
-    const previous = event.relatedTarget;
-    if (
-      domGetters.isReady() &&
-      previous instanceof Node &&
-      domGetters.getRoot().contains(previous)
-    ) {
-      return;
-    }
-    onFocus?.(event);
+      throw new Error("STUB");
   });
 
   const handleRootClick = useEventCallback((event: React.MouseEvent<HTMLDivElement>) => {
-    // The click event on the clear or open button would propagate to the input, trigger this handler and result in an inadvertent section selection.
-    // We avoid this by checking if the call of `handleInputClick` is actually intended, or a propagated call, which should be skipped.
-    if (event.isDefaultPrevented()) {
-      return;
-    }
-    onClick?.(event);
-    rootProps.onClick(event);
+      throw new Error("STUB");
   });
 
   const handleRootMouseDown = useEventCallback((event: React.MouseEvent<HTMLDivElement>) => {
-    // The `isDefaultPrevented` check skips mousedowns that have already been
-    // suppressed before this handler runs -- in particular, propagated events
-    // from the clear / open buttons whose own handlers `preventDefault`, and
-    // capture-phase parents that intentionally block field interactions.
-    // Userland `onMouseDown` calling `event.preventDefault()` does *not*
-    // suppress `rootProps.onMouseDown` here: the prevent fires *after* this
-    // check, and `rootProps.onMouseDown` is the section-selection mechanism
-    // for the field -- letting consumers disable it inline would leave the
-    // field unable to focus a section on click.
-    if (event.isDefaultPrevented()) {
-      return;
-    }
-    onMouseDown?.(event);
-    rootProps.onMouseDown(event);
+      throw new Error("STUB");
   });
 
   const handleRootPaste = useEventCallback((event: React.ClipboardEvent<HTMLDivElement>) => {
-    onPaste?.(event);
-    rootProps.onPaste(event);
+      throw new Error("STUB");
   });
 
   const handleRootInput = useEventCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    onInput?.(event);
-    rootProps.onInput(event);
+      throw new Error("STUB");
   });
 
   const handleClear = useEventCallback((event: React.MouseEvent, ...args) => {
-    event.preventDefault();
-    onClear?.(event, ...(args as []));
-    clearValue();
-
-    if (!isFieldFocused(sectionListRef)) {
-      // setSelectedSections is called internally
-      focusField(0);
-    } else {
-      setSelectedSections(sectionOrder.startIndex);
-    }
+      throw new Error("STUB");
   });
 
   const elements = React.useMemo<PickersSectionElement[]>(() => {
-    return state.sections.map((section, sectionIndex) => {
-      const content = createSectionContentProps(section, sectionIndex);
-      return {
-        container: createSectionContainerProps(sectionIndex),
-        content,
-        before: {
-          children: section.startSeparator,
-        },
-        after: {
-          children: section.endSeparator,
-          'data-range-position': section.isEndFormatSeparator
-            ? content['data-range-position']
-            : undefined,
-        },
-      };
-    });
+      throw new Error("STUB");
   }, [state.sections, createSectionContainerProps, createSectionContentProps]);
 
   React.useEffect(() => {
-    if (sectionListRef.current == null) {
-      throw new Error(
-        `MUI X: The \`sectionListRef\` prop has not been initialized by \`PickersSectionList\`
-You probably tried to pass a component to the \`textField\` slot that contains an \`<input />\` element instead of a \`PickersSectionList\`.
-
-Learn more about the field accessible DOM structure on the MUI documentation: https://mui.com/x/react-date-pickers/fields/#fields-to-edit-a-single-element`,
-      );
-    }
-
-    if (autoFocus && !disabled) {
-      sectionListRef.current.getSectionContent(sectionOrder.startIndex).focus();
-    }
+      throw new Error("STUB");
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEnhancedEffect(() => {
-    if (!focused || !sectionListRef.current) {
-      return;
-    }
-
-    if (parsedSelectedSections === 'all') {
-      sectionListRef.current.getRoot().focus();
-    } else if (typeof parsedSelectedSections === 'number') {
-      const domElement = sectionListRef.current.getSectionContent(parsedSelectedSections);
-      if (domElement) {
-        domElement.focus();
-      }
-    }
+      throw new Error("STUB");
   }, [parsedSelectedSections, focused]);
 
   useEnhancedEffect(() => {
-    syncSelectionToDOM({ focused, domGetters, stateResponse });
+      throw new Error("STUB");
   });
 
-  React.useImperativeHandle(fieldRef, () => ({
-    getSections: () => state.sections,
-    getActiveSectionIndex: () => getActiveSectionIndex(sectionListRef),
-    setSelectedSections: (newSelectedSections) => {
-      if (disabled || !sectionListRef.current) {
-        return;
-      }
-
-      const newParsedSelectedSections = parseSelectedSections(newSelectedSections, state.sections);
-      const newActiveSectionIndex =
-        newParsedSelectedSections === 'all' ? 0 : newParsedSelectedSections;
-      setFocused(newActiveSectionIndex !== null);
-      setSelectedSections(newSelectedSections);
-    },
-    focusField,
-    isFieldFocused: () => isFieldFocused(sectionListRef),
-    clearValue,
-  }));
+  React.useImperativeHandle(fieldRef, () => { throw new Error("STUB"); });
 
   return {
     // Forwarded

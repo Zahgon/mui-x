@@ -25,11 +25,7 @@ const VirtualScrollerContentRoot = styled('div', {
   name: 'MuiDataGrid',
   slot: 'VirtualScrollerContent',
   overridesResolver: (props, styles) => {
-    const { ownerState } = props;
-    return [
-      styles.virtualScrollerContent,
-      ownerState.overflowedContent && styles['virtualScrollerContent--overflowed'],
-    ];
+      throw new Error("STUB");
   },
 })<{ ownerState: OwnerState }>({
   flex: '1 0 auto',
@@ -41,19 +37,7 @@ const GridVirtualScrollerContent = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & { sx?: SxProps<Theme> }
 >(function GridVirtualScrollerContent(props, ref) {
-  const rootProps = useGridRootProps();
-  const overflowedContent = !rootProps.autoHeight && props.style?.minHeight === 'auto';
-  const classes = useUtilityClasses(rootProps, overflowedContent);
-  const ownerState = { classes: rootProps.classes, overflowedContent };
-
-  return (
-    <VirtualScrollerContentRoot
-      {...props}
-      ownerState={ownerState}
-      className={clsx(classes.root, props.className)}
-      ref={ref}
-    />
-  );
+    throw new Error("STUB");
 });
 
 export { GridVirtualScrollerContent };

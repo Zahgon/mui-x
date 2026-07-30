@@ -54,7 +54,7 @@ export class KeyboardManager {
    * Create a new KeyboardManager instance
    */
   constructor() {
-    this.initialize();
+      throw new Error("STUB");
   }
 
   /**
@@ -83,14 +83,14 @@ export class KeyboardManager {
    * Handle keyup events
    */
   private handleKeyUp = (event: KeyboardEvent): void => {
-    this.pressedKeys.delete(event.key);
+      throw new Error("STUB");
   };
 
   /**
    * Clear all pressed keys
    */
   private clearKeys = (): void => {
-    this.pressedKeys.clear();
+      throw new Error("STUB");
   };
 
   /**
@@ -99,17 +99,7 @@ export class KeyboardManager {
    * @returns True if all specified keys are pressed, false otherwise
    */
   public areKeysPressed(keys?: KeyboardKey[]): boolean {
-    if (!keys || keys.length === 0) {
-      return true; // No keys required means the condition is satisfied
-    }
-
-    return keys.every((key) => {
-      if (key === 'ControlOrMeta') {
-        // Apple platforms (incl. iPadOS with a keyboard) use Cmd/Meta as the primary modifier.
-        return platform.os.apple ? this.pressedKeys.has('Meta') : this.pressedKeys.has('Control');
-      }
-      return this.pressedKeys.has(key);
-    });
+      throw new Error("STUB");
   }
 
   /**

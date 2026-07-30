@@ -4,14 +4,5 @@ import { gridRowGroupingSanitizedModelSelector } from '../features/rowGrouping/g
 import { useGridPrivateApiContext } from './useGridPrivateApiContext';
 
 export const useGridAriaAttributesPremium = (): React.HTMLAttributes<HTMLElement> => {
-  const ariaAttributesPro = useGridAriaAttributesPro();
-  const apiRef = useGridPrivateApiContext();
-  const gridRowGroupingModel = useGridSelector(apiRef, gridRowGroupingSanitizedModelSelector);
-
-  const ariaAttributesPremium = gridRowGroupingModel.length > 0 ? { role: 'treegrid' } : {};
-
-  return {
-    ...ariaAttributesPro,
-    ...ariaAttributesPremium,
-  };
+    throw new Error("STUB");
 };

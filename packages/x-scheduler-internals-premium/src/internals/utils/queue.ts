@@ -24,9 +24,7 @@ export interface DateRange {
  * Format: "startTimestamp:endTimestamp"
  */
 function getDateRangeKey(adapter: Adapter, range: DateRange): string {
-  const startTimestamp = getDateKey(range.start, adapter);
-  const endTimestamp = getDateKey(range.end, adapter);
-  return `${startTimestamp}:${endTimestamp}`;
+    throw new Error("STUB");
 }
 
 /**
@@ -69,7 +67,7 @@ export class SchedulerDataManager {
   private fetchFunction: (range: DateRange, adapter: Adapter) => Promise<void>;
 
   public get disposed(): boolean {
-    return this.disposables.disposed;
+      throw new Error("STUB");
   }
 
   constructor(
@@ -81,70 +79,18 @@ export class SchedulerDataManager {
       debounceMs?: number;
     } = {},
   ) {
-    this.adapter = adapter;
-    this.fetchFunction = fetchFunction;
-    this.maxConcurrentRequests = options.maxConcurrentRequests ?? MAX_CONCURRENT_REQUESTS;
-    this.maxQueuedRequests = options.maxQueuedRequests ?? MAX_QUEUED_REQUESTS;
-    this.debounceMs = options.debounceMs ?? DEBOUNCE_MS;
-
-    this.disposables.defer(() => {
-      this.cancelQueuedRequests();
-      this.pendingRequests.clear();
-      this.settledRequests.clear();
-    });
+      throw new Error("STUB");
   }
 
   /**
    * Helper to safely add ranges to the queue and enforce limits.
    */
   private commitRangesToQueue = (ranges: DateRange[]) => {
-    ranges.forEach((range) => {
-      const key = getDateRangeKey(this.adapter, range);
-
-      // Skip if already settled, currently fetching, or already in queue
-      if (this.pendingRequests.has(key) || this.queuedRequests.has(key)) {
-        return;
-      }
-
-      this.queuedRequests.set(key, range);
-    });
-    // Trim queue if it exceeds max size.
-    while (this.queuedRequests.size > this.maxQueuedRequests) {
-      const firstKey = this.queuedRequests.keys().next().value;
-      if (firstKey !== undefined) {
-        this.queuedRequests.delete(firstKey);
-      }
-    }
+      throw new Error("STUB");
   };
 
   private processQueue = async () => {
-    if (this.queuedRequests.size === 0 || this.pendingRequests.size >= this.maxConcurrentRequests) {
-      return;
-    }
-
-    const loopLength = Math.min(
-      this.maxConcurrentRequests - this.pendingRequests.size,
-      this.queuedRequests.size,
-    );
-
-    if (loopLength === 0) {
-      return;
-    }
-
-    const fetchQueue = Array.from(this.queuedRequests.entries());
-    const fetchPromises: Promise<void>[] = [];
-
-    const startIndex = Math.max(0, fetchQueue.length - loopLength);
-    const itemsToProcess = fetchQueue.slice(startIndex);
-
-    for (const [rangeKey, range] of itemsToProcess) {
-      this.queuedRequests.delete(rangeKey);
-      this.pendingRequests.set(rangeKey, range);
-
-      fetchPromises.push(this.fetchFunction(range, this.adapter));
-    }
-
-    await Promise.all(fetchPromises);
+      throw new Error("STUB");
   };
 
   /**
@@ -166,22 +112,7 @@ export class SchedulerDataManager {
     this.stagedRanges = [...ranges];
 
     return new Promise<void>((resolve, reject) => {
-      this.pendingDebounceResolve = resolve;
-      this.timeoutManager.startTimeout('debounce', this.debounceMs, async () => {
-        this.pendingDebounceResolve = null;
-        // Move from Stage -> Actual Queue
-        if (this.stagedRanges) {
-          this.commitRangesToQueue(this.stagedRanges);
-          this.stagedRanges = null;
-        }
-
-        try {
-          await this.processQueue();
-          resolve();
-        } catch (error) {
-          reject(error);
-        }
-      });
+        throw new Error("STUB");
     });
   };
 
@@ -190,32 +121,11 @@ export class SchedulerDataManager {
    * Useful for initial load or forced refresh.
    */
   public queueImmediate = async (ranges: DateRange[]) => {
-    if (this.disposed) {
-      return;
-    }
-    // Clear any pending debounce
-    this.timeoutManager.clearTimeout('debounce');
-    if (this.pendingDebounceResolve) {
-      this.pendingDebounceResolve();
-      this.pendingDebounceResolve = null;
-    }
-
-    this.stagedRanges = null;
-
-    this.commitRangesToQueue(ranges);
-    await this.processQueue();
+      throw new Error("STUB");
   };
 
   public cancelQueuedRequests = () => {
-    // Clear any pending debounce
-    this.timeoutManager.clearTimeout('debounce');
-    if (this.pendingDebounceResolve) {
-      this.pendingDebounceResolve();
-      this.pendingDebounceResolve = null;
-    }
-
-    this.stagedRanges = null;
-    this.queuedRequests.clear();
+      throw new Error("STUB");
   };
 
   public setRequestSettled = async (range: DateRange) => {
@@ -229,7 +139,7 @@ export class SchedulerDataManager {
   };
 
   [disposeSymbol](): void {
-    this.disposables.dispose();
+      throw new Error("STUB");
   }
 
   public clearPendingRequest = async (range: DateRange) => {
@@ -253,5 +163,5 @@ export class SchedulerDataManager {
     return RequestStatus.UNKNOWN;
   };
 
-  public getActiveRequestsCount = () => this.pendingRequests.size + this.queuedRequests.size;
+  public getActiveRequestsCount = () => { throw new Error("STUB"); };
 }

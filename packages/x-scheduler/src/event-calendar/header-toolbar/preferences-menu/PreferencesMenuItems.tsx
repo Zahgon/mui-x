@@ -33,12 +33,7 @@ const PreferencesMenuListItemIcon = styled(ListItemIcon, {
 const PreferencesMenuListSubheader = styled(ListSubheader, {
   name: 'MuiEventCalendar',
   slot: 'PreferencesMenuListSubheader',
-})(({ theme }) => ({
-  ...theme.typography.button,
-  color: (theme.vars || theme).palette.text.disabled,
-  paddingBottom: theme.spacing(1),
-  backgroundColor: 'transparent',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 /**
  * Computes which preference options are visible from the menu config and current view.
@@ -95,11 +90,11 @@ export function usePreferencesMenuModel() {
   }
 
   const visibleOptions = preferenceOptions.filter(
-    (option) => preferencesMenuConfig?.[option.configKey] !== false,
+    (option) => { throw new Error("STUB"); },
   );
 
   const visibleViewSpecificOptions = viewSpecificPreferenceOptions.filter(
-    (option) => preferencesMenuConfig?.[option.configKey] !== false && option.view === currentView,
+    (option) => { throw new Error("STUB"); },
   );
 
   const showSpecificOptions = visibleViewSpecificOptions.length > 0;
@@ -193,16 +188,7 @@ export function usePreferencesMenuItems(): {
   );
 
   visibleOptions.forEach((option) => {
-    items.push(
-      renderCheckableItem(
-        option.configKey,
-        'menuitemcheckbox',
-        !!preferences[option.preferenceKey],
-        option.label,
-        (event) =>
-          handleToggle(option.preferenceKey, !preferences[option.preferenceKey], event.nativeEvent),
-      ),
-    );
+      throw new Error("STUB");
   });
 
   if (showDividerBeforeTimeFormat) {
@@ -221,14 +207,14 @@ export function usePreferencesMenuItems(): {
         'menuitemradio',
         !!preferences.ampm,
         localeText.amPm12h,
-        (event) => handleTimeFormatChange('12', event.nativeEvent),
+        (event) => { throw new Error("STUB"); },
       ),
       renderCheckableItem(
         'ampm-24',
         'menuitemradio',
         !preferences.ampm,
         localeText.hour24h,
-        (event) => handleTimeFormatChange('24', event.nativeEvent),
+        (event) => { throw new Error("STUB"); },
       ),
     );
   }
@@ -252,15 +238,7 @@ export function usePreferencesMenuItems(): {
         { value: 6, label: localeText.weekdaySaturday },
       ] as const
     ).forEach(({ value, label }) => {
-      items.push(
-        renderCheckableItem(
-          `week-start-${value}`,
-          'menuitemradio',
-          preferences.weekStartsOn === value,
-          label,
-          (event) => handleWeekStartsOnChange(value, event.nativeEvent),
-        ),
-      );
+        throw new Error("STUB");
     });
   }
 
@@ -277,20 +255,7 @@ export function usePreferencesMenuItems(): {
       </PreferencesMenuListSubheader>,
     );
     visibleViewSpecificOptions.forEach((option) => {
-      items.push(
-        renderCheckableItem(
-          option.configKey,
-          'menuitemcheckbox',
-          !!preferences[option.preferenceKey],
-          option.label,
-          (event) =>
-            handleToggle(
-              option.preferenceKey,
-              !preferences[option.preferenceKey],
-              event.nativeEvent,
-            ),
-        ),
-      );
+        throw new Error("STUB");
     });
   }
 

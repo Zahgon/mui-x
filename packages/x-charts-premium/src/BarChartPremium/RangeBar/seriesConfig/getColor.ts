@@ -10,29 +10,12 @@ const getColor: ColorProcessor<'rangeBar'> = (series, xAxis, yAxis) => {
 
   if (bandColorScale && bandValues) {
     return (dataIndex?: number) => {
-      if (dataIndex === undefined) {
-        return series.color;
-      }
-
-      const value = bandValues[dataIndex];
-      const color = bandColorScale(value);
-
-      if (typeof color !== 'string') {
-        return getSeriesColor({ value, dataIndex });
-      }
-
-      return color;
+        throw new Error("STUB");
     };
   }
 
   return (dataIndex?: number) => {
-    if (dataIndex === undefined) {
-      return series.color;
-    }
-
-    const value = series.data[dataIndex];
-
-    return getSeriesColor({ value, dataIndex });
+      throw new Error("STUB");
   };
 };
 

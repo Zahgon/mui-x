@@ -95,19 +95,11 @@ const defaultFormats: AdapterFormats = {
 };
 
 function throwMissingUTCPluginError() {
-  throw new Error(
-    'MUI X Date Pickers: Missing dayjs UTC plugin. ' +
-      'UTC and timezone support requires the dayjs UTC plugin to be enabled. ' +
-      'See https://mui.com/x/react-date-pickers/timezone/#day-js-and-utc for setup instructions.',
-  );
+    throw new Error("STUB");
 }
 
 function throwMissingTimezonePluginError() {
-  throw new Error(
-    'MUI X Date Pickers: Missing dayjs timezone plugin. ' +
-      'Timezone support requires both the dayjs UTC and timezone plugins to be enabled. ' +
-      'See https://mui.com/x/react-date-pickers/timezone/#day-js-and-timezone for setup instructions.',
-  );
+    throw new Error("STUB");
 }
 
 declare module '@mui/x-date-pickers/models' {
@@ -157,26 +149,16 @@ export class AdapterDayjs implements MuiPickersAdapter<string> {
   public formatTokenMap = formatTokenMap;
 
   constructor({ locale, formats }: AdapterOptions<string, never> = {}) {
-    this.locale = locale;
-    this.formats = { ...defaultFormats, ...formats };
-
-    // Moved plugins to the constructor to allow for users to use options on the library
-    // for reference: https://github.com/mui/mui-x/pull/11151
-    dayjs.extend(customParseFormatPlugin);
+      throw new Error("STUB");
   }
 
   private setLocaleToValue = (value: Dayjs) => {
-    const expectedLocale = this.getCurrentLocaleCode();
-    if (expectedLocale === value.locale()) {
-      return value;
-    }
-
-    return value.locale(expectedLocale);
+      throw new Error("STUB");
   };
 
-  private hasUTCPlugin = () => typeof dayjs.utc !== 'undefined';
+  private hasUTCPlugin = () => { throw new Error("STUB"); };
 
-  private hasTimezonePlugin = () => typeof dayjs.tz !== 'undefined';
+  private hasTimezonePlugin = () => { throw new Error("STUB"); };
 
   private isSame = (value: Dayjs, comparing: Dayjs, comparisonTemplate: string) => {
     const comparingInValueTimezone = this.setTimezone(comparing, this.getTimezone(value))!;
@@ -188,69 +170,23 @@ export class AdapterDayjs implements MuiPickersAdapter<string> {
    * Replaces "default" by undefined and "system" by the system timezone before passing it to `dayjs`.
    */
   private cleanTimezone = (timezone: string) => {
-    switch (timezone) {
-      case 'default': {
-        return undefined;
-      }
-      case 'system': {
-        return dayjs.tz.guess();
-      }
-      default: {
-        return timezone;
-      }
-    }
+      throw new Error("STUB");
   };
 
   private createSystemDate = (value: string | undefined): Dayjs => {
-    return this.setLocaleToValue(dayjs(value));
+      throw new Error("STUB");
   };
 
   private createUTCDate = (value: string | undefined): Dayjs => {
-    /* v8 ignore next 3 */
-    if (!this.hasUTCPlugin()) {
-      throwMissingUTCPluginError();
-    }
-
-    return this.setLocaleToValue(dayjs.utc(value));
+      throw new Error("STUB");
   };
 
   private createTZDate = (value: string | undefined, timezone: PickersTimezone): Dayjs => {
-    /* v8 ignore next 3 */
-    if (!this.hasUTCPlugin()) {
-      throwMissingUTCPluginError();
-    }
-
-    /* v8 ignore next 3 */
-    if (!this.hasTimezonePlugin()) {
-      throwMissingTimezonePluginError();
-    }
-
-    const keepLocalTime = value !== undefined && !value.endsWith('Z');
-
-    return this.setLocaleToValue(dayjs(value).tz(this.cleanTimezone(timezone), keepLocalTime));
+      throw new Error("STUB");
   };
 
   private getLocaleFormats = () => {
-    const locales = dayjs.Ls;
-    const locale = this.locale || 'en';
-
-    let localeObject = locales[locale];
-
-    if (localeObject === undefined) {
-      /* v8 ignore start */
-      if (process.env.NODE_ENV !== 'production') {
-        warnOnce([
-          'MUI X: Your locale has not been found.',
-          'Either the locale key is not a supported one. Locales supported by dayjs are available here: https://github.com/iamkun/dayjs/tree/dev/src/locale.',
-          "Or you forget to import the locale from 'dayjs/locale/{localeUsed}'",
-          'fallback on English locale.',
-        ]);
-      }
-      /* v8 ignore stop */
-      localeObject = locales.en;
-    }
-
-    return localeObject.formats;
+      throw new Error("STUB");
   };
 
   /**
@@ -260,27 +196,7 @@ export class AdapterDayjs implements MuiPickersAdapter<string> {
    * See https://github.com/iamkun/dayjs/blob/b3624de619d6e734cd0ffdbbd3502185041c1b60/src/plugin/timezone/index.js#L72
    */
   protected adjustOffset = (value: Dayjs) => {
-    if (!this.hasTimezonePlugin()) {
-      return value;
-    }
-
-    const timezone = this.getTimezone(value);
-    if (timezone !== 'UTC') {
-      const fixedValue = value.tz(this.cleanTimezone(timezone), true);
-      // TODO: Simplify the case when we raise the `dayjs` peer dep to 1.11.12 (https://github.com/iamkun/dayjs/releases/tag/v1.11.12)
-      /* v8 ignore next 3 */
-      // @ts-ignore
-      if (fixedValue.$offset === (value.$offset ?? 0)) {
-        return value;
-      }
-      // Change only what is needed to avoid creating a new object with unwanted data
-      // Especially important when used in an environment where utc or timezone dates are used only in some places
-      // Reference: https://github.com/mui/mui-x/issues/13290
-      // @ts-ignore
-      value.$offset = fixedValue.$offset;
-    }
-
-    return value;
+      throw new Error("STUB");
   };
 
   public date = <T extends string | null | undefined>(
@@ -301,7 +217,7 @@ export class AdapterDayjs implements MuiPickersAdapter<string> {
     return this.createTZDate(value, timezone) as unknown as R;
   };
 
-  public getInvalidDate = () => dayjs(new Date('Invalid date'));
+  public getInvalidDate = () => { throw new Error("STUB"); };
 
   public getTimezone = (value: Dayjs): string => {
     if (this.hasTimezonePlugin()) {
@@ -381,18 +297,13 @@ export class AdapterDayjs implements MuiPickersAdapter<string> {
     const t = (formatBis: string) =>
       formatBis.replace(
         /(\[[^\]]+])|(MMMM|MM|DD|dddd)/g,
-        (_: string, a: string, b: string) => a || b.slice(1),
+        (_: string, a: string, b: string) => { throw new Error("STUB"); },
       );
 
     return format.replace(
       /(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,
       (_: string, a: string, b: string) => {
-        const B = b && b.toUpperCase();
-        return (
-          a ||
-          localeFormats[b as keyof typeof localeFormats] ||
-          t(localeFormats[B as keyof typeof localeFormats] as string)
-        );
+          throw new Error("STUB");
       },
     );
   };
@@ -442,7 +353,7 @@ export class AdapterDayjs implements MuiPickersAdapter<string> {
   };
 
   public isSameHour = (value: Dayjs, comparing: Dayjs) => {
-    return value.isSame(comparing, 'hour');
+      throw new Error("STUB");
   };
 
   public isAfter = (value: Dayjs, comparing: Dayjs) => {
@@ -538,7 +449,7 @@ export class AdapterDayjs implements MuiPickersAdapter<string> {
   };
 
   public addHours = (value: Dayjs, amount: number) => {
-    return this.adjustOffset(value.add(amount, 'hour'));
+      throw new Error("STUB");
   };
 
   public addMinutes = (value: Dayjs, amount: number) => {
@@ -546,7 +457,7 @@ export class AdapterDayjs implements MuiPickersAdapter<string> {
   };
 
   public addSeconds = (value: Dayjs, amount: number) => {
-    return this.adjustOffset(value.add(amount, 'second'));
+      throw new Error("STUB");
   };
 
   public getYear = (value: Dayjs) => {
@@ -610,23 +521,7 @@ export class AdapterDayjs implements MuiPickersAdapter<string> {
   };
 
   public getWeekArray = (value: Dayjs) => {
-    const start = this.startOfWeek(this.startOfMonth(value));
-    const end = this.endOfWeek(this.endOfMonth(value));
-
-    let count = 0;
-    let current = start;
-    const nestedWeeks: Dayjs[][] = [];
-
-    while (current < end) {
-      const weekNumber = Math.floor(count / 7);
-      nestedWeeks[weekNumber] = nestedWeeks[weekNumber] || [];
-      nestedWeeks[weekNumber].push(current);
-
-      current = this.addDays(current, 1);
-      count += 1;
-    }
-
-    return nestedWeeks;
+      throw new Error("STUB");
   };
 
   public getWeekNumber = (value: Dayjs) => {

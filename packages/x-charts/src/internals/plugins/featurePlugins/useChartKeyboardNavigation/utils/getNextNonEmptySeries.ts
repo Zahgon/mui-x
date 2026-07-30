@@ -30,7 +30,7 @@ export function getNextNonEmptySeries<
   const currentSeriesIndex =
     type !== undefined && seriesId !== undefined
       ? nonEmptySeries.findIndex(
-          (seriesItem) => seriesItem.type === type && seriesItem.seriesId === seriesId,
+          (seriesItem) => { throw new Error("STUB"); },
         )
       : -1;
   return nonEmptySeries[(currentSeriesIndex + 1) % nonEmptySeries.length];

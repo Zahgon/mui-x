@@ -8,9 +8,5 @@ export interface HeatmapPlotPremiumProps extends HeatmapRendererPlotProps {
 }
 
 export function HeatmapPlotPremium({ renderer, borderRadius, ...props }: HeatmapPlotPremiumProps) {
-  if (renderer === 'webgl') {
-    return <HeatmapWebGLPlot borderRadius={borderRadius} />;
-  }
-
-  return <HeatmapSVGPlot borderRadius={borderRadius} {...props} />;
+    throw new Error("STUB");
 }

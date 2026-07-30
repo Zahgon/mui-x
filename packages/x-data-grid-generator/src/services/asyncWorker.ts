@@ -8,16 +8,7 @@ export default function asyncWorker({
   done: () => void;
 }) {
   const myNonEssentialWork: IdleRequestCallback = (deadline) => {
-    // If there is a surplus time in the frame, or timeout
-    while ((deadline.timeRemaining() > 0 || deadline.didTimeout) && tasks.current > 0) {
-      work();
-    }
-
-    if (tasks.current > 0) {
-      requestIdleCallback(myNonEssentialWork);
-    } else {
-      done();
-    }
+      throw new Error("STUB");
   };
 
   // Don't use requestIdleCallback if the time is mock, better to run synchronously in such case.

@@ -6,17 +6,4 @@ import type { DefaultizedZoomOptions } from './useChartCartesianAxis.types';
 export const createZoomLookup =
   (axisDirection: 'x' | 'y') =>
   (axes: AxisConfig<ScaleName, any, ChartsCartesianAxisProps>[] = []) =>
-    axes.reduce<Record<AxisId, DefaultizedZoomOptions>>((acc, v) => {
-      // @ts-ignore
-      const { zoom, id: axisId, reverse, scaleType } = v;
-      const defaultizedZoom = defaultizeZoom(
-        zoom,
-        axisId,
-        axisDirection,
-        getEffectiveZoomReverse(axisDirection, scaleType, reverse),
-      );
-      if (defaultizedZoom) {
-        acc[axisId] = defaultizedZoom;
-      }
-      return acc;
-    }, {});
+    { throw new Error("STUB"); };

@@ -10,12 +10,5 @@ export const createPositionGetter: (
 ) => PositionGetter =
   (scale, isCategoryDirection, gap, ordinalScaleData) =>
   (value, bandIndex, stackOffset, useBand) => {
-    if (isOrdinalScale(scale)) {
-      const position = scale(ordinalScaleData?.[bandIndex])!;
-      return useBand ? position + scale.bandwidth() : position;
-    }
-    if (isCategoryDirection) {
-      return scale(value + (stackOffset || 0))! + bandIndex * gap;
-    }
-    return scale(value)!;
+      throw new Error("STUB");
   };

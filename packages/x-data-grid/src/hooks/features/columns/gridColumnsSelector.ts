@@ -13,7 +13,7 @@ import { gridListColumnSelector, gridListViewSelector } from '../listView';
  * @category Columns
  */
 export const gridColumnsStateSelector = createRootSelector(
-  (state: GridStateCommunity) => state.columns,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 /**
@@ -22,7 +22,7 @@ export const gridColumnsStateSelector = createRootSelector(
  */
 export const gridColumnFieldsSelector = createSelector(
   gridColumnsStateSelector,
-  (columnsState) => columnsState.orderedFields,
+  (columnsState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -31,7 +31,7 @@ export const gridColumnFieldsSelector = createSelector(
  */
 export const gridColumnLookupSelector = createSelector(
   gridColumnsStateSelector,
-  (columnsState) => columnsState.lookup,
+  (columnsState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -41,7 +41,7 @@ export const gridColumnLookupSelector = createSelector(
 export const gridColumnDefinitionsSelector = createSelectorMemoized(
   gridColumnFieldsSelector,
   gridColumnLookupSelector,
-  (allFields, lookup) => allFields.map((field) => lookup[field]),
+  (allFields, lookup) => { throw new Error("STUB"); },
 );
 
 /**
@@ -51,7 +51,7 @@ export const gridColumnDefinitionsSelector = createSelectorMemoized(
  */
 export const gridColumnVisibilityModelSelector = createSelector(
   gridColumnsStateSelector,
-  (columnsState) => columnsState.columnVisibilityModel,
+  (columnsState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -62,7 +62,7 @@ export const gridColumnVisibilityModelSelector = createSelector(
  */
 export const gridInitialColumnVisibilityModelSelector = createSelector(
   gridColumnsStateSelector,
-  (columnsState) => columnsState.initialColumnVisibilityModel,
+  (columnsState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -75,9 +75,7 @@ export const gridVisibleColumnDefinitionsSelector = createSelectorMemoized(
   gridListViewSelector,
   gridListColumnSelector,
   (columns, columnVisibilityModel, listView, listColumn) =>
-    listView && listColumn
-      ? [listColumn]
-      : columns.filter((column) => columnVisibilityModel[column.field] !== false),
+    { throw new Error("STUB"); },
 );
 
 /**
@@ -86,7 +84,7 @@ export const gridVisibleColumnDefinitionsSelector = createSelectorMemoized(
  */
 export const gridVisibleColumnFieldsSelector = createSelectorMemoized(
   gridVisibleColumnDefinitionsSelector,
-  (visibleColumns) => visibleColumns.map((column) => column.field),
+  (visibleColumns) => { throw new Error("STUB"); },
 );
 
 /**
@@ -94,7 +92,7 @@ export const gridVisibleColumnFieldsSelector = createSelectorMemoized(
  * @category Visible Columns
  */
 export const gridPinnedColumnsSelector = createRootSelector(
-  (state: GridStateCommunity) => state.pinnedColumns,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 /**
@@ -105,7 +103,7 @@ export const gridPinnedColumnsSelector = createRootSelector(
 export const gridExistingPinnedColumnSelector = createSelectorMemoized(
   gridPinnedColumnsSelector,
   gridColumnFieldsSelector,
-  (model, orderedFields) => filterMissingColumns(model, orderedFields),
+  (model, orderedFields) => { throw new Error("STUB"); },
 );
 
 /**
@@ -118,15 +116,7 @@ export const gridVisiblePinnedColumnDefinitionsSelector = createSelectorMemoized
   gridVisibleColumnFieldsSelector,
   gridListViewSelector,
   (columnsState, model, visibleColumnFields, listView) => {
-    if (listView) {
-      return EMPTY_PINNED_COLUMN_FIELDS;
-    }
-    const visiblePinnedFields = filterMissingColumns(model, visibleColumnFields);
-    const visiblePinnedColumns = {
-      left: visiblePinnedFields.left.map((field) => columnsState.lookup[field]),
-      right: visiblePinnedFields.right.map((field) => columnsState.lookup[field]),
-    };
-    return visiblePinnedColumns;
+      throw new Error("STUB");
   },
 );
 
@@ -143,12 +133,12 @@ function filterMissingColumns(pinnedColumns: GridPinnedColumnFields, columns: st
     if (!Array.isArray(newPinnedColumns)) {
       return [];
     }
-    return newPinnedColumns.filter((field) => remainingColumns.includes(field));
+    return newPinnedColumns.filter((field) => { throw new Error("STUB"); });
   };
 
   const leftPinnedColumns = filter(pinnedColumns.left, columns);
   const columnsWithoutLeftPinnedColumns = columns.filter(
-    (field) => !leftPinnedColumns.includes(field),
+    (field) => { throw new Error("STUB"); },
   );
   const rightPinnedColumns = filter(pinnedColumns.right, columnsWithoutLeftPinnedColumns);
 
@@ -162,15 +152,7 @@ function filterMissingColumns(pinnedColumns: GridPinnedColumnFields, columns: st
 export const gridColumnPositionsSelector = createSelectorMemoized(
   gridVisibleColumnDefinitionsSelector,
   (visibleColumns) => {
-    const positions: number[] = [];
-    let currentPosition = 0;
-
-    for (let i = 0; i < visibleColumns.length; i += 1) {
-      positions.push(currentPosition);
-      currentPosition += visibleColumns[i].computedWidth;
-    }
-
-    return positions;
+      throw new Error("STUB");
   },
 );
 
@@ -180,7 +162,7 @@ export const gridColumnPositionsSelector = createSelectorMemoized(
  */
 export const gridFilterableColumnDefinitionsSelector = createSelectorMemoized(
   gridColumnDefinitionsSelector,
-  (columns) => columns.filter((col) => col.filterable),
+  (columns) => { throw new Error("STUB"); },
 );
 
 /**
@@ -190,12 +172,7 @@ export const gridFilterableColumnDefinitionsSelector = createSelectorMemoized(
 export const gridFilterableColumnLookupSelector = createSelectorMemoized(
   gridColumnDefinitionsSelector,
   (columns) =>
-    columns.reduce<GridColumnLookup>((acc, col) => {
-      if (col.filterable) {
-        acc[col.field] = col;
-      }
-      return acc;
-    }, {}),
+    { throw new Error("STUB"); },
 );
 
 /**
@@ -205,5 +182,5 @@ export const gridFilterableColumnLookupSelector = createSelectorMemoized(
  */
 export const gridHasColSpanSelector = createSelectorMemoized(
   gridColumnDefinitionsSelector,
-  (columns) => columns.some((column) => column.colSpan !== undefined),
+  (columns) => { throw new Error("STUB"); },
 );

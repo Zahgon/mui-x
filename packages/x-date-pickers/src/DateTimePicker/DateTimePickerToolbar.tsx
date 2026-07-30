@@ -66,38 +66,8 @@ const useUtilityClasses = (
 const DateTimePickerToolbarRoot = styled(PickersToolbar, {
   name: 'MuiDateTimePickerToolbar',
   slot: 'Root',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'toolbarVariant',
-})<{ ownerState: PickerToolbarOwnerState; toolbarVariant: PickerVariant }>(({ theme }) => ({
-  paddingLeft: 16,
-  paddingRight: 16,
-  justifyContent: 'space-around',
-  position: 'relative',
-  variants: [
-    {
-      props: { toolbarVariant: 'desktop' },
-      style: {
-        borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
-        [`& .${pickersToolbarClasses.content} .${pickersToolbarTextClasses.root}[data-selected]`]: {
-          color: (theme.vars || theme).palette.primary.main,
-          fontWeight: theme.typography.fontWeightBold,
-        },
-      },
-    },
-    {
-      props: { toolbarVariant: 'desktop', pickerOrientation: 'landscape' },
-      style: {
-        borderRight: `1px solid ${(theme.vars || theme).palette.divider}`,
-      },
-    },
-    {
-      props: { toolbarVariant: 'desktop', pickerOrientation: 'portrait' },
-      style: {
-        paddingLeft: 24,
-        paddingRight: 0,
-      },
-    },
-  ],
-}));
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
+})<{ ownerState: PickerToolbarOwnerState; toolbarVariant: PickerVariant }>(({ theme }) => { throw new Error("STUB"); });
 
 const DateTimePickerToolbarDateContainer = styled('div', {
   name: 'MuiDateTimePickerToolbar',
@@ -111,7 +81,7 @@ const DateTimePickerToolbarDateContainer = styled('div', {
 const DateTimePickerToolbarTimeContainer = styled('div', {
   name: 'MuiDateTimePickerToolbar',
   slot: 'TimeContainer',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'toolbarVariant',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<{ ownerState: PickerToolbarOwnerState; toolbarVariant: PickerVariant }>({
   display: 'flex',
   flexDirection: 'row',
@@ -132,16 +102,14 @@ const DateTimePickerToolbarTimeContainer = styled('div', {
     },
     {
       props: ({ pickerOrientation, toolbarVariant }) =>
-        pickerOrientation === 'landscape' && toolbarVariant !== 'desktop',
+        { throw new Error("STUB"); },
       style: {
         flexDirection: 'column',
       },
     },
     {
       props: ({ pickerOrientation, toolbarVariant, toolbarDirection }) =>
-        pickerOrientation === 'landscape' &&
-        toolbarVariant !== 'desktop' &&
-        toolbarDirection === 'rtl',
+        { throw new Error("STUB"); },
       style: {
         flexDirection: 'column-reverse',
       },
@@ -152,7 +120,7 @@ const DateTimePickerToolbarTimeContainer = styled('div', {
 const DateTimePickerToolbarTimeDigitsContainer = styled('div', {
   name: 'MuiDateTimePickerToolbar',
   slot: 'TimeDigitsContainer',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'toolbarVariant',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<{ ownerState: PickerToolbarOwnerState; toolbarVariant: PickerVariant }>({
   display: 'flex',
   variants: [
@@ -172,7 +140,7 @@ const DateTimePickerToolbarTimeDigitsContainer = styled('div', {
 const DateTimePickerToolbarSeparator = styled(PickersToolbarText, {
   name: 'MuiDateTimePickerToolbar',
   slot: 'Separator',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'toolbarVariant',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<{ ownerState: PickerToolbarOwnerState; toolbarVariant: PickerVariant }>({
   margin: '0 4px 0 2px',
   cursor: 'default',
@@ -190,11 +158,7 @@ const DateTimePickerToolbarSeparator = styled(PickersToolbarText, {
 const DateTimePickerToolbarAmPmSelection = styled('div', {
   name: 'MuiDateTimePickerToolbar',
   slot: 'AmPmSelection',
-  overridesResolver: (props, styles) => [
-    { [`.${dateTimePickerToolbarClasses.ampmLabel}`]: styles.ampmLabel },
-    { [`&.${dateTimePickerToolbarClasses.ampmLandscape}`]: styles.ampmLandscape },
-    styles.ampmSelection,
-  ],
+  overridesResolver: (props, styles) => { throw new Error("STUB"); },
 })<{
   ownerState: PickerToolbarOwnerState;
 }>({
@@ -278,7 +242,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
   const setView = overrides ? overrides.setView : setViewContext;
 
   const { meridiemMode, handleMeridiemChange } = useMeridiemMode(value, ampm, (newValue) =>
-    setValue(newValue, { changeImportance: 'set', source: 'view' }),
+    { throw new Error("STUB"); },
   );
 
   const toolbarVariant = overrides?.forceDesktopVariant ? 'desktop' : variant;
@@ -287,15 +251,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
   const toolbarTitle = inToolbarTitle ?? translations.dateTimePickerToolbarTitle;
 
   const dateText = React.useMemo(() => {
-    if (!adapter.isValid(value)) {
-      return toolbarPlaceholder;
-    }
-
-    if (toolbarFormat) {
-      return adapter.formatByString(value, toolbarFormat);
-    }
-
-    return adapter.format(value, 'shortDate');
+      throw new Error("STUB");
   }, [value, toolbarFormat, toolbarPlaceholder, adapter]);
 
   const formatSection = (format: keyof AdapterFormats, fallback: string) => {
@@ -320,7 +276,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
             tabIndex={-1}
             variant="subtitle1"
             data-testid="datetimepicker-toolbar-year"
-            onClick={() => setView('year')}
+            onClick={() => { throw new Error("STUB"); }}
             selected={view === 'year'}
             value={formatSection('year', '–')}
           />
@@ -331,7 +287,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
             tabIndex={-1}
             variant={isDesktop ? 'h5' : 'h4'}
             data-testid="datetimepicker-toolbar-day"
-            onClick={() => setView('day')}
+            onClick={() => { throw new Error("STUB"); }}
             selected={view === 'day'}
             value={dateText}
           />
@@ -357,7 +313,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
                     : undefined
                 }
                 data-testid="hours"
-                onClick={() => setView('hours')}
+                onClick={() => { throw new Error("STUB"); }}
                 selected={view === 'hours'}
                 value={formatSection(ampm ? 'hours12h' : 'hours24h', '--')}
               />
@@ -376,7 +332,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
                     : undefined
                 }
                 data-testid="minutes"
-                onClick={() => setView('minutes')}
+                onClick={() => { throw new Error("STUB"); }}
                 selected={view === 'minutes' || (!views.includes('minutes') && view === 'hours')}
                 value={formatSection('minutes', '--')}
                 disabled={!views.includes('minutes')}
@@ -401,7 +357,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
                     : undefined
                 }
                 data-testid="seconds"
-                onClick={() => setView('seconds')}
+                onClick={() => { throw new Error("STUB"); }}
                 selected={view === 'seconds'}
                 value={formatSection('seconds', '--')}
               />
@@ -418,7 +374,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
               selected={meridiemMode === 'am'}
               typographyClassName={classes.ampmLabel}
               value={formatMeridiem(adapter, 'am')}
-              onClick={readOnly ? undefined : () => handleMeridiemChange('am')}
+              onClick={readOnly ? undefined : () => { throw new Error("STUB"); }}
               disabled={disabled}
             />
             <PickersToolbarButton
@@ -426,7 +382,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
               selected={meridiemMode === 'pm'}
               typographyClassName={classes.ampmLabel}
               value={formatMeridiem(adapter, 'pm')}
-              onClick={readOnly ? undefined : () => handleMeridiemChange('pm')}
+              onClick={readOnly ? undefined : () => { throw new Error("STUB"); }}
               disabled={disabled}
             />
           </DateTimePickerToolbarAmPmSelection>
@@ -436,7 +392,7 @@ function DateTimePickerToolbar(inProps: DateTimePickerToolbarProps) {
           <PickersToolbarButton
             variant="h5"
             data-testid="am-pm-view-button"
-            onClick={() => setView('meridiem')}
+            onClick={() => { throw new Error("STUB"); }}
             selected={view === 'meridiem'}
             value={value && meridiemMode ? formatMeridiem(adapter, meridiemMode) : '--'}
             width={MULTI_SECTION_CLOCK_SECTION_WIDTH}

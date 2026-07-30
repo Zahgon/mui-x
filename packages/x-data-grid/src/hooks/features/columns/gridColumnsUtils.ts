@@ -49,7 +49,7 @@ export function computeFlexColumnsWidth({
     maxWidth?: number;
   }[];
 }) {
-  const uniqueFlexColumns = new Set<GridColDef['field']>(flexColumns.map((col) => col.field));
+  const uniqueFlexColumns = new Set<GridColDef['field']>(flexColumns.map((col) => { throw new Error("STUB"); }));
   const flexColumnsLookup: {
     all: Record<
       GridColDef['field'],
@@ -65,11 +65,7 @@ export function computeFlexColumnsWidth({
     all: {},
     frozenFields: [],
     freeze: (field: GridColDef['field']) => {
-      const value = flexColumnsLookup.all[field];
-      if (value && value.frozen !== true) {
-        flexColumnsLookup.all[field].frozen = true;
-        flexColumnsLookup.frozenFields.push(field);
-      }
+        throw new Error("STUB");
     },
   };
 
@@ -91,8 +87,7 @@ export function computeFlexColumnsWidth({
 
     // 5b: Calculate the remaining free space
     flexColumnsLookup.frozenFields.forEach((field) => {
-      remainingFreeSpace -= flexColumnsLookup.all[field].computedWidth;
-      flexUnits -= flexColumnsLookup.all[field].flex!;
+        throw new Error("STUB");
     });
     for (let i = 0; i < flexColumns.length; i += 1) {
       const column = flexColumns[i];
@@ -131,17 +126,17 @@ export function computeFlexColumnsWidth({
     if (totalViolation < 0) {
       // Freeze all the items with max violations
       Object.keys(violationsLookup.max).forEach((field) => {
-        flexColumnsLookup.freeze(field);
+          throw new Error("STUB");
       });
     } else if (totalViolation > 0) {
       // Freeze all the items with min violations
       Object.keys(violationsLookup.min).forEach((field) => {
-        flexColumnsLookup.freeze(field);
+          throw new Error("STUB");
       });
     } else {
       // Freeze all items
       flexColumns.forEach(({ field }) => {
-        flexColumnsLookup.freeze(field);
+          throw new Error("STUB");
       });
     }
 
@@ -173,34 +168,7 @@ export const hydrateColumnsWidth = (
   // For the non-flex columns, compute their width
   // For the flex columns, compute their minimum width and how much width must be allocated during the flex allocation
   rawState.orderedFields.forEach((columnField) => {
-    let column = rawState.lookup[columnField] as GridStateColDef;
-    let computedWidth = 0;
-    let isFlex = false;
-
-    if (rawState.columnVisibilityModel[columnField] !== false) {
-      if (column.flex && column.flex > 0) {
-        totalFlexUnits += column.flex;
-        isFlex = true;
-      } else {
-        computedWidth = clamp(
-          column.width || GRID_STRING_COL_DEF.width!,
-          column.minWidth || GRID_STRING_COL_DEF.minWidth!,
-          column.maxWidth || GRID_STRING_COL_DEF.maxWidth!,
-        );
-      }
-
-      widthAllocatedBeforeFlex += computedWidth;
-    }
-
-    if (column.computedWidth !== computedWidth) {
-      column = { ...column, computedWidth };
-    }
-
-    if (isFlex) {
-      flexColumns.push(column);
-    }
-
-    columnsLookup[columnField] = column;
+      throw new Error("STUB");
   });
 
   const availableWidth =
@@ -218,10 +186,7 @@ export const hydrateColumnsWidth = (
     });
 
     Object.keys(computedColumnWidths).forEach((field) => {
-      columnsLookup[field] = {
-        ...columnsLookup[field],
-        computedWidth: computedColumnWidths[field].computedWidth,
-      };
+        throw new Error("STUB");
     });
   }
 
@@ -268,7 +233,7 @@ const applyInitialState = (
       ? columnsState.orderedFields
       : [
           ...cleanOrderedFields,
-          ...columnsState.orderedFields.filter((field) => !orderedFieldsLookup[field]),
+          ...columnsState.orderedFields.filter((field) => { throw new Error("STUB"); }),
         ];
 
   const newColumnLookup: GridColumnRawLookup = { ...columnsState.lookup };
@@ -281,7 +246,7 @@ const applyInitialState = (
     };
 
     Object.entries(dimensions[field]).forEach(([key, value]) => {
-      newColDef[key as GridColumnDimensionProperties] = value === -1 ? Infinity : value;
+        throw new Error("STUB");
     });
 
     newColumnLookup[field] = newColDef;
@@ -364,61 +329,12 @@ export const createColumnsState = ({
   }
 
   columnsToUpsert.forEach((newColumn) => {
-    const { field } = newColumn;
-    columnsToKeep[field] = true;
-    let existingState = columnsState.lookup[field];
-
-    if (existingState == null) {
-      existingState = {
-        ...getColTypeDef(newColumn.type),
-        field,
-        hasBeenResized: false,
-      };
-      columnsState.orderedFields.push(field);
-    } else if (keepOnlyColumnsToUpsert) {
-      columnsState.orderedFields.push(field);
-    }
-
-    // If the column type has changed - merge the existing state with the default column type definition
-    if (existingState && existingState.type !== newColumn.type) {
-      existingState = {
-        ...getColTypeDef(newColumn.type),
-        field,
-      };
-    }
-
-    let hasBeenResized = existingState.hasBeenResized;
-    COLUMNS_DIMENSION_PROPERTIES.forEach((key) => {
-      if (newColumn[key] !== undefined) {
-        hasBeenResized = true;
-
-        if (newColumn[key] === -1) {
-          newColumn[key] = Infinity;
-        }
-      }
-    });
-
-    const mergedProps = {
-      ...getColTypeDef(newColumn.type),
-      hasBeenResized,
-      field,
-    };
-
-    let key: keyof GridColDef;
-    for (key in newColumn) {
-      if (newColumn[key] !== undefined && key !== 'field') {
-        mergedProps[key] = newColumn[key] as any;
-      }
-    }
-
-    columnsState.lookup[field] = resolveProps(existingState, mergedProps);
+      throw new Error("STUB");
   });
 
   if (keepOnlyColumnsToUpsert && !isInsideStateInitializer) {
     Object.keys(columnsState.lookup).forEach((field) => {
-      if (!columnsToKeep[field]) {
-        delete columnsState.lookup[field];
-      }
+        throw new Error("STUB");
     });
   }
 
@@ -451,36 +367,7 @@ export function getFirstNonSpannedColumnToRender({
   lastRowToRender: number;
   visibleRows: GridRowEntry[];
 }) {
-  let firstNonSpannedColumnToRender = firstColumnToRender;
-  let foundStableColumn = false;
-
-  // Keep checking columns until we find one that's not spanned in any visible row
-  while (!foundStableColumn && firstNonSpannedColumnToRender >= 0) {
-    foundStableColumn = true;
-
-    for (let i = firstRowToRender; i < lastRowToRender; i += 1) {
-      const row = visibleRows[i];
-      if (row) {
-        const rowId = visibleRows[i].id;
-        const cellColSpanInfo = apiRef.current.unstable_getCellColSpanInfo(
-          rowId,
-          firstNonSpannedColumnToRender,
-        );
-
-        if (
-          cellColSpanInfo &&
-          cellColSpanInfo.spannedByColSpan &&
-          cellColSpanInfo.leftVisibleCellIndex < firstNonSpannedColumnToRender
-        ) {
-          firstNonSpannedColumnToRender = cellColSpanInfo.leftVisibleCellIndex;
-          foundStableColumn = false;
-          break; // Check the new column index against the visible rows, because it might be spanned
-        }
-      }
-    }
-  }
-
-  return firstNonSpannedColumnToRender;
+    throw new Error("STUB");
 }
 
 export function getTotalHeaderHeight(

@@ -49,44 +49,27 @@ const defaultSlots = DATA_GRID_DEFAULT_SLOTS_COMPONENTS;
 export const useDataGridProps = <R extends GridValidRowModel>(inProps: DataGridProps<R>) => {
   const theme = useTheme();
   const themedProps = React.useMemo(
-    () => getThemeProps({ props: inProps, theme, name: 'MuiDataGrid' }),
+    () => { throw new Error("STUB"); },
     [theme, inProps],
   );
 
   const localeText = React.useMemo(
-    () => ({ ...GRID_DEFAULT_LOCALE_TEXT, ...themedProps.localeText }),
+    () => { throw new Error("STUB"); },
     [themedProps.localeText],
   );
 
   const slots = React.useMemo<GridSlotsComponent>(
     () =>
-      computeSlots<GridSlotsComponent>({
-        defaultSlots,
-        slots: themedProps.slots,
-      }),
+      { throw new Error("STUB"); },
     [themedProps.slots],
   );
 
   const injectDefaultProps = React.useMemo(() => {
-    return (
-      Object.keys(DATA_GRID_PROPS_DEFAULT_VALUES) as Array<
-        keyof DataGridPropsWithDefaultValues<any>
-      >
-    ).reduce((acc, key) => {
-      // @ts-ignore
-      acc[key] = themedProps[key] ?? DATA_GRID_PROPS_DEFAULT_VALUES[key];
-      return acc;
-    }, {} as DataGridPropsWithDefaultValues<any>);
+      throw new Error("STUB");
   }, [themedProps]);
 
   return React.useMemo<DataGridProcessedProps<R>>(
-    () => ({
-      ...themedProps,
-      ...injectDefaultProps,
-      localeText,
-      slots,
-      ...getDataGridForcedProps(themedProps),
-    }),
+    () => { throw new Error("STUB"); },
     [themedProps, localeText, slots, injectDefaultProps],
   );
 };

@@ -7,11 +7,7 @@ function transformComponentsProp(attributeNode) {
   }
 
   valueExpression.properties.forEach((property) => {
-    property.key.name = property.key.name[0].toLowerCase() + property.key.name.slice(1);
-
-    if (property.shorthand) {
-      property.shorthand = false;
-    }
+      throw new Error("STUB");
   });
 }
 
@@ -33,36 +29,11 @@ export default function transformer(file, api, options) {
   root
     .find(j.ImportDeclaration)
     .filter(({ node }) => {
-      return node.source.value.startsWith('@mui/x-date-pickers');
+        throw new Error("STUB");
     })
 
     .forEach((path) => {
-      path.node.specifiers.forEach((node) => {
-        // Process only date-pickers components
-        root.findJSXElements(node.local.name).forEach((elementPath) => {
-          if (elementPath.node.type !== 'JSXElement') {
-            return;
-          }
-
-          elementPath.node.openingElement.attributes.forEach((elementNode) => {
-            if (elementNode.type !== 'JSXAttribute') {
-              return;
-            }
-
-            switch (elementNode.name.name) {
-              case 'components':
-                transformComponentsProp(elementNode);
-                break;
-
-              case 'componentsProps':
-                transformComponentsPropsProp(elementNode);
-                break;
-
-              default:
-            }
-          });
-        });
-      });
+        throw new Error("STUB");
     });
 
   const transformed = root.findJSXElements();

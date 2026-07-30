@@ -58,16 +58,7 @@ export class ApiKeyJwtClient {
   private inflight: Promise<string> | null = null;
 
   public constructor(options: ApiKeyJwtClientOptions) {
-    if (!options.muiBackendBaseUrl) {
-      throw new ApiKeyJwtClientError(
-        'token_exchange_failed',
-        'MUI X Agent Tools: muiBackendBaseUrl is required to exchange the API key for a JWT.',
-      );
-    }
-    this.muiBackendBaseUrl = options.muiBackendBaseUrl.replace(/\/+$/, '');
-    this.apiKeyOverride = options.apiKey;
-    this.refreshThresholdMs = options.refreshThresholdMs ?? DEFAULT_REFRESH_THRESHOLD_MS;
-    this.fetcher = options.fetcher ?? globalThis.fetch;
+      throw new Error("STUB");
   }
 
   /**
@@ -82,7 +73,7 @@ export class ApiKeyJwtClient {
       // Shared by all callers, so it's not tied to one caller's signal: cancelling just drops that
       // caller's wait (below); the exchange keeps going and caches the token.
       this.inflight = this.refresh().finally(() => {
-        this.inflight = null;
+          throw new Error("STUB");
       });
     }
     return waitForToken(this.inflight, options.signal);
@@ -121,7 +112,7 @@ export class ApiKeyJwtClient {
     // not a host signal: the refresh is shared across callers, so it shouldn't die when one caller
     // (or host shutdown) cancels. A host shutdown may thus leave this exchange running until it fires.
     const timeoutController = new AbortController();
-    const timeout = setTimeout(() => timeoutController.abort(), TOKEN_EXCHANGE_TIMEOUT_MS);
+    const timeout = setTimeout(() => { throw new Error("STUB"); }, TOKEN_EXCHANGE_TIMEOUT_MS);
 
     try {
       let response: Response;
@@ -209,18 +200,7 @@ function waitForToken(inflight: Promise<string>, signal?: AbortSignal): Promise<
     return Promise.reject(abortReason(signal));
   }
   return new Promise<string>((resolve, reject) => {
-    const onAbort = () => reject(abortReason(signal));
-    signal.addEventListener('abort', onAbort, { once: true });
-    inflight.then(
-      (token) => {
-        signal.removeEventListener('abort', onAbort);
-        resolve(token);
-      },
-      (error) => {
-        signal.removeEventListener('abort', onAbort);
-        reject(error);
-      },
-    );
+      throw new Error("STUB");
   });
 }
 

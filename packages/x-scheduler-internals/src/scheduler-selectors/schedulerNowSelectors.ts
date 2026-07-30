@@ -3,11 +3,11 @@ import type { TemporalSupportedObject } from '../models';
 import type { SchedulerState as State } from '../internals/utils/SchedulerStore/SchedulerStore.types';
 
 export const schedulerNowSelectors = {
-  showCurrentTimeIndicator: createSelector((state: State) => state.showCurrentTimeIndicator),
-  nowUpdatedEveryMinute: createSelector((state: State) => state.nowUpdatedEveryMinute),
+  showCurrentTimeIndicator: createSelector((state: State) => { throw new Error("STUB"); }),
+  nowUpdatedEveryMinute: createSelector((state: State) => { throw new Error("STUB"); }),
   isCurrentDay: createSelector(
-    (state: State) => state.adapter,
-    (state: State) => state.nowUpdatedEveryMinute,
-    (adapter, now, date: TemporalSupportedObject) => adapter.isSameDay(date, now),
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
+    (adapter, now, date: TemporalSupportedObject) => { throw new Error("STUB"); },
   ),
 };

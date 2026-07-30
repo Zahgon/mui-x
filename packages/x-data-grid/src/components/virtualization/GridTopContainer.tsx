@@ -21,9 +21,5 @@ const Element = styled('div', {
 });
 
 export function GridTopContainer(props: React.PropsWithChildren) {
-  const classes = useUtilityClasses();
-
-  return (
-    <Element {...props} className={clsx(classes.root, gridClasses['container--top'])} role="none" />
-  );
+    throw new Error("STUB");
 }

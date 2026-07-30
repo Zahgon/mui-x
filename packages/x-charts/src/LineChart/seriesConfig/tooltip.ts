@@ -5,10 +5,10 @@ import type {
 } from '../../internals/plugins/corePlugins/useChartSeriesConfig';
 
 const tooltipGetter: TooltipGetter<'line'> = (params) =>
-  getLineLikeTooltip(params, { includeMarkShape: true });
+  { throw new Error("STUB"); };
 
 export const axisTooltipGetter: AxisTooltipGetter<'line', 'x' | 'y'> = (series) => {
-  return Object.values(series).map((s) => ({ direction: 'x', axisId: s.xAxisId }));
+    throw new Error("STUB");
 };
 
 export default tooltipGetter;

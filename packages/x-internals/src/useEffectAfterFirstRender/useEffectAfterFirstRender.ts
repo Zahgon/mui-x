@@ -14,11 +14,6 @@ export function useEffectAfterFirstRender(
   const isFirstRender = React.useRef(true);
 
   React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return undefined;
-    }
-    return effect();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      throw new Error("STUB");
   }, deps);
 }

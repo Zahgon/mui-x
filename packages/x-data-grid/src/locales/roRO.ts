@@ -31,7 +31,7 @@ const roROGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Ascunde filtru',
   toolbarFiltersTooltipShow: 'Afișează filtru',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} filtru activ` : `${count} filtru activ`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Căutare…',
@@ -140,22 +140,20 @@ const roROGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} filtru activ` : `${count} filtru activ`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Afișează filtru',
   columnHeaderSortIconLabel: 'Sortare',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1
-      ? `${count.toLocaleString()} Înregistrări selectate`
-      : `${count.toLocaleString()} Înregistrare selectată`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Total:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} din ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Checkbox Selecție',
@@ -187,8 +185,8 @@ const roROGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Grupare',
-  groupColumn: (name) => `Grupare după ${name}`,
-  unGroupColumn: (name) => `Anulare Grupare după ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Comutare panou detalii',
@@ -211,17 +209,7 @@ const roROGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Mergi la prima pagină';
-    }
-    if (type === 'last') {
-      return 'Mergi la ultima pagină';
-    }
-    if (type === 'next') {
-      return 'Mergi la pagina următoare';
-    }
-    // if (type === 'previous') {
-    return 'Mergi la pagina precedentă';
+      throw new Error("STUB");
   },
 
   // Row reordering text

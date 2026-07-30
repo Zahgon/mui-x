@@ -30,48 +30,14 @@ export function usePinchGesture(instance: GestureInstance, options: UsePinchGest
   const { chartsLayerContainerRef } = instance;
   const onPinchRef = React.useRef(onPinch);
   React.useEffect(() => {
-    onPinchRef.current = onPinch;
+      throw new Error("STUB");
   });
 
   React.useEffect(() => {
-    if (!enabled) {
-      return;
-    }
-    instance.updateZoomInteractionListeners('zoomPinch', { requiredKeys });
+      throw new Error("STUB");
   }, [enabled, requiredKeys, instance]);
 
   React.useEffect(() => {
-    const element = chartsLayerContainerRef.current;
-    if (element === null || !enabled) {
-      return () => {};
-    }
-
-    const latest = { point: { x: 0, y: 0 }, deltaScale: 0, direction: 0, valid: false };
-    const flush = rafThrottle(() => {
-      if (latest.valid) {
-        onPinchRef.current(latest.point, latest.deltaScale, latest.direction);
-        latest.valid = false;
-      }
-    });
-
-    const handler = instance.addInteractionListener('zoomPinch', (event) => {
-      // A direction of 0 means the pinch gesture is not yet meaningful.
-      if (event.detail.direction === 0) {
-        return;
-      }
-      latest.point = getChartPoint(element, {
-        clientX: event.detail.centroid.x,
-        clientY: event.detail.centroid.y,
-      });
-      latest.deltaScale = event.detail.deltaScale;
-      latest.direction = event.detail.direction;
-      latest.valid = true;
-      flush();
-    });
-
-    return () => {
-      handler.cleanup();
-      flush.clear();
-    };
+      throw new Error("STUB");
   }, [chartsLayerContainerRef, enabled, instance]);
 }

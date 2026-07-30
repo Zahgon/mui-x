@@ -24,15 +24,7 @@ import { responsiveTypographyContainerQueries } from '../constants/responsiveTyp
 const StandaloneViewRoot = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'StandaloneViewRoot',
-})(({ theme }) => ({
-  display: 'contents',
-  fontFamily: theme.typography.fontFamily,
-  boxSizing: 'border-box',
-  '*, *::before, *::after': {
-    boxSizing: 'inherit',
-  },
-  ...responsiveTypographyContainerQueries,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 export interface EventCalendarProviderProps<
   TEvent extends object,
@@ -49,41 +41,5 @@ export interface EventCalendarProviderProps<
 export function EventCalendarProvider<TEvent extends object, TResource extends object>(
   props: EventCalendarProviderProps<TEvent, TResource>,
 ) {
-  const { children, localeText, ...other } = props;
-  const schedulerId = useId();
-
-  const mergedLocaleText = React.useMemo(
-    () => ({ ...EVENT_CALENDAR_DEFAULT_LOCALE_TEXT, ...localeText }),
-    [localeText],
-  );
-
-  const calendarStyledValue = React.useMemo(
-    () => ({
-      schedulerId,
-      classes: eventCalendarClasses,
-      localeText: mergedLocaleText,
-    }),
-    [schedulerId, mergedLocaleText],
-  );
-  const dialogStyledValue = React.useMemo(
-    () => ({
-      schedulerId,
-      classes: eventCalendarClasses,
-      localeText: mergedLocaleText,
-    }),
-    [schedulerId, mergedLocaleText],
-  );
-  const sharedComponentsStyledValue = React.useMemo(() => ({ classes: eventCalendarClasses }), []);
-
-  return (
-    <UnstyledEventCalendarProvider {...other}>
-      <EventCalendarStyledContext.Provider value={calendarStyledValue}>
-        <EventDialogStyledContext.Provider value={dialogStyledValue}>
-          <SharedComponentsStyledContext.Provider value={sharedComponentsStyledValue}>
-            <StandaloneViewRoot>{children}</StandaloneViewRoot>
-          </SharedComponentsStyledContext.Provider>
-        </EventDialogStyledContext.Provider>
-      </EventCalendarStyledContext.Provider>
-    </UnstyledEventCalendarProvider>
-  );
+    throw new Error("STUB");
 }

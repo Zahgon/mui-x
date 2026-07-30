@@ -15,25 +15,15 @@ export const useGridRegisterStrategyProcessor = <
   processor: GridStrategyProcessor<G>,
 ) => {
   const registerPreProcessor = React.useCallback(() => {
-    // NOTE: the unregister fn is intentionally discarded. Unlike pipe processors
-    // (which are additive), a strategy processor is required for as long as its
-    // strategy is active — `applyStrategyProcessor` throws if the active strategy's
-    // processor is missing — so it must outlive the registering component. The cache
-    // keeps a single entry per (processor, strategy) and is reclaimed with the grid
-    // api, so nothing leaks; `void` documents the deliberate discard.
-    void apiRef.current.registerStrategyProcessor(strategyName, group, processor);
+      throw new Error("STUB");
   }, [apiRef, processor, group, strategyName]);
 
   useFirstRender(() => {
-    registerPreProcessor();
+      throw new Error("STUB");
   });
 
   const isFirstRender = React.useRef(true);
   React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-    } else {
-      registerPreProcessor();
-    }
+      throw new Error("STUB");
   }, [registerPreProcessor]);
 };

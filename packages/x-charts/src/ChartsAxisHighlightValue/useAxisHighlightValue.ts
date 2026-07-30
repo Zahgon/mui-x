@@ -23,10 +23,10 @@ function getAxisValueFormatter(
 
   if (axis.valueFormatter) {
     return (v: number | Date | string) =>
-      axis.valueFormatter!(v as any, { location: 'tooltip', scale: axis.scale });
+      { throw new Error("STUB"); };
   }
 
-  return (v: number | Date | string) => `${v}`;
+  return (v: number | Date | string) => { throw new Error("STUB"); };
 }
 
 export interface AxisHighlightValueItem extends ChartsAxisHighlightValueItemProps {
@@ -72,9 +72,9 @@ export function useAxisHighlightValue(
   } else {
     items = axisHighlightValues
       .filter(
-        (item) => (axisId === undefined || item.axisId === axisId) && item.value !== undefined,
+        (item) => { throw new Error("STUB"); },
       )
-      .map((item) => ({ axisId: item.axisId, value: item.value }));
+      .map((item) => { throw new Error("STUB"); });
   }
 
   const result: AxisHighlightValueItem[] = [];

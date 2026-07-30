@@ -6,17 +6,15 @@ export const checkColumnVisibilityModelsSame = (
   b: GridColumnVisibilityModel,
 ) => {
   // Filter `false` values only, as `true` and not having a key are the same
-  const aFalseValues = new Set(Object.keys(a).filter((key) => a[key] === false));
-  const bFalseValues = new Set(Object.keys(b).filter((key) => b[key] === false));
+  const aFalseValues = new Set(Object.keys(a).filter((key) => { throw new Error("STUB"); }));
+  const bFalseValues = new Set(Object.keys(b).filter((key) => { throw new Error("STUB"); }));
   if (aFalseValues.size !== bFalseValues.size) {
     return false;
   }
 
   let result = true;
   aFalseValues.forEach((key) => {
-    if (!bFalseValues.has(key)) {
-      result = false;
-    }
+      throw new Error("STUB");
   });
   return result;
 };
@@ -24,4 +22,4 @@ export const checkColumnVisibilityModelsSame = (
 export const defaultSearchPredicate: NonNullable<GridColumnsManagementProps['searchPredicate']> = (
   column,
   searchValue,
-) => (column.headerName || column.field).toLowerCase().indexOf(searchValue) > -1;
+) => { throw new Error("STUB"); };

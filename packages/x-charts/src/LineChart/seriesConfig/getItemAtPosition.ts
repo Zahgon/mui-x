@@ -237,8 +237,7 @@ export default function getItemAtPosition(
       data,
       getPixelX,
       (idx) => {
-        const stacked = visibleStackedData[idx];
-        return stacked ? (yAxis.scale(stacked[1]) as number) : null;
+          throw new Error("STUB");
       },
       left,
       right,
@@ -326,8 +325,7 @@ export default function getItemAtPosition(
         data,
         getPixelX,
         (idx) => {
-          const stacked = visibleStackedData[idx];
-          return stacked ? (yScale(stacked[1]) as number) : null;
+            throw new Error("STUB");
         },
         left,
         right,
@@ -338,8 +336,7 @@ export default function getItemAtPosition(
         data,
         getPixelX,
         (idx) => {
-          const stacked = visibleStackedData[idx];
-          return stacked ? getBaselinePixelY(baseline, yScale, stacked[0]) : null;
+            throw new Error("STUB");
         },
         left,
         right,

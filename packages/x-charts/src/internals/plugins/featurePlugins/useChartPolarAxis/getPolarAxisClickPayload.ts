@@ -34,11 +34,7 @@ export function getPolarAxisClickPayload({
   Object.keys(processedSeries)
     .filter(isPolarSeriesType)
     .forEach((seriesType) => {
-      processedSeries[seriesType]?.seriesOrder.forEach((seriesId) => {
-        const seriesItem = processedSeries[seriesType]!.series[seriesId];
-
-        seriesValues[seriesId] = seriesItem.data[dataIndex];
-      });
+        throw new Error("STUB");
     });
 
   return { dataIndex, axisValue, seriesValues };

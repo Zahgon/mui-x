@@ -14,7 +14,7 @@ import { gridRowMaximumTreeDepthSelector, gridRowTreeSelector } from '../rows/gr
 /**
  * @category Filtering
  */
-const gridFilterStateSelector = createRootSelector((state: GridStateCommunity) => state.filter);
+const gridFilterStateSelector = createRootSelector((state: GridStateCommunity) => { throw new Error("STUB"); });
 
 /**
  * Get the current filter model.
@@ -22,7 +22,7 @@ const gridFilterStateSelector = createRootSelector((state: GridStateCommunity) =
  */
 export const gridFilterModelSelector = createSelector(
   gridFilterStateSelector,
-  (filterState) => filterState.filterModel,
+  (filterState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -31,7 +31,7 @@ export const gridFilterModelSelector = createSelector(
  */
 export const gridQuickFilterValuesSelector = createSelector(
   gridFilterModelSelector,
-  (filterModel) => filterModel.quickFilterValues,
+  (filterModel) => { throw new Error("STUB"); },
 );
 
 /**
@@ -39,7 +39,7 @@ export const gridQuickFilterValuesSelector = createSelector(
  * @ignore - do not document.
  */
 export const gridVisibleRowsLookupSelector = createRootSelector(
-  (state: GridStateCommunity) => state.visibleRowsLookup,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 /**
@@ -48,7 +48,7 @@ export const gridVisibleRowsLookupSelector = createRootSelector(
  */
 export const gridFilteredRowsLookupSelector = createSelector(
   gridFilterStateSelector,
-  (filterState) => filterState.filteredRowsLookup,
+  (filterState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -57,7 +57,7 @@ export const gridFilteredRowsLookupSelector = createSelector(
  */
 export const gridFilteredChildrenCountLookupSelector = createSelector(
   gridFilterStateSelector,
-  (filterState) => filterState.filteredChildrenCountLookup,
+  (filterState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -66,7 +66,7 @@ export const gridFilteredChildrenCountLookupSelector = createSelector(
  */
 export const gridFilteredDescendantCountLookupSelector = createSelector(
   gridFilterStateSelector,
-  (filterState) => filterState.filteredDescendantCountLookup,
+  (filterState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -78,10 +78,7 @@ export const gridExpandedSortedRowEntriesSelector = createSelectorMemoized(
   gridVisibleRowsLookupSelector,
   gridSortedRowEntriesSelector,
   (visibleRowsLookup, sortedRows) => {
-    if (isObjectEmpty(visibleRowsLookup)) {
-      return sortedRows;
-    }
-    return sortedRows.filter((row) => visibleRowsLookup[row.id] !== false);
+      throw new Error("STUB");
   },
 );
 
@@ -92,7 +89,7 @@ export const gridExpandedSortedRowEntriesSelector = createSelectorMemoized(
  */
 export const gridExpandedSortedRowIdsSelector = createSelectorMemoized(
   gridExpandedSortedRowEntriesSelector,
-  (visibleSortedRowEntries) => visibleSortedRowEntries.map((row) => row.id),
+  (visibleSortedRowEntries) => { throw new Error("STUB"); },
 );
 
 /**
@@ -104,9 +101,7 @@ export const gridFilteredSortedRowEntriesSelector = createSelectorMemoized(
   gridFilteredRowsLookupSelector,
   gridSortedRowEntriesSelector,
   (filteredRowsLookup, sortedRows) =>
-    isObjectEmpty(filteredRowsLookup)
-      ? sortedRows
-      : sortedRows.filter((row) => filteredRowsLookup[row.id] !== false),
+    { throw new Error("STUB"); },
 );
 
 /**
@@ -116,7 +111,7 @@ export const gridFilteredSortedRowEntriesSelector = createSelectorMemoized(
  */
 export const gridFilteredSortedRowIdsSelector = createSelectorMemoized(
   gridFilteredSortedRowEntriesSelector,
-  (filteredSortedRowEntries) => filteredSortedRowEntries.map((row) => row.id),
+  (filteredSortedRowEntries) => { throw new Error("STUB"); },
 );
 
 /**
@@ -129,28 +124,7 @@ export const gridExpandedSortedRowTreeLevelPositionLookupSelector = createSelect
   gridExpandedSortedRowIdsSelector,
   gridRowTreeSelector,
   (visibleSortedRowIds, rowTree) => {
-    const depthPositionCounter: Record<number, number> = {};
-    let lastDepth = 0;
-
-    return visibleSortedRowIds.reduce((acc: Record<GridRowId, number>, rowId) => {
-      const rowNode = rowTree[rowId];
-
-      if (!depthPositionCounter[rowNode.depth]) {
-        depthPositionCounter[rowNode.depth] = 0;
-      }
-
-      // going deeper in the tree should reset the counter
-      // since it might have been used in some other branch at the same level, up in the tree
-      // going back up should keep the counter and continue where it left off
-      if (rowNode.depth > lastDepth) {
-        depthPositionCounter[rowNode.depth] = 0;
-      }
-
-      lastDepth = rowNode.depth;
-      depthPositionCounter[rowNode.depth] += 1;
-      acc[rowId] = depthPositionCounter[rowNode.depth];
-      return acc;
-    }, {});
+      throw new Error("STUB");
   },
 );
 
@@ -164,26 +138,7 @@ export const gridFilteredSortedDepthRowEntriesSelector = createSelectorMemoized(
   gridRowTreeSelector,
   gridRowMaximumTreeDepthSelector,
   (sortedRows, rowTree, rowTreeDepth) => {
-    if (rowTreeDepth < 2) {
-      return [sortedRows];
-    }
-
-    return sortedRows.reduce(
-      (acc, row) => {
-        const depth = rowTree[row.id]?.depth;
-        if (depth === undefined) {
-          return acc;
-        }
-
-        if (!acc[depth]) {
-          acc[depth] = [];
-        }
-
-        acc[depth].push(row);
-        return acc;
-      },
-      [[]] as GridRowEntry<GridValidRowModel>[][],
-    );
+      throw new Error("STUB");
   },
 );
 
@@ -193,7 +148,7 @@ export const gridFilteredSortedDepthRowEntriesSelector = createSelectorMemoized(
  */
 export const gridFilteredSortedTopLevelRowEntriesSelector = createSelector(
   gridFilteredSortedDepthRowEntriesSelector,
-  (filteredSortedDepthRows) => filteredSortedDepthRows[0] ?? [],
+  (filteredSortedDepthRows) => { throw new Error("STUB"); },
 );
 
 /**
@@ -202,7 +157,7 @@ export const gridFilteredSortedTopLevelRowEntriesSelector = createSelector(
  */
 export const gridExpandedRowCountSelector = createSelector(
   gridExpandedSortedRowEntriesSelector,
-  (visibleSortedRows) => visibleSortedRows.length,
+  (visibleSortedRows) => { throw new Error("STUB"); },
 );
 
 /**
@@ -211,7 +166,7 @@ export const gridExpandedRowCountSelector = createSelector(
  */
 export const gridFilteredTopLevelRowCountSelector = createSelector(
   gridFilteredSortedTopLevelRowEntriesSelector,
-  (visibleSortedTopLevelRows) => visibleSortedTopLevelRows.length,
+  (visibleSortedTopLevelRows) => { throw new Error("STUB"); },
 );
 
 /**
@@ -221,7 +176,7 @@ export const gridFilteredTopLevelRowCountSelector = createSelector(
  */
 export const gridFilteredRowCountSelector = createSelector(
   gridFilteredSortedRowEntriesSelector,
-  (filteredSortedRowEntries) => filteredSortedRowEntries.length,
+  (filteredSortedRowEntries) => { throw new Error("STUB"); },
 );
 
 /**
@@ -231,7 +186,7 @@ export const gridFilteredRowCountSelector = createSelector(
 export const gridFilteredDescendantRowCountSelector = createSelector(
   gridFilteredRowCountSelector,
   gridFilteredTopLevelRowCountSelector,
-  (totalRowCount, topLevelRowCount) => totalRowCount - topLevelRowCount,
+  (totalRowCount, topLevelRowCount) => { throw new Error("STUB"); },
 );
 
 /**
@@ -242,26 +197,7 @@ export const gridFilterActiveItemsSelector = createSelectorMemoized(
   gridFilterModelSelector,
   gridColumnLookupSelector,
   (filterModel, columnLookup) =>
-    filterModel.items?.filter((item) => {
-      if (!item.field) {
-        return false;
-      }
-      const column = columnLookup[item.field];
-      if (!column?.filterOperators || column?.filterOperators?.length === 0) {
-        return false;
-      }
-      const filterOperator = column.filterOperators.find(
-        (operator) => operator.value === item.operator,
-      );
-      if (!filterOperator) {
-        return false;
-      }
-      const hasFilterValue = Array.isArray(item.value)
-        ? item.value.length > 0
-        : item.value != null && item.value?.toString() !== '';
-
-      return !filterOperator.InputComponent || hasFilterValue;
-    }),
+    { throw new Error("STUB"); },
 );
 
 export type GridFilterActiveItemsLookup = { [field: string]: GridFilterItem[] };
@@ -273,19 +209,7 @@ export type GridFilterActiveItemsLookup = { [field: string]: GridFilterItem[] };
 export const gridFilterActiveItemsLookupSelector = createSelectorMemoized(
   gridFilterActiveItemsSelector,
   (activeFilters) => {
-    const result: GridFilterActiveItemsLookup = activeFilters.reduce<GridFilterActiveItemsLookup>(
-      (res, filterItem) => {
-        if (!res[filterItem.field!]) {
-          res[filterItem.field!] = [filterItem];
-        } else {
-          res[filterItem.field!].push(filterItem);
-        }
-        return res;
-      },
-      {},
-    );
-
-    return result;
+      throw new Error("STUB");
   },
 );
 
@@ -297,9 +221,6 @@ export const gridFilterActiveItemsLookupSelector = createSelectorMemoized(
 export const gridExpandedSortedRowIndexLookupSelector = createSelectorMemoized(
   gridExpandedSortedRowIdsSelector,
   (expandedSortedIds) => {
-    return expandedSortedIds.reduce<Record<GridRowId, number>>((acc, id, index) => {
-      acc[id] = index;
-      return acc;
-    }, Object.create(null));
+      throw new Error("STUB");
   },
 );

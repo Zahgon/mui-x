@@ -4,7 +4,7 @@ import { sankey } from '../d3Sankey';
 import type { SankeyGraph } from '../d3Sankey';
 import { getNodeAlignFunction } from '../utils';
 
-const defaultSankeyValueFormatter = (v: number) => (v == null ? '' : v.toLocaleString());
+const defaultSankeyValueFormatter = (v: number) => { throw new Error("STUB"); };
 
 export const getSeriesWithDefaultValues: GetSeriesWithDefaultValues<'sankey'> = (
   seriesData,
@@ -20,50 +20,12 @@ export const getSeriesWithDefaultValues: GetSeriesWithDefaultValues<'sankey'> = 
   let colorIndex = -1;
   if (seriesData.data.nodes) {
     seriesData.data.nodes.forEach((node) => {
-      const id = node.id || node.label || '';
-      const label = node.label || `${id}`;
-      colorIndex += 1;
-      nodeMap.set(id, {
-        ...node,
-        id,
-        label,
-        color: node.color ?? nodeColor ?? colors?.[colorIndex % colors.length],
-      });
+        throw new Error("STUB");
     });
   }
 
   const links = seriesData.data.links.map((link) => {
-    // Add default values to nodes
-    if (!nodeMap.has(link.source)) {
-      colorIndex += 1;
-      const source = {
-        id: link.source,
-        label: `${link.source}`,
-        color: nodeColor ?? colors?.[colorIndex % colors.length],
-      };
-      nodeMap.set(source.id, source);
-    }
-
-    if (!nodeMap.has(link.target)) {
-      colorIndex += 1;
-      const target = {
-        id: link.target,
-        label: `${link.target}`,
-        color: nodeColor ?? colors?.[colorIndex % colors.length],
-      };
-      nodeMap.set(target.id, target);
-    }
-
-    // Add color to links
-    let resolvedColor = link.color ?? linkColor;
-
-    if (resolvedColor === 'source') {
-      resolvedColor = nodeMap.get(link.source)?.color ?? linkColor;
-    } else if (resolvedColor === 'target') {
-      resolvedColor = nodeMap.get(link.target)?.color ?? linkColor;
-    }
-
-    return { ...link, color: resolvedColor };
+      throw new Error("STUB");
   });
 
   const highlightScope = {
@@ -92,8 +54,8 @@ export const getSeriesWithDefaultValues: GetSeriesWithDefaultValues<'sankey'> = 
     nodes: nodeMap
       .values()
       .toArray()
-      .map((v) => ({ ...v })),
-    links: links.map((v) => ({ ...v })),
+      .map((v) => { throw new Error("STUB"); }),
+    links: links.map((v) => { throw new Error("STUB"); }),
   };
 
   // Create the sankey layout generator
@@ -104,7 +66,7 @@ export const getSeriesWithDefaultValues: GetSeriesWithDefaultValues<'sankey'> = 
     false
   >(false)
     .nodeAlign(getNodeAlignFunction(nodeAlign))
-    .nodeId((d) => d.id);
+    .nodeId((d) => { throw new Error("STUB"); });
 
   // Generate the layout
   let data: SankeyGraph<false, SankeyLayoutNode<false>, SankeyLayoutLink<false>>;

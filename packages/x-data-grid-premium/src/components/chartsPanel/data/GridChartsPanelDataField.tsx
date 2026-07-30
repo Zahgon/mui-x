@@ -59,37 +59,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const GridChartsPanelDataFieldRoot = styled('div', {
   name: 'MuiDataGrid',
   slot: 'ChartsPanelDataField',
-})<{ ownerState: OwnerState; disabled: boolean }>(({ disabled }) => ({
-  flexShrink: 0,
-  position: 'relative',
-  padding: vars.spacing(0, 1, 0, 2),
-  height: 32,
-  display: 'flex',
-  alignItems: 'center',
-  gap: vars.spacing(0.5),
-  borderWidth: 0,
-  borderTopWidth: 2,
-  borderBottomWidth: 2,
-  borderStyle: 'solid',
-  borderColor: 'transparent',
-  margin: '-1px 0', // collapse vertical borders
-  cursor: disabled ? 'not-allowed' : 'grab',
-  opacity: disabled ? 0.5 : 1,
-  variants: [
-    { props: { dropPosition: 'top' }, style: { borderTopColor: vars.colors.interactive.selected } },
-    {
-      props: { dropPosition: 'bottom' },
-      style: { borderBottomColor: vars.colors.interactive.selected },
-    },
-    {
-      props: { section: null },
-      style: { borderTopColor: 'transparent', borderBottomColor: 'transparent' },
-    },
-  ],
-  '&:hover': {
-    backgroundColor: vars.colors.interactive.hover,
-  },
-}));
+})<{ ownerState: OwnerState; disabled: boolean }>(({ disabled }) => { throw new Error("STUB"); });
 
 const GridChartsPanelDataFieldName = styled('span', {
   name: 'MuiDataGrid',
@@ -142,119 +112,7 @@ export function AggregationSelect({
   aggFunc: string;
   field: FieldTransferObject['field'];
 }) {
-  const rootProps = useGridRootProps();
-  const [aggregationMenuOpen, setAggregationMenuOpen] = React.useState(false);
-  const aggregationMenuTriggerRef = React.useRef<HTMLDivElement>(null);
-  const aggregationMenuTriggerId = useId();
-  const aggregationMenuId = useId();
-
-  const apiRef = useGridApiContext();
-  const aggregationModel = gridAggregationModelSelector(apiRef);
-  const pivotActive = gridPivotActiveSelector(apiRef);
-
-  const getActualFieldName = React.useCallback(
-    (fieldName: string) =>
-      pivotActive ? fieldName.split(COLUMN_GROUP_ID_SEPARATOR).slice(-1)[0] : fieldName,
-    [pivotActive],
-  );
-
-  const colDef = React.useCallback(
-    (fieldName: string) => apiRef.current.getColumn(getActualFieldName(fieldName)),
-    [apiRef, getActualFieldName],
-  );
-
-  const availableAggregationFunctions = React.useMemo(() => {
-    const column = colDef(field);
-
-    return [
-      ...(pivotActive ? [] : [AGGREGATION_FUNCTION_NONE]),
-      ...(column
-        ? getAvailableAggregationFunctions({
-            aggregationFunctions: rootProps.aggregationFunctions,
-            colDef: column,
-            isDataSource: !!rootProps.dataSource,
-          })
-        : []),
-    ];
-  }, [colDef, field, pivotActive, rootProps.aggregationFunctions, rootProps.dataSource]);
-
-  const handleClick = React.useCallback(
-    (func: string) => {
-      if (pivotActive) {
-        const fieldName = getActualFieldName(field);
-        apiRef.current.setPivotModel((prev) => ({
-          ...prev,
-          values: prev.values.map((col) => {
-            if (col.field === fieldName) {
-              return { ...col, aggFunc: func };
-            }
-            return col;
-          }),
-        }));
-      } else if (func === AGGREGATION_FUNCTION_NONE) {
-        const updatedAggregationModel = { ...aggregationModel };
-        delete updatedAggregationModel[field];
-        apiRef.current.setAggregationModel(updatedAggregationModel);
-      } else {
-        apiRef.current.setAggregationModel({ ...aggregationModel, [field]: func });
-      }
-
-      setAggregationMenuOpen(false);
-    },
-    [apiRef, field, getActualFieldName, pivotActive, aggregationModel, setAggregationMenuOpen],
-  );
-
-  return availableAggregationFunctions.length > 0 ? (
-    <React.Fragment>
-      <rootProps.slots.baseChip
-        label={getAggregationFunctionLabel({
-          apiRef,
-          aggregationRule: {
-            aggregationFunctionName: aggFunc,
-            aggregationFunction: rootProps.aggregationFunctions[aggFunc] || {},
-          },
-        })}
-        size="small"
-        variant="outlined"
-        ref={aggregationMenuTriggerRef}
-        id={aggregationMenuTriggerId}
-        aria-haspopup="true"
-        aria-controls={aggregationMenuOpen ? aggregationMenuId : undefined}
-        aria-expanded={aggregationMenuOpen ? 'true' : undefined}
-        onClick={() => setAggregationMenuOpen(!aggregationMenuOpen)}
-      />
-      <GridMenu
-        open={aggregationMenuOpen}
-        onClose={() => setAggregationMenuOpen(false)}
-        target={aggregationMenuTriggerRef.current}
-        position="bottom-start"
-      >
-        <rootProps.slots.baseMenuList
-          id={aggregationMenuId}
-          aria-labelledby={aggregationMenuTriggerId}
-          autoFocusItem
-          {...rootProps.slotProps?.baseMenuList}
-        >
-          {availableAggregationFunctions.map((func) => (
-            <rootProps.slots.baseMenuItem
-              key={func}
-              selected={aggFunc === func}
-              onClick={() => handleClick(func)}
-              {...rootProps.slotProps?.baseMenuItem}
-            >
-              {getAggregationFunctionLabel({
-                apiRef,
-                aggregationRule: {
-                  aggregationFunctionName: func,
-                  aggregationFunction: rootProps.aggregationFunctions[func] || {},
-                },
-              })}
-            </rootProps.slots.baseMenuItem>
-          ))}
-        </rootProps.slots.baseMenuList>
-      </GridMenu>
-    </React.Fragment>
-  ) : null;
+    throw new Error("STUB");
 }
 
 function GridChartsPanelDataField(props: GridChartsPanelDataFieldProps) {
@@ -278,68 +136,34 @@ function GridChartsPanelDataField(props: GridChartsPanelDataFieldProps) {
   const apiRef = useGridPrivateApiContext();
   const aggregationModel = useGridSelector(apiRef, gridAggregationModelSelector);
   const rowGroupingModel = useGridSelector(apiRef, gridRowGroupingSanitizedModelSelector);
-  const isRowGroupingEnabled = React.useMemo(() => rowGroupingModel.length > 0, [rowGroupingModel]);
+  const isRowGroupingEnabled = React.useMemo(() => { throw new Error("STUB"); }, [rowGroupingModel]);
 
   const handleDragStart = React.useCallback(
     (event: React.DragEvent) => {
-      const data: FieldTransferObject = { field, section };
-      event.dataTransfer.setData('text/plain', JSON.stringify(data));
-      event.dataTransfer.dropEffect = 'move';
-      onDragStart(field, section);
-    },
+          throw new Error("STUB");
+      },
     [field, onDragStart, section],
   );
 
   const getDropPosition = React.useCallback((event: React.DragEvent): DropPosition => {
-    const rect = (event.target as HTMLElement).getBoundingClientRect();
-    const y = event.clientY - rect.top;
-    if (y < rect.height / 2) {
-      return 'top';
-    }
-    return 'bottom';
+      throw new Error("STUB");
   }, []);
 
   const handleDragOver = React.useCallback(
     (event: React.DragEvent) => {
-      if (disabled) {
-        return;
-      }
-
-      if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-        setDropPosition(getDropPosition(event));
-      }
-    },
+          throw new Error("STUB");
+      },
     [disabled, getDropPosition],
   );
 
   const handleDragLeave = React.useCallback((event: React.DragEvent) => {
-    if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-      setDropPosition(null);
-    }
+      throw new Error("STUB");
   }, []);
 
   const handleDrop = React.useCallback(
     (event: React.DragEvent) => {
-      setDropPosition(null);
-
-      if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-        event.preventDefault();
-
-        const position = getDropPosition(event);
-
-        const { field: droppedField, section: originSection } = JSON.parse(
-          event.dataTransfer.getData('text/plain'),
-        ) as FieldTransferObject;
-
-        apiRef.current.chartsIntegration.updateDataReference(
-          droppedField,
-          originSection,
-          section,
-          field,
-          position || undefined,
-        );
-      }
-    },
+          throw new Error("STUB");
+      },
     [getDropPosition, apiRef, field, section],
   );
 
@@ -375,7 +199,7 @@ function GridChartsPanelDataField(props: GridChartsPanelDataFieldProps) {
             density="compact"
             {...rootProps.slotProps?.baseCheckbox}
             checked={selected || false}
-            onChange={() => onChange && onChange(field, section)}
+            onChange={() => { throw new Error("STUB"); }}
             label={children}
           />
         ) : (

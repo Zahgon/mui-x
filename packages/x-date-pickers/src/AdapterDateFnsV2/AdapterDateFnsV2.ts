@@ -88,21 +88,7 @@ export class AdapterDateFns
   implements MuiPickersAdapter<DateFnsLocale>
 {
   constructor({ locale, formats }: AdapterOptions<DateFnsLocale, never> = {}) {
-    /* v8 ignore start */
-    if (process.env.NODE_ENV !== 'production') {
-      if (typeof addDays !== 'function') {
-        // TODO: fix mui/no-guarded-throw
-        // eslint-disable-next-line mui/no-guarded-throw
-        throw new Error(
-          [
-            'MUI: This adapter is only compatible with `date-fns` v2.x package versions.',
-            'Please, install v2.x of the package or use the `AdapterDateFns` instead.',
-          ].join('\n'),
-        );
-      }
-    }
-    /* v8 ignore stop */
-    super({ locale: locale ?? defaultLocale, formats, longFormatters });
+      throw new Error("STUB");
   }
 
   public parse = (value: string, format: string): Date | null => {
@@ -154,7 +140,7 @@ export class AdapterDateFns
   };
 
   public isSameHour = (value: Date, comparing: Date): boolean => {
-    return isSameHour(value, comparing);
+      throw new Error("STUB");
   };
 
   public isAfter = (value: Date, comparing: Date): boolean => {
@@ -234,7 +220,7 @@ export class AdapterDateFns
   };
 
   public addHours = (value: Date, amount: number): Date => {
-    return addHours(value, amount);
+      throw new Error("STUB");
   };
 
   public addMinutes = (value: Date, amount: number): Date => {
@@ -242,7 +228,7 @@ export class AdapterDateFns
   };
 
   public addSeconds = (value: Date, amount: number): Date => {
-    return addSeconds(value, amount);
+      throw new Error("STUB");
   };
 
   public getYear = (value: Date): number => {
@@ -306,23 +292,7 @@ export class AdapterDateFns
   };
 
   public getWeekArray = (value: Date): Date[][] => {
-    const start = this.startOfWeek(this.startOfMonth(value));
-    const end = this.endOfWeek(this.endOfMonth(value));
-
-    let count = 0;
-    let current = start;
-    const nestedWeeks: Date[][] = [];
-
-    while (this.isBefore(current, end)) {
-      const weekNumber = Math.floor(count / 7);
-      nestedWeeks[weekNumber] = nestedWeeks[weekNumber] || [];
-      nestedWeeks[weekNumber].push(current);
-
-      current = this.addDays(current, 1);
-      count += 1;
-    }
-
-    return nestedWeeks;
+      throw new Error("STUB");
   };
 
   public getWeekNumber = (value: Date): number => {

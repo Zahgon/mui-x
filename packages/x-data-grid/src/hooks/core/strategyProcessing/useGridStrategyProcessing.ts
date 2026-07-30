@@ -77,34 +77,8 @@ export const useGridStrategyProcessing = (apiRef: RefObject<GridPrivateApiCommon
     GridStrategyProcessingApi['registerStrategyProcessor']
   >(
     (strategyName, processorName, processor: GridStrategyProcessor<any>) => {
-      const cleanup = () => {
-        const { [strategyName]: removedPreProcessor, ...otherProcessors } =
-          strategiesCache.current[processorName]!;
-        strategiesCache.current[processorName] = otherProcessors;
-      };
-
-      if (!strategiesCache.current[processorName]) {
-        strategiesCache.current[processorName] = {};
-      }
-
-      const groupPreProcessors = strategiesCache.current[
-        processorName
-      ] as UntypedStrategyProcessors;
-      const previousProcessor = groupPreProcessors[strategyName];
-      groupPreProcessors[strategyName] = processor;
-
-      if (!previousProcessor || previousProcessor === processor) {
-        return cleanup;
-      }
-
-      if (
-        strategyName === apiRef.current.getActiveStrategy(GRID_STRATEGIES_PROCESSORS[processorName])
-      ) {
-        apiRef.current.publishEvent('activeStrategyProcessorChange', processorName);
-      }
-
-      return cleanup;
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
@@ -112,41 +86,15 @@ export const useGridStrategyProcessing = (apiRef: RefObject<GridPrivateApiCommon
     GridStrategyProcessingApi['applyStrategyProcessor']
   >(
     (processorName, params) => {
-      const activeStrategy = apiRef.current.getActiveStrategy(
-        GRID_STRATEGIES_PROCESSORS[processorName],
-      );
-      if (activeStrategy == null) {
-        throw new Error(
-          "MUI X: Can't apply a strategy processor before defining an active strategy",
-        );
-      }
-
-      const groupCache = strategiesCache.current[processorName];
-      if (!groupCache || !groupCache[activeStrategy]) {
-        throw new Error(
-          `MUI X: No processor found for processor "${processorName}" on strategy "${activeStrategy}"`,
-        );
-      }
-
-      const processor = groupCache[activeStrategy] as GridStrategyProcessor<any>;
-      return processor(params);
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
   const getActiveStrategy = React.useCallback<GridStrategyProcessingApi['getActiveStrategy']>(
     (strategyGroup) => {
-      const strategyEntries = Array.from(availableStrategies.current.entries());
-      const availableStrategyEntry = strategyEntries.find(([, strategy]) => {
-        if (strategy.group !== strategyGroup) {
-          return false;
-        }
-
-        return strategy.isAvailable();
-      });
-
-      return availableStrategyEntry?.[0] ?? GRID_DEFAULT_STRATEGY;
-    },
+          throw new Error("STUB");
+      },
     [],
   );
 
@@ -154,9 +102,8 @@ export const useGridStrategyProcessing = (apiRef: RefObject<GridPrivateApiCommon
     GridStrategyProcessingApi['setStrategyAvailability']
   >(
     (strategyGroup, strategyName, isAvailable) => {
-      availableStrategies.current.set(strategyName, { group: strategyGroup, isAvailable });
-      apiRef.current.publishEvent('strategyAvailabilityChange');
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 

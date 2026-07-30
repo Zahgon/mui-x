@@ -61,25 +61,7 @@ export const selectorChartPreviewXScales = createSelectorMemoized(
     { domains: unfilteredDomains },
     axisId: AxisId,
   ) {
-    const hasAxis = xAxes?.some((axis) => axis.id === axisId);
-    const drawingArea = createPreviewDrawingArea(hasAxis ? 'x' : 'y', chartDrawingArea);
-    const options = zoomOptions[axisId];
-
-    const scales: Record<AxisId, D3Scale> = {};
-
-    xAxes?.forEach((eachAxis) => {
-      const axis = eachAxis as Readonly<DefaultedAxis<ScaleName, any, Readonly<ChartsAxisProps>>>;
-
-      const scale = getNormalizedAxisScale(axis, unfilteredDomains[axis.id].domain);
-      const range = getRange(drawingArea, 'x', axis);
-      const zoomedRange = zoomScaleRange(range, [options.minStart, options.maxEnd]);
-
-      scale.range(zoomedRange);
-
-      scales[axis.id] = scale;
-    });
-
-    return scales;
+      throw new Error("STUB");
   },
 );
 
@@ -99,30 +81,7 @@ export const selectorChartPreviewComputedXAxis = createSelectorMemoized(
     { axes, domains },
     axisId: AxisId,
   ) => {
-    const hasAxis = axes?.some((axis) => axis.id === axisId);
-    const drawingArea = createPreviewDrawingArea(hasAxis ? 'x' : 'y', chartDrawingArea);
-
-    const options = zoomOptions[axisId];
-    const zoomMap = new Map<AxisId, ZoomData>([
-      [axisId, { axisId, start: options.minStart, end: options.maxEnd }],
-    ]);
-
-    const computedAxes = computeAxisValue({
-      scales,
-      drawingArea,
-      formattedSeries,
-      axis: axes,
-      seriesConfig,
-      axisDirection: 'x',
-      zoomMap,
-      domains,
-    });
-
-    if (computedAxes.axis[axisId]) {
-      return { [axisId]: computedAxes.axis[axisId] };
-    }
-
-    return computedAxes.axis;
+      throw new Error("STUB");
   },
 );
 
@@ -138,30 +97,7 @@ export const selectorChartPreviewYScales = createSelectorMemoized(
     { domains: unfilteredDomains },
     axisId: AxisId,
   ) {
-    const hasAxis = yAxes?.some((axis) => axis.id === axisId);
-    const drawingArea = createPreviewDrawingArea(hasAxis ? 'y' : 'x', chartDrawingArea);
-    const options = zoomOptions[axisId];
-
-    const scales: Record<AxisId, D3Scale> = {};
-
-    yAxes?.forEach((eachAxis) => {
-      const axis = eachAxis as Readonly<DefaultedAxis<ScaleName, any, Readonly<ChartsAxisProps>>>;
-
-      const scale = getNormalizedAxisScale(axis, unfilteredDomains[axis.id].domain);
-      let range = getRange(drawingArea, 'y', axis);
-
-      if (isOrdinalScale(scale)) {
-        range = range.reverse() as [number, number];
-      }
-
-      const zoomedRange = zoomScaleRange(range, [options.minStart, options.maxEnd]);
-
-      scale.range(zoomedRange);
-
-      scales[axis.id] = scale;
-    });
-
-    return scales;
+      throw new Error("STUB");
   },
 );
 
@@ -181,29 +117,6 @@ export const selectorChartPreviewComputedYAxis = createSelectorMemoized(
     { axes, domains },
     axisId: AxisId,
   ) => {
-    const hasAxis = axes?.some((axis) => axis.id === axisId);
-    const drawingArea = createPreviewDrawingArea(hasAxis ? 'y' : 'x', chartDrawingArea);
-
-    const options = zoomOptions[axisId];
-    const zoomMap = new Map<AxisId, ZoomData>([
-      [axisId, { axisId, start: options.minStart, end: options.maxEnd }],
-    ]);
-
-    const computedAxes = computeAxisValue({
-      scales,
-      drawingArea,
-      formattedSeries,
-      axis: axes,
-      seriesConfig,
-      axisDirection: 'y',
-      zoomMap,
-      domains,
-    });
-
-    if (computedAxes.axis[axisId]) {
-      return { [axisId]: computedAxes.axis[axisId] };
-    }
-
-    return computedAxes.axis;
+      throw new Error("STUB");
   },
 );

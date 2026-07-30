@@ -104,18 +104,6 @@ export const getMinutesNumbers = ({
       [0, f('00')],
     ] as const
   ).map(([numberValue, label], index) => {
-    const selected = numberValue === value;
-    return (
-      <ClockNumber
-        key={numberValue}
-        label={label}
-        id={selected ? selectedId : undefined}
-        index={index + 1}
-        inner={false}
-        disabled={isDisabled(numberValue)}
-        selected={selected}
-        aria-label={getClockNumberText(label)}
-      />
-    );
+      throw new Error("STUB");
   });
 };

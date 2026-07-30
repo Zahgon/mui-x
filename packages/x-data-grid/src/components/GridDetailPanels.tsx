@@ -1,5 +1,5 @@
 export interface GridDetailPanelsProps {}
 
 export function GridDetailPanels(_: GridDetailPanelsProps) {
-  return null;
+    throw new Error("STUB");
 }

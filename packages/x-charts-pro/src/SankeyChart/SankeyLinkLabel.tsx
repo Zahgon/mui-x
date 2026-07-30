@@ -34,44 +34,6 @@ const getLinkMidpoint = (link: SankeyLayoutLink) => {
  */
 export const SankeyLinkLabel = React.forwardRef<SVGTextElement, SankeyLinkLabelProps>(
   function SankeyLinkLabel(props, ref) {
-    const { link } = props;
-    const theme = useTheme();
-    const series = useSankeySeries()[0];
-    const classes = useUtilityClasses();
-
-    if (!link.path || link.y0 === undefined || link.y1 === undefined) {
-      return null; // No path defined or invalid coordinates, nothing to render
-    }
-
-    const midpoint = getLinkMidpoint(link);
-
-    // Get the series data and valueFormatter
-    const formattedValue = series?.valueFormatter
-      ? series.valueFormatter(link.value, {
-          type: 'link',
-          sourceId: link.source.id,
-          targetId: link.target.id,
-          location: 'label',
-        })
-      : link.value;
-
-    return (
-      <text
-        ref={ref}
-        className={classes.linkLabel}
-        x={midpoint.x}
-        y={midpoint.y}
-        textAnchor="middle"
-        dominantBaseline="middle"
-        fontSize={theme.typography.caption.fontSize}
-        fill={(theme.vars || theme).palette.text.primary}
-        data-link-source={link.source.id}
-        data-link-target={link.target.id}
-        fontFamily={theme.typography.fontFamily}
-        pointerEvents="none"
-      >
-        {formattedValue}
-      </text>
-    );
-  },
+        throw new Error("STUB");
+    },
 );

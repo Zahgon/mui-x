@@ -45,31 +45,8 @@ const GridRowCountRoot = styled('div', {
 
 const GridRowCount = forwardRef<HTMLDivElement, GridRowCountProps>(
   function GridRowCount(props, ref) {
-    const { className, rowCount, visibleRowCount, ...other } = props;
-    const apiRef = useGridApiContext();
-    const ownerState = useGridRootProps();
-    const classes = useUtilityClasses(ownerState);
-
-    if (rowCount === 0) {
-      return null;
-    }
-
-    const text =
-      visibleRowCount < rowCount
-        ? apiRef.current.getLocaleText('footerTotalVisibleRows')(visibleRowCount, rowCount)
-        : rowCount.toLocaleString();
-
-    return (
-      <GridRowCountRoot
-        className={clsx(classes.root, className)}
-        ownerState={ownerState}
-        {...other}
-        ref={ref}
-      >
-        {apiRef.current.getLocaleText('footerTotalRows')} {text}
-      </GridRowCountRoot>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridRowCount.propTypes /* remove-proptypes */ = {

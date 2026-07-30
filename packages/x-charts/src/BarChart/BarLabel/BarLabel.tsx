@@ -12,15 +12,7 @@ import {
 export const BarLabelComponent = styled('text', {
   name: 'MuiBarLabel',
   slot: 'Root',
-})(({ theme }) => ({
-  ...theme?.typography?.body2,
-  stroke: 'none',
-  fill: (theme.vars || theme)?.palette?.text?.primary,
-  transitionProperty: 'opacity, fill',
-  transitionDuration: `${ANIMATION_DURATION_MS}ms`,
-  transitionTimingFunction: ANIMATION_TIMING_FUNCTION,
-  pointerEvents: 'none',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 export type BarLabelProps = Omit<
   React.SVGProps<SVGTextElement>,

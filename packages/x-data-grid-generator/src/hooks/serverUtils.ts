@@ -23,15 +23,7 @@ import { randomInt } from '../services/random-generator';
 const getAvailableAggregationFunctions = (columnType: GridColDef['type']) => {
   const availableAggregationFunctions = new Map<string, GridAggregationFunction>();
   Object.keys(GRID_AGGREGATION_FUNCTIONS).forEach((functionName) => {
-    const columnTypes =
-      GRID_AGGREGATION_FUNCTIONS[functionName as keyof typeof GRID_AGGREGATION_FUNCTIONS]
-        .columnTypes;
-    if (!columnTypes || columnTypes.includes(columnType ?? 'string')) {
-      availableAggregationFunctions.set(
-        functionName,
-        GRID_AGGREGATION_FUNCTIONS[functionName as keyof typeof GRID_AGGREGATION_FUNCTIONS],
-      );
-    }
+      throw new Error("STUB");
   });
   return availableAggregationFunctions;
 };
@@ -115,7 +107,7 @@ export const DEFAULT_SERVER_OPTIONS: DefaultServerOptions = {
 const apiRef = {} as any;
 
 const simplifiedValueGetter = (field: string, colDef: GridColDef) => (row: GridRowModel) => {
-  return colDef.valueGetter?.(row[row.id] as never, row, colDef, apiRef) || row[field];
+    throw new Error("STUB");
 };
 
 const getRowComparator = (
@@ -128,23 +120,12 @@ const getRowComparator = (
     return comparator;
   }
   const sortOperators = sortModel.map((sortItem) => {
-    const columnField = sortItem.field;
-    const colDef = columnsWithDefaultColDef.find(({ field }) => field === sortItem.field) as any;
-    return {
-      ...sortItem,
-      valueGetter: simplifiedValueGetter(columnField, colDef),
-      sortComparator: colDef.sortComparator,
-    };
+      throw new Error("STUB");
   });
 
   const comparator = (row1: GridRowModel, row2: GridRowModel) =>
     sortOperators.reduce((acc, { valueGetter, sort, sortComparator }) => {
-      if (acc !== 0) {
-        return acc;
-      }
-      const v1 = valueGetter(row1);
-      const v2 = valueGetter(row2);
-      return sort === 'desc' ? -1 * sortComparator(v1, v2) : sortComparator(v1, v2);
+        throw new Error("STUB");
     }, 0);
 
   return comparator;
@@ -166,68 +147,20 @@ const buildQuickFilterApplier = (filterModel: GridFilterModel, columns: GridColD
   const stubApiRef = {
     current: {
       getRowFormattedValue: (row: GridValidRowModel, c: GridColDef) => {
-        const field = c.field;
-        return row[field];
-      },
+            throw new Error("STUB");
+        },
     },
   };
 
   columns.forEach((column) => {
-    const getApplyQuickFilterFn = column?.getApplyQuickFilterFn;
-
-    if (getApplyQuickFilterFn) {
-      appliersPerField.push({
-        column,
-        appliers: quickFilterValues.map((quickFilterValue) => {
-          return {
-            fn: getApplyQuickFilterFn(
-              quickFilterValue,
-              column as GridStateColDef,
-              stubApiRef as any,
-            ),
-          };
-        }),
-      });
-    }
+      throw new Error("STUB");
   });
 
   return function isRowMatchingQuickFilter(
     row: GridValidRowModel,
     shouldApplyFilter?: (field: string) => boolean,
   ) {
-    const result = {} as Record<string, boolean>;
-
-    /* eslint-disable no-labels */
-    outer: for (let v = 0; v < quickFilterValues.length; v += 1) {
-      const filterValue = quickFilterValues[v];
-
-      for (let i = 0; i < appliersPerField.length; i += 1) {
-        const { column, appliers } = appliersPerField[i];
-        const { field } = column;
-
-        if (shouldApplyFilter && !shouldApplyFilter(field)) {
-          continue;
-        }
-
-        const applier = appliers[v];
-        const value = row[field];
-
-        if (applier.fn === null) {
-          continue;
-        }
-        const isMatching = applier.fn(value, row, column, stubApiRef);
-
-        if (isMatching) {
-          result[filterValue] = true;
-          continue outer;
-        }
-      }
-
-      result[filterValue] = false;
-    }
-    /* eslint-enable no-labels */
-
-    return result;
+      throw new Error("STUB");
   };
 };
 
@@ -244,10 +177,7 @@ const getQuicklyFilteredRows = (
 
   if (isRowMatchingQuickFilter) {
     return rows.filter((row) => {
-      const result = isRowMatchingQuickFilter(row);
-      return filterModel.quickFilterLogicOperator === GridLogicOperator.And
-        ? Object.values(result).every(Boolean)
-        : Object.values(result).some(Boolean);
+        throw new Error("STUB");
     });
   }
   return rows;
@@ -263,50 +193,20 @@ const getFilteredRows = (
   }
 
   const valueGetters = filterModel.items.map(({ field }) =>
-    simplifiedValueGetter(
-      field,
-      columnsWithDefaultColDef.find((column) => column.field === field) as any,
-    ),
+    { throw new Error("STUB"); },
   );
 
   const filterFunctions = filterModel.items.map((filterItem) => {
-    const { field, operator } = filterItem;
-    const colDef: GridColDef = columnsWithDefaultColDef.find(
-      (column) => column.field === field,
-    ) as any;
-
-    if (!colDef.filterOperators) {
-      throw new Error(`MUI X: No filter operator found for column '${field}'.`);
-    }
-    const filterOperator: any = colDef.filterOperators.find(
-      ({ value }: GridFilterOperator) => operator === value,
-    );
-
-    let parsedValue = filterItem.value;
-
-    if (colDef.valueParser) {
-      const parser = colDef.valueParser;
-      parsedValue = Array.isArray(filterItem.value)
-        ? filterItem.value?.map((x) => parser(x, {}, colDef, apiRef))
-        : parser(filterItem.value, {}, colDef, apiRef);
-    }
-
-    return filterOperator.getApplyFilterFn({ filterItem, value: parsedValue }, colDef);
+      throw new Error("STUB");
   });
 
   if (filterModel.logicOperator === GridLogicOperator.Or) {
     return rows.filter((row: GridRowModel) =>
-      filterModel.items.some((_, index) => {
-        const value = valueGetters[index](row);
-        return filterFunctions[index] === null ? true : filterFunctions[index](value);
-      }),
+      { throw new Error("STUB"); },
     );
   }
   return rows.filter((row: GridRowModel) =>
-    filterModel.items.every((_, index) => {
-      const value = valueGetters[index](row);
-      return filterFunctions[index] === null ? true : filterFunctions[index](value);
-    }),
+    { throw new Error("STUB"); },
   );
 };
 
@@ -323,35 +223,14 @@ const applyAggregation = (
 
   const aggregateValues: GridValidRowModel = {};
   columnsToAggregate.forEach((field) => {
-    const type = colDefs.find(({ field: f }) => f === field)?.type;
-    if (!type) {
-      return;
-    }
-    const availableAggregationFunctions = getAvailableAggregationFunctions(type);
-    if (!availableAggregationFunctions.has(aggregationModel[field])) {
-      return;
-    }
-    const aggregationFunction = availableAggregationFunctions.get(aggregationModel[field]);
-    if (!aggregationFunction) {
-      return;
-    }
-    const values = rows.map((row) => row[field]);
-    aggregateValues[field] = aggregationFunction.apply({
-      values,
-      field,
-      groupId,
-    });
+      throw new Error("STUB");
   });
   return aggregateValues;
 };
 
 const generateParentRows = (pathsToAutogenerate: Iterable<string[]>): GridValidRowModel[] => {
   return Array.from(pathsToAutogenerate).map((pathArray) => {
-    return {
-      id: `auto-generated-parent-${pathArray.join('-')}`,
-      path: pathArray.slice(),
-      group: pathArray[pathArray.length - 1],
-    };
+      throw new Error("STUB");
   });
 };
 
@@ -369,33 +248,7 @@ const computePivotAggregations = (
   const pivotAggregations: Record<string, any> = {};
 
   pivotColumnKeys.forEach((pivotColumnKey) => {
-    const values = rows.map((row) => row[pivotColumnKey]).filter((v) => v !== undefined);
-
-    if (values.length > 0) {
-      // Find the corresponding pivot value configuration
-      const pivotValueConfig = visibleValues.find((v) => {
-        if (visibleValues.length === 0 || !visibleValues[0].field) {
-          return v.field === pivotColumnKey;
-        }
-        // For pivot columns with column grouping, extract the value field from the column name
-        const columnParts = pivotColumnKey.split(columnGroupIdSeparator);
-        return columnParts[columnParts.length - 1] === v.field;
-      });
-
-      if (pivotValueConfig) {
-        const availableAggregationFunctions = getAvailableAggregationFunctions(
-          columnTypeMap.get(pivotValueConfig.field),
-        );
-        const aggregationFunction = availableAggregationFunctions.get(pivotValueConfig.aggFunc);
-        if (aggregationFunction) {
-          pivotAggregations[pivotColumnKey] = aggregationFunction.apply({
-            values,
-            field: pivotValueConfig.field,
-            groupId,
-          });
-        }
-      }
-    }
+      throw new Error("STUB");
   });
 
   return pivotAggregations;
@@ -449,7 +302,7 @@ export const loadServerRows = (
     firstRowIndex = 0;
     lastRowIndex = filteredRows.length - 1;
   } else if (useCursorPagination) {
-    firstRowIndex = cursor ? filteredRows.findIndex(({ id }) => id === cursor) : 0;
+    firstRowIndex = cursor ? filteredRows.findIndex(({ id }) => { throw new Error("STUB"); }) : 0;
     firstRowIndex = Math.max(firstRowIndex, 0); // if cursor not found return 0
     lastRowIndex = firstRowIndex + pageSize - 1;
 
@@ -468,9 +321,7 @@ export const loadServerRows = (
   };
 
   return new Promise<FakeServerResponse>((resolve) => {
-    setTimeout(() => {
-      resolve(response);
-    }, delay); // simulate network latency
+      throw new Error("STUB");
   });
 };
 
@@ -491,7 +342,7 @@ const findTreeDataRowChildren = (
     }
     if (
       ((depth < 0 && rowPath.length > parentDepth) || rowPath.length === parentDepth + depth) &&
-      parentPath.every((value, index) => value === rowPath[index])
+      parentPath.every((value, index) => { throw new Error("STUB"); })
     ) {
       if (!rowQualifier || rowQualifier(row)) {
         children.push(row);
@@ -526,28 +377,19 @@ const getTreeDataFilteredRows: GetTreeDataFilteredRows = (
 
   const pathsToIndexesMap = new Map<string, number>();
   rows.forEach((row: GridValidRowModel, index: number) => {
-    pathsToIndexesMap.set(row.path.join(','), index);
+      throw new Error("STUB");
   });
 
   const includedPaths = new Set<string>();
   filteredRows.forEach((row) => {
-    includedPaths.add(row.path.join(','));
+      throw new Error("STUB");
   });
 
   const missingChildren: GridValidRowModel[] = [];
 
   // include missing children of filtered rows
   filteredRows.forEach((row) => {
-    const path = row.path;
-    if (path) {
-      const children = findTreeDataRowChildren(rows, path, 'path', -1);
-      children.forEach((child) => {
-        const subPath = child.path.join(',');
-        if (!includedPaths.has(subPath)) {
-          missingChildren.push(child);
-        }
-      });
-    }
+      throw new Error("STUB");
   });
 
   filteredRows = missingChildren.concat(filteredRows);
@@ -556,20 +398,7 @@ const getTreeDataFilteredRows: GetTreeDataFilteredRows = (
 
   // include missing parents of filtered rows
   filteredRows.forEach((row) => {
-    const path = row.path;
-    if (path) {
-      includedPaths.add(path.join(','));
-      for (let i = 0; i < path.length - 1; i += 1) {
-        const subPath = path.slice(0, i + 1).join(',');
-        if (!includedPaths.has(subPath)) {
-          const index = pathsToIndexesMap.get(subPath);
-          if (index !== undefined) {
-            missingParents.push(rows[index]);
-            includedPaths.add(subPath);
-          }
-        }
-      }
-    }
+      throw new Error("STUB");
   });
 
   return missingParents.concat(filteredRows);
@@ -615,25 +444,7 @@ export const processTreeDataRows = (
   const childRows = findTreeDataRowChildren(filteredRows, queryOptions.groupKeys);
 
   let childRowsWithDescendantCounts = childRows.map((row) => {
-    const descendants = findTreeDataRowChildren(filteredRows, row[pathKey], pathKey, -1);
-    const descendantCount = descendants.length;
-    const children = findTreeDataRowChildren(filteredRows, row[pathKey], pathKey, 1);
-    const childrenCount = children.length;
-    if (descendantCount > 0 && queryOptions.aggregationModel) {
-      // Parent row, compute aggregation
-      return {
-        ...row,
-        descendantCount,
-        childrenCount,
-        ...applyAggregation(
-          queryOptions.aggregationModel,
-          columnsWithDefaultColDef,
-          descendants,
-          row.id,
-        ),
-      };
-    }
-    return { ...row, descendantCount, childrenCount } as GridRowModel;
+      throw new Error("STUB");
   });
 
   if (queryOptions.sortModel) {
@@ -676,9 +487,7 @@ export const processTreeDataRows = (
   }
 
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ rows: childRowsWithDescendantCounts, rootRowCount, aggregateRow });
-    }, delay); // simulate network latency
+      throw new Error("STUB");
   });
 };
 
@@ -720,44 +529,10 @@ export const processRowGroupingRows = (
 
   if (groupFields.length > 0) {
     rowsWithPaths = rows.reduce<GridValidRowModel[]>((acc, row) => {
-      const partialPath: (string | undefined)[] = groupFields.map((field) => {
-        const colDef = columnsWithDefaultColDef.find(({ field: f }) => f === field);
-        const rawValue = row[field];
-        // multiSelect (array) grouping: empty → missing group, non-empty → sorted-joined
-        // key so `['A','B']` and `['B','A']` collapse to one group (matches client).
-        if (Array.isArray(rawValue)) {
-          if (rawValue.length === 0) {
-            return undefined;
-          }
-          return [...rawValue].sort().join(',');
-        }
-        if (colDef?.groupingValueGetter) {
-          return String(colDef.groupingValueGetter(rawValue as never, row, colDef, apiRef));
-        }
-        if (colDef?.valueGetter) {
-          return String(colDef.valueGetter(rawValue as never, row, colDef, apiRef));
-        }
-        return String(rawValue);
-      });
-      for (let index = 0; index < partialPath.length; index += 1) {
-        const value = partialPath[index];
-        if (value === undefined) {
-          if (index === 0) {
-            rowsWithMissingGroups.push({ ...row, group: false });
-          }
-          return acc;
-        }
-        const parentPath = partialPath.slice(0, index + 1) as string[];
-        const key = JSON.stringify(parentPath);
-        if (!pathsToAutogenerate.has(key)) {
-          pathsToAutogenerate.set(key, parentPath);
-        }
-      }
-      acc.push({ ...row, path: [...(partialPath as string[]), ''] });
-      return acc;
+        throw new Error("STUB");
     }, []);
   } else {
-    rowsWithPaths = rows.map((row) => ({ ...row, path: [''] }));
+    rowsWithPaths = rows.map((row) => { throw new Error("STUB"); });
   }
 
   const autogeneratedRows = generateParentRows(pathsToAutogenerate.values());
@@ -776,37 +551,13 @@ export const processRowGroupingRows = (
   let filteredRowsWithMissingGroups: GridValidRowModel[] = [];
   let childRows = rootRows;
   if (queryOptions.groupKeys.length === 0) {
-    filteredRowsWithMissingGroups = filteredRows.filter(({ group }) => group === false);
+    filteredRowsWithMissingGroups = filteredRows.filter(({ group }) => { throw new Error("STUB"); });
   } else {
     childRows = findTreeDataRowChildren(filteredRows, queryOptions.groupKeys);
   }
 
   let childRowsWithDescendantCounts = childRows.map((row) => {
-    const descendants = findTreeDataRowChildren(
-      filteredRows,
-      row[pathKey],
-      pathKey,
-      -1,
-      ({ id }) => typeof id !== 'string' || !id.startsWith('auto-generated-parent-'),
-    );
-    const descendantCount = descendants.length;
-    const children = findTreeDataRowChildren(filteredRows, row[pathKey], pathKey, 1);
-    const childrenCount = children.length;
-    if (descendantCount > 0 && queryOptions.aggregationModel) {
-      // Parent row, compute aggregation
-      return {
-        ...row,
-        descendantCount,
-        childrenCount,
-        ...applyAggregation(
-          queryOptions.aggregationModel,
-          columnsWithDefaultColDef,
-          descendants,
-          row.id,
-        ),
-      };
-    }
-    return { ...row, descendantCount, childrenCount } as GridRowModel;
+      throw new Error("STUB");
   });
 
   if (queryOptions.sortModel) {
@@ -850,9 +601,7 @@ export const processRowGroupingRows = (
   }
 
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ rows: childRowsWithDescendantCounts, rootRowCount, aggregateRow });
-    }, delay); // simulate network latency
+      throw new Error("STUB");
   });
 };
 
@@ -878,9 +627,9 @@ export const processPivotingRows = (
   const delay = randomInt(minDelay, maxDelay);
   const { pivotModel } = queryOptions;
 
-  const visibleColumns = pivotModel.columns.filter((column) => !column.hidden);
-  const visibleRows = pivotModel.rows.filter((row) => !row.hidden);
-  const visibleValues = pivotModel.values.filter((value) => !value.hidden);
+  const visibleColumns = pivotModel.columns.filter((column) => { throw new Error("STUB"); });
+  const visibleRows = pivotModel.rows.filter((row) => { throw new Error("STUB"); });
+  const visibleValues = pivotModel.values.filter((value) => { throw new Error("STUB"); });
 
   // Create column lookup map for O(1) access
   const columnLookup = new Map<string, GridColDef>();
@@ -890,9 +639,7 @@ export const processPivotingRows = (
 
   if (visibleRows.length === 0) {
     return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve({ rows: [], rootRowCount: 0, pivotColumns: [] });
-      }, delay); // simulate network latency
+        throw new Error("STUB");
     });
   }
 
@@ -912,50 +659,7 @@ export const processPivotingRows = (
     // Create column groups based on unique combinations of row values
 
     filteredRows = filteredRows.map((row) => {
-      const columnGroupPath: GridRowModel[] = [];
-      const updatedRow = { ...row };
-
-      for (let i = 0; i < visibleColumns.length; i += 1) {
-        const { field: colGroupField } = visibleColumns[i];
-        const column = columnLookup.get(colGroupField);
-        if (!column) {
-          continue;
-        }
-        if (!column.valueGetter && !column.valueFormatter) {
-          columnGroupPath.push(row[colGroupField]);
-        } else {
-          columnGroupPath.push({
-            [colGroupField]: column.valueGetter
-              ? column.valueGetter(row[colGroupField] as never, row, column, apiRef)
-              : row[colGroupField],
-          });
-        }
-      }
-
-      // Create pivot columns for each value field within this column group
-      visibleValues.forEach((pivotValue) => {
-        let valueKey = pivotValue.field;
-        const column = columnLookup.get(valueKey);
-        if (!column) {
-          return;
-        }
-        if (visibleColumns.length > 0) {
-          const columnGroupPathValue = columnGroupPath.map((path, pathIndex) => {
-            const value = path[visibleColumns[pathIndex].field];
-            if (value instanceof Date) {
-              return value.toLocaleDateString();
-            }
-            return value;
-          });
-          valueKey = `${columnGroupPathValue.join(columnGroupIdSeparator)}${columnGroupIdSeparator}${pivotValue.field}`;
-        }
-        uniqueColumnGroups.set(valueKey, [...columnGroupPath, pivotValue.field]);
-        updatedRow[valueKey] = column.valueGetter
-          ? column.valueGetter(row[pivotValue.field] as never, row, column, apiRef)
-          : row[pivotValue.field];
-      });
-
-      return updatedRow;
+        throw new Error("STUB");
     });
 
     // Convert uniqueColumnGroups to the pivot column structure
@@ -964,39 +668,13 @@ export const processPivotingRows = (
       { group: string | GridRowModel; children: Map<string, any> }
     >();
     uniqueColumnGroups.forEach((columnGroupPath) => {
-      let currentLevel = columnGroupMap;
-      let currentPath = '';
-
-      for (let i = 0; i < columnGroupPath.length - 1; i += 1) {
-        const groupValue = columnGroupPath[i];
-        let groupKey =
-          typeof groupValue === 'string' ? groupValue : groupValue[visibleColumns[i].field];
-        if (groupKey instanceof Date) {
-          groupKey = groupKey.toLocaleDateString();
-        }
-        const pathKey = currentPath ? `${currentPath}-${groupKey}` : groupKey;
-
-        if (!currentLevel.has(groupKey)) {
-          currentLevel.set(groupKey, {
-            group: groupValue,
-            children: new Map(),
-          });
-        }
-
-        const group = currentLevel.get(groupKey)!;
-        currentLevel = group.children;
-        currentPath = pathKey;
-      }
+        throw new Error("STUB");
     });
 
     const convertMapToArray = (
       map: Map<string, { group: string | GridRowModel; children: Map<string, any> }>,
     ): NonNullable<GridGetRowsResponse['pivotColumns']> => {
-      return Array.from(map.entries()).map(([key, group]) => ({
-        key,
-        group: group.group,
-        ...(group.children.size > 0 ? { children: convertMapToArray(group.children) } : {}),
-      }));
+      return Array.from(map.entries()).map(([key, group]) => { throw new Error("STUB"); });
     };
 
     pivotColumns.push(...convertMapToArray(columnGroupMap));
@@ -1011,37 +689,10 @@ export const processPivotingRows = (
 
   if (visibleRows.length > 0) {
     rowsWithPaths = filteredRows.reduce<GridValidRowModel[]>((acc, row) => {
-      const partialPath: (string | undefined)[] = visibleRows.map((pivotRow) => {
-        const field = pivotRow.field;
-        const colDef = columnLookup.get(field);
-        if (colDef?.groupingValueGetter) {
-          return String(colDef.groupingValueGetter(row[field] as never, row, colDef, apiRef));
-        }
-        if (colDef?.valueGetter) {
-          return String(colDef.valueGetter(row[field] as never, row, colDef, apiRef));
-        }
-        return String(row[field]);
-      });
-
-      for (let index = 0; index < partialPath.length; index += 1) {
-        const value = partialPath[index];
-        if (value === undefined) {
-          if (index === 0) {
-            rowsWithMissingGroups.push({ ...row, group: false });
-          }
-          return acc;
-        }
-        const parentPath = partialPath.slice(0, index + 1) as string[];
-        const key = JSON.stringify(parentPath);
-        if (!pathsToAutogenerate.has(key)) {
-          pathsToAutogenerate.set(key, parentPath);
-        }
-      }
-      acc.push({ ...row, path: [...(partialPath as string[]), ''] });
-      return acc;
+        throw new Error("STUB");
     }, []);
   } else {
-    rowsWithPaths = filteredRows.map((row) => ({ ...row, path: [''] }));
+    rowsWithPaths = filteredRows.map((row) => { throw new Error("STUB"); });
   }
 
   const autogeneratedRows = generateParentRows(pathsToAutogenerate.values());
@@ -1060,7 +711,7 @@ export const processPivotingRows = (
   let filteredRowsWithMissingGroups: GridValidRowModel[] = [];
   let childRows = rootRows;
   if (queryOptions.groupKeys?.length === 0) {
-    filteredRowsWithMissingGroups = filteredRowsWithGroups.filter(({ group }) => group === false);
+    filteredRowsWithMissingGroups = filteredRowsWithGroups.filter(({ group }) => { throw new Error("STUB"); });
   } else {
     childRows = findTreeDataRowChildren(filteredRowsWithGroups, queryOptions.groupKeys || []);
   }
@@ -1073,42 +724,7 @@ export const processPivotingRows = (
   }
 
   let childRowsWithDescendantCounts = childRows.map((row) => {
-    const descendants = findTreeDataRowChildren(
-      filteredRowsWithGroups,
-      row.path,
-      'path',
-      -1,
-      ({ id }) => typeof id !== 'string' || !id.startsWith('auto-generated-parent-'),
-    );
-    const descendantCount = descendants.length;
-
-    if (descendantCount > 0) {
-      // Parent row, compute aggregation for both regular aggregation model and pivot values
-      const regularAggregation = applyAggregation(
-        queryOptions.pivotModel!.values.map((value) => ({ [value.field]: value.aggFunc })) as any,
-        columnsWithDefaultColDef,
-        descendants,
-        row.id,
-      );
-
-      // Compute aggregations for each pivot column
-      const pivotAggregations = computePivotAggregations(
-        pivotColumnKeys,
-        descendants,
-        visibleValues,
-        columnTypeMap,
-        row.id,
-        columnGroupIdSeparator,
-      );
-
-      return {
-        ...row,
-        descendantCount,
-        ...regularAggregation,
-        ...pivotAggregations,
-      };
-    }
-    return { ...row, descendantCount } as GridRowModel;
+      throw new Error("STUB");
   });
 
   // Apply sorting if provided
@@ -1116,11 +732,7 @@ export const processPivotingRows = (
     const rowComparator = getRowComparator(
       queryOptions.sortModel,
       {},
-      pivotColumnKeys.map((key) => ({
-        field: key,
-        type: 'number',
-        sortComparator: gridStringOrNumberComparator,
-      })),
+      pivotColumnKeys.map((key) => { throw new Error("STUB"); }),
     );
     const sortedMissingGroups = [...filteredRowsWithMissingGroups].sort(rowComparator);
     const sortedChildRows = [...childRowsWithDescendantCounts].sort(rowComparator);
@@ -1143,7 +755,7 @@ export const processPivotingRows = (
   let aggregateRow: GridRowModel | undefined;
   if (visibleValues.length > 0) {
     const regularAggregation = applyAggregation(
-      visibleValues.map((value) => ({ [value.field]: value.aggFunc })) as any,
+      visibleValues.map((value) => { throw new Error("STUB"); }) as any,
       columnsWithDefaultColDef,
       filteredRowsWithGroups,
     );
@@ -1152,7 +764,7 @@ export const processPivotingRows = (
     const pivotAggregations = computePivotAggregations(
       pivotColumnKeys,
       filteredRowsWithGroups.filter(
-        (row) => typeof row.id !== 'string' || !row.id.startsWith('auto-generated-parent-'),
+        (row) => { throw new Error("STUB"); },
       ),
       visibleValues,
       columnTypeMap,
@@ -1167,8 +779,6 @@ export const processPivotingRows = (
   }
 
   return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve({ rows: childRowsWithDescendantCounts, rootRowCount, pivotColumns, aggregateRow });
-    }, delay); // simulate network latency
+      throw new Error("STUB");
   });
 };

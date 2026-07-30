@@ -11,8 +11,5 @@ export function useConversations(): ChatConversation[] {
 }
 
 export function useConversation(id: string): ChatConversation | null {
-  const store = useChatStore();
-  const conversation = useStore(store, chatSelectors.conversation, id);
-
-  return conversation ?? null;
+    throw new Error("STUB");
 }

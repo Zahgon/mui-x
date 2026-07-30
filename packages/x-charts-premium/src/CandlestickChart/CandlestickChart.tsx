@@ -118,59 +118,7 @@ const CandlestickChart = React.forwardRef(function CandlestickChart(
   inProps: CandlestickChartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiCandlestickChart' });
-  const { showToolbar = false } = props;
-  const {
-    chartsWrapperProps,
-    chartsContainerProps,
-    candlestickPlotProps,
-    gridProps,
-    clipPathProps,
-    clipPathGroupProps,
-    overlayProps,
-    chartsAxisProps,
-    axisHighlightProps,
-    legendProps,
-    children,
-  } = useCandlestickChartProps(props);
-  const { chartsDataProviderPremiumProps, chartsSurfaceProps } = useChartsContainerPremiumProps<
-    'ohlc',
-    CandlestickChartPluginSignatures
-  >(chartsContainerProps);
-
-  const Tooltip = props.slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = props.slots?.toolbar ?? ChartsToolbarPro;
-  const { className: chartsLayerContainerClassName, ...chartsSvgLayerProps } = chartsSurfaceProps;
-
-  return (
-    <ChartsDataProviderPremium<'ohlc', CandlestickChartPluginSignatures>
-      {...chartsDataProviderPremiumProps}
-    >
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {showToolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!props.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsLayerContainer className={chartsLayerContainerClassName}>
-          <ChartsSvgLayer>
-            <ChartsGrid {...gridProps} />
-          </ChartsSvgLayer>
-          <ChartsWebGLLayer>
-            <CandlestickPlot {...candlestickPlotProps} />
-          </ChartsWebGLLayer>
-          <ChartsSvgLayer {...chartsSvgLayerProps}>
-            <g {...clipPathGroupProps}>
-              <ChartsOverlay {...overlayProps} />
-              <ChartsAxisHighlight {...axisHighlightProps} />
-            </g>
-            <ChartsAxis {...chartsAxisProps} />
-            <ChartsZoomSlider />
-            <ChartsClipPath {...clipPathProps} />
-            {children}
-          </ChartsSvgLayer>
-        </ChartsLayerContainer>
-        {!props.loading && <Tooltip {...props.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProviderPremium>
-  );
+    throw new Error("STUB");
 });
 
 CandlestickChart.propTypes /* remove-proptypes */ = {

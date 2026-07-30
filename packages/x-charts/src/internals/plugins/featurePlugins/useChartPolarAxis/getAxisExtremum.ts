@@ -46,15 +46,7 @@ export const getAxisExtremum = <SeriesType extends PolarChartSeriesType>(
 
   const extremums = polarSeriesTypes.reduce<PolarExtremumGetterResult>(
     (acc, charType) =>
-      axisExtremumCallback(
-        acc,
-        charType as SeriesType,
-        axis,
-        axisDirection,
-        seriesConfig,
-        axisIndex,
-        formattedSeries,
-      ),
+      { throw new Error("STUB"); },
     [Infinity, -Infinity],
   );
 

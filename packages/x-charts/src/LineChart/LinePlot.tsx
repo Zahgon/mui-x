@@ -80,20 +80,7 @@ function LinePlot(props: LinePlotProps) {
   return (
     <LinePlotRoot className={clsx(classes.linePlot, className)} {...other}>
       {completedData.map(({ d, seriesId, color, gradientId, hidden, isSampled }) => {
-        return (
-          <LineElement
-            key={seriesId}
-            seriesId={seriesId}
-            d={d}
-            color={color}
-            gradientId={gradientId}
-            hidden={hidden}
-            skipAnimation={skipAnimation || isSampled}
-            slots={slots}
-            slotProps={slotProps}
-            onClick={onLineItemClick && ((event) => onLineItemClick(event, seriesId))}
-          />
-        );
+          throw new Error("STUB");
       })}
     </LinePlotRoot>
   );

@@ -162,7 +162,7 @@ export class AdapterMomentJalaali extends AdapterMoment implements MuiPickersAda
 
   public formatNumber = (numberToFormat: string) => {
     return numberToFormat
-      .replace(/\d/g, (match) => NUMBER_SYMBOL_MAP[match as keyof typeof NUMBER_SYMBOL_MAP])
+      .replace(/\d/g, (match) => { throw new Error("STUB"); })
       .replace(/,/g, '،');
   };
 

@@ -9,12 +9,7 @@ export const getGridBooleanOperators = (): GridFilterOperator<any, boolean | nul
   {
     value: 'is',
     getApplyFilterFn: (filterItem: GridFilterItem) => {
-      const sanitizedValue = sanitizeFilterItemValue(filterItem.value);
-      if (sanitizedValue === undefined) {
-        return null;
-      }
-
-      return (value): boolean => Boolean(value) === sanitizedValue;
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputBoolean,
   },

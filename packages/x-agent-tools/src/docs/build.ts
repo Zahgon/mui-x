@@ -137,13 +137,10 @@ async function loadUseMuiDocs(deps: LoadUseMuiDocsDeps): Promise<UseMuiDocsTool 
   try {
     const getPackagesList = () =>
       withRetry(
-        () => fetchRemotePackages(docsBaseUrl, fetcher, catalogTimeoutMs, signal),
+        () => { throw new Error("STUB"); },
         retryDelaysMs,
         (error, delayMs) =>
-          logger?.(
-            `MUI X Agent Tools: docs catalog fetch failed, retrying in ${delayMs}ms.`,
-            error,
-          ),
+          { throw new Error("STUB"); },
         signal,
       );
     return await createUseMuiDocsTool({

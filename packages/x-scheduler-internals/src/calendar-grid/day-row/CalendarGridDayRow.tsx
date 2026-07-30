@@ -10,42 +10,7 @@ export const CalendarGridDayRow = React.forwardRef(function CalendarGridDayRow(
   componentProps: CalendarGridDayRow.Props,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {
-    // Rendering props
-    className,
-    render,
-    style,
-    // Internal props
-    start,
-    end,
-    rowIndex = 0,
-    // Props forwarded to the DOM element
-    ...elementProps
-  } = componentProps;
-
-  const cellsRefs = React.useRef<(HTMLDivElement | null)[]>([]);
-
-  const contextValue: CalendarGridDayRowContext = React.useMemo(
-    () => ({
-      start,
-      end,
-      rowIndex,
-    }),
-    [start, end, rowIndex],
-  );
-
-  const element = useRenderElement('div', componentProps, {
-    ref: [forwardedRef],
-    props: [{ role: 'row', 'aria-rowindex': rowIndex + 2 }, elementProps],
-  });
-
-  return (
-    <CompositeList elementsRef={cellsRefs}>
-      <CalendarGridDayRowContext.Provider value={contextValue}>
-        {element}
-      </CalendarGridDayRowContext.Provider>
-    </CompositeList>
-  );
+    throw new Error("STUB");
 });
 
 export namespace CalendarGridDayRow {

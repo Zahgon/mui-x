@@ -1,6 +1,8 @@
 import type { Logger } from '../types';
 
-const noopLogger: Logger = () => {};
+const noopLogger: Logger = () => {
+    throw new Error("STUB");
+};
 
 /**
  * Hosts MUI serves docs / `llms.txt` from. Allowlist only: nothing else is fetchable, no matter how
@@ -44,21 +46,6 @@ export function createDocsUrlGuard(
     }
   }
   return (url) => {
-    let parsed: URL;
-    try {
-      parsed = new URL(url);
-    } catch {
-      return false;
-    }
-    // Explicitly configured backends are trusted as-is (they may be http://localhost in dev).
-    if (allowed.has(parsed.origin)) {
-      return true;
-    }
-    // Built-in MUI docs hosts must be https, so the first request can't be tampered with in transit.
-    if (parsed.protocol !== 'https:') {
-      return false;
-    }
-    const host = parsed.hostname.toLowerCase().replace(/\.$/, ''); // strip a trailing DNS dot
-    return isMuiDocsHost(host);
+      throw new Error("STUB");
   };
 }

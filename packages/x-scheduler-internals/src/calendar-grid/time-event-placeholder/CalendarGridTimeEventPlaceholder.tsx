@@ -12,50 +12,8 @@ export const CalendarGridTimeEventPlaceholder = React.forwardRef(
     componentProps: CalendarGridTimeEventPlaceholder.Props,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ) {
-    const {
-      // Rendering props
-      className,
-      render,
-      style,
-      // Internal props
-      start,
-      end,
-      // Props forwarded to the DOM element
-      ...elementProps
-    } = componentProps;
-
-    const {
-      start: columnStart,
-      end: columnEnd,
-      dayStartMinute,
-      dayEndMinute,
-    } = useCalendarGridTimeColumnContext();
-
-    const { position, duration } = useElementPositionInCollection({
-      start,
-      end,
-      collectionStart: columnStart,
-      collectionEnd: columnEnd,
-      dayStartMinute,
-      dayEndMinute,
-    });
-
-    const { state } = useEvent({ start, end });
-
-    return useRenderElement('div', componentProps, {
-      state,
-      ref: [forwardedRef],
-      props: [
-        elementProps,
-        {
-          style: {
-            [CalendarGridTimeEventPlaceholderCssVars.yPosition]: `${position * 100}%`,
-            [CalendarGridTimeEventPlaceholderCssVars.height]: `${duration * 100}%`,
-          } as React.CSSProperties,
-        },
-      ],
-    });
-  },
+        throw new Error("STUB");
+    },
 );
 
 export namespace CalendarGridTimeEventPlaceholder {

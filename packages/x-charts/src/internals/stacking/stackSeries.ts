@@ -96,30 +96,7 @@ export const getStackingGroups = <T extends StackableSeriesType>(params: Formatt
   const stackIndex: Record<SeriesId, number> = {};
 
   seriesOrder.forEach((id) => {
-    const { stack, stackOrder, stackOffset } = series[id];
-
-    if (stack === undefined) {
-      stackingGroups.push({
-        ids: [id],
-        stackingOrder: StackOrder.none,
-        stackingOffset: StackOffset.none,
-      });
-    } else if (stackIndex[stack] === undefined) {
-      stackIndex[stack] = stackingGroups.length;
-      stackingGroups.push({
-        ids: [id],
-        stackingOrder: StackOrder[stackOrder ?? defaultStrategy?.stackOrder ?? 'none'],
-        stackingOffset: StackOffset[stackOffset ?? defaultStrategy?.stackOffset ?? 'diverging'],
-      });
-    } else {
-      stackingGroups[stackIndex[stack]].ids.push(id);
-      if (stackOrder !== undefined) {
-        stackingGroups[stackIndex[stack]].stackingOrder = StackOrder[stackOrder];
-      }
-      if (stackOffset !== undefined) {
-        stackingGroups[stackIndex[stack]].stackingOffset = StackOffset[stackOffset];
-      }
-    }
+      throw new Error("STUB");
   });
 
   return stackingGroups;

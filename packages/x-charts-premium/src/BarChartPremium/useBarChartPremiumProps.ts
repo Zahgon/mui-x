@@ -67,9 +67,6 @@ function applyWebGLBandTickSpacing<T extends { scaleType?: string; tickSpacing?:
     return axes;
   }
   return axes.map((axis) => {
-    if (axis.scaleType === 'band' && axis.tickSpacing === undefined) {
-      return { ...axis, tickSpacing: WEBGL_DEFAULT_BAND_TICK_SPACING };
-    }
-    return axis;
+      throw new Error("STUB");
   });
 }

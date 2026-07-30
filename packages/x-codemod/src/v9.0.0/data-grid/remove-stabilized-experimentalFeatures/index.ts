@@ -18,19 +18,10 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   };
 
   propKeys.forEach((propKey) => {
-    removeObjectProperty({ root, j, propName, componentsNames, propKey });
+      throw new Error("STUB");
   });
 
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'remove-stabilized-experimentalFeatures',
-  specFiles: [
-    {
-      name: 'remove charts from experimentalFeatures',
-      actual: readFile(path.join(import.meta.dirname, 'actual.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

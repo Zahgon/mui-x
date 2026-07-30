@@ -180,11 +180,7 @@ export class AdapterDateFnsBase<DateFnsLocale extends DateFnsLocaleBase> impleme
   public longFormatters: DateFnsAdapterBaseOptions<DateFnsLocale>['longFormatters'];
 
   constructor(props: DateFnsAdapterBaseOptions<DateFnsLocale>) {
-    const { locale, formats, longFormatters, lib } = props;
-    this.locale = locale;
-    this.formats = { ...defaultFormats, ...formats };
-    this.longFormatters = longFormatters;
-    this.lib = lib || 'date-fns';
+      throw new Error("STUB");
   }
 
   public date = <T extends string | null | undefined>(value?: T): DateBuilderReturnType<T> => {
@@ -200,7 +196,7 @@ export class AdapterDateFnsBase<DateFnsLocale extends DateFnsLocaleBase> impleme
     return new Date(value) as unknown as R;
   };
 
-  public getInvalidDate = () => new Date('Invalid Date');
+  public getInvalidDate = () => { throw new Error("STUB"); };
 
   public getTimezone = (): string => {
     return 'default';
@@ -232,12 +228,7 @@ export class AdapterDateFnsBase<DateFnsLocale extends DateFnsLocaleBase> impleme
     return format
       .match(longFormatRegexp)!
       .map((token: string) => {
-        const firstCharacter = token[0];
-        if (firstCharacter === 'p' || firstCharacter === 'P') {
-          const longFormatter = this.longFormatters[firstCharacter];
-          return longFormatter(token, this.locale.formatLong);
-        }
-        return token;
+          throw new Error("STUB");
       })
       .join('');
   };

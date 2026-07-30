@@ -18,49 +18,5 @@ export function HighlightedScatterMark({
   className,
   ...props
 }: React.SVGAttributes<SVGCircleElement>) {
-  const theme = useTheme();
-  const store = useStore();
-  const highlightedItem = store.use(selectorChartsHighlightedItem);
-  const drawingArea = store.use(selectorChartDrawingArea);
-  const classes = useUtilityClasses();
-
-  const isHighlightedScatter =
-    highlightedItem?.type === 'scatter' && highlightedItem.dataIndex !== undefined;
-  const resolved = useScatterItemPosition(
-    isHighlightedScatter
-      ? { seriesId: highlightedItem.seriesId, dataIndex: highlightedItem.dataIndex! }
-      : null,
-  );
-
-  if (!resolved) {
-    return null;
-  }
-
-  const { cx, cy, markerSize } = resolved;
-
-  // Allow a markerSize margin around the drawing area so the highlight ring stays
-  // visible at the edges (e.g. during keyboard navigation) without needing a clip-path.
-  const margin = markerSize;
-  if (
-    cx < drawingArea.left - margin ||
-    cx > drawingArea.left + drawingArea.width + margin ||
-    cy < drawingArea.top - margin ||
-    cy > drawingArea.top + drawingArea.height + margin
-  ) {
-    return null;
-  }
-
-  return (
-    <circle
-      className={clsx(classes.highlightedMark, className)}
-      fill="none"
-      stroke={(theme.vars ?? theme).palette.text.primary}
-      strokeWidth={1}
-      cx={cx}
-      cy={cy}
-      r={markerSize}
-      pointerEvents="none"
-      {...props}
-    />
-  );
+    throw new Error("STUB");
 }

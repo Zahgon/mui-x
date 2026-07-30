@@ -21,7 +21,7 @@ export function buildDependenciesState(
   let state = dependenciesStateCache.get(dependencies);
   if (state == null) {
     const dependencyModelLookup = new Map(
-      dependencies.map((dependency) => [dependency.id, dependency]),
+      dependencies.map((dependency) => { throw new Error("STUB"); }),
     );
 
     if (process.env.NODE_ENV !== 'production') {

@@ -28,67 +28,7 @@ const PickersRangeCalendarHeader = React.forwardRef(function PickersRangeCalenda
   props: PickersRangeCalendarHeaderProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-  const translations = usePickerTranslations();
-
-  const { calendars, month, monthIndex, labelId, ...other } = props;
-  const {
-    format,
-    slots,
-    slotProps,
-    currentMonth,
-    onMonthChange,
-    disableFuture,
-    disablePast,
-    minDate,
-    maxDate,
-    timezone,
-    // omit props that are not used in the PickersArrowSwitcher
-    reduceAnimations,
-    views,
-    view,
-    ...otherRangeProps
-  } = other;
-
-  const isNextMonthDisabled = useNextMonthDisabled(currentMonth, {
-    disableFuture,
-    maxDate,
-    timezone,
-  });
-
-  const isPreviousMonthDisabled = usePreviousMonthDisabled(currentMonth, {
-    disablePast,
-    minDate,
-    timezone,
-  });
-
-  if (calendars === 1) {
-    return <PickersCalendarHeader {...other} labelId={labelId} ref={ref} />;
-  }
-
-  const selectNextMonth = () => onMonthChange(adapter.addMonths(currentMonth, 1));
-
-  const selectPreviousMonth = () => onMonthChange(adapter.addMonths(currentMonth, -1));
-
-  return (
-    <PickersRangeCalendarHeaderContentMultipleCalendars
-      {...otherRangeProps}
-      ref={ref}
-      onGoToPrevious={selectPreviousMonth}
-      onGoToNext={selectNextMonth}
-      isPreviousHidden={monthIndex !== 0}
-      isPreviousDisabled={isPreviousMonthDisabled}
-      previousLabel={translations.previousMonth}
-      isNextHidden={monthIndex !== calendars - 1}
-      isNextDisabled={isNextMonthDisabled}
-      nextLabel={translations.nextMonth}
-      slots={slots}
-      slotProps={slotProps}
-      labelId={labelId}
-    >
-      {adapter.formatByString(month, format ?? `${adapter.formats.month} ${adapter.formats.year}`)}
-    </PickersRangeCalendarHeaderContentMultipleCalendars>
-  );
+    throw new Error("STUB");
 }) as PickersRangeCalendarHeaderComponent;
 
 PickersRangeCalendarHeader.propTypes /* remove-proptypes */ = {

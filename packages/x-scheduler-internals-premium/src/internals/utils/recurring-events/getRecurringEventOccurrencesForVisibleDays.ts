@@ -93,100 +93,11 @@ class RecurringEventExpander {
     start: TemporalSupportedObject,
     end: TemporalSupportedObject,
   ) {
-    // Important:
-    // Occurrences are always computed in dataTimezone to avoid DST issues
-    // DisplayTimezone is applied only for presentation purposes
-
-    this.dataTimezone = event.dataTimezone;
-    this.rule = this.dataTimezone.rrule!;
-    this.dtStartInDataTz = adapter.setTimezone(
-      this.dataTimezone.start.value,
-      this.dataTimezone.timezone,
-    );
-    this.seriesStartDay = adapter.startOfDay(
-      adapter.setTimezone(this.dataTimezone.start.value, this.dataTimezone.timezone),
-    );
-    this.interval = Math.max(1, this.rule.interval ?? 1);
-
-    const dataTz = this.dataTimezone.timezone;
-    const visibleStartDataTz = adapter.startOfDay(adapter.setTimezone(start, dataTz));
-    const visibleEndDataTz = adapter.startOfDay(adapter.setTimezone(end, dataTz));
-
-    // Adjust scan range to catch multi-day events starting before visible range
-    const eventDuration = getEventDurationInDays(adapter, event);
-    this.scanFirstDay = adapter.startOfDay(adapter.addDays(visibleStartDataTz, 1 - eventDuration));
-    this.scanLastDay = adapter.startOfDay(visibleEndDataTz);
-
-    // Pre-compute boundaries and exclusions
-    this.exDateKeys = new Set(this.dataTimezone.exDates?.map((d) => getDateKey(d, adapter)));
-    this.untilBoundary = this.rule.until ? adapter.startOfDay(this.rule.until) : null;
-    this.minDate = adapter.isBefore(this.seriesStartDay, this.scanFirstDay)
-      ? this.scanFirstDay
-      : this.seriesStartDay;
-
-    // Initialize frequency-specific data
-    this.initializeFrequencyData();
+      throw new Error("STUB");
   }
 
   private initializeFrequencyData(): void {
-    const hasCount = typeof this.rule.count === 'number' && this.rule.count > 0;
-    const hasUntil = !!this.rule.until;
-    if (hasCount && hasUntil) {
-      throw new Error(
-        'MUI X Scheduler: The recurring rule cannot have both count and until properties. ' +
-          'A recurrence rule should specify either a count (number of occurrences) or an until date, but not both. ' +
-          'Remove one of these properties from the recurrence rule.',
-      );
-    }
-
-    switch (this.rule.freq) {
-      case 'WEEKLY': {
-        const byDayCodes = parsesByDayForWeeklyFrequency(this.rule.byDay) ?? [
-          getWeekDayCode(this.adapter, this.dtStartInDataTz),
-        ];
-        this.sortedWeekDayCodes = byDayCodes.toSorted(
-          (a, b) =>
-            NOT_LOCALIZED_WEEK_DAYS_INDEXES.get(a)! - NOT_LOCALIZED_WEEK_DAYS_INDEXES.get(b)!,
-        );
-        break;
-      }
-      case 'MONTHLY': {
-        if (this.rule.byDay?.length && this.rule.byMonthDay?.length) {
-          throw new Error(
-            'MUI X Scheduler: Monthly recurrences cannot have both byDay and byMonthDay properties. ' +
-              'Specify either specific weekdays (byDay) or specific dates (byMonthDay), but not both. ' +
-              'Remove one of these properties from the recurrence rule.',
-          );
-        }
-
-        if (this.rule.byDay?.length) {
-          this.monthlyByDay = parsesByDayForMonthlyFrequency(this.rule.byDay);
-        } else {
-          this.monthlyTargetDay = this.rule.byMonthDay?.length
-            ? this.rule.byMonthDay[0]
-            : this.adapter.getDate(this.seriesStartDay);
-        }
-        break;
-      }
-      case 'YEARLY': {
-        // Only exact "same month + same day" recurrence is supported.
-        // Any use of BYMONTH, BYMONTHDAY, BYDAY, or multiple values is not allowed.
-        if (this.rule.byMonth?.length || this.rule.byMonthDay?.length || this.rule.byDay?.length) {
-          throw new Error(
-            'MUI X Scheduler: Yearly recurrences only support exact same date recurrence. ' +
-              'The yearly frequency repeats on the same month and day as DTSTART. ' +
-              'Remove byMonth, byMonthDay, and byDay properties for yearly recurrence.',
-          );
-        }
-
-        this.yearlyTargetMonth = this.adapter.getMonth(this.seriesStartDay);
-        this.yearlyTargetDay = this.adapter.getDate(this.seriesStartDay);
-        break;
-      }
-      default:
-        // DAILY needs no special initialization
-        break;
-    }
+      throw new Error("STUB");
   }
 
   /**

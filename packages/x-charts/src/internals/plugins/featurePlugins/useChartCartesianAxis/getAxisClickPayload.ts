@@ -34,27 +34,10 @@ export function getAxisClickPayload({
 
   Object.keys(processedSeries)
     .filter((seriesType): seriesType is AxisClickSeriesType =>
-      AXIS_CLICK_SERIES_TYPES.has(seriesType as AxisClickSeriesType),
+      { throw new Error("STUB"); },
     )
     .forEach((seriesType) => {
-      // @ts-ignore
-      const seriesTypeConfig = processedSeries[seriesType];
-
-      seriesTypeConfig?.seriesOrder.forEach((seriesId: SeriesId) => {
-        const seriesItem = seriesTypeConfig!.series[seriesId];
-
-        const providedXAxisId = seriesItem.xAxisId;
-        const providedYAxisId = seriesItem.yAxisId;
-
-        const axisKey = isXAxis ? providedXAxisId : providedYAxisId;
-        if (axisKey === undefined || axisKey === axisId) {
-          // @ts-ignore This is safe because users need to opt in to use range bar series.
-          // In that case, they should import the module augmentation from `x-charts-pro/moduleAugmentation/rangeBarOnClick`
-          // Which adds the proper type to the series data.
-          // TODO(v10): Remove this ts-ignore when we can make the breaking change to ChartsAxisData.
-          seriesValues[seriesId] = seriesItem.data[dataIndex];
-        }
-      });
+        throw new Error("STUB");
     });
 
   return { dataIndex, axisValue, seriesValues };

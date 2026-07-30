@@ -57,102 +57,38 @@ export const useGridPipeProcessing = (apiRef: RefObject<GridPrivateApiCommon>) =
 
   const isRunning = React.useRef(false);
   const runAppliers = React.useCallback((groupCache: GroupCache | undefined) => {
-    if (isRunning.current || !groupCache) {
-      return;
-    }
-    isRunning.current = true;
-    Object.values(groupCache.appliers).forEach((callback) => {
-      callback();
-    });
-    isRunning.current = false;
+      throw new Error("STUB");
   }, []);
 
   const registerPipeProcessor = React.useCallback<
     GridPipeProcessingPrivateApi['registerPipeProcessor']
   >((group, id, processor) => {
-    if (!cache.current[group]) {
-      cache.current[group] = {
-        processors: new Map(),
-        processorsAsArray: [],
-        appliers: {},
-        processorsUpdated: false,
-      };
-    }
-
-    const groupCache = cache.current[group]!;
-    const oldProcessor = groupCache.processors.get(id);
-    if (oldProcessor !== processor) {
-      groupCache.processors.set(id, processor);
-      groupCache.processorsAsArray = Array.from(cache.current[group]!.processors.values()).filter(
-        (processorValue) => processorValue !== null,
-      );
-      groupCache.processorsUpdated = true;
-    }
-
-    return () => {
-      cache.current[group]!.processors.set(id, null);
-      cache.current[group]!.processorsAsArray = Array.from(
-        cache.current[group]!.processors.values(),
-      ).filter((processorValue) => processorValue !== null);
-    };
+      throw new Error("STUB");
   }, []);
 
   const registerPipeApplier = React.useCallback<
     GridPipeProcessingPrivateApi['registerPipeApplier']
   >((group, id, applier) => {
-    if (!cache.current[group]) {
-      cache.current[group] = {
-        processors: new Map(),
-        processorsAsArray: [],
-        appliers: {},
-        processorsUpdated: false,
-      };
-    }
-
-    cache.current[group]!.appliers[id] = applier;
-
-    return () => {
-      const { [id]: removedGroupApplier, ...otherAppliers } = cache.current[group]!.appliers;
-      cache.current[group]!.appliers = otherAppliers;
-    };
+      throw new Error("STUB");
   }, []);
 
   const requestPipeProcessorsApplication = React.useCallback<
     GridPipeProcessingPrivateApi['requestPipeProcessorsApplication']
   >(
     (group) => {
-      runAppliers(cache.current[group]);
-    },
+          throw new Error("STUB");
+      },
     [runAppliers],
   );
 
   const runAppliersForPendingProcessors = React.useCallback(() => {
-    for (const group in cache.current) {
-      if (!Object.prototype.hasOwnProperty.call(cache.current, group)) {
-        continue;
-      }
-      const groupCache = cache.current[group as keyof Cache]!;
-      if (groupCache.processorsUpdated) {
-        groupCache.processorsUpdated = false;
-        runAppliers(groupCache);
-      }
-    }
+      throw new Error("STUB");
   }, [runAppliers]);
 
   const applyPipeProcessors = React.useCallback<
     GridPipeProcessingApi['unstable_applyPipeProcessors']
   >((...args) => {
-    const [group, value, context] = args as [GridPipeProcessorGroup, any, any];
-    if (!cache.current[group]) {
-      return value;
-    }
-
-    const processors = cache.current[group]!.processorsAsArray;
-    let result = value;
-    for (let i = 0; i < processors.length; i += 1) {
-      result = processors[i](result, context);
-    }
-    return result;
+      throw new Error("STUB");
   }, []);
 
   const preProcessingPrivateApi: GridPipeProcessingPrivateApi = {

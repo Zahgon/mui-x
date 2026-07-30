@@ -136,24 +136,7 @@ function PieArcLabelPlot(props: PieArcLabelPlotProps) {
 
   return (
     <PieArcLabelPlotRoot {...other}>
-      {transformedData.map((item) => (
-        <ArcLabel
-          key={item.id ?? item.dataIndex}
-          startAngle={item.startAngle}
-          endAngle={item.endAngle}
-          paddingAngle={item.paddingAngle}
-          arcLabelRadius={item.arcLabelRadius}
-          cornerRadius={item.cornerRadius}
-          hidden={item.hidden}
-          seriesId={seriesId}
-          color={item.color}
-          isFaded={item.isFaded}
-          isHighlighted={item.isHighlighted}
-          formattedArcLabel={getItemLabel(arcLabel, arcLabelMinAngle, item)}
-          skipAnimation={skipAnimation ?? false}
-          {...slotProps?.pieArcLabel}
-        />
-      ))}
+      {transformedData.map((item) => { throw new Error("STUB"); })}
     </PieArcLabelPlotRoot>
   );
 }

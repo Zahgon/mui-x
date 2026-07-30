@@ -37,54 +37,7 @@ import { isDatePickerView } from '../internals/utils/date-utils';
 const rendererInterceptor = function RendererInterceptor(
   props: PickerRendererInterceptorProps<PickerValue, DateOrTimeViewWithMeridiem, any>,
 ) {
-  const { viewRenderers, popperView, rendererProps } = props;
-  const { openTo, focusedView, timeViewsCount, ...otherProps } = rendererProps;
-
-  const finalProps = {
-    ...otherProps,
-    // we control the focused view manually
-    autoFocus: false,
-    focusedView: null,
-    sx: [
-      {
-        [`&.${multiSectionDigitalClockClasses.root}`]: {
-          borderBottom: 0,
-        },
-        [`&.${multiSectionDigitalClockClasses.root}, .${multiSectionDigitalClockSectionClasses.root}, &.${digitalClockClasses.root}`]:
-          {
-            maxHeight: VIEW_HEIGHT,
-          },
-      },
-    ],
-  };
-  const isTimeViewActive = isInternalTimeView(popperView);
-  const dateView = isTimeViewActive ? 'day' : popperView;
-  const timeView = isTimeViewActive ? popperView : 'hours';
-
-  return (
-    <React.Fragment>
-      {viewRenderers[dateView]?.({
-        ...rendererProps,
-        view: !isTimeViewActive ? popperView : 'day',
-        focusedView: focusedView && isDatePickerView(focusedView) ? focusedView : null,
-        views: rendererProps.views.filter(isDatePickerView),
-        sx: [{ gridColumn: 1 }, ...finalProps.sx],
-      } as any)}
-      {timeViewsCount > 0 && (
-        <React.Fragment>
-          <Divider orientation="vertical" sx={{ gridColumn: 2 }} />
-          {viewRenderers[timeView]?.({
-            ...finalProps,
-            view: isTimeViewActive ? popperView : 'hours',
-            focusedView: focusedView && isInternalTimeView(focusedView) ? focusedView : null,
-            openTo: isInternalTimeView(openTo) ? openTo : 'hours',
-            views: rendererProps.views.filter(isInternalTimeView),
-            sx: [{ gridColumn: 3 }, ...finalProps.sx],
-          } as any)}
-        </React.Fragment>
-      )}
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 };
 
 type DesktopDateTimePickerComponent = ((
@@ -105,81 +58,7 @@ const DesktopDateTimePicker = React.forwardRef(function DesktopDateTimePicker(
   inProps: DesktopDateTimePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-
-  // Props with the default values common to all date time pickers
-  const defaultizedProps = useDateTimePickerDefaultizedProps<DesktopDateTimePickerProps>(
-    inProps,
-    'MuiDesktopDateTimePicker',
-  );
-
-  const renderTimeView = defaultizedProps.shouldRenderTimeInASingleColumn
-    ? renderDigitalClockTimeView
-    : renderMultiSectionDigitalClockTimeView;
-
-  const viewRenderers: PickerViewRendererLookup<PickerValue, any, any> = {
-    day: renderDateViewCalendar,
-    month: renderDateViewCalendar,
-    year: renderDateViewCalendar,
-    hours: renderTimeView,
-    minutes: renderTimeView,
-    seconds: renderTimeView,
-    meridiem: renderTimeView,
-    ...defaultizedProps.viewRenderers,
-  };
-  const ampmInClock = defaultizedProps.ampmInClock ?? true;
-  // Need to avoid adding the `meridiem` view when unexpected renderer is specified
-  const shouldHoursRendererContainMeridiemView =
-    viewRenderers.hours?.name === renderMultiSectionDigitalClockTimeView.name;
-  const views = !shouldHoursRendererContainMeridiemView
-    ? defaultizedProps.views.filter((view) => view !== 'meridiem')
-    : defaultizedProps.views;
-
-  // Props with the default values specific to the desktop variant
-  const props = {
-    ...defaultizedProps,
-    viewRenderers,
-    format: resolveDateTimeFormat(adapter, {
-      ...defaultizedProps,
-      views: defaultizedProps.viewsForFormatting,
-    }),
-    views,
-    yearsPerRow: defaultizedProps.yearsPerRow ?? 4,
-    ampmInClock,
-    slots: {
-      field: DateTimeField,
-      layout: DesktopDateTimePickerLayout,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      toolbar: {
-        hidden: true,
-        ampmInClock,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-      tabs: {
-        hidden: true,
-        ...defaultizedProps.slotProps?.tabs,
-      },
-    },
-  };
-
-  const { renderPicker } = useDesktopPicker<DateOrTimeViewWithMeridiem, typeof props>({
-    ref,
-    props,
-    valueManager: singleItemValueManager,
-    valueType: 'date-time',
-    validator: validateDateTime,
-    rendererInterceptor,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as DesktopDateTimePickerComponent;
 
 DesktopDateTimePicker.propTypes /* remove-proptypes */ = {

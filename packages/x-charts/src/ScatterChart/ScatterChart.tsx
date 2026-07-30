@@ -150,45 +150,7 @@ const ScatterChart = React.forwardRef(function ScatterChart(
   inProps: ScatterChartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiScatterChart' });
-  const {
-    chartsWrapperProps,
-    chartsContainerProps,
-    chartsAxisProps,
-    gridProps,
-    scatterPlotProps,
-    overlayProps,
-    legendProps,
-    axisHighlightProps,
-    children,
-  } = useScatterChartProps(props);
-  const { chartsDataProviderProps, chartsSurfaceProps } =
-    useChartsContainerProps(chartsContainerProps);
-
-  const Tooltip = props.slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = props.slots?.toolbar;
-
-  return (
-    <ChartsDataProvider<'scatter', ScatterChartPluginSignatures> {...chartsDataProviderProps}>
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {props.showToolbar && Toolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!props.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <ChartsAxis {...chartsAxisProps} />
-          <ChartsGrid {...gridProps} />
-          <g data-drawing-container>
-            {/* The `data-drawing-container` indicates that children are part of the drawing area. Ref: https://github.com/mui/mui-x/issues/13659 */}
-            <ScatterPlot {...scatterPlotProps} />
-          </g>
-          <ChartsOverlay {...overlayProps} />
-          <ChartsAxisHighlight {...axisHighlightProps} />
-          <FocusedScatterMark />
-          {children}
-        </ChartsSurface>
-        {!props.loading && <Tooltip trigger="item" {...props.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProvider>
-  );
+    throw new Error("STUB");
 });
 
 ScatterChart.propTypes /* remove-proptypes */ = {

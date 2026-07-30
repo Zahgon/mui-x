@@ -8,23 +8,7 @@ export const CalendarGridHeaderRow = React.forwardRef(function CalendarGridHeade
   componentProps: CalendarGridHeaderRow.Props,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {
-    // Rendering props
-    className,
-    render,
-    style,
-    // Props forwarded to the DOM element
-    ...elementProps
-  } = componentProps;
-
-  const cellsRefs = React.useRef<(HTMLDivElement | null)[]>([]);
-
-  const element = useRenderElement('div', componentProps, {
-    ref: [forwardedRef],
-    props: [{ role: 'row', 'aria-rowindex': 1 }, elementProps],
-  });
-
-  return <CompositeList elementsRef={cellsRefs}>{element}</CompositeList>;
+    throw new Error("STUB");
 });
 
 export namespace CalendarGridHeaderRow {

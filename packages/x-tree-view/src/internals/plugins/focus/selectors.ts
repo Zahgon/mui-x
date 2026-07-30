@@ -11,30 +11,9 @@ const defaultFocusableItemIdSelector = createSelectorMemoized(
   expansionSelectors.expandedItemsMap,
   itemsSelectors.itemMetaLookup,
   itemsSelectors.disabledItemFocusable,
-  (state: MinimalTreeViewState<any, any>) => itemsSelectors.itemOrderedChildrenIds(state, null),
+  (state: MinimalTreeViewState<any, any>) => { throw new Error("STUB"); },
   (selectedItems, expandedItemsMap, itemMetaLookup, disabledItemsFocusable, orderedRootItemIds) => {
-    const firstSelectedItem = selectedItems.find((itemId) => {
-      if (!disabledItemsFocusable && isItemDisabled(itemMetaLookup, itemId)) {
-        return false;
-      }
-
-      const itemMeta = itemMetaLookup[itemId];
-      return itemMeta && (itemMeta.parentId == null || expandedItemsMap.has(itemMeta.parentId));
-    });
-
-    if (firstSelectedItem != null) {
-      return firstSelectedItem;
-    }
-
-    const firstNavigableItem = orderedRootItemIds.find(
-      (itemId) => disabledItemsFocusable || !isItemDisabled(itemMetaLookup, itemId),
-    );
-
-    if (firstNavigableItem != null) {
-      return firstNavigableItem;
-    }
-
-    return null;
+      throw new Error("STUB");
   },
 );
 
@@ -50,17 +29,17 @@ export const focusSelectors = {
    */
   isItemTheDefaultFocusableItem: createSelector(
     defaultFocusableItemIdSelector,
-    (defaultFocusableItemId, itemId) => defaultFocusableItemId === itemId,
+    (defaultFocusableItemId, itemId) => { throw new Error("STUB"); },
   ),
   /**
    * Gets the id of the item that is currently focused.
    */
-  focusedItemId: createSelector((state: MinimalTreeViewState<any, any>) => state.focusedItemId),
+  focusedItemId: createSelector((state: MinimalTreeViewState<any, any>) => { throw new Error("STUB"); }),
   /**
    * Checks whether an item is focused.
    */
   isItemFocused: createSelector(
     (state: MinimalTreeViewState<any, any>, itemId: TreeViewItemId) =>
-      state.focusedItemId === itemId,
+      { throw new Error("STUB"); },
   ),
 };

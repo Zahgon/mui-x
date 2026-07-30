@@ -33,7 +33,7 @@ const heILGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'הסתר מסננים',
   toolbarFiltersTooltipShow: 'הצג מסננים',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} מסננים פעילים` : `מסנן אחד פעיל`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'חיפוש…',
@@ -142,20 +142,20 @@ const heILGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} מסננים פעילים` : `מסנן אחד פעיל`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'הצג מסננים',
   columnHeaderSortIconLabel: 'מיין',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1 ? `${count.toLocaleString()} שורות נבחרו` : `שורה אחת נבחרה`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'סך הכל:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} מתוך ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'בחירה',
@@ -187,8 +187,8 @@ const heILGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'קבוצה',
-  groupColumn: (name) => `קבץ לפי ${name}`,
-  unGroupColumn: (name) => `הפסק לקבץ לפי ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'הצג/הסתר פרטים',
@@ -198,25 +198,10 @@ const heILGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'שורות בעמוד:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}-${formatNumber(to)} מתוך ${count !== -1 ? formatNumber(count) : `יותר מ־${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to ? `כ־${formatNumber(estimated)}` : `יותר מ־${formatNumber(to)}`;
-    return `${formatNumber(from)}-${formatNumber(to)} מתוך ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'לעמוד הראשון';
-    }
-    if (type === 'last') {
-      return 'לעמוד האחרון';
-    }
-    if (type === 'next') {
-      return 'לעמוד הבא';
-    }
-    // if (type === 'previous') {
-    return 'לעמוד הקודם';
+      throw new Error("STUB");
   },
 
   // Row reordering text

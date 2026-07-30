@@ -15,8 +15,7 @@ export class TreeViewJSXItemsPlugin {
   private itemOwners = new Map<string, symbol>();
 
   public constructor(store: SimpleTreeViewStore<any>) {
-    this.store = store;
-    store.itemPluginManager.register(useJSXItemsItemPlugin, jsxItemsitemWrapper);
+      throw new Error("STUB");
   }
 
   /**
@@ -68,17 +67,7 @@ Two items were provided with the same id in the \`items\` prop: "${item.id}"`,
     }
 
     return () => {
-      this.itemOwners.delete(item.id);
-
-      const newItemMetaLookup = { ...this.store.state.itemMetaLookup };
-      const newItemModelLookup = { ...this.store.state.itemModelLookup };
-      delete newItemMetaLookup[item.id];
-      delete newItemModelLookup[item.id];
-
-      this.store.update({
-        itemMetaLookup: newItemMetaLookup,
-        itemModelLookup: newItemModelLookup,
-      });
+        throw new Error("STUB");
     };
   };
 
@@ -91,16 +80,11 @@ Two items were provided with the same id in the \`items\` prop: "${item.id}"`,
    */
   public mapLabelFromJSX = (itemId: TreeViewItemId, label: string) => {
     this.store.keyboardNavigation.updateLabelMap((labelMap) => {
-      labelMap[itemId] = label;
-      return labelMap;
+        throw new Error("STUB");
     });
 
     return () => {
-      this.store.keyboardNavigation.updateLabelMap((labelMap) => {
-        const newMap = { ...labelMap };
-        delete newMap[itemId];
-        return newMap;
-      });
+        throw new Error("STUB");
     };
   };
 
@@ -114,33 +98,6 @@ Two items were provided with the same id in the \`items\` prop: "${item.id}"`,
     parentId: TreeViewItemId | null,
     orderedChildrenIds: TreeViewItemId[],
   ) => {
-    const parentIdWithDefault = parentId ?? TREE_VIEW_ROOT_PARENT_ID;
-
-    this.store.update({
-      itemOrderedChildrenIdsLookup: {
-        ...this.store.state.itemOrderedChildrenIdsLookup,
-        [parentIdWithDefault]: orderedChildrenIds,
-      },
-      itemChildrenIndexesLookup: {
-        ...this.store.state.itemChildrenIndexesLookup,
-        [parentIdWithDefault]: buildSiblingIndexes(orderedChildrenIds),
-      },
-    });
-
-    // If a parent was selected while its children were unmounted (collapsed with unmountOnExit),
-    // re-run selection propagation now that the children are registered.
-    // The multiSelect guard matches the documented contract: selectionPropagation only works with multiSelect.
-    if (
-      parentId !== null &&
-      selectionSelectors.isMultiSelectEnabled(this.store.state) &&
-      selectionSelectors.propagationRules(this.store.state).descendants &&
-      selectionSelectors.isItemSelected(this.store.state, parentId)
-    ) {
-      this.store.selection.setItemSelection({
-        itemId: parentId,
-        shouldBeSelected: true,
-        keepExistingSelection: true,
-      });
-    }
+      throw new Error("STUB");
   };
 }

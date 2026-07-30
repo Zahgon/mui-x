@@ -4,17 +4,9 @@ import type { SchedulerState as State } from '../internals/utils/SchedulerStore/
 import type { SchedulerResource, SchedulerResourceId } from '../models';
 
 const resourceParentIdLookupSelector = createSelectorMemoized(
-  (state: State) => state.resourceChildrenIdLookup,
+  (state: State) => { throw new Error("STUB"); },
   (resourceChildrenIdLookup) => {
-    const result: Map<SchedulerResourceId, SchedulerResourceId | null> = new Map();
-
-    for (const [resourceId, childrenIds] of resourceChildrenIdLookup) {
-      for (const childId of childrenIds) {
-        result.set(childId, resourceId);
-      }
-    }
-
-    return result;
+      throw new Error("STUB");
   },
 );
 
@@ -45,174 +37,86 @@ export function resolveResourceProperty<T>(
 
 const resourceDepthLookupSelector = createSelectorMemoized(
   resourceParentIdLookupSelector,
-  (state: State) => state.processedResourceLookup,
+  (state: State) => { throw new Error("STUB"); },
   (parentLookup, processedResourceLookup) => {
-    const result: Map<SchedulerResourceId, number> = new Map();
-    const cache = new Map<string, number>();
-
-    const getDepth = (resourceId: string): number => {
-      const cached = cache.get(resourceId);
-      if (cached !== undefined) {
-        return cached;
-      }
-
-      const parentId = parentLookup.get(resourceId);
-      const depth = parentId ? getDepth(parentId) + 1 : 0;
-      cache.set(resourceId, depth);
-      return depth;
-    };
-
-    for (const resourceId of processedResourceLookup.keys()) {
-      result.set(resourceId, getDepth(resourceId));
-    }
-
-    return result;
+      throw new Error("STUB");
   },
 );
 
 // Memoized so the O(children) scan runs only when the structure or visibility
 // changes, not on every store notification. Read per resource in O(1) below.
 const resourceHasVisibleChildrenLookupSelector = createSelectorMemoized(
-  (state: State) => state.resourceChildrenIdLookup,
-  (state: State) => state.visibleResources,
+  (state: State) => { throw new Error("STUB"); },
+  (state: State) => { throw new Error("STUB"); },
   (childrenIdLookup, visibleResources) => {
-    const result = new Map<SchedulerResourceId, boolean>();
-    for (const [resourceId, childrenIds] of childrenIdLookup) {
-      result.set(
-        resourceId,
-        childrenIds.some((childId) => visibleResources[childId] !== false),
-      );
-    }
-    return result;
+      throw new Error("STUB");
   },
 );
 
 export const schedulerResourceSelectors = {
   processedResource: createSelector(
-    (state: State) => state.processedResourceLookup,
+    (state: State) => { throw new Error("STUB"); },
     (processedResourceLookup, resourceId: string | null | undefined) =>
-      resourceId == null ? null : (processedResourceLookup.get(resourceId) ?? null),
+      { throw new Error("STUB"); },
   ),
   processedResourceList: createSelectorMemoized(
-    (state: State) => state.resourceIdList,
-    (state: State) => state.processedResourceLookup,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (resourceIds, processedResourceLookup) =>
-      resourceIds.map((id) => processedResourceLookup.get(id)!),
+      { throw new Error("STUB"); },
   ),
   processedResourceFlatList: createSelectorMemoized(
-    (state: State) => state.resourceIdList,
-    (state: State) => state.processedResourceLookup,
-    (state: State) => state.resourceChildrenIdLookup,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (resourceIds, processedResourceLookup, resourceChildrenIdLookup) => {
-      const flatList: SchedulerResource[] = [];
-
-      const addResourceAndChildren = (resourceId: string) => {
-        const resource = processedResourceLookup.get(resourceId);
-        if (!resource) {
-          return;
-        }
-
-        flatList.push(resource);
-
-        const childrenIds = resourceChildrenIdLookup.get(resourceId);
-        if (childrenIds?.length) {
-          for (const childId of childrenIds) {
-            addResourceAndChildren(childId);
-          }
-        }
-      };
-
-      for (const resourceId of resourceIds) {
-        addResourceAndChildren(resourceId);
-      }
-      return flatList;
+        throw new Error("STUB");
     },
   ),
   processedResourceChildrenLookup: createSelectorMemoized(
-    (state: State) => state.processedResourceLookup,
-    (state: State) => state.resourceChildrenIdLookup,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (processedResourceLookup, resourceChildrenIdLookup) => {
-      const result: Map<SchedulerResourceId, SchedulerResource[]> = new Map();
-
-      for (const [resourceId, childrenIds] of resourceChildrenIdLookup) {
-        const children = childrenIds.map((id) => processedResourceLookup.get(id)!);
-        result.set(resourceId, children);
-      }
-
-      return result;
+        throw new Error("STUB");
     },
   ),
-  childrenIdLookup: (state: State) => state.resourceChildrenIdLookup,
+  childrenIdLookup: (state: State) => { throw new Error("STUB"); },
   // Single-function createSelector is unmemoized; keep the body returning a
   // stable ref (a Map value or EMPTY_ARRAY), never a freshly-built array.
   resourceChildrenIds: createSelector(
     (state: State, resourceId: SchedulerResourceId) =>
-      state.resourceChildrenIdLookup.get(resourceId) ?? EMPTY_ARRAY,
+      { throw new Error("STUB"); },
   ),
   // O(1) read from the memoized lookup; a resource with no entry (a leaf) has no
   // visible children.
   resourceHasVisibleChildren: createSelector(
     resourceHasVisibleChildrenLookupSelector,
-    (lookup, resourceId: SchedulerResourceId) => lookup.get(resourceId) ?? false,
+    (lookup, resourceId: SchedulerResourceId) => { throw new Error("STUB"); },
   ),
   hasNestedResources: createSelector(
     resourceParentIdLookupSelector,
-    (parentLookup) => parentLookup.size > 0,
+    (parentLookup) => { throw new Error("STUB"); },
   ),
   // Unmemoized (returns a primitive); don't change the body to build an object.
   isResourceCollapsed: createSelector(
     (state: State, resourceId: SchedulerResourceId) =>
-      state.collapsedResources[resourceId] === true,
+      { throw new Error("STUB"); },
   ),
-  collapsedResources: (state: State) => state.collapsedResources,
+  collapsedResources: (state: State) => { throw new Error("STUB"); },
   resourceParentIdLookup: resourceParentIdLookupSelector,
   resourceDepthLookup: resourceDepthLookupSelector,
   resourceDepth: createSelector(
     resourceDepthLookupSelector,
     (resourceDepthLookup, resourceId: SchedulerResourceId) =>
-      resourceDepthLookup.get(resourceId) ?? 0,
+      { throw new Error("STUB"); },
   ),
-  idList: createSelector((state: State) => state.resourceIdList),
+  idList: createSelector((state: State) => { throw new Error("STUB"); }),
   visibleMap: createSelectorMemoized(
-    (state: State) => state.visibleResources,
+    (state: State) => { throw new Error("STUB"); },
     resourceParentIdLookupSelector,
-    (state: State) => state.processedResourceLookup,
+    (state: State) => { throw new Error("STUB"); },
     (visibleResources, parentLookup, processedResourceLookup) => {
-      // Fast path: no parent-child relationships means no ancestor visibility to check
-      if (parentLookup.size === 0) {
-        return visibleResources;
-      }
-
-      const cache = new Map<string, boolean>();
-
-      const checkVisibility = (resourceId: string): boolean => {
-        const cached = cache.get(resourceId);
-        if (cached !== undefined) {
-          return cached;
-        }
-
-        const isDirectlyVisible = visibleResources[resourceId] !== false;
-        let result: boolean;
-
-        if (!isDirectlyVisible) {
-          result = false;
-        } else {
-          const parentId = parentLookup.get(resourceId);
-          result = parentId ? checkVisibility(parentId) : true;
-        }
-
-        cache.set(resourceId, result);
-        return result;
-      };
-
-      const curatedMap: Record<string, boolean> = {};
-      for (const resourceId of processedResourceLookup.keys()) {
-        if (!checkVisibility(resourceId)) {
-          curatedMap[resourceId] = false;
-        }
-      }
-
-      return curatedMap;
+        throw new Error("STUB");
     },
   ),
   /**
@@ -222,11 +126,7 @@ export const schedulerResourceSelectors = {
    */
   defaultEventColor: createSelector(
     (state: State, resourceId: SchedulerResourceId | null | undefined) => {
-      if (resourceId == null) {
-        return state.eventColor;
-      }
-
-      return resolveResourceProperty(state, resourceId, (r) => r.eventColor, state.eventColor);
-    },
+          throw new Error("STUB");
+      },
   ),
 };

@@ -16,7 +16,7 @@ export interface ChatBoxClasses {
 export type ChatBoxClassKey = keyof ChatBoxClasses;
 
 export function getChatBoxUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatBox', slot);
+    throw new Error("STUB");
 }
 
 export const chatBoxClasses: ChatBoxClasses = generateUtilityClasses('MuiChatBox', [

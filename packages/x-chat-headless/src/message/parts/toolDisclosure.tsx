@@ -63,38 +63,5 @@ export function useToolDisclosure(
   builtInOpen: boolean,
   disclosureRef?: React.RefObject<HTMLDetailsElement | null>,
 ): readonly [boolean, (next: boolean) => void] {
-  const getExpanded = React.useContext(ToolDisclosureContext);
-  const resolved = getExpanded?.(ownerState);
-  const authoritative = resolved !== undefined;
-  const desired = authoritative ? (resolved as boolean) : builtInOpen;
-
-  const [open, setOpen] = React.useState(desired);
-  // Apply the policy on each `desired` transition by adjusting state during render
-  // (no effect, no extra paint). Authoritative policies drive both edges so a
-  // consumer can collapse a card when its tool ends; the built-in default only ever
-  // forces open (rising edge) and never auto-collapses. A manual toggle is therefore
-  // respected until the next transition.
-  const [prevDesired, setPrevDesired] = React.useState(desired);
-  if (desired !== prevDesired) {
-    setPrevDesired(desired);
-    if (authoritative || desired) {
-      setOpen(desired);
-    }
-  }
-
-  React.useEffect(() => {
-    if (open || !disclosureRef?.current) {
-      return;
-    }
-    const el = disclosureRef.current;
-    const active = el.ownerDocument.activeElement;
-    if (active && el.contains(active)) {
-      const summary = el.querySelector('summary');
-      if (summary && summary !== active) {
-        (summary as HTMLElement).focus();
-      }
-    }
-  }, [open, disclosureRef]);
-
-  return [open, setOpen] as const;
+    throw new Error("STUB");
 }

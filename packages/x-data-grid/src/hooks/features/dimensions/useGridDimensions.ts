@@ -77,44 +77,19 @@ export const dimensionsStateInitializer: GridStateInitializer<RootProps> = (
   props,
   apiRef,
 ) => {
-  const dimensions = EMPTY_DIMENSIONS;
-
-  const density = gridDensityFactorSelector(apiRef);
-  const dimensionsWithStatic = {
-    ...dimensions,
-    ...getStaticDimensions(
-      props,
-      apiRef,
-      density,
-      gridVisiblePinnedColumnDefinitionsSelector(apiRef),
-    ),
-  };
-
-  apiRef.current.store.state.dimensions = dimensionsWithStatic;
-
-  return {
-    ...state,
-    dimensions: dimensionsWithStatic,
-  };
+    throw new Error("STUB");
 };
 
 const columnsTotalWidthSelector = createSelector(
   gridVisibleColumnDefinitionsSelector,
   gridColumnPositionsSelector,
   (visibleColumns, positions) => {
-    const colCount = visibleColumns.length;
-    if (colCount === 0) {
-      return 0;
-    }
-    return roundToDecimalPlaces(
-      positions[colCount - 1] + visibleColumns[colCount - 1].computedWidth,
-      1,
-    );
+      throw new Error("STUB");
   },
 );
 
 export function useGridDimensions(apiRef: RefObject<GridPrivateApiCommunity>, props: RootProps) {
-  const getRootDimensions = React.useCallback(() => gridDimensionsSelector(apiRef), [apiRef]);
+  const getRootDimensions = React.useCallback(() => { throw new Error("STUB"); }, [apiRef]);
 
   const apiPublic: GridDimensionsApi = {
     getRootDimensions,
@@ -122,10 +97,10 @@ export function useGridDimensions(apiRef: RefObject<GridPrivateApiCommunity>, pr
 
   const apiPrivate: GridDimensionsPrivateApi = {
     updateDimensions: () => {
-      return apiRef.current.virtualizer.api.updateDimensions();
-    },
+          throw new Error("STUB");
+      },
     getViewportPageSize: () => {
-      return apiRef.current.virtualizer.api.getViewportPageSize();
+        throw new Error("STUB");
     },
   };
 
@@ -133,7 +108,7 @@ export function useGridDimensions(apiRef: RefObject<GridPrivateApiCommunity>, pr
   useGridApiMethod(apiRef, apiPrivate, 'private');
 
   const handleRootMount: GridEventListener<'rootMount'> = (root) => {
-    setCSSVariables(root, gridDimensionsSelector(apiRef));
+      throw new Error("STUB");
   };
 
   useGridEventPriority(apiRef, 'rootMount', handleRootMount);
@@ -145,62 +120,16 @@ export function useGridDimensions(apiRef: RefObject<GridPrivateApiCommunity>, pr
     const errorShown = React.useRef(false);
 
     useGridEventPriority(apiRef, 'resize', (size) => {
-      if (!getRootDimensions().isReady) {
-        return;
-      }
-      if (size.height === 0 && !errorShown.current && !props.autoHeight && !platform.env.jsdom) {
-        logger.error(
-          [
-            'The parent DOM element of the Data Grid has an empty height.',
-            'Please make sure that this element has an intrinsic height.',
-            'The grid displays with a height of 0px.',
-            '',
-            'More details: https://mui.com/r/x-data-grid-no-dimensions.',
-          ].join('\n'),
-        );
-        errorShown.current = true;
-      }
-      if (size.width === 0 && !errorShown.current && !platform.env.jsdom) {
-        logger.error(
-          [
-            'The parent DOM element of the Data Grid has an empty width.',
-            'Please make sure that this element has an intrinsic width.',
-            'The grid displays with a width of 0px.',
-            '',
-            'More details: https://mui.com/r/x-data-grid-no-dimensions.',
-          ].join('\n'),
-        );
-        errorShown.current = true;
-      }
+        throw new Error("STUB");
     });
     /* eslint-enable react-hooks/rules-of-hooks */
   }
 
   useStoreEffect(
     apiRef.current.store,
-    (s) => s.dimensions,
+    (s) => { throw new Error("STUB"); },
     (previous, next) => {
-      if (!next.isReady) {
-        return;
-      }
-
-      if (apiRef.current.rootElementRef.current) {
-        setCSSVariables(apiRef.current.rootElementRef.current, next);
-      }
-      const virtualScroller = apiRef.current.virtualScrollerRef?.current;
-      if (virtualScroller) {
-        const maxScrollLeft = Math.max(0, next.rowWidth - next.viewportOuterSize.width);
-        const currentScrollLeft = Math.abs(virtualScroller.scrollLeft);
-        if (currentScrollLeft > maxScrollLeft) {
-          apiRef.current.scroll({ left: maxScrollLeft });
-        }
-      }
-
-      if (!areElementSizesEqual(next.viewportInnerSize, previous.viewportInnerSize)) {
-        apiRef.current.publishEvent('viewportInnerSizeChange', next.viewportInnerSize);
-      }
-
-      apiRef.current.publishEvent('debouncedResize', next.root);
+        throw new Error("STUB");
     },
   );
 }
@@ -248,8 +177,8 @@ function getStaticDimensions(
     ),
     columnsTotalWidth: columnsTotalWidthSelector(apiRef),
     headersTotalHeight: getTotalHeaderHeight(apiRef, props),
-    leftPinnedWidth: pinnedColumnns.left.reduce((w, col) => w + col.computedWidth, 0),
-    rightPinnedWidth: pinnedColumnns.right.reduce((w, col) => w + col.computedWidth, 0),
+    leftPinnedWidth: pinnedColumnns.left.reduce((w, col) => { throw new Error("STUB"); }, 0),
+    rightPinnedWidth: pinnedColumnns.right.reduce((w, col) => { throw new Error("STUB"); }, 0),
   };
 }
 

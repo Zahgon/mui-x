@@ -127,28 +127,7 @@ export class AdapterDateFnsJalali
   implements MuiPickersAdapter<DateFnsLocale>
 {
   constructor({ locale, formats }: AdapterOptions<DateFnsLocale, never> = {}) {
-    /* v8 ignore start */
-    if (process.env.NODE_ENV !== 'production') {
-      if (typeof addDays !== 'function') {
-        // TODO: fix mui/no-guarded-throw
-        // eslint-disable-next-line mui/no-guarded-throw
-        throw new Error(
-          [
-            'MUI: This adapter is only compatible with `date-fns-jalali` v2.x package versions.',
-            'Please, install v2.x of the package or use the `AdapterDateFnsJalali` instead.',
-          ].join('\n'),
-        );
-      }
-    }
-    /* v8 ignore stop */
-    super({
-      locale: locale ?? defaultLocale,
-      // some formats are different in jalali adapter,
-      // this ensures that `AdapterDateFnsBase` formats are overridden
-      formats: { ...defaultFormats, ...formats },
-      longFormatters,
-      lib: 'date-fns-jalali',
-    });
+      throw new Error("STUB");
   }
 
   public parse = (value: string, format: string): Date | null => {
@@ -177,7 +156,7 @@ export class AdapterDateFnsJalali
 
   public formatNumber = (numberToFormat: string): string => {
     return numberToFormat
-      .replace(/\d/g, (match) => NUMBER_SYMBOL_MAP[match as keyof typeof NUMBER_SYMBOL_MAP])
+      .replace(/\d/g, (match) => { throw new Error("STUB"); })
       .replace(/,/g, '،');
   };
 
@@ -206,7 +185,7 @@ export class AdapterDateFnsJalali
   };
 
   public isSameHour = (value: Date, comparing: Date): boolean => {
-    return isSameHour(value, comparing);
+      throw new Error("STUB");
   };
 
   public isAfter = (value: Date, comparing: Date): boolean => {
@@ -286,7 +265,7 @@ export class AdapterDateFnsJalali
   };
 
   public addHours = (value: Date, amount: number): Date => {
-    return addHours(value, amount);
+      throw new Error("STUB");
   };
 
   public addMinutes = (value: Date, amount: number): Date => {
@@ -294,7 +273,7 @@ export class AdapterDateFnsJalali
   };
 
   public addSeconds = (value: Date, amount: number): Date => {
-    return addSeconds(value, amount);
+      throw new Error("STUB");
   };
 
   public getYear = (value: Date): number => {
@@ -358,23 +337,7 @@ export class AdapterDateFnsJalali
   };
 
   public getWeekArray = (value: Date): Date[][] => {
-    const start = this.startOfWeek(this.startOfMonth(value));
-    const end = this.endOfWeek(this.endOfMonth(value));
-
-    let count = 0;
-    let current = start;
-    const nestedWeeks: Date[][] = [];
-
-    while (this.isBefore(current, end)) {
-      const weekNumber = Math.floor(count / 7);
-      nestedWeeks[weekNumber] = nestedWeeks[weekNumber] || [];
-      nestedWeeks[weekNumber].push(current);
-
-      current = this.addDays(current, 1);
-      count += 1;
-    }
-
-    return nestedWeeks;
+      throw new Error("STUB");
   };
 
   public getWeekNumber = (date: Date): number => {

@@ -4,7 +4,7 @@ import type { ChartState } from '../../models/chart';
 
 export const selectorChartCartesianAxisState = (
   state: ChartState<[], [UseChartCartesianAxisSignature]>,
-) => state.cartesianAxis;
+) => { throw new Error("STUB"); };
 
 export type SelectorChartRawXAxisType = <
   State extends ChartState<[], [UseChartCartesianAxisSignature]>,
@@ -12,7 +12,7 @@ export type SelectorChartRawXAxisType = <
   state: State,
 ) => DefaultedXAxis[] | undefined;
 
-export const selectorChartRawXAxis: SelectorChartRawXAxisType = (state) => state.cartesianAxis?.x;
+export const selectorChartRawXAxis: SelectorChartRawXAxisType = (state) => { throw new Error("STUB"); };
 
 export type SelectorChartRawYAxisType = <
   State extends ChartState<[], [UseChartCartesianAxisSignature]>,
@@ -20,8 +20,8 @@ export type SelectorChartRawYAxisType = <
   state: State,
 ) => DefaultedYAxis[] | undefined;
 
-export const selectorChartRawYAxis: SelectorChartRawYAxisType = (state) => state.cartesianAxis?.y;
+export const selectorChartRawYAxis: SelectorChartRawYAxisType = (state) => { throw new Error("STUB"); };
 
 export const selectorChartCartesianAxesGap = (
   state: ChartState<[], [UseChartCartesianAxisSignature]>,
-) => state.cartesianAxis?.axesGap ?? 0;
+) => { throw new Error("STUB"); };

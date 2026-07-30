@@ -20,7 +20,7 @@ const ALL_RESULTS_PAGE_VALUE = -1;
  * @ignore - do not document.
  */
 export const gridPaginationSelector = createRootSelector(
-  (state: GridStateCommunity) => state.pagination,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 /**
@@ -29,7 +29,7 @@ export const gridPaginationSelector = createRootSelector(
  */
 export const gridPaginationEnabledClientSideSelector = createSelector(
   gridPaginationSelector,
-  (pagination) => pagination.enabled && pagination.paginationMode === 'client',
+  (pagination) => { throw new Error("STUB"); },
 );
 
 /**
@@ -38,7 +38,7 @@ export const gridPaginationEnabledClientSideSelector = createSelector(
  */
 export const gridPaginationModelSelector = createSelector(
   gridPaginationSelector,
-  (pagination) => pagination.paginationModel,
+  (pagination) => { throw new Error("STUB"); },
 );
 
 /**
@@ -47,7 +47,7 @@ export const gridPaginationModelSelector = createSelector(
  */
 export const gridPaginationRowCountSelector = createSelector(
   gridPaginationSelector,
-  (pagination) => pagination.rowCount,
+  (pagination) => { throw new Error("STUB"); },
 );
 
 /**
@@ -56,7 +56,7 @@ export const gridPaginationRowCountSelector = createSelector(
  */
 export const gridPaginationMetaSelector = createSelector(
   gridPaginationSelector,
-  (pagination) => pagination.meta,
+  (pagination) => { throw new Error("STUB"); },
 );
 
 /**
@@ -65,7 +65,7 @@ export const gridPaginationMetaSelector = createSelector(
  */
 export const gridPageSelector = createSelector(
   gridPaginationModelSelector,
-  (paginationModel) => paginationModel.page,
+  (paginationModel) => { throw new Error("STUB"); },
 );
 
 /**
@@ -74,7 +74,7 @@ export const gridPageSelector = createSelector(
  */
 export const gridPageSizeSelector = createSelector(
   gridPaginationModelSelector,
-  (paginationModel) => paginationModel.pageSize,
+  (paginationModel) => { throw new Error("STUB"); },
 );
 
 /**
@@ -85,7 +85,7 @@ export const gridPageCountSelector = createSelector(
   gridPaginationModelSelector,
   gridPaginationRowCountSelector,
   (paginationModel, rowCount) =>
-    getPageCount(rowCount, paginationModel.pageSize, paginationModel.page),
+    { throw new Error("STUB"); },
 );
 
 /**
@@ -107,67 +107,7 @@ export const gridPaginationRowRangeSelector = createSelectorMemoized(
     visibleSortedRowEntries,
     visibleSortedTopLevelRowEntries,
   ) => {
-    if (!clientSidePaginationEnabled) {
-      return null;
-    }
-
-    if (!visibleSortedRowEntries || visibleSortedRowEntries.length === 0) {
-      return null;
-    }
-
-    const visibleTopLevelRowCount = visibleSortedTopLevelRowEntries.length;
-    const topLevelFirstRowIndex = Math.min(
-      paginationModel.pageSize * paginationModel.page,
-      visibleTopLevelRowCount - 1,
-    );
-    const topLevelLastRowIndex =
-      paginationModel.pageSize === ALL_RESULTS_PAGE_VALUE
-        ? visibleTopLevelRowCount - 1
-        : Math.min(
-            topLevelFirstRowIndex + paginationModel.pageSize - 1,
-            visibleTopLevelRowCount - 1,
-          );
-
-    // The range contains no element
-    if (topLevelFirstRowIndex === -1 || topLevelLastRowIndex === -1) {
-      return null;
-    }
-
-    // The tree is flat, there is no need to look for children
-    if (rowTreeDepth < 2) {
-      return { firstRowIndex: topLevelFirstRowIndex, lastRowIndex: topLevelLastRowIndex };
-    }
-
-    const topLevelFirstRow = visibleSortedTopLevelRowEntries[topLevelFirstRowIndex];
-    const topLevelRowsInCurrentPageCount = topLevelLastRowIndex - topLevelFirstRowIndex + 1;
-    const firstRowIndex = visibleSortedRowEntries.findIndex(
-      (row) => row.id === topLevelFirstRow.id,
-    );
-
-    let lastRowIndex = firstRowIndex;
-    let topLevelRowAdded = 0;
-
-    while (
-      lastRowIndex < visibleSortedRowEntries.length &&
-      topLevelRowAdded <= topLevelRowsInCurrentPageCount
-    ) {
-      const row = visibleSortedRowEntries[lastRowIndex];
-      const depth = rowTree[row.id]?.depth;
-
-      if (depth === undefined) {
-        lastRowIndex += 1;
-      } else {
-        if (topLevelRowAdded < topLevelRowsInCurrentPageCount || depth > 0) {
-          lastRowIndex += 1;
-        }
-
-        if (depth === 0) {
-          topLevelRowAdded += 1;
-        }
-      }
-    }
-
-    return { firstRowIndex, lastRowIndex: lastRowIndex - 1 };
+      throw new Error("STUB");
   },
 );
 
@@ -179,14 +119,7 @@ export const gridPaginatedVisibleSortedGridRowEntriesSelector = createSelectorMe
   gridExpandedSortedRowEntriesSelector,
   gridPaginationRowRangeSelector,
   (visibleSortedRowEntries, paginationRange) => {
-    if (!paginationRange) {
-      return [];
-    }
-
-    return visibleSortedRowEntries.slice(
-      paginationRange.firstRowIndex,
-      paginationRange.lastRowIndex + 1,
-    );
+      throw new Error("STUB");
   },
 );
 
@@ -198,14 +131,7 @@ export const gridPaginatedVisibleSortedGridRowIdsSelector = createSelectorMemoiz
   gridExpandedSortedRowIdsSelector,
   gridPaginationRowRangeSelector,
   (visibleSortedRowIds, paginationRange) => {
-    if (!paginationRange) {
-      return [];
-    }
-
-    return visibleSortedRowIds.slice(
-      paginationRange.firstRowIndex,
-      paginationRange.lastRowIndex + 1,
-    );
+      throw new Error("STUB");
   },
 );
 
@@ -220,30 +146,6 @@ export const gridVisibleRowsSelector = createSelectorMemoized(
   gridPaginatedVisibleSortedGridRowEntriesSelector,
   gridExpandedSortedRowEntriesSelector,
   (clientPaginationEnabled, paginationRowRange, paginationRows, expandedSortedRowEntries) => {
-    if (clientPaginationEnabled) {
-      return {
-        rows: paginationRows,
-        range: paginationRowRange,
-        rowIdToIndexMap: paginationRows.reduce((lookup, row, index) => {
-          lookup.set(row.id, index);
-          return lookup;
-        }, new Map<GridRowId, number>()),
-      };
-    }
-
-    return {
-      rows: expandedSortedRowEntries,
-      range:
-        expandedSortedRowEntries.length === 0
-          ? null
-          : {
-              firstRowIndex: 0,
-              lastRowIndex: expandedSortedRowEntries.length - 1,
-            },
-      rowIdToIndexMap: expandedSortedRowEntries.reduce((lookup, row, index) => {
-        lookup.set(row.id, index);
-        return lookup;
-      }, new Map<GridRowId, number>()),
-    };
+      throw new Error("STUB");
   },
 );

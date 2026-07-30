@@ -44,7 +44,7 @@ export function removeNodeFromSourceParent(
   sourceNode: GridTreeNode,
 ): void {
   const sourceParent = updatedTree[sourceNode.parent!] as GridGroupNode;
-  const sourceChildren = sourceParent.children.filter((id) => id !== sourceNode.id);
+  const sourceChildren = sourceParent.children.filter((id) => { throw new Error("STUB"); });
 
   if (sourceChildren.length === 0) {
     updatedTree[sourceNode.parent!] = {

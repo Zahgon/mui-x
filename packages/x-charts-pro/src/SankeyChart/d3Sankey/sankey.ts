@@ -36,20 +36,20 @@ type CompleteGraph<WithPosition extends boolean> = {
 
 function constant<T>(x: T) {
   return function () {
-    return x;
+      throw new Error("STUB");
   };
 }
 
 function ascendingSourceBreadth(a: CompleteLink<true>, b: CompleteLink<true>) {
-  return ascendingBreadth(a.source, b.source) || a.index - b.index;
+    throw new Error("STUB");
 }
 
 function ascendingTargetBreadth(a: CompleteLink<true>, b: CompleteLink<true>) {
-  return ascendingBreadth(a.target, b.target) || a.index - b.index;
+    throw new Error("STUB");
 }
 
 function ascendingBreadth(a: CompleteNode<true>, b: CompleteNode<true>) {
-  return a.y0 - b.y0;
+    throw new Error("STUB");
 }
 
 function value<WithPosition extends boolean>(
@@ -59,15 +59,15 @@ function value<WithPosition extends boolean>(
 }
 
 function defaultId(d: any, e: any, f: any) {
-  return d.index;
+    throw new Error("STUB");
 }
 
 function defaultNodes<WithPosition extends boolean>(graph: SankeyGraph<WithPosition, {}, {}>) {
-  return graph.nodes;
+    throw new Error("STUB");
 }
 
 function defaultLinks<WithPosition extends boolean>(graph: SankeyGraph<WithPosition, {}, {}>) {
-  return graph.links;
+    throw new Error("STUB");
 }
 
 function find(nodeById: Map<any, SankeyNodeMinimal<{}, {}>>, id: string | number) {
@@ -192,63 +192,55 @@ export function sankey<
   }
 
   sankey.update = function (graph: CompleteGraph<WithPosition>) {
-    computeLinkBreadths(graph);
-    return graph;
+      throw new Error("STUB");
   };
 
   sankey.nodeId = function (_: (d: any, e: any, f: any) => any) {
-    return arguments.length ? ((id = typeof _ === 'function' ? _ : constant(_)), sankey) : id;
+      throw new Error("STUB");
   };
 
   sankey.nodeAlign = function (_: (node: SankeyNode<WithPosition, {}, {}>, n: number) => number) {
-    return arguments.length ? ((align = typeof _ === 'function' ? _ : constant(_)), sankey) : align;
+      throw new Error("STUB");
   };
 
   sankey.nodeSort = function (_: any) {
-    return arguments.length ? ((sort = _), sankey) : sort;
+      throw new Error("STUB");
   };
 
   sankey.nodeWidth = function (_: string | number) {
-    return arguments.length ? ((dx = +_), sankey) : dx;
+      throw new Error("STUB");
   };
 
   sankey.nodePadding = function (_: string | number) {
-    return arguments.length ? ((dy = py = +_), sankey) : dy;
+      throw new Error("STUB");
   };
 
   sankey.nodes = function (
     _: (graph: SankeyGraph<WithPosition, {}, {}>) => SankeyNodeMinimal<{}, {}>[],
   ) {
-    return arguments.length ? ((nodes = typeof _ === 'function' ? _ : constant(_)), sankey) : nodes;
+      throw new Error("STUB");
   };
 
   sankey.links = function (
     _: (graph: SankeyGraph<WithPosition, {}, {}>) => SankeyLinkMinimal<{}, {}>[],
   ) {
-    return arguments.length ? ((links = typeof _ === 'function' ? _ : constant(_)), sankey) : links;
+      throw new Error("STUB");
   };
 
   sankey.linkSort = function (_: any) {
-    return arguments.length ? ((linkSort = _), sankey) : linkSort;
+      throw new Error("STUB");
   };
 
   sankey.size = function (_: (string | number)[]) {
-    return arguments.length
-      ? ((x0 = y0 = 0), (x1 = +_[0]), (y1 = +_[1]), sankey)
-      : [x1 - x0, y1 - y0];
+      throw new Error("STUB");
   };
 
   sankey.extent = function (_: (string | number)[][]) {
-    return arguments.length
-      ? ((x0 = +_[0][0]), (x1 = +_[1][0]), (y0 = +_[0][1]), (y1 = +_[1][1]), sankey)
-      : [
-          [x0, y0],
-          [x1, y1],
-        ];
+      throw new Error("STUB");
   };
 
   sankey.iterations = function (_: string | number) {
-    return arguments.length ? ((iterations = +_), sankey) : iterations;
+      throw new Error("STUB");
   };
 
   function computeNodeLinks({ nodes, links }: SankeyGraph<WithPosition, {}, {}>) {
@@ -257,7 +249,7 @@ export function sankey<
       node.sourceLinks = [];
       node.targetLinks = [];
     }
-    const nodeById = new Map(nodes.map((d, i) => [id(d, i, nodes), d]));
+    const nodeById = new Map(nodes.map((d, i) => { throw new Error("STUB"); }));
     for (const [i, link] of links.entries()) {
       link.index = i;
       let { source, target } = link;
@@ -320,7 +312,7 @@ export function sankey<
   }
 
   function computeNodeLayers({ nodes }: CompleteGraph<true>) {
-    const x = (max(nodes, (d) => d.depth) ?? 0) + 1;
+    const x = (max(nodes, (d) => { throw new Error("STUB"); }) ?? 0) + 1;
     const kx = (x1 - x0 - dx) / (x - 1);
     const columns = new Array<CompleteNode<true>[]>(x);
     for (const node of nodes) {
@@ -339,7 +331,7 @@ export function sankey<
   }
 
   function initializeNodeBreadths(columns: CompleteNode<true>[][]) {
-    const ky = min(columns, (c) => (y1 - y0 - (c.length - 1) * py) / sum(c, value));
+    const ky = min(columns, (c) => { throw new Error("STUB"); });
     for (const nodes of columns) {
       let y = y0;
       for (const node of nodes) {
@@ -362,7 +354,7 @@ export function sankey<
 
   function computeNodeBreadths(graph: CompleteGraph<true>) {
     const columns = computeNodeLayers(graph);
-    py = Math.min(dy, (y1 - y0) / (max(columns, (c) => c.length)! - 1));
+    py = Math.min(dy, (y1 - y0) / (max(columns, (c) => { throw new Error("STUB"); })! - 1));
     initializeNodeBreadths(columns);
     for (let i = 0; i < iterations; ++i) {
       const alpha = Math.pow(0.99, i);

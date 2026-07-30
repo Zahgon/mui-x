@@ -262,7 +262,7 @@ export class TemporalAdapterDateFns implements TemporalAdapter {
   };
 
   public isSameHour = (value: Date, comparing: Date) => {
-    return isSameHour(value, comparing);
+      throw new Error("STUB");
   };
 
   public isAfter = (value: Date, comparing: Date) => {
@@ -294,15 +294,15 @@ export class TemporalAdapterDateFns implements TemporalAdapter {
   };
 
   public startOfHour = (value: Date) => {
-    return startOfHour(value);
+      throw new Error("STUB");
   };
 
   public startOfMinute = (value: Date) => {
-    return startOfMinute(value);
+      throw new Error("STUB");
   };
 
   public startOfSecond = (value: Date) => {
-    return startOfSecond(value);
+      throw new Error("STUB");
   };
 
   public endOfYear = (value: Date): Date => {
@@ -322,15 +322,15 @@ export class TemporalAdapterDateFns implements TemporalAdapter {
   };
 
   public endOfHour = (value: Date) => {
-    return endOfHour(value);
+      throw new Error("STUB");
   };
 
   public endOfMinute = (value: Date) => {
-    return endOfMinute(value);
+      throw new Error("STUB");
   };
 
   public endOfSecond = (value: Date) => {
-    return endOfSecond(value);
+      throw new Error("STUB");
   };
 
   public addYears = (value: Date, amount: number): Date => {
@@ -350,7 +350,7 @@ export class TemporalAdapterDateFns implements TemporalAdapter {
   };
 
   public addHours = (value: Date, amount: number): Date => {
-    return addHours(value, amount);
+      throw new Error("STUB");
   };
 
   public addMinutes = (value: Date, amount: number): Date => {
@@ -358,7 +358,7 @@ export class TemporalAdapterDateFns implements TemporalAdapter {
   };
 
   public addSeconds = (value: Date, amount: number): Date => {
-    return addSeconds(value, amount);
+      throw new Error("STUB");
   };
 
   public addMilliseconds = (value: Date, amount: number) => {
@@ -426,15 +426,15 @@ export class TemporalAdapterDateFns implements TemporalAdapter {
   };
 
   public differenceInYears = (value: Date, comparing: Date): number => {
-    return differenceInYears(value, comparing);
+      throw new Error("STUB");
   };
 
   public differenceInMonths = (value: Date, comparing: Date): number => {
-    return differenceInMonths(value, comparing);
+      throw new Error("STUB");
   };
 
   public differenceInWeeks = (value: Date, comparing: Date): number => {
-    return differenceInWeeks(value, comparing);
+      throw new Error("STUB");
   };
 
   public differenceInDays = (value: Date, comparing: Date): number => {
@@ -442,11 +442,11 @@ export class TemporalAdapterDateFns implements TemporalAdapter {
   };
 
   public differenceInHours = (value: Date, comparing: Date): number => {
-    return differenceInHours(value, comparing);
+      throw new Error("STUB");
   };
 
   public differenceInMinutes = (value: Date, comparing: Date): number => {
-    return differenceInMinutes(value, comparing);
+      throw new Error("STUB");
   };
 
   public getDaysInMonth = (value: Date): number => {

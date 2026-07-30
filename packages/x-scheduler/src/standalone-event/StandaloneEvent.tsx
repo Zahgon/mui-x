@@ -14,16 +14,8 @@ const StandaloneEventRoot = styled(UnstyledStandaloneEvent, {
 
 const StandaloneEvent = React.forwardRef<HTMLDivElement, StandaloneEventProps>(
   function StandaloneEvent(props, forwardedRef) {
-    const styledContext = React.useContext(EventCalendarStyledContext);
-    return (
-      <StandaloneEventRoot
-        ref={forwardedRef}
-        className={styledContext?.classes.standaloneEvent}
-        {...props}
-        renderDragPreview={(parameters) => <EventDragPreview {...parameters} />}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 StandaloneEvent.propTypes /* remove-proptypes */ = {

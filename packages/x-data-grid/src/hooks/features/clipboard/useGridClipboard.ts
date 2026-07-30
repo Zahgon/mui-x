@@ -33,7 +33,7 @@ function writeToClipboardPolyfill(data: string) {
 function copyToClipboard(data: string) {
   if (navigator.clipboard) {
     navigator.clipboard.writeText(data).catch(() => {
-      writeToClipboardPolyfill(data);
+        throw new Error("STUB");
     });
   } else {
     writeToClipboardPolyfill(data);
@@ -77,52 +77,14 @@ export const useGridClipboard = (
 
   const handleCopy = React.useCallback(
     (event: KeyboardEvent) => {
-      if (!isCopyShortcut(event)) {
-        return;
-      }
-
-      // Do nothing if there's a native selection
-      if (hasNativeSelection(event.target as HTMLInputElement)) {
-        return;
-      }
-
-      let textToCopy = '';
-      const selectedRowsCount = gridRowSelectionCountSelector(apiRef);
-      if (selectedRowsCount > 0) {
-        textToCopy = apiRef.current.getDataAsCsv({
-          includeHeaders: false,
-          delimiter: clipboardCopyCellDelimiter,
-          shouldAppendQuotes: false,
-          escapeFormulas: false,
-        });
-      } else {
-        const focusedCell = gridFocusCellSelector(apiRef);
-        if (focusedCell) {
-          const cellParams = apiRef.current.getCellParams(focusedCell.id, focusedCell.field);
-          textToCopy = serializeCellValue(cellParams, {
-            csvOptions: {
-              delimiter: clipboardCopyCellDelimiter,
-              shouldAppendQuotes: false,
-              escapeFormulas: false,
-            },
-            ignoreValueFormatter,
-          });
-        }
-      }
-
-      textToCopy = apiRef.current.unstable_applyPipeProcessors('clipboardCopy', textToCopy);
-
-      if (textToCopy) {
-        copyToClipboard(textToCopy);
-        apiRef.current.publishEvent('clipboardCopy', textToCopy);
-      }
-    },
+          throw new Error("STUB");
+      },
     [apiRef, ignoreValueFormatter, clipboardCopyCellDelimiter],
   );
 
   useGridNativeEventListener(
     apiRef,
-    () => apiRef.current.rootElementRef.current,
+    () => { throw new Error("STUB"); },
     'keydown',
     handleCopy,
   );

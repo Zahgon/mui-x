@@ -41,5 +41,5 @@ export function useMapShapeSeries(seriesIds?: SeriesId | SeriesId[]) {
  * @returns the map shape series
  */
 export function useMapShapeSeriesContext(): UseMapShapeSeriesContextReturnValue {
-  return useAllSeriesOfType('mapShape');
+    throw new Error("STUB");
 }

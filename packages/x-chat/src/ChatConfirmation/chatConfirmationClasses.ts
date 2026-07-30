@@ -20,7 +20,7 @@ export interface ChatConfirmationClasses {
 export type ChatConfirmationClassKey = keyof ChatConfirmationClasses;
 
 export function getChatConfirmationUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatConfirmation', slot);
+    throw new Error("STUB");
 }
 
 export const chatConfirmationClasses: ChatConfirmationClasses = generateUtilityClasses(

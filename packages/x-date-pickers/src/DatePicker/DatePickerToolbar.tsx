@@ -71,48 +71,7 @@ export const DatePickerToolbar = React.forwardRef(function DatePickerToolbar(
   inProps: DatePickerToolbarProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiDatePickerToolbar' });
-  const {
-    toolbarFormat,
-    toolbarPlaceholder = '––',
-    className,
-    classes: classesProp,
-    ...other
-  } = props;
-  const adapter = usePickerAdapter();
-  const { value, views, orientation } = usePickerContext<PickerValue, DateView>();
-  const translations = usePickerTranslations();
-  const ownerState = useToolbarOwnerState();
-  const classes = useUtilityClasses(classesProp);
-
-  const dateText = React.useMemo(() => {
-    if (!adapter.isValid(value)) {
-      return toolbarPlaceholder;
-    }
-
-    const formatFromViews = resolveDateFormat(adapter, { format: toolbarFormat, views }, true);
-
-    return adapter.formatByString(value, formatFromViews);
-  }, [value, toolbarFormat, toolbarPlaceholder, adapter, views]);
-
-  return (
-    <DatePickerToolbarRoot
-      ref={ref}
-      toolbarTitle={translations.datePickerToolbarTitle}
-      className={clsx(classes.root, className)}
-      {...other}
-    >
-      <DatePickerToolbarTitle
-        variant="h4"
-        data-testid="datepicker-toolbar-date"
-        align={orientation === 'landscape' ? 'left' : 'center'}
-        ownerState={ownerState}
-        className={classes.title}
-      >
-        {dateText}
-      </DatePickerToolbarTitle>
-    </DatePickerToolbarRoot>
-  );
+    throw new Error("STUB");
 }) as DatePickerToolbarComponent;
 
 DatePickerToolbar.propTypes /* remove-proptypes */ = {

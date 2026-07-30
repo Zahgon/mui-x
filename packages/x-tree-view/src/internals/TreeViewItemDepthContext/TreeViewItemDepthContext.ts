@@ -5,4 +5,4 @@ import type { MinimalTreeViewState } from '../MinimalTreeViewStore';
 
 export const TreeViewItemDepthContext = React.createContext<
   ((state: MinimalTreeViewState<any, any>, itemId: TreeViewItemId) => number) | number
->(() => -1);
+>(() => { throw new Error("STUB"); });

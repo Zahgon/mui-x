@@ -15,12 +15,7 @@ export type GridListViewState = (GridListViewColDef & { computedWidth: number })
 
 export const listViewStateInitializer: GridStateInitializer<
   Pick<DataGridProcessedProps, 'listViewColumn'>
-> = (state, props, apiRef) => ({
-  ...state,
-  listViewColumn: props.listViewColumn
-    ? { ...props.listViewColumn, computedWidth: getListColumnWidth(apiRef) }
-    : undefined,
-});
+> = (state, props, apiRef) => { throw new Error("STUB"); };
 
 export function useGridListView(
   apiRef: RefObject<GridPrivateApiCommunity>,
@@ -31,16 +26,7 @@ export function useGridListView(
    */
   const updateListColumnWidth = () => {
     apiRef.current.setState((state) => {
-      if (!state.listViewColumn) {
-        return state;
-      }
-      return {
-        ...state,
-        listViewColumn: {
-          ...state.listViewColumn,
-          computedWidth: getListColumnWidth(apiRef),
-        },
-      };
+        throw new Error("STUB");
     });
   };
 
@@ -48,10 +34,7 @@ export function useGridListView(
   const handleGridSizeChange: GridEventListener<'viewportInnerSizeChange'> = (
     viewportInnerSize,
   ) => {
-    if (prevInnerWidth.current !== viewportInnerSize.width) {
-      prevInnerWidth.current = viewportInnerSize.width;
-      updateListColumnWidth();
-    }
+      throw new Error("STUB");
   };
 
   useGridEvent(apiRef, 'viewportInnerSizeChange', handleGridSizeChange);
@@ -61,28 +44,11 @@ export function useGridListView(
    * EFFECTS
    */
   useEnhancedEffect(() => {
-    const listColumn = props.listViewColumn;
-    if (listColumn) {
-      apiRef.current.setState((state) => {
-        return {
-          ...state,
-          listViewColumn: {
-            ...listColumn,
-            computedWidth: getListColumnWidth(apiRef),
-          },
-        };
-      });
-    }
+      throw new Error("STUB");
   }, [apiRef, props.listViewColumn]);
 
   React.useEffect(() => {
-    if (process.env.NODE_ENV !== 'production' && props.listView && !props.listViewColumn) {
-      warnOnce([
-        'MUI X: The `listViewColumn` prop must be set if `listView` is enabled.',
-        'To fix, pass a column definition to the `listViewColumn` prop, e.g. `{ field: "example", renderCell: (params) => <div>{params.row.id}</div> }`.',
-        'For more details, see https://mui.com/x/react-data-grid/list-view/',
-      ]);
-    }
+      throw new Error("STUB");
   }, [props.listView, props.listViewColumn]);
 }
 

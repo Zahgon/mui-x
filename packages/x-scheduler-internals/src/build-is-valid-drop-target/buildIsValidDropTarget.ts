@@ -20,5 +20,5 @@ export function buildIsValidDropTarget<Targets extends keyof EventDropDataLookup
   targets: Targets[],
 ) {
   const targetsSet = new Set(targets);
-  return (data: any): data is EventDropDataLookup[Targets] => targetsSet.has(data.source);
+  return (data: any): data is EventDropDataLookup[Targets] => { throw new Error("STUB"); };
 }

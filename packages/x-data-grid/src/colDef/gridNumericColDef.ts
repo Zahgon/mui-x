@@ -10,8 +10,8 @@ export const GRID_NUMERIC_COL_DEF: GridColTypeDef<number | string | null, string
   align: 'right',
   headerAlign: 'right',
   sortComparator: gridNumberComparator,
-  valueParser: (value) => (value === '' ? null : Number(value)),
-  valueFormatter: (value?: number) => (isNumber(value) ? value.toLocaleString() : value || ''),
+  valueParser: (value) => { throw new Error("STUB"); },
+  valueFormatter: (value?: number) => { throw new Error("STUB"); },
   filterOperators: getGridNumericOperators(),
   getApplyQuickFilterFn: getGridNumericQuickFilterFn,
 };

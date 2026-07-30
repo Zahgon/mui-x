@@ -37,8 +37,5 @@ export interface GetWordsByLinesParams {
 }
 
 export function getWordsByLines({ style, needsComputation, text }: GetWordsByLinesParams) {
-  return text.split('\n').map((subText) => ({
-    text: subText,
-    ...(needsComputation ? getStringSize(subText, style) : { width: 0, height: 0 }),
-  }));
+  return text.split('\n').map((subText) => { throw new Error("STUB"); });
 }

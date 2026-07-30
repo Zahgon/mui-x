@@ -51,22 +51,7 @@ export function createMinimalInitialState<
   R extends TreeViewValidItem<R>,
   Multiple extends boolean | undefined,
 >(parameters: MinimalTreeViewParameters<R, Multiple>): MinimalTreeViewState<R, Multiple> {
-  return {
-    treeId: undefined,
-    focusedItemId: null,
-    ...deriveStateFromParameters(parameters),
-    ...TreeViewItemsPlugin.buildItemsStateIfNeeded(parameters),
-    expandedItems: applyModelInitialValue(
-      parameters.expandedItems,
-      parameters.defaultExpandedItems,
-      [],
-    ),
-    selectedItems: applyModelInitialValue(
-      parameters.selectedItems,
-      parameters.defaultSelectedItems,
-      (parameters.multiSelect ? EMPTY_ARRAY : null) as TreeViewSelectionValue<Multiple>,
-    ),
-  };
+    throw new Error("STUB");
 }
 
 let globalTreeViewDefaultId = 0;

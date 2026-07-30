@@ -136,18 +136,7 @@ export class PointerManager {
     new Set();
 
   public constructor(options: PointerManagerOptions) {
-    this.root =
-      // User provided root element
-      (options.root as HTMLElement) ??
-      // Fallback to document root or body, this fixes shadow DOM scenarios
-      (document.getRootNode({ composed: true }) as HTMLElement) ??
-      // Fallback to document body, for some testing environments
-      document.body;
-    this.touchAction = options.touchAction || 'auto';
-    this.passive = options.passive ?? false;
-    this.preventEventInterruption = options.preventEventInterruption ?? true;
-
-    this.setupEventListeners();
+      throw new Error("STUB");
   }
 
   /**
@@ -166,7 +155,7 @@ export class PointerManager {
 
     // Return unregister function
     return () => {
-      this.gestureHandlers.delete(handler);
+        throw new Error("STUB");
     };
   }
 
@@ -181,7 +170,7 @@ export class PointerManager {
    * @returns The active pointers as a read-only map
    */
   public getPointers(): ReadonlyMap<number, PointerData> {
-    return this.pointers;
+      throw new Error("STUB");
   }
 
   /**
@@ -191,22 +180,7 @@ export class PointerManager {
    * the CSS touch-action property on the root element.
    */
   private setupEventListeners(): void {
-    // Set touch-action CSS property
-    if (this.touchAction !== 'auto') {
-      this.root.style.touchAction = this.touchAction;
-    }
-
-    // Add event listeners
-    this.root.addEventListener('pointerdown', this.handlePointerEvent, { passive: this.passive });
-    this.root.addEventListener('pointermove', this.handlePointerEvent, { passive: this.passive });
-    this.root.addEventListener('pointerup', this.handlePointerEvent, { passive: this.passive });
-    this.root.addEventListener('pointercancel', this.handlePointerEvent, { passive: this.passive });
-    // @ts-expect-error, forceCancel is not a standard event, but used for custom handling
-    this.root.addEventListener('forceCancel', this.handlePointerEvent, { passive: this.passive });
-
-    // Add blur and contextmenu event listeners to interrupt all gestures
-    this.root.addEventListener('blur', this.handleInterruptEvents);
-    this.root.addEventListener('contextmenu', this.handleInterruptEvents);
+      throw new Error("STUB");
   }
 
   /**
@@ -216,45 +190,7 @@ export class PointerManager {
    * @param event - The event that triggered the interruption (blur or contextmenu)
    */
   private handleInterruptEvents = (event: Event): void => {
-    if (
-      this.preventEventInterruption &&
-      'pointerType' in event &&
-      (event as PointerEvent).pointerType === 'touch'
-    ) {
-      event.preventDefault();
-      return;
-    }
-
-    // Create a synthetic pointer cancel event
-    const cancelEvent = new PointerEvent('forceCancel', {
-      bubbles: false,
-      cancelable: false,
-    });
-
-    const firstPointer = this.pointers.values().next().value;
-    if (this.pointers.size > 0 && firstPointer) {
-      // If there are active pointers, use the first one as a template for coordinates
-
-      // Update the synthetic event with the pointer's coordinates
-      Object.defineProperties(cancelEvent, {
-        clientX: { value: firstPointer.clientX },
-        clientY: { value: firstPointer.clientY },
-        pointerId: { value: firstPointer.pointerId },
-        pointerType: { value: firstPointer.pointerType },
-      });
-
-      // Force update of all pointers to have type 'forceCancel'
-      for (const [pointerId, pointer] of this.pointers.entries()) {
-        const updatedPointer = { ...pointer, type: 'forceCancel' };
-        this.pointers.set(pointerId, updatedPointer);
-      }
-    }
-
-    // Notify all handlers about the interruption
-    this.notifyHandlers(cancelEvent);
-
-    // Clear all pointers
-    this.pointers.clear();
+      throw new Error("STUB");
   };
 
   /**
@@ -268,26 +204,7 @@ export class PointerManager {
    * @param event - The original pointer event from the browser
    */
   private handlePointerEvent = (event: PointerEvent): void => {
-    const { type, pointerId } = event;
-
-    // Create or update pointer data
-    if (type === 'pointerdown' || type === 'pointermove') {
-      this.pointers.set(pointerId, this.createPointerData(event));
-    }
-    // Remove pointer data on up or cancel
-    else if (type === 'pointerup' || type === 'pointercancel' || type === 'forceCancel') {
-      // Update one last time before removing
-      this.pointers.set(pointerId, this.createPointerData(event));
-
-      // Notify handlers with current state
-      this.notifyHandlers(event);
-
-      // Then remove the pointer
-      this.pointers.delete(pointerId);
-      return;
-    }
-
-    this.notifyHandlers(event);
+      throw new Error("STUB");
   };
 
   /**
@@ -298,7 +215,7 @@ export class PointerManager {
    * @param event - The original pointer event that triggered this notification
    */
   private notifyHandlers(event: PointerEvent): void {
-    this.gestureHandlers.forEach((handler) => handler(this.pointers, event));
+      throw new Error("STUB");
   }
 
   /**
@@ -311,22 +228,7 @@ export class PointerManager {
    * @returns A new PointerData object representing this pointer
    */
   private createPointerData(event: PointerEvent): PointerData {
-    return {
-      pointerId: event.pointerId,
-      clientX: event.clientX,
-      clientY: event.clientY,
-      pageX: event.pageX,
-      pageY: event.pageY,
-      target: event.target,
-      timeStamp: event.timeStamp,
-      type: event.type,
-      isPrimary: event.isPrimary,
-      pressure: event.pressure,
-      width: event.width,
-      height: event.height,
-      pointerType: event.pointerType,
-      srcEvent: event,
-    };
+      throw new Error("STUB");
   }
 
   /**

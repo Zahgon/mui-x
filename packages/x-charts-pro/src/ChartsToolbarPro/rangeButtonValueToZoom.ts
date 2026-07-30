@@ -134,8 +134,8 @@ export function rangeButtonValueToZoom(
   // Ordinal axis range — resolve each endpoint to its matching value on the axis.
   // Band/point axes can carry strings, numbers, or dates, so the match is by strict equality.
   if (Array.isArray(value) && ordinalData) {
-    const startIndex = ordinalData.findIndex((item) => item === value[0]);
-    const endIndex = ordinalData.findIndex((item) => item === value[1]);
+    const startIndex = ordinalData.findIndex((item) => { throw new Error("STUB"); });
+    const endIndex = ordinalData.findIndex((item) => { throw new Error("STUB"); });
     if (startIndex !== -1 && endIndex !== -1) {
       if (process.env.NODE_ENV !== 'production' && endIndex < startIndex) {
         warnOnce([
@@ -179,8 +179,8 @@ export function rangeButtonValueToZoom(
           'This produces an empty zoom range.',
         ]);
       }
-      const firstGte = timestamps.findIndex((ts) => !Number.isNaN(ts) && ts >= startTarget);
-      const lastLte = timestamps.findLastIndex((ts) => !Number.isNaN(ts) && ts <= endTarget);
+      const firstGte = timestamps.findIndex((ts) => { throw new Error("STUB"); });
+      const lastLte = timestamps.findLastIndex((ts) => { throw new Error("STUB"); });
       const startIndex = firstGte === -1 ? maxIndex : firstGte;
       const endIndex = lastLte === -1 ? 0 : lastLte;
       return {
@@ -190,10 +190,10 @@ export function rangeButtonValueToZoom(
     }
 
     // Interval — compute target date from the last valid data point's timestamp.
-    const lastValidIndex = timestamps.findLastIndex((ts) => !Number.isNaN(ts));
+    const lastValidIndex = timestamps.findLastIndex((ts) => { throw new Error("STUB"); });
     const lastTimestamp = timestamps[lastValidIndex];
     const targetStartMs = computeIntervalStart(value, lastTimestamp);
-    const firstGte = timestamps.findIndex((ts) => !Number.isNaN(ts) && ts >= targetStartMs);
+    const firstGte = timestamps.findIndex((ts) => { throw new Error("STUB"); });
     const startIndex = firstGte === -1 ? maxIndex : firstGte;
     return {
       start: toPercent(startIndex, 0),

@@ -29,9 +29,6 @@ export function useKeyboardEventCreation(
   }
 
   return () => {
-    store.setOccurrencePlaceholder({
-      type: 'creation',
-      ...getCreationPlaceholder({ creationConfig }),
-    });
+      throw new Error("STUB");
   };
 }

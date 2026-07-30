@@ -28,18 +28,7 @@ const TimePicker = React.forwardRef(function TimePicker(
   inProps: TimePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiTimePicker' });
-
-  const { desktopModeMediaQuery = DEFAULT_DESKTOP_MODE_MEDIA_QUERY, ...other } = props;
-
-  // defaults to `true` in environments where `window.matchMedia` would not be available (i.e. test/jsdom)
-  const isDesktop = useMediaQuery(desktopModeMediaQuery, { defaultMatches: true });
-
-  if (isDesktop) {
-    return <DesktopTimePicker ref={ref} {...other} />;
-  }
-
-  return <MobileTimePicker ref={ref} {...(other as MobileTimePickerProps)} />;
+    throw new Error("STUB");
 }) as TimePickerComponent;
 
 TimePicker.propTypes /* remove-proptypes */ = {

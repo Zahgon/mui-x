@@ -18,9 +18,7 @@ const nlNLPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Open vorige view',
   openNextView: 'Open volgende view',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'jaarweergave is geopend, schakel over naar kalenderweergave'
-      : 'kalenderweergave is geopend, switch naar jaarweergave',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Start',
@@ -46,25 +44,25 @@ const nlNLPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Selecteer ${timeViews[view]}. ${!formattedTime ? 'Geen tijd geselecteerd' : `Geselecteerde tijd is ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} uren`,
-  minutesClockNumberText: (minutes) => `${minutes} minuten`,
-  secondsClockNumberText: (seconds) => `${seconds} seconden`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Selecteer ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Weeknummer',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Week ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Kies datum, geselecteerde datum is ${formattedDate}` : 'Kies datum',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Kies tijd, geselecteerde tijd is ${formattedTime}` : 'Kies tijd',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Wissen',
 
@@ -73,14 +71,14 @@ const nlNLPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'kies datum',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'J'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'uu',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Jaar',

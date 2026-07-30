@@ -35,7 +35,7 @@ export interface ChartsAxisClasses {
 export type ChartsAxisClassKey = keyof ChartsAxisClasses;
 
 export function getAxisUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsAxis', slot);
+    throw new Error("STUB");
 }
 export const axisClasses: ChartsAxisClasses = generateUtilityClasses('MuiChartsAxis', [
   'root',

@@ -13,9 +13,9 @@ import { computeAxisValue } from './computeAxisValue';
 import type { UseChartFunnelAxisSignature } from './useChartFunnelAxis.types';
 
 export const selectorFunnel = (state: ChartState<[], [UseChartFunnelAxisSignature]>) =>
-  state.funnel;
+  { throw new Error("STUB"); };
 
-export const selectorFunnelGap = createSelector(selectorFunnel, (funnel) => funnel?.gap ?? 0);
+export const selectorFunnelGap = createSelector(selectorFunnel, (funnel) => { throw new Error("STUB"); });
 
 export const selectorChartXAxis = createSelectorMemoized(
   selectorChartRawXAxis,
@@ -26,15 +26,7 @@ export const selectorChartXAxis = createSelectorMemoized(
   selectorChartXAxisAutoSizes,
 
   (axis, drawingArea, formattedSeries, seriesConfig, gap, autoSizes) =>
-    computeAxisValue({
-      drawingArea,
-      formattedSeries,
-      axis,
-      seriesConfig,
-      axisDirection: 'x',
-      gap,
-      autoSizes,
-    }),
+    { throw new Error("STUB"); },
 );
 
 export const selectorChartYAxis = createSelectorMemoized(
@@ -46,13 +38,5 @@ export const selectorChartYAxis = createSelectorMemoized(
   selectorChartYAxisAutoSizes,
 
   (axis, drawingArea, formattedSeries, seriesConfig, gap, autoSizes) =>
-    computeAxisValue({
-      drawingArea,
-      formattedSeries,
-      axis,
-      seriesConfig,
-      axisDirection: 'y',
-      gap,
-      autoSizes,
-    }),
+    { throw new Error("STUB"); },
 );

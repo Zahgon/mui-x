@@ -50,54 +50,7 @@ const STEPS: PickerRangeStep[] = [
 const rendererInterceptor = function RendererInterceptor(
   props: PickerRendererInterceptorProps<PickerRangeValue, DateTimeRangePickerView, any>,
 ) {
-  const { viewRenderers, popperView, rendererProps } = props;
-  const { openTo, ...otherProps } = rendererProps;
-  const { rangePosition } = usePickerRangePositionContext();
-
-  const finalProps = {
-    ...otherProps,
-    sx: [
-      {
-        [`&.${multiSectionDigitalClockClasses.root}`]: {
-          borderBottom: 0,
-        },
-        [`&.${multiSectionDigitalClockClasses.root}, .${multiSectionDigitalClockSectionClasses.root}, &.${digitalClockClasses.root}`]:
-          {
-            maxHeight: RANGE_VIEW_HEIGHT,
-          },
-      },
-    ],
-  };
-  const isTimeViewActive = isInternalTimeView(popperView);
-  const referenceDate = resolveReferenceDate(rendererProps.referenceDate, rangePosition);
-  return (
-    <React.Fragment>
-      {viewRenderers.day?.({
-        ...rendererProps,
-        referenceDate,
-        rangePosition,
-        availableRangePositions: [rangePosition],
-        view: !isTimeViewActive ? popperView : 'day',
-        views: rendererProps.views.filter(isDatePickerView),
-        sx: [{ gridColumn: 1 }, ...finalProps.sx],
-      })}
-      <Divider orientation="vertical" sx={{ gridColumn: 2 }} />
-      <DateTimeRangePickerTimeWrapper
-        {...finalProps}
-        referenceDate={referenceDate}
-        view={isTimeViewActive ? popperView : 'hours'}
-        views={finalProps.views.filter(isInternalTimeView)}
-        openTo={isInternalTimeView(openTo) ? openTo : 'hours'}
-        viewRenderer={
-          viewRenderers[isTimeViewActive ? popperView : 'hours'] as PickerViewRenderer<
-            PickerRangeValue,
-            any
-          >
-        }
-        sx={[{ gridColumn: 3 }, ...finalProps.sx]}
-      />
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 };
 
 type DesktopDateRangePickerComponent = ((
@@ -118,78 +71,7 @@ const DesktopDateTimeRangePicker = React.forwardRef(function DesktopDateTimeRang
   inProps: DesktopDateTimeRangePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-  // Props with the default values common to all date time range pickers
-  const defaultizedProps = useDateTimeRangePickerDefaultizedProps<DesktopDateTimeRangePickerProps>(
-    inProps,
-    'MuiDesktopDateTimeRangePicker',
-  );
-
-  const renderTimeView = defaultizedProps.shouldRenderTimeInASingleColumn
-    ? renderDigitalClockTimeView
-    : renderMultiSectionDigitalClockTimeView;
-
-  const viewRenderers: PickerViewRendererLookup<any, any, any> = {
-    day: renderDateRangeViewCalendar,
-    hours: renderTimeView,
-    minutes: renderTimeView,
-    seconds: renderTimeView,
-    meridiem: renderTimeView,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  // Need to avoid adding the `meridiem` view when unexpected renderer is specified
-  const shouldHoursRendererContainMeridiemView =
-    viewRenderers.hours?.name === renderMultiSectionDigitalClockTimeView.name;
-  const views = !shouldHoursRendererContainMeridiemView
-    ? defaultizedProps.views.filter((view) => view !== 'meridiem')
-    : defaultizedProps.views;
-
-  const props = {
-    ...defaultizedProps,
-    views,
-    viewRenderers,
-    format: resolveDateTimeFormat(
-      adapter,
-      { ...defaultizedProps, views: defaultizedProps.viewsForFormatting },
-      true,
-    ),
-    // force true to correctly handle `renderTimeViewClock` as a renderer
-    ampmInClock: true,
-    calendars: defaultizedProps.calendars ?? 1,
-    slots: {
-      field: SingleInputDateTimeRangeField,
-      layout: DesktopDateTimePickerLayout,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      tabs: {
-        hidden: true,
-        ...defaultizedProps.slotProps?.tabs,
-      },
-      toolbar: {
-        hidden: true,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useDesktopRangePicker<DateTimeRangePickerView, typeof props>({
-    ref,
-    props,
-    valueManager: rangeValueManager,
-    valueType: 'date-time',
-    validator: validateDateTimeRange,
-    rendererInterceptor,
-    steps: STEPS,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as DesktopDateRangePickerComponent;
 
 DesktopDateTimeRangePicker.propTypes /* remove-proptypes */ = {

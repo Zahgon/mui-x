@@ -18,89 +18,10 @@ export const useChartTooltip: ChartPlugin<UseChartTooltipSignature<any>> = <
   params,
   instance,
 }: ChartPluginOptions<UseChartTooltipSignature<SeriesType>>) => {
-  useAssertModelConsistency({
-    warningPrefix: 'MUI X Charts',
-    componentName: 'Chart',
-    propName: 'tooltipItem',
-    controlled: params.tooltipItem,
-    defaultValue: null,
-  });
-
-  useEnhancedEffect(() => {
-    if (store.state.tooltip.item !== params.tooltipItem) {
-      const newItem = params.tooltipItem
-        ? instance.identifierWithType(params.tooltipItem, 'seriesItem')
-        : null;
-
-      if (
-        store.state.tooltip.item === null || newItem === null
-          ? newItem !== store.state.tooltip.item
-          : instance.serializeIdentifier(store.state.tooltip.item) !==
-            instance.serializeIdentifier(newItem)
-      ) {
-        store.set('tooltip', { ...store.state.tooltip, item: newItem });
-      }
-    }
-  }, [store, instance, params.tooltipItem]);
-
-  const removeTooltipItem = useEventCallback(function removeTooltipItem(
-    itemToRemove?: SeriesItemIdentifier<SeriesType>,
-  ) {
-    const prevItem = store.state.tooltip.item;
-
-    if (prevItem === null) {
-      return; // Already null, nothing to do
-    }
-
-    if (
-      !itemToRemove ||
-      instance.serializeIdentifier(prevItem) ===
-        instance.serializeIdentifier(instance.identifierWithType(itemToRemove, 'seriesItem'))
-    ) {
-      // Remove the item is either
-      // - no item provided, so we unconditionally remove it
-      // - the provided item matches the current one
-
-      params.onTooltipItemChange?.(null);
-
-      if (!store.state.tooltip.itemIsControlled) {
-        store.set('tooltip', { ...store.state.tooltip, item: null });
-      }
-      return;
-    }
-  });
-
-  const setTooltipItem = useEventCallback(function setTooltipItem(
-    newItem: SeriesItemIdentifierWithType<SeriesType>,
-  ) {
-    if (!fastObjectShallowCompare(store.state.tooltip.item, newItem)) {
-      params.onTooltipItemChange?.(newItem);
-      if (!store.state.tooltip.itemIsControlled) {
-        store.set('tooltip', { ...store.state.tooltip, item: newItem });
-      }
-    }
-  });
-
-  return {
-    instance: {
-      setTooltipItem,
-      removeTooltipItem,
-    },
-  };
+    throw new Error("STUB");
 };
 
-useChartTooltip.getInitialState = (params, currentState) => ({
-  tooltip: {
-    itemIsControlled: params.tooltipItem !== undefined,
-    item:
-      params.tooltipItem == null
-        ? null
-        : createIdentifierWithType(currentState)(
-            // Need some as because the generic SeriesType can't be propagated to plugins methods.
-            params.tooltipItem as SeriesItemIdentifier<ChartSeriesType>,
-          ),
-  },
-});
+useChartTooltip.getInitialState = (params, currentState) => { throw new Error("STUB"); };
 
 useChartTooltip.params = {
   tooltipItem: true,

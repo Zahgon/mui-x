@@ -24,7 +24,7 @@ export interface ChartsLegendClasses {
 }
 
 function getLegendUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsLegend', slot);
+    throw new Error("STUB");
 }
 
 export const useUtilityClasses = (props: ChartsLegendProps & ChartsLegendSlotExtension) => {

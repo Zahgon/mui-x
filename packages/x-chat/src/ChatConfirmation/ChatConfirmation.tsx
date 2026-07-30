@@ -41,163 +41,49 @@ const useThemeProps = createUseThemeProps('MuiChatConfirmation');
 
 // Inline SVG — avoids @mui/icons-material dependency
 function WarningIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="currentColor" width="1.25em" height="1.25em" aria-hidden="true">
-      <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
-    </svg>
-  );
+    throw new Error("STUB");
 }
 
 const ChatConfirmationRoot = styled('div', {
   name: 'MuiChatConfirmation',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(({ theme }) => ({
-  borderRadius: theme.shape.borderRadius,
-  border: `1px solid ${(theme.vars || theme).palette.warning.main}`,
-  padding: theme.spacing(2),
-  backgroundColor: (theme.vars || theme).palette.background.paper,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(1.5),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConfirmationIcon = styled('span', {
   name: 'MuiChatConfirmation',
   slot: 'Icon',
-  overridesResolver: (_, styles) => styles.icon,
-})(({ theme }) => ({
-  display: 'flex',
-  color: (theme.vars || theme).palette.warning.main,
-  fontSize: 20,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConfirmationMessage = styled('p', {
   name: 'MuiChatConfirmation',
   slot: 'Message',
-  overridesResolver: (_, styles) => styles.message,
-})(({ theme }) => ({
-  ...theme.typography.body2,
-  color: (theme.vars || theme).palette.text.primary,
-  margin: 0,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConfirmationActions = styled('div', {
   name: 'MuiChatConfirmation',
   slot: 'Actions',
-  overridesResolver: (_, styles) => styles.actions,
-})(({ theme }) => ({
-  display: 'flex',
-  gap: theme.spacing(1),
-  justifyContent: 'flex-end',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConfirmationCancelButton = styled('button', {
   name: 'MuiChatConfirmation',
   slot: 'CancelButton',
-  overridesResolver: (_, styles) => styles.cancelButton,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  padding: theme.spacing(0.625, 1.5),
-  borderRadius: theme.shape.borderRadius,
-  border: `1px solid ${(theme.vars || theme).palette.divider}`,
-  backgroundColor: 'transparent',
-  color: (theme.vars || theme).palette.text.secondary,
-  fontSize: theme.typography.body2.fontSize,
-  fontFamily: theme.typography.fontFamily,
-  cursor: 'pointer',
-  transition: theme.transitions.create(['background-color']),
-  '&:hover': {
-    backgroundColor: (theme.vars || theme).palette.action.hover,
-  },
-  '&:focus-visible': {
-    outline: `2px solid ${(theme.vars || theme).palette.primary.main}`,
-    outlineOffset: 2,
-  },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConfirmationConfirmButton = styled('button', {
   name: 'MuiChatConfirmation',
   slot: 'ConfirmButton',
-  overridesResolver: (_, styles) => styles.confirmButton,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  padding: theme.spacing(0.625, 1.5),
-  borderRadius: theme.shape.borderRadius,
-  border: `1px solid ${(theme.vars || theme).palette.warning.main}`,
-  backgroundColor: (theme.vars || theme).palette.warning.main,
-  color: (theme.vars || theme).palette.warning.contrastText,
-  fontSize: theme.typography.body2.fontSize,
-  fontFamily: theme.typography.fontFamily,
-  fontWeight: theme.typography.fontWeightMedium,
-  cursor: 'pointer',
-  transition: theme.transitions.create(['background-color', 'border-color']),
-  '&:hover': {
-    backgroundColor: (theme.vars || theme).palette.warning.dark,
-    borderColor: (theme.vars || theme).palette.warning.dark,
-  },
-  '&:focus-visible': {
-    outline: `2px solid ${(theme.vars || theme).palette.warning.main}`,
-    outlineOffset: 2,
-  },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConfirmation = React.forwardRef<HTMLDivElement, ChatConfirmationProps>(
   function ChatConfirmation(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatConfirmation' });
-    const {
-      message,
-      confirmLabel = 'Confirm',
-      cancelLabel = 'Cancel',
-      onConfirm,
-      onCancel,
-      className,
-      classes: classesProp,
-      sx,
-      ...other
-    } = props;
-    const classes = useChatConfirmationUtilityClasses(classesProp);
-    const messageId = React.useId();
-
-    return (
-      <ChatConfirmationRoot
-        ref={ref}
-        className={clsx(classes.root, className)}
-        sx={sx}
-        // Inline, non-modal confirmation card: a labelled `group` (named by its
-        // message) rather than `alertdialog`, which would promise modal focus
-        // management this card neither provides nor needs.
-        role="group"
-        aria-labelledby={messageId}
-        {...other}
-      >
-        <ChatConfirmationIcon className={classes.icon}>
-          <WarningIcon />
-        </ChatConfirmationIcon>
-        <ChatConfirmationMessage id={messageId} className={classes.message}>
-          {message}
-        </ChatConfirmationMessage>
-        <ChatConfirmationActions className={classes.actions}>
-          <ChatConfirmationCancelButton
-            type="button"
-            className={classes.cancelButton}
-            onClick={onCancel}
-          >
-            {cancelLabel}
-          </ChatConfirmationCancelButton>
-          <ChatConfirmationConfirmButton
-            type="button"
-            className={classes.confirmButton}
-            onClick={onConfirm}
-          >
-            {confirmLabel}
-          </ChatConfirmationConfirmButton>
-        </ChatConfirmationActions>
-      </ChatConfirmationRoot>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatConfirmation.propTypes /* remove-proptypes */ = {

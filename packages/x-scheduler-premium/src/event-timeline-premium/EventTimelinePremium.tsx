@@ -70,21 +70,7 @@ const useUtilityClasses = (classes: Partial<EventTimelinePremiumClasses> | undef
 const EventTimelinePremiumRoot = styled('div', {
   name: 'MuiEventTimeline',
   slot: 'Root',
-})(({ theme }) => ({
-  boxSizing: 'border-box',
-  '*, *::before, *::after': {
-    boxSizing: 'inherit',
-  },
-  position: 'relative',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(2),
-  height: '100%',
-  minHeight: 0,
-  overflow: 'hidden',
-  fontFamily: theme.typography.fontFamily,
-  fontSize: theme.typography.body2.fontSize,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const EventTimelinePremium = React.forwardRef(function EventTimelinePremium<
   TEvent extends object,
@@ -93,59 +79,7 @@ const EventTimelinePremium = React.forwardRef(function EventTimelinePremium<
   inProps: EventTimelinePremiumProps<TEvent, TResource>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  // We don't want the plan suffix in the theme, otherwise we couldn't share the theme entry across packages
-  // eslint-disable-next-line mui/material-ui-name-matches-component-name
-  const props = useThemeProps({ props: inProps, name: 'MuiEventTimeline' });
-  useLicenseVerifier(packageInfo);
-
-  const {
-    parameters,
-    forwardedProps: { className, classes: classesProp, ...forwardedProps },
-  } = useExtractEventTimelinePremiumParameters<TEvent, TResource, typeof props>(props);
-  const store = useEventTimelinePremium(parameters);
-  const classes = useUtilityClasses(classesProp);
-
-  const { localeText, resourceColumnLabel, apiRef, ...other } = forwardedProps;
-  useInitializeApiRef(store, apiRef);
-
-  const schedulerId = useId();
-
-  const mergedLocaleText = React.useMemo(
-    () => ({ ...EVENT_TIMELINE_DEFAULT_LOCALE_TEXT, ...localeText }),
-    [localeText],
-  );
-
-  const timelineStyledContextValue = React.useMemo(
-    () => ({ schedulerId, classes, localeText: mergedLocaleText, resourceColumnLabel }),
-    [schedulerId, classes, mergedLocaleText, resourceColumnLabel],
-  );
-
-  const dialogStyledContextValue = React.useMemo(
-    () => ({ schedulerId, classes, localeText: mergedLocaleText }),
-    [schedulerId, classes, mergedLocaleText],
-  );
-
-  const sharedComponentsStyledContextValue = React.useMemo(() => ({ classes }), [classes]);
-
-  return (
-    <SchedulerStoreContext.Provider value={store as any}>
-      <EventTimelinePremiumStyledContext.Provider value={timelineStyledContextValue}>
-        <EventDialogStyledContext.Provider value={dialogStyledContextValue}>
-          <SharedComponentsStyledContext.Provider value={sharedComponentsStyledContextValue}>
-            <EventTimelinePremiumRoot
-              ref={forwardedRef}
-              className={clsx(classes.root, className)}
-              {...other}
-            >
-              <EventTimelinePremiumContent />
-              <ErrorContainer />
-              {watermark}
-            </EventTimelinePremiumRoot>
-          </SharedComponentsStyledContext.Provider>
-        </EventDialogStyledContext.Provider>
-      </EventTimelinePremiumStyledContext.Provider>
-    </SchedulerStoreContext.Provider>
-  );
+    throw new Error("STUB");
 }) as EventTimelinePremiumComponent;
 
 EventTimelinePremium.propTypes /* remove-proptypes */ = {

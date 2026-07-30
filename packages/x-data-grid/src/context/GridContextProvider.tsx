@@ -23,19 +23,5 @@ export function GridContextProvider({
   props,
   children,
 }: GridContextProviderProps) {
-  const apiRef = React.useRef(privateApiRef.current.getPublicApi());
-
-  return (
-    <GridConfigurationContext.Provider value={configuration}>
-      <GridRootPropsContext.Provider value={props}>
-        <GridPrivateApiContext.Provider value={privateApiRef}>
-          <GridApiContext.Provider value={apiRef}>
-            <GridPanelContextProvider>
-              <GridCSSVariablesContext>{children}</GridCSSVariablesContext>
-            </GridPanelContextProvider>
-          </GridApiContext.Provider>
-        </GridPrivateApiContext.Provider>
-      </GridRootPropsContext.Provider>
-    </GridConfigurationContext.Provider>
-  );
+    throw new Error("STUB");
 }

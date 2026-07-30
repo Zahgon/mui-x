@@ -8,10 +8,7 @@ const getSeriesWithDefaultValues: GetSeriesWithDefaultValues<'pie'> = (
   return {
     ...seriesData,
     id: seriesData.id ?? `auto-generated-id-${seriesIndex}`,
-    data: seriesData.data.map((d, index) => ({
-      ...d,
-      color: d.color ?? colors[index % colors.length],
-    })),
+    data: seriesData.data.map((d, index) => { throw new Error("STUB"); }),
   };
 };
 

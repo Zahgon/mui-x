@@ -35,68 +35,24 @@ export function useAnimateInternal<Props extends {}, Elem extends Element>(
   const lastPropsRef = React.useRef<Props>(props);
 
   useEnhancedEffect(() => {
-    lastPropsRef.current = props;
+      throw new Error("STUB");
   }, [props]);
 
   useEnhancedEffect(() => {
-    if (skip) {
-      transitionRef.current?.finish();
-      transitionRef.current = null;
-      elementRef.current = null;
-      lastInterpolatedPropsRef.current = props;
-    }
+      throw new Error("STUB");
   }, [props, skip]);
 
   const animate = React.useCallback(
     (element: Elem) => {
-      const lastInterpolatedProps = lastInterpolatedPropsRef.current;
-      const interpolate = createInterpolator(lastInterpolatedProps, props);
-      transitionRef.current = new Transition(
-        ANIMATION_DURATION_MS,
-        ANIMATION_TIMING_FUNCTION_JS,
-        (t) => {
-          const interpolatedProps = interpolate(t);
-
-          lastInterpolatedPropsRef.current = interpolatedProps;
-
-          applyProps(element, interpolatedProps);
-        },
-      );
-    },
+          throw new Error("STUB");
+      },
     [applyProps, createInterpolator, props],
   );
 
   const setRef = React.useCallback(
     (element: Elem | null) => {
-      if (element === null) {
-        transitionRef.current?.stop();
-        return;
-      }
-
-      const lastElement = elementRef.current;
-
-      if (lastElement === element) {
-        // If it's the same element and same props, resume the transition.
-        if (shallowEqual(lastPropsRef.current, props)) {
-          transitionRef.current?.resume();
-          return;
-        }
-
-        // If props aren't the same, stop the transition and start a new animation.
-        transitionRef.current?.stop();
-      }
-
-      // If it's a different element, stop the transition of the last element and start a new animation.
-      if (lastElement) {
-        transitionRef.current?.stop();
-      }
-
-      elementRef.current = element;
-
-      if (transitionRef.current || !skip) {
-        animate(element);
-      }
-    },
+          throw new Error("STUB");
+      },
     [animate, props, skip],
   );
 

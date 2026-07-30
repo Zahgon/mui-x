@@ -34,42 +34,15 @@ export class SchedulerSchedulingPlugin<
   protected readonly disposables = new DisposableStack();
 
   public constructor(store: SchedulerStore<TEvent, any, State, Parameters>) {
-    this.store = store;
-
-    if (process.env.NODE_ENV !== 'production') {
-      this.warnOnInvalidDependencies();
-      this.disposables.defer(
-        store.registerStoreEffect(
-          (state) => state.dependencyModelList,
-          () => this.warnOnInvalidDependencies(),
-        ),
-      );
-      this.disposables.defer(
-        store.registerStoreEffect(
-          (state) => state.processedEventLookup,
-          () => this.warnOnInvalidDependencies(),
-        ),
-      );
-    }
+      throw new Error("STUB");
   }
 
   [disposeSymbol]() {
-    this.disposables.dispose();
+      throw new Error("STUB");
   }
 
   private updateDependencies(newDependencies: SchedulerDependency[]) {
-    if (process.env.NODE_ENV !== 'production') {
-      if (!this.store.parameters.onDependenciesChange) {
-        warnOnce([
-          'MUI X Scheduler: A dependency update was ignored because no `onDependenciesChange` handler is provided.',
-          'The `dependencies` prop is fully controlled, so without it the changes are lost and the UI does not update.',
-          'Pass an `onDependenciesChange` handler that updates the `dependencies` prop.',
-        ]);
-      }
-    }
-
-    const eventDetails = createChangeEventDetails('none');
-    this.store.parameters.onDependenciesChange?.(newDependencies, eventDetails);
+      throw new Error("STUB");
   }
 
   /**
@@ -80,9 +53,7 @@ export class SchedulerSchedulingPlugin<
     current: readonly SchedulerDependency[],
     remaining: SchedulerDependency[],
   ) {
-    if (remaining.length !== current.length) {
-      this.updateDependencies(remaining);
-    }
+      throw new Error("STUB");
   }
 
   /**
@@ -93,17 +64,7 @@ export class SchedulerSchedulingPlugin<
    * its dependencies were already removed — a known v1 limitation, there is no rollback.
    */
   public handleEventsUpdate = (parameters: UpdateEventsParameters) => {
-    const { deleted } = parameters;
-    if (!deleted || deleted.length === 0) {
-      return;
-    }
-
-    const deletedSet = new Set(deleted);
-    const current = this.store.state.dependencyModelList;
-    const remaining = current.filter(
-      (dependency) => !deletedSet.has(dependency.source) && !deletedSet.has(dependency.target),
-    );
-    this.updateDependenciesIfChanged(current, remaining);
+      throw new Error("STUB");
   };
 
   /**
@@ -115,27 +76,7 @@ export class SchedulerSchedulingPlugin<
   public addDependency = (
     properties: SchedulerDependencyCreationProperties,
   ): SchedulerAddDependencyResult => {
-    const { processedEventLookup } = this.store.state;
-    for (const eventId of [properties.source, properties.target]) {
-      const status = classifyDependencyEvent(processedEventLookup, eventId);
-      if (status !== 'ok') {
-        return { status: 'rejected', reason: status, eventId };
-      }
-    }
-
-    // Only `source`/`target` define identity while the type union has a single member;
-    // TODO(#22853): include `type` in the identity when the type union widens.
-    const duplicate = this.store.state.dependencyModelList.find(
-      (dependency) =>
-        dependency.source === properties.source && dependency.target === properties.target,
-    );
-    if (duplicate) {
-      return { status: 'rejected', reason: 'duplicateDependency', dependencyId: duplicate.id };
-    }
-
-    const dependency: SchedulerDependency = { ...properties, id: generateId('dependency') };
-    this.updateDependencies([...this.store.state.dependencyModelList, dependency]);
-    return { status: 'added', id: dependency.id };
+      throw new Error("STUB");
   };
 
   /**
@@ -143,33 +84,10 @@ export class SchedulerSchedulingPlugin<
    * Implementation of the store's `deleteDependency()` — call it through the store.
    */
   public deleteDependency = (dependencyId: SchedulerDependencyId) => {
-    const current = this.store.state.dependencyModelList;
-    const remaining = current.filter((dependency) => dependency.id !== dependencyId);
-    this.updateDependenciesIfChanged(current, remaining);
+      throw new Error("STUB");
   };
 
   private warnOnInvalidDependencies() {
-    const { dependencyModelList, processedEventLookup } = this.store.state;
-    // With lazy loading a missing event is expected (it may not be fetched yet).
-    const hasDataSource = this.store.parameters.dataSource != null;
-
-    for (const dependency of dependencyModelList) {
-      for (const eventId of [dependency.source, dependency.target]) {
-        const status = classifyDependencyEvent(processedEventLookup, eventId);
-        if (status === 'unknownEvent') {
-          if (!hasDataSource) {
-            warnOnce([
-              `MUI X Scheduler: The dependency "${String(dependency.id)}" references the unknown event "${String(eventId)}".`,
-              'It is kept in the data but ignored by the timeline.',
-            ]);
-          }
-        } else if (status === 'recurringEvent') {
-          warnOnce([
-            `MUI X Scheduler: The dependency "${String(dependency.id)}" references the recurring event "${String(eventId)}".`,
-            'Dependencies on recurring events are not supported, so it is ignored by the timeline.',
-          ]);
-        }
-      }
-    }
+      throw new Error("STUB");
   }
 }

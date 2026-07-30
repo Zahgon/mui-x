@@ -16,38 +16,20 @@ const useThemeProps = createUseThemeProps('MuiChatMessageSources');
 const ChatMessageSourcesRootStyled = styled('div', {
   name: 'MuiChatMessageSources',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(0.5),
-  marginTop: theme.spacing(1),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatMessageSourcesLabelStyled = styled('p', {
   name: 'MuiChatMessageSources',
   slot: 'Label',
-  overridesResolver: (_, styles) => styles.label,
-})(({ theme }) => ({
-  margin: 0,
-  paddingBottom: theme.spacing(0.25),
-  fontSize: theme.typography.caption.fontSize,
-  color: (theme.vars || theme).palette.text.secondary,
-  fontWeight: theme.typography.fontWeightMedium,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatMessageSourcesListStyled = styled('ol', {
   name: 'MuiChatMessageSources',
   slot: 'List',
-  overridesResolver: (_, styles) => styles.list,
-})(({ theme }) => ({
-  margin: 0,
-  padding: 0,
-  listStyle: 'none',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(0.5),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 export interface ChatMessageSourcesSlots {
   /** The root container element. @default 'div' */
@@ -86,59 +68,7 @@ const ChatMessageSources = React.forwardRef(function ChatMessageSources(
   inProps: ChatMessageSourcesProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiChatMessageSources' });
-  const {
-    label = 'Sources',
-    children,
-    className,
-    classes: classesProp,
-    slots,
-    slotProps,
-    sx,
-    ...other
-  } = props;
-  const classes = useChatMessageSourcesUtilityClasses(classesProp);
-
-  const Root = slots?.root ?? ChatMessageSourcesRootStyled;
-  const Label = slots?.label ?? ChatMessageSourcesLabelStyled;
-  const List = slots?.list ?? ChatMessageSourcesListStyled;
-
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState: {},
-    additionalProps: {
-      ref,
-      className: clsx(classes.root, className),
-      sx,
-    },
-  });
-
-  const labelProps = useSlotProps({
-    elementType: Label,
-    externalSlotProps: slotProps?.label,
-    ownerState: {},
-    additionalProps: {
-      className: classes.label,
-    },
-  });
-
-  const listProps = useSlotProps({
-    elementType: List,
-    externalSlotProps: slotProps?.list,
-    ownerState: {},
-    additionalProps: {
-      className: classes.list,
-    },
-  });
-
-  return (
-    <Root {...rootProps}>
-      <Label {...labelProps}>{label}</Label>
-      <List {...listProps}>{children}</List>
-    </Root>
-  );
+    throw new Error("STUB");
 }) as ChatMessageSourcesComponent;
 
 ChatMessageSources.propTypes /* remove-proptypes */ = {

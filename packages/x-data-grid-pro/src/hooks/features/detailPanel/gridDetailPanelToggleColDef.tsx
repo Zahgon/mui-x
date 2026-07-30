@@ -27,11 +27,9 @@ export const GRID_DETAIL_PANEL_TOGGLE_COL_DEF: GridColDef = {
   align: 'left',
   width: 40,
   valueGetter: (value, row, column, apiRef) => {
-    const rowId = gridRowIdSelector(apiRef, row);
-    const expandedRowIds = gridDetailPanelExpandedRowIdsSelector(apiRef as RefObject<GridApiPro>);
-    return expandedRowIds.has(rowId);
+      throw new Error("STUB");
   },
-  rowSpanValueGetter: (_, row, __, apiRef) => gridRowIdSelector(apiRef, row),
-  renderCell: (params) => <GridDetailPanelToggleCell {...params} />,
-  renderHeader: ({ colDef }) => <span style={visuallyHidden}>{colDef.headerName}</span>,
+  rowSpanValueGetter: (_, row, __, apiRef) => { throw new Error("STUB"); },
+  renderCell: (params) => { throw new Error("STUB"); },
+  renderHeader: ({ colDef }) => { throw new Error("STUB"); },
 };

@@ -38,16 +38,13 @@ function GridFilterInputBoolean(props: GridFilterInputBooleanProps) {
 
   const onFilterChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = sanitizeFilterItemValue(event.target.value);
-      setFilterValueState(value);
-
-      applyValue({ ...item, value });
-    },
+          throw new Error("STUB");
+      },
     [applyValue, item],
   );
 
   React.useEffect(() => {
-    setFilterValueState(sanitizeFilterItemValue(item.value));
+      throw new Error("STUB");
   }, [item.value]);
 
   const label = slotProps?.root.label ?? apiRef.current.getLocaleText('filterPanelInputLabel');
@@ -135,14 +132,8 @@ GridFilterInputBoolean.propTypes /* remove-proptypes */ = {
     PropTypes.func,
     PropTypes.shape({
       current: (props, propName) => {
-        if (props[propName] == null) {
-          return null;
-        }
-        if (typeof props[propName] !== 'object' || props[propName].nodeType !== 1) {
-          return new Error(`Expected prop '${propName}' to be of type Element`);
-        }
-        return null;
-      },
+            throw new Error("STUB");
+        },
     }),
   ]),
   /**

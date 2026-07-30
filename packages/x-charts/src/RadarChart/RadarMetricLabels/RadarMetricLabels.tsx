@@ -11,24 +11,7 @@ function RadarMetricLabels() {
 
   return (
     <React.Fragment>
-      {corners.map(({ x, y, angle, label }, i) => (
-        <ChartsText
-          key={i}
-          x={x}
-          y={y}
-          fontSize={14}
-          fill={(theme.vars || theme).palette.text.primary}
-          stroke="none"
-          text={label}
-          style={{
-            ...theme.typography.caption,
-            fontSize: 12,
-            lineHeight: 1.25,
-            textAnchor: getDefaultTextAnchor(180 + angle),
-            dominantBaseline: getDefaultBaseline(180 + angle),
-          }}
-        />
-      ))}
+      {corners.map(({ x, y, angle, label }, i) => { throw new Error("STUB"); })}
     </React.Fragment>
   );
 }

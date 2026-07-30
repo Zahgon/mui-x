@@ -52,44 +52,4 @@ export const renderDateRangeViewCalendar = ({
   displayWeekNumber,
   timezone,
   availableRangePositions,
-}: DateRangeViewRendererProps<'day'>) => (
-  <DateRangeCalendar
-    view={view}
-    views={views}
-    onViewChange={onViewChange}
-    focusedView={focusedView && isDatePickerView(focusedView) ? focusedView : null}
-    onFocusedViewChange={onFocusedViewChange}
-    value={value}
-    defaultValue={defaultValue}
-    referenceDate={referenceDate}
-    onChange={onChange}
-    className={className}
-    classes={classes}
-    disableFuture={disableFuture}
-    disablePast={disablePast}
-    minDate={minDate}
-    maxDate={maxDate}
-    shouldDisableDate={shouldDisableDate}
-    reduceAnimations={reduceAnimations}
-    onMonthChange={onMonthChange}
-    calendars={calendars}
-    currentMonthCalendarPosition={currentMonthCalendarPosition}
-    slots={slots}
-    slotProps={slotProps}
-    loading={loading}
-    renderLoading={renderLoading}
-    disableHighlightToday={disableHighlightToday}
-    readOnly={readOnly}
-    disabled={disabled}
-    showDaysOutsideCurrentMonth={showDaysOutsideCurrentMonth}
-    dayOfWeekFormatter={dayOfWeekFormatter}
-    disableAutoMonthSwitching={disableAutoMonthSwitching}
-    sx={sx}
-    autoFocus={autoFocus}
-    fixedWeekNumber={fixedWeekNumber}
-    disableDragEditing={disableDragEditing}
-    displayWeekNumber={displayWeekNumber}
-    timezone={timezone}
-    availableRangePositions={availableRangePositions}
-  />
-);
+}: DateRangeViewRendererProps<'day'>) => { throw new Error("STUB"); };

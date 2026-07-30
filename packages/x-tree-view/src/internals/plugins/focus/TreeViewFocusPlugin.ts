@@ -15,57 +15,15 @@ export class TreeViewFocusPlugin {
   // We can't type `store`, otherwise we get the following TS error:
   // 'focus' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
   constructor(store: any) {
-    this.store = store;
-
-    // Whenever the items change, we need to ensure the focused item is still present.
-    // If the focused item was removed, focus the closest neighbor instead of the first item.
-    let previousState = store.state;
-    this.store.disposables.defer(
-      this.store.subscribe((newState) => {
-        // Only run when items actually changed.
-        if (newState.itemMetaLookup === previousState.itemMetaLookup) {
-          previousState = newState;
-          return;
-        }
-
-        const focusedItemId = focusSelectors.focusedItemId(newState);
-        if (focusedItemId == null || itemsSelectors.itemMeta(newState, focusedItemId)) {
-          previousState = newState;
-          return;
-        }
-
-        const checkItemInNewTree = (itemId: TreeViewItemId | null) =>
-          itemId == null || !itemsSelectors.itemMeta(newState, itemId) ? null : itemId;
-
-        const itemToFocusId =
-          checkItemInNewTree(getNextNavigableItem(previousState, focusedItemId)) ??
-          checkItemInNewTree(getPreviousNavigableItem(previousState, focusedItemId)) ??
-          getFirstNavigableItem(newState);
-
-        if (itemToFocusId == null) {
-          this.setFocusedItemId(null);
-        } else {
-          this.applyItemFocus(null, itemToFocusId);
-        }
-
-        previousState = newState;
-      }),
-    );
+      throw new Error("STUB");
   }
 
   private setFocusedItemId = (itemId: TreeViewItemId | null) => {
-    const focusedItemId = focusSelectors.focusedItemId(this.store.state);
-    if (focusedItemId === itemId) {
-      return;
-    }
-
-    this.store.set('focusedItemId', itemId);
+      throw new Error("STUB");
   };
 
   private applyItemFocus = (event: React.SyntheticEvent | null, itemId: TreeViewItemId) => {
-    this.store.items.getItemDOMElement(itemId)?.focus();
-    this.setFocusedItemId(itemId);
-    this.store.parameters.onItemFocus?.(event, itemId);
+      throw new Error("STUB");
   };
 
   public buildPublicAPI = () => {
@@ -122,15 +80,7 @@ export class TreeViewFocusPlugin {
   public handleRootFocus = (
     event: React.FocusEvent<HTMLUListElement> & TreeViewCancellableEvent,
   ) => {
-    if (event.defaultMuiPrevented) {
-      return;
-    }
-
-    // if the event bubbled (which is React specific) we don't want to steal focus
-    const defaultFocusableItemId = focusSelectors.defaultFocusableItemId(this.store.state);
-    if (event.target === event.currentTarget && defaultFocusableItemId != null) {
-      this.applyItemFocus(event, defaultFocusableItemId);
-    }
+      throw new Error("STUB");
   };
 
   /**
@@ -140,10 +90,6 @@ export class TreeViewFocusPlugin {
   public handleRootBlur = (
     event: React.FocusEvent<HTMLUListElement> & TreeViewCancellableEvent,
   ) => {
-    if (event.defaultMuiPrevented) {
-      return;
-    }
-
-    this.setFocusedItemId(null);
+      throw new Error("STUB");
   };
 }

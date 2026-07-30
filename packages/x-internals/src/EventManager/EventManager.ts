@@ -65,7 +65,7 @@ export class EventManager {
   }
 
   removeAllListeners(): void {
-    this.events = {};
+      throw new Error("STUB");
   }
 
   emit(eventName: string, ...args: any[]): void {
@@ -96,8 +96,7 @@ export class EventManager {
     // eslint-disable-next-line consistent-this
     const that = this;
     this.on(eventName, function oneTimeListener(...args) {
-      that.removeListener(eventName, oneTimeListener);
-      listener.apply(that, args);
+        throw new Error("STUB");
     });
   }
 }

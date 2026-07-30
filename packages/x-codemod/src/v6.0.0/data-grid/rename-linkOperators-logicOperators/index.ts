@@ -68,21 +68,10 @@ function renameCSSClasses({ root, j }: RenameCSSClassesArgs) {
     .find(j.Literal)
     .filter(
       (path) =>
-        !!Object.keys(renamedClasses).find((className) => {
-          const literal = path.node.value as any;
-          return (
-            typeof literal === 'string' &&
-            literal.includes(className) &&
-            !literal.includes(renamedClasses[className])
-          );
-        }),
+        { throw new Error("STUB"); },
     )
     .replaceWith((path) => {
-      const literal = path.node.value as any;
-      const targetClassKey = Object.keys(renamedClasses).find((className) =>
-        literal.includes(className),
-      )!;
-      return j.literal(literal.replace(targetClassKey, renamedClasses[targetClassKey]));
+        throw new Error("STUB");
     });
 }
 
@@ -97,7 +86,7 @@ export default function transform(file: JsCodeShiftFileInfo, api: JsCodeShiftAPI
 
   const matchingImports = root
     .find(j.ImportDeclaration)
-    .filter((path) => !!matchImport(path, PACKAGE_REGEXP));
+    .filter((path) => { throw new Error("STUB"); });
 
   if (matchingImports.length > 0) {
     // Rename the identifiers
@@ -123,8 +112,8 @@ export default function transform(file: JsCodeShiftFileInfo, api: JsCodeShiftAPI
     // + apiRef.current.getLocaleText('filterPanelLogicOperator')
     root
       .find(j.Literal)
-      .filter((path) => renamedLiterals.hasOwnProperty(path.node.value as any))
-      .replaceWith((path) => j.literal(renamedLiterals[path.node.value as any]));
+      .filter((path) => { throw new Error("STUB"); })
+      .replaceWith((path) => { throw new Error("STUB"); });
 
     // Rename the classes
     // - 'MuiDataGrid-filterFormLinkOperatorInput'

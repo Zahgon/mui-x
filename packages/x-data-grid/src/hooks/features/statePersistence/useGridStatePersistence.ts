@@ -10,10 +10,8 @@ export const useGridStatePersistence = (apiRef: RefObject<GridPrivateApiCommunit
     GridStatePersistenceApi<GridInitialStateCommunity>['exportState']
   >(
     (params = {}) => {
-      const stateToExport = apiRef.current.unstable_applyPipeProcessors('exportState', {}, params);
-
-      return stateToExport as GridInitialStateCommunity;
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
@@ -21,20 +19,8 @@ export const useGridStatePersistence = (apiRef: RefObject<GridPrivateApiCommunit
     GridStatePersistenceApi<GridInitialStateCommunity>['restoreState']
   >(
     (stateToRestore) => {
-      const response = apiRef.current.unstable_applyPipeProcessors(
-        'restoreState',
-        {
-          callbacks: [],
-        },
-        {
-          stateToRestore,
-        },
-      );
-
-      response.callbacks.forEach((callback) => {
-        callback();
-      });
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 

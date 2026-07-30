@@ -19,26 +19,7 @@ const StandaloneAgendaView = React.forwardRef(function StandaloneAgendaView<
   inProps: StandaloneAgendaViewProps<TEvent, TResource>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  // eslint-disable-next-line mui/material-ui-name-matches-component-name
-  const props = useThemeProps({ props: inProps, name: 'MuiEventCalendar' });
-
-  const { parameters, forwardedProps } = useExtractEventCalendarParameters<
-    TEvent,
-    TResource,
-    typeof props
-  >(props);
-
-  const { localeText, ...other } = forwardedProps;
-
-  return (
-    <ResponsiveTypographyContainer>
-      <EventCalendarProvider {...parameters} localeText={localeText}>
-        <EventDialogProvider>
-          <AgendaView ref={forwardedRef} {...other} />
-        </EventDialogProvider>
-      </EventCalendarProvider>
-    </ResponsiveTypographyContainer>
-  );
+    throw new Error("STUB");
 }) as StandaloneAgendaViewComponent;
 
 StandaloneAgendaView.propTypes /* remove-proptypes */ = {

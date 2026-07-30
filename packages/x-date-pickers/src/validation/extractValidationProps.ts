@@ -56,10 +56,7 @@ type ValidationPropNames = (typeof VALIDATION_PROP_NAMES)[number];
 export const extractValidationProps = <Props extends { [key: string]: any }>(props: Props) =>
   VALIDATION_PROP_NAMES.reduce(
     (extractedProps, propName) => {
-      if (props.hasOwnProperty(propName)) {
-        extractedProps[propName] = props[propName];
-      }
-      return extractedProps;
-    },
+          throw new Error("STUB");
+      },
     {} as Pick<Props, ValidationPropNames>,
   );

@@ -13,10 +13,7 @@ import { styled } from '@mui/material/styles';
 const ChartsZoomSliderTooltipRoot = styled(Popper, {
   name: 'MuiChartsZoomSliderTooltip',
   slot: 'Root',
-})(({ theme }) => ({
-  pointerEvents: 'none',
-  zIndex: theme.zIndex.modal,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MODIFIERS = [
   {
@@ -37,20 +34,5 @@ export function ChartsTooltipZoomSliderValue({
   modifiers = MODIFIERS,
   children,
 }: ChartsTooltipZoomSliderValueProps) {
-  return (
-    <NoSsr>
-      {open ? (
-        <ChartsZoomSliderTooltipRoot
-          open={open}
-          anchorEl={anchorEl}
-          placement={placement}
-          modifiers={modifiers}
-        >
-          <ChartsTooltipPaper sx={{ paddingX: 0.5 }}>
-            <Typography variant="caption">{children}</Typography>
-          </ChartsTooltipPaper>
-        </ChartsZoomSliderTooltipRoot>
-      ) : null}
-    </NoSsr>
-  );
+    throw new Error("STUB");
 }

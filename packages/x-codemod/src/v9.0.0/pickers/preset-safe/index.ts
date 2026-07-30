@@ -25,7 +25,7 @@ const allModules = [
 
 export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftAPI, options: any) {
   allModules.forEach((transform) => {
-    file.source = transform(file, api, options);
+      throw new Error("STUB");
   });
 
   return file.source;

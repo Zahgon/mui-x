@@ -85,133 +85,7 @@ export const serializeRowUnsafe = (
   }
 
   columns.forEach((column, colIndex) => {
-    const colSpanInfo = hasColSpan
-      ? apiRef.current.unstable_getCellColSpanInfo(id, colIndex)
-      : undefined;
-    if (colSpanInfo && colSpanInfo.spannedByColSpan) {
-      return;
-    }
-    if (colSpanInfo && colSpanInfo.cellProps.colSpan > 1) {
-      mergedCells.push({
-        leftIndex: colIndex + 1,
-        rightIndex: colIndex + colSpanInfo.cellProps.colSpan,
-      });
-    }
-
-    let cellValue: string | undefined;
-
-    switch (column.type) {
-      case 'singleSelect': {
-        const castColumn = column as GridSingleSelectColDef;
-        if (typeof castColumn.valueOptions === 'function') {
-          // If value option depends on the row, set specific options to the cell
-          // This dataValidation is buggy with LibreOffice and does not allow to have coma
-          const valueOptions = castColumn.valueOptions({
-            id,
-            row,
-            field: column.field,
-          });
-
-          let formulae: string = '"';
-          getFormattedValueOptions(
-            castColumn,
-            row,
-            valueOptions,
-            apiRef.current,
-            (value, index) => {
-              const formatted = value.toString().replace(commaRegex, commaReplacement);
-              formulae += formatted;
-              if (index < valueOptions.length - 1) {
-                formulae += ',';
-              }
-            },
-          );
-          formulae += '"';
-
-          dataValidation[castColumn.field] = {
-            type: 'list',
-            allowBlank: true,
-            formulae: [formulae],
-          };
-        } else {
-          const address = defaultValueOptionsFormulae[column.field].address;
-
-          // If value option is defined for the column, refer to another sheet
-          dataValidation[castColumn.field] = {
-            type: 'list',
-            allowBlank: true,
-            formulae: [address],
-          };
-        }
-
-        const formattedValue = apiRef.current.getRowFormattedValue(row, castColumn);
-        if (process.env.NODE_ENV !== 'production') {
-          if (String(formattedValue) === '[object Object]') {
-            warnOnce([
-              'MUI X: When the value of a field is an object or a `renderCell` is provided, the Excel export might not display the value correctly.',
-              'You can provide a `valueFormatter` with a string representation to be used.',
-            ]);
-          }
-        }
-        if (isObject<{ label: any }>(formattedValue)) {
-          cellValue = formattedValue?.label;
-        } else {
-          cellValue = formattedValue as any;
-        }
-        break;
-      }
-      case 'boolean':
-      case 'number':
-        cellValue = apiRef.current.getRowValue(row, column);
-        break;
-      case 'date':
-      case 'dateTime': {
-        // Excel does not do any timezone conversion, so we create a date using UTC instead of local timezone
-        // Solution from: https://github.com/exceljs/exceljs/issues/486#issuecomment-432557582
-        // About Date.UTC(): https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/UTC#exemples
-        const value = apiRef.current.getRowValue(row, column) as Date;
-        // value may be `undefined` in auto-generated grouping rows
-        if (!value) {
-          break;
-        }
-        const utcDate = new Date(
-          Date.UTC(
-            value.getFullYear(),
-            value.getMonth(),
-            value.getDate(),
-            value.getHours(),
-            value.getMinutes(),
-            value.getSeconds(),
-          ),
-        );
-        serializedRow[column.field] = utcDate;
-        break;
-      }
-      case 'actions':
-        break;
-      default:
-        cellValue = apiRef.current.getRowFormattedValue(row, column);
-        if (process.env.NODE_ENV !== 'production') {
-          if (String(cellValue) === '[object Object]') {
-            warnOnce([
-              'MUI X: When the value of a field is an object or a `renderCell` is provided, the Excel export might not display the value correctly.',
-              'You can provide a `valueFormatter` with a string representation to be used.',
-            ]);
-          }
-        }
-        break;
-    }
-
-    if (typeof cellValue === 'string' && options.escapeFormulas) {
-      // See https://owasp.org/www-community/attacks/CSV_Injection
-      if (['=', '+', '-', '@', '\t', '\r'].includes(cellValue[0])) {
-        cellValue = `'${cellValue}`;
-      }
-    }
-
-    if (typeof cellValue !== 'undefined') {
-      serializedRow[column.field] = cellValue;
-    }
+      throw new Error("STUB");
   });
 
   return {
@@ -245,7 +119,7 @@ export function serializeColumns(
   columns: GridStateColDef[],
   styles: ColumnsStylesInterface,
 ): SerializedColumns {
-  return columns.map((column) => serializeColumn(column, styles));
+  return columns.map((column) => { throw new Error("STUB"); });
 }
 
 export async function getDataForValueOptionsSheet(
@@ -279,7 +153,7 @@ export async function getDataForValueOptionsSheet(
       column.valueOptions as Array<ValueOptions>,
       api,
       (value) => {
-        values.push(value);
+          throw new Error("STUB");
       },
     );
 
@@ -334,8 +208,7 @@ export async function buildExcel(
 
   if (includeColumnGroupsHeaders) {
     const columnGroupPaths = columns.reduce<Record<string, string[]>>((acc, column) => {
-      acc[column.field] = apiRef.current.getColumnGroupPath(column.field);
-      return acc;
+        throw new Error("STUB");
     }, {});
 
     addColumnGroupingHeaders(
@@ -347,7 +220,7 @@ export async function buildExcel(
   }
 
   if (includeHeaders) {
-    worksheet.addRow(columns.map((column) => column.headerName ?? column.field));
+    worksheet.addRow(columns.map((column) => { throw new Error("STUB"); }));
   }
 
   const valueOptionsData = await getDataForValueOptionsSheet(
@@ -359,8 +232,7 @@ export async function buildExcel(
 
   apiRef.current.resetColSpan();
   rowIds.forEach((id) => {
-    const serializedRow = serializeRowUnsafe(id, columns, apiRef, valueOptionsData, options);
-    addSerializedRowToWorksheet(serializedRow, worksheet);
+      throw new Error("STUB");
   });
   apiRef.current.resetColSpan();
 

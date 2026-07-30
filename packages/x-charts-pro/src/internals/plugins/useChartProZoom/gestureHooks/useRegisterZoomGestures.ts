@@ -17,40 +17,6 @@ import {
  */
 export const useRegisterZoomGestures = ({ instance }: { instance: ChartUsedInstance<any> }) => {
   React.useEffect(() => {
-    return instance.registerGestures([
-      new PanGesture({
-        name: 'zoomPan',
-        threshold: 0,
-        preventIf: ['zoomTapAndDrag', 'zoomPressAndDrag'],
-      }),
-      new PinchGesture({
-        name: 'zoomPinch',
-        threshold: 5,
-      }),
-      new TurnWheelGesture({
-        name: 'zoomTurnWheel',
-        sensitivity: 0.01,
-        initialDelta: 1,
-        passive: false,
-      }),
-      new TurnWheelGesture({
-        name: 'panTurnWheel',
-        sensitivity: 0.5,
-        passive: false,
-      }),
-      new TapAndDragGesture({
-        name: 'zoomTapAndDrag',
-        dragThreshold: 10,
-      }),
-      new PressAndDragGesture({
-        name: 'zoomPressAndDrag',
-        dragThreshold: 10,
-        preventIf: ['zoomPinch'],
-      }),
-      new TapGesture({
-        name: 'zoomDoubleTapReset',
-        taps: 2,
-      }),
-    ]);
+      throw new Error("STUB");
   }, [instance]);
 };

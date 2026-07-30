@@ -45,65 +45,11 @@ export const ReasoningPart = React.forwardRef(function ReasoningPart(
   props: ReasoningPartProps,
   ref: React.Ref<HTMLDetailsElement>,
 ) {
-  const { className, index, message, onToolCall, part, slots, slotProps, ...other } = props;
-  void index;
-  void onToolCall;
-  const localeText = useChatLocaleText();
-  const ownerState = React.useMemo<ReasoningPartOwnerState>(
-    () => ({
-      messageId: message.id,
-      role: message.role,
-      streaming: part.state === 'streaming',
-    }),
-    [message.id, message.role, part.state],
-  );
-  const Root = slots?.root ?? 'details';
-  const Summary = slots?.summary ?? 'summary';
-  const Content = slots?.content ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-      open: ownerState.streaming,
-      className,
-    },
-  });
-  // Inside a roving message list the summary leaves the tab order until the
-  // user drills into the message (Enter); it stays mouse-clickable.
-  const contentTabIndex = useMessageContentTabIndex();
-  const summaryProps = useSlotProps({
-    elementType: Summary,
-    externalSlotProps: slotProps?.summary,
-    ownerState,
-    additionalProps: {
-      tabIndex: contentTabIndex,
-    },
-  });
-  const contentProps = useSlotProps({
-    elementType: Content,
-    externalSlotProps: slotProps?.content,
-    ownerState,
-  });
-
-  return (
-    <Root {...rootProps}>
-      <Summary {...summaryProps}>
-        {ownerState.streaming
-          ? localeText.messageReasoningStreamingLabel
-          : localeText.messageReasoningLabel}
-      </Summary>
-      <Content {...contentProps}>{part.text}</Content>
-    </Root>
-  );
+    throw new Error("STUB");
 }) as ReasoningPartComponent;
 
 export function createReasoningPartRenderer(
   defaultProps: ReasoningPartExternalProps = {},
 ): ChatPartRenderer<ChatReasoningMessagePart> {
-  return function ReasoningPartRenderer(rendererProps) {
-    return <ReasoningPart {...defaultProps} {...rendererProps} />;
-  };
+    throw new Error("STUB");
 }

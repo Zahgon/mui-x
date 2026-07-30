@@ -54,34 +54,9 @@ const GridChartTypeRoot = styled('div', {
 const GridChartTypeButton = styled('button', {
   name: 'MuiDataGrid',
   slot: 'ChartTypeSelectorButton',
-  shouldForwardProp: (prop) => prop !== 'isSelected',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<ChartTypeButtonProps>(({ isSelected }) => {
-  return {
-    backgroundColor: isSelected
-      ? `color-mix(in srgb, ${vars.colors.interactive.selected} calc(${vars.colors.interactive.selectedOpacity} * 100%), ${vars.colors.background.base})`
-      : vars.colors.background.base,
-    color: isSelected ? vars.colors.interactive.selected : vars.colors.foreground.muted,
-    cursor: 'pointer',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: vars.spacing(0.5),
-    padding: vars.spacing(1.5, 1, 1),
-    border: `1px solid ${isSelected ? vars.colors.interactive.selected : vars.colors.border.base}`,
-    font: vars.typography.font.small,
-    fontWeight: vars.typography.fontWeight.medium,
-    borderRadius: vars.radius.base,
-    transition: vars.transition(['border-color', 'background-color', 'color'], {
-      duration: vars.transitions.duration.short,
-      easing: vars.transitions.easing.easeInOut,
-    }),
-    '&:hover': {
-      backgroundColor: isSelected
-        ? `color-mix(in srgb, ${vars.colors.interactive.selected} calc(${vars.colors.interactive.selectedOpacity} * 100%), ${vars.colors.background.base})`
-        : vars.colors.interactive.hover,
-    },
-  };
+    throw new Error("STUB");
 });
 
 function GridChartsPanelChart(props: GridChartsPanelChartProps) {
@@ -92,18 +67,7 @@ function GridChartsPanelChart(props: GridChartsPanelChartProps) {
   return (
     <GridChartsManagementRoot ownerState={rootProps} className={classes.root}>
       <GridChartTypeRoot className={classes.chartTypeRoot}>
-        {Object.entries(schema).map(([type, config]) => (
-          <GridChartTypeButton
-            key={type}
-            className={classes.button}
-            isSelected={type === selectedChartType}
-            onClick={() => onChartTypeChange(type)}
-            {...rootProps.slotProps?.baseButton}
-          >
-            <config.icon style={{ width: 32, height: 32 }} />
-            {config.label}
-          </GridChartTypeButton>
-        ))}
+        {Object.entries(schema).map(([type, config]) => { throw new Error("STUB"); })}
       </GridChartTypeRoot>
     </GridChartsManagementRoot>
   );

@@ -10,7 +10,5 @@ export function useEventCalendarPremiumApiRef<
   TEvent extends object = object,
   TResource extends object = object,
 >() {
-  return React.useRef(undefined) as React.RefObject<
-    SchedulerPublicAPI<EventCalendarPremiumStore<TEvent, TResource>> | undefined
-  >;
+    throw new Error("STUB");
 }

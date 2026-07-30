@@ -18,9 +18,7 @@ const koKRPickers: Partial<PickersLocaleText> = {
   openPreviousView: '이전 화면 보기',
   openNextView: '다음 화면 보기',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? '연도 선택 화면에서 달력 화면으로 전환하기'
-      : '달력 화면에서 연도 선택 화면으로 전환하기',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: '시작',
@@ -46,33 +44,27 @@ const koKRPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `${views[view]} 선택하세요. ${!formattedTime ? '시간을 선택하지 않았습니다.' : `현재 선택된 시간은 ${formattedTime}입니다.`}`,
-  hoursClockNumberText: (hours) => `${hours}시`,
-  minutesClockNumberText: (minutes) => `${minutes}분`,
-  secondsClockNumberText: (seconds) => `${seconds}초`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `${views[view]} 선택하기`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: '주 번호',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `${weekNumber}번째 주`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate
-      ? `날짜를 선택하세요. 현재 선택된 날짜는 ${formattedDate}입니다.`
-      : '날짜를 선택하세요',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime
-      ? `시간을 선택하세요. 현재 선택된 시간은 ${formattedTime}입니다.`
-      : '시간을 선택하세요',
+    { throw new Error("STUB"); },
   openRangePickerDialogue: (formattedRange) =>
-    formattedRange
-      ? `범위를 선택하세요. 현재 선택된 범위는 ${formattedRange}입니다.`
-      : '범위를 선택하세요',
+    { throw new Error("STUB"); },
   fieldClearLabel: '지우기',
 
   // Table labels
@@ -80,14 +72,14 @@ const koKRPickers: Partial<PickersLocaleText> = {
   dateTableLabel: '선택한 날짜',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: '년',

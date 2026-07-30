@@ -123,38 +123,7 @@ function Scatter(props: ScatterProps) {
   return (
     <g data-series={series.id} className={classes.series}>
       {scatterPlotData.map((dataPoint) => {
-        const highlightState = getHighlightState(dataPoint);
-        const isItemHighlighted = highlightState === 'highlighted';
-        const isItemFaded = highlightState === 'faded';
-
-        return (
-          <Marker
-            key={dataPoint.id ?? dataPoint.dataIndex}
-            className={clsx(classes.marker, markerProps.className)}
-            dataIndex={dataPoint.dataIndex}
-            color={colorGetter(dataPoint.dataIndex)}
-            size={sizeGetter(dataPoint.dataIndex)}
-            isHighlighted={isItemHighlighted}
-            isFaded={isItemFaded}
-            x={dataPoint.x}
-            y={dataPoint.y}
-            onClick={
-              onItemClick &&
-              ((event) =>
-                onItemClick(event, {
-                  type: 'scatter',
-                  seriesId: series.id,
-                  dataIndex: dataPoint.dataIndex,
-                }))
-            }
-            data-highlighted={isItemHighlighted || undefined}
-            data-faded={isItemFaded || undefined}
-            {...(skipInteractionHandlers
-              ? undefined
-              : getInteractionItemProps(instance, dataPoint))}
-            {...markerProps}
-          />
-        );
+          throw new Error("STUB");
       })}
     </g>
   );

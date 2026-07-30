@@ -22,71 +22,19 @@ export interface ChatUnreadMarkerProps extends UnreadMarkerProps {
 const ChatUnreadMarkerStyled = styled('div', {
   name: 'MuiChatUnreadMarker',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1.5),
-  paddingInline: theme.spacing(2),
-  paddingBlock: theme.spacing(0.5),
-  // Flex-filled rules on either side of the centered chip.
-  '&::before, &::after': {
-    content: '""',
-    flex: 1,
-    height: 1,
-    backgroundColor: (theme.vars || theme).palette.divider,
-  },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatUnreadMarkerLabelStyled = styled('span', {
   name: 'MuiChatUnreadMarker',
   slot: 'Label',
-  overridesResolver: (_, styles) => styles.label,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  minHeight: 24,
-  maxWidth: '100%',
-  paddingInline: theme.spacing(1),
-  borderRadius: 12,
-  backgroundColor: (theme.vars || theme).palette.action.selected,
-  color: (theme.vars || theme).palette.text.secondary,
-  fontSize: theme.typography.caption.fontSize,
-  fontWeight: theme.typography.fontWeightMedium,
-  lineHeight: 1,
-  whiteSpace: 'nowrap',
-  flexShrink: 0,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatUnreadMarker = React.forwardRef<HTMLDivElement, ChatUnreadMarkerProps>(
   function ChatUnreadMarker(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatUnreadMarker' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatUnreadMarkerUtilityClasses(classesProp);
-
-    return (
-      <UnreadMarker
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          root: slots?.root ?? ChatUnreadMarkerStyled,
-          label: slots?.label ?? ChatUnreadMarkerLabelStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          root: mergeSlotProps(
-            {
-              className: clsx(classes.root, className),
-              sx,
-            },
-            slotProps?.root,
-          ) as any,
-          label: mergeSlotProps({ className: classes.label }, slotProps?.label) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatUnreadMarker.propTypes /* remove-proptypes */ = {

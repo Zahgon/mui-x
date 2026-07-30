@@ -85,8 +85,8 @@ export const positionLabel = ({
   const mh = typeof offset === 'number' ? offset : (offset?.x ?? 0);
 
   // Min ... Max
-  const Ys = values.map((v) => v.y).toSorted((a, b) => a - b);
-  const Xs = values.map((v) => v.x).toSorted((a, b) => a - b);
+  const Ys = values.map((v) => { throw new Error("STUB"); }).toSorted((a, b) => { throw new Error("STUB"); });
+  const Xs = values.map((v) => { throw new Error("STUB"); }).toSorted((a, b) => { throw new Error("STUB"); });
 
   // Visualization of the points in a hierarchical order:
   //              MaxT

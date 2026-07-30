@@ -45,7 +45,7 @@ export const getEmployeeColumns = (): GridColDefGenerator[] => [
     display: 'flex',
     renderCell: renderAvatar,
     valueGetter: (value, row) =>
-      row.name == null || row.avatar == null ? null : { name: row.name, color: row.avatar },
+      { throw new Error("STUB"); },
     sortable: false,
     filterable: false,
     groupable: false,
@@ -118,13 +118,13 @@ export const getEmployeeColumns = (): GridColDefGenerator[] => [
     headerName: 'Country',
     type: 'singleSelect',
     valueOptions: COUNTRY_ISO_OPTIONS_SORTED,
-    valueFormatter: (value: CountryIsoOption) => value?.label,
+    valueFormatter: (value: CountryIsoOption) => { throw new Error("STUB"); },
     generateData: randomCountry,
     renderCell: renderCountry,
     renderEditCell: renderEditCountry,
-    groupingValueGetter: (value: { label: string } | undefined) => value?.label,
+    groupingValueGetter: (value: { label: string } | undefined) => { throw new Error("STUB"); },
     sortComparator: (v1, v2, param1, param2) =>
-      gridStringOrNumberComparator(v1.label, v2.label, param1, param2),
+      { throw new Error("STUB"); },
     width: 150,
     editable: true,
   } as GridColDef<any, CountryIsoOption, string>,
@@ -171,13 +171,10 @@ export const getEmployeeColumns = (): GridColDefGenerator[] => [
   {
     field: 'salary',
     headerName: 'Salary',
-    generateData: () => randomInt(30000, 80000),
+    generateData: () => { throw new Error("STUB"); },
     type: 'number',
     valueFormatter: (value?: number) => {
-      if (!value || typeof value !== 'number') {
-        return value;
-      }
-      return `$${value.toLocaleString()}`;
+        throw new Error("STUB");
     },
   },
 ];

@@ -7,20 +7,8 @@ import type { GridRowCheckboxProps } from '../../models/gridSlotsComponentsProps
 
 const GridRowCheckbox = forwardRef<HTMLButtonElement, GridRowCheckboxProps>(
   function GridRowCheckbox(props, ref) {
-    const { rowId, material, ...other } = props;
-    const rootProps = useGridRootProps();
-    return (
-      <rootProps.slots.baseCheckbox
-        {...rootProps.slotProps?.baseCheckbox}
-        {...other}
-        material={{
-          disableRipple: props.disabled,
-          ...material,
-        }}
-        ref={ref}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridRowCheckbox.propTypes /* remove-proptypes */ = {

@@ -171,8 +171,7 @@ const getLegendSection = (
         { content: localeText.chartConfigurationOptionBottomRight, value: 'bottomRight' },
       ],
       isHidden: ({ configuration }: { configuration: GridChartsConfiguration }) =>
-        configuration[`${keyPrefix}Direction`] === 'vertical' ||
-        (configuration[`${keyPrefix}Direction`] === undefined && defaultDirection === 'vertical'),
+        { throw new Error("STUB"); },
     },
     [`${keyPrefix}PositionVertical`]: {
       label: localeText.chartConfigurationLegendPosition,
@@ -188,8 +187,7 @@ const getLegendSection = (
         { content: localeText.chartConfigurationOptionBottomRight, value: 'bottomRight' },
       ],
       isHidden: ({ configuration }: { configuration: GridChartsConfiguration }) =>
-        configuration[`${keyPrefix}Direction`] === 'horizontal' ||
-        (configuration[`${keyPrefix}Direction`] === undefined && defaultDirection === 'horizontal'),
+        { throw new Error("STUB"); },
     },
     [`${keyPrefix}Direction`]: {
       label: localeText.chartConfigurationLegendDirection,
@@ -223,10 +221,7 @@ const getColorOptions = (localeText: ChartsLocaleText) => ({
   label: localeText.chartPaletteLabel,
   type: 'select' as const,
   default: 'rainbowSurgePalette',
-  options: getColors(localeText).map(({ key, name }) => ({
-    value: key,
-    content: <PaletteOption palette={colorPaletteLookup.get(key)!}>{name}</PaletteOption>,
-  })),
+  options: getColors(localeText).map(({ key, name }) => { throw new Error("STUB"); }),
 });
 
 const getBarColumnCustomization = (
@@ -270,7 +265,7 @@ const getBarColumnCustomization = (
         label: localeText.chartConfigurationStacked,
         type: 'boolean',
         default: false,
-        isDisabled: ({ values }: { values: any[] }) => values.length < 2,
+        isDisabled: ({ values }: { values: any[] }) => { throw new Error("STUB"); },
       },
       itemLabel: {
         label:
@@ -325,7 +320,7 @@ const getLineAreaCustomization = (
         label: localeText.chartConfigurationStacked,
         type: 'boolean',
         default: false,
-        isDisabled: ({ values }: { values: any[] }) => values.length < 2,
+        isDisabled: ({ values }: { values: any[] }) => { throw new Error("STUB"); },
       },
       showMark: {
         label: localeText.chartConfigurationShowMark,
@@ -383,7 +378,7 @@ export const getLocalizedConfigurationOptions = (
               label: localeText.chartConfigurationSeriesGap,
               type: 'number',
               default: 10,
-              isDisabled: ({ values }: { values: any[] }) => values.length < 2,
+              isDisabled: ({ values }: { values: any[] }) => { throw new Error("STUB"); },
               htmlAttributes: {
                 min: '0',
               },

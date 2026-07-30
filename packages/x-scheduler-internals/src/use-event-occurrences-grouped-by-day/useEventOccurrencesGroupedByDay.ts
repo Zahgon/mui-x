@@ -33,14 +33,7 @@ export function useEventOccurrencesGroupedByDay(
 
   return React.useMemo(
     () =>
-      innerGetEventOccurrencesGroupedByDay({
-        adapter,
-        days,
-        events,
-        visibleResources,
-        displayTimezone,
-        recurringEventsPlugin,
-      }),
+      { throw new Error("STUB"); },
     [adapter, days, events, visibleResources, displayTimezone, recurringEventsPlugin],
   );
 }
@@ -70,7 +63,7 @@ export function innerGetEventOccurrencesGroupedByDay(
     parameters;
 
   const occurrenceMap = new Map<string, SchedulerEventOccurrence[]>(
-    days.map((day) => [day.key, []]),
+    days.map((day) => { throw new Error("STUB"); }),
   );
 
   const start = adapter.startOfDay(days[0].value);

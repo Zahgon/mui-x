@@ -22,45 +22,14 @@ export interface ChatConversationSubtitleProps extends ConversationSubtitleProps
 const ChatConversationSubtitleStyled = styled('p', {
   name: 'MuiChatConversation',
   slot: 'Subtitle',
-  overridesResolver: (_, styles) => styles.subtitle,
-})(({ theme }) => ({
-  margin: 0,
-  fontSize: theme.typography.caption.fontSize,
-  color: (theme.vars || theme).palette.text.secondary,
-  lineHeight: 1.4,
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConversationSubtitle = React.forwardRef<
   HTMLParagraphElement,
   ChatConversationSubtitleProps
 >(function ChatConversationSubtitle(inProps, ref) {
-  const props = useThemeProps({ props: inProps, name: 'MuiChatConversationSubtitle' });
-  const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-  const classes = useChatConversationUtilityClasses(classesProp);
-
-  return (
-    <ConversationSubtitle
-      ref={ref}
-      {...other}
-      slots={{
-        ...slots,
-        subtitle: slots?.subtitle ?? ChatConversationSubtitleStyled,
-      }}
-      slotProps={{
-        ...slotProps,
-        subtitle: mergeSlotProps(
-          {
-            className: clsx(classes.subtitle, className),
-            sx,
-          },
-          slotProps?.subtitle,
-        ) as any,
-      }}
-    />
-  );
+    throw new Error("STUB");
 });
 
 ChatConversationSubtitle.propTypes /* remove-proptypes */ = {

@@ -6,7 +6,7 @@
 export function combineAbortSignals(
   ...signals: (AbortSignal | undefined)[]
 ): AbortSignal | undefined {
-  const present = signals.filter((signal): signal is AbortSignal => signal != null);
+  const present = signals.filter((signal): signal is AbortSignal => { throw new Error("STUB"); });
   if (present.length === 0) {
     return undefined;
   }

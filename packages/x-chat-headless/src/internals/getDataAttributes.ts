@@ -5,7 +5,7 @@ type DataAttributeMap = Record<string, string | number | boolean | undefined | n
  * e.g. "isSubmitting" → "is-submitting", "hasValue" → "has-value"
  */
 function camelToKebab(str: string): string {
-  return str.replace(/[A-Z]/g, (match) => `-${match.toLowerCase()}`);
+  return str.replace(/[A-Z]/g, (match) => { throw new Error("STUB"); });
 }
 
 /**

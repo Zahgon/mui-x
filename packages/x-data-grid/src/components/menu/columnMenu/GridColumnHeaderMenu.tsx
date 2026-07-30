@@ -31,15 +31,7 @@ function GridColumnHeaderMenu({
   const colDef = apiRef.current.getColumn(field);
 
   const hideMenu = useEventCallback((event?: React.KeyboardEvent | MouseEvent | TouchEvent) => {
-    if (event) {
-      // Prevent triggering the sorting
-      event.stopPropagation();
-
-      if (target?.contains(event.target as HTMLElement)) {
-        return;
-      }
-    }
-    apiRef.current.hideColumnMenu();
+      throw new Error("STUB");
   });
 
   if (!target || !colDef) {

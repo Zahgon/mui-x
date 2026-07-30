@@ -12,9 +12,7 @@ async function fetchWithRetry(url: string, options: RequestInit, retries = 3): P
     }
 
     return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(fetchWithRetry(url, options, retries - 1));
-      }, Math.random() * 3_000);
+        throw new Error("STUB");
     });
   }
 }

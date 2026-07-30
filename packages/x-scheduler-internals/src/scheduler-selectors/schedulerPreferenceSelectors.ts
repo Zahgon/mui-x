@@ -3,18 +3,15 @@ import type { SchedulerState as State } from '../internals/utils/SchedulerStore/
 import { DEFAULT_SCHEDULER_PREFERENCES } from '../internals/utils/SchedulerStore';
 
 const allSchedulerPreferencesSelector = createSelectorMemoized(
-  (state: State) => state.preferences,
-  (preferences) => ({
-    ...DEFAULT_SCHEDULER_PREFERENCES,
-    ...preferences,
-  }),
+  (state: State) => { throw new Error("STUB"); },
+  (preferences) => { throw new Error("STUB"); },
 );
 
 export const schedulerPreferenceSelectors = {
   all: allSchedulerPreferencesSelector,
-  ampm: createSelector(allSchedulerPreferencesSelector, (preferences) => preferences.ampm),
+  ampm: createSelector(allSchedulerPreferencesSelector, (preferences) => { throw new Error("STUB"); }),
   weekStartsOn: createSelector(
     allSchedulerPreferencesSelector,
-    (preferences) => preferences.weekStartsOn,
+    (preferences) => { throw new Error("STUB"); },
   ),
 };

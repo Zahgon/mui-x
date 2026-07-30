@@ -20,42 +20,16 @@ export interface ChatMessageMetaProps extends MessageMetaProps {
 const ChatMessageMetaStyled = styled('div', {
   name: 'MuiChatMessage',
   slot: 'Meta',
-  overridesResolver: (_, styles) => styles.meta,
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
 })<{ ownerState?: { role?: string; variant?: string; isOwnMessage?: boolean } }>(
-  ({ theme, ownerState }) => ({
-    gridArea: 'meta',
-    display: 'flex',
-    alignItems: 'center',
-    gap: theme.spacing(0.5),
-    fontSize: theme.typography.caption.fontSize,
-    color: (theme.vars || theme).palette.text.disabled,
-    lineHeight: 1.4,
-    minHeight: '1.2em',
-    // Compact: always right-align status + timestamp regardless of ownership.
-    // Align to the top of the grid row so it stays at the top when content wraps.
-    // Default: only right-align for own messages.
-    ...((ownerState?.variant === 'compact' || ownerState?.isOwnMessage) && {
-      justifyContent: 'flex-end',
-    }),
-    ...(ownerState?.variant === 'compact' && {
-      alignSelf: 'start',
-      whiteSpace: 'nowrap',
-    }),
-  }),
+  ({ theme, ownerState }) => { throw new Error("STUB"); },
 );
 
 const ChatMessageStatusStyled = styled('span', {
   name: 'MuiChatMessage',
   slot: 'Status',
-  overridesResolver: (_, styles) => styles.status,
-})<{ ownerState?: { variant?: string } }>(({ ownerState }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  // In compact mode, place the status icon before the timestamp.
-  ...(ownerState?.variant === 'compact' && {
-    order: -1,
-  }),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})<{ ownerState?: { variant?: string } }>(({ ownerState }) => { throw new Error("STUB"); });
 
 /**
  * Custom Status slot for ChatMessage.
@@ -66,63 +40,13 @@ const ChatMessageStatusSlot = React.forwardRef<HTMLSpanElement, any>(function Ch
   { ownerState, children, ...other },
   ref,
 ) {
-  const isCompact = ownerState?.variant === 'compact';
-  const status = ownerState?.message?.status;
-  const isSent = status === 'sent';
-  const isRead = status === 'read';
-
-  let content = children;
-  if (isCompact && isSent) {
-    content = <DoneIcon sx={{ fontSize: '1em' }} aria-hidden="true" />;
-  } else if (isCompact && isRead) {
-    content = <DoneAllIcon sx={{ fontSize: '1em' }} aria-hidden="true" />;
-  }
-
-  return (
-    <ChatMessageStatusStyled ref={ref} ownerState={ownerState} {...other}>
-      {content}
-    </ChatMessageStatusStyled>
-  );
+    throw new Error("STUB");
 });
 
 const ChatMessageMeta = React.forwardRef<HTMLDivElement, ChatMessageMetaProps>(
   function ChatMessageMeta(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatMessageMeta' });
-    // Drop a JS/theme-injected `classes` (not a prop on this sub-part — it shares
-    // the `MuiChatMessage-*` namespace) so it can't leak onto the DOM via `...other`.
-    const {
-      slots,
-      slotProps,
-      className,
-      sx,
-      classes: classesProp,
-      ...other
-    } = props as ChatMessageMetaProps & { classes?: unknown };
-    void classesProp;
-    const classes = useChatMessageUtilityClasses(undefined);
-
-    return (
-      <MessageMeta
-        ref={ref}
-        {...other}
-        slots={{
-          meta: ChatMessageMetaStyled,
-          status: ChatMessageStatusSlot,
-          ...slots,
-        }}
-        slotProps={{
-          ...slotProps,
-          meta: mergeSlotProps(
-            {
-              className: clsx(classes.meta, className),
-              sx,
-            },
-            slotProps?.meta,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatMessageMeta.propTypes /* remove-proptypes */ = {

@@ -30,17 +30,7 @@ const FIXED_CELL_WIDTH = 28;
 const MonthViewRoot = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'MonthView',
-})(({ theme }) => ({
-  width: '100%',
-  height: '100%',
-  borderRadius: theme.shape.borderRadius,
-  border: `1px solid ${(theme.vars || theme).palette.divider}`,
-  overflow: 'hidden',
-  display: 'flex',
-  flexDirection: 'column',
-  maxHeight: '100%',
-  overflowY: 'auto',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MonthViewGrid = styled(CalendarGrid.Root, {
   name: 'MuiEventCalendar',
@@ -59,43 +49,17 @@ interface MonthViewRowGridProps {
 const MonthViewHeader = styled(CalendarGrid.HeaderRow, {
   name: 'MuiEventCalendar',
   slot: 'MonthViewHeader',
-})<{ ownerState: MonthViewRowGridProps }>(({ theme, ownerState }) => ({
-  display: 'grid',
-  gridTemplateColumns: ownerState.showWeekNumber
-    ? `${FIXED_CELL_WIDTH}px repeat(auto-fit, minmax(0, 1fr))`
-    : 'repeat(auto-fit, minmax(0, 1fr))',
-  borderBlockEnd: `1px solid ${(theme.vars || theme).palette.divider}`,
-}));
+})<{ ownerState: MonthViewRowGridProps }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 const MonthViewHeaderCell = styled(CalendarGrid.HeaderCell, {
   name: 'MuiEventCalendar',
   slot: 'MonthViewHeaderCell',
-})(({ theme }) => ({
-  padding: theme.spacing(1),
-  textAlign: 'center',
-  fontSize: theme.typography.body2.fontSize,
-  lineHeight: '18px',
-  '&:not(:first-of-type)': {
-    borderInlineStart: `1px solid ${(theme.vars || theme).palette.divider}`,
-  },
-  '&:focus-visible': {
-    outline: 'none',
-    borderRadius: theme.shape.borderRadius,
-    boxShadow: `inset 0 0 0 2px ${(theme.vars || theme).palette.primary.main}`,
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MonthViewWeekHeaderCell = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'MonthViewWeekHeaderCell',
-})(({ theme }) => ({
-  padding: theme.spacing(1, 0),
-  textAlign: 'center',
-  fontSize: theme.typography.caption.fontSize,
-  lineHeight: '18px',
-  color: (theme.vars || theme).palette.text.secondary,
-  fontStyle: 'italic',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MonthViewBody = styled('div', {
   name: 'MuiEventCalendar',
@@ -118,22 +82,14 @@ const EVENT_GAP = 4; // theme.spacing(0.5) = 4px
 
 const MONTH_VIEW_DEFINITION: EventCalendarViewDefinition = {
   siblingVisibleDateGetter: ({ state, delta }) =>
-    state.adapter.addMonths(
-      state.adapter.startOfMonth(schedulerOtherSelectors.visibleDate(state)),
-      delta,
-    ),
+    { throw new Error("STUB"); },
   visibleDaysSelector: createSelectorMemoized(
-    (state: State) => state.adapter,
+    (state: State) => { throw new Error("STUB"); },
     schedulerOtherSelectors.visibleDate,
     eventCalendarPreferenceSelectors.showWeekends,
     eventCalendarPreferenceSelectors.weekStartsOn,
     (adapter, visibleDate, showWeekends, weekStartsOn) =>
-      getDayList({
-        adapter,
-        start: getStartOfWeek(adapter, adapter.startOfMonth(visibleDate), weekStartsOn),
-        end: getEndOfWeek(adapter, adapter.endOfMonth(visibleDate), weekStartsOn),
-        excludeWeekends: !showWeekends,
-      }),
+      { throw new Error("STUB"); },
   ),
 };
 
@@ -145,107 +101,6 @@ export const MonthView = React.memo(
     props: MonthViewProps,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ) {
-    // Context hooks
-    const adapter = useAdapterContext();
-    const { classes, localeText } = useEventCalendarStyledContext();
-    const store = useEventCalendarStoreContext();
-
-    // Ref hooks
-    const containerRef = React.useRef<HTMLElement | null>(null);
-    const handleRef = useMergedRefs(forwardedRef, containerRef);
-    const cellRef = React.useRef<HTMLDivElement>(null);
-
-    // Selector hooks
-    const showWeekNumber = useStore(store, eventCalendarPreferenceSelectors.showWeekNumber);
-    const showWeekends = useStore(store, eventCalendarPreferenceSelectors.showWeekends);
-
-    // State hooks
-    const [maxEvents, setMaxEvents] = React.useState<number>(2);
-
-    // Feature hooks
-    const { days } = useEventCalendarView(MONTH_VIEW_DEFINITION);
-
-    const weeks = React.useMemo(() => {
-      const chunkSize = showWeekends ? 7 : 5;
-      const result: SchedulerProcessedDate[][] = [];
-      for (let i = 0; i < days.length; i += chunkSize) {
-        result.push(days.slice(i, i + chunkSize));
-      }
-      return result;
-    }, [days, showWeekends]);
-
-    const monthViewRowsPerType = React.useMemo(
-      () => ({ 'day-grid': weeks.length }) as const,
-      [weeks.length],
-    );
-
-    const occurrencesMap = useEventOccurrencesGroupedByDay({ days });
-
-    useResizeObserver(
-      cellRef,
-      () => {
-        const cellHeight = cellRef.current!.clientHeight;
-        const eventContainerHeight = cellHeight - CELL_PADDING - DAY_NUMBER_HEADER_HEIGHT;
-        const maxEventsCount = Math.floor(eventContainerHeight / (EVENT_HEIGHT + EVENT_GAP));
-        setMaxEvents(Math.max(1, maxEventsCount));
-      },
-      true,
-    );
-
-    return (
-      <MonthViewRoot
-        {...props}
-        ref={handleRef}
-        className={clsx(props.className, classes.monthView)}
-      >
-        <MoreEventsPopoverProvider>
-          <MonthViewGrid
-            className={classes.monthViewGrid}
-            rowTypes={MONTH_VIEW_ROW_TYPES}
-            rowsPerType={monthViewRowsPerType}
-            aria-rowcount={1 + weeks.length}
-            aria-colcount={weeks[0].length}
-          >
-            <MonthViewHeader
-              className={classes.monthViewHeader}
-              ownerState={{ showWeekNumber }}
-              aria-rowindex={1}
-            >
-              {showWeekNumber && (
-                <MonthViewWeekHeaderCell
-                  className={classes.monthViewWeekHeaderCell}
-                  aria-hidden="true"
-                >
-                  {localeText.weekAbbreviation}
-                </MonthViewWeekHeaderCell>
-              )}
-              {weeks[0].map((weekDay, dayIdx) => (
-                <MonthViewHeaderCell
-                  className={classes.monthViewHeaderCell}
-                  key={weekDay.key}
-                  date={weekDay}
-                  aria-colindex={dayIdx + 1}
-                  skipDataCurrent
-                >
-                  {adapter.formatByString(weekDay.value, 'ccc')}
-                </MonthViewHeaderCell>
-              ))}
-            </MonthViewHeader>
-            <MonthViewBody className={classes.monthViewBody}>
-              {weeks.map((week, weekIdx) => (
-                <MonthViewWeekRow
-                  key={weekIdx}
-                  rowIndex={weekIdx}
-                  maxEvents={maxEvents}
-                  days={week}
-                  occurrencesMap={occurrencesMap}
-                  firstDayRef={weekIdx === 0 ? cellRef : undefined}
-                />
-              ))}
-            </MonthViewBody>
-          </MonthViewGrid>
-        </MoreEventsPopoverProvider>
-      </MonthViewRoot>
-    );
+      throw new Error("STUB");
   }),
 );

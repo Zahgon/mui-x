@@ -18,39 +18,5 @@ const useUtilityClasses = () => {
 };
 
 export function GridPinnedRows({ position }: GridPinnedRowsProps) {
-  const classes = useUtilityClasses();
-  const apiRef = useGridPrivateApiContext();
-
-  const pinnedRowsData = useGridSelector(apiRef, gridPinnedRowsSelector);
-  const rows = pinnedRowsData[position];
-  const { getRows } = apiRef.current.virtualizer.api.getters;
-
-  const pinnedRenderContext = React.useMemo(
-    () => ({
-      firstRowIndex: 0,
-      lastRowIndex: rows.length,
-      firstColumnIndex: -1,
-      lastColumnIndex: -1,
-    }),
-    [rows],
-  );
-
-  if (rows.length === 0) {
-    return null;
-  }
-
-  const pinnedRows = getRows(
-    {
-      position,
-      rows,
-      renderContext: pinnedRenderContext,
-    },
-    gridRowTreeSelector(apiRef),
-  );
-
-  return (
-    <div className={clsx(classes.root, gridClasses[`pinnedRows--${position}`])} role="none">
-      {pinnedRows}
-    </div>
-  );
+    throw new Error("STUB");
 }

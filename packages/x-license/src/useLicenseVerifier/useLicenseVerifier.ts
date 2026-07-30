@@ -31,11 +31,7 @@ export const sharedLicenseStatuses: {
  * This should not be used in production code, but can be useful for testing purposes.
  */
 export function clearLicenseStatusCache() {
-  for (const packageName in sharedLicenseStatuses) {
-    if (Object.prototype.hasOwnProperty.call(sharedLicenseStatuses, packageName)) {
-      delete sharedLicenseStatuses[packageName as MuiCommercialPackageName];
-    }
-  }
+    throw new Error("STUB");
 }
 
 export function useLicenseVerifier(packageInfo: CommercialPackageInfo): {
@@ -43,61 +39,6 @@ export function useLicenseVerifier(packageInfo: CommercialPackageInfo): {
 } {
   const { key: contextKey } = React.useContext(MuiLicenseInfoContext);
   return React.useMemo(() => {
-    const licenseKey = contextKey ?? LicenseInfo.getLicenseKey();
-    const { name: packageName, releaseDate, version: packageVersion } = packageInfo;
-
-    // Cache the response to not trigger the error twice.
-    if (
-      sharedLicenseStatuses[packageName] &&
-      sharedLicenseStatuses[packageName]!.key === licenseKey
-    ) {
-      return sharedLicenseStatuses[packageName]!.licenseVerifier;
-    }
-
-    const plan = packageName.includes('premium') ? 'Premium' : 'Pro';
-    const licenseStatus = verifyLicense({
-      packageInfo,
-      licenseKey,
-    });
-
-    const fullPackageName = `@mui/${packageName}`;
-
-    sendMuiXTelemetryEvent(
-      muiXTelemetryEvents.licenseVerification(
-        { licenseKey, xLicenseClientVersion: packageVersion },
-        {
-          packageName,
-          packageReleaseInfo: releaseDate,
-          licenseStatus: licenseStatus?.status,
-        },
-      ),
-    );
-
-    if (licenseStatus.status === LICENSE_STATUS.Valid) {
-      // Skip
-    } else if (licenseStatus.status === LICENSE_STATUS.Invalid) {
-      showInvalidLicenseKeyError();
-    } else if (licenseStatus.status === LICENSE_STATUS.NotAvailableInInitialProPlan) {
-      showNotAvailableInInitialProPlanError();
-    } else if (licenseStatus.status === LICENSE_STATUS.OutOfScope) {
-      showLicenseKeyPlanMismatchError({ packageName: fullPackageName });
-    } else if (licenseStatus.status === LICENSE_STATUS.NotFound) {
-      showMissingLicenseKeyError({ plan, packageName: fullPackageName });
-    } else if (licenseStatus.status === LICENSE_STATUS.ExpiredAnnualGrace) {
-      showExpiredAnnualGraceLicenseKeyError({ plan, ...licenseStatus.meta });
-    } else if (licenseStatus.status === LICENSE_STATUS.ExpiredAnnual) {
-      showExpiredAnnualLicenseKeyError({ plan, ...licenseStatus.meta });
-    } else if (licenseStatus.status === LICENSE_STATUS.ExpiredVersion) {
-      showExpiredPackageVersionError({ packageName: fullPackageName });
-    } else if (licenseStatus.status === LICENSE_STATUS.NotValidForPackage) {
-      showLicenseKeyVersionMismatchError(licenseStatus.meta);
-    } else if (process.env.NODE_ENV !== 'production') {
-      // TODO: fix mui/no-guarded-throw
-      // eslint-disable-next-line mui/no-guarded-throw
-      throw new Error('missing status handler');
-    }
-
-    sharedLicenseStatuses[packageName] = { key: licenseKey, licenseVerifier: licenseStatus };
-    return licenseStatus;
+      throw new Error("STUB");
   }, [packageInfo, contextKey]);
 }

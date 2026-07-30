@@ -35,21 +35,8 @@ const GridColumnHeaderTitleRoot = styled('div', {
 
 const ColumnHeaderInnerTitle = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   function ColumnHeaderInnerTitle(props, ref) {
-    // Tooltip adds aria-label to the props, which is not needed since the children prop is a string
-    // See https://github.com/mui/mui-x/pull/14482
-    const { className, 'aria-label': ariaLabel, ...other } = props;
-    const rootProps = useGridRootProps();
-    const classes = useUtilityClasses(rootProps);
-
-    return (
-      <GridColumnHeaderTitleRoot
-        className={clsx(classes.root, className)}
-        ownerState={rootProps}
-        {...other}
-        ref={ref}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 export interface GridColumnHeaderTitleProps {
@@ -66,14 +53,7 @@ function GridColumnHeaderTitle(props: GridColumnHeaderTitleProps) {
   const [tooltip, setTooltip] = React.useState('');
 
   const handleMouseOver = React.useCallback<React.MouseEventHandler<HTMLDivElement>>(() => {
-    if (!description && titleRef?.current) {
-      const isOver = isOverflown(titleRef.current);
-      if (isOver) {
-        setTooltip(label);
-      } else {
-        setTooltip('');
-      }
-    }
+      throw new Error("STUB");
   }, [description, label]);
 
   return (

@@ -29,5 +29,5 @@ export const EventDialogOptionalRenderersContext =
   React.createContext<EventDialogOptionalRenderers>({});
 
 export function useEventDialogOptionalRenderers(): EventDialogOptionalRenderers {
-  return React.useContext(EventDialogOptionalRenderersContext);
+    throw new Error("STUB");
 }

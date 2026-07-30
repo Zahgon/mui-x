@@ -19,5 +19,5 @@ export const GRID_ACTIONS_COL_DEF: GridColTypeDef = {
   disableColumnMenu: true,
   disableExport: true,
   renderCell: renderActionsCell,
-  getApplyQuickFilterFn: () => null,
+  getApplyQuickFilterFn: () => { throw new Error("STUB"); },
 };

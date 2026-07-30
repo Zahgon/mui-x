@@ -30,17 +30,7 @@ const renderSingleSelectOptions = ({
   const iterableColumnValues = ['', ...(getValueOptions(column) || [])];
 
   return iterableColumnValues.map((option) => {
-    const value = getOptionValue(option);
-    let label = getOptionLabel(option);
-    if (label === '') {
-      label = ' '; // To force the height of the empty option
-    }
-
-    return (
-      <OptionComponent {...baseSelectOptionProps} native={isSelectNative} key={value} value={value}>
-        {label}
-      </OptionComponent>
-    );
+      throw new Error("STUB");
   });
 };
 
@@ -76,19 +66,13 @@ function GridFilterInputSingleSelect(props: GridFilterInputSingleSelectProps) {
   const getOptionLabel = resolvedColumn!.getOptionLabel;
 
   const currentValueOptions = React.useMemo(() => {
-    return getValueOptions(resolvedColumn!);
+      throw new Error("STUB");
   }, [resolvedColumn]);
 
   const onFilterChange = React.useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
-      // NativeSelect casts the value to a string, convert it back to the original type.
-      const value = getValueFromValueOptions(
-        event.target.value,
-        currentValueOptions,
-        getOptionValue,
-      );
-      applyValue({ ...item, value });
-    },
+          throw new Error("STUB");
+      },
     [currentValueOptions, getOptionValue, applyValue, item],
   );
 
@@ -164,14 +148,8 @@ GridFilterInputSingleSelect.propTypes /* remove-proptypes */ = {
     PropTypes.func,
     PropTypes.shape({
       current: (props, propName) => {
-        if (props[propName] == null) {
-          return null;
-        }
-        if (typeof props[propName] !== 'object' || props[propName].nodeType !== 1) {
-          return new Error(`Expected prop '${propName}' to be of type Element`);
-        }
-        return null;
-      },
+            throw new Error("STUB");
+        },
     }),
   ]),
   /**

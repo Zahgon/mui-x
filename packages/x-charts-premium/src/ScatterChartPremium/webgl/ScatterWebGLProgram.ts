@@ -23,35 +23,15 @@ export class ScatterWebGLProgram {
   private readonly colors: InstancedAttribute;
 
   constructor(private gl: WebGL2RenderingContext) {
-    setupStandardBlending(gl);
-
-    const linked = linkProgram(gl, scatterVertexShader, scatterFragmentShader);
-    this.program = linked.program;
-    this.shaders.push(...linked.shaders);
-
-    this.quadBuffer = uploadQuadBuffer(gl);
-    this.vao = gl.createVertexArray();
-    gl.bindVertexArray(this.vao);
-
-    bindQuadBuffer(gl, this.program, this.quadBuffer);
-    this.centers = createInstancedAttribute(gl, this.program, 'a_center', 2);
-    this.sizes = createInstancedAttribute(gl, this.program, 'a_size', 1);
-    this.colors = createInstancedAttribute(gl, this.program, 'a_color', 4, gl.UNSIGNED_BYTE, true);
-
-    gl.bindVertexArray(null);
+      throw new Error("STUB");
   }
 
   setResolution(width: number, height: number) {
-    const { gl } = this;
-    gl.useProgram(this.program);
-    gl.uniform2f(gl.getUniformLocation(this.program, 'u_resolution'), width, height);
+      throw new Error("STUB");
   }
 
   plot(plotData: ScatterWebGLPlotData) {
-    const { gl } = this;
-    uploadGrowableBuffer(gl, this.centers.buffer, plotData.centers);
-    uploadGrowableBuffer(gl, this.sizes.buffer, plotData.sizes);
-    uploadGrowableBuffer(gl, this.colors.buffer, plotData.colors);
+      throw new Error("STUB");
   }
 
   render(plotData: ScatterWebGLPlotData) {
@@ -74,6 +54,6 @@ export class ScatterWebGLProgram {
     gl.deleteBuffer(this.sizes.buffer.buffer);
     gl.deleteBuffer(this.colors.buffer.buffer);
     gl.deleteBuffer(this.quadBuffer);
-    this.shaders.forEach((shader) => gl.deleteShader(shader));
+    this.shaders.forEach((shader) => { throw new Error("STUB"); });
   }
 }

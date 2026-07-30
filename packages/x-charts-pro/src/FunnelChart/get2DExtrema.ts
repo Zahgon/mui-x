@@ -16,15 +16,7 @@ export const get2DExtrema = (
   };
 
   dataPoints.forEach((section, dataIndex) => {
-    section.forEach((v) => {
-      const x = xPositionGetter(v.x, dataIndex, v.stackOffset, v.useBandWidth);
-      const y = yPositionGetter(v.y, dataIndex, v.stackOffset, v.useBandWidth);
-
-      minPoint.x = Math.min(minPoint.x, x);
-      minPoint.y = Math.min(minPoint.y, y);
-      maxPoint.x = Math.max(maxPoint.x, x);
-      maxPoint.y = Math.max(maxPoint.y, y);
-    });
+      throw new Error("STUB");
   });
 
   return [minPoint, maxPoint];

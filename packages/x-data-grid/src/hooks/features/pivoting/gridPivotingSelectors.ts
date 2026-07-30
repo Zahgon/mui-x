@@ -5,17 +5,17 @@ import type { GridPivotingStatePartial } from './gridPivotingInterfaces';
 
 const gridPivotingStateSelector = createRootSelector(
   // @ts-ignore
-  (state: GridStateCommunity) => state.pivoting as GridPivotingStatePartial,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 export const gridPivotActiveSelector = createSelector(
   gridPivotingStateSelector,
-  (pivoting) => pivoting?.active,
+  (pivoting) => { throw new Error("STUB"); },
 );
 
 const emptyColumns = new Map<string, GridColDef>();
 
 export const gridPivotInitialColumnsSelector = createSelector(
   gridPivotingStateSelector,
-  (pivoting) => pivoting?.initialColumns || emptyColumns,
+  (pivoting) => { throw new Error("STUB"); },
 );

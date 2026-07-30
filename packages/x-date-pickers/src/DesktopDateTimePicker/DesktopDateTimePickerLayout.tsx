@@ -23,38 +23,7 @@ type DesktopDateTimePickerLayoutComponent = (<TValue extends PickerValidValue>(
 const DesktopDateTimePickerLayout = React.forwardRef(function DesktopDateTimePickerLayout<
   TValue extends PickerValidValue,
 >(props: PickersLayoutProps<TValue>, ref: React.Ref<HTMLDivElement>) {
-  const { toolbar, tabs, content, actionBar, shortcuts, ownerState } = usePickerLayout(props);
-  const { orientation } = usePickerContext();
-  const { sx, className, classes } = props;
-  const isActionBarVisible = actionBar && (actionBar.props.actions?.length ?? 0) > 0;
-
-  return (
-    <PickersLayoutRoot
-      ref={ref}
-      className={clsx(pickersLayoutClasses.root, classes?.root, className)}
-      sx={[
-        {
-          [`& .${pickersLayoutClasses.tabs}`]: { gridRow: 4, gridColumn: '1 / 4' },
-          [`& .${pickersLayoutClasses.actionBar}`]: { gridRow: 5 },
-        },
-        ...(Array.isArray(sx) ? sx : [sx]),
-      ]}
-      ownerState={ownerState}
-    >
-      {orientation === 'landscape' ? shortcuts : toolbar}
-      {orientation === 'landscape' ? toolbar : shortcuts}
-      <PickersLayoutContentWrapper
-        className={clsx(pickersLayoutClasses.contentWrapper, classes?.contentWrapper)}
-        ownerState={ownerState}
-        sx={{ display: 'grid' }}
-      >
-        {content}
-        {tabs}
-        {isActionBarVisible && <Divider sx={{ gridRow: 3, gridColumn: '1 / 4' }} />}
-      </PickersLayoutContentWrapper>
-      {actionBar}
-    </PickersLayoutRoot>
-  );
+    throw new Error("STUB");
 }) as DesktopDateTimePickerLayoutComponent;
 
 DesktopDateTimePickerLayout.propTypes /* remove-proptypes */ = {

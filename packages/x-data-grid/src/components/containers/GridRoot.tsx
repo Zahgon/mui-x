@@ -50,56 +50,7 @@ const useUtilityClasses = (ownerState: OwnerState, density: GridDensity) => {
 };
 
 const GridRoot = forwardRef<HTMLDivElement, GridRootProps>(function GridRoot(props, ref) {
-  const rootProps = useGridRootProps();
-  const { className, children, sidePanel, ...other } = props;
-  const apiRef = useGridPrivateApiContext();
-  const density = useGridSelector(apiRef, gridDensitySelector);
-  const rootElementRef = apiRef.current.rootElementRef;
-
-  const rootMountCallback = React.useCallback(
-    (node: HTMLElement | null) => {
-      if (node === null) {
-        return;
-      }
-      apiRef.current.publishEvent('rootMount', node);
-    },
-    [apiRef],
-  );
-
-  const handleRef = useForkRef(rootElementRef, ref, rootMountCallback);
-
-  const ownerState = rootProps;
-
-  const classes = useUtilityClasses(ownerState, density);
-  const cssVariables = useCSSVariablesContext();
-
-  const isSSR = useIsSSR();
-
-  if (isSSR) {
-    return null;
-  }
-
-  return (
-    <GridRootStyles
-      className={clsx(
-        classes.root,
-        className,
-        cssVariables.className,
-        sidePanel && gridClasses.withSidePanel,
-      )}
-      ownerState={ownerState}
-      {...other}
-      ref={handleRef}
-    >
-      <div className={gridClasses.mainContent} role="none">
-        <GridHeader />
-        <GridBody>{children}</GridBody>
-        <GridFooterPlaceholder />
-      </div>
-      {sidePanel}
-      {cssVariables.tag}
-    </GridRootStyles>
-  );
+    throw new Error("STUB");
 });
 
 GridRoot.propTypes /* remove-proptypes */ = {

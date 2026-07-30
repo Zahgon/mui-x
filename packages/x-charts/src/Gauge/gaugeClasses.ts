@@ -15,7 +15,7 @@ export interface GaugeClasses {
 export type GaugeClassKey = keyof GaugeClasses;
 
 export function getGaugeUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiGauge', slot);
+    throw new Error("STUB");
 }
 
 export const gaugeClasses: GaugeClasses = generateUtilityClasses('MuiGauge', [

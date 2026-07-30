@@ -9,24 +9,8 @@ import { gaugeClasses } from './gaugeClasses';
 const StyledPath = styled('path', {
   name: 'MuiGauge',
   slot: 'ReferenceArc',
-})(({ theme }) => ({
-  fill: (theme.vars || theme).palette.divider,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 export function GaugeReferenceArc({ className, ...other }: React.ComponentProps<'path'>) {
-  const { startAngle, endAngle, outerRadius, innerRadius, cornerRadius, cx, cy } = useGaugeState();
-
-  return (
-    <StyledPath
-      className={clsx(gaugeClasses.referenceArc, className)}
-      transform={`translate(${cx}, ${cy})`}
-      d={d3Arc().cornerRadius(cornerRadius)({
-        startAngle,
-        endAngle,
-        innerRadius,
-        outerRadius,
-      })!}
-      {...other}
-    />
-  );
+    throw new Error("STUB");
 }

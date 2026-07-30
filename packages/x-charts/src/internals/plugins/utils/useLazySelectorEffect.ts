@@ -19,15 +19,7 @@ export function useLazySelectorEffect<
    */
   skip?: boolean,
 ): void {
-  const instance = useLazyRef(initialize, {
-    store,
-    selector,
-    skip,
-  }).current;
-
-  instance.effect = effect;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  React.useEffect(instance.onMount(skip), [skip]);
+    throw new Error("STUB");
 }
 
 // `useLazyRef` typings are incorrect, `params` should not be optional
@@ -47,33 +39,14 @@ function initialize<TSignatures extends readonly ChartAnyPluginSignature[], Valu
   const subscribe = () => {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     instance.dispose ??= store.subscribe((state) => {
-      const nextState = selector(state);
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      instance.effect(previousState, nextState);
-      previousState = nextState;
+        throw new Error("STUB");
     });
   };
 
   const instance = {
     effect: noop as (previous: Value, next: Value) => void,
     dispose: null as Function | null,
-    onMount: (skip?: boolean) => () => {
-      if (skip) {
-        return undefined;
-      }
-
-      if (!isRunning) {
-        // Initialize values
-        isRunning = true;
-        previousState = selector(store.state);
-      }
-
-      subscribe();
-      return () => {
-        instance.dispose?.();
-        instance.dispose = null;
-      };
-    },
+    onMount: (skip?: boolean) => { throw new Error("STUB"); },
   };
 
   if (!initialSkip) {

@@ -32,54 +32,5 @@ export const ConversationListItemAvatar = React.forwardRef(function Conversation
   props: ConversationListItemAvatarProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    conversation,
-    selected = false,
-    unread = false,
-    focused = false,
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    ...other
-  } = props as ConversationListItemAvatarProps & {
-    ownerState?: ConversationListItemAvatarOwnerState;
-  };
-  // Use conversation-level avatar if provided, otherwise pick the first
-  // non-'user' participant so the list shows the other person's avatar
-  // instead of the local user's.
-  const participant =
-    conversation.participants?.find((p) => p.role !== 'user') ?? conversation.participants?.[0];
-  const avatarUrl = conversation.avatarUrl ?? participant?.avatarUrl;
-  const avatarAlt = participant?.displayName ?? '';
-
-  const ownerState: ConversationListItemAvatarOwnerState = {
-    conversation,
-    selected,
-    unread,
-    focused,
-  };
-  void ownerStateProp;
-  const Root = slots?.root ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  const Image = slots?.image ?? 'img';
-  const imageProps = useSlotProps({
-    elementType: Image,
-    externalSlotProps: slotProps?.image,
-    ownerState,
-    additionalProps: {
-      alt: avatarAlt,
-      src: avatarUrl ?? undefined,
-    },
-  });
-
-  return <Root {...rootProps}>{avatarUrl ? <Image {...imageProps} /> : null}</Root>;
+    throw new Error("STUB");
 }) as ConversationListItemAvatarComponent;

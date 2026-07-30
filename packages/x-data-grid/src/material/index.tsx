@@ -89,48 +89,17 @@ export { useMaterialCSSVariables } from './variables';
 
 const InputAdornment = styled(MUIInputAdornment, {
   slot: 'internal',
-})(({ theme }) => ({
-  [`&.${inputAdornmentClasses.positionEnd} .${iconButtonClasses.sizeSmall}`]: {
-    marginRight: theme.spacing(-0.75),
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const FormControlLabel = styled(MUIFormControlLabel, {
   slot: 'internal',
-  shouldForwardProp: (prop) => prop !== 'fullWidth',
-})<{ fullWidth?: boolean }>(({ theme }) => ({
-  gap: theme.spacing(0.5),
-  margin: 0,
-  overflow: 'hidden',
-  [`& .${formControlLabelClasses.label}`]: {
-    fontSize: theme.typography.pxToRem(14),
-    overflow: 'hidden',
-    textOverflow: 'ellipsis',
-    whiteSpace: 'nowrap',
-  },
-  variants: [
-    {
-      props: { fullWidth: true },
-      style: {
-        width: '100%',
-      },
-    },
-  ],
-}));
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
+})<{ fullWidth?: boolean }>(({ theme }) => { throw new Error("STUB"); });
 
 const Checkbox = styled(MUICheckbox, {
   slot: 'internal',
-  shouldForwardProp: (prop) => prop !== 'density',
-})<{ density?: P['baseCheckbox']['density'] }>(({ theme }) => ({
-  variants: [
-    {
-      props: { density: 'compact' },
-      style: {
-        padding: theme.spacing(0.5),
-      },
-    },
-  ],
-}));
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
+})<{ density?: P['baseCheckbox']['density'] }>(({ theme }) => { throw new Error("STUB"); });
 
 const ListItemText = styled(MUIListItemText, {
   slot: 'internal',
@@ -143,442 +112,105 @@ const ListItemText = styled(MUIListItemText, {
 });
 
 const BaseSelect = forwardRef<any, P['baseSelect']>(function BaseSelect(props, ref) {
-  const {
-    id,
-    label,
-    labelId,
-    material,
-    disabled,
-    multiple,
-    slotProps,
-    onChange,
-    onKeyDown,
-    onOpen,
-    onClose,
-    renderValue,
-    size,
-    style,
-    fullWidth,
-    ...other
-  } = props;
-  const theme = useTheme();
-  const textFieldDefaults = (theme.components?.MuiTextField?.defaultProps ?? {}) as any;
-  const computedSize = (size ?? textFieldDefaults.size) as 'small' | 'medium' | undefined;
-  const computedVariant = (textFieldDefaults.variant ?? 'outlined') as
-    'standard' | 'filled' | 'outlined';
-  const menuProps = {
-    slotProps: { paper: { onKeyDown } },
-  } as Partial<MUIMenuProps>;
-  if (onClose) {
-    menuProps.onClose = onClose;
-  }
-  return (
-    <MUIFormControl
-      size={computedSize}
-      fullWidth={fullWidth}
-      style={style}
-      disabled={disabled}
-      ref={ref}
-    >
-      <MUIInputLabel id={labelId} htmlFor={id} shrink variant={computedVariant}>
-        {label}
-      </MUIInputLabel>
-      <MUISelect
-        id={id}
-        labelId={labelId}
-        label={label}
-        displayEmpty
-        multiple={multiple}
-        onChange={onChange as any}
-        renderValue={renderValue}
-        variant={computedVariant as any}
-        {...other}
-        inputProps={slotProps?.htmlInput}
-        onOpen={onOpen}
-        MenuProps={menuProps}
-        size={computedSize}
-        {...material}
-      />
-    </MUIFormControl>
-  );
+    throw new Error("STUB");
 });
 
 const StyledPagination = styled(MUIPagination, {
   slot: 'internal',
-})(({ theme }) => ({
-  [`& .${tablePaginationClasses.selectLabel}`]: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
-  [`& .${tablePaginationClasses.input}`]: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'inline-flex',
-    },
-  },
-})) as typeof MUIPagination;
+})(({ theme }) => { throw new Error("STUB"); }) as typeof MUIPagination;
 
 const BasePagination = forwardRef<any, P['basePagination']>(function BasePagination(props, ref) {
-  const { onRowsPerPageChange, material, disabled, ...other } = props;
-  const computedProps = React.useMemo(() => {
-    if (!disabled) {
-      return undefined;
-    }
-    return {
-      slotProps: {
-        actions: {
-          previousButton: { disabled: true },
-          nextButton: { disabled: true },
-        },
-      },
-    };
-  }, [disabled]);
-
-  const apiRef = useGridApiContext();
-  const rootProps = useGridRootProps();
-  const { estimatedRowCount } = rootProps;
-
-  return (
-    <StyledPagination
-      component="div"
-      onRowsPerPageChange={useEventCallback(
-        (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-          onRowsPerPageChange?.(Number(event.target.value));
-        },
-      )}
-      labelRowsPerPage={apiRef.current.getLocaleText('paginationRowsPerPage')}
-      labelDisplayedRows={(params) =>
-        apiRef.current.getLocaleText('paginationDisplayedRows')({
-          ...params,
-          estimated: estimatedRowCount,
-        })
-      }
-      getItemAriaLabel={apiRef.current.getLocaleText('paginationItemAriaLabel')}
-      {...computedProps}
-      {...other}
-      {...material}
-      ref={ref}
-    />
-  );
+    throw new Error("STUB");
 });
 
 const BaseBadge = forwardRef<any, P['baseBadge']>(function BaseBadge(props, ref) {
-  const { material, ...other } = props;
-  return <MUIBadge {...other} {...material} ref={ref} />;
+    throw new Error("STUB");
 });
 
 const BaseCheckbox = forwardRef<any, P['baseCheckbox']>(function BaseCheckbox(props, ref) {
-  const { autoFocus, label, fullWidth, slotProps, className, material, inputRef, ...other } = props;
-
-  const elementRef = React.useRef<HTMLButtonElement>(null);
-  const handleRef = useForkRef(elementRef, ref);
-  const rippleRef = React.useRef<any>(null);
-  const combinedInputRef = useForkRef(
-    inputRef,
-    slotProps?.htmlInput?.ref,
-    (material?.slotProps?.input as any)?.ref,
-  );
-
-  React.useEffect(() => {
-    if (autoFocus) {
-      const input = elementRef.current?.querySelector('input');
-      input?.focus({ preventScroll: true });
-    } else if (autoFocus === false && rippleRef.current) {
-      // Only available in @mui/material v5.4.1 or later
-      // @ts-ignore
-      rippleRef.current.stop({});
-    }
-  }, [autoFocus]);
-
-  const checkboxSlotProps = React.useMemo(
-    () => ({
-      ...material?.slotProps,
-      input: {
-        ...material?.slotProps?.input,
-        ...slotProps?.htmlInput,
-        ref: combinedInputRef,
-      },
-    }),
-    [material?.slotProps, slotProps?.htmlInput, combinedInputRef],
-  );
-
-  if (!label) {
-    return (
-      <Checkbox
-        {...other}
-        {...material}
-        className={clsx(className, material?.className)}
-        slotProps={checkboxSlotProps}
-        ref={handleRef}
-        touchRippleRef={rippleRef}
-      />
-    );
-  }
-
-  return (
-    <FormControlLabel
-      className={className}
-      control={
-        <Checkbox
-          {...other}
-          {...material}
-          slotProps={checkboxSlotProps}
-          ref={handleRef}
-          touchRippleRef={rippleRef}
-        />
-      }
-      label={label}
-      fullWidth={fullWidth}
-    />
-  );
+    throw new Error("STUB");
 });
 
 const BaseCircularProgress = forwardRef<any, P['baseCircularProgress']>(
   function BaseCircularProgress(props, ref) {
-    const { material, ...other } = props;
-    return <MUICircularProgress {...other} {...material} ref={ref} />;
-  },
+        throw new Error("STUB");
+    },
 );
 
 const BaseDivider = forwardRef<any, P['baseDivider']>(function BaseDivider(props, ref) {
-  const { material, ...other } = props;
-  return <MUIDivider {...other} {...material} ref={ref} />;
+    throw new Error("STUB");
 });
 
 const BaseLinearProgress = forwardRef<any, P['baseLinearProgress']>(
   function BaseLinearProgress(props, ref) {
-    const { material, ...other } = props;
-    return <MUILinearProgress {...other} {...material} ref={ref} />;
-  },
+        throw new Error("STUB");
+    },
 );
 
 const BaseButton = forwardRef<any, P['baseButton']>(function BaseButton(props, ref) {
-  const { material, ...other } = props;
-  return <MUIButton {...other} {...material} ref={ref} />;
+    throw new Error("STUB");
 });
 
 const StyledToggleButton = styled(MUIToggleButton, {
   slot: 'internal',
-})(({ theme }) => ({
-  gap: theme.spacing(1),
-  border: 0,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const BaseToggleButton = forwardRef<any, P['baseToggleButton']>(
   function BaseToggleButton(props, ref) {
-    const { material, ...rest } = props;
-    return <StyledToggleButton size="small" color="primary" {...rest} {...material} ref={ref} />;
-  },
+        throw new Error("STUB");
+    },
 );
 
 const BaseChip = forwardRef<any, P['baseChip']>(function BaseChip(props, ref) {
-  const { material, ...other } = props;
-  return <MUIChip {...other} {...material} ref={ref} />;
+    throw new Error("STUB");
 });
 
 const BaseIconButton = forwardRef<any, P['baseIconButton']>(function BaseIconButton(props, ref) {
-  const { material, ...other } = props;
-  return <MUIIconButton {...other} {...material} ref={ref} />;
+    throw new Error("STUB");
 });
 
 const BaseTooltip = forwardRef<any, P['baseTooltip']>(function BaseTooltip(props, ref) {
-  const { material, ...other } = props;
-  return <MUITooltip {...other} {...material} ref={ref} />;
+    throw new Error("STUB");
 });
 
 const BaseSkeleton = forwardRef<any, P['baseSkeleton']>(function BaseSkeleton(props, ref) {
-  const { material, ...other } = props;
-  return <MUISkeleton {...other} {...material} ref={ref} />;
+    throw new Error("STUB");
 });
 
 const BaseSwitch = forwardRef<any, P['baseSwitch']>(function BaseSwitch(props, ref) {
-  const { material, label, className, ...other } = props;
-
-  if (!label) {
-    return <MUISwitch {...other} {...material} className={className} ref={ref} />;
-  }
-
-  return (
-    <FormControlLabel
-      className={className}
-      control={<MUISwitch {...other} {...material} ref={ref} />}
-      label={label}
-    />
-  );
+    throw new Error("STUB");
 });
 
 const BaseMenuList = forwardRef<any, P['baseMenuList']>(function BaseMenuList(props, ref) {
-  const { material, ...other } = props;
-  return <MUIMenuList {...other} {...material} ref={ref} />;
+    throw new Error("STUB");
 });
 
 function BaseMenuItem(props: P['baseMenuItem']) {
-  const { inert, iconStart, iconEnd, children, material, ...other } = props;
-  if (inert) {
-    (other as any).disableRipple = true;
-  }
-  return React.createElement(MUIMenuItem, { ...other, ...material }, [
-    iconStart && <MUIListItemIcon key="1">{iconStart}</MUIListItemIcon>,
-    <ListItemText key="2">{children}</ListItemText>,
-    iconEnd && <MUIListItemIcon key="3">{iconEnd}</MUIListItemIcon>,
-  ]);
+    throw new Error("STUB");
 }
 
 function BaseModal(props: P['baseModal']) {
-  const { material, ...other } = props;
-  return <MUIModal {...other} {...material} />;
+    throw new Error("STUB");
 }
 
 function BaseTextField(props: P['baseTextField']) {
-  const { slotProps, material, ...other } = props;
-  const theme = useTheme();
-  const textFieldDefaults = (theme.components?.MuiTextField?.defaultProps ?? {}) as any;
-  const computedVariant = (other as any).variant ?? textFieldDefaults.variant ?? 'outlined';
-  const computedSize = (other as any).size ?? textFieldDefaults.size;
-  return (
-    <MUITextField
-      variant={computedVariant as any}
-      size={computedSize as any}
-      {...other}
-      {...material}
-      slotProps={{
-        htmlInput: slotProps?.htmlInput,
-        input: transformInputProps(slotProps?.input as any),
-        inputLabel: { shrink: true, ...(slotProps as any)?.inputLabel },
-      }}
-    />
-  );
+    throw new Error("STUB");
 }
 
 function BaseAutocomplete(props: P['baseAutocomplete']) {
-  const rootProps = useGridRootProps();
-  const {
-    id,
-    multiple,
-    freeSolo,
-    options,
-    getOptionLabel,
-    isOptionEqualToValue,
-    value,
-    onChange,
-    label,
-    placeholder,
-    slotProps,
-    material,
-    ...other
-  } = props;
-
-  return (
-    <MUIAutocomplete<string, true, false, true>
-      id={id}
-      multiple={multiple}
-      freeSolo={freeSolo}
-      options={options}
-      getOptionLabel={getOptionLabel}
-      isOptionEqualToValue={isOptionEqualToValue}
-      value={value}
-      onChange={onChange}
-      renderValue={(currentValue, getTagProps) =>
-        currentValue.map((option, index) => {
-          const { key, ...tagProps } = getTagProps({ index });
-          return (
-            <MUIChip
-              key={key}
-              variant="outlined"
-              size="small"
-              label={typeof option === 'string' ? option : getOptionLabel?.(option as any)}
-              {...tagProps}
-              {...(typeof slotProps?.chip === 'function'
-                ? slotProps.chip(option, index)
-                : slotProps?.chip)}
-            />
-          );
-        })
-      }
-      renderInput={(params) => {
-        const { slotProps: autocompleteSlotProps, ...inputRest } = params;
-        const { slotProps: textFieldSlotProps, ...textFieldRest } = slotProps?.textField ?? {};
-        const { slotProps: baseTextFieldSlotProps, ...baseTextFieldRest } =
-          rootProps.slotProps?.baseTextField ?? {};
-        return (
-          <MUITextField
-            {...inputRest}
-            label={label}
-            placeholder={placeholder}
-            {...textFieldRest}
-            {...baseTextFieldRest}
-            slotProps={{
-              htmlInput: {
-                ...autocompleteSlotProps.htmlInput,
-                ...textFieldSlotProps?.htmlInput,
-                ...baseTextFieldSlotProps?.htmlInput,
-              },
-              input: {
-                ...transformInputProps(autocompleteSlotProps.input as any, false),
-                ...textFieldSlotProps?.input,
-                ...baseTextFieldSlotProps?.input,
-              },
-              inputLabel: {
-                shrink: true,
-                ...autocompleteSlotProps.inputLabel,
-                ...textFieldSlotProps?.inputLabel,
-                ...baseTextFieldSlotProps?.inputLabel,
-              },
-            }}
-          />
-        );
-      }}
-      {...other}
-      {...material}
-    />
-  );
+    throw new Error("STUB");
 }
 
 function BaseInput(props: P['baseInput']) {
-  return <MUIInputBase {...transformInputProps(props)} />;
+    throw new Error("STUB");
 }
 
 function transformInputProps(props: P['baseInput'] | undefined, wrapAdornments = true) {
-  if (!props) {
-    return undefined;
-  }
-
-  const { slotProps, material, ...other } = props;
-  const result = other as Partial<MUIInputBaseProps>;
-
-  if (wrapAdornments) {
-    if (result.startAdornment) {
-      result.startAdornment = (
-        <InputAdornment position="start">{result.startAdornment}</InputAdornment>
-      );
-    }
-    if (result.endAdornment) {
-      result.endAdornment = <InputAdornment position="end">{result.endAdornment}</InputAdornment>;
-    }
-  }
-
-  for (const k in material) {
-    if (Object.hasOwn(material, k)) {
-      result[k as keyof typeof result] = material[k as keyof typeof material];
-    }
-  }
-
-  if (slotProps?.htmlInput) {
-    if (result.inputProps) {
-      result.inputProps = { ...result.inputProps, ...slotProps?.htmlInput };
-    } else {
-      result.inputProps = slotProps?.htmlInput;
-    }
-  }
-
-  return result;
+    throw new Error("STUB");
 }
 
 const BaseTextarea = forwardRef<any, P['baseTextarea']>(function BaseTextarea(props, ref) {
-  const { material, ...other } = props;
-  return <MUITextareaAutosize {...other} {...material} ref={ref} />;
+    throw new Error("STUB");
 });
 
 const transformOrigin = {
@@ -587,100 +219,7 @@ const transformOrigin = {
 };
 
 const BasePopper = forwardRef<any, P['basePopper']>(function BasePopper(props, ref) {
-  const {
-    open,
-    children,
-    className,
-    clickAwayTouchEvent,
-    clickAwayMouseEvent,
-    flip,
-    focusTrap,
-    onExited,
-    onClickAway,
-    onDidShow,
-    onDidHide,
-    id,
-    target,
-    transition,
-    placement,
-    material,
-    ...other
-  } = props;
-
-  const modifiers = React.useMemo(() => {
-    const result: MUIPopperProps['modifiers'] = [
-      {
-        name: 'preventOverflow',
-        options: {
-          padding: 8,
-        },
-      },
-    ];
-    if (flip) {
-      result.push({
-        name: 'flip',
-        enabled: true,
-      });
-    }
-    if (onDidShow || onDidHide) {
-      result.push({
-        name: 'isPlaced',
-        enabled: true,
-        phase: 'main' as const,
-        fn: () => {
-          onDidShow?.();
-        },
-        effect: () => () => {
-          onDidHide?.();
-        },
-      });
-    }
-    return result;
-  }, [flip, onDidShow, onDidHide]);
-
-  let content: any;
-  if (!transition) {
-    content = wrappers(props, children);
-  } else {
-    const handleExited = (popperOnExited: (() => void) | undefined) => (node: HTMLElement) => {
-      if (popperOnExited) {
-        popperOnExited();
-      }
-
-      if (onExited) {
-        onExited(node);
-      }
-    };
-
-    content = (p: any) =>
-      wrappers(
-        props,
-        <MUIGrow
-          {...p.TransitionProps}
-          style={{ transformOrigin: transformOrigin[p.placement as keyof typeof transformOrigin] }}
-          onExited={handleExited(p.TransitionProps?.onExited)}
-        >
-          <MUIPaper>{children}</MUIPaper>
-        </MUIGrow>,
-      );
-  }
-
-  return (
-    <MUIPopper
-      id={id}
-      className={className}
-      open={open}
-      anchorEl={target as any}
-      transition={transition}
-      placement={placement}
-      modifiers={modifiers}
-      {...other}
-      {...material}
-      ref={ref}
-    >
-      {content}
-    </MUIPopper>
-  );
+    throw new Error("STUB");
 });
 
 function wrappers(props: PopperProps, content: any) {
@@ -714,18 +253,13 @@ function focusTrapWrapper(props: PopperProps, content: any) {
 }
 
 function BaseSelectOption({ native, ...props }: NonNullable<P['baseSelectOption']>) {
-  if (native) {
-    return <option {...props} />;
-  }
-  return <MUIMenuItem {...props} />;
+    throw new Error("STUB");
 }
 
 const StyledTabs = styled(MUITabs, {
   name: 'MuiDataGrid',
   slot: 'Tabs',
-})(({ theme }) => ({
-  borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const StyledTab = styled(MUITab, {
   name: 'MuiDataGrid',
@@ -752,45 +286,11 @@ function TabPanel(
     active: boolean;
   } & React.HTMLAttributes<HTMLDivElement>,
 ) {
-  const { children, value, active, ...other } = props;
-
-  return (
-    <StyledTabPanel role="tabpanel" style={{ display: active ? 'flex' : 'none' }} {...other}>
-      {children}
-    </StyledTabPanel>
-  );
+    throw new Error("STUB");
 }
 
 function BaseTabs({ items, value, material, ...props }: P['baseTabs']) {
-  const id = useId();
-  const labelId = `${id}-tab-${value}`;
-  const panelId = `${id}-tabpanel-${value}`;
-  return (
-    <React.Fragment>
-      <StyledTabs {...props} value={value} variant="scrollable" scrollButtons="auto" {...material}>
-        {items.map((item) => (
-          <StyledTab
-            key={item.value}
-            value={item.value}
-            label={item.label}
-            id={labelId}
-            aria-controls={panelId}
-          />
-        ))}
-      </StyledTabs>
-      {items.map((item) => (
-        <TabPanel
-          key={item.value}
-          value={item.value}
-          active={value === item.value}
-          id={panelId}
-          aria-labelledby={labelId}
-        >
-          {item.children}
-        </TabPanel>
-      ))}
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }
 
 const iconSlots: GridIconSlotsComponent = {

@@ -107,80 +107,7 @@ export class Flatbush {
     data?: ArrayBufferLike,
     byteOffset = 0,
   ) {
-    if (numItems === undefined) {
-      throw new Error(
-        'MUI X Charts: Missing required argument "numItems" for spatial index. ' +
-          'The index needs to know how many items it will contain. ' +
-          'Provide the expected number of items as the first argument.',
-      );
-    }
-    if (isNaN(numItems) || numItems <= 0) {
-      throw new Error(
-        `MUI X Charts: Unexpected numItems value: ${numItems}. ` +
-          'The spatial index requires a positive integer for numItems. ' +
-          'Provide a positive number greater than 0.',
-      );
-    }
-
-    this.numItems = +numItems;
-    this.nodeSize = Math.min(Math.max(+nodeSize, 2), 65535);
-    this.byteOffset = byteOffset;
-
-    // calculate the total number of nodes in the R-tree to allocate space for
-    // and the index of each tree level (used in search later)
-    let n = numItems;
-    let numNodes = n;
-    this._levelBounds = [n * 4];
-    do {
-      n = Math.ceil(n / this.nodeSize);
-      numNodes += n;
-      this._levelBounds.push(numNodes * 4);
-    } while (n !== 1);
-
-    this.ArrayType = ArrayType;
-    this.IndexArrayType = numNodes < 16384 ? Uint16Array : Uint32Array;
-
-    const arrayTypeIndex = ARRAY_TYPES.indexOf(ArrayType);
-    const nodesByteSize = numNodes * 4 * ArrayType.BYTES_PER_ELEMENT;
-
-    if (arrayTypeIndex < 0) {
-      throw new Error(
-        `MUI X Charts: Unexpected typed array class: ${ArrayType}. ` +
-          'The spatial index only supports standard typed array types. ' +
-          'Use one of: Int8Array, Uint8Array, Int16Array, Uint16Array, Int32Array, Uint32Array, Float32Array, or Float64Array.',
-      );
-    }
-
-    if (data) {
-      this.data = data;
-      this._boxes = new ArrayType(data, byteOffset + 8, numNodes * 4);
-      this._indices = new this.IndexArrayType(data, byteOffset + 8 + nodesByteSize, numNodes);
-
-      this._pos = numNodes * 4;
-      this.minX = this._boxes[this._pos - 4];
-      this.minY = this._boxes[this._pos - 3];
-      this.maxX = this._boxes[this._pos - 2];
-      this.maxY = this._boxes[this._pos - 1];
-    } else {
-      const data = (this.data = new ArrayBufferType(
-        8 + nodesByteSize + numNodes * this.IndexArrayType.BYTES_PER_ELEMENT,
-      ));
-      this._boxes = new ArrayType(data, 8, numNodes * 4);
-      this._indices = new this.IndexArrayType(data, 8 + nodesByteSize, numNodes);
-      this._pos = 0;
-      this.minX = Infinity;
-      this.minY = Infinity;
-      this.maxX = -Infinity;
-      this.maxY = -Infinity;
-
-      new Uint8Array(data, 0, 2).set([0xfb, (VERSION << 4) + arrayTypeIndex]);
-      new Uint16Array(data, 2, 1)[0] = nodeSize;
-      new Uint32Array(data, 4, 1)[0] = numItems;
-    }
-
-    // a priority queue for k-nearest-neighbors queries
-    /** @type FlatQueue<number> */
-    this._queue = new FlatQueue();
+      throw new Error("STUB");
   }
 
   /**
@@ -435,7 +362,7 @@ export class Flatbush {
 }
 
 function sqDist(dx: number, dy: number) {
-  return dx * dx + dy * dy;
+    throw new Error("STUB");
 }
 
 /**

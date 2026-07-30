@@ -11,7 +11,7 @@ export interface PickersInputClasses extends PickersInputBaseClasses {
 export type PickersInputClassKey = keyof PickersInputClasses;
 
 export function getPickersInputUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickersFilledInput', slot);
+    throw new Error("STUB");
 }
 
 export const pickersInputClasses = {

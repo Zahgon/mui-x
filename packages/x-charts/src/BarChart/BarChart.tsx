@@ -121,47 +121,7 @@ const BarChart = React.forwardRef(function BarChart(
   inProps: BarChartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiBarChart' });
-  const {
-    chartsWrapperProps,
-    chartsContainerProps,
-    barPlotProps,
-    gridProps,
-    clipPathProps,
-    clipPathGroupProps,
-    overlayProps,
-    chartsAxisProps,
-    axisHighlightProps,
-    legendProps,
-    children,
-  } = useBarChartProps(props);
-  const { chartsDataProviderProps, chartsSurfaceProps } =
-    useChartsContainerProps(chartsContainerProps);
-
-  const Tooltip = props.slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = props.slots?.toolbar;
-
-  return (
-    <ChartsDataProvider<'bar', BarChartPluginSignatures> {...chartsDataProviderProps}>
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {props.showToolbar && Toolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!props.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <ChartsGrid {...gridProps} />
-          <g {...clipPathGroupProps}>
-            <BarPlot {...barPlotProps} />
-            <ChartsOverlay {...overlayProps} />
-            <ChartsAxisHighlight {...axisHighlightProps} />
-            <FocusedBar />
-          </g>
-          <ChartsAxis {...chartsAxisProps} />
-          <ChartsClipPath {...clipPathProps} />
-          {children}
-        </ChartsSurface>
-        {!props.loading && <Tooltip {...props.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProvider>
-  );
+    throw new Error("STUB");
 });
 
 BarChart.propTypes /* remove-proptypes */ = {

@@ -8,33 +8,10 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   root
     .find(j.ImportDeclaration)
     .filter((path) =>
-      ['@mui/x-data-grid-pro', '@mui/x-data-grid-premium'].includes(
-        path.node.source.value as string,
-      ),
+      { throw new Error("STUB"); },
     )
     .forEach((path) => {
-      const specifiers = path.node.specifiers;
-      const filteredSpecifiers = specifiers!.filter(
-        (spec) => !(j.ImportSpecifier.check(spec) && spec.imported.name === 'LicenseInfo'),
-      );
-
-      // If `LicenseInfo` was found and removed
-      if (filteredSpecifiers.length !== specifiers!.length) {
-        const licenseImport = j.importDeclaration(
-          [j.importSpecifier(j.identifier('LicenseInfo'))],
-          j.stringLiteral('@mui/x-license'),
-        );
-
-        if (filteredSpecifiers.length > 0) {
-          // Keep other imports but remove `LicenseInfo`
-          path.node.specifiers = filteredSpecifiers;
-          // Insert new import right after the modified import
-          j(path).insertAfter(licenseImport);
-        } else {
-          // Remove import entirely and insert new one at the same position
-          j(path).replaceWith(licenseImport);
-        }
-      }
+        throw new Error("STUB");
     });
 
   const printOptions = options?.printOptions || {

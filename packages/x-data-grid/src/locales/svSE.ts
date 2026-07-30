@@ -32,7 +32,7 @@ const svSEGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Dölj filter',
   toolbarFiltersTooltipShow: 'Visa filter',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktiva filter` : `${count} aktivt filter`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Sök…',
@@ -128,7 +128,7 @@ const svSEGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Meny',
-  columnMenuAriaLabel: (columnName: string) => `${columnName} kolumnmeny`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Visa kolumner',
   columnMenuManageColumns: 'Hantera kolumner',
   columnMenuFilter: 'Filtrera',
@@ -141,22 +141,20 @@ const svSEGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktiva filter` : `${count} aktivt filter`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Visa filter',
   columnHeaderSortIconLabel: 'Sortera',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1
-      ? `${count.toLocaleString()} rader markerade`
-      : `${count.toLocaleString()} rad markerad`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Totalt antal rader:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} av ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Markering med kryssruta',
@@ -188,8 +186,8 @@ const svSEGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Grupp',
-  groupColumn: (name) => `Gruppera efter ${name}`,
-  unGroupColumn: (name) => `Sluta gruppera efter ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Växla detaljpanel',
@@ -199,25 +197,10 @@ const svSEGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Rader per sida:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    const unknownRowCount = count == null || count === -1;
-    if (!estimated) {
-      return `${from}–${to} av ${!unknownRowCount ? count : `fler än ${to}`}`;
-    }
-    const estimatedLabel = estimated && estimated > to ? `ungefär ${estimated}` : `fler än ${to}`;
-    return `${from}–${to} av ${!unknownRowCount ? count : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Gå till första sidan';
-    }
-    if (type === 'last') {
-      return 'Gå till sista sidan';
-    }
-    if (type === 'next') {
-      return 'Gå till nästa sida';
-    }
-    // if (type === 'previous') {
-    return 'Gå till föregående sida';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -276,8 +259,8 @@ const svSEGrid: Partial<GridLocaleText> = {
   chartsFieldBlocked: 'Det här fältet kan inte läggas till i någon sektion',
   chartsCategories: 'Kategorier',
   chartsSeries: 'Serie',
-  chartsMenuAddToDimensions: (dimensionLabel: string) => `Lägg till ${dimensionLabel}`,
-  chartsMenuAddToValues: (valuesLabel: string) => `Lägg till ${valuesLabel}`,
+  chartsMenuAddToDimensions: (dimensionLabel: string) => { throw new Error("STUB"); },
+  chartsMenuAddToValues: (valuesLabel: string) => { throw new Error("STUB"); },
   chartsMenuMoveUp: 'Flytta upp',
   chartsMenuMoveDown: 'Flytta ned',
   chartsMenuMoveToTop: 'Flytta till toppen',
@@ -285,9 +268,9 @@ const svSEGrid: Partial<GridLocaleText> = {
   chartsMenuOptions: 'Fältalternativ',
   chartsMenuRemove: 'Ta bort',
   chartsDragToDimensions: (dimensionLabel: string) =>
-    `Dra hit för att använda kolumnen som ${dimensionLabel}`,
+    { throw new Error("STUB"); },
   chartsDragToValues: (valuesLabel: string) =>
-    `Dra hit för att använda kolumnen som ${valuesLabel}`,
+    { throw new Error("STUB"); },
 
   // AI Assistant panel
   aiAssistantPanelTitle: 'AI assistent',
@@ -313,36 +296,30 @@ const svSEGrid: Partial<GridLocaleText> = {
   promptAppliedChanges: 'Tillämpade ändringar',
 
   // Prompt changes
-  promptChangeGroupDescription: (column: string) => `Gruppera efter ${column}`,
+  promptChangeGroupDescription: (column: string) => { throw new Error("STUB"); },
   promptChangeAggregationLabel: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeAggregationDescription: (column: string, aggregation: string) =>
-    `Aggregering ${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeFilterLabel: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `${column} är någon av: ${value}`;
-    }
-    return `${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeFilterDescription: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `Filtrera där ${column} är någon av: ${value}`;
-    }
-    return `Filtrera där ${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeSortDescription: (column: string, direction: string) =>
-    `Sortera på ${column} (${direction})`,
+    { throw new Error("STUB"); },
   promptChangePivotEnableLabel: 'Pivot',
   promptChangePivotEnableDescription: 'Aktivera pivot',
-  promptChangePivotColumnsLabel: (count: number) => `Kolumner (${count})`,
+  promptChangePivotColumnsLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotColumnsDescription: (column: string, direction: string) =>
-    `${column}${direction ? ` (${direction})` : ''}`,
-  promptChangePivotRowsLabel: (count: number) => `Rader (${count})`,
-  promptChangePivotValuesLabel: (count: number) => `Värden (${count})`,
+    { throw new Error("STUB"); },
+  promptChangePivotRowsLabel: (count: number) => { throw new Error("STUB"); },
+  promptChangePivotValuesLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotValuesDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeChartsLabel: (dimensionsCount: number, valuesCount: number) =>
-    `Dimensioner (${dimensionsCount}), Värden (${valuesCount})`,
+    { throw new Error("STUB"); },
 };
 
 export const svSE: Localization = getGridLocalization(svSEGrid);

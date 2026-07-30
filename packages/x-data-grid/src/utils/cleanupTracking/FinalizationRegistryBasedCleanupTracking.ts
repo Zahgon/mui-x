@@ -2,9 +2,7 @@ import type { CleanupTracking, UnsubscribeFn, UnregisterToken } from './CleanupT
 
 export class FinalizationRegistryBasedCleanupTracking implements CleanupTracking {
   registry = new FinalizationRegistry<UnsubscribeFn>((unsubscribe) => {
-    if (typeof unsubscribe === 'function') {
-      unsubscribe();
-    }
+      throw new Error("STUB");
   });
 
   register(object: any, unsubscribe: UnsubscribeFn, unregisterToken: UnregisterToken): void {

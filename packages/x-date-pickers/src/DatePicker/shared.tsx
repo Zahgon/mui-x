@@ -78,14 +78,7 @@ export function useDatePickerDefaultizedProps<Props extends BaseDatePickerProps>
   const validationProps = useApplyDefaultValuesToDateValidationProps(themeProps);
 
   const localeText = React.useMemo<PickersInputLocaleText | undefined>(() => {
-    if (themeProps.localeText?.toolbarTitle == null) {
-      return themeProps.localeText;
-    }
-
-    return {
-      ...themeProps.localeText,
-      datePickerToolbarTitle: themeProps.localeText.toolbarTitle,
-    };
+      throw new Error("STUB");
   }, [themeProps.localeText]);
 
   return {

@@ -33,7 +33,7 @@ const esESGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Ocultar filtros',
   toolbarFiltersTooltipShow: 'Mostrar filtros',
   toolbarFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} filtros activos` : `${count} filtro activo`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Buscar…',
@@ -129,7 +129,7 @@ const esESGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Menú',
-  columnMenuAriaLabel: (columnName: string) => `Menú de la columna ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Mostrar columnas',
   columnMenuManageColumns: 'Administrar columnas',
   columnMenuFilter: 'Filtro',
@@ -142,22 +142,20 @@ const esESGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} filtros activos` : `${count} filtro activo`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Mostrar filtros',
   columnHeaderSortIconLabel: 'Ordenar',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count > 1
-      ? `${count.toLocaleString()} filas seleccionadas`
-      : `${count.toLocaleString()} fila seleccionada`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Filas Totales:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} de ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Seleccionar casilla',
@@ -189,8 +187,8 @@ const esESGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Grupo',
-  groupColumn: (name) => `Agrupar por ${name}`,
-  unGroupColumn: (name) => `No agrupar por ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Alternar detalle',
@@ -200,27 +198,10 @@ const esESGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Filas por página:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} de ${count !== -1 ? formatNumber(count) : `más de ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `alrededor de ${formatNumber(estimated)}`
-        : `más de ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} de ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Ir a la primera página';
-    }
-    if (type === 'last') {
-      return 'Ir a la última página';
-    }
-    if (type === 'next') {
-      return 'Ir a la página siguiente';
-    }
-    // if (type === 'previous') {
-    return 'Ir a la página anterior';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -279,8 +260,8 @@ const esESGrid: Partial<GridLocaleText> = {
   chartsFieldBlocked: 'Este campo no se puede añadir a ninguna sección',
   chartsCategories: 'Categorías',
   chartsSeries: 'Series',
-  chartsMenuAddToDimensions: (dimensionLabel: string) => `Añadir a ${dimensionLabel}`,
-  chartsMenuAddToValues: (valuesLabel: string) => `Añadir a ${valuesLabel}`,
+  chartsMenuAddToDimensions: (dimensionLabel: string) => { throw new Error("STUB"); },
+  chartsMenuAddToValues: (valuesLabel: string) => { throw new Error("STUB"); },
   chartsMenuMoveUp: 'Mover arriba',
   chartsMenuMoveDown: 'Mover abajo',
   chartsMenuMoveToTop: 'Mover al inicio',
@@ -288,9 +269,9 @@ const esESGrid: Partial<GridLocaleText> = {
   chartsMenuOptions: 'Opciones de campo',
   chartsMenuRemove: 'Eliminar',
   chartsDragToDimensions: (dimensionLabel: string) =>
-    `Arrastrar aquí para utilizar la columna como ${dimensionLabel}`,
+    { throw new Error("STUB"); },
   chartsDragToValues: (valuesLabel: string) =>
-    `Arrastrar aquí para utilizar la columna como  ${valuesLabel}`,
+    { throw new Error("STUB"); },
 
   // AI Assistant panel
   aiAssistantPanelTitle: 'Asistente de IA',
@@ -317,36 +298,30 @@ const esESGrid: Partial<GridLocaleText> = {
   promptAppliedChanges: 'Se han aplicado los cambios',
 
   // Prompt changes
-  promptChangeGroupDescription: (column: string) => `Agrupar por ${column}`,
+  promptChangeGroupDescription: (column: string) => { throw new Error("STUB"); },
   promptChangeAggregationLabel: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeAggregationDescription: (column: string, aggregation: string) =>
-    `Agregar ${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeFilterLabel: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `${column} es uno de: ${value}`;
-    }
-    return `${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeFilterDescription: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `Filtrar por ${column} cuando sea uno de: ${value}`;
-    }
-    return `Filtrar por ${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeSortDescription: (column: string, direction: string) =>
-    `Ordenar por ${column} (${direction})`,
+    { throw new Error("STUB"); },
   promptChangePivotEnableLabel: 'Tabla dinámica',
   promptChangePivotEnableDescription: 'Activar tabla dinámica',
-  promptChangePivotColumnsLabel: (count: number) => `Columnas (${count})`,
+  promptChangePivotColumnsLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotColumnsDescription: (column: string, direction: string) =>
-    `${column}${direction ? ` (${direction})` : ''}`,
-  promptChangePivotRowsLabel: (count: number) => `Filas (${count})`,
-  promptChangePivotValuesLabel: (count: number) => `Valores (${count})`,
+    { throw new Error("STUB"); },
+  promptChangePivotRowsLabel: (count: number) => { throw new Error("STUB"); },
+  promptChangePivotValuesLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotValuesDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeChartsLabel: (dimensionsCount: number, valuesCount: number) =>
-    `Dimensiones (${dimensionsCount}), Valores (${valuesCount})`,
+    { throw new Error("STUB"); },
 };
 
 export const esES: Localization = getGridLocalization(esESGrid);

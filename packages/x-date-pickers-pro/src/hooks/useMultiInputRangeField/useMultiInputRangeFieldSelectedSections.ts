@@ -38,58 +38,5 @@ interface UseMultiInputFieldSelectedSectionsResponse {
 export const useMultiInputRangeFieldSelectedSections = (
   parameters: UseMultiInputRangeFieldSelectedSectionsParameters,
 ): UseMultiInputFieldSelectedSectionsResponse => {
-  const endFieldRef = React.useRef<FieldRef<PickerValue>>(null);
-  const handleEndFieldRef = useForkRef(parameters.endFieldRef, endFieldRef);
-
-  const [startSelectedSection, setStartSelectedSection] = React.useState<FieldSelectedSections>(
-    parameters.selectedSections ?? null,
-  );
-  const [endSelectedSection, setEndSelectedSection] = React.useState<FieldSelectedSections>(null);
-
-  const getActiveField = () => {
-    if (endFieldRef.current && endFieldRef.current.isFieldFocused()) {
-      return 'end';
-    }
-
-    return 'start';
-  };
-
-  const handleStartSelectedSectionChange = useEventCallback(
-    (newSelectedSections: FieldSelectedSections) => {
-      setStartSelectedSection(newSelectedSections);
-      if (getActiveField() === 'start') {
-        parameters.onSelectedSectionsChange?.(newSelectedSections);
-      }
-    },
-  );
-
-  const handleEndSelectedSectionChange = useEventCallback(
-    (newSelectedSections: FieldSelectedSections) => {
-      setEndSelectedSection(newSelectedSections);
-      if (getActiveField() === 'end') {
-        parameters.onSelectedSectionsChange?.(newSelectedSections);
-      }
-    },
-  );
-
-  const activeField = getActiveField();
-
-  return {
-    start: {
-      fieldRef: parameters.startFieldRef,
-      selectedSections:
-        activeField === 'start' && parameters.selectedSections !== undefined
-          ? parameters.selectedSections
-          : startSelectedSection,
-      onSelectedSectionsChange: handleStartSelectedSectionChange,
-    },
-    end: {
-      fieldRef: handleEndFieldRef,
-      selectedSections:
-        activeField === 'end' && parameters.selectedSections !== undefined
-          ? parameters.selectedSections
-          : endSelectedSection,
-      onSelectedSectionsChange: handleEndSelectedSectionChange,
-    },
-  };
+    throw new Error("STUB");
 };

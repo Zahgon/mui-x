@@ -47,19 +47,12 @@ function ChartsLocalizationProvider(inProps: ChartsLocalizationProviderProps) {
   const { children, localeText: themeLocaleText } = props;
 
   const localeText = React.useMemo(
-    () => ({
-      ...DEFAULT_LOCALE,
-      ...themeLocaleText,
-      ...parentLocaleText,
-      ...inLocaleText,
-    }),
+    () => { throw new Error("STUB"); },
     [themeLocaleText, parentLocaleText, inLocaleText],
   );
 
   const contextValue: ChartsLocalizationContextValue = React.useMemo(() => {
-    return {
-      localeText,
-    };
+      throw new Error("STUB");
   }, [localeText]);
 
   return (

@@ -92,61 +92,7 @@ function ChartsRotationAxis(props: ChartsRotationAxisProps) {
           <path d={arcPath} stroke={stroke} fill="none" className={classes.line} />
         ))}
       {ticks.map(({ offset: angle, labelOffset, formattedValue }, index) => {
-        if (!formattedValue) {
-          return null;
-        }
-
-        // Convert "0 = up" convention to SVG math angle (0 = right, clockwise y-down).
-        const dx = Math.sin(angle);
-        const dy = -Math.cos(angle);
-
-        const labelDx = labelOffset === 0 ? dx : Math.sin(angle + labelOffset);
-        const labelDy = labelOffset === 0 ? dy : -Math.cos(angle + labelOffset);
-
-        const tx = cx + dx * radius;
-        const ty = cy + dy * radius;
-
-        const tickDx = (tickPosition === 'after' ? 1 : -1) * dx * tickSize;
-        const tickDy = (tickPosition === 'after' ? 1 : -1) * dy * tickSize;
-
-        let tickLabelRadius = radius + (tickLabelPosition === 'after' ? 1 : -1) * TICK_LABEL_GAP;
-
-        if (tickLabelPosition === tickPosition && !disableTicks) {
-          // Add the size of the tick if they are in the same direction.
-          tickLabelRadius += tickSize;
-        }
-
-        // Compute the label position.
-        const labelX = cx + labelDx * tickLabelRadius;
-        const labelY = cy + labelDy * tickLabelRadius;
-
-        return (
-          <g key={index} className={classes.tickContainer}>
-            {!disableTicks && (
-              <line
-                x1={tx}
-                y1={ty}
-                x2={tx + tickDx}
-                y2={ty + tickDy}
-                stroke={stroke}
-                className={classes.tick}
-              />
-            )}
-            {!disableTickLabel && (
-              <text
-                x={labelX}
-                y={labelY}
-                fill={stroke}
-                fontSize={12}
-                className={classes.tickLabel}
-                pointerEvents="none"
-                {...getLabelTextAnchors(labelDx, labelDy, tickLabelPosition)}
-              >
-                {formattedValue}
-              </text>
-            )}
-          </g>
-        );
+          throw new Error("STUB");
       })}
     </g>
   );

@@ -42,75 +42,14 @@ export function useDragOnPressGesture(
   // Keep the latest handlers in a ref so changing them doesn't rebind listeners.
   const handlersRef = React.useRef({ onPanStart, onPan, onPanEnd });
   React.useEffect(() => {
-    handlersRef.current = { onPanStart, onPan, onPanEnd };
+      throw new Error("STUB");
   });
 
   React.useEffect(() => {
-    if (!enabled) {
-      return;
-    }
-    instance.updateZoomInteractionListeners('zoomPressAndDrag', {
-      requiredKeys: config?.requiredKeys,
-      pointerMode: config?.pointerMode,
-      pointerOptions: {
-        mouse: config?.mouse,
-        touch: config?.touch,
-      },
-    });
+      throw new Error("STUB");
   }, [enabled, config, instance]);
 
   React.useEffect(() => {
-    const element = chartsLayerContainerRef.current;
-    if (element === null || !enabled) {
-      return () => {};
-    }
-
-    let isInteracting = false;
-    let lastEvent: PanEvent | null = null;
-    const accumulated = { x: 0, y: 0 };
-
-    const handlePanStart = (event: PanEvent) => {
-      if (!(event.detail.target as SVGElement)?.closest('[data-charts-zoom-slider]')) {
-        isInteracting = true;
-        handlersRef.current.onPanStart?.(event);
-      }
-    };
-    const handlePanEnd = (event: PanEvent) => {
-      isInteracting = false;
-      handlersRef.current.onPanEnd?.(event);
-    };
-
-    const throttled = rafThrottle(() => {
-      const delta = { x: accumulated.x, y: accumulated.y };
-      accumulated.x = 0;
-      accumulated.y = 0;
-      if (lastEvent) {
-        handlersRef.current.onPan(delta, lastEvent);
-      }
-    });
-
-    const handlePan = (event: PanEvent) => {
-      if (!isInteracting) {
-        return;
-      }
-      lastEvent = event;
-      accumulated.x += event.detail.deltaX;
-      accumulated.y += event.detail.deltaY;
-      throttled();
-    };
-
-    const panHandler = instance.addInteractionListener('zoomPressAndDrag', handlePan);
-    const panStartHandler = instance.addInteractionListener(
-      'zoomPressAndDragStart',
-      handlePanStart,
-    );
-    const panEndHandler = instance.addInteractionListener('zoomPressAndDragEnd', handlePanEnd);
-
-    return () => {
-      panHandler.cleanup();
-      panStartHandler.cleanup();
-      panEndHandler.cleanup();
-      throttled.clear();
-    };
+      throw new Error("STUB");
   }, [instance, chartsLayerContainerRef, enabled]);
 }

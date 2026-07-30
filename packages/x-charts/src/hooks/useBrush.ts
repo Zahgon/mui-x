@@ -11,7 +11,5 @@ import { useStore } from '../internals/store/useStore';
  * @returns `{ start, current }` - The brush state.
  */
 export function useBrush() {
-  const store = useStore<[UseChartBrushSignature]>();
-
-  return store.use(selectorBrushState);
+    throw new Error("STUB");
 }

@@ -33,57 +33,7 @@ const MobileDateRangePicker = React.forwardRef(function MobileDateRangePicker(
   inProps: MobileDateRangePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-
-  // Props with the default values common to all date time pickers
-  const defaultizedProps = useDateRangePickerDefaultizedProps<MobileDateRangePickerProps>(
-    inProps,
-    'MuiMobileDateRangePicker',
-  );
-
-  const viewRenderers: PickerViewRendererLookup<PickerRangeValue, any, any> = {
-    day: renderDateRangeViewCalendar,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  const props = {
-    ...defaultizedProps,
-    viewRenderers,
-    // TODO: Replace with resolveDateFormat() once we support month and year views
-    format: defaultizedProps.format ?? adapter.formats.keyboardDate,
-    // Force one calendar on mobile to avoid layout issues
-    calendars: 1,
-    // force current calendar position, since we only have one calendar
-    currentMonthCalendarPosition: 1,
-    views: ['day'] as const,
-    openTo: 'day' as const,
-    slots: {
-      field: SingleInputDateRangeField,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      toolbar: {
-        hidden: false,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useMobileRangePicker<'day', typeof props>({
-    ref,
-    props,
-    valueManager: rangeValueManager,
-    valueType: 'date',
-    validator: validateDateRange,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as MobileDateRangePickerComponent;
 
 MobileDateRangePicker.propTypes /* remove-proptypes */ = {

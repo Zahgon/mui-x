@@ -35,11 +35,7 @@ type OwnerState = DataGridProProcessedProps;
 const useUtilityClasses = (ownerState: OwnerState) => {
   const { classes } = ownerState;
   return React.useMemo(() => {
-    const slots = {
-      headerFilterRow: ['headerFilterRow'],
-    };
-
-    return composeClasses(slots, getDataGridUtilityClass, classes);
+      throw new Error("STUB");
   }, [classes]);
 };
 
@@ -87,23 +83,8 @@ export const useGridColumnHeadersPro = (props: UseGridColumnHeadersProps) => {
 
   const getFilterItem = React.useCallback(
     (colDef: GridStateColDef) => {
-      const filterModelItem = filterModel?.items.find(
-        (it) => it.field === colDef.field && it.operator !== 'isAnyOf',
-      );
-      if (filterModelItem != null) {
-        // there's a valid `filterModelItem` for this column
-        return filterModelItem;
-      }
-      const defaultCachedItem = filterItemsCache[colDef.field];
-      if (defaultCachedItem != null) {
-        // there's a cached `defaultItem` for this column
-        return defaultCachedItem;
-      }
-      // there's no cached `defaultItem` for this column, let's generate one and cache it
-      const defaultItem = getGridFilter(colDef);
-      filterItemsCache[colDef.field] = defaultItem;
-      return defaultItem;
-    },
+          throw new Error("STUB");
+      },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [filterModel],
   );

@@ -85,7 +85,7 @@ function defaultAxisTooltipConfig(
   const axisFormatter =
     axis.valueFormatter ??
     ((v: string | number | Date) =>
-      axis.scaleType === 'utc' ? utcFormatter(v) : v.toLocaleString());
+      { throw new Error("STUB"); });
 
   const axisFormattedValue = axisFormatter(axisValue, {
     location: 'tooltip',
@@ -162,161 +162,40 @@ export function useAxesTooltip<
 
   if (directions === undefined || directions.includes('x')) {
     tooltipXAxes.forEach(({ axisId, dataIndex }) => {
-      tooltipAxes.push(defaultAxisTooltipConfig(xAxis[axisId], dataIndex, 'x'));
+        throw new Error("STUB");
     });
   }
 
   if (directions === undefined || directions.includes('y')) {
     tooltipYAxes.forEach(({ axisId, dataIndex }) => {
-      tooltipAxes.push(defaultAxisTooltipConfig(yAxis[axisId], dataIndex, 'y'));
+        throw new Error("STUB");
     });
   }
 
   if (directions === undefined || directions.includes('rotation')) {
     tooltipRotationAxes.forEach(({ axisId, dataIndex }) => {
-      tooltipAxes.push(defaultAxisTooltipConfig(rotationAxis[axisId], dataIndex, 'rotation'));
+        throw new Error("STUB");
     });
   }
 
   if (directions === undefined || directions.includes('radius')) {
     tooltipRadiusAxes.forEach(({ axisId, dataIndex }) => {
-      tooltipAxes.push(defaultAxisTooltipConfig(radiusAxis[axisId], dataIndex, 'radius'));
+        throw new Error("STUB");
     });
   }
 
   Object.keys(series)
     .filter((seriesType): seriesType is ComposableCartesianChartSeriesType =>
-      composableCartesianSeriesTypes.has(seriesType as ComposableCartesianChartSeriesType),
+      { throw new Error("STUB"); },
     )
     .forEach(<Type extends ComposableCartesianChartSeriesType>(seriesType: Type) => {
-      const seriesOfType = series[seriesType];
-      if (!seriesOfType) {
-        return [];
-      }
-      return seriesOfType.seriesOrder.forEach((seriesId) => {
-        const seriesToAdd = seriesOfType.series[seriesId]!;
-
-        // Skip hidden series (only if visibility manager is available)
-        if (isItemVisible && !isItemVisible({ type: seriesType, seriesId })) {
-          return;
-        }
-
-        const providedXAxisId = seriesToAdd.xAxisId ?? defaultXAxis.id;
-        const providedYAxisId = seriesToAdd.yAxisId ?? defaultYAxis.id;
-
-        const tooltipItemIndex = tooltipAxes.findIndex(
-          ({ axisDirection, axisId }) =>
-            (axisDirection === 'x' && axisId === providedXAxisId) ||
-            (axisDirection === 'y' && axisId === providedYAxisId),
-        );
-        // Test if the series uses the default axis
-        if (tooltipItemIndex >= 0) {
-          const colorAxisId =
-            ('colorAxisId' in seriesToAdd && seriesToAdd.colorAxisId) ||
-            ('zAxisId' in seriesToAdd && seriesToAdd.zAxisId) ||
-            zAxisIds[0];
-          const { dataIndex } = tooltipAxes[tooltipItemIndex];
-          const color =
-            colorProcessors[seriesType]?.(
-              seriesToAdd,
-              xAxis[providedXAxisId],
-              yAxis[providedYAxisId],
-              colorAxisId ? zAxis[colorAxisId] : undefined,
-            )(dataIndex) ?? '';
-
-          const rawValue = seriesToAdd.data[dataIndex] ?? null;
-          const formattedLabel = getLabel(seriesToAdd.label, 'tooltip') ?? null;
-
-          let value: any;
-          let formattedValue: any;
-
-          if (seriesType === 'ohlc' && Array.isArray(rawValue)) {
-            const [open, high, low, close] = rawValue as [number, number, number, number];
-            const formatter = seriesToAdd.valueFormatter as any;
-            value = { open, high, low, close };
-            formattedValue = {
-              open: formatter(open, { dataIndex, field: 'open' }),
-              high: formatter(high, { dataIndex, field: 'high' }),
-              low: formatter(low, { dataIndex, field: 'low' }),
-              close: formatter(close, { dataIndex, field: 'close' }),
-            };
-          } else {
-            value = rawValue;
-            formattedValue = (seriesToAdd.valueFormatter as any)(rawValue, {
-              dataIndex,
-            });
-          }
-
-          tooltipAxes[tooltipItemIndex].seriesItems.push({
-            seriesId,
-            color,
-            value,
-            formattedValue,
-            formattedLabel,
-            markType: seriesToAdd.labelMarkType,
-            markShape: getSeriesMark(seriesToAdd),
-          });
-        }
-      });
+        throw new Error("STUB");
     });
 
   Object.keys(series)
     .filter(isPolarSeriesType)
     .forEach(<Type extends PolarChartSeriesType>(seriesType: Type) => {
-      const seriesOfType = series[seriesType];
-      if (!seriesOfType) {
-        return [];
-      }
-      return seriesOfType.seriesOrder.forEach((seriesId) => {
-        const seriesToAdd = seriesOfType.series[seriesId]!;
-
-        // Skip hidden series (only if visibility manager is available)
-        if (isItemVisible && !isItemVisible({ type: seriesType, seriesId })) {
-          return;
-        }
-
-        const providedRotationAxisId =
-          ('rotationAxisId' in seriesToAdd ? (seriesToAdd.rotationAxisId as AxisId) : undefined) ??
-          defaultRotationAxis?.id;
-        const providedRadiusAxisId =
-          ('radiusAxisId' in seriesToAdd ? (seriesToAdd.radiusAxisId as AxisId) : undefined) ??
-          defaultRadiusAxis?.id;
-
-        const tooltipItemIndex = tooltipAxes.findIndex(
-          ({ axisDirection, axisId }) =>
-            (axisDirection === 'rotation' && axisId === providedRotationAxisId) ||
-            (axisDirection === 'radius' && axisId === providedRadiusAxisId),
-        );
-        // Test if the series uses the default axis
-        if (tooltipItemIndex >= 0) {
-          const { dataIndex } = tooltipAxes[tooltipItemIndex];
-
-          const color =
-            colorProcessors[seriesType]?.(
-              seriesToAdd,
-              providedRotationAxisId !== undefined
-                ? rotationAxis[providedRotationAxisId]
-                : undefined,
-              providedRadiusAxisId !== undefined ? radiusAxis[providedRadiusAxisId] : undefined,
-            )(dataIndex) ?? '';
-
-          const value = seriesToAdd.data[dataIndex] ?? null;
-          const formattedValue = (seriesToAdd.valueFormatter as any)(value, {
-            dataIndex,
-          });
-          const formattedLabel = getLabel(seriesToAdd.label, 'tooltip') ?? null;
-
-          tooltipAxes[tooltipItemIndex].seriesItems.push({
-            seriesId,
-            color,
-            value,
-            formattedValue,
-            formattedLabel,
-            markType: seriesToAdd.labelMarkType,
-            markShape: getSeriesMark(seriesToAdd),
-          });
-        }
-      });
+        throw new Error("STUB");
     });
 
   return tooltipAxes as UseAxesTooltipReturnValue<SeriesType>[];

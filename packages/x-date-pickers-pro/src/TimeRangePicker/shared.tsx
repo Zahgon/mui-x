@@ -145,14 +145,7 @@ export function useTimeRangePickerDefaultizedProps<Props extends BaseTimeRangePi
   });
 
   const localeText = React.useMemo<PickersInputLocaleText | undefined>(() => {
-    if (themeProps.localeText?.toolbarTitle == null) {
-      return themeProps.localeText;
-    }
-
-    return {
-      ...themeProps.localeText,
-      timeRangePickerToolbarTitle: themeProps.localeText.toolbarTitle,
-    };
+      throw new Error("STUB");
   }, [themeProps.localeText]);
 
   const {

@@ -47,7 +47,7 @@ export interface DateRangePickerDayClasses {
 export type DateRangePickerDayClassKey = keyof DateRangePickerDayClasses;
 
 export function getDateRangePickerDayUtilityClass(slot: string) {
-  return generateUtilityClass('MuiDateRangePickerDay', slot);
+    throw new Error("STUB");
 }
 
 export const dateRangePickerDayClasses = generateUtilityClasses<DateRangePickerDayClassKey>(

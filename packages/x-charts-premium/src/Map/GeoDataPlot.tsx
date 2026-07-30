@@ -37,19 +37,7 @@ function GeoDataPlot(props: GeoDataPlotProps) {
   return (
     <g className={className}>
       {geoData.features.map((feature, index) => {
-        const d = path(feature);
-        if (!d) {
-          return null;
-        }
-        return (
-          <path
-            key={feature.id ?? index}
-            d={d}
-            fill={fill}
-            stroke={stroke}
-            strokeWidth={strokeWidth}
-          />
-        );
+          throw new Error("STUB");
       })}
     </g>
   );

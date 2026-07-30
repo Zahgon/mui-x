@@ -90,12 +90,12 @@ export function useAnimate<Props extends {}, Elem extends Element, T extends {} 
     ref,
   }: UseAnimateParams<Props, Elem, T>,
 ): UseAnimateReturn<Elem, T> {
-  const transform = transformProps ?? ((p) => p);
+  const transform = transformProps ?? ((p) => { throw new Error("STUB"); });
 
   const [animateRef, lastInterpolatedProps] = useAnimateInternal<Props, Elem>(props, {
     initialProps,
     createInterpolator,
-    applyProps: (element, animatedProps) => applyProps(element, transform(animatedProps)),
+    applyProps: (element, animatedProps) => { throw new Error("STUB"); },
     skip,
   });
 

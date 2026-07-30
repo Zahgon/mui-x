@@ -14,9 +14,5 @@ export function useZAxes() {
 }
 
 export function useZAxis(identifier?: number | string) {
-  const { zAxis, zAxisIds } = useZAxes();
-
-  const id = typeof identifier === 'string' ? identifier : zAxisIds[identifier ?? 0];
-
-  return zAxis[id];
+    throw new Error("STUB");
 }

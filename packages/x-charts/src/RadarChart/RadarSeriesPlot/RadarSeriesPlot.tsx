@@ -23,55 +23,8 @@ function RadarSeriesPlot(props: RadarSeriesPlotProps) {
     <g className={clsx(classes.seriesRoot, className)}>
       {seriesCoordinates?.map(
         ({ seriesId, points, color, hideMark, fillArea, hidden }, seriesIndex) => {
-          if (hidden) {
-            return null;
-          }
-
-          return (
-            <g key={seriesId} data-series={seriesId}>
-              {
-                <path
-                  key={seriesId}
-                  {...getPathProps({
-                    seriesId,
-                    points,
-                    color,
-                    fillArea,
-                    getHighlightState,
-                    classes,
-                  })}
-                  onClick={(event) =>
-                    onAreaClick?.(event, {
-                      type: 'radar',
-                      seriesId,
-                      dataIndex: getRotationIndex(event),
-                    })
-                  }
-                  cursor={onAreaClick ? 'pointer' : 'unset'}
-                  {...interactionProps[seriesIndex]}
-                />
-              }
-              {!hideMark &&
-                points.map((point, index) => (
-                  <circle
-                    key={index}
-                    {...getCircleProps({
-                      seriesId,
-                      point,
-                      color: point.color,
-                      fillArea,
-                      getHighlightState,
-                      classes,
-                    })}
-                    onClick={(event) =>
-                      onMarkClick?.(event, { type: 'radar', seriesId, dataIndex: index })
-                    }
-                    cursor={onMarkClick ? 'pointer' : 'unset'}
-                  />
-                ))}
-            </g>
-          );
-        },
+              throw new Error("STUB");
+          },
       )}
     </g>
   );

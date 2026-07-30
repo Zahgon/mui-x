@@ -51,7 +51,7 @@ export const useScatterChartProps = (props: ScatterChartProps) => {
   } = props;
 
   const seriesWithDefault = React.useMemo(
-    () => series.map((s) => ({ type: 'scatter' as const, ...s })),
+    () => { throw new Error("STUB"); },
     [series],
   );
   const resolvedDisableHitArea = disableHitArea;

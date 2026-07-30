@@ -9,40 +9,8 @@ const ChartsAxisHighlightValueText = styled('div', {
   name: 'MuiChartsAxisHighlightValue',
   slot: 'Root',
 
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'position',
-})<Pick<ChartsAxisHighlightValueItemProps, 'position'>>(({ theme }) => ({
-  ...theme.typography.caption,
-  padding: theme.spacing(0.5, 1),
-  border: `solid ${theme.palette.divider} 1px`,
-  backgroundColor: theme.palette.background.paper,
-  '--clamped-offset': 'calc(-1*min(var(--min),max(calc(100% - var(--max)),50%)))',
-  variants: [
-    {
-      props: { position: 'top' },
-      style: {
-        translate: 'var(--clamped-offset) -100%',
-      },
-    },
-    {
-      props: { position: 'bottom' },
-      style: {
-        translate: 'var(--clamped-offset) 0',
-      },
-    },
-    {
-      props: { position: 'left' },
-      style: {
-        translate: '-100% var(--clamped-offset)',
-      },
-    },
-    {
-      props: { position: 'right' },
-      style: {
-        translate: '0 var(--clamped-offset)',
-      },
-    },
-  ],
-}));
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
+})<Pick<ChartsAxisHighlightValueItemProps, 'position'>>(({ theme }) => { throw new Error("STUB"); });
 
 export interface ChartsAxisHighlightValueItemProps {
   x: number;

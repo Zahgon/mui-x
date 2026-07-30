@@ -33,10 +33,7 @@ export interface FunnelSectionLabelProps extends Omit<
 export const FunnelSectionLabelText = styled('text', {
   name: 'MuiFunnelChart',
   slot: 'SectionLabel',
-})(() => ({
-  transition:
-    'opacity 0.2s ease-in, fill 0.2s ease-in, fill-opacity 0.2s ease-in, filter 0.2s ease-in',
-}));
+})(() => { throw new Error("STUB"); });
 
 /**
  * @ignore - internal component.
@@ -51,34 +48,7 @@ const FunnelSectionLabel = consumeSlots<FunnelSectionLabelProps, SVGTextElement>
     props: FunnelSectionLabelProps,
     ref: React.Ref<SVGTextElement>,
   ) {
-    const { classes, color, onClick, className, label, variant, seriesId, dataIndex, ...other } =
-      props;
-    const theme = useTheme();
-
-    return (
-      <FunnelSectionLabelText
-        stroke="none"
-        pointerEvents="none"
-        fontFamily={theme.typography.body2.fontFamily}
-        fontSize={theme.typography.body2.fontSize}
-        fontSizeAdjust={theme.typography.body2.fontSizeAdjust}
-        fontWeight={theme.typography.body2.fontWeight}
-        letterSpacing={theme.typography.body2.letterSpacing}
-        fontStretch={theme.typography.body2.fontStretch}
-        fontStyle={theme.typography.body2.fontStyle}
-        fontVariant={theme.typography.body2.fontVariant}
-        fill={(theme.vars || theme)?.palette?.text?.primary}
-        className={clsx(classes?.sectionLabel, className)}
-        x={label.x}
-        y={label.y}
-        textAnchor={label.textAnchor ?? 'middle'}
-        dominantBaseline={label.dominantBaseline ?? 'central'}
-        {...other}
-        ref={ref}
-      >
-        {label.value}
-      </FunnelSectionLabelText>
-    );
+      throw new Error("STUB");
   }),
 );
 

@@ -28,18 +28,7 @@ const DateTimePicker = React.forwardRef(function DateTimePicker(
   inProps: DateTimePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiDateTimePicker' });
-
-  const { desktopModeMediaQuery = DEFAULT_DESKTOP_MODE_MEDIA_QUERY, ...other } = props;
-
-  // defaults to `true` in environments where `window.matchMedia` would not be available (i.e. test/jsdom)
-  const isDesktop = useMediaQuery(desktopModeMediaQuery, { defaultMatches: true });
-
-  if (isDesktop) {
-    return <DesktopDateTimePicker ref={ref} {...other} />;
-  }
-
-  return <MobileDateTimePicker ref={ref} {...(other as MobileDateTimePickerProps)} />;
+    throw new Error("STUB");
 }) as DateTimePickerComponent;
 
 DateTimePicker.propTypes /* remove-proptypes */ = {

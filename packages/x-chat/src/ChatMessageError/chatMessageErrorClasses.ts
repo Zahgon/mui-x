@@ -14,7 +14,7 @@ export interface ChatMessageErrorClasses {
 export type ChatMessageErrorClassKey = keyof ChatMessageErrorClasses;
 
 export function getChatMessageErrorUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatMessageError', slot);
+    throw new Error("STUB");
 }
 
 export const chatMessageErrorClasses: ChatMessageErrorClasses = generateUtilityClasses(

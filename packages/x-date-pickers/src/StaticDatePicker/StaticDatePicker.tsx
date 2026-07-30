@@ -28,45 +28,7 @@ const StaticDatePicker = React.forwardRef(function StaticDatePicker(
   inProps: StaticDatePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const defaultizedProps = useDatePickerDefaultizedProps<StaticDatePickerProps>(
-    inProps,
-    'MuiStaticDatePicker',
-  );
-
-  const displayStaticWrapperAs = defaultizedProps.displayStaticWrapperAs ?? 'mobile';
-
-  const viewRenderers: DatePickerViewRenderers<DateView> = {
-    day: renderDateViewCalendar,
-    month: renderDateViewCalendar,
-    year: renderDateViewCalendar,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  // Props with the default values specific to the static variant
-  const props = {
-    ...defaultizedProps,
-    viewRenderers,
-    displayStaticWrapperAs,
-    yearsPerRow: defaultizedProps.yearsPerRow ?? (displayStaticWrapperAs === 'mobile' ? 3 : 4),
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      toolbar: {
-        hidden: displayStaticWrapperAs === 'desktop',
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useStaticPicker<DateView, typeof props>({
-    ref,
-    props,
-    valueManager: singleItemValueManager,
-    valueType: 'date',
-    validator: validateDate,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as StaticDatePickerComponent;
 
 StaticDatePicker.propTypes /* remove-proptypes */ = {

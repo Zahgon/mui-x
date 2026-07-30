@@ -30,7 +30,7 @@ function ChartsText(props: ChartsTextProps) {
   const isHydrated = useIsHydrated();
 
   const wordsByLines = React.useMemo(
-    () => getWordsByLines({ style, needsComputation: isHydrated && text.includes('\n'), text }),
+    () => { throw new Error("STUB"); },
     [style, text, isHydrated],
   );
 
@@ -58,16 +58,7 @@ function ChartsText(props: ChartsTextProps) {
       dominantBaseline={dominantBaseline}
       style={style}
     >
-      {wordsByLines.map((line, index) => (
-        <tspan
-          x={x}
-          dy={`${index === 0 ? startDy : wordsByLines[0].height}px`}
-          dominantBaseline={dominantBaseline} // Propagated to fix Safari issue: https://github.com/mui/mui-x/issues/10808
-          key={index}
-        >
-          {line.text}
-        </tspan>
-      ))}
+      {wordsByLines.map((line, index) => { throw new Error("STUB"); })}
     </text>
   );
 }

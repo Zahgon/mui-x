@@ -60,7 +60,7 @@ export const useDesktopRangePicker = <
     localeText,
     getStepNavigation,
     onPopperExited: useEventCallback(() =>
-      rangePositionResponse.setRangePosition(props.defaultRangePosition ?? 'start'),
+      { throw new Error("STUB"); },
     ),
   });
 

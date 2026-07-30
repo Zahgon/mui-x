@@ -25,10 +25,7 @@ export const createFakeServer = (
   const initialState = getInitialState(dataSetOptionsWithDefault, columns);
 
   const defaultColDef = getGridDefaultColumnTypes();
-  const columnsWithDefaultColDef = columns.map((column) => ({
-    ...defaultColDef[column.type || 'string'],
-    ...column,
-  }));
+  const columnsWithDefaultColDef = columns.map((column) => { throw new Error("STUB"); });
 
   const useQuery = (queryOptions: QueryOptions) => {
     const {
@@ -44,45 +41,7 @@ export const createFakeServer = (
     const [isLoading, setIsLoading] = React.useState<boolean>(dataGenerationIsLoading);
 
     React.useEffect(() => {
-      if (dataGenerationIsLoading) {
-        // dataset is not ready
-        return () => {};
-      }
-
-      queryOptionsRef.current = queryOptions;
-      let active = true;
-
-      setIsLoading(true);
-      setResponse((prev) =>
-        Object.keys(prev.pageInfo).length === 0 ? prev : { ...prev, pageInfo: {} },
-      );
-
-      (async function fetchData() {
-        const { returnedRows, nextCursor, totalRowCount, hasNextPage } = await loadServerRows(
-          rows,
-          queryOptions,
-          serverOptionsWithDefault,
-          columnsWithDefaultColDef,
-        );
-        if (!active) {
-          return;
-        }
-        const newRep = {
-          rows: returnedRows,
-          pageInfo: {
-            totalRowCount,
-            nextCursor,
-            hasNextPage,
-            pageSize: returnedRows.length,
-          },
-        };
-        setResponse((prev) => (isDeepEqual(prev, newRep) ? prev : newRep));
-        setIsLoading(false);
-      })();
-
-      return () => {
-        active = false;
-      };
+        throw new Error("STUB");
     }, [dataGenerationIsLoading, queryOptions, rows]);
 
     // We use queryOptions pointer to be sure that isLoading===true as soon as the options change

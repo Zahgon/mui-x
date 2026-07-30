@@ -27,91 +27,9 @@ export interface PickerInputOwnerState extends PickerTextFieldOwnerState {
 const PickersInputRoot = styled(PickersInputBaseRoot, {
   name: 'MuiPickersInput',
   slot: 'Root',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'disableUnderline',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<{ ownerState: PickerInputOwnerState }>(({ theme }) => {
-  const light = theme.palette.mode === 'light';
-  let bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
-  if (theme.vars) {
-    bottomLineColor = theme.alpha(
-      theme.vars.palette.common.onBackground,
-      theme.vars.opacity.inputUnderline,
-    );
-  }
-  return {
-    'label + &': {
-      marginTop: 16,
-    },
-    variants: [
-      ...Object.keys((theme.vars ?? theme).palette)
-        // @ts-ignore
-        .filter((key) => (theme.vars ?? theme).palette[key].main)
-        .map((color) => ({
-          props: {
-            inputColor: color as PickerTextFieldOwnerState['inputColor'],
-            inputHasUnderline: true,
-          },
-          style: {
-            '&::after': {
-              // @ts-ignore
-              borderBottom: `2px solid ${(theme.vars || theme).palette[color].main}`,
-            },
-          },
-        })),
-      {
-        props: { inputHasUnderline: true },
-        style: {
-          '&::after': {
-            background: 'red',
-            left: 0,
-            bottom: 0,
-            // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
-            content: '""',
-            position: 'absolute',
-            right: 0,
-            transform: 'scaleX(0)',
-            transition: theme.transitions.create('transform', {
-              duration: theme.transitions.duration.shorter,
-              easing: theme.transitions.easing.easeOut,
-            }),
-            pointerEvents: 'none', // Transparent to the hover style.
-          },
-          [`&.${pickersInputClasses.focused}:after`]: {
-            // translateX(0) is a workaround for Safari transform scale bug
-            // See https://github.com/mui/material-ui/issues/31766
-            transform: 'scaleX(1) translateX(0)',
-          },
-          [`&.${pickersInputClasses.error}`]: {
-            '&:before, &:after': {
-              borderBottomColor: (theme.vars || theme).palette.error.main,
-            },
-          },
-          '&::before': {
-            borderBottom: `1px solid ${bottomLineColor}`,
-            left: 0,
-            bottom: 0,
-            // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
-            content: '"\\00a0"',
-            position: 'absolute',
-            right: 0,
-            transition: theme.transitions.create('border-bottom-color', {
-              duration: theme.transitions.duration.shorter,
-            }),
-            pointerEvents: 'none', // Transparent to the hover style.
-          },
-          [`&:hover:not(.${pickersInputClasses.disabled}, .${pickersInputClasses.error}):before`]: {
-            borderBottom: `2px solid ${(theme.vars || theme).palette.text.primary}`,
-            // Reset on touch devices, it doesn't add specificity
-            '@media (hover: none)': {
-              borderBottom: `1px solid ${bottomLineColor}`,
-            },
-          },
-          [`&.${pickersInputClasses.disabled}:before`]: {
-            borderBottomStyle: 'dotted',
-          },
-        },
-      },
-    ],
-  };
+    throw new Error("STUB");
 });
 
 const useUtilityClasses = (
@@ -140,43 +58,7 @@ const PickersInput = React.forwardRef(function PickersInput(
   inProps: PickersInputProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiPickersInput',
-  });
-
-  const {
-    label,
-    autoFocus,
-    disableUnderline = false,
-    ownerState: ownerStateProp,
-    classes: classesProp,
-    slots: inSlots,
-    slotProps: inSlotProps,
-    ...other
-  } = props;
-
-  const pickerTextFieldOwnerState = usePickerTextFieldOwnerState();
-  const ownerState: PickerInputOwnerState = {
-    ...pickerTextFieldOwnerState,
-    inputHasUnderline: !disableUnderline,
-  };
-  const classes = useUtilityClasses(classesProp, ownerState);
-
-  return (
-    <PickersInputBase
-      {...other}
-      slots={{ root: PickersInputRoot, ...inSlots }}
-      slotProps={{
-        ...inSlotProps,
-        root: { disableUnderline, ...inSlotProps?.root },
-      }}
-      ownerState={ownerState}
-      label={label}
-      classes={classes}
-      ref={ref as any}
-    />
-  );
+    throw new Error("STUB");
 });
 
 PickersInput.propTypes /* remove-proptypes */ = {

@@ -125,53 +125,7 @@ const RadialLineChart = React.forwardRef(function RadialLineChart(
   inProps: RadialLineChartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiRadialLineChart' });
-  const {
-    chartsWrapperProps,
-    chartsContainerProps,
-    gridProps,
-    axisHighlightProps,
-    clipPathProps,
-    clipPathGroupProps,
-    overlayProps,
-    legendProps,
-    children,
-  } = useRadialLineChartProps(props);
-  const { chartsDataProviderProps, chartsSurfaceProps } = useChartsContainerProps<
-    'radialLine',
-    RadialLineChartPluginSignatures
-  >(chartsContainerProps);
-
-  const Tooltip = props.slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = props.slots?.toolbar;
-
-  return (
-    <ChartsRadialDataProviderPremium<'radialLine', RadialLineChartPluginSignatures>
-      {...chartsDataProviderProps}
-      seriesConfig={seriesConfig}
-    >
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {props.showToolbar && Toolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!props.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <ChartsRadialGrid {...gridProps} />
-          <g {...clipPathGroupProps}>
-            <RadialAreaPlot />
-            <RadialLinePlot />
-            <ChartsOverlay {...overlayProps} />
-          </g>
-          <ChartsRadialAxisHighlight {...axisHighlightProps} />
-          <ChartsRotationAxis />
-          <ChartsRadiusAxis />
-          <RadialMarkPlot />
-          <RadialLineHighlightPlot slots={props.slots} slotProps={props.slotProps} />
-          <ChartsClipPath {...clipPathProps} />
-          {children}
-        </ChartsSurface>
-        {!props.loading && <Tooltip {...props.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsRadialDataProviderPremium>
-  );
+    throw new Error("STUB");
 });
 
 RadialLineChart.propTypes /* remove-proptypes */ = {

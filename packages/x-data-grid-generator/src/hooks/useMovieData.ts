@@ -29,10 +29,7 @@ const COLUMNS: GridColDef[] = [
     width: 150,
     groupable: false,
     valueFormatter: (value) => {
-      if (!value) {
-        return '';
-      }
-      return currencyFormatter.format(value);
+        throw new Error("STUB");
     },
   } as GridColDef<any, number, string>,
   {
@@ -49,7 +46,7 @@ const COLUMNS: GridColDef[] = [
     field: 'year',
     headerName: 'Year',
     type: 'number',
-    valueFormatter: (value) => (typeof value === 'number' ? `${value}` : ''),
+    valueFormatter: (value) => { throw new Error("STUB"); },
     availableAggregationFunctions: ['max', 'min'],
   },
   {
@@ -550,8 +547,5 @@ export const getMovieColumns = (): GridColDef[] => COLUMNS;
 export const getMovieRows = (): GridRowModel<Movie>[] => ROWS;
 
 export const useMovieData = () => {
-  return {
-    rows: ROWS,
-    columns: COLUMNS,
-  };
+    throw new Error("STUB");
 };

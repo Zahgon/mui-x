@@ -50,48 +50,7 @@ export function useTicksGrouped(
   } = options;
 
   return React.useMemo(() => {
-    const domain = scale.domain();
-    const filteredDomain =
-      (typeof tickInterval === 'function' && domain.filter(tickInterval)) ||
-      (typeof tickInterval === 'object' && tickInterval) ||
-      domain;
-
-    if (scale.bandwidth() > 0) {
-      // scale type = 'band'
-      const entries = mapToGrouping(
-        filteredDomain,
-        groups,
-        tickPlacement,
-        tickLabelPlacement,
-        scale,
-      );
-
-      if (entries[0]) {
-        entries[0].ignoreTick = true;
-      }
-
-      return [
-        {
-          formattedValue: undefined,
-          offset: scale.range()[0],
-          labelOffset: 0,
-          groupIndex: groups.length - 1,
-        },
-
-        ...entries,
-
-        // Last tick
-        {
-          formattedValue: undefined,
-          offset: scale.range()[1],
-          labelOffset: 0,
-          groupIndex: groups.length - 1,
-        },
-      ];
-    }
-
-    // scale type = 'point'
-    return mapToGrouping(filteredDomain, groups, tickPlacement, tickLabelPlacement, scale);
+      throw new Error("STUB");
   }, [scale, tickInterval, groups, tickPlacement, tickLabelPlacement]);
 }
 

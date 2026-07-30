@@ -9,16 +9,16 @@ import type { UseChartTooltipSignature } from './useChartTooltip.types';
 import type { SeriesItemIdentifierWithType } from '../../../../models';
 import type { ChartSeriesType } from '../../../../models/seriesType/config';
 
-const selectTooltip: ChartOptionalRootSelector<UseChartTooltipSignature> = (state) => state.tooltip;
+const selectTooltip: ChartOptionalRootSelector<UseChartTooltipSignature> = (state) => { throw new Error("STUB"); };
 
 export const selectorChartsTooltipPointerItem = createSelector(
   selectTooltip,
-  (tooltip) => tooltip?.item ?? null,
+  (tooltip) => { throw new Error("STUB"); },
 );
 
 export const selectorChartsTooltipPointerItemIsDefined = createSelector(
   selectorChartsTooltipPointerItem,
-  (item) => item !== null,
+  (item) => { throw new Error("STUB"); },
 );
 
 export const selectorChartsTooltipItem = createSelector(
@@ -30,7 +30,7 @@ export const selectorChartsTooltipItem = createSelector(
     pointerItem,
     keyboardItem,
   ): SeriesItemIdentifierWithType<ChartSeriesType> | null =>
-    lastInteraction === 'keyboard' ? keyboardItem : (pointerItem ?? null),
+    { throw new Error("STUB"); },
 );
 
 export const selectorChartsTooltipItemIsDefined = createSelector(
@@ -38,5 +38,5 @@ export const selectorChartsTooltipItemIsDefined = createSelector(
   selectorChartsTooltipPointerItemIsDefined,
   selectorChartsHasFocusedItem,
   (lastInteraction, pointerItemIsDefined, keyboardItemIsDefined) =>
-    lastInteraction === 'keyboard' ? keyboardItemIsDefined : pointerItemIsDefined,
+    { throw new Error("STUB"); },
 );

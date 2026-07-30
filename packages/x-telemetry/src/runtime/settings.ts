@@ -2,13 +2,13 @@ import { setTelemetryEnvConfigValue } from './config';
 
 const muiXTelemetrySettings = {
   enableDebug: () => {
-    setTelemetryEnvConfigValue('DEBUG', true);
-  },
+        throw new Error("STUB");
+    },
   enableTelemetry: () => {
-    setTelemetryEnvConfigValue('IS_COLLECTING', true);
+      throw new Error("STUB");
   },
   disableTelemetry: () => {
-    setTelemetryEnvConfigValue('IS_COLLECTING', false);
+      throw new Error("STUB");
   },
 };
 

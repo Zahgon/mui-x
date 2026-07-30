@@ -39,7 +39,7 @@ function getActiveConversation(
     return null;
   }
 
-  return conversations.find((conversation) => conversation.id === activeConversationId) ?? null;
+  return conversations.find((conversation) => { throw new Error("STUB"); }) ?? null;
 }
 
 export const ConversationRoot = markChatLayoutPane(
@@ -47,43 +47,7 @@ export const ConversationRoot = markChatLayoutPane(
     props: ConversationRootProps,
     ref: React.Ref<HTMLDivElement>,
   ) {
-    const { children, slots, slotProps, ...other } = props;
-    const { activeConversationId } = useChat();
-    const localeText = useChatLocaleText();
-    const conversations = useConversations();
-    const conversation = React.useMemo(
-      () => getActiveConversation(conversations, activeConversationId),
-      [activeConversationId, conversations],
-    );
-    const ownerState: ConversationRootOwnerState = React.useMemo(
-      () => ({
-        conversationId: activeConversationId,
-        hasConversation: conversation != null,
-        conversation,
-      }),
-      [activeConversationId, conversation],
-    );
-    const Root = slots?.root ?? 'div';
-    const rootProps = useSlotProps({
-      elementType: Root,
-      externalSlotProps: slotProps?.root,
-      externalForwardedProps: other,
-      ownerState,
-      additionalProps: {
-        ref,
-        // Landmark for the active-conversation (thread) area, so assistive
-        // technology can jump between the conversations sidebar, the thread,
-        // and the composer.
-        role: 'region',
-        'aria-label': localeText.threadLandmarkLabel,
-      },
-    });
-
-    return (
-      <ConversationContextProvider value={ownerState}>
-        <Root {...rootProps}>{children}</Root>
-      </ConversationContextProvider>
-    );
+      throw new Error("STUB");
   }) as ConversationRootComponent,
   'thread',
 );

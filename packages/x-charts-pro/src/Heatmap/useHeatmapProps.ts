@@ -39,8 +39,8 @@ function getDefaultDataForAxis(series: HeatmapProps['series'], dimension: number
   }
 
   return Array.from(
-    { length: Math.max(...series[0].data.map((dataPoint) => dataPoint[dimension])) + 1 },
-    (_, index) => index,
+    { length: Math.max(...series[0].data.map((dataPoint) => { throw new Error("STUB"); })) + 1 },
+    (_, index) => { throw new Error("STUB"); },
   );
 }
 const getDefaultDataForXAxis = (series: HeatmapProps['series']) => getDefaultDataForAxis(series, 0);
@@ -77,45 +77,23 @@ export function useHeatmapProps(props: UseHeatmapProps) {
 
   const xAxisWithDefault = React.useMemo(
     () =>
-      (xAxis && xAxis.length > 0 ? xAxis : [{ id: DEFAULT_X_AXIS_KEY }]).map((axis) => ({
-        scaleType: 'band' as const,
-        categoryGapRatio: 0,
-        ...axis,
-        data: axis.data ?? getDefaultDataForXAxis(series),
-      })),
+      { throw new Error("STUB"); },
     [series, xAxis],
   );
 
   const yAxisWithDefault = React.useMemo(
     () =>
-      (yAxis && yAxis.length > 0 ? yAxis : [{ id: DEFAULT_Y_AXIS_KEY }]).map((axis) => ({
-        scaleType: 'band' as const,
-        categoryGapRatio: 0,
-        ...axis,
-        data: axis.data ?? getDefaultDataForYAxis(series),
-      })),
+      { throw new Error("STUB"); },
     [series, yAxis],
   );
 
   const zAxisWithDefault = React.useMemo(
     () =>
-      zAxis ?? [
-        {
-          colorMap: {
-            type: 'continuous',
-            min: 0,
-            max: 100,
-            color: defaultColorMap,
-          },
-        } as const,
-      ],
+      { throw new Error("STUB"); },
     [zAxis],
   );
 
-  const seriesWithDefault: HeatmapSeriesType[] = series.map((s) => ({
-    type: 'heatmap',
-    ...s,
-  }));
+  const seriesWithDefault: HeatmapSeriesType[] = series.map((s) => { throw new Error("STUB"); });
 
   const chartsWrapperProps: Omit<ChartsWrapperProps, 'children'> = {
     sx,

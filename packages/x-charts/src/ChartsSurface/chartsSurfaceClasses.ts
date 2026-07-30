@@ -8,7 +8,7 @@ export interface ChartsSurfaceClasses {
 }
 
 function getSurfaceUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsSurface', slot);
+    throw new Error("STUB");
 }
 
 export const useUtilityClasses = () => {

@@ -20,36 +20,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   const packageRegex = /^@mui\/x-charts(-pro|-premium)?(\/(models|internals))?$/;
 
   root.find(j.ImportDeclaration).forEach((astPath) => {
-    const source = astPath.node.source.value?.toString() ?? '';
-    if (!packageRegex.test(source)) {
-      return;
-    }
-
-    const specifiers = astPath.node.specifiers || [];
-    const remainingSpecifiers: typeof specifiers = [];
-
-    specifiers.forEach((specifier) => {
-      if (specifier.type === 'ImportSpecifier') {
-        const importedName = specifier.imported.name.toString();
-        if (REMOVED_FUNCTIONS.includes(importedName)) {
-          // Track the local name used for this import
-          const localName = specifier.local?.name.toString() || importedName;
-          importedFunctions[localName] = importedName;
-        } else {
-          remainingSpecifiers.push(specifier);
-        }
-      } else {
-        remainingSpecifiers.push(specifier);
-      }
-    });
-
-    if (remainingSpecifiers.length === 0) {
-      // Remove the entire import declaration if no specifiers remain
-      j(astPath).remove();
-    } else if (remainingSpecifiers.length !== specifiers.length) {
-      // Update the import declaration with remaining specifiers
-      astPath.node.specifiers = remainingSpecifiers;
-    }
+      throw new Error("STUB");
   });
 
   // If no relevant imports were found, return the source unchanged to avoid reformatting
@@ -61,50 +32,10 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   // isBarSeries(series) -> series.type === 'bar'
   // isDefaultizedBarSeries(series) -> series.type === 'bar'
   Object.keys(importedFunctions).forEach((localName) => {
-    root
-      .find(j.CallExpression, {
-        callee: {
-          type: 'Identifier',
-          name: localName,
-        },
-      })
-      .replaceWith((astPath) => {
-        const args = astPath.node.arguments;
-        if (args.length !== 1) {
-          // If not exactly 1 argument, keep as-is (shouldn't happen)
-          return astPath.node;
-        }
-
-        const arg = args[0];
-        if (arg.type === 'SpreadElement') {
-          // Can't handle spread elements
-          return astPath.node;
-        }
-
-        // Create: arg.type === 'bar'
-        return j.binaryExpression(
-          '===',
-          j.memberExpression(arg as any, j.identifier('type')),
-          j.stringLiteral('bar'),
-        );
-      });
+      throw new Error("STUB");
   });
 
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'remove-is-bar-series-helpers',
-  specFiles: [
-    {
-      name: 'root-imports',
-      actual: readFile(path.join(import.meta.dirname, 'actual-root-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-root-imports.spec.tsx')),
-    },
-    {
-      name: 'nested-imports',
-      actual: readFile(path.join(import.meta.dirname, 'actual-nested-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-nested-imports.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

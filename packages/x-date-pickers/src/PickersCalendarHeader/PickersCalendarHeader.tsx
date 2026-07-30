@@ -59,15 +59,7 @@ const PickersCalendarHeaderLabelContainer = styled('div', {
   slot: 'LabelContainer',
 })<{
   ownerState: PickerOwnerState;
-}>(({ theme }) => ({
-  display: 'flex',
-  overflow: 'hidden',
-  alignItems: 'center',
-  cursor: 'pointer',
-  marginRight: 'auto',
-  ...theme.typography.body1,
-  fontWeight: theme.typography.fontWeightMedium,
-}));
+}>(({ theme }) => { throw new Error("STUB"); });
 
 const PickersCalendarHeaderLabel = styled('div', {
   name: 'MuiPickersCalendarHeader',
@@ -102,11 +94,7 @@ const PickersCalendarHeaderSwitchViewIcon = styled(ArrowDropDownIcon, {
   slot: 'SwitchViewIcon',
 })<{
   ownerState: PickerOwnerState;
-}>(({ theme }) => ({
-  willChange: 'transform',
-  transition: theme.transitions.create('transform'),
-  transform: 'rotate(0deg)',
-}));
+}>(({ theme }) => { throw new Error("STUB"); });
 
 type PickersCalendarHeaderComponent = ((
   props: PickersCalendarHeaderProps & React.RefAttributes<HTMLDivElement>,
@@ -127,140 +115,7 @@ const PickersCalendarHeader = React.forwardRef(function PickersCalendarHeader(
   inProps: PickersCalendarHeaderProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const translations = usePickerTranslations();
-  const adapter = usePickerAdapter();
-
-  const props = useThemeProps({ props: inProps, name: 'MuiPickersCalendarHeader' });
-
-  const {
-    slots,
-    slotProps,
-    currentMonth: month,
-    disabled,
-    disableFuture,
-    disablePast,
-    maxDate,
-    minDate,
-    onMonthChange,
-    onViewChange,
-    view,
-    reduceAnimations,
-    views,
-    labelId,
-    className,
-    classes: classesProp,
-    timezone,
-    format = `${adapter.formats.month} ${adapter.formats.year}`,
-    ...other
-  } = props;
-
-  const { ownerState } = usePickerPrivateContext();
-  const classes = useUtilityClasses(classesProp);
-
-  const SwitchViewButton = slots?.switchViewButton ?? PickersCalendarHeaderSwitchViewButton;
-  const switchViewButtonProps = useSlotProps({
-    elementType: SwitchViewButton,
-    externalSlotProps: slotProps?.switchViewButton,
-    additionalProps: {
-      size: 'small',
-      'aria-label': translations.calendarViewSwitchingButtonAriaLabel(view),
-    },
-    ownerState: { ...ownerState, view },
-    className: classes.switchViewButton,
-  });
-
-  const SwitchViewIcon = slots?.switchViewIcon ?? PickersCalendarHeaderSwitchViewIcon;
-  // The spread is here to avoid this bug mui/material-ui#34056
-  const { ownerState: switchViewIconOwnerState, ...switchViewIconProps } = useSlotProps({
-    elementType: SwitchViewIcon,
-    externalSlotProps: slotProps?.switchViewIcon,
-    ownerState,
-    className: classes.switchViewIcon,
-  });
-
-  const selectNextMonth = () => onMonthChange(adapter.addMonths(month, 1));
-  const selectPreviousMonth = () => onMonthChange(adapter.addMonths(month, -1));
-
-  const isNextMonthDisabled = useNextMonthDisabled(month, {
-    disableFuture,
-    maxDate,
-    timezone,
-  });
-  const isPreviousMonthDisabled = usePreviousMonthDisabled(month, {
-    disablePast,
-    minDate,
-    timezone,
-  });
-
-  const handleToggleView = () => {
-    if (views.length === 1 || !onViewChange || disabled) {
-      return;
-    }
-
-    if (views.length === 2) {
-      onViewChange(views.find((el) => el !== view) || views[0]);
-    } else {
-      // switching only between first 2
-      const nextIndexToOpen = views.indexOf(view) !== 0 ? 0 : 1;
-      onViewChange(views[nextIndexToOpen]);
-    }
-  };
-
-  // No need to display more information
-  if (views.length === 1 && views[0] === 'year') {
-    return null;
-  }
-
-  const label = adapter.formatByString(month, format);
-
-  return (
-    <PickersCalendarHeaderRoot
-      {...other}
-      ownerState={ownerState}
-      className={clsx(classes.root, className)}
-      ref={ref}
-    >
-      {/* `role="none"` is an alias for `role="presentation"`, but aria-query treats them differently. */}
-      {/* See https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/1090 */}
-      {/* eslint-disable-next-line jsx-a11y/role-supports-aria-props */}
-      <PickersCalendarHeaderLabelContainer
-        role="none"
-        onClick={handleToggleView}
-        ownerState={ownerState}
-        // putting this on the label item element below breaks when using transition
-        aria-live="polite"
-        className={classes.labelContainer}
-      >
-        <PickersFadeTransitionGroup reduceAnimations={reduceAnimations} transKey={label}>
-          <PickersCalendarHeaderLabel
-            id={labelId}
-            data-testid="calendar-month-and-year-text"
-            ownerState={ownerState}
-            className={classes.label}
-          >
-            {label}
-          </PickersCalendarHeaderLabel>
-        </PickersFadeTransitionGroup>
-        {views.length > 1 && !disabled && (
-          <SwitchViewButton {...switchViewButtonProps}>
-            <SwitchViewIcon {...switchViewIconProps} />
-          </SwitchViewButton>
-        )}
-      </PickersCalendarHeaderLabelContainer>
-      <Fade in={view === 'day'} appear={!reduceAnimations} enter={!reduceAnimations}>
-        <PickersArrowSwitcher
-          slots={slots}
-          slotProps={slotProps}
-          onGoToPrevious={selectPreviousMonth}
-          isPreviousDisabled={isPreviousMonthDisabled}
-          previousLabel={translations.previousMonth}
-          onGoToNext={selectNextMonth}
-          isNextDisabled={isNextMonthDisabled}
-          nextLabel={translations.nextMonth}
-        />
-      </Fade>
-    </PickersCalendarHeaderRoot>
-  );
+    throw new Error("STUB");
 }) as PickersCalendarHeaderComponent;
 
 PickersCalendarHeader.propTypes /* remove-proptypes */ = {

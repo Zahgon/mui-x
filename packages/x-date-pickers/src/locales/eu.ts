@@ -18,9 +18,7 @@ const euPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'azken bista ireki',
   openNextView: 'hurrengo bista ireki',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'urteko bista irekita dago, aldatu egutegi bistara'
-      : 'egutegi bista irekita dago, aldatu urteko bistara',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Hasi',
@@ -46,25 +44,25 @@ const euPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Aukeratu ${views[view]}. ${!formattedTime ? 'Ez da ordurik aukertau' : `Aukeratutako ordua ${formattedTime} da`}`,
-  hoursClockNumberText: (hours) => `${hours} ordu`,
-  minutesClockNumberText: (minutes) => `${minutes} minutu`,
-  secondsClockNumberText: (seconds) => `${seconds} segundu`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Aukeratu ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Astea zenbakia',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `${weekNumber} astea`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Data aukeratu, aukeratutako data ${formattedDate} da` : 'Data aukeratu',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Ordua aukeratu, aukeratutako ordua ${formattedTime} da` : 'Ordua aukeratu',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Balioa garbitu',
 
@@ -73,14 +71,14 @@ const euPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'data aukeratu',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   // year: 'Year',

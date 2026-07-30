@@ -51,7 +51,7 @@ export const addTreeDataOptionsToDemoData = (
   > = {};
   const rowsCount = data.rows.length;
 
-  const groupingCol = data.columns.find((col) => col.field === options.groupingField);
+  const groupingCol = data.columns.find((col) => { throw new Error("STUB"); });
 
   if (!groupingCol) {
     throw new Error('MUI X: The tree data grouping field does not exist.');
@@ -74,29 +74,7 @@ export const addTreeDataOptionsToDemoData = (
   }
 
   Object.entries(rowsByTreeDepth).forEach(([depthStr, { rows }]) => {
-    const depth = Number(depthStr);
-
-    Object.values(rows).forEach((row) => {
-      const path: string[] = [];
-      let previousRow: RowWithParentIndex | null = null;
-      for (let k = depth; k >= 0; k -= 1) {
-        let rowTemp: RowWithParentIndex;
-        if (k === depth) {
-          if (depth > 0) {
-            row.parentIndex = Number(randomArrayItem(rowsByTreeDepth[depth - 1].rowIndexes));
-          }
-          rowTemp = row;
-        } else {
-          rowTemp = rowsByTreeDepth[k].rows[previousRow!.parentIndex!];
-        }
-
-        path.unshift(rowTemp.value[groupingField!]);
-
-        previousRow = rowTemp;
-      }
-
-      row.value.path = path;
-    });
+      throw new Error("STUB");
   });
 
   return {
@@ -105,7 +83,7 @@ export const addTreeDataOptionsToDemoData = (
       headerName: groupingCol.headerName ?? groupingCol.field,
       width: 250,
     },
-    getTreeDataPath: (row) => row.path,
+    getTreeDataPath: (row) => { throw new Error("STUB"); },
     treeData: true,
   };
 };

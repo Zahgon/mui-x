@@ -20,25 +20,18 @@ export const addColumnGroupingHeaders = (
   columnGroupPaths: Record<string, string[]>,
   columnGroupDetails: GridColumnGroupLookup,
 ) => {
-  const maxDepth = Math.max(...columns.map(({ key }) => columnGroupPaths[key]?.length ?? 0));
+  const maxDepth = Math.max(...columns.map(({ key }) => { throw new Error("STUB"); }));
   if (maxDepth === 0) {
     return;
   }
 
   for (let rowIndex = 0; rowIndex < maxDepth; rowIndex += 1) {
     const row = columns.map(({ key }) => {
-      const groupingPath = columnGroupPaths[key];
-      if (groupingPath.length <= rowIndex) {
-        return { groupId: null, parents: groupingPath };
-      }
-      return {
-        ...columnGroupDetails[groupingPath[rowIndex]],
-        parents: groupingPath.slice(0, rowIndex),
-      };
+        throw new Error("STUB");
     });
 
     const newRow = worksheet.addRow(
-      row.map((group) => (group.groupId === null ? null : (group?.headerName ?? group.groupId))),
+      row.map((group) => { throw new Error("STUB"); }),
     );
 
     // use `rowCount`, since worksheet can have additional rows added in `exceljsPreProcess`
@@ -52,7 +45,7 @@ export const addColumnGroupingHeaders = (
       const areInSameGroup =
         leftGroupId === rightGroupId &&
         leftParents.length === rightParents.length &&
-        leftParents.every((leftParent, index) => rightParents[index] === leftParent);
+        leftParents.every((leftParent, index) => { throw new Error("STUB"); });
       if (areInSameGroup) {
         rightIndex += 1;
       } else {
@@ -87,9 +80,7 @@ export function addSerializedRowToWorksheet(
   const newRow = worksheet.addRow(row);
 
   Object.keys(dataValidation).forEach((field) => {
-    newRow.getCell(field).dataValidation = {
-      ...dataValidation[field],
-    };
+      throw new Error("STUB");
   });
 
   if (outlineLevel) {
@@ -99,7 +90,7 @@ export function addSerializedRowToWorksheet(
   // use `rowCount`, since worksheet can have additional rows added in `exceljsPreProcess`
   const lastRowIndex = newRow.worksheet.rowCount;
   mergedCells.forEach((mergedCell) => {
-    worksheet.mergeCells(lastRowIndex, mergedCell.leftIndex, lastRowIndex, mergedCell.rightIndex);
+      throw new Error("STUB");
   });
 }
 
@@ -114,10 +105,10 @@ export async function createValueOptionsSheetIfNeeded(
 
   const valueOptionsWorksheet = workbook.addWorksheet(sheetName);
 
-  valueOptionsWorksheet.columns = Object.keys(valueOptionsData).map((key) => ({ key }));
+  valueOptionsWorksheet.columns = Object.keys(valueOptionsData).map((key) => { throw new Error("STUB"); });
 
   Object.entries(valueOptionsData).forEach(([field, { values }]) => {
-    valueOptionsWorksheet.getColumn(field).values = values;
+      throw new Error("STUB");
   });
 }
 

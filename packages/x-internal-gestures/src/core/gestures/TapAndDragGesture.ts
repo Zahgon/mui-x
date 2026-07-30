@@ -217,40 +217,7 @@ export class TapAndDragGesture<GestureName extends string> extends PointerGestur
   }
 
   protected updateOptions(options: typeof this.mutableOptionsType): void {
-    super.updateOptions(options);
-
-    this.tapMaxDistance = options.tapMaxDistance ?? this.tapMaxDistance;
-    this.dragTimeout = options.dragTimeout ?? this.dragTimeout;
-    this.dragThreshold = options.dragThreshold ?? this.dragThreshold;
-    this.dragDirection = options.dragDirection || this.dragDirection;
-
-    this.element.dispatchEvent(
-      new CustomEvent(`${this.panGesture.name}ChangeOptions`, {
-        detail: {
-          minPointers: this.minPointers,
-          maxPointers: this.maxPointers,
-          threshold: this.dragThreshold,
-          direction: this.dragDirection,
-          pointerMode: this.pointerMode,
-          requiredKeys: this.requiredKeys,
-          preventIf: this.preventIf,
-          pointerOptions: structuredClone(this.pointerOptions),
-        },
-      }),
-    );
-
-    this.element.dispatchEvent(
-      new CustomEvent(`${this.tapGesture.name}ChangeOptions`, {
-        detail: {
-          maxDistance: this.tapMaxDistance,
-          maxPointers: this.maxPointers,
-          pointerMode: this.pointerMode,
-          requiredKeys: this.requiredKeys,
-          preventIf: this.preventIf,
-          pointerOptions: structuredClone(this.pointerOptions),
-        },
-      }),
-    );
+      throw new Error("STUB");
   }
 
   protected resetState(): void {
@@ -271,72 +238,28 @@ export class TapAndDragGesture<GestureName extends string> extends PointerGestur
    * This can be empty because the TapAndDragGesture relies on TapGesture and PanGesture to handle pointer events
    * The internal gestures will manage their own state and events, while this class coordinates between them
    */
-  protected handlePointerEvent(): void {}
+  protected handlePointerEvent(): void {
+      throw new Error("STUB");
+  }
 
   private tapHandler = (): void => {
-    if (this.state.phase !== 'waitingForTap') {
-      return;
-    }
-
-    this.state.phase = 'tapDetected';
-
-    this.setTouchAction();
-
-    // Start timeout to wait for drag start
-    this.state.dragTimeoutId = setTimeout(() => {
-      // Timeout expired, reset gesture
-      this.resetState();
-    }, this.dragTimeout);
+      throw new Error("STUB");
   };
 
   private dragStartHandler = (event: PanEvent) => {
-    if (this.state.phase !== 'tapDetected') {
-      return;
-    }
-
-    // Clear the drag timeout as drag has started
-    if (this.state.dragTimeoutId !== null) {
-      clearTimeout(this.state.dragTimeoutId);
-      this.state.dragTimeoutId = null;
-    }
-
-    this.restoreTouchAction();
-
-    this.state.phase = 'dragging';
-    this.isActive = true;
-
-    // Fire start event
-    this.element.dispatchEvent(
-      new CustomEvent(createEventName(this.name, event.detail.phase), event),
-    );
+      throw new Error("STUB");
   };
 
   private dragMoveHandler = (event: PanEvent): void => {
-    if (this.state.phase !== 'dragging') {
-      return;
-    }
-
-    // Fire move event
-    this.element.dispatchEvent(
-      new CustomEvent(createEventName(this.name, event.detail.phase), event),
-    );
+      throw new Error("STUB");
   };
 
   private dragEndHandler = (event: PanEvent): void => {
-    if (this.state.phase !== 'dragging') {
-      return;
-    }
-
-    this.resetState();
-
-    // Fire end event
-    this.element.dispatchEvent(
-      new CustomEvent(createEventName(this.name, event.detail.phase), event),
-    );
+      throw new Error("STUB");
   };
 
   private setTouchAction(): void {
-    this.element.addEventListener('touchstart', preventDefault, { passive: false });
+      throw new Error("STUB");
   }
 
   private restoreTouchAction(): void {

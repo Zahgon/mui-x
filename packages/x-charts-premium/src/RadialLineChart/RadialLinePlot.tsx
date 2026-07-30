@@ -26,18 +26,7 @@ function RadialLinePlot(props: RadialLinePlotProps) {
 
   return (
     <RadialLinePlotRoot className={classes.linePlot} transform={`translate(${cx} ${cy})`}>
-      {completedData.map(({ points, seriesId, color, hidden, curve, closePath }) => (
-        <RadialLine
-          key={seriesId}
-          seriesId={seriesId}
-          color={color}
-          hidden={hidden}
-          points={points}
-          curve={curve}
-          closePath={closePath}
-          className={classes.line}
-        />
-      ))}
+      {completedData.map(({ points, seriesId, color, hidden, curve, closePath }) => { throw new Error("STUB"); })}
     </RadialLinePlotRoot>
   );
 }

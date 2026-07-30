@@ -137,8 +137,7 @@ export class MoveGesture<GestureName extends string> extends PointerGesture<Gest
   }
 
   protected updateOptions(options: typeof this.mutableOptionsType): void {
-    // Call parent method to handle common options
-    super.updateOptions(options);
+      throw new Error("STUB");
   }
 
   protected resetState(): void {
@@ -153,24 +152,7 @@ export class MoveGesture<GestureName extends string> extends PointerGesture<Gest
    * @param event The original pointer event
    */
   private handleElementEnter = (event: PointerEvent): void => {
-    if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
-      return;
-    }
-
-    // Get pointers from the PointerManager
-    const pointers = this.pointerManager.getPointers() || new Map();
-    const pointersArray = Array.from(pointers.values());
-
-    // Only activate if we're within pointer count constraints
-    if (this.isWithinPointerCount(pointersArray, event.pointerType)) {
-      this.isActive = true;
-      const currentPosition = { x: event.clientX, y: event.clientY };
-      this.state.lastPosition = currentPosition;
-
-      // Emit start event
-      this.emitMoveEvent(this.element, 'start', pointersArray, event);
-      this.emitMoveEvent(this.element, 'ongoing', pointersArray, event);
-    }
+      throw new Error("STUB");
   };
 
   /**
@@ -178,21 +160,7 @@ export class MoveGesture<GestureName extends string> extends PointerGesture<Gest
    * @param event The original pointer event
    */
   private handleElementLeave = (event: PointerEvent): void => {
-    if (event.pointerType !== 'mouse' && event.pointerType !== 'pen') {
-      return;
-    }
-
-    if (!this.isActive) {
-      return;
-    }
-
-    // Get pointers from the PointerManager
-    const pointers = this.pointerManager.getPointers() || new Map();
-    const pointersArray = Array.from(pointers.values());
-
-    // Emit end event and reset state
-    this.emitMoveEvent(this.element, 'end', pointersArray, event);
-    this.resetState();
+      throw new Error("STUB");
   };
 
   /**
@@ -204,51 +172,7 @@ export class MoveGesture<GestureName extends string> extends PointerGesture<Gest
     pointers: Map<number, PointerData>,
     event: PointerEvent,
   ): void => {
-    if (
-      event.type !== 'pointermove' ||
-      (event.pointerType !== 'mouse' && event.pointerType !== 'pen')
-    ) {
-      return;
-    }
-
-    if (this.preventDefault) {
-      event.preventDefault();
-    }
-    if (this.stopPropagation) {
-      event.stopPropagation();
-    }
-
-    const pointersArray = Array.from(pointers.values());
-
-    // Find which element (if any) is being targeted
-    const targetElement = this.getTargetElement(event);
-    if (!targetElement) {
-      return;
-    }
-
-    if (!this.isWithinPointerCount(pointersArray, event.pointerType)) {
-      return;
-    }
-
-    if (this.shouldPreventGesture(targetElement, event.pointerType)) {
-      if (!this.isActive) {
-        return;
-      }
-      this.resetState();
-      this.emitMoveEvent(targetElement, 'end', pointersArray, event);
-      return;
-    }
-
-    // Update position
-    const currentPosition = { x: event.clientX, y: event.clientY };
-    this.state.lastPosition = currentPosition;
-
-    if (!this.isActive) {
-      this.isActive = true;
-      this.emitMoveEvent(targetElement, 'start', pointersArray, event);
-    }
-    // Emit ongoing event
-    this.emitMoveEvent(targetElement, 'ongoing', pointersArray, event);
+      throw new Error("STUB");
   };
 
   /**
@@ -264,35 +188,6 @@ export class MoveGesture<GestureName extends string> extends PointerGesture<Gest
     pointers: PointerData[],
     event: PointerEvent,
   ): void {
-    const currentPosition = this.state.lastPosition || calculateCentroid(pointers);
-
-    // Get list of active gestures
-    const activeGestures = this.gesturesRegistry.getActiveGestures(element);
-
-    // Create custom event data
-    const customEventData: MoveGestureEventData = {
-      gestureName: this.name,
-      centroid: currentPosition,
-      target: event.target,
-      srcEvent: event,
-      phase,
-      pointers,
-      timeStamp: event.timeStamp,
-      activeGestures,
-      customData: this.customData,
-    };
-
-    // Event names to trigger
-    const eventName = createEventName(this.name, phase);
-
-    // Dispatch custom events on the element
-    const domEvent = new CustomEvent(eventName, {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: customEventData,
-    });
-
-    element.dispatchEvent(domEvent);
+      throw new Error("STUB");
   }
 }

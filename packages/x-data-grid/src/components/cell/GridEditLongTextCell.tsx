@@ -35,16 +35,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const GridEditLongTextCellTextarea = styled(NotRendered<GridSlotProps['baseTextarea']>, {
   name: 'MuiDataGrid',
   slot: 'EditLongTextCellTextarea',
-})<{ ownerState: OwnerState }>(({ theme }) => ({
-  width: '100%',
-  padding: 0,
-  ...theme.typography.body2,
-  letterSpacing: 'normal',
-  outline: 'none',
-  background: 'transparent',
-  border: 'none',
-  resize: 'vertical',
-}));
+})<{ ownerState: OwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 const GridEditLongTextCellRoot = styled('div', {
   name: 'MuiDataGrid',
@@ -71,31 +62,12 @@ const GridEditLongTextCellValue = styled('div', {
 const GridEditLongTextCellPopper = styled(NotRendered<GridSlotProps['basePopper']>, {
   name: 'MuiDataGrid',
   slot: 'EditLongTextCellPopper',
-})<{ ownerState: OwnerState }>(({ theme }) => ({
-  zIndex: vars.zIndex.menu,
-  background: (theme.vars || theme).palette.background.paper,
-  '&[data-popper-reference-hidden]': {
-    opacity: 0, // use opacity to preserve focus.
-  },
-}));
+})<{ ownerState: OwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 const GridEditLongTextCellPopperContent = styled('div', {
   name: 'MuiDataGrid',
   slot: 'EditLongTextCellPopperContent',
-})(({ theme }) => ({
-  ...theme.typography.body2,
-  letterSpacing: 'normal',
-  paddingBlock: 15.5,
-  paddingInline: 9,
-  height: 'max-content',
-  overflow: 'auto',
-  whiteSpace: 'pre-wrap',
-  wordBreak: 'break-word',
-  width: 'var(--_width)',
-  border: `1px solid ${(theme.vars || theme).palette.divider}`,
-  boxShadow: (theme.vars || theme).shadows[4],
-  boxSizing: 'border-box',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 export interface GridEditLongTextCellProps extends GridRenderEditCellParams<any, string | null> {
   debounceMs?: number;
@@ -156,9 +128,7 @@ function GridEditLongTextCell(props: GridEditLongTextCellProps) {
   const showPopup = hasFocus && Boolean(anchorEl);
 
   React.useEffect(() => {
-    if (meta?.changeReason !== 'debouncedSetEditCellValue') {
-      setValueState(value);
-    }
+      throw new Error("STUB");
   }, [meta, value]);
 
   return (
@@ -283,82 +253,7 @@ GridEditLongTextCell.propTypes /* remove-proptypes */ = {
 } as any;
 
 function GridEditLongTextarea(props: GridEditLongTextCellProps) {
-  const {
-    id,
-    field,
-    colDef,
-    debounceMs = 200,
-    onValueChange,
-    valueState,
-    setValueState,
-    hasFocus,
-    slotProps,
-  } = props;
-  const textareaRef = React.useRef<HTMLTextAreaElement | null>(null);
-  const apiRef = useGridApiContext();
-  const rootProps = useGridRootProps();
-  const classes = useUtilityClasses(rootProps);
-
-  useEnhancedEffect(() => {
-    if (hasFocus && textareaRef.current) {
-      // preventScroll: the popper is portaled into the GridRow, so focusing
-      // without it triggers the browser to scroll the grid container which is undesirable.
-      textareaRef.current.focus({ preventScroll: true });
-      // Move cursor to end of text
-      const length = textareaRef.current.value.length;
-      textareaRef.current.setSelectionRange(length, length);
-    }
-  }, [hasFocus]);
-
-  const handleChange = React.useCallback(
-    async (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const newValue = event.target.value;
-
-      const column = apiRef.current.getColumn(field);
-
-      let parsedValue = newValue;
-      if (column?.valueParser) {
-        parsedValue = column.valueParser(newValue, apiRef.current.getRow(id), column, apiRef);
-      }
-
-      setValueState(parsedValue);
-      apiRef.current.setEditCellValue(
-        { id, field, value: parsedValue, debounceMs, unstable_skipValueParser: true },
-        event,
-      );
-
-      if (onValueChange) {
-        await onValueChange(event, newValue);
-      }
-    },
-    [apiRef, debounceMs, field, id, onValueChange, setValueState],
-  );
-
-  const handleKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-      if (event.key === 'Enter' && event.shiftKey) {
-        // Shift+Enter: let textarea handle newline, stop propagation to prevent grid from exiting edit
-        event.stopPropagation();
-      }
-      if (rootProps.editMode === 'cell' && event.key === 'Escape') {
-        apiRef.current.stopCellEditMode({ id, field, ignoreModifications: true });
-      }
-    },
-    [apiRef, field, id, rootProps.editMode],
-  );
-  return (
-    <GridEditLongTextCellTextarea
-      ref={textareaRef}
-      as={rootProps.slots.baseTextarea}
-      ownerState={rootProps}
-      aria-label={colDef.headerName || field}
-      value={valueState ?? ''}
-      onChange={handleChange}
-      onKeyDown={handleKeyDown}
-      {...slotProps?.textarea}
-      className={clsx(classes.textarea, slotProps?.textarea?.className)}
-    />
-  );
+    throw new Error("STUB");
 }
 
 GridEditLongTextarea.propTypes /* remove-proptypes */ = {
@@ -434,6 +329,4 @@ GridEditLongTextarea.propTypes /* remove-proptypes */ = {
 
 export { GridEditLongTextCell };
 
-export const renderEditLongTextCell = (params: GridEditLongTextCellProps) => (
-  <GridEditLongTextCell {...params} />
-);
+export const renderEditLongTextCell = (params: GridEditLongTextCellProps) => { throw new Error("STUB"); };

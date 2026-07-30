@@ -41,18 +41,10 @@ function ChartsAxis(props: ChartsAxisProps) {
   return (
     <React.Fragment>
       {xAxisIds.map((axisId) => {
-        if (!xAxis[axisId].position || xAxis[axisId].position === 'none') {
-          return null;
-        }
-
-        return <XAxis key={axisId} slots={slots} slotProps={slotProps} axisId={axisId} />;
+          throw new Error("STUB");
       })}
       {yAxisIds.map((axisId) => {
-        if (!yAxis[axisId].position || yAxis[axisId].position === 'none') {
-          return null;
-        }
-
-        return <YAxis key={axisId} slots={slots} slotProps={slotProps} axisId={axisId} />;
+          throw new Error("STUB");
       })}
     </React.Fragment>
   );

@@ -31,7 +31,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const GridToolbarContainerRoot = styled(Toolbar, {
   name: 'MuiDataGrid',
   slot: 'ToolbarContainer',
-  shouldForwardProp: (prop) => prop !== 'ownerState',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<{ ownerState: OwnerState }>({
   display: 'flex',
   alignItems: 'center',
@@ -46,24 +46,8 @@ const GridToolbarContainerRoot = styled(Toolbar, {
  */
 const GridToolbarContainer = forwardRef<HTMLDivElement, GridToolbarContainerProps>(
   function GridToolbarContainer(props, ref) {
-    const { className, children, ...other } = props;
-    const rootProps = useGridRootProps();
-    const classes = useUtilityClasses(rootProps);
-    if (!children) {
-      return null;
-    }
-
-    return (
-      <GridToolbarContainerRoot
-        className={clsx(classes.root, className)}
-        ownerState={rootProps}
-        {...other}
-        ref={ref}
-      >
-        {children}
-      </GridToolbarContainerRoot>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridToolbarContainer.propTypes /* remove-proptypes */ = {

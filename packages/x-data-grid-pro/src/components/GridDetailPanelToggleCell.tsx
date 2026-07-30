@@ -28,7 +28,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const isExpandedSelector = createSelector(
   gridDetailPanelExpandedRowIdsSelector,
   (expandedRowIds, rowId: GridRowId) => {
-    return expandedRowIds.has(rowId);
+      throw new Error("STUB");
   },
 );
 

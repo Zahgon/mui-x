@@ -70,13 +70,13 @@ function resolveMatchedMember(
     return parameters.currentUser;
   }
 
-  const member = parameters.members?.find((candidate) => candidate.id === authorId);
+  const member = parameters.members?.find((candidate) => { throw new Error("STUB"); });
   if (member) {
     return member;
   }
 
   return parameters.activeConversation?.participants?.find(
-    (candidate) => candidate.id === authorId,
+    (candidate) => { throw new Error("STUB"); },
   );
 }
 
@@ -173,9 +173,5 @@ export function getMessageAuthorGroupingKey(
   message: ChatMessage | null,
   parameters: ResolveMessageAuthorParameters,
 ): string | undefined {
-  if (!message) {
-    return undefined;
-  }
-
-  return resolveMessageAuthor(message, parameters)?.id ?? message.role ?? undefined;
+    throw new Error("STUB");
 }

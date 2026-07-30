@@ -11,7 +11,7 @@ export interface MultiSectionDigitalClockSectionClasses {
 export type MultiSectionDigitalClockSectionClassKey = keyof MultiSectionDigitalClockSectionClasses;
 
 export function getMultiSectionDigitalClockSectionUtilityClass(slot: string) {
-  return generateUtilityClass('MuiMultiSectionDigitalClockSection', slot);
+    throw new Error("STUB");
 }
 
 export const multiSectionDigitalClockSectionClasses: MultiSectionDigitalClockSectionClasses =

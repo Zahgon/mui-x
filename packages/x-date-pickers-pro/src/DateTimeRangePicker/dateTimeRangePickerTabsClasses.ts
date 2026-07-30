@@ -15,7 +15,7 @@ export interface DateTimeRangePickerTabsClasses {
 export type DateTimeRangePickerTabsClassKey = keyof DateTimeRangePickerTabsClasses;
 
 export function getDateTimeRangePickerTabsUtilityClass(slot: string) {
-  return generateUtilityClass('MuiDateTimeRangePickerTabs', slot);
+    throw new Error("STUB");
 }
 
 export const dateTimeRangePickerTabsClasses: DateTimeRangePickerTabsClasses =

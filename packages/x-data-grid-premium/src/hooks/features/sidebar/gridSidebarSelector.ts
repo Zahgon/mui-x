@@ -2,19 +2,15 @@ import { createRootSelector, createSelector } from '@mui/x-data-grid-pro/interna
 import type { GridStatePremium } from '../../../models/gridStatePremium';
 
 export const gridSidebarStateSelector = createRootSelector(
-  (state: GridStatePremium) => state.sidebar,
+  (state: GridStatePremium) => { throw new Error("STUB"); },
 );
 
 export const gridSidebarOpenSelector = createSelector(
   gridSidebarStateSelector,
-  (state) => state.open,
+  (state) => { throw new Error("STUB"); },
 );
 
 export const gridSidebarContentSelector = createSelector(
   gridSidebarStateSelector,
-  ({ sidebarId, labelId, value }) => ({
-    sidebarId,
-    labelId,
-    value,
-  }),
+  ({ sidebarId, labelId, value }) => { throw new Error("STUB"); },
 );

@@ -15,6 +15,6 @@ export function wrapTool<Input extends z.ZodObject, Output extends z.ZodType, Ev
     // `parse` yields the schema's output type; the public `execute` is typed on the input (pre-
     // validation) type, so re-assert it at the validated boundary. They coincide for these schemas.
     execute: async (input, context) =>
-      tool.execute(tool.inputSchema.parse(input) as z.input<Input>, context),
+      { throw new Error("STUB"); },
   };
 }

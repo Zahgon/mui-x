@@ -18,9 +18,7 @@ const faIRPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'نمای قبلی',
   openNextView: 'نمای بعدی',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'نمای سال باز است، رفتن به نمای تقویم'
-      : 'نمای تقویم باز است، رفتن به نمای سال',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'شروع',
@@ -46,33 +44,27 @@ const faIRPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `انتخاب ${views[view]}. ${!formattedTime ? 'زمانی انتخاب نشده است' : `زمان انتخاب شده ${formattedTime} است`}`,
-  hoursClockNumberText: (hours) => `${hours} ساعت`,
-  minutesClockNumberText: (minutes) => `${minutes} دقیقه`,
-  secondsClockNumberText: (seconds) => `${seconds} ثانیه`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `انتخاب ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'شماره هفته',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `هفته ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate
-      ? `تاریخ را انتخاب کنید، تاریخ انتخاب شده ${formattedDate} است`
-      : 'تاریخ را انتخاب کنید',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime
-      ? `زمان را انتخاب کنید، زمان انتخاب شده ${formattedTime} است`
-      : 'زمان را انتخاب کنید',
+    { throw new Error("STUB"); },
   openRangePickerDialogue: (formattedRange) =>
-    formattedRange
-      ? `بازه را انتخاب کنید، بازه زمانی انتخاب شده ${formattedRange} است`
-      : 'بازه را انتخاب کنید',
+    { throw new Error("STUB"); },
   fieldClearLabel: 'پاک کردن',
 
   // Table labels
@@ -80,14 +72,14 @@ const faIRPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'انتخاب تاریخ',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'سال',

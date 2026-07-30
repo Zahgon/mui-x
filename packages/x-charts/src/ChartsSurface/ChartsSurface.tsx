@@ -47,22 +47,7 @@ const ChartsSurface = React.forwardRef<HTMLDivElement, ChartsSurfaceProps>(funct
   inProps: ChartsSurfaceProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const themeProps = useThemeProps({ props: inProps, name: 'MuiChartsSurface' });
-
-  const { children, className, title, desc, ...other } = themeProps;
-
-  const classes = useUtilityClasses();
-
-  return (
-    <ChartsLayerContainer
-      className={clsx(classes.root, className)}
-      ref={ref}
-      title={title}
-      desc={desc}
-    >
-      <ChartsSvgLayer {...other}>{children}</ChartsSvgLayer>
-    </ChartsLayerContainer>
-  );
+    throw new Error("STUB");
 });
 
 ChartsSurface.propTypes /* remove-proptypes */ = {

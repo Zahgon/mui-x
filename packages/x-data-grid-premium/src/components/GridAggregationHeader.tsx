@@ -19,12 +19,7 @@ const GridAggregationHeaderRoot = styled('div', {
   name: 'MuiDataGrid',
   slot: 'AggregationColumnHeader',
   overridesResolver: (props, styles) => {
-    const { ownerState } = props;
-    return [
-      styles.aggregationColumnHeader,
-      ownerState.colDef.headerAlign &&
-        styles[`aggregationColumnHeader--align${capitalize(ownerState.colDef.headerAlign)}`],
-    ];
+      throw new Error("STUB");
   },
 })<{ ownerState: OwnerState }>({
   display: 'flex',

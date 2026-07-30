@@ -47,18 +47,5 @@ export interface BarProps extends Omit<
 }
 
 export function AnimatedBarElement(props: BarProps) {
-  const { ownerState, skipAnimation, seriesId, dataIndex, xOrigin, yOrigin, ...other } = props;
-
-  const animatedProps = useAnimateBar(props);
-
-  return (
-    <rect
-      {...other}
-      filter={ownerState.isHighlighted ? 'brightness(120%)' : undefined}
-      opacity={ownerState.isFaded ? 0.3 : 1}
-      data-highlighted={ownerState.isHighlighted || undefined}
-      data-faded={ownerState.isFaded || undefined}
-      {...animatedProps}
-    />
-  );
+    throw new Error("STUB");
 }

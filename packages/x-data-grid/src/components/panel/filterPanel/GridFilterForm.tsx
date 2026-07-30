@@ -10,11 +10,8 @@ import type { GridFilterFormProps } from './GridFilterFormBase';
 
 const GridFilterForm = forwardRef<HTMLDivElement, GridFilterFormProps>(
   function GridFilterForm(props, ref) {
-    const apiRef = useGridApiContext();
-    const filterModel = useGridSelector(apiRef, gridFilterModelSelector);
-
-    return <GridFilterFormBase filterModel={filterModel} {...props} ref={ref} />;
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridFilterForm.propTypes /* remove-proptypes */ = {

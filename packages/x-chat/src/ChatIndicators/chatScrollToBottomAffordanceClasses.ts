@@ -10,7 +10,7 @@ export interface ChatScrollToBottomAffordanceClasses {
 export type ChatScrollToBottomAffordanceClassKey = keyof ChatScrollToBottomAffordanceClasses;
 
 export function getChatScrollToBottomAffordanceUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatScrollToBottomAffordance', slot);
+    throw new Error("STUB");
 }
 
 export const chatScrollToBottomAffordanceClasses: ChatScrollToBottomAffordanceClasses =

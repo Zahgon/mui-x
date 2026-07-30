@@ -22,8 +22,7 @@ const isFunctionInterpolator = <Value extends number | Date>(
 function getClampedSize(sizes: readonly [number, number]) {
   const [minSize, maxSize] = sizes;
   return (t: number) => {
-    const clampedT = Math.max(Math.min(t, 1), 0);
-    return minSize + clampedT * (maxSize - minSize);
+      throw new Error("STUB");
   };
 }
 
@@ -60,7 +59,7 @@ export function getOrdinalSizeScale(
     );
   }
   return scaleOrdinal<number | Date | string, number>(
-    config.sizes.map((_, index) => index),
+    config.sizes.map((_, index) => { throw new Error("STUB"); }),
     config.sizes,
   ).unknown(config.unknownSize ?? null);
 }

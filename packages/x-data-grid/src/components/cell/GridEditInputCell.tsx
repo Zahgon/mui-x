@@ -56,90 +56,7 @@ export interface GridEditInputCellProps extends GridRenderEditCellParams {
 }
 
 const GridEditInputCell = forwardRef<HTMLInputElement, GridEditInputCellProps>((props, ref) => {
-  const rootProps = useGridRootProps();
-
-  const {
-    id,
-    value,
-    formattedValue,
-    api,
-    field,
-    row,
-    rowNode,
-    colDef,
-    cellMode,
-    isEditable,
-    tabIndex,
-    hasFocus,
-    isValidating,
-    debounceMs = 200,
-    isProcessingProps,
-    onValueChange,
-    slotProps,
-    ...other
-  } = props;
-
-  const apiRef = useGridApiContext();
-  const inputRef = React.useRef<HTMLInputElement>(null);
-  const [valueState, setValueState] = React.useState(value);
-  const classes = useUtilityClasses(rootProps);
-
-  const handleChange = React.useCallback(
-    async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.target.value;
-
-      const column = apiRef.current.getColumn(field);
-
-      let parsedValue = newValue;
-      if (column?.valueParser) {
-        parsedValue = column.valueParser(newValue, apiRef.current.getRow(id), column, apiRef);
-      }
-
-      setValueState(parsedValue);
-      apiRef.current.setEditCellValue(
-        { id, field, value: parsedValue, debounceMs, unstable_skipValueParser: true },
-        event,
-      );
-
-      if (onValueChange) {
-        await onValueChange(event, newValue);
-      }
-    },
-    [apiRef, debounceMs, field, id, onValueChange],
-  );
-
-  const meta = apiRef.current.unstable_getEditCellMeta(id, field);
-
-  React.useEffect(() => {
-    if (meta?.changeReason !== 'debouncedSetEditCellValue') {
-      setValueState(value);
-    }
-  }, [meta, value]);
-
-  useEnhancedEffect(() => {
-    if (hasFocus) {
-      inputRef.current!.focus();
-    }
-  }, [hasFocus]);
-
-  return (
-    <GridEditInputCellRoot
-      as={rootProps.slots.baseInput}
-      inputRef={inputRef}
-      className={classes.root}
-      ownerState={rootProps}
-      fullWidth
-      type={colDef.type === 'number' ? colDef.type : 'text'}
-      value={valueState ?? ''}
-      onChange={handleChange}
-      endAdornment={
-        isProcessingProps ? <rootProps.slots.loadIcon fontSize="small" color="action" /> : undefined
-      }
-      {...other}
-      {...slotProps?.root}
-      ref={ref}
-    />
-  );
+    throw new Error("STUB");
 });
 
 GridEditInputCell.propTypes /* remove-proptypes */ = {
@@ -212,6 +129,4 @@ GridEditInputCell.propTypes /* remove-proptypes */ = {
 
 export { GridEditInputCell };
 
-export const renderEditInputCell = (params: GridEditInputCellProps) => (
-  <GridEditInputCell {...params} />
-);
+export const renderEditInputCell = (params: GridEditInputCellProps) => { throw new Error("STUB"); };

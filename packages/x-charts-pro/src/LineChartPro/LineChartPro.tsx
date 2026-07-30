@@ -85,71 +85,7 @@ const LineChartPro = React.forwardRef(function LineChartPro(
   inProps: LineChartProProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiLineChartPro' });
-  const { initialZoom, zoomData, onZoomChange, apiRef, showToolbar, sampling, ...other } = props;
-  const {
-    chartsWrapperProps,
-    chartsContainerProps,
-    gridProps,
-    clipPathProps,
-    clipPathGroupProps,
-    areaPlotProps,
-    linePlotProps,
-    markPlotProps,
-    overlayProps,
-    chartsAxisProps,
-    axisHighlightProps,
-    lineHighlightPlotProps,
-    legendProps,
-    children,
-  } = useLineChartProps(other);
-  const { chartsDataProviderProProps, chartsSurfaceProps } = useChartsContainerProProps<
-    'line',
-    LineChartProPluginSignatures
-  >(
-    {
-      ...chartsContainerProps,
-      initialZoom,
-      zoomData,
-      onZoomChange,
-      apiRef,
-      plugins: LINE_CHART_PRO_PLUGINS,
-    },
-    { seriesType: 'line', method: sampling },
-  );
-
-  const Tooltip = props.slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = props.slots?.toolbar ?? ChartsToolbarPro;
-
-  return (
-    <ChartsDataProviderPro<'line', LineChartProPluginSignatures> {...chartsDataProviderProProps}>
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {showToolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!props.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <ChartsGrid {...gridProps} />
-          <g {...clipPathGroupProps}>
-            <AreaPlot {...areaPlotProps} />
-            <LinePlot {...linePlotProps} />
-            <ChartsOverlay {...overlayProps} />
-            <ChartsAxisHighlight {...axisHighlightProps} />
-          </g>
-          <FocusedLineMark />
-          <ChartsAxis {...chartsAxisProps} />
-          <ChartsZoomSlider />
-          <g data-drawing-container>
-            {/* The `data-drawing-container` indicates that children are part of the drawing area. Ref: https://github.com/mui/mui-x/issues/13659 */}
-            <MarkPlot {...markPlotProps} />
-          </g>
-          <LineHighlightPlot {...lineHighlightPlotProps} />
-          <ChartsBrushOverlay />
-          <ChartsClipPath {...clipPathProps} />
-          {children}
-        </ChartsSurface>
-        {!props.loading && <Tooltip {...props.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProviderPro>
-  );
+    throw new Error("STUB");
 });
 
 LineChartPro.propTypes /* remove-proptypes */ = {

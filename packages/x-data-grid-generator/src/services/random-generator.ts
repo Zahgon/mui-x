@@ -22,7 +22,7 @@ declare const __DISABLE_CHANCE_RANDOM__: any;
 
 export function resetRandomGenerators() {
   if (typeof __DISABLE_CHANCE_RANDOM__ !== 'undefined' && __DISABLE_CHANCE_RANDOM__) {
-    chance = new Chance(() => 0.5);
+    chance = new Chance(() => { throw new Error("STUB"); });
     chanceGuid = new Chance(42);
   } else {
     chance = new Chance();
@@ -40,20 +40,7 @@ type ColumnDataGenerator<Value> = (data: any, context: GridDataGeneratorContext)
 const uniquenessHandler =
   (generator: ColumnDataGenerator<string>): ColumnDataGenerator<string> =>
   (data, context) => {
-    const rawValue = generator(data, context);
-
-    if (!context.values) {
-      return rawValue;
-    }
-
-    const valueCount = (context.values[rawValue] ?? 0) + 1;
-    context.values[rawValue] = valueCount + 1;
-
-    if (valueCount > 1) {
-      return `${rawValue} ${valueCount}`;
-    }
-
-    return rawValue;
+      throw new Error("STUB");
   };
 
 function dateFuture(years?: number, refDate?: string) {
@@ -115,54 +102,52 @@ export const randomInt = (min: number, max: number): number => chance.integer({ 
 export const randomPrice = (min = 0, max = 100000): number => Number(random(min, max).toFixed(2));
 export const randomRate = (): number => random(0, 1);
 export const randomDate = (start: Date, end: Date) =>
-  new Date(
-    start.getTime() + chance.floating({ min: 0, max: 1 }) * (end.getTime() - start.getTime()),
-  );
+  { throw new Error("STUB"); };
 export const randomArrayItem = <T>(arr: T[]) => arr[randomInt(0, arr.length - 1)];
 export const randomBoolean = (): boolean => randomArrayItem([true, false]);
 export const randomSubarray = <T>(arr: T[], min = 0, max?: number): T[] => {
   const count = randomInt(min, max ?? arr.length);
-  const shuffled = [...arr].sort(() => chance.floating({ min: -1, max: 1 }));
+  const shuffled = [...arr].sort(() => { throw new Error("STUB"); });
   return shuffled.slice(0, count);
 };
 
 export const randomColor = () => randomArrayItem(COLORS);
 export const randomId = () => chanceGuid.guid();
-export const randomDesk = () => `D-${chance.integer({ min: 0, max: 10000 })}`;
+export const randomDesk = () => { throw new Error("STUB"); };
 export const randomCommodity = () => randomArrayItem(COMMODITY_OPTIONS);
 export const randomTraderName = () => chance.name();
 export const randomUserName = () => chance.twitter();
 export const randomEmail = () => chance.email();
-export const randomUrl = () => chance.url();
-export const randomPhoneNumber = () => chance.phone();
-export const randomUnitPrice = () => randomPrice(1, 100);
-export const randomUnitPriceCurrency = () => randomArrayItem(CURRENCY_OPTIONS);
+export const randomUrl = () => { throw new Error("STUB"); };
+export const randomPhoneNumber = () => { throw new Error("STUB"); };
+export const randomUnitPrice = () => { throw new Error("STUB"); };
+export const randomUnitPriceCurrency = () => { throw new Error("STUB"); };
 export const randomQuantity = () => randomInt(1000, 100000);
-export const randomFeeRate = () => Number(random(0.1, 0.4).toFixed(3));
-export const randomIncoterm = () => randomArrayItem(INCOTERM_OPTIONS);
+export const randomFeeRate = () => { throw new Error("STUB"); };
+export const randomIncoterm = () => { throw new Error("STUB"); };
 export const randomStatusOptions = () => randomArrayItem(STATUS_OPTIONS);
-export const randomPnL = () => random(-100000000, 100000000);
-export const randomMaturityDate = () => dateFuture();
-export const randomTradeDate = () => dateRecent();
-export const randomBrokerId = () => chance.guid();
-export const randomCompanyName = () => chance.company();
+export const randomPnL = () => { throw new Error("STUB"); };
+export const randomMaturityDate = () => { throw new Error("STUB"); };
+export const randomTradeDate = () => { throw new Error("STUB"); };
+export const randomBrokerId = () => { throw new Error("STUB"); };
+export const randomCompanyName = () => { throw new Error("STUB"); };
 export const randomCountry = () => randomArrayItem(COUNTRY_ISO_OPTIONS);
 export const randomCurrency = () => randomArrayItem(CURRENCY_OPTIONS);
 export const randomAddress = () => chance.address();
 export const randomCity = () => chance.city();
-export const randomTaxCode = () => randomArrayItem(TAXCODE_OPTIONS);
-export const randomContractType = () => randomArrayItem(CONTRACT_TYPE_OPTIONS);
-export const randomRateType = () => randomArrayItem(RATE_TYPE_OPTIONS);
+export const randomTaxCode = () => { throw new Error("STUB"); };
+export const randomContractType = () => { throw new Error("STUB"); };
+export const randomRateType = () => { throw new Error("STUB"); };
 export const randomCreatedDate = () => datePast();
 export const randomUpdatedDate = () => dateRecent();
-export const randomJobTitle = () => chance.profession();
-export const randomRating = () => randomInt(1, 5);
-export const randomName = uniquenessHandler(() => chance.name());
+export const randomJobTitle = () => { throw new Error("STUB"); };
+export const randomRating = () => { throw new Error("STUB"); };
+export const randomName = uniquenessHandler(() => { throw new Error("STUB"); });
 
-export const randomTradeTags = () => randomSubarray(TRADE_TAG_OPTIONS, 1, 4);
-export const randomCertifications = () => randomSubarray(CERTIFICATION_OPTIONS, 0, 3);
+export const randomTradeTags = () => { throw new Error("STUB"); };
+export const randomCertifications = () => { throw new Error("STUB"); };
 
 export const generateFilledQuantity = (data: { quantity: number }) =>
-  Number((data.quantity * randomRate()).toFixed()) / data.quantity;
+  { throw new Error("STUB"); };
 export const generateIsFilled = (data: { quantity: number; filledQuantity: number }) =>
-  data.quantity === data.filledQuantity;
+  { throw new Error("STUB"); };

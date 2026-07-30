@@ -10,7 +10,7 @@ export interface SimpleTreeViewClasses extends Omit<
 export type SimpleTreeViewClassKey = keyof SimpleTreeViewClasses;
 
 export function getSimpleTreeViewUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiSimpleTreeView', slot);
+    throw new Error("STUB");
 }
 
 export const simpleTreeViewClasses: SimpleTreeViewClasses = generateUtilityClasses(

@@ -8,16 +8,7 @@ export function ChatLocaleProvider(props: {
   children: React.ReactNode;
   localeText?: Partial<ChatLocaleText>;
 }) {
-  const { children, localeText } = props;
-  const value = React.useMemo<ChatLocaleText>(
-    () => ({
-      ...CHAT_DEFAULT_LOCALE_TEXT,
-      ...localeText,
-    }),
-    [localeText],
-  );
-
-  return <ChatLocaleContext.Provider value={value}>{children}</ChatLocaleContext.Provider>;
+    throw new Error("STUB");
 }
 
 export function useChatLocaleText() {

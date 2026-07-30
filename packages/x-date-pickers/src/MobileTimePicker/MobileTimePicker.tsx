@@ -33,56 +33,7 @@ const MobileTimePicker = React.forwardRef(function MobileTimePicker(
   inProps: MobileTimePickerProps<TimeView>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-
-  // Props with the default values common to all time pickers
-  const defaultizedProps = useTimePickerDefaultizedProps<TimeView, MobileTimePickerProps<TimeView>>(
-    inProps,
-    'MuiMobileTimePicker',
-  );
-
-  const viewRenderers: TimePickerViewRenderers<TimeView> = {
-    hours: renderTimeViewClock,
-    minutes: renderTimeViewClock,
-    seconds: renderTimeViewClock,
-    ...defaultizedProps.viewRenderers,
-  };
-  const ampmInClock = defaultizedProps.ampmInClock ?? false;
-
-  // Props with the default values specific to the mobile variant
-  const props = {
-    ...defaultizedProps,
-    ampmInClock,
-    viewRenderers,
-    format: resolveTimeFormat(adapter, defaultizedProps),
-    slots: {
-      field: TimeField,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      toolbar: {
-        hidden: false,
-        ampmInClock,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useMobilePicker<TimeView, typeof props>({
-    ref,
-    props,
-    valueManager: singleItemValueManager,
-    valueType: 'time',
-    validator: validateTime,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as MobileTimePickerComponent;
 
 MobileTimePicker.propTypes /* remove-proptypes */ = {

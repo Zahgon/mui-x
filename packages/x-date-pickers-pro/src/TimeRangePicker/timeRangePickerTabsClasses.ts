@@ -11,7 +11,7 @@ export interface TimeRangePickerTabsClasses {
 export type TimeRangePickerTabsClassKey = keyof TimeRangePickerTabsClasses;
 
 export function getTimeRangePickerTabsUtilityClass(slot: string) {
-  return generateUtilityClass('MuiTimeRangePickerTabs', slot);
+    throw new Error("STUB");
 }
 
 export const timeRangePickerTabsClasses: TimeRangePickerTabsClasses = generateUtilityClasses(

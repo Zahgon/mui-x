@@ -32,7 +32,7 @@ const zhTWGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: '顯示篩選器',
   toolbarFiltersTooltipHide: '隱藏篩選器',
   toolbarFiltersTooltipShow: '顯示篩選器',
-  toolbarFiltersTooltipActive: (count) => `${count} 個篩選器`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: '搜尋…',
@@ -128,7 +128,7 @@ const zhTWGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: '選單',
-  columnMenuAriaLabel: (columnName: string) => `${columnName} 欄位選單`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: '顯示欄位',
   columnMenuManageColumns: '管理欄位',
   columnMenuFilter: '篩選器',
@@ -140,19 +140,19 @@ const zhTWGrid: Partial<GridLocaleText> = {
   // columnMenuManageCharts: 'Manage charts',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) => `${count} 個篩選器`,
+  columnHeaderFiltersTooltipActive: (count) => { throw new Error("STUB"); },
   columnHeaderFiltersLabel: '顯示篩選器',
   columnHeaderSortIconLabel: '排序',
 
   // Rows selected footer text
-  footerRowSelected: (count) => `已選取 ${count.toLocaleString()} 個`,
+  footerRowSelected: (count) => { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: '總數:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} / ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: '核取方塊',
@@ -184,8 +184,8 @@ const zhTWGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: '群組',
-  groupColumn: (name) => `以 ${name} 分組`,
-  unGroupColumn: (name) => `取消以 ${name} 分組`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: '切換顯示詳細資訊',
@@ -195,24 +195,10 @@ const zhTWGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: '每頁數量:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} 共 ${count !== -1 ? formatNumber(count) : `超過 ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to ? `約 ${formatNumber(estimated)}` : `超過 ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} 共 ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return '第一頁';
-    }
-    if (type === 'last') {
-      return '最後一頁';
-    }
-    if (type === 'next') {
-      return '下一頁';
-    }
-    return '上一頁';
+      throw new Error("STUB");
   },
 
   // Row reordering text

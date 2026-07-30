@@ -42,117 +42,7 @@ export function useDropTarget<Targets extends keyof EventDropDataLookup>(
   const store = useSchedulerStoreContext();
 
   React.useEffect(() => {
-    if (!ref.current) {
-      return undefined;
-    }
-    const getDataFromInside: useDropTarget.GetDataFromInside = (data, newStart, newEnd) => {
-      const type =
-        data.source === 'CalendarGridDayEventResizeHandler' ||
-        data.source === 'CalendarGridTimeEventResizeHandler'
-          ? 'internal-resize'
-          : 'internal-drag';
-
-      return {
-        type,
-        surfaceType,
-        start: newStart,
-        end: newEnd,
-        eventId: data.eventId,
-        occurrenceKey: data.occurrenceKey,
-        originalOccurrence: data.originalOccurrence,
-        resourceId:
-          resourceId === undefined
-            ? (getPrimaryResourceId(data.originalOccurrence.resource) ?? null)
-            : resourceId,
-      };
-    };
-
-    const getDataFromOutside: useDropTarget.GetDataFromOutside = (data, start) => {
-      const eventCreationConfig = schedulerEventSelectors.creationConfig(store.state);
-      if (eventCreationConfig === false) {
-        return undefined;
-      }
-
-      return {
-        type: 'external-drag',
-        surfaceType,
-        start,
-        // TODO: Improve the start and end time of a non all-day event dropped in the Month View.
-        end: adapter.addMinutes(start, data.eventData.duration ?? eventCreationConfig.duration),
-        eventData: data.eventData,
-        onEventDrop: data.onEventDrop,
-        resourceId:
-          resourceId === undefined
-            ? (getPrimaryResourceId(data.eventData.resource) ?? null)
-            : resourceId,
-      };
-    };
-
-    return dropTargetForElements({
-      element: ref.current,
-      getData: () => ({ isSchedulerDropTarget: true, surfaceType }),
-      canDrop: ({ source }) => {
-        if (!isValidDropTarget(source.data)) {
-          return false;
-        }
-
-        if (
-          source.data.source === 'StandaloneEvent' &&
-          !schedulerEventSelectors.canDragEventsFromTheOutside(store.state)
-        ) {
-          return false;
-        }
-
-        return true;
-      },
-      onDrag: ({ source, location }) => {
-        const newPlaceholder = getEventDropData({
-          data: source.data,
-          getDataFromInside,
-          getDataFromOutside,
-          input: location.current.input,
-        });
-        if (newPlaceholder) {
-          store.setOccurrencePlaceholder(newPlaceholder);
-        }
-      },
-      onDrop: ({ source, location }) => {
-        const dropData = getEventDropData({
-          data: source.data,
-          getDataFromInside,
-          getDataFromOutside,
-          input: location.current.input,
-        });
-
-        const placeholder = dropData ?? schedulerOccurrencePlaceholderSelectors.value(store.state);
-
-        if (isInternalDragOrResizePlaceholder(placeholder)) {
-          applyInternalDragOrResizeOccurrencePlaceholder(
-            store,
-            placeholder,
-            addPropertiesToDroppedEvent,
-          );
-        } else if (placeholder?.type === 'external-drag') {
-          applyExternalDragOccurrencePlaceholder(store, placeholder, addPropertiesToDroppedEvent);
-        }
-      },
-      onDragLeave: () => {
-        const currentPlaceholder = schedulerOccurrencePlaceholderSelectors.value(store.state);
-        if (currentPlaceholder?.surfaceType !== surfaceType) {
-          return;
-        }
-
-        const type = currentPlaceholder.type;
-        const shouldHidePlaceholder =
-          type === 'external-drag' ||
-          (isInternalDragOrResizePlaceholder(currentPlaceholder) &&
-            schedulerEventSelectors.canDropEventsToTheOutside(store.state));
-
-        if (shouldHidePlaceholder) {
-          store.setOccurrencePlaceholder({ ...currentPlaceholder, isHidden: true });
-        }
-      },
-    });
+      throw new Error("STUB");
   }, [
     ref,
     surfaceType,
@@ -229,16 +119,7 @@ function applyInternalDragOrResizeOccurrencePlaceholder(
   Object.assign(changes, additionalChanges);
 
   const hasChanged = Object.entries(changes).some(([key, value]) => {
-    if (key === 'id') {
-      return false;
-    }
-    if (key === 'start' || key === 'end') {
-      return !adapter.isEqual(
-        originalOccurrence.displayTimezone[key].value,
-        value as TemporalSupportedObject,
-      );
-    }
-    return originalOccurrence[key as keyof typeof originalOccurrence] !== value;
+      throw new Error("STUB");
   });
 
   if (!hasChanged) {

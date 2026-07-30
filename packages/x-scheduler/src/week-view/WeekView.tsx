@@ -21,23 +21,6 @@ export const WeekView = React.memo(
     props: WeekViewProps,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ) {
-    // Context hooks
-    const store = useEventCalendarStoreContext();
-
-    // Feature hooks
-    const { days } = useEventCalendarView(WEEK_VIEW_DEFINITION);
-
-    // Selector hooks
-    const config = useStore(store, eventCalendarViewSelectors.timeGridConfig, 'week');
-
-    return (
-      <DayTimeGrid
-        ref={forwardedRef}
-        days={days}
-        startTime={config?.startTime}
-        endTime={config?.endTime}
-        {...props}
-      />
-    );
+      throw new Error("STUB");
   }),
 );

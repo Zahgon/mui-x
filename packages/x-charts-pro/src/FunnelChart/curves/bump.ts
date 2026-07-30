@@ -23,29 +23,23 @@ export class Bump implements FunnelCurveGenerator {
     context: CanvasRenderingContext2D,
     { isHorizontal, min, max, isIncreasing }: CurveOptions,
   ) {
-    this.context = context;
-    this.isHorizontal = isHorizontal ?? false;
-    this.min = min ?? { x: 0, y: 0 };
-    this.max = max ?? { x: 0, y: 0 };
-
-    if (isIncreasing) {
-      const currentMin = this.min;
-      const currentMax = this.max;
-      this.min = currentMax;
-      this.max = currentMin;
-    }
+      throw new Error("STUB");
   }
 
-  areaStart(): void {}
+  areaStart(): void {
+      throw new Error("STUB");
+  }
 
-  areaEnd(): void {}
+  areaEnd(): void {
+      throw new Error("STUB");
+  }
 
   lineStart(): void {}
 
   lineEnd(): void {}
 
   processPoints(points: Point[]): Point[] {
-    return points;
+      throw new Error("STUB");
   }
 
   point(x: number, y: number): void {

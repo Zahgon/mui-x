@@ -35,31 +35,10 @@ const PickersToolbarTextRoot = styled(Typography, {
 })<{
   component?: React.ElementType;
   ownerState: PickersToolbarTextProps;
-}>(({ theme }) => ({
-  transition: theme.transitions.create('color'),
-  color: (theme.vars || theme).palette.text.secondary,
-  [`&[data-selected]`]: {
-    color: (theme.vars || theme).palette.text.primary,
-  },
-}));
+}>(({ theme }) => { throw new Error("STUB"); });
 
 export const PickersToolbarText = React.forwardRef<HTMLSpanElement, PickersToolbarTextProps>(
   function PickersToolbarText(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiPickersToolbarText' });
-    const { className, classes: classesProp, selected, value, ...other } = props;
-    const classes = useUtilityClasses(classesProp);
-
-    return (
-      <PickersToolbarTextRoot
-        ref={ref}
-        className={clsx(classes.root, className)}
-        component="span"
-        ownerState={props}
-        {...(selected && { 'data-selected': true })}
-        {...other}
-      >
-        {value}
-      </PickersToolbarTextRoot>
-    );
-  },
+        throw new Error("STUB");
+    },
 );

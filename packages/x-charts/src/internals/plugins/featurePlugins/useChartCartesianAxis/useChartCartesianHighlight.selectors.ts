@@ -64,7 +64,7 @@ function getAxisHighlight<Item extends AxisItemIdentifier | AxisHighlightWithVal
 
 const selectorChartControlledCartesianAxisHighlight = (
   state: ChartState<[], [UseChartCartesianAxisSignature]>,
-) => state.controlledCartesianAxisHighlight;
+) => { throw new Error("STUB"); };
 
 const selectAxisHighlight = (
   computedIndex: number | null,
@@ -74,23 +74,7 @@ const selectAxisHighlight = (
   lastInteractionUpdate: InteractionUpdateSource | undefined,
   isBrushSelectionActive: boolean | undefined,
 ) => {
-  if (isBrushSelectionActive) {
-    return [];
-  }
-
-  if (controlledAxisItems !== undefined) {
-    return controlledAxisItems
-      .filter((item) => axis.axis[item.axisId] !== undefined)
-      .map((item) => item);
-  }
-
-  const pointerHighlight = computedIndex !== null && {
-    axisId: axis.axisIds[0],
-    dataIndex: computedIndex,
-  };
-  const keyboardHighlight = keyboardAxisItem != null && keyboardAxisItem;
-
-  return getAxisHighlight(lastInteractionUpdate, pointerHighlight, keyboardHighlight);
+    throw new Error("STUB");
 };
 
 export const selectorChartsHighlightXAxisIndex = createSelectorMemoized(
@@ -123,34 +107,7 @@ const selectAxisHighlightWithValue = (
   lastInteractionUpdate: InteractionUpdateSource | undefined,
   isBrushSelectionActive: boolean | undefined,
 ) => {
-  if (isBrushSelectionActive) {
-    return [];
-  }
-
-  if (controlledAxisItems !== undefined) {
-    return controlledAxisItems
-      .map((item) => ({
-        ...item,
-        value: axis.axis[item.axisId]?.data?.[item.dataIndex],
-      }))
-      .filter(({ value }) => value !== undefined);
-  }
-
-  const pointerHighlight: false | AxisHighlightWithValue = computedValue != null && {
-    axisId: axis.axisIds[0],
-    value: computedValue,
-  };
-  if (pointerHighlight && computedIndex != null) {
-    pointerHighlight.dataIndex = computedIndex;
-  }
-
-  const keyboardValue =
-    keyboardAxisItem != null &&
-    axis.axis[keyboardAxisItem.axisId]?.data?.[keyboardAxisItem.dataIndex];
-  const keyboardHighlight = keyboardAxisItem != null &&
-    keyboardValue != null && { ...keyboardAxisItem, value: keyboardValue };
-
-  return getAxisHighlight(lastInteractionUpdate, pointerHighlight, keyboardHighlight);
+    throw new Error("STUB");
 };
 
 export const selectorChartsHighlightXAxisValue = createSelectorMemoized(
@@ -187,14 +144,7 @@ const selectAxis = (
   axisItems: AxisItemIdentifier[] | undefined,
   axis: ComputeResult<ChartsAxisProps>,
 ) => {
-  if (axisItems === undefined) {
-    return [axis.axis[axis.axisIds[0]]];
-  }
-  const filteredAxes = axisItems
-    .map((item) => axis.axis[item.axisId] ?? null)
-    .filter((item) => item !== null);
-
-  return filteredAxes;
+    throw new Error("STUB");
 };
 
 export const selectorChartsHighlightXAxis = createSelector(

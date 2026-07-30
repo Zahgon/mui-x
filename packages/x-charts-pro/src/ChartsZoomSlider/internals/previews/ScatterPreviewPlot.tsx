@@ -27,66 +27,7 @@ export function ScatterPreviewPlot({
   width,
   seriesIds,
 }: ScatterPreviewPlotProps) {
-  const store = useStore();
-  const seriesData = useScatterSeriesContext();
-  const xAxes = store.use(selectorChartPreviewComputedXAxis, axisId);
-  const yAxes = store.use(selectorChartPreviewComputedYAxis, axisId);
-  const defaultXAxisId = useXAxes().xAxisIds[0];
-  const defaultYAxisId = useYAxes().yAxisIds[0];
-  const { zAxis: zAxes, zAxisIds } = useZAxes();
-  const defaultZAxisId = zAxisIds[0];
-
-  if (seriesData === undefined) {
-    return null;
-  }
-
-  const { series, seriesOrder } = seriesData;
-  const seriesIdsSet = seriesIds ? new Set(seriesIds) : undefined;
-
-  return (
-    <React.Fragment>
-      {seriesOrder.map((seriesId) => {
-        // Filter by the provided series IDs.
-        if (seriesIdsSet && !seriesIdsSet.has(seriesId)) {
-          return null;
-        }
-
-        const { id, xAxisId, yAxisId, colorAxisId, zAxisId, color } = series[seriesId];
-
-        const xAxis = xAxes[xAxisId ?? defaultXAxisId];
-        const yAxis = yAxes[yAxisId ?? defaultYAxisId];
-
-        // This series is not attached to the current axis, skip it.
-        if (xAxis?.id !== axisId && yAxis?.id !== axisId) {
-          return null;
-        }
-
-        const colorGetter = scatterSeriesConfig.colorProcessor(
-          series[seriesId],
-          xAxis,
-          yAxis,
-          zAxes[colorAxisId ?? zAxisId ?? defaultZAxisId],
-        );
-        const xScale = xAxis.scale;
-        const yScale = yAxis.scale;
-
-        return (
-          <ScatterPreviewItems
-            key={id}
-            xScale={xScale}
-            yScale={yScale}
-            color={color}
-            colorGetter={colorGetter}
-            series={series[seriesId]}
-            x={x}
-            y={y}
-            height={height}
-            width={width}
-          />
-        );
-      })}
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }
 
 interface ScatterPreviewItemsProps {
@@ -102,32 +43,5 @@ interface ScatterPreviewItemsProps {
 }
 
 function ScatterPreviewItems(props: ScatterPreviewItemsProps) {
-  const { series, xScale, yScale, color, colorGetter, x, y, width, height } = props;
-
-  const isPointInside = React.useCallback(
-    (px: number, py: number) => px >= x && px <= x + width && py >= y && py <= y + height,
-    [height, width, x, y],
-  );
-
-  const scatterPlotData = useScatterPlotData(series, xScale, yScale, isPointInside);
-
-  return (
-    <g data-series={series.id}>
-      {scatterPlotData.map((dataPoint, i) => {
-        return (
-          <ScatterMarker
-            key={dataPoint.id ?? dataPoint.dataIndex}
-            dataIndex={dataPoint.dataIndex}
-            color={colorGetter ? colorGetter(i) : color}
-            x={dataPoint.x}
-            y={dataPoint.y}
-            seriesId={series.id}
-            size={series.preview.markerSize}
-            isHighlighted={false}
-            isFaded={false}
-          />
-        );
-      })}
-    </g>
-  );
+    throw new Error("STUB");
 }

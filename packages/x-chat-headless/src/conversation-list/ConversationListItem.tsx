@@ -35,45 +35,5 @@ export const ConversationListItem = React.forwardRef(function ConversationListIt
   props: ConversationListItemProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    children,
-    conversation,
-    selected = false,
-    unread = false,
-    focused = false,
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    ...other
-  } = props as ConversationListItemProps & {
-    ownerState?: ConversationListItemOwnerState;
-  };
-  const ownerState: ConversationListItemOwnerState = {
-    conversation,
-    selected,
-    unread,
-    focused,
-  };
-  void ownerStateProp;
-  const Root = slots?.root ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-      // Expose the conversation id as a stable hook for tests, automation,
-      // and consumer styling without forcing them to bind a ref (Playwright
-      // Bug D).
-      'data-conversation-id': conversation.id,
-      ...getDataAttributes({
-        selected: ownerState.selected,
-        unread: ownerState.unread,
-        focused: ownerState.focused,
-      }),
-    },
-  });
-
-  return <Root {...rootProps}>{children}</Root>;
+    throw new Error("STUB");
 }) as ConversationListItemComponent;

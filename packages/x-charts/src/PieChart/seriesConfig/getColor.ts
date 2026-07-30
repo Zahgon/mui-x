@@ -2,7 +2,7 @@ import type { ColorProcessor } from '../../internals/plugins/corePlugins/useChar
 
 const getColor: ColorProcessor<'pie'> = (series) => {
   return (dataIndex: number) => {
-    return series.data[dataIndex].color;
+      throw new Error("STUB");
   };
 };
 

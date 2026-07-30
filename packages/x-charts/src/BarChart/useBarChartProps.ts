@@ -70,66 +70,32 @@ export const useBarChartProps = (props: UseBarChartProps) => {
 
   const hasHorizontalSeries =
     layout === 'horizontal' ||
-    (layout === undefined && series.some((item) => item.layout === 'horizontal'));
+    (layout === undefined && series.some((item) => { throw new Error("STUB"); }));
 
   const defaultBandXAxis: AxisConfig<'band', number, ChartsXAxisProps>[] = React.useMemo(
-    () => [
-      {
-        id: DEFAULT_X_AXIS_KEY,
-        scaleType: 'band',
-        data: Array.from(
-          { length: Math.max(...series.map((s) => (s.data ?? dataset ?? []).length)) },
-          (_, index) => index,
-        ),
-      },
-    ],
+    () => { throw new Error("STUB"); },
     [dataset, series],
   );
 
   const defaultBandYAxis: AxisConfig<'band', number, ChartsYAxisProps>[] = React.useMemo(
-    () => [
-      {
-        id: DEFAULT_Y_AXIS_KEY,
-        scaleType: 'band',
-        data: Array.from(
-          { length: Math.max(...series.map((s) => (s.data ?? dataset ?? []).length)) },
-          (_, index) => index,
-        ),
-      },
-    ],
+    () => { throw new Error("STUB"); },
     [dataset, series],
   );
 
   const seriesWithDefault = React.useMemo(
     () =>
-      series.map((s) => ({
-        type: 'bar' as const,
-        ...s,
-        layout: hasHorizontalSeries ? ('horizontal' as const) : ('vertical' as const),
-      })),
+      { throw new Error("STUB"); },
     [hasHorizontalSeries, series],
   );
 
   const defaultXAxis = hasHorizontalSeries ? undefined : defaultBandXAxis;
   const processedXAxis = React.useMemo(() => {
-    if (!xAxis) {
-      return defaultXAxis;
-    }
-
-    return hasHorizontalSeries
-      ? xAxis
-      : xAxis.map((axis) => ({ scaleType: 'band' as const, ...axis }));
+      throw new Error("STUB");
   }, [defaultXAxis, hasHorizontalSeries, xAxis]);
 
   const defaultYAxis = hasHorizontalSeries ? defaultBandYAxis : undefined;
   const processedYAxis = React.useMemo(() => {
-    if (!yAxis) {
-      return defaultYAxis;
-    }
-
-    return hasHorizontalSeries
-      ? yAxis.map((axis) => ({ scaleType: 'band' as const, ...axis }))
-      : yAxis;
+      throw new Error("STUB");
   }, [defaultYAxis, hasHorizontalSeries, yAxis]);
 
   const chartsContainerProps: ChartsContainerProps<'bar', BarChartPluginSignatures> = {

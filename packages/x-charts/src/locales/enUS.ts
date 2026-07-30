@@ -16,7 +16,7 @@ export const enUSLocaleText: ChartsLocaleText = {
 
   // Toolbar Export Menu
   toolbarExportPrint: 'Print',
-  toolbarExportImage: (mimeType) => `Export as ${imageMimeTypes[mimeType] ?? mimeType}`,
+  toolbarExportImage: (mimeType) => { throw new Error("STUB"); },
 
   // Charts renderer configuration
   chartTypeBar: 'Bar',
@@ -132,26 +132,20 @@ export const enUSLocaleText: ChartsLocaleText = {
     formattedCategoryValue,
     seriesLabel,
   }) {
-    return [formattedCategoryValue, seriesLabel, value === null ? this.a11yNoValue : formattedValue]
-      .filter(Boolean)
-      .join(this.a11yConnector);
+      throw new Error("STUB");
   },
   lineDescription: function lineDescription({ y, formattedXValue, formattedYValue, seriesLabel }) {
-    return [formattedXValue, seriesLabel, y === null ? this.a11yNoValue : formattedYValue]
-      .filter(Boolean)
-      .join(this.a11yConnector);
+      throw new Error("STUB");
   },
   scatterDescription: function scatterDescription({
     formattedXValue,
     formattedYValue,
     seriesLabel,
   }) {
-    return [seriesLabel, formattedXValue, formattedYValue].filter(Boolean).join(this.a11yConnector);
+      throw new Error("STUB");
   },
   pieDescription: function pieDescription({ value, formattedValue, seriesLabel }) {
-    return [seriesLabel, value === null ? this.a11yNoValue : formattedValue]
-      .filter(Boolean)
-      .join(this.a11yConnector);
+      throw new Error("STUB");
   },
   radarDescription: function radarDescription({
     value,
@@ -159,14 +153,10 @@ export const enUSLocaleText: ChartsLocaleText = {
     formattedCategoryValue,
     seriesLabel,
   }) {
-    return [formattedCategoryValue, seriesLabel, value === null ? this.a11yNoValue : formattedValue]
-      .filter(Boolean)
-      .join(this.a11yConnector);
+      throw new Error("STUB");
   },
   funnelDescription: function funnelDescription({ value, formattedValue, seriesLabel }) {
-    return [seriesLabel, value === null ? this.a11yNoValue : formattedValue]
-      .filter(Boolean)
-      .join(this.a11yConnector);
+      throw new Error("STUB");
   },
   heatmapDescription: function heatmapDescription({
     value,
@@ -174,26 +164,17 @@ export const enUSLocaleText: ChartsLocaleText = {
     formattedXValue,
     formattedYValue,
   }) {
-    return [formattedXValue, formattedYValue, value === null ? this.a11yNoValue : formattedValue]
-      .filter(Boolean)
-      .join(this.a11yConnector);
+      throw new Error("STUB");
   },
   sankeyNodeDescription: function sankeyNodeDescription({ formattedValue, nodeLabel }) {
-    return [nodeLabel, formattedValue].filter(Boolean).join(this.a11yConnector);
+      throw new Error("STUB");
   },
   sankeyLinkDescription: function sankeyLinkDescription({
     formattedValue,
     sourceLabel,
     targetLabel,
   }) {
-    return [
-      sourceLabel && targetLabel
-        ? `${sourceLabel} to ${targetLabel}`
-        : (sourceLabel ?? targetLabel),
-      formattedValue,
-    ]
-      .filter(Boolean)
-      .join(this.a11yConnector);
+      throw new Error("STUB");
   },
   rangeBarDescription: function rangeBarDescription({
     value,
@@ -201,9 +182,7 @@ export const enUSLocaleText: ChartsLocaleText = {
     formattedCategoryValue,
     seriesLabel,
   }) {
-    return [formattedCategoryValue, seriesLabel, value === null ? this.a11yNoValue : formattedValue]
-      .filter(Boolean)
-      .join(this.a11yConnector);
+      throw new Error("STUB");
   },
   ohlcDescription: function ohlcDescription({
     open,
@@ -217,16 +196,7 @@ export const enUSLocaleText: ChartsLocaleText = {
     formattedDate,
     seriesLabel,
   }) {
-    const hasValues = open !== null && high !== null && low !== null && close !== null;
-    return [
-      formattedDate,
-      seriesLabel,
-      hasValues
-        ? `Open: ${formattedOpen ?? open}, High: ${formattedHigh ?? high}, Low: ${formattedLow ?? low}, Close: ${formattedClose ?? close}`
-        : this.a11yNoValue,
-    ]
-      .filter(Boolean)
-      .join(this.a11yConnector);
+      throw new Error("STUB");
   },
 };
 

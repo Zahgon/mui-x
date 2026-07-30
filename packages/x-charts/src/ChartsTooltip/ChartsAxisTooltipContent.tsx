@@ -50,51 +50,7 @@ function ChartsAxisTooltipContent(props: ChartsAxisTooltipContentProps) {
   return (
     <ChartsTooltipPaper sx={props.sx} className={classes.paper}>
       {tooltipData.map(({ axisId, mainAxis, axisValue, axisFormattedValue, seriesItems }) => {
-        const sortedItems =
-          sort && sort !== 'none'
-            ? [...seriesItems].sort((a, b) => {
-                const aValue = a.value?.valueOf();
-                const bValue = b.value?.valueOf();
-                if (typeof aValue !== 'number') {
-                  return 1;
-                }
-                if (typeof bValue !== 'number') {
-                  return -1;
-                }
-
-                return sort === 'asc' ? aValue - bValue : bValue - aValue;
-              })
-            : seriesItems;
-
-        return (
-          <ChartsTooltipTable className={classes.table} key={axisId}>
-            {axisValue != null && !mainAxis.hideTooltip && (
-              <Typography component="caption">{axisFormattedValue}</Typography>
-            )}
-
-            <tbody>
-              {sortedItems.map((item) => {
-                const seriesConfig = getSeriesConfig(item.seriesId);
-                const Content =
-                  seriesConfig && 'AxisTooltipContent' in seriesConfig
-                    ? (seriesConfig.AxisTooltipContent ?? DefaultContent)
-                    : DefaultContent;
-
-                return (
-                  <Content
-                    key={item.seriesId}
-                    classes={props.classes}
-                    item={
-                      /* TypeScript can't guarantee that the item's series type is the same as the Content's series type,
-                       * so we need to cast */
-                      item as any
-                    }
-                  />
-                );
-              })}
-            </tbody>
-          </ChartsTooltipTable>
-        );
+          throw new Error("STUB");
       })}
     </ChartsTooltipPaper>
   );
@@ -103,35 +59,7 @@ function ChartsAxisTooltipContent(props: ChartsAxisTooltipContentProps) {
 function DefaultContent(
   props: AxisTooltipContentProps<Exclude<CartesianChartSeriesType, 'ohlc'> | PolarChartSeriesType>,
 ) {
-  const classes = useUtilityClasses(props.classes);
-  const { item } = props;
-
-  if (item.formattedValue == null || typeof item.formattedValue !== 'string') {
-    return null;
-  }
-
-  return (
-    <ChartsTooltipRow
-      className={classes.row}
-      data-series={item.seriesId}
-      data-index={'dataIndex' in item ? item.dataIndex : undefined}
-    >
-      <ChartsTooltipCell className={clsx(classes.labelCell, classes.cell)} component="th">
-        <div className={classes.markContainer}>
-          <ChartsLabelMark
-            type={item.markType}
-            markShape={item.markShape}
-            color={item.color}
-            className={classes.mark}
-          />
-        </div>
-        {item.formattedLabel || null}
-      </ChartsTooltipCell>
-      <ChartsTooltipCell className={clsx(classes.valueCell, classes.cell)} component="td">
-        {item.formattedValue}
-      </ChartsTooltipCell>
-    </ChartsTooltipRow>
-  );
+    throw new Error("STUB");
 }
 
 DefaultContent.propTypes /* remove-proptypes */ = {

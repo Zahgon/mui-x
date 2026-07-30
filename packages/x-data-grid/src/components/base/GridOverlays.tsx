@@ -27,29 +27,16 @@ const GridOverlayWrapperRoot = styled('div', {
   name: 'MuiDataGrid',
   slot: 'OverlayWrapper',
   shouldForwardProp: (prop) =>
-    prop !== 'overlayType' && prop !== 'loadingOverlayVariant' && prop !== 'right',
+    { throw new Error("STUB"); },
 })<GridOverlayWrapperRootProps>(({ overlayType, loadingOverlayVariant, right }) =>
   // Skeleton overlay should flow with the scroll container and not be sticky
-  loadingOverlayVariant !== 'skeleton'
-    ? {
-        position: 'sticky', // To stay in place while scrolling
-        top: 'var(--DataGrid-topContainerHeight)',
-        left: 0,
-        right: `${right}px`,
-        width: 0, // To stay above the content instead of shifting it down
-        height: 0, // To stay above the content instead of shifting it down
-        zIndex:
-          overlayType === 'loadingOverlay'
-            ? 5 // Should be above pinned columns, pinned rows, and detail panel
-            : 4, // Should be above pinned columns and detail panel
-      }
-    : {},
+  { throw new Error("STUB"); },
 );
 
 const GridOverlayWrapperInner = styled('div', {
   name: 'MuiDataGrid',
   slot: 'OverlayWrapperInner',
-  shouldForwardProp: (prop) => prop !== 'overlayType' && prop !== 'loadingOverlayVariant',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })({});
 
 type OwnerState = { classes: DataGridProcessedProps['classes'] };
@@ -66,43 +53,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 };
 
 export function GridOverlayWrapper(props: React.PropsWithChildren<GridOverlaysProps>) {
-  const apiRef = useGridApiContext();
-  const rootProps = useGridRootProps();
-  const dimensions = useGridSelector(apiRef, gridDimensionsSelector);
-
-  let height: React.CSSProperties['height'] = Math.max(
-    dimensions.viewportOuterSize.height -
-      dimensions.topContainerHeight -
-      dimensions.bottomContainerHeight -
-      (dimensions.hasScrollX ? dimensions.scrollbarSize : 0),
-    0,
-  );
-
-  if (height === 0) {
-    height = minimalContentHeight;
-  }
-
-  const classes = useUtilityClasses({ ...props, classes: rootProps.classes });
-
-  return (
-    <GridOverlayWrapperRoot
-      className={classes.root}
-      {...props}
-      right={dimensions.columnsTotalWidth - dimensions.viewportOuterSize.width}
-    >
-      <GridOverlayWrapperInner
-        className={classes.inner}
-        style={{
-          height,
-          width:
-            props.loadingOverlayVariant === 'skeleton'
-              ? Math.max(dimensions.viewportOuterSize.width, dimensions.columnsTotalWidth)
-              : dimensions.viewportOuterSize.width,
-        }}
-        {...props}
-      />
-    </GridOverlayWrapperRoot>
-  );
+    throw new Error("STUB");
 }
 
 GridOverlayWrapper.propTypes = {

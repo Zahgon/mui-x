@@ -26,44 +26,12 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const CollapsibleTriggerRoot = styled('button', {
   name: 'MuiDataGrid',
   slot: 'CollapsibleTrigger',
-})<{ ownerState: OwnerState }>(({ ownerState }) => ({
-  position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  height: 40,
-  padding: vars.spacing(0, 1.5),
-  border: `1px solid ${vars.colors.border.base}`,
-  background: 'none',
-  outline: 'none',
-  borderTopLeftRadius: vars.radius.base,
-  borderTopRightRadius: vars.radius.base,
-  borderBottomLeftRadius: ownerState.open ? 0 : vars.radius.base,
-  borderBottomRightRadius: ownerState.open ? 0 : vars.radius.base,
-  '&:hover': {
-    backgroundColor: vars.colors.interactive.hover,
-    cursor: 'pointer',
-  },
-  '&:focus-visible': {
-    outline: `2px solid ${vars.colors.interactive.selected}`,
-    outlineOffset: -2,
-  },
-}));
+})<{ ownerState: OwnerState }>(({ ownerState }) => { throw new Error("STUB"); });
 
 const CollapsibleIcon = styled('div', {
   name: 'MuiDataGrid',
   slot: 'CollapsibleIcon',
-})<{ ownerState: OwnerState }>(({ ownerState }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  color: vars.colors.foreground.muted,
-  transform: ownerState.open ? 'none' : 'rotate(180deg)',
-  transition: vars.transition(['transform'], {
-    duration: vars.transitions.duration.short,
-    easing: vars.transitions.easing.easeInOut,
-  }),
-}));
+})<{ ownerState: OwnerState }>(({ ownerState }) => { throw new Error("STUB"); });
 
 function CollapsibleTrigger(props: CollapsibleTriggerProps) {
   const { children, className, ...other } = props;
@@ -79,7 +47,7 @@ function CollapsibleTrigger(props: CollapsibleTriggerProps) {
       tabIndex={0}
       aria-controls={open ? panelId : undefined}
       aria-expanded={!open}
-      onClick={() => onOpenChange(!open)}
+      onClick={() => { throw new Error("STUB"); }}
       {...other}
     >
       {children}

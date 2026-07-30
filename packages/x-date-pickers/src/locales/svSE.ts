@@ -18,9 +18,7 @@ const svSEPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Öppna föregående vy',
   openNextView: 'Öppna nästa vy',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'årsvyn är öppen, byt till kalendervy'
-      : 'kalendervyn är öppen, byt till årsvy',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Start',
@@ -46,25 +44,25 @@ const svSEPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Välj ${timeViews[view]}. ${!formattedTime ? 'Ingen tid vald' : `Vald tid är ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} timmar`,
-  minutesClockNumberText: (minutes) => `${minutes} minuter`,
-  secondsClockNumberText: (seconds) => `${seconds} sekunder`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Välj ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Vecka nummer',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Vecka ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Välj datum, valt datum är ${formattedDate}` : 'Välj datum',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Välj tid, vald tid är ${formattedTime}` : 'Välj tid',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Rensa värde',
 
@@ -73,14 +71,14 @@ const svSEPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'välj datum',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Å'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'tt',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'År',

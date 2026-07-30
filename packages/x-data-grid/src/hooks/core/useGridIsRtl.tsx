@@ -14,10 +14,6 @@ export const useGridIsRtl = (apiRef: RefObject<GridPrivateApiCommon>): void => {
 
   const isFirstEffect = React.useRef(true);
   React.useEffect(() => {
-    if (isFirstEffect.current) {
-      isFirstEffect.current = false;
-    } else {
-      apiRef.current.setState((state: GridStateCommunity) => ({ ...state, isRtl }));
-    }
+      throw new Error("STUB");
   }, [apiRef, isRtl]);
 };

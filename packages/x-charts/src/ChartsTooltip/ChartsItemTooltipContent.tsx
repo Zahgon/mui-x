@@ -103,27 +103,7 @@ function DefaultMultipleValueContent({
   classes: propClasses,
   item,
 }: DefaultMultipleValueContentProps) {
-  const classes = useUtilityClasses(propClasses);
-
-  return (
-    <React.Fragment>
-      {item.values.map((value) => (
-        <ChartsTooltipRow
-          key={value.label}
-          className={classes.row}
-          data-series={item.identifier.seriesId}
-          data-index={item.identifier.dataIndex}
-        >
-          <ChartsTooltipCell className={clsx(classes.labelCell, classes.cell)} component="th">
-            {value.label}
-          </ChartsTooltipCell>
-          <ChartsTooltipCell className={clsx(classes.valueCell, classes.cell)} component="td">
-            {value.formattedValue}
-          </ChartsTooltipCell>
-        </ChartsTooltipRow>
-      ))}
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }
 
 DefaultMultipleValueContent.propTypes /* remove-proptypes */ = {
@@ -181,36 +161,7 @@ function DefaultSingleValueContent<T extends ChartSeriesType>({
   classes: propClasses,
   item,
 }: DefaultSingleValueContentProps<T>) {
-  const { color, label, formattedValue, markType, markShape } = item;
-
-  const classes = useUtilityClasses(propClasses);
-
-  if (formattedValue == null || typeof formattedValue !== 'string') {
-    return null;
-  }
-
-  return (
-    <ChartsTooltipRow
-      className={classes.row}
-      data-series={item.identifier.seriesId}
-      data-index={'dataIndex' in item.identifier ? item.identifier.dataIndex : undefined}
-    >
-      <ChartsTooltipCell className={clsx(classes.labelCell, classes.cell)} component="th">
-        <div className={classes.markContainer}>
-          <ChartsLabelMark
-            type={markType}
-            markShape={markShape}
-            color={color}
-            className={classes.mark}
-          />
-        </div>
-        {label}
-      </ChartsTooltipCell>
-      <ChartsTooltipCell className={clsx(classes.valueCell, classes.cell)} component="td">
-        {formattedValue}
-      </ChartsTooltipCell>
-    </ChartsTooltipRow>
-  );
+    throw new Error("STUB");
 }
 
 DefaultSingleValueContent.propTypes /* remove-proptypes */ = {

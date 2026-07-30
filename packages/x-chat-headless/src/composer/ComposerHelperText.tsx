@@ -26,39 +26,5 @@ export const ComposerHelperText = React.forwardRef(function ComposerHelperText(
   props: ComposerHelperTextProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { slots, slotProps, children, ...other } = props;
-  const composer = useComposerContext();
-  const ownerState: ComposerHelperTextOwnerState = {
-    isSubmitting: composer.isSubmitting,
-    hasValue: composer.hasValue,
-    isStreaming: composer.isStreaming,
-    attachmentCount: composer.attachmentCount,
-    disabled: composer.disabled,
-    error: composer.error != null,
-  };
-  const HelperText = slots?.helperText ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: HelperText,
-    externalSlotProps: slotProps?.helperText,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-  const content = children ?? composer.error?.message ?? null;
-
-  if (content == null) {
-    return null;
-  }
-
-  const resolvedRole =
-    (rootProps as React.HTMLAttributes<HTMLDivElement>).role ??
-    (composer.error ? 'alert' : undefined);
-
-  return (
-    <HelperText {...rootProps} role={resolvedRole}>
-      {content}
-    </HelperText>
-  );
+    throw new Error("STUB");
 }) as ComposerHelperTextComponent;

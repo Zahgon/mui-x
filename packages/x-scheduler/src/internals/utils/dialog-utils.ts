@@ -19,18 +19,7 @@ export function calculatePosition(
   const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(value, max));
 
   const checkFit = (pos: Position) => {
-    switch (pos) {
-      case 'right':
-        return windowWidth - anchorRect.right >= elemRect.width + margin;
-      case 'left':
-        return anchorRect.left >= elemRect.width + margin;
-      case 'bottom':
-        return windowHeight - anchorRect.bottom >= elemRect.height + margin;
-      case 'top':
-        return anchorRect.top >= elemRect.height + margin;
-      default:
-        return false;
-    }
+      throw new Error("STUB");
   };
 
   const getCoords = (pos: Position) => {
@@ -67,7 +56,7 @@ export function calculatePosition(
   const positions: Position[] = ['right', 'left', 'bottom', 'top'];
   const preferredPositions = [
     defaultPosition,
-    ...positions.filter((position) => position !== defaultPosition),
+    ...positions.filter((position) => { throw new Error("STUB"); }),
   ];
   const validPosition = preferredPositions.find(checkFit);
 

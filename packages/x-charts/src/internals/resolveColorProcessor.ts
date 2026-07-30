@@ -20,42 +20,17 @@ export function resolveColorProcessor<SeriesType extends LineOrBarSeriesType, V>
 
   if (valueColorScale) {
     return (dataIndex) => {
-      if (dataIndex === undefined) {
-        return series.color;
-      }
-      const value = series.data[dataIndex];
-
-      const color = valueColorScale(value!);
-      if (typeof color !== 'string') {
-        return getSeriesColor({ value, dataIndex });
-      }
-      return color;
+        throw new Error("STUB");
     };
   }
 
   if (categoryColorScale && categoryValues) {
     return (dataIndex) => {
-      if (dataIndex === undefined) {
-        return series.color;
-      }
-      const value = categoryValues[dataIndex];
-      const fallbackValue: ColorCallbackValue<number | null> = {
-        value: series.data[dataIndex],
-        dataIndex,
-      };
-      const color = categoryColorScale(value as NonNullable<V>);
-      if (typeof color !== 'string') {
-        return getSeriesColor(fallbackValue);
-      }
-      return color;
+        throw new Error("STUB");
     };
   }
 
   return (dataIndex) => {
-    if (dataIndex === undefined) {
-      return series.color;
-    }
-    const value = series.data[dataIndex];
-    return getSeriesColor({ value, dataIndex });
+      throw new Error("STUB");
   };
 }

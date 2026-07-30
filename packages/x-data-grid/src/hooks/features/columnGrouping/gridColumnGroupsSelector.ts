@@ -10,25 +10,25 @@ import type { GridStateCommunity } from '../../../models/gridStateCommunity';
  * @ignore - do not document.
  */
 export const gridColumnGroupingSelector = createRootSelector(
-  (state: GridStateCommunity) => state.columnGrouping,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 export const gridColumnGroupsUnwrappedModelSelector = createSelectorMemoized(
   gridColumnGroupingSelector,
-  (columnGrouping) => columnGrouping?.unwrappedGroupingModel ?? {},
+  (columnGrouping) => { throw new Error("STUB"); },
 );
 
 export const gridColumnGroupsLookupSelector = createSelectorMemoized(
   gridColumnGroupingSelector,
-  (columnGrouping) => columnGrouping?.lookup ?? {},
+  (columnGrouping) => { throw new Error("STUB"); },
 );
 
 export const gridColumnGroupsHeaderStructureSelector = createSelectorMemoized(
   gridColumnGroupingSelector,
-  (columnGrouping) => columnGrouping?.headerStructure ?? [],
+  (columnGrouping) => { throw new Error("STUB"); },
 );
 
 export const gridColumnGroupsHeaderMaxDepthSelector = createSelector(
   gridColumnGroupingSelector,
-  (columnGrouping) => columnGrouping?.maxDepth ?? 0,
+  (columnGrouping) => { throw new Error("STUB"); },
 );

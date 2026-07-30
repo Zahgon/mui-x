@@ -33,54 +33,5 @@ export const MessageError = React.forwardRef(function MessageError(
   props: MessageErrorProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    children,
-    ...other
-  } = props as MessageErrorProps & { ownerState?: MessageErrorOwnerState };
-  void ownerStateProp;
-  const messageContext = useMessageContext();
-  const { messageId } = messageContext;
-  const chatError = useMessageError(messageId);
-  const runtime = useChatRuntimeContext(true);
-
-  const retry = React.useCallback(async () => {
-    if (!runtime || !messageId) {
-      return;
-    }
-    await runtime.actions.retry(messageId);
-  }, [runtime, messageId]);
-
-  const ownerState = React.useMemo<MessageErrorOwnerState>(
-    () => ({
-      ...messageContext,
-      chatError,
-      // Retry only runs on user messages (stream failures attach errors to the
-      // assistant id, but the action no-ops there) — keep `retryable` honest so
-      // slots don't render a button that does nothing.
-      retryable: (chatError?.retryable ?? false) && messageContext.role === 'user',
-      retry,
-    }),
-    [messageContext, chatError, retry],
-  );
-
-  const Root = slots?.root ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: chatError ? slotProps?.root : undefined,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-      role: 'alert',
-    },
-  });
-
-  if (!chatError) {
-    return null;
-  }
-
-  return <Root {...rootProps}>{children ?? chatError.message}</Root>;
+    throw new Error("STUB");
 }) as MessageErrorComponent;

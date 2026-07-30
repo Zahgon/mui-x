@@ -67,13 +67,8 @@ const ShadowScrollArea = styled('div', {
  */
 const GridShadowScrollArea = forwardRef<HTMLDivElement, GridShadowScrollAreaProps>(
   function GridShadowScrollArea(props, ref) {
-    const { children, ...other } = props;
-    return (
-      <ShadowScrollArea {...other} ref={ref}>
-        {children}
-      </ShadowScrollArea>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridShadowScrollArea.propTypes /* remove-proptypes */ = {

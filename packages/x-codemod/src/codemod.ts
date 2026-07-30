@@ -42,11 +42,7 @@ async function runTransform(
   // Parse additional jscodeshift options from flags
   const additionalOptions: Record<string, unknown> = {};
   [...codemodFlags, ...flags.jscodeshift].forEach((flag) => {
-    const match = flag.match(/^--([^=]+)(?:=(.*))?$/);
-    if (match) {
-      const [, key, value] = match;
-      additionalOptions[key] = value ?? true;
-    }
+      throw new Error("STUB");
   });
 
   const options = {
@@ -88,7 +84,7 @@ function run(argv: ArgumentsCamelCase<HandlerArgv>) {
 
   return runTransform(
     codemod,
-    paths.map((filePath) => path.resolve(filePath)),
+    paths.map((filePath) => { throw new Error("STUB"); }),
     { jscodeshift, parser },
     (other as string[]) || [],
   );
@@ -99,26 +95,7 @@ yargs(process.argv.slice(2))
     command: '$0 <codemod> <paths...>',
     describe: 'Applies a `@mui/x-codemod` to the specified paths',
     builder: (command) => {
-      return command
-        .positional('codemod', {
-          description: 'The name of the codemod',
-          type: 'string',
-        })
-        .positional('paths', {
-          array: true,
-          description: 'Paths forwarded to `jscodeshift`',
-          type: 'string',
-        })
-        .option('parser', {
-          description: 'which parser for jscodeshift to use',
-          default: 'tsx',
-          type: 'string',
-        })
-        .option('jscodeshift', {
-          description: '(Advanced) Pass options directly to jscodeshift',
-          default: [],
-          type: 'array',
-        });
+        throw new Error("STUB");
     },
     handler: run,
   } as CommandModule<{}, HandlerArgv>)

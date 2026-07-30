@@ -21,36 +21,14 @@ const shimmerKeyframes = keyframes`
 const ChatMessageSkeletonRootStyled = styled('div', {
   name: 'MuiChatMessageSkeleton',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(1),
-  padding: theme.spacing(0.5, 0),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatMessageSkeletonLineStyled = styled('div', {
   name: 'MuiChatMessageSkeleton',
   slot: 'Line',
-  overridesResolver: (_, styles) => styles.line,
-})(({ theme }) => ({
-  height: '0.875em',
-  borderRadius: theme.shape.borderRadius,
-  background: `linear-gradient(
-    90deg,
-    ${(theme.vars || theme).palette.action.hover} 25%,
-    ${(theme.vars || theme).palette.action.selected} 37%,
-    ${(theme.vars || theme).palette.action.hover} 63%
-  )`,
-  backgroundSize: '400% 100%',
-  animation: `${shimmerKeyframes} 1.4s ease infinite`,
-  '@media (prefers-reduced-motion: reduce)': {
-    animation: 'none',
-  },
-  '&:last-child': {
-    width: '60%',
-  },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 export interface ChatMessageSkeletonSlots {
   /** The root container element. @default 'div' */
@@ -85,34 +63,7 @@ const ChatMessageSkeleton = React.forwardRef(function ChatMessageSkeleton(
   inProps: ChatMessageSkeletonProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiChatMessageSkeleton' });
-  const { lines = 3, className, classes: classesProp, slots, slotProps, sx, ...other } = props;
-  const classes = useChatMessageSkeletonUtilityClasses(classesProp);
-
-  const Root = slots?.root ?? ChatMessageSkeletonRootStyled;
-  const Line = slots?.line ?? ChatMessageSkeletonLineStyled;
-
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState: {},
-    additionalProps: {
-      ref,
-      className: clsx(classes.root, className),
-      sx,
-    },
-  });
-
-  const lineSlotProps = slotProps?.line as React.HTMLAttributes<HTMLDivElement> | undefined;
-
-  return (
-    <Root {...rootProps}>
-      {Array.from({ length: lines }, (_, i) => (
-        <Line key={i} {...lineSlotProps} className={clsx(classes.line, lineSlotProps?.className)} />
-      ))}
-    </Root>
-  );
+    throw new Error("STUB");
 }) as ChatMessageSkeletonComponent;
 
 ChatMessageSkeleton.propTypes /* remove-proptypes */ = {

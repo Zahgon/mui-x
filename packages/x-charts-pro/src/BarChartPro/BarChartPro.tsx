@@ -78,63 +78,7 @@ const BarChartPro = React.forwardRef(function BarChartPro(
   inProps: BarChartProProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiBarChartPro' });
-  const { initialZoom, zoomData, onZoomChange, apiRef, showToolbar, sampling, ...other } = props;
-  const {
-    chartsWrapperProps,
-    chartsContainerProps,
-    barPlotProps,
-    gridProps,
-    clipPathProps,
-    clipPathGroupProps,
-    overlayProps,
-    chartsAxisProps,
-    axisHighlightProps,
-    legendProps,
-    children,
-  } = useBarChartProps(other);
-
-  const { chartsDataProviderProProps, chartsSurfaceProps } = useChartsContainerProProps<
-    'bar',
-    BarChartProPluginSignatures
-  >(
-    {
-      ...chartsContainerProps,
-      initialZoom,
-      zoomData,
-      onZoomChange,
-      apiRef,
-      plugins: BAR_CHART_PRO_PLUGINS,
-    },
-    { seriesType: 'bar', method: sampling },
-  );
-
-  const Tooltip = props.slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = props.slots?.toolbar ?? ChartsToolbarPro;
-
-  return (
-    <ChartsDataProviderPro<'bar', BarChartProPluginSignatures> {...chartsDataProviderProProps}>
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {showToolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!props.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <ChartsGrid {...gridProps} />
-          <g {...clipPathGroupProps}>
-            <BarPlot {...barPlotProps} />
-            <ChartsOverlay {...overlayProps} />
-            <ChartsAxisHighlight {...axisHighlightProps} />
-            <FocusedBar />
-          </g>
-          <ChartsAxis {...chartsAxisProps} />
-          <ChartsZoomSlider />
-          <ChartsBrushOverlay />
-          <ChartsClipPath {...clipPathProps} />
-          {children}
-        </ChartsSurface>
-        {!props.loading && <Tooltip {...props.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProviderPro>
-  );
+    throw new Error("STUB");
 });
 
 BarChartPro.propTypes /* remove-proptypes */ = {

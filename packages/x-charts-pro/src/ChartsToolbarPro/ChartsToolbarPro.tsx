@@ -101,16 +101,7 @@ function ChartsToolbarPro({
     if (rangeButtons && rangeButtons.length > 0) {
       children.push(
         <RangeButtonGroup key="range-buttons" exclusive size="small">
-          {rangeButtons.map((rangeButton) => (
-            <ChartsToolbarRangeButtonTrigger
-              key={rangeButton.label}
-              value={rangeButton.value}
-              label={rangeButton.label}
-              axisId={rangeButtonsAxisId}
-            >
-              {rangeButton.label}
-            </ChartsToolbarRangeButtonTrigger>
-          ))}
+          {rangeButtons.map((rangeButton) => { throw new Error("STUB"); })}
         </RangeButtonGroup>,
       );
       children.push(<ChartsToolbarDivider key="range-divider" />);
@@ -149,13 +140,7 @@ function ChartsToolbarPro({
     const closeExportMenu = () => setExportMenuOpen(false);
 
     const handleListKeyDown = (event: React.KeyboardEvent) => {
-      if (event.key === 'Tab') {
-        event.preventDefault();
-      }
-
-      if (isHideMenuKey(event.key)) {
-        closeExportMenu();
-      }
+        throw new Error("STUB");
     };
 
     if (children.length > 0) {
@@ -171,7 +156,7 @@ function ChartsToolbarPro({
             aria-controls={exportMenuId}
             aria-haspopup="true"
             aria-expanded={exportMenuOpen ? 'true' : undefined}
-            onClick={() => setExportMenuOpen(!exportMenuOpen)}
+            onClick={() => { throw new Error("STUB"); }}
             size="small"
           >
             <ExportIcon fontSize="small" />
@@ -200,16 +185,7 @@ function ChartsToolbarPro({
                 {localeText.toolbarExportPrint}
               </ChartsToolbarPrintExportTrigger>
             )}
-            {imageExportOptionList.map((imageExportOptions) => (
-              <ChartsToolbarImageExportTrigger
-                key={imageExportOptions.type}
-                render={<MenuItem dense {...slotProps?.baseMenuItem} />}
-                options={imageExportOptions}
-                onClick={closeExportMenu}
-              >
-                {localeText.toolbarExportImage(imageExportOptions.type)}
-              </ChartsToolbarImageExportTrigger>
-            ))}
+            {imageExportOptionList.map((imageExportOptions) => { throw new Error("STUB"); })}
           </MenuList>
         </ChartsMenu>
       </React.Fragment>,

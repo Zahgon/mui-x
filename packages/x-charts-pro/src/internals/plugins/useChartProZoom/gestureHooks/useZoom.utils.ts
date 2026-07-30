@@ -140,45 +140,6 @@ export function translateZoom(
   filterMode: 'x' | 'y' | 'xy' = 'xy',
 ) {
   return initialZoomData.map((zoom) => {
-    const options = optionsLookup[zoom.axisId];
-    if (
-      !options ||
-      !options.panning ||
-      (options.axisDirection === 'x' && filterMode === 'y') ||
-      (options.axisDirection === 'y' && filterMode === 'x')
-    ) {
-      return zoom;
-    }
-    const min = zoom.start;
-    const max = zoom.end;
-    const span = max - min;
-    const MIN_PERCENT = options.minStart;
-    const MAX_PERCENT = options.maxEnd;
-    const rawDisplacement = options.axisDirection === 'x' ? movement.x : movement.y;
-    const displacement = options.reverse ? -rawDisplacement : rawDisplacement;
-    const dimension = options.axisDirection === 'x' ? drawingArea.width : drawingArea.height;
-    let newMinPercent = min - (displacement / dimension) * span;
-    let newMaxPercent = max - (displacement / dimension) * span;
-    if (newMinPercent < MIN_PERCENT) {
-      newMinPercent = MIN_PERCENT;
-      newMaxPercent = newMinPercent + span;
-    }
-    if (newMaxPercent > MAX_PERCENT) {
-      newMaxPercent = MAX_PERCENT;
-      newMinPercent = newMaxPercent - span;
-    }
-    if (
-      newMinPercent < MIN_PERCENT ||
-      newMaxPercent > MAX_PERCENT ||
-      span < options.minSpan ||
-      span > options.maxSpan
-    ) {
-      return zoom;
-    }
-    return {
-      ...zoom,
-      start: newMinPercent,
-      end: newMaxPercent,
-    };
+      throw new Error("STUB");
   });
 }

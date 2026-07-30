@@ -32,40 +32,25 @@ export const useControlledValue = <
   });
 
   const inputTimezone = React.useMemo(
-    () => valueManager.getTimezone(adapter, valueWithInputTimezone),
+    () => { throw new Error("STUB"); },
     [adapter, valueManager, valueWithInputTimezone],
   );
 
   const setInputTimezone = useEventCallback((newValue: TValue) => {
-    if (inputTimezone == null) {
-      return newValue;
-    }
-
-    return valueManager.setTimezone(adapter, inputTimezone, newValue);
+      throw new Error("STUB");
   });
 
   const timezoneToRender = React.useMemo(() => {
-    if (timezoneProp) {
-      return timezoneProp;
-    }
-    if (inputTimezone) {
-      return inputTimezone;
-    }
-    if (referenceDate) {
-      return adapter.getTimezone(Array.isArray(referenceDate) ? referenceDate[0] : referenceDate);
-    }
-    return 'default';
+      throw new Error("STUB");
   }, [timezoneProp, inputTimezone, referenceDate, adapter]);
 
   const valueWithTimezoneToRender = React.useMemo(
-    () => valueManager.setTimezone(adapter, timezoneToRender, valueWithInputTimezone),
+    () => { throw new Error("STUB"); },
     [valueManager, adapter, timezoneToRender, valueWithInputTimezone],
   );
 
   const handleValueChange = useEventCallback((newValue: TValue, ...otherParams: any[]) => {
-    const newValueWithInputTimezone = setInputTimezone(newValue);
-    setValue(newValueWithInputTimezone);
-    onChangeProp?.(newValueWithInputTimezone, ...otherParams);
+      throw new Error("STUB");
   }) as TChange;
 
   return {

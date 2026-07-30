@@ -108,7 +108,7 @@ function GridColumnsManagement(props: GridColumnsManagementProps) {
   const pivotActive = useGridSelector(apiRef, gridPivotActiveSelector);
   const pivotInitialColumns = useGridSelector(apiRef, gridPivotInitialColumnsSelector);
   const columns = React.useMemo(
-    () => (pivotActive ? Array.from(pivotInitialColumns.values()) : columnDefinitions),
+    () => { throw new Error("STUB"); },
     [pivotActive, pivotInitialColumns, columnDefinitions],
   );
 
@@ -126,112 +126,61 @@ function GridColumnsManagement(props: GridColumnsManagementProps) {
 
   const debouncedFilter = React.useMemo(
     () =>
-      debounce((value: string) => {
-        setSearchValue(value);
-      }, searchDebounceMs ?? 150),
+      { throw new Error("STUB"); },
     [searchDebounceMs],
   );
 
   const isResetDisabled = React.useMemo(
-    () => checkColumnVisibilityModelsSame(columnVisibilityModel, initialColumnVisibilityModel),
+    () => { throw new Error("STUB"); },
     [columnVisibilityModel, initialColumnVisibilityModel],
   );
 
   const sortedColumns = React.useMemo(() => {
-    switch (sort) {
-      case 'asc':
-        return [...columns].sort((a, b) =>
-          collator.compare(a.headerName || a.field, b.headerName || b.field),
-        );
-
-      case 'desc':
-        return [...columns].sort(
-          (a, b) => -collator.compare(a.headerName || a.field, b.headerName || b.field),
-        );
-
-      default:
-        return columns;
-    }
+      throw new Error("STUB");
   }, [columns, sort]);
 
   const toggleColumn = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name: field } = event.target;
-    apiRef.current.setColumnVisibility(field, columnVisibilityModel[field] === false);
+      throw new Error("STUB");
   };
 
   const currentColumns = React.useMemo(() => {
-    const togglableColumns = getTogglableColumns ? getTogglableColumns(sortedColumns) : null;
-
-    const togglableSortedColumns = togglableColumns
-      ? sortedColumns.filter(({ field }) => togglableColumns.includes(field))
-      : sortedColumns;
-
-    if (!searchValue) {
-      return togglableSortedColumns;
-    }
-
-    return togglableSortedColumns.filter((column) =>
-      searchPredicate(column, searchValue.toLowerCase()),
-    );
+      throw new Error("STUB");
   }, [sortedColumns, searchValue, searchPredicate, getTogglableColumns]);
 
   const toggleAllColumns = React.useCallback(
     (isVisible: boolean) => {
-      const currentModel = gridColumnVisibilityModelSelector(apiRef);
-      const newModel = { ...currentModel };
-      const togglableColumns = getTogglableColumns ? getTogglableColumns(columns) : null;
-
-      (toggleAllMode === 'filteredOnly' ? currentColumns : columns).forEach((col) => {
-        if (col.hideable && (togglableColumns == null || togglableColumns.includes(col.field))) {
-          if (isVisible) {
-            // delete the key from the model instead of setting it to `true`
-            delete newModel[col.field];
-          } else {
-            newModel[col.field] = false;
-          }
-        }
-      });
-
-      return apiRef.current.setColumnVisibilityModel(newModel);
-    },
+          throw new Error("STUB");
+      },
     [apiRef, columns, getTogglableColumns, toggleAllMode, currentColumns],
   );
 
   const handleSearchValueChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      debouncedFilter(event.target.value);
-    },
+          throw new Error("STUB");
+      },
     [debouncedFilter],
   );
 
   const hideableColumns = React.useMemo(
-    () => currentColumns.filter((col) => col.hideable),
+    () => { throw new Error("STUB"); },
     [currentColumns],
   );
 
   const allHideableColumnsVisible = React.useMemo(
     () =>
-      hideableColumns.every(
-        (column) =>
-          columnVisibilityModel[column.field] == null ||
-          columnVisibilityModel[column.field] !== false,
-      ),
+      { throw new Error("STUB"); },
     [columnVisibilityModel, hideableColumns],
   );
 
   const allHideableColumnsHidden = React.useMemo(
-    () => hideableColumns.every((column) => columnVisibilityModel[column.field] === false),
+    () => { throw new Error("STUB"); },
     [columnVisibilityModel, hideableColumns],
   );
 
   const firstSwitchRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
-    if (autoFocusSearchField) {
-      searchInputRef.current?.focus();
-    } else if (firstSwitchRef.current && typeof firstSwitchRef.current.focus === 'function') {
-      firstSwitchRef.current.focus();
-    }
+      throw new Error("STUB");
   }, [autoFocusSearchField]);
 
   let firstHideableColumnFound = false;
@@ -243,11 +192,7 @@ function GridColumnsManagement(props: GridColumnsManagementProps) {
     return false;
   };
   const handleSearchReset = React.useCallback(() => {
-    setSearchValue('');
-    if (searchInputRef.current) {
-      searchInputRef.current.value = '';
-      searchInputRef.current.focus();
-    }
+      throw new Error("STUB");
   }, []);
 
   return (
@@ -299,22 +244,7 @@ function GridColumnsManagement(props: GridColumnsManagementProps) {
       </GridColumnsManagementHeader>
       <GridColumnsManagementScrollArea ownerState={rootProps}>
         <GridColumnsManagementBody className={classes.root} ownerState={rootProps}>
-          {currentColumns.map((column) => (
-            <GridColumnsManagementRow
-              as={rootProps.slots.baseCheckbox}
-              key={column.field}
-              className={classes.row}
-              disabled={column.hideable === false || pivotActive}
-              checked={columnVisibilityModel[column.field] !== false}
-              onChange={toggleColumn}
-              name={column.field}
-              inputRef={isFirstHideableColumn(column) ? firstSwitchRef : undefined}
-              label={column.headerName || column.field}
-              density="compact"
-              fullWidth
-              {...rootProps.slotProps?.baseCheckbox}
-            />
-          ))}
+          {currentColumns.map((column) => { throw new Error("STUB"); })}
           {currentColumns.length === 0 && (
             <GridColumnsManagementEmptyText ownerState={rootProps}>
               {apiRef.current.getLocaleText('columnsManagementNoColumns')}
@@ -329,7 +259,7 @@ function GridColumnsManagement(props: GridColumnsManagementProps) {
               disabled={hideableColumns.length === 0 || pivotActive}
               checked={allHideableColumnsVisible}
               indeterminate={!allHideableColumnsVisible && !allHideableColumnsHidden}
-              onChange={() => toggleAllColumns(!allHideableColumnsVisible)}
+              onChange={() => { throw new Error("STUB"); }}
               name={apiRef.current.getLocaleText('columnsManagementShowHideAllText')}
               label={apiRef.current.getLocaleText('columnsManagementShowHideAllText')}
               density="compact"
@@ -341,7 +271,7 @@ function GridColumnsManagement(props: GridColumnsManagementProps) {
 
           {!disableResetButton ? (
             <rootProps.slots.baseButton
-              onClick={() => apiRef.current.setColumnVisibilityModel(initialColumnVisibilityModel)}
+              onClick={() => { throw new Error("STUB"); }}
               disabled={isResetDisabled || pivotActive}
               {...rootProps.slotProps?.baseButton}
             >

@@ -19,7 +19,7 @@ export interface ChartsLabelMarkClasses {
 }
 
 function getLabelMarkUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsLabelMark', slot);
+    throw new Error("STUB");
 }
 
 export const labelMarkClasses: ChartsLabelMarkClasses = generateUtilityClasses(

@@ -39,18 +39,4 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'rename-axis-tooltip-hook',
-  specFiles: [
-    {
-      name: 'nested',
-      actual: readFile(path.join(import.meta.dirname, 'actual-nested-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-nested-imports.spec.tsx')),
-    },
-    {
-      name: 'root',
-      actual: readFile(path.join(import.meta.dirname, 'actual-root-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-root-imports.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

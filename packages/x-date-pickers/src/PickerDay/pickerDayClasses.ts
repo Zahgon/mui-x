@@ -19,7 +19,7 @@ export interface PickerDayClasses {
 export type PickerDayClassKey = keyof PickerDayClasses;
 
 export function getPickerDayUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickerDay', slot);
+    throw new Error("STUB");
 }
 
 export const pickerDayClasses = generateUtilityClasses<PickerDayClassKey>('MuiPickerDay', [

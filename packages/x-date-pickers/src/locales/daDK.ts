@@ -19,9 +19,7 @@ const daDKPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Åben forrige visning',
   openNextView: 'Åben næste visning',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'årsvisning er åben, skift til kalendervisning'
-      : 'kalendervisning er åben, skift til årsvisning',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Start',
@@ -47,25 +45,25 @@ const daDKPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Vælg ${timeViews[view] ?? view}. ${!formattedTime ? 'Intet tidspunkt valgt' : `Valgte tidspunkt er ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} timer`,
-  minutesClockNumberText: (minutes) => `${minutes} minutter`,
-  secondsClockNumberText: (seconds) => `${seconds} sekunder`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Vælg ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Ugenummer',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Uge ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Vælg dato, valgte dato er ${formattedDate}` : 'Vælg dato',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Vælg tidspunkt, valgte tidspunkt er ${formattedTime}` : 'Vælg tidspunkt',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'ryd felt',
 
@@ -74,14 +72,14 @@ const daDKPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'vælg dato',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'år',

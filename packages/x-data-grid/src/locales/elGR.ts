@@ -31,7 +31,7 @@ const elGRGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Απόκρυψη φίλτρων',
   toolbarFiltersTooltipShow: 'Εμφάνιση φίλτρων',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} ενεργά φίλτρα` : `${count} ενεργό φίλτρο`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Αναζήτηση…',
@@ -140,22 +140,20 @@ const elGRGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} ενεργά φίλτρα` : `${count} ενεργό φίλτρο`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Εμφάνιση φίλτρων',
   columnHeaderSortIconLabel: 'Ταξινόμηση',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1
-      ? `${count.toLocaleString()} επιλεγμένες γραμμές`
-      : `${count.toLocaleString()} επιλεγμένη γραμμή`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Σύνολο Γραμμών:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} από ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Επιλογή πλαισίου ελέγχου',
@@ -187,8 +185,8 @@ const elGRGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Ομαδοποίηση',
-  groupColumn: (name) => `Ομαδοποίηση κατά ${name}`,
-  unGroupColumn: (name) => `Διακοπή ομαδοποίησης κατά ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Εναλλαγή πίνακα λεπτομερειών',
@@ -211,18 +209,7 @@ const elGRGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Πρώτη σελίδα';
-    }
-    if (type === 'last') {
-      return 'Τελευταία σελίδα';
-    }
-    if (type === 'next') {
-      return 'Επόμενη σελίδα';
-    }
-
-    // if (type === "previous") {
-    return 'Προηγούμενη σελίδα';
+      throw new Error("STUB");
   },
 
   // Row reordering text

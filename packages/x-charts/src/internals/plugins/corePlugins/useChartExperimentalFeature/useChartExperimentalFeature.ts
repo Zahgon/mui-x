@@ -7,11 +7,7 @@ import type { ChartSeriesType } from '../../../../models/seriesType/config';
 export const useChartExperimentalFeatures: ChartPlugin<
   UseChartExperimentalFeaturesSignature<ChartSeriesType>
 > = ({ params, store }) => {
-  useEnhancedEffect(() => {
-    store.set('experimentalFeatures', params.experimentalFeatures);
-  }, [store, params.experimentalFeatures]);
-
-  return {};
+    throw new Error("STUB");
 };
 
 useChartExperimentalFeatures.params = {
@@ -19,7 +15,5 @@ useChartExperimentalFeatures.params = {
 };
 
 useChartExperimentalFeatures.getInitialState = ({ experimentalFeatures }) => {
-  return {
-    experimentalFeatures,
-  };
+    throw new Error("STUB");
 };

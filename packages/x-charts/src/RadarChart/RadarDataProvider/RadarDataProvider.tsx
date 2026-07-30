@@ -60,51 +60,24 @@ function RadarDataProvider<
   } = props;
 
   const rotationAxes: PolarAxisConfig<'point', string, ChartsRotationAxisProps>[] = React.useMemo(
-    () => [
-      {
-        id: 'radar-rotation-axis',
-        scaleType: 'point',
-        data: radar.metrics.map((metric) => (typeof metric === 'string' ? metric : metric.name)),
-        startAngle: radar.startAngle,
-        endAngle: radar.startAngle !== undefined ? radar.startAngle + 360 : undefined,
-        labelGap: radar.labelGap,
-        valueFormatter: (name, { location }) =>
-          radar.labelFormatter?.(name, { location: location as 'tick' | 'tooltip' }) ?? name,
-      },
-    ],
+    () => { throw new Error("STUB"); },
     [radar],
   );
 
   const radiusAxis: PolarAxisConfig<'linear', any, ChartsRadiusAxisProps>[] = React.useMemo(
     () =>
-      radar.metrics.map((m) => {
-        const { name, min = 0, max = radar.max } = typeof m === 'string' ? { name: m } : m;
-
-        return {
-          id: name,
-          label: name,
-          scaleType: 'linear' as const,
-          min,
-          max,
-        };
-      }),
+      { throw new Error("STUB"); },
     [radar],
   );
 
   const defaultizedSeries = React.useMemo(
     () =>
-      series.map((s) => ({
-        type: 'radar' as const,
-        highlightScope:
-          s.highlightScope ??
-          (highlight === 'series' ? { highlight: 'series', fade: 'global' } : undefined),
-        ...s,
-      })),
+      { throw new Error("STUB"); },
     [series, highlight],
   );
 
   const defaultizedMargin = React.useMemo(
-    () => defaultizeMargin(margin, DEFAULT_RADAR_MARGIN),
+    () => { throw new Error("STUB"); },
     [margin],
   );
 

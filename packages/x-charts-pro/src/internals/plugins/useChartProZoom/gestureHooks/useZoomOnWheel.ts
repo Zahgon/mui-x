@@ -29,27 +29,7 @@ export const useZoomOnWheel = (
     enabled: isZoomOnWheelEnabled,
     requiredKeys: config?.requiredKeys,
     onWheel: (point, wheelEvent) => {
-      setZoomDataCallback((prev) => {
-        return prev.map((zoom) => {
-          const option = optionsLookup[zoom.axisId];
-          if (!option) {
-            return zoom;
-          }
-          const centerRatio =
-            option.axisDirection === 'x'
-              ? getHorizontalCenterRatio(point, drawingArea, option.reverse)
-              : getVerticalCenterRatio(point, drawingArea, option.reverse);
-
-          const { scaleRatio, isZoomIn } = getWheelScaleRatio(wheelEvent, option.step);
-          const [newMinRange, newMaxRange] = zoomAtPoint(centerRatio, scaleRatio, zoom, option);
-
-          if (!isSpanValid(newMinRange, newMaxRange, isZoomIn, option)) {
-            return zoom;
-          }
-
-          return { axisId: zoom.axisId, start: newMinRange, end: newMaxRange };
-        });
-      });
+        throw new Error("STUB");
     },
   });
 };

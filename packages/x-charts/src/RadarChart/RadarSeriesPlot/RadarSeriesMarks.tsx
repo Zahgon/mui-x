@@ -47,33 +47,7 @@ function RadarSeriesMarks(props: RadarSeriesMarksProps) {
   return (
     <React.Fragment>
       {seriesCoordinates?.map(({ seriesId: id, points, hideMark, fillArea, hidden }) => {
-        if (hideMark || hidden) {
-          return null;
-        }
-
-        return (
-          <g key={id} data-series={id}>
-            {points.map((point, index) => (
-              <circle
-                key={index}
-                {...getCircleProps({
-                  seriesId: id,
-                  point,
-                  color: point.color,
-                  fillArea,
-                  getHighlightState,
-                  classes,
-                })}
-                pointerEvents={onItemClick ? undefined : 'none'}
-                onClick={(event) =>
-                  onItemClick?.(event, { type: 'radar', seriesId: id, dataIndex: index })
-                }
-                cursor={onItemClick ? 'pointer' : 'unset'}
-                {...other}
-              />
-            ))}
-          </g>
-        );
+          throw new Error("STUB");
       })}
     </React.Fragment>
   );

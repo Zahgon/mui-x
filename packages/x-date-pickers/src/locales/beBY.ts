@@ -19,9 +19,7 @@ const beBYPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Aдкрыць папярэдні выгляд',
   openNextView: 'Aдкрыць наступны выгляд',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'гадавы выгляд адкрыты, перайсці да каляндарнага выгляду'
-      : 'каляндарны выгляд адкрыты, перайсці да гадавога выгляду',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Пачатак',
@@ -47,25 +45,25 @@ const beBYPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Абярыце ${views[view]}. ${!formattedTime ? 'Час не абраны' : `Абраны час ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} гадзін`,
-  minutesClockNumberText: (minutes) => `${minutes} хвілін`,
-  secondsClockNumberText: (seconds) => `${seconds} секунд`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Абярыце ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Нумар тыдня',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Тыдзень ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Абраць дату, абрана дата  ${formattedDate}` : 'Абраць дату',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Абраць час, абрыны час  ${formattedTime}` : 'Абраць час',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   // fieldClearLabel: 'Clear',
 
@@ -74,14 +72,14 @@ const beBYPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'абраць дату',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
   // fieldWeekDayPlaceholder: params => params.contentType === 'letter' ? 'EEEE' : 'EE',
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   // year: 'Year',

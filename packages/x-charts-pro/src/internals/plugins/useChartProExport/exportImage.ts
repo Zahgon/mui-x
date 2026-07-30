@@ -55,35 +55,11 @@ export async function exportImage(
 
   let resolve: (value: void) => void;
   const iframeLoadPromise = new Promise((res) => {
-    resolve = res;
+      throw new Error("STUB");
   });
 
   iframe.onload = async () => {
-    const exportDoc = iframe.contentDocument!;
-    const elementClone = element.cloneNode(true) as Element;
-    elementClone.querySelectorAll('[data-hide-on-export]').forEach((el) => el.remove());
-    applyStyles(svg, previousStyles);
-    exportDoc.body.replaceChildren(elementClone);
-    exportDoc.body.style.margin = '0px';
-    /* Set display block through styles to ensure that CSS rules that target `body` don't accidentally target this
-     * iframe's body, which might cause the body to have no intrinsic width or height, leading to the canvas having a
-     * size of 0px, which causes the `toBlob` call to return null. */
-    exportDoc.body.style.display = 'block';
-    /* The body's parent has a width of 0, so we use fit-content to ensure that the body adjusts its width to the width
-     * of its children. */
-    exportDoc.body.style.width = 'fit-content';
-
-    const rootCandidate = element.getRootNode();
-    const root =
-      rootCandidate.constructor.name === 'ShadowRoot' ? (rootCandidate as ShadowRoot) : doc;
-
-    if (copyStyles) {
-      await Promise.all(loadStyleSheets(exportDoc, root, nonce));
-    }
-
-    await copyCanvasesContent(element, elementClone);
-
-    resolve();
+      throw new Error("STUB");
   };
 
   doc.body.appendChild(iframe);
@@ -120,13 +96,13 @@ export async function exportImage(
 
   let resolveBlobPromise: (value: Blob | null) => void;
   const blobPromise = new Promise<Blob | null>((res) => {
-    resolveBlobPromise = res;
+      throw new Error("STUB");
   });
 
   let blob: Blob | null;
 
   try {
-    canvas.toBlob((b) => resolveBlobPromise(b), type, quality);
+    canvas.toBlob((b) => { throw new Error("STUB"); }, type, quality);
     blob = await blobPromise;
   } catch (error) {
     throw new Error('MUI X Charts: Failed to create blob from canvas.', { cause: error });

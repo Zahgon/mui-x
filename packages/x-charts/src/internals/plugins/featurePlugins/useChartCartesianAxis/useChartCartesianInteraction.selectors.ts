@@ -28,7 +28,7 @@ function indexGetter(
   ids: AxisId | AxisId[] = axes.axisIds[0],
 ): number | number[] {
   return Array.isArray(ids)
-    ? ids.map((id) => getAxisIndex(axes.axis[id], value))
+    ? ids.map((id) => { throw new Error("STUB"); })
     : getAxisIndex(axes.axis[ids], value);
 }
 export const selectChartsInteractionAxisIndex = (
@@ -36,11 +36,7 @@ export const selectChartsInteractionAxisIndex = (
   axes: ComputeResult<ChartsCartesianAxisProps>,
   id: AxisId | undefined,
 ) => {
-  if (value === null) {
-    return null;
-  }
-  const index = indexGetter(value, axes, id);
-  return index === -1 ? null : index;
+    throw new Error("STUB");
 };
 
 export const selectorChartsInteractionXAxisIndex = createSelector(
@@ -62,14 +58,7 @@ export const selectorChartAxisInteraction = createSelector(
   selectorChartYAxis,
 
   (x, y, xAxis, yAxis) =>
-    [
-      ...(x === null
-        ? []
-        : xAxis.axisIds.map((axisId) => ({ axisId, dataIndex: indexGetter(x, xAxis, axisId) }))),
-      ...(y === null
-        ? []
-        : yAxis.axisIds.map((axisId) => ({ axisId, dataIndex: indexGetter(y, yAxis, axisId) }))),
-    ].filter((item) => item.dataIndex !== null && item.dataIndex >= 0),
+    { throw new Error("STUB"); },
 );
 
 /**
@@ -98,15 +87,8 @@ function valueGetter(
 ): Value | Value[] {
   return Array.isArray(ids)
     ? ids.map((id, axisIndex) => {
-        const axis = axes.axis[id];
-
-        return getAxisValue(
-          axis.scale,
-          axis.data,
-          value,
-          (indexes as (number | null)[])[axisIndex],
-        );
-      })
+        throw new Error("STUB");
+    })
     : getAxisValue(axes.axis[ids].scale, axes.axis[ids].data, value, indexes as number | null);
 }
 
@@ -115,10 +97,7 @@ export const selectorChartsInteractionXAxisValue = createSelector(
   selectorChartXAxis,
   selectorChartsInteractionXAxisIndex,
   (x, xAxes, xIndex, id: AxisId | undefined) => {
-    if (x === null || xAxes.axisIds.length === 0) {
-      return null;
-    }
-    return valueGetter(x, xAxes, xIndex, id);
+      throw new Error("STUB");
   },
 );
 
@@ -127,9 +106,6 @@ export const selectorChartsInteractionYAxisValue = createSelector(
   selectorChartYAxis,
   selectorChartsInteractionYAxisIndex,
   (y, yAxes, yIndex, id: AxisId | undefined) => {
-    if (y === null || yAxes.axisIds.length === 0) {
-      return null;
-    }
-    return valueGetter(y, yAxes, yIndex, id);
+      throw new Error("STUB");
   },
 );

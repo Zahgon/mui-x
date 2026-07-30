@@ -55,75 +55,20 @@ export function useCopyToClipboard(resetMs: number = 2000): UseCopyToClipboardRe
   const copyTokenRef = React.useRef(0);
 
   React.useEffect(() => {
-    // Reset on (re)mount: StrictMode and remounts run the cleanup below before
-    // mounting again, so relying on the initial ref value would leave the hook
-    // permanently flagged as unmounted and silently swallow every state update.
-    mountedRef.current = true;
-    return () => {
-      mountedRef.current = false;
-      if (resetTimerRef.current !== null) {
-        clearTimeout(resetTimerRef.current);
-      }
-    };
+      throw new Error("STUB");
   }, []);
 
   const setTemporaryState = React.useCallback(
     (nextState: CopyState) => {
-      if (!mountedRef.current) {
-        return;
-      }
-      setCopyState(nextState);
-      if (resetTimerRef.current !== null) {
-        clearTimeout(resetTimerRef.current);
-      }
-      resetTimerRef.current = setTimeout(() => {
-        if (mountedRef.current) {
-          setCopyState('idle');
-        }
-      }, resetMs);
-    },
+          throw new Error("STUB");
+      },
     [resetMs],
   );
 
   const copy = React.useCallback(
     (value: string) => {
-      copyTokenRef.current += 1;
-      const token = copyTokenRef.current;
-      const isCurrent = () => token === copyTokenRef.current;
-
-      // Prefer the async Clipboard API when available (secure contexts, modern
-      // browsers). Fall back to the synchronous `execCommand` path otherwise, so
-      // insecure (`http://`) origins and older browsers still copy.
-      if (
-        typeof navigator !== 'undefined' &&
-        typeof navigator.clipboard?.writeText === 'function'
-      ) {
-        try {
-          // `writeText` can reject (permission denied) or, in some engines, throw
-          // synchronously (document not focused) — fall back to `execCommand`
-          // before surfacing an error.
-          navigator.clipboard.writeText(value).then(
-            () => {
-              if (isCurrent()) {
-                setTemporaryState('copied');
-              }
-            },
-            () => {
-              if (isCurrent()) {
-                setTemporaryState(legacyCopy(value) ? 'copied' : 'error');
-              }
-            },
-          );
-          return;
-        } catch {
-          // Fall through to the legacy path below.
-        }
-      }
-
-      if (isCurrent()) {
-        setTemporaryState(legacyCopy(value) ? 'copied' : 'error');
-      }
-    },
+          throw new Error("STUB");
+      },
     [setTemporaryState],
   );
 

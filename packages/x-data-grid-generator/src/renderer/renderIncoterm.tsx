@@ -9,26 +9,9 @@ interface IncotermProps {
 }
 
 const Incoterm = React.memo(function Incoterm(props: IncotermProps) {
-  const { value } = props;
-
-  if (!value) {
-    return null;
-  }
-
-  const valueStr = value.toString();
-  const tooltip = valueStr.slice(valueStr.indexOf('(') + 1, valueStr.indexOf(')'));
-  const code = valueStr.slice(0, valueStr.indexOf('(')).trim();
-
-  return (
-    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-      <span>{code}</span>
-      <Tooltip title={tooltip}>
-        <InfoIcon sx={{ color: '#2196f3', alignSelf: 'center', ml: '8px' }} />
-      </Tooltip>
-    </Box>
-  );
+    throw new Error("STUB");
 });
 
 export function renderIncoterm(params: GridRenderCellParams<any, string | null, any>) {
-  return <Incoterm value={params.value} />;
+    throw new Error("STUB");
 }

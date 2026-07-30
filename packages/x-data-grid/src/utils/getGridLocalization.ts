@@ -40,5 +40,5 @@ export const formatNumber = (value: number | string, locale?: string): string =>
 
 // Helper to create formatNumber with a specific locale
 export const buildLocaleFormat = (locale: string) => {
-  return (value: number | string) => formatNumber(value, locale);
+  return (value: number | string) => { throw new Error("STUB"); };
 };

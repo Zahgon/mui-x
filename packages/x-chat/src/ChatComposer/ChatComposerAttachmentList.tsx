@@ -26,32 +26,14 @@ export interface ChatComposerAttachmentListProps extends ComposerAttachmentListP
 const ChatComposerAttachmentListStyled = styled('div', {
   name: 'MuiChatComposer',
   slot: 'AttachmentList',
-  overridesResolver: (_, styles) => styles.attachmentList,
-})(({ theme }) => ({
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: theme.spacing(0.5),
-  padding: theme.spacing(0.5, 0),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const AttachmentChip = styled('div', {
   name: 'MuiChatComposer',
   slot: 'AttachmentChip',
   skipVariantsResolver: true,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 4,
-  maxWidth: 180,
-  padding: theme.spacing(0.25, 0.75),
-  border: '1px solid',
-  borderColor: (theme.vars || theme).palette.divider,
-  borderRadius: (theme.shape.borderRadius as number) * 2,
-  backgroundColor: (theme.vars || theme).palette.background.paper,
-  fontSize: theme.typography.caption.fontSize,
-  lineHeight: theme.typography.caption.lineHeight,
-  color: (theme.vars || theme).palette.text.secondary,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const AttachmentThumbnail = styled('img', {
   name: 'MuiChatComposer',
@@ -80,113 +62,23 @@ const AttachmentRemoveButton = styled('button', {
   name: 'MuiChatComposer',
   slot: 'AttachmentRemoveButton',
   skipVariantsResolver: true,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: 16,
-  height: 16,
-  padding: 0,
-  border: 'none',
-  borderRadius: '50%',
-  backgroundColor: 'transparent',
-  color: (theme.vars || theme).palette.text.disabled,
-  cursor: 'pointer',
-  flexShrink: 0,
-  fontSize: 12,
-  '&:hover': {
-    color: (theme.vars || theme).palette.text.primary,
-    backgroundColor: (theme.vars || theme).palette.action.hover,
-  },
-  '& svg': {
-    width: '1em',
-    height: '1em',
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const AttachmentFileIconWrapper = styled('span', {
   name: 'MuiChatComposer',
   slot: 'AttachmentFileIcon',
   skipVariantsResolver: true,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: 20,
-  height: 20,
-  flexShrink: 0,
-  fontSize: 16,
-  color: (theme.vars || theme).palette.text.disabled,
-  '& svg': {
-    width: '1em',
-    height: '1em',
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 function DefaultAttachmentListContent() {
-  // Read directly from the store so the list renders even outside a `ChatComposer` —
-  // useful for custom layouts and isolated previews. `ChatProvider` is still required.
-  const composer = useChatComposer();
-  const localeText = useChatLocaleText();
-
-  return (
-    <React.Fragment>
-      {composer.attachments.map((attachment) => {
-        const fileName = attachment.file.name || localeText.composerAttachmentFallbackLabel;
-        return (
-          <AttachmentChip key={attachment.localId}>
-            {attachment.previewUrl ? (
-              <AttachmentThumbnail src={attachment.previewUrl} alt={fileName} />
-            ) : (
-              <AttachmentFileIconWrapper>
-                <DefaultFileIcon />
-              </AttachmentFileIconWrapper>
-            )}
-            <AttachmentFileName>{fileName}</AttachmentFileName>
-            <AttachmentRemoveButton
-              type="button"
-              aria-label={localeText.composerRemoveAttachmentLabel(fileName)}
-              onClick={() => composer.removeAttachment(attachment.localId)}
-            >
-              <DefaultCloseIcon />
-            </AttachmentRemoveButton>
-          </AttachmentChip>
-        );
-      })}
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }
 
 const ChatComposerAttachmentList = React.forwardRef<
   HTMLDivElement,
   ChatComposerAttachmentListProps
 >(function ChatComposerAttachmentList(inProps, ref) {
-  const props = useThemeProps({ props: inProps, name: 'MuiChatComposerAttachmentList' });
-  const { slots, slotProps, className, classes: classesProp, sx, children, ...other } = props;
-  const classes = useChatComposerUtilityClasses(classesProp);
-
-  return (
-    <ComposerAttachmentList
-      ref={ref}
-      {...other}
-      slots={{
-        ...slots,
-        attachmentList: slots?.attachmentList ?? ChatComposerAttachmentListStyled,
-      }}
-      slotProps={{
-        ...slotProps,
-        attachmentList: mergeSlotProps(
-          {
-            className: clsx(classes.attachmentList, className),
-            sx,
-          },
-          slotProps?.attachmentList,
-        ) as any,
-      }}
-    >
-      {children ?? <DefaultAttachmentListContent />}
-    </ComposerAttachmentList>
-  );
+    throw new Error("STUB");
 });
 
 ChatComposerAttachmentList.propTypes /* remove-proptypes */ = {

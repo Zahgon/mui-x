@@ -26,13 +26,5 @@ const Element = styled('div', {
 });
 
 export function GridBottomContainer(props: GridBottomContainerProps) {
-  const classes = useUtilityClasses();
-
-  return (
-    <Element
-      {...props}
-      className={clsx(classes.root, gridClasses['container--bottom'])}
-      role="none"
-    />
-  );
+    throw new Error("STUB");
 }

@@ -14,6 +14,6 @@ export const selectorChartSeriesLayout = createSelectorMemoized(
   selectorChartSeriesConfig,
   selectorChartDrawingArea,
   function selectorChartSeriesLayout(processedSeries, seriesConfig, drawingArea) {
-    return applySeriesLayout(processedSeries, seriesConfig, drawingArea);
+      throw new Error("STUB");
   },
 );

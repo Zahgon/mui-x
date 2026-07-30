@@ -18,27 +18,5 @@ export function useTreeViewRootProps<TStore extends TreeViewAnyStore>(
   const itemChildrenIndentation = useStore(store, itemsSelectors.itemChildrenIndentation);
   const isMultiSelectEnabled = useStore(store, selectionSelectors.isMultiSelectEnabled);
 
-  return (otherHandlers: EventHandlers) => ({
-    ref,
-    role: 'tree',
-    id: treeId,
-    'aria-multiselectable': isMultiSelectEnabled,
-    ...forwardedProps,
-    ...otherHandlers,
-    style: {
-      ...forwardedProps.style,
-      '--TreeView-itemChildrenIndentation':
-        typeof itemChildrenIndentation === 'number'
-          ? `${itemChildrenIndentation}px`
-          : itemChildrenIndentation,
-    } as React.CSSProperties,
-    onFocus: (event: React.FocusEvent<HTMLUListElement> & TreeViewCancellableEvent) => {
-      otherHandlers.onFocus?.(event);
-      store.focus.handleRootFocus(event);
-    },
-    onBlur: (event: React.FocusEvent<HTMLUListElement> & TreeViewCancellableEvent) => {
-      otherHandlers.onBlur?.(event);
-      store.focus.handleRootBlur(event);
-    },
-  });
+  return (otherHandlers: EventHandlers) => { throw new Error("STUB"); };
 }

@@ -11,7 +11,7 @@ export interface TimeClockClasses {
 export type TimeClockClassKey = keyof TimeClockClasses;
 
 export function getTimeClockUtilityClass(slot: string) {
-  return generateUtilityClass('MuiTimeClock', slot);
+    throw new Error("STUB");
 }
 
 export const timeClockClasses: TimeClockClasses = generateUtilityClasses('MuiTimeClock', [

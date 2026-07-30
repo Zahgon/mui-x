@@ -18,9 +18,7 @@ const nnNOPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Opne forrige visning',
   openNextView: 'Opne neste visning',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'årsvisning er open, byt til kalendervisning'
-      : 'kalendervisning er open, byt til årsvisning',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Start',
@@ -46,25 +44,25 @@ const nnNOPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Vel ${timeViews[view]}. ${!formattedTime ? 'Ingen tid vald' : `Vald tid er ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} timar`,
-  minutesClockNumberText: (minutes) => `${minutes} minuttar`,
-  secondsClockNumberText: (seconds) => `${seconds} sekundar`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Vel ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Vekenummer',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Veke ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Vel dato, vald dato er ${formattedDate}` : 'Vel dato',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Vel tid, vald tid er ${formattedTime}` : 'Vel tid',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Fjern verdi',
 
@@ -73,14 +71,14 @@ const nnNOPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'vel dato',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Å'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'tt',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'År',

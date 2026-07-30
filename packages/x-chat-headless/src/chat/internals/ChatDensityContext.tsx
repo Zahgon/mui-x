@@ -20,9 +20,7 @@ const ChatDensityContext = React.createContext<ChatDensity>('standard');
  * </ChatDensityProvider>
  */
 export function ChatDensityProvider(props: { children: React.ReactNode; density: ChatDensity }) {
-  const { children, density } = props;
-
-  return <ChatDensityContext.Provider value={density}>{children}</ChatDensityContext.Provider>;
+    throw new Error("STUB");
 }
 
 /**

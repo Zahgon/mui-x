@@ -241,43 +241,7 @@ export class PressAndDragGesture<GestureName extends string> extends PointerGest
   }
 
   protected updateOptions(options: typeof this.mutableOptionsType): void {
-    super.updateOptions(options);
-
-    this.pressDuration = options.pressDuration ?? this.pressDuration;
-    this.pressMaxDistance = options.pressMaxDistance ?? this.pressMaxDistance;
-    this.dragTimeout = options.dragTimeout ?? this.dragTimeout;
-    this.dragThreshold = options.dragThreshold ?? this.dragThreshold;
-    this.dragDirection = options.dragDirection || this.dragDirection;
-
-    // Update internal gesture options
-    this.element.dispatchEvent(
-      new CustomEvent(`${this.panGesture.name}ChangeOptions`, {
-        detail: {
-          minPointers: this.minPointers,
-          maxPointers: this.maxPointers,
-          threshold: this.dragThreshold,
-          direction: this.dragDirection,
-          pointerMode: this.pointerMode,
-          requiredKeys: this.requiredKeys,
-          preventIf: this.preventIf,
-          pointerOptions: structuredClone(this.pointerOptions),
-        },
-      }),
-    );
-
-    this.element.dispatchEvent(
-      new CustomEvent(`${this.pressGesture.name}ChangeOptions`, {
-        detail: {
-          duration: this.pressDuration,
-          maxDistance: this.pressMaxDistance,
-          maxPointers: this.maxPointers,
-          pointerMode: this.pointerMode,
-          requiredKeys: this.requiredKeys,
-          preventIf: this.preventIf,
-          pointerOptions: structuredClone(this.pointerOptions),
-        },
-      }),
-    );
+      throw new Error("STUB");
   }
 
   protected resetState(): void {
@@ -298,75 +262,28 @@ export class PressAndDragGesture<GestureName extends string> extends PointerGest
    * This can be empty because the PressAndDragGesture relies on PressGesture and PanGesture to handle pointer events
    * The internal gestures will manage their own state and events, while this class coordinates between them
    */
-  protected handlePointerEvent(): void {}
+  protected handlePointerEvent(): void {
+      throw new Error("STUB");
+  }
 
   private pressHandler = (): void => {
-    if (this.state.phase !== 'waitingForPress') {
-      return;
-    }
-
-    this.state.phase = 'pressDetected';
-
-    this.setTouchAction();
-
-    // Start timeout to wait for drag start
-    this.state.dragTimeoutId = setTimeout(() => {
-      // Timeout expired, reset gesture
-      this.resetState();
-    }, this.dragTimeout);
+      throw new Error("STUB");
   };
 
   private dragStartHandler = (event: PanEvent) => {
-    if (this.state.phase !== 'pressDetected') {
-      return;
-    }
-
-    // Clear the drag timeout as drag has started
-    if (this.state.dragTimeoutId !== null) {
-      clearTimeout(this.state.dragTimeoutId);
-      this.state.dragTimeoutId = null;
-    }
-
-    // Restore touch action since we're now dragging
-    this.restoreTouchAction();
-
-    this.state.phase = 'dragging';
-    this.isActive = true;
-
-    // Fire start event
-    this.element.dispatchEvent(
-      new CustomEvent(createEventName(this.name, event.detail.phase), event),
-    );
+      throw new Error("STUB");
   };
 
   private dragMoveHandler = (event: PanEvent): void => {
-    if (this.state.phase !== 'dragging') {
-      return;
-    }
-
-    // Fire move event
-    this.element.dispatchEvent(
-      new CustomEvent(createEventName(this.name, event.detail.phase), event),
-    );
+      throw new Error("STUB");
   };
 
   private dragEndHandler = (event: PanEvent): void => {
-    if (this.state.phase !== 'dragging') {
-      return;
-    }
-
-    this.resetState();
-
-    // Fire end event
-    this.element.dispatchEvent(
-      new CustomEvent(createEventName(this.name, event.detail.phase), event),
-    );
+      throw new Error("STUB");
   };
 
   private setTouchAction(): void {
-    this.element.addEventListener('touchstart', preventDefault, { passive: false });
-    this.element.addEventListener('touchmove', preventDefault, { passive: false });
-    this.element.addEventListener('touchend', preventDefault, { passive: false });
+      throw new Error("STUB");
   }
 
   private restoreTouchAction(): void {

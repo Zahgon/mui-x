@@ -12,10 +12,7 @@ import type { GridStateInitializer } from '../../utils/useGridInitializeState';
 
 export const preferencePanelStateInitializer: GridStateInitializer<
   Pick<DataGridProcessedProps, 'initialState'>
-> = (state, props) => ({
-  ...state,
-  preferencePanel: props.initialState?.preferencePanel ?? { open: false },
-});
+> = (state, props) => { throw new Error("STUB"); };
 
 /**
  * TODO: Add a single `setPreferencePanel` method to avoid multiple `setState`
@@ -30,37 +27,13 @@ export const useGridPreferencesPanel = (
    * API METHODS
    */
   const hidePreferences = React.useCallback(() => {
-    apiRef.current.setState((state) => {
-      if (!state.preferencePanel.open) {
-        return state;
-      }
-
-      logger.debug('Hiding Preferences Panel');
-      const preferencePanelState = gridPreferencePanelStateSelector(apiRef);
-      apiRef.current.publishEvent('preferencePanelClose', {
-        openedPanelValue: preferencePanelState.openedPanelValue,
-      });
-      return { ...state, preferencePanel: { open: false } };
-    });
+      throw new Error("STUB");
   }, [apiRef, logger]);
 
   const showPreferences = React.useCallback<GridPreferencesPanelApi['showPreferences']>(
     (newValue, panelId, labelId) => {
-      logger.debug('Opening Preferences Panel');
-      apiRef.current.setState((state) => ({
-        ...state,
-        preferencePanel: {
-          ...state.preferencePanel,
-          open: true,
-          openedPanelValue: newValue,
-          panelId,
-          labelId,
-        },
-      }));
-      apiRef.current.publishEvent('preferencePanelOpen', {
-        openedPanelValue: newValue,
-      });
-    },
+          throw new Error("STUB");
+      },
     [logger, apiRef],
   );
 
@@ -78,40 +51,15 @@ export const useGridPreferencesPanel = (
    */
   const stateExportPreProcessing = React.useCallback<GridPipeProcessor<'exportState'>>(
     (prevState, context) => {
-      const preferencePanelToExport = gridPreferencePanelStateSelector(apiRef);
-
-      const shouldExportPreferencePanel =
-        // Always export if the `exportOnlyDirtyModels` property is not activated
-        !context.exportOnlyDirtyModels ||
-        // Always export if the panel was initialized
-        props.initialState?.preferencePanel != null ||
-        // Always export if the panel is opened
-        preferencePanelToExport.open;
-
-      if (!shouldExportPreferencePanel) {
-        return prevState;
-      }
-
-      return {
-        ...prevState,
-        preferencePanel: preferencePanelToExport,
-      };
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.initialState?.preferencePanel],
   );
 
   const stateRestorePreProcessing = React.useCallback<GridPipeProcessor<'restoreState'>>(
     (params, context) => {
-      const preferencePanel = context.stateToRestore.preferencePanel;
-      if (preferencePanel != null) {
-        apiRef.current.setState((state) => ({
-          ...state,
-          preferencePanel,
-        }));
-      }
-
-      return params;
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 

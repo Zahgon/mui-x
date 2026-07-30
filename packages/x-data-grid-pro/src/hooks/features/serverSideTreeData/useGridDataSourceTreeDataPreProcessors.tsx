@@ -53,159 +53,33 @@ export const useGridDataSourceTreeDataPreProcessors = (
   >,
 ) => {
   const setStrategyAvailability = React.useCallback(() => {
-    privateApiRef.current.setStrategyAvailability(
-      GridStrategyGroup.RowTree,
-      TreeDataStrategy.DataSource,
-      props.treeData && props.dataSource ? () => true : () => false,
-    );
+      throw new Error("STUB");
   }, [privateApiRef, props.treeData, props.dataSource]);
 
   const getGroupingColDef = React.useCallback(() => {
-    const groupingColDefProp = props.groupingColDef;
-
-    let colDefOverride: GridGroupingColDefOverride | null | undefined;
-    if (typeof groupingColDefProp === 'function') {
-      const params: GridGroupingColDefOverrideParams = {
-        groupingName: TreeDataStrategy.DataSource,
-        fields: [],
-      };
-
-      colDefOverride = groupingColDefProp(params);
-    } else {
-      colDefOverride = groupingColDefProp;
-    }
-
-    const { hideDescendantCount, ...colDefOverrideProperties } = colDefOverride ?? {};
-
-    const commonProperties: Omit<GridColDef, 'field' | 'editable'> = {
-      ...GRID_TREE_DATA_GROUPING_COL_DEF,
-      renderCell: (params) => (
-        <GridDataSourceTreeDataGroupingCell
-          {...(params as GridRenderCellParams<any, any, any, GridDataSourceGroupNode>)}
-          hideDescendantCount={hideDescendantCount}
-        />
-      ),
-      headerName: privateApiRef.current.getLocaleText('treeDataGroupingHeaderName'),
-    };
-
-    return {
-      ...commonProperties,
-      ...colDefOverrideProperties,
-      ...GRID_TREE_DATA_GROUPING_COL_DEF_FORCED_PROPERTIES,
-    };
+      throw new Error("STUB");
   }, [privateApiRef, props.groupingColDef]);
 
   const updateGroupingColumn = React.useCallback<GridPipeProcessor<'hydrateColumns'>>(
     (columnsState) => {
-      if (!props.dataSource) {
-        return columnsState;
-      }
-      const groupingColDefField = GRID_TREE_DATA_GROUPING_COL_DEF_FORCED_PROPERTIES.field;
-
-      const shouldHaveGroupingColumn = props.treeData;
-      const prevGroupingColumn = columnsState.lookup[groupingColDefField];
-
-      if (shouldHaveGroupingColumn) {
-        const newGroupingColumn = getGroupingColDef();
-        if (prevGroupingColumn) {
-          newGroupingColumn.width = prevGroupingColumn.width;
-          newGroupingColumn.flex = prevGroupingColumn.flex;
-        }
-        columnsState.lookup[groupingColDefField] = newGroupingColumn;
-        if (prevGroupingColumn == null) {
-          columnsState.orderedFields = [groupingColDefField, ...columnsState.orderedFields];
-        }
-      } else if (!shouldHaveGroupingColumn && prevGroupingColumn) {
-        delete columnsState.lookup[groupingColDefField];
-        columnsState.orderedFields = columnsState.orderedFields.filter(
-          (field) => field !== groupingColDefField,
-        );
-      }
-
-      return columnsState;
-    },
+          throw new Error("STUB");
+      },
     [props.treeData, props.dataSource, getGroupingColDef],
   );
 
   const createRowTreeForTreeData = React.useCallback<GridStrategyProcessor<'rowTreeCreation'>>(
     (params) => {
-      const getGroupKey = props.dataSource?.getGroupKey;
-      if (!getGroupKey) {
-        throw new Error(
-          'MUI X Data Grid: No getGroupKey method provided with the dataSource. ' +
-            'Server-side tree data requires a getGroupKey method to determine row hierarchy. ' +
-            'Add getGroupKey to your dataSource configuration.',
-        );
-      }
-
-      const getChildrenCount = props.dataSource?.getChildrenCount;
-      if (!getChildrenCount) {
-        throw new Error(
-          'MUI X Data Grid: No getChildrenCount method provided with the dataSource. ' +
-            'Server-side tree data requires a getChildrenCount method to determine expandable rows. ' +
-            'Add getChildrenCount to your dataSource configuration.',
-        );
-      }
-
-      const getRowTreeBuilderNode = (rowId: GridRowId) => {
-        const parentPath =
-          (params.updates as GridRowsPartialUpdates).groupKeys ?? getParentPath(rowId, params);
-        const count = getChildrenCount(params.dataRowIdToModelLookup[rowId]);
-        return {
-          id: rowId,
-          path: [...parentPath, getGroupKey(params.dataRowIdToModelLookup[rowId])].map(
-            (key): RowTreeBuilderGroupingCriterion => ({ key, field: null }),
-          ),
-          serverChildrenCount: count,
-        };
-      };
-
-      const onDuplicatePath: GridTreePathDuplicateHandler = (firstId, secondId, path) => {
-        throw new Error(
-          `MUI X Data Grid: The values returned by getGroupKey for sibling rows must be unique. ` +
-            `Rows with id "${firstId}" and "${secondId}" have the same path: ${JSON.stringify(path.map((step) => step.key))}. ` +
-            'Ensure getGroupKey returns unique values for each sibling row.',
-        );
-      };
-
-      if (params.updates.type === 'full') {
-        return createRowTree({
-          previousTree: params.previousTree,
-          nodes: params.updates.rows.map(getRowTreeBuilderNode),
-          defaultGroupingExpansionDepth: props.defaultGroupingExpansionDepth,
-          isGroupExpandedByDefault: props.isGroupExpandedByDefault,
-          groupingName: TreeDataStrategy.DataSource,
-          onDuplicatePath,
-        });
-      }
-
-      return updateRowTree({
-        nodes: {
-          inserted: params.updates.actions.insert.map(getRowTreeBuilderNode),
-          modified: params.updates.actions.modify.map(getRowTreeBuilderNode),
-          removed: params.updates.actions.remove,
-        },
-        previousTree: params.previousTree!,
-        previousGroupsToFetch: params.previousGroupsToFetch,
-        previousTreeDepth: params.previousTreeDepths!,
-        defaultGroupingExpansionDepth: props.defaultGroupingExpansionDepth,
-        isGroupExpandedByDefault: props.isGroupExpandedByDefault,
-        groupingName: TreeDataStrategy.DataSource,
-      });
-    },
+          throw new Error("STUB");
+      },
     [props.dataSource, props.defaultGroupingExpansionDepth, props.isGroupExpandedByDefault],
   );
 
   const filterRows = React.useCallback<GridStrategyProcessor<'filtering'>>(() => {
-    const rowTree = gridRowTreeSelector(privateApiRef);
-
-    return skipFiltering(rowTree);
+      throw new Error("STUB");
   }, [privateApiRef]);
 
   const sortRows = React.useCallback<GridStrategyProcessor<'sorting'>>(() => {
-    const rowTree = gridRowTreeSelector(privateApiRef);
-
-    return skipSorting(rowTree);
+      throw new Error("STUB");
   }, [privateApiRef]);
 
   useGridRegisterPipeProcessor(privateApiRef, 'hydrateColumns', updateGroupingColumn);
@@ -233,7 +107,7 @@ export const useGridDataSourceTreeDataPreProcessors = (
    * 1ST RENDER
    */
   useFirstRender(() => {
-    setStrategyAvailability();
+      throw new Error("STUB");
   });
 
   /**
@@ -241,10 +115,6 @@ export const useGridDataSourceTreeDataPreProcessors = (
    */
   const isFirstRender = React.useRef(true);
   React.useEffect(() => {
-    if (!isFirstRender.current) {
-      setStrategyAvailability();
-    } else {
-      isFirstRender.current = false;
-    }
+      throw new Error("STUB");
   }, [setStrategyAvailability]);
 };

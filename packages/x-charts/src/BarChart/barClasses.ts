@@ -31,7 +31,7 @@ export interface BarElementOwnerState {
 }
 
 export function getBarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiBarChart', slot);
+    throw new Error("STUB");
 }
 
 export const barClasses: BarClasses = generateUtilityClasses('MuiBarChart', [

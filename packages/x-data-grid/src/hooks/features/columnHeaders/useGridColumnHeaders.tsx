@@ -125,39 +125,29 @@ export const useGridColumnHeaders = (props: UseGridColumnHeadersProps) => {
   const scrollbarWidth = useGridSelector(apiRef, gridVerticalScrollbarWidthSelector);
 
   const handleColumnResizeStart = React.useCallback<GridEventListener<'columnResizeStart'>>(
-    (params) => setResizeCol(params.field),
+    (params) => { throw new Error("STUB"); },
     [],
   );
   const handleColumnResizeStop = React.useCallback<GridEventListener<'columnResizeStop'>>(
-    () => setResizeCol(''),
+    () => { throw new Error("STUB"); },
     [],
   );
 
   const handleColumnReorderStart = React.useCallback<GridEventListener<'columnHeaderDragStart'>>(
-    (params) => setDragCol(params.field),
+    (params) => { throw new Error("STUB"); },
     [],
   );
   const handleColumnReorderStop = React.useCallback<GridEventListener<'columnHeaderDragEndNative'>>(
-    () => setDragCol(''),
+    () => { throw new Error("STUB"); },
     [],
   );
 
   const leftRenderContext = React.useMemo(() => {
-    return pinnedColumns.left.length
-      ? {
-          firstColumnIndex: 0,
-          lastColumnIndex: pinnedColumns.left.length,
-        }
-      : null;
+      throw new Error("STUB");
   }, [pinnedColumns.left.length]);
 
   const rightRenderContext = React.useMemo(() => {
-    return pinnedColumns.right.length
-      ? {
-          firstColumnIndex: visibleColumns.length - pinnedColumns.right.length,
-          lastColumnIndex: visibleColumns.length,
-        }
-      : null;
+      throw new Error("STUB");
   }, [pinnedColumns.right.length, visibleColumns.length]);
 
   useGridEvent(apiRef, 'columnResizeStart', handleColumnResizeStart);
@@ -354,7 +344,7 @@ export const useGridColumnHeaders = (props: UseGridColumnHeadersProps) => {
 
     const firstGroupIndex = rowStructure.findIndex(
       ({ groupId, columnFields }) =>
-        groupId === firstGroupToRender && columnFields.includes(firstColumnFieldToRender),
+        { throw new Error("STUB"); },
     );
 
     const lastColumnFieldToRender = visibleColumns[lastColumnToRender - 1].field;
@@ -362,20 +352,15 @@ export const useGridColumnHeaders = (props: UseGridColumnHeadersProps) => {
 
     const lastGroupIndex = rowStructure.findIndex(
       ({ groupId, columnFields }) =>
-        groupId === lastGroupToRender && columnFields.includes(lastColumnFieldToRender),
+        { throw new Error("STUB"); },
     );
 
     const visibleColumnGroupHeader = rowStructure
       .slice(firstGroupIndex, lastGroupIndex + 1)
       .map((groupStructure) => {
-        return {
-          ...groupStructure,
-          columnFields: groupStructure.columnFields.filter(
-            (field) => columnVisibility[field] !== false,
-          ),
-        };
+          throw new Error("STUB");
       })
-      .filter((groupStructure) => groupStructure.columnFields.length > 0);
+      .filter((groupStructure) => { throw new Error("STUB"); });
 
     const firstVisibleColumnIndex =
       visibleColumnGroupHeader[0].columnFields.indexOf(firstColumnFieldToRender);
@@ -384,81 +369,12 @@ export const useGridColumnHeaders = (props: UseGridColumnHeadersProps) => {
       firstVisibleColumnIndex,
     );
     const leftOverflow = hiddenGroupColumns.reduce((acc, field) => {
-      const column = columnsLookup[field];
-      return acc + (column.computedWidth ?? 0);
+        throw new Error("STUB");
     }, 0);
 
     let columnIndex = firstColumnToRender;
     const children = visibleColumnGroupHeader.map(({ groupId, columnFields }, index) => {
-      const hasFocus =
-        columnGroupHeaderFocus !== null &&
-        columnGroupHeaderFocus.depth === depth &&
-        columnFields.includes(columnGroupHeaderFocus.field);
-      const tabIndex: 0 | -1 =
-        columnGroupHeaderTabIndexState !== null &&
-        columnGroupHeaderTabIndexState.depth === depth &&
-        columnFields.includes(columnGroupHeaderTabIndexState.field)
-          ? 0
-          : -1;
-
-      const headerInfo: HeaderInfo = {
-        groupId,
-        width: columnFields.reduce((acc, field) => acc + columnsLookup[field].computedWidth, 0),
-        fields: columnFields,
-        colIndex: columnIndex,
-        hasFocus,
-        tabIndex,
-      };
-
-      const pinnedPosition = params.position;
-      const pinnedOffset = getPinnedCellOffset(
-        pinnedPosition,
-        headerInfo.width,
-        columnIndex,
-        columnPositions,
-        columnsTotalWidth,
-        scrollbarWidth,
-      );
-
-      columnIndex += columnFields.length;
-
-      let indexInSection = index;
-      if (pinnedPosition === PinnedColumnPosition.LEFT) {
-        // Group headers can expand to multiple columns, we need to adjust the index
-        indexInSection = columnIndex - 1;
-      }
-
-      return (
-        <GridColumnGroupHeader
-          key={index}
-          groupId={groupId}
-          width={headerInfo.width}
-          fields={headerInfo.fields}
-          colIndex={headerInfo.colIndex}
-          depth={depth}
-          isLastColumn={index === visibleColumnGroupHeader.length - 1}
-          maxDepth={headerGroupingMaxDepth}
-          height={groupHeaderHeight}
-          hasFocus={hasFocus}
-          tabIndex={tabIndex}
-          pinnedPosition={pinnedPosition}
-          pinnedOffset={pinnedOffset}
-          showLeftBorder={shouldCellShowLeftBorder(
-            pinnedPosition,
-            indexInSection,
-            rootProps.showColumnVerticalBorder,
-            rootProps.pinnedColumnsSectionSeparator,
-          )}
-          showRightBorder={shouldCellShowRightBorder(
-            pinnedPosition,
-            indexInSection,
-            visibleColumnGroupHeader.length,
-            rootProps.showColumnVerticalBorder,
-            gridHasFiller,
-            rootProps.pinnedColumnsSectionSeparator,
-          )}
-        />
-      );
+        throw new Error("STUB");
     });
 
     return getFillers(params, children, leftOverflow);
@@ -524,8 +440,6 @@ export const useGridColumnHeaders = (props: UseGridColumnHeadersProps) => {
     getColumnGroupHeadersRows,
     getPinnedCellOffset,
     isDragging: !!dragCol,
-    getInnerProps: () => ({
-      role: 'rowgroup',
-    }),
+    getInnerProps: () => { throw new Error("STUB"); },
   };
 };

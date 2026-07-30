@@ -45,96 +45,18 @@ type FilePartComponent = ((
 ) => React.JSX.Element) & { propTypes?: any };
 
 function FileIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="currentColor"
-      focusable="false"
-      height="16"
-      viewBox="0 0 24 24"
-      width="16"
-      style={{ flexShrink: 0 }}
-    >
-      <path d="M6 2h8l4 4v16H6V2Zm8 1.5V7h3.5L14 3.5Z" />
-    </svg>
-  );
+    throw new Error("STUB");
 }
 
 export const FilePart = React.forwardRef(function FilePart(
   props: FilePartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { className, index, message, onToolCall, part, slots, slotProps, ...other } = props;
-  void index;
-  void onToolCall;
-  const ownerState = React.useMemo<FilePartOwnerState>(
-    () => ({
-      image: part.mediaType.startsWith('image/'),
-      mediaType: part.mediaType,
-      messageId: message.id,
-      role: message.role,
-    }),
-    [message.id, message.role, part.mediaType],
-  );
-  const Root = slots?.root ?? 'div';
-  const Preview = slots?.preview ?? 'img';
-  const LinkSlot = slots?.link ?? 'a';
-  const Filename = slots?.filename ?? 'span';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-      className,
-    },
-  });
-  const previewProps = useSlotProps({
-    elementType: Preview,
-    externalSlotProps: slotProps?.preview,
-    ownerState,
-  });
-  // Inside a roving message list the link leaves the tab order until the
-  // user drills into the message (Enter); it stays mouse-clickable.
-  const contentTabIndex = useMessageContentTabIndex();
-  const linkProps = useSlotProps({
-    elementType: LinkSlot,
-    externalSlotProps: slotProps?.link,
-    ownerState,
-    additionalProps: {
-      tabIndex: contentTabIndex,
-    },
-  });
-  const filenameProps = useSlotProps({
-    elementType: Filename,
-    externalSlotProps: slotProps?.filename,
-    ownerState,
-  });
-
-  return (
-    <Root {...rootProps}>
-      <LinkSlot
-        href={safeFileUri(part.url) || undefined}
-        rel="noreferrer noopener"
-        target="_blank"
-        {...linkProps}
-      >
-        {ownerState.image ? (
-          <Preview alt={part.filename ?? ''} src={part.url} {...previewProps} />
-        ) : (
-          <FileIcon />
-        )}
-        <Filename {...filenameProps}>{part.filename ?? part.url}</Filename>
-      </LinkSlot>
-    </Root>
-  );
+    throw new Error("STUB");
 }) as FilePartComponent;
 
 export function createFilePartRenderer(
   defaultProps: FilePartExternalProps = {},
 ): ChatPartRenderer<ChatFileMessagePart> {
-  return function FilePartRendererFn(rendererProps) {
-    return <FilePart {...defaultProps} {...rendererProps} />;
-  };
+    throw new Error("STUB");
 }

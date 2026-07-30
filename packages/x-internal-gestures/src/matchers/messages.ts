@@ -1,10 +1,10 @@
 export const messages = {
   invalidClass: () =>
-    'Expected a valid gesture class, but received invalid input or an instantiated class instead.',
+    { throw new Error("STUB"); },
   invalidOrEmptyObjectParam: (paramName: string) =>
-    `Expected a non-empty ${paramName} object, but received invalid or empty ${paramName}.`,
+    { throw new Error("STUB"); },
   invalidObjectParam: (paramName: string) =>
-    `Expected valid ${paramName}, but received an invalid value.`,
+    { throw new Error("STUB"); },
   negationError: (matcherName: string) =>
-    `${matcherName} matcher does not support negation. Use expect().${matcherName}() instead of expect().not.${matcherName}().`,
+    { throw new Error("STUB"); },
 };

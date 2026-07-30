@@ -10,7 +10,7 @@ export const parametersToStateMapper: TreeViewParametersToStateMapper<
   SimpleTreeViewState<any>,
   InnerSimpleTreeViewParameters<any>
 > = {
-  getInitialState: (minimalInitialState) => minimalInitialState,
-  updateStateFromParameters: (newMinimalState) => newMinimalState,
-  shouldIgnoreItemsStateUpdate: () => true,
+  getInitialState: (minimalInitialState) => { throw new Error("STUB"); },
+  updateStateFromParameters: (newMinimalState) => { throw new Error("STUB"); },
+  shouldIgnoreItemsStateUpdate: () => { throw new Error("STUB"); },
 };

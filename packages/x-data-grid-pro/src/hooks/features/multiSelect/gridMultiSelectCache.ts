@@ -14,34 +14,21 @@ export class GridMultiSelectCache implements GridMultiSelectInternalCache {
   private metricsSubscribers = new Set<(metrics: GridMultiSelectOverflowMetrics | null) => void>();
 
   private notifyMetrics = (metrics: GridMultiSelectOverflowMetrics | null) => {
-    this.metricsSubscribers.forEach((cb) => cb(metrics));
+      throw new Error("STUB");
   };
 
   public getOverflowMetrics = () => {
-    return this.overflowMetrics;
+      throw new Error("STUB");
   };
 
   public setOverflowMetrics = (next: GridMultiSelectOverflowMetrics) => {
-    // Skip no-op updates so subscribed cells don't re-render on every measurer ResizeObserver tick.
-    const prev = this.overflowMetrics;
-    if (
-      prev &&
-      prev.gap === next.gap &&
-      fastArrayCompare(prev.overflowChipWidths, next.overflowChipWidths)
-    ) {
-      return;
-    }
-    this.overflowMetrics = next;
-    this.notifyMetrics(next);
+      throw new Error("STUB");
   };
 
   public subscribeOverflowMetrics = (
     callback: (metrics: GridMultiSelectOverflowMetrics | null) => void,
   ) => {
-    this.metricsSubscribers.add(callback);
-    return () => {
-      this.metricsSubscribers.delete(callback);
-    };
+      throw new Error("STUB");
   };
 
   public teardown = () => {

@@ -66,29 +66,5 @@ export const consumeThemeProps = <
     props: React.PropsWithoutRef<Props>,
     ref: React.ForwardedRef<Ref>,
   ) {
-    const themedProps = useThemeProps({
-      props,
-      // eslint-disable-next-line mui/material-ui-name-matches-component-name
-      name,
-    });
-
-    const defaultProps =
-      typeof options.defaultProps === 'function'
-        ? options.defaultProps(themedProps as Props)
-        : (options.defaultProps ?? {});
-
-    const outProps = resolveProps(defaultProps, themedProps) as React.PropsWithoutRef<Props>;
-
-    const theme = useTheme();
-    const classes = options.classesResolver?.(outProps as Props, theme);
-
-    const OutComponent = React.forwardRef<Ref, Props>(
-      InComponent as React.ForwardRefRenderFunction<Ref, React.PropsWithoutRef<Props>>,
-    );
-
-    if (process.env.NODE_ENV !== 'production') {
-      OutComponent.displayName = `consumeThemeProps(${name})`;
-    }
-
-    return <OutComponent {...outProps} classes={classes} ref={ref} />;
+      throw new Error("STUB");
   });

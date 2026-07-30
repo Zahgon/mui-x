@@ -29,22 +29,7 @@ function buildApplyFilterFn(
   const time = date.getTime();
 
   return (value: Date): boolean => {
-    if (!value) {
-      return false;
-    }
-
-    if (keepRawComparison) {
-      return compareFn(value.getTime(), time);
-    }
-
-    // Make a copy of the date to not reset the hours in the original object
-    const dateCopy = new Date(value);
-    if (showTime) {
-      dateCopy.setSeconds(0, 0);
-    } else {
-      dateCopy.setHours(0, 0, 0, 0);
-    }
-    return compareFn(dateCopy.getTime(), time);
+      throw new Error("STUB");
   };
 }
 
@@ -54,7 +39,7 @@ export const getGridDateOperators = (
   {
     value: 'is',
     getApplyFilterFn: (filterItem) => {
-      return buildApplyFilterFn(filterItem, (value1, value2) => value1 === value2, showTime);
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputDate,
     InputComponentProps: { type: showTime ? 'datetime-local' : 'date' },
@@ -62,7 +47,7 @@ export const getGridDateOperators = (
   {
     value: 'not',
     getApplyFilterFn: (filterItem) => {
-      return buildApplyFilterFn(filterItem, (value1, value2) => value1 !== value2, showTime);
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputDate,
     InputComponentProps: { type: showTime ? 'datetime-local' : 'date' },
@@ -70,12 +55,7 @@ export const getGridDateOperators = (
   {
     value: 'after',
     getApplyFilterFn: (filterItem) => {
-      return buildApplyFilterFn(
-        filterItem,
-        (value1, value2) => value1 > value2,
-        showTime,
-        showTime,
-      );
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputDate,
     InputComponentProps: { type: showTime ? 'datetime-local' : 'date' },
@@ -83,12 +63,7 @@ export const getGridDateOperators = (
   {
     value: 'onOrAfter',
     getApplyFilterFn: (filterItem) => {
-      return buildApplyFilterFn(
-        filterItem,
-        (value1, value2) => value1 >= value2,
-        showTime,
-        showTime,
-      );
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputDate,
     InputComponentProps: { type: showTime ? 'datetime-local' : 'date' },
@@ -96,7 +71,7 @@ export const getGridDateOperators = (
   {
     value: 'before',
     getApplyFilterFn: (filterItem) => {
-      return buildApplyFilterFn(filterItem, (value1, value2) => value1 < value2, showTime, true);
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputDate,
     InputComponentProps: { type: showTime ? 'datetime-local' : 'date' },
@@ -104,12 +79,7 @@ export const getGridDateOperators = (
   {
     value: 'onOrBefore',
     getApplyFilterFn: (filterItem) => {
-      return buildApplyFilterFn(
-        filterItem,
-        (value1, value2) => value1 <= value2,
-        showTime,
-        showTime,
-      );
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputDate,
     InputComponentProps: { type: showTime ? 'datetime-local' : 'date' },
@@ -117,18 +87,14 @@ export const getGridDateOperators = (
   {
     value: 'isEmpty',
     getApplyFilterFn: () => {
-      return (value): boolean => {
-        return value == null;
-      };
+        throw new Error("STUB");
     },
     requiresFilterValue: false,
   },
   {
     value: 'isNotEmpty',
     getApplyFilterFn: () => {
-      return (value): boolean => {
-        return value != null;
-      };
+        throw new Error("STUB");
     },
     requiresFilterValue: false,
   },

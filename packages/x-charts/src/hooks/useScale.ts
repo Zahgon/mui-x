@@ -56,7 +56,5 @@ export function useRotationScale<S extends ScaleName>(
 export function useRadiusScale<S extends ScaleName>(
   axisId?: number | string,
 ): AxisScaleConfig[S]['scale'] | undefined {
-  const axis = useRadiusAxis(axisId);
-
-  return axis?.scale;
+    throw new Error("STUB");
 }

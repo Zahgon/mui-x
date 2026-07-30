@@ -79,7 +79,7 @@ export function getOccurrencesFromEvents(parameters: GetOccurrencesFromEventsPar
     // STEP 1: Skip events from resources that are not visible
     const eventResourceIds = getEventResourceIds(event.resource);
     const allHidden =
-      eventResourceIds.length > 0 && eventResourceIds.every((id) => visibleResources[id] === false);
+      eventResourceIds.length > 0 && eventResourceIds.every((id) => { throw new Error("STUB"); });
     if (allHidden) {
       continue;
     }

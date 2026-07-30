@@ -2,9 +2,9 @@ import { useRefWithInit } from '@base-ui/utils/useRefWithInit';
 import type { TreeViewItemId, TreeViewSelectionPropagation } from '../models';
 import { getLookupFromArray } from '../internals/plugins/selection/TreeViewSelectionPlugin';
 
-const defaultGetItemId = (item: any) => item.id;
+const defaultGetItemId = (item: any) => { throw new Error("STUB"); };
 
-const defaultGetItemChildren = (item: any) => item.children;
+const defaultGetItemChildren = (item: any) => { throw new Error("STUB"); };
 
 /**
  * Applies the selection propagation rules to the selected items.
@@ -50,47 +50,7 @@ const defaultGetItemChildren = (item: any) => item.children;
 export function useApplyPropagationToSelectedItemsOnMount(
   parameters: UseApplyPropagationToDefaultSelectedItemsParameters<any>,
 ) {
-  const {
-    items: itemsParam,
-    getItemId = defaultGetItemId,
-    getItemChildren = defaultGetItemChildren,
-    selectedItems,
-    selectionPropagation,
-  } = parameters;
-
-  return useRefWithInit(() => {
-    const lookup = getLookupFromArray(selectedItems);
-
-    function walk(items: any[], isParentSelected: boolean) {
-      for (const item of items) {
-        const itemId = getItemId(item);
-        let isSelected = lookup[itemId];
-
-        if (!isSelected && selectionPropagation.descendants && isParentSelected) {
-          lookup[itemId] = true;
-          isSelected = true;
-        }
-
-        const children = getItemChildren(item) ?? [];
-        if (children.length > 0) {
-          walk(children, isSelected);
-
-          if (!isSelected && selectionPropagation.parents) {
-            const areAllChildrenSelected = children.every(
-              (childId: any) => lookup[getItemId(childId)],
-            );
-            if (areAllChildrenSelected) {
-              lookup[itemId] = true;
-            }
-          }
-        }
-      }
-    }
-
-    walk(itemsParam, false);
-
-    return Object.keys(lookup);
-  }).current;
+    throw new Error("STUB");
 }
 
 interface UseApplyPropagationToDefaultSelectedItemsParameters<R extends { children?: R[] }> {

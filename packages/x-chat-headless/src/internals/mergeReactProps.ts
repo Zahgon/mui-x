@@ -47,14 +47,7 @@ export function mergeReactProps(...propsList: (AnyProps | undefined)[]): AnyProp
       result[key] = handlers[0];
     } else {
       result[key] = (...args: any[]) => {
-        for (const handler of handlers) {
-          handler(...args);
-
-          // If the first argument is a React event with defaultPrevented, stop chaining
-          if (args[0] != null && typeof args[0] === 'object' && args[0].defaultPrevented) {
-            break;
-          }
-        }
+          throw new Error("STUB");
       };
     }
   }

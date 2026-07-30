@@ -52,57 +52,8 @@ export type FilterPanelTriggerProps = Omit<GridSlotProps['baseButton'], 'classNa
  */
 const FilterPanelTrigger = forwardRef<HTMLButtonElement, FilterPanelTriggerProps>(
   function FilterPanelTrigger(props, ref) {
-    const { render, className, onClick, onPointerUp, ...other } = props;
-    const rootProps = useGridRootProps();
-    const buttonId = useId();
-    const panelId = useId();
-    const apiRef = useGridApiContext();
-    const panelState = useGridSelector(apiRef, gridPreferencePanelStateSelector);
-    const open =
-      panelState.open && panelState.openedPanelValue === GridPreferencePanelsValue.filters;
-    const activeFilters = useGridSelector(apiRef, gridFilterActiveItemsSelector);
-    const filterCount = activeFilters.length;
-    const state = { open, filterCount };
-    const resolvedClassName = typeof className === 'function' ? className(state) : className;
-    const { triggers } = useGridPanelContext();
-    const handleRef = useForkRef(ref, triggers.filterPanel.setRef);
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (open) {
-        apiRef.current.hidePreferences();
-      } else {
-        apiRef.current.showPreferences(GridPreferencePanelsValue.filters, panelId, buttonId);
-      }
-      onClick?.(event);
-    };
-
-    const handlePointerUp = (event: React.PointerEvent<HTMLButtonElement>) => {
-      if (open) {
-        event.stopPropagation();
-      }
-      onPointerUp?.(event);
-    };
-
-    const element = useComponentRenderer(
-      rootProps.slots.baseButton,
-      render,
-      {
-        ...rootProps.slotProps?.baseButton,
-        id: buttonId,
-        'aria-haspopup': 'true',
-        'aria-expanded': open ? 'true' : undefined,
-        'aria-controls': open ? panelId : undefined,
-        onClick: handleClick,
-        onPointerUp: handlePointerUp,
-        className: resolvedClassName,
-        ...other,
-        ref: handleRef,
-      },
-      state,
-    );
-
-    return <React.Fragment>{element}</React.Fragment>;
-  },
+        throw new Error("STUB");
+    },
 );
 
 FilterPanelTrigger.propTypes /* remove-proptypes */ = {

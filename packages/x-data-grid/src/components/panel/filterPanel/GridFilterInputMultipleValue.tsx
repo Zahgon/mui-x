@@ -23,36 +23,22 @@ function GridFilterInputMultipleValue(props: GridFilterInputMultipleValueProps) 
   const rootProps = useGridRootProps();
 
   React.useEffect(() => {
-    const itemValue = item.value ?? [];
-    setFilterValueState(itemValue.map(String));
+      throw new Error("STUB");
   }, [item.value]);
 
   const handleChange = React.useCallback<
     NonNullable<AutocompleteProps<string, true, false, true>['onChange']>
   >(
     (event, value) => {
-      setFilterValueState(value.map(String));
-
-      applyValue({
-        ...item,
-        value: [
-          ...value.map((filterItemValue) =>
-            type === 'number' ? Number(filterItemValue) : filterItemValue,
-          ),
-        ],
-      });
-    },
+          throw new Error("STUB");
+      },
     [applyValue, item, type],
   );
 
   const handleInputChange = React.useCallback(
     (event: React.SyntheticEvent, value: string) => {
-      if (value === '') {
-        setOptions([]);
-      } else {
-        setOptions([value]);
-      }
-    },
+          throw new Error("STUB");
+      },
     [setOptions],
   );
 
@@ -109,14 +95,8 @@ GridFilterInputMultipleValue.propTypes /* remove-proptypes */ = {
     PropTypes.func,
     PropTypes.shape({
       current: (props, propName) => {
-        if (props[propName] == null) {
-          return null;
-        }
-        if (typeof props[propName] !== 'object' || props[propName].nodeType !== 1) {
-          return new Error(`Expected prop '${propName}' to be of type Element`);
-        }
-        return null;
-      },
+            throw new Error("STUB");
+        },
     }),
   ]),
   /**

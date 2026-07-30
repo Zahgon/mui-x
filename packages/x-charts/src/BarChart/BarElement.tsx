@@ -71,7 +71,7 @@ function BarElement(props: BarElementProps) {
     ...other
   } = props;
   const itemIdentifier = React.useMemo(
-    () => ({ type: 'bar' as const, seriesId, dataIndex }),
+    () => { throw new Error("STUB"); },
     [seriesId, dataIndex],
   );
   const highlightState = useItemHighlightState(itemIdentifier);

@@ -41,36 +41,13 @@ export function useFieldInternalPropsWithDefaults<TManager extends PickerAnyMana
     PickerManagerError<TManager>
   > = React.useCallback(
     (newValue, ctx) => {
-      return setValue?.(newValue, {
-        validationError: ctx.validationError,
-        shouldClose: false,
-      });
-    },
+          throw new Error("STUB");
+      },
     [setValue],
   );
 
   const internalPropsWithDefaultsFromContext = React.useMemo(() => {
-    // If one of the context is null,
-    // Then the field is used as a standalone component and the other context will be null as well.
-    if (fieldPrivateContext != null && pickerContext != null) {
-      return {
-        value: pickerContext.value,
-        onChange: handleChangeFromPicker,
-        timezone: pickerContext.timezone,
-        disabled: pickerContext.disabled,
-        readOnly: pickerContext.readOnly,
-        autoFocus: pickerContext.autoFocus && !pickerContext.open,
-        focused: pickerContext.open ? true : undefined,
-        format: pickerContext.fieldFormat,
-        formatDensity: fieldPrivateContext.formatDensity,
-        selectedSections: fieldPrivateContext.selectedSections,
-        onSelectedSectionsChange: fieldPrivateContext.onSelectedSectionsChange,
-        fieldRef: handleFieldRef,
-        ...internalProps,
-      };
-    }
-
-    return internalProps;
+      throw new Error("STUB");
   }, [pickerContext, fieldPrivateContext, internalProps, handleChangeFromPicker, handleFieldRef]);
 
   return useApplyDefaultValuesToFieldInternalProps(internalPropsWithDefaultsFromContext);

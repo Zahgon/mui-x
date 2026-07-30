@@ -44,125 +44,27 @@ export class CandlestickWebGLProgram {
   private readonly wick: WickProgram;
 
   constructor(private gl: WebGL2RenderingContext) {
-    /* Enable blending for transparency
-     * These are global to the WebGL context and need to be set only once */
-    gl.enable(gl.BLEND);
-    gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-
-    /* Shared, write-once geometry buffers */
-    this.quadBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.quadBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, QUAD_VERTICES, gl.STATIC_DRAW);
-
-    this.wickGeometryBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, this.wickGeometryBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, WICK_VERTICES, gl.STATIC_DRAW);
-
-    this.candle = this.initCandleProgram();
-    this.wick = this.initWickProgram();
+      throw new Error("STUB");
   }
 
   private initCandleProgram(): CandleProgram {
-    const gl = this.gl;
-    const { program, fragmentShader, vertexShader } = initializeProgram(
-      gl,
-      candleVertexShader,
-      candleFragmentShader,
-    );
-    this.shaders.push(fragmentShader, vertexShader);
-
-    const vao = gl.createVertexArray();
-    const centers = createGrowableBuffer(gl);
-    const heights = createGrowableBuffer(gl);
-    const colors = createGrowableBuffer(gl);
-
-    gl.bindVertexArray(vao);
-
-    /* Quad geometry — shared, instanced over per-candle attributes. */
-    bindAttribute(gl, program, 'a_position', this.quadBuffer, 2, 0);
-
-    bindAttribute(gl, program, 'a_center', centers.buffer, 2, 1);
-    bindAttribute(gl, program, 'a_height', heights.buffer, 1, 1);
-    /* Colors live in a Uint8(Clamped)Array — 1 byte per channel, normalized to [0, 1]
-     * in the shader. 4x less GPU traffic than Float32 RGBA. */
-    bindAttribute(gl, program, 'a_color', colors.buffer, 4, 1, gl.UNSIGNED_BYTE, true);
-
-    gl.bindVertexArray(null);
-
-    return {
-      program,
-      vao,
-      centers,
-      heights,
-      colors,
-      uResolution: gl.getUniformLocation(program, 'u_resolution'),
-      uCandleWidth: gl.getUniformLocation(program, 'u_candle_width'),
-    };
+      throw new Error("STUB");
   }
 
   private initWickProgram(): WickProgram {
-    const gl = this.gl;
-    const { program, fragmentShader, vertexShader } = initializeProgram(
-      gl,
-      wickVertexShader,
-      wickFragmentShader,
-    );
-    this.shaders.push(fragmentShader, vertexShader);
-
-    const vao = gl.createVertexArray();
-    const centers = createGrowableBuffer(gl);
-    const heights = createGrowableBuffer(gl);
-    const colors = createGrowableBuffer(gl);
-
-    gl.bindVertexArray(vao);
-
-    bindAttribute(gl, program, 'a_position', this.wickGeometryBuffer, 2, 0);
-
-    bindAttribute(gl, program, 'a_center', centers.buffer, 2, 1);
-    bindAttribute(gl, program, 'a_height', heights.buffer, 1, 1);
-    bindAttribute(gl, program, 'a_wick_color', colors.buffer, 4, 1, gl.UNSIGNED_BYTE, true);
-
-    gl.bindVertexArray(null);
-
-    return {
-      program,
-      vao,
-      centers,
-      heights,
-      colors,
-      uResolution: gl.getUniformLocation(program, 'u_resolution'),
-      uCandleWidth: gl.getUniformLocation(program, 'u_candle_width'),
-    };
+      throw new Error("STUB");
   }
 
   setResolution(width: number, height: number) {
-    this.gl.useProgram(this.candle.program);
-    this.gl.uniform2f(this.candle.uResolution, width, height);
-
-    this.gl.useProgram(this.wick.program);
-    this.gl.uniform2f(this.wick.uResolution, width, height);
+      throw new Error("STUB");
   }
 
   setCandleWidth(candleWidth: number) {
-    this.gl.useProgram(this.candle.program);
-    this.gl.uniform1f(this.candle.uCandleWidth, candleWidth);
-
-    this.gl.useProgram(this.wick.program);
-    this.gl.uniform1f(this.wick.uCandleWidth, candleWidth);
+      throw new Error("STUB");
   }
 
   plot(plotData: CandlestickPlotData) {
-    const { gl } = this;
-    const { candleCenters, candleHeights, wickCenters, wickHeights, candleColors, wickColors } =
-      plotData;
-
-    uploadGrowableBuffer(gl, this.candle.centers, candleCenters);
-    uploadGrowableBuffer(gl, this.candle.heights, candleHeights);
-    uploadGrowableBuffer(gl, this.candle.colors, candleColors);
-
-    uploadGrowableBuffer(gl, this.wick.centers, wickCenters);
-    uploadGrowableBuffer(gl, this.wick.heights, wickHeights);
-    uploadGrowableBuffer(gl, this.wick.colors, wickColors);
+      throw new Error("STUB");
   }
 
   render(dataLength: number) {
@@ -199,7 +101,7 @@ export class CandlestickWebGLProgram {
     gl.deleteBuffer(this.wick.heights.buffer);
     gl.deleteBuffer(this.wick.colors.buffer);
 
-    this.shaders.forEach((shader) => gl.deleteShader(shader));
+    this.shaders.forEach((shader) => { throw new Error("STUB"); });
   }
 }
 
@@ -213,13 +115,7 @@ function bindAttribute(
   type: GLenum = gl.FLOAT,
   normalized: boolean = false,
 ) {
-  const location = gl.getAttribLocation(program, name);
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.enableVertexAttribArray(location);
-  gl.vertexAttribPointer(location, size, type, normalized, 0, 0);
-  if (divisor !== 0) {
-    gl.vertexAttribDivisor(location, divisor);
-  }
+    throw new Error("STUB");
 }
 
 function initializeProgram(
@@ -227,23 +123,5 @@ function initializeProgram(
   vertexShaderSource: string,
   fragmentShaderSource: string,
 ) {
-  const program = gl.createProgram();
-  const vertexShader = compileShader(gl, vertexShaderSource, gl.VERTEX_SHADER);
-  const fragmentShader = compileShader(gl, fragmentShaderSource, gl.FRAGMENT_SHADER);
-  gl.attachShader(program, vertexShader);
-  gl.attachShader(program, fragmentShader);
-
-  gl.linkProgram(program);
-
-  /* Only inspect link status when linking actually failed; the parameter call stalls the pipeline.
-   * https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/WebGL_best_practices#dont_check_shader_compile_status_unless_linking_fails */
-  if (process.env.NODE_ENV !== 'production') {
-    if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error(`Program linking failed: ${gl.getProgramInfoLog(program)}`);
-      console.error(`Vertex shader info-log: ${gl.getShaderInfoLog(vertexShader)}`);
-      console.error(`Fragment shader info-log: ${gl.getShaderInfoLog(fragmentShader)}`);
-    }
-  }
-
-  return { program, vertexShader, fragmentShader };
+    throw new Error("STUB");
 }

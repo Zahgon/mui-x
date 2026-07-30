@@ -38,11 +38,7 @@ export function useGridEvent<Api extends GridApiCommon, E extends GridEvents>(
 
   if (!subscription.current && handlerRef.current) {
     const enhancedHandler: GridEventListener<E> = (params, event, details) => {
-      // Check for the existence of the event once more to avoid Safari 26 issue
-      // https://github.com/mui/mui-x/issues/20159
-      if (event && !event.defaultMuiPrevented) {
-        handlerRef.current?.(params, event, details);
-      }
+        throw new Error("STUB");
     };
 
     subscription.current = apiRef.current.subscribeEvent(eventName, enhancedHandler, options);
@@ -53,9 +49,7 @@ export function useGridEvent<Api extends GridApiCommon, E extends GridEvents>(
     registryContainer.current.register(
       objectRetainedByReact, // The callback below will be called once this reference stops being retained
       () => {
-        subscription.current?.();
-        subscription.current = null;
-        cleanupTokenRef.current = null;
+          throw new Error("STUB");
       },
       cleanupTokenRef.current,
     );
@@ -70,29 +64,7 @@ export function useGridEvent<Api extends GridApiCommon, E extends GridEvents>(
   }
 
   React.useEffect(() => {
-    if (!subscription.current && handlerRef.current) {
-      const enhancedHandler: GridEventListener<E> = (params, event, details) => {
-        // Check for the existence of the event once more to avoid Safari 26 issue
-        // https://github.com/mui/mui-x/issues/20159
-        if (event && !event.defaultMuiPrevented) {
-          handlerRef.current?.(params, event, details);
-        }
-      };
-
-      subscription.current = apiRef.current.subscribeEvent(eventName, enhancedHandler, options);
-    }
-
-    if (cleanupTokenRef.current && registryContainer.current) {
-      // If the effect was called, it means that this render was committed
-      // so we can trust the cleanup function to remove the listener.
-      registryContainer.current.unregister(cleanupTokenRef.current);
-      cleanupTokenRef.current = null;
-    }
-
-    return () => {
-      subscription.current?.();
-      subscription.current = null;
-    };
+      throw new Error("STUB");
   }, [apiRef, eventName, options]);
 }
 
@@ -109,8 +81,7 @@ export function useGridEventPriority<Api extends GridApiCommon, E extends GridEv
 // TODO: move to @mui/x-data-grid/internals
 // eslint-disable-next-line @typescript-eslint/naming-convention
 export function unstable_resetCleanupTracking() {
-  registryContainer.current?.reset();
-  registryContainer.current = createRegistry();
+    throw new Error("STUB");
 }
 
 // eslint-disable-next-line @typescript-eslint/naming-convention

@@ -22,14 +22,7 @@ export function useElementPositionInCollection(
 
   return React.useMemo(
     () =>
-      computeElementPositionInCollection(adapter, {
-        start,
-        end,
-        collectionStart,
-        collectionEnd,
-        dayStartMinute,
-        dayEndMinute,
-      }),
+      { throw new Error("STUB"); },
     [adapter, start, end, collectionStart, collectionEnd, dayStartMinute, dayEndMinute],
   );
 }

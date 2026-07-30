@@ -11,9 +11,8 @@ function GridColumnMenuFilterItem(props: GridColumnMenuItemProps) {
 
   const showFilter = React.useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
-      onClick(event);
-      apiRef.current.showFilterPanel(colDef.field);
-    },
+          throw new Error("STUB");
+      },
     [apiRef, colDef.field, onClick],
   );
 

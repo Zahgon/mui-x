@@ -100,11 +100,7 @@ export function applyRecurringUpdateFollowing(
   stringified.end = dateToEventString(adapter, effectiveEnd, originalModel.end, dataTimezone);
   if (changes.exDates != null) {
     stringified.exDates = changes.exDates.map((d, i) => {
-      const originalExDate = originalModel.exDates?.[i];
-      if (originalExDate) {
-        return dateToEventString(adapter, d, originalExDate, dataTimezone);
-      }
-      return dateToEventString(adapter, d, originalModel.start, dataTimezone);
+        throw new Error("STUB");
     });
   }
 

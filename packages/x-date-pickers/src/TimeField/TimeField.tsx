@@ -30,26 +30,7 @@ const TimeField = React.forwardRef(function TimeField(
   inProps: TimeFieldProps,
   inRef: React.Ref<HTMLDivElement>,
 ) {
-  const themeProps = useThemeProps({
-    props: inProps,
-    name: 'MuiTimeField',
-  });
-
-  const { slots, slotProps, ...other } = themeProps;
-
-  const textFieldProps = useFieldTextFieldProps<TimeFieldProps>({
-    slotProps,
-    ref: inRef,
-    externalForwardedProps: other,
-  });
-
-  const fieldResponse = useTimeField<typeof textFieldProps>(textFieldProps);
-
-  return (
-    <PickerFieldUIContextProvider slots={slots} slotProps={slotProps} inputRef={other.inputRef}>
-      <PickerFieldUI fieldResponse={fieldResponse} defaultOpenPickerIcon={ClockIcon} />
-    </PickerFieldUIContextProvider>
-  );
+    throw new Error("STUB");
 }) as TimeFieldComponent;
 
 TimeField.propTypes /* remove-proptypes */ = {

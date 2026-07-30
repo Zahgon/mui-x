@@ -2,5 +2,5 @@ import { createRootSelector } from '../../../utils/createSelector';
 import type { GridStateCommunity } from '../../../models/gridStateCommunity';
 
 export const gridRowsMetaSelector = createRootSelector(
-  (state: GridStateCommunity) => state.rowsMeta,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );

@@ -1052,7 +1052,7 @@ export interface GridClasses {
 export type GridClassKey = keyof GridClasses;
 
 export function getDataGridUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiDataGrid', slot);
+    throw new Error("STUB");
 }
 
 /**

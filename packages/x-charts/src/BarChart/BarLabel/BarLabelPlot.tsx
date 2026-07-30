@@ -42,27 +42,7 @@ function BarLabelPlot(props: BarLabelPlotProps) {
 
   return (
     <g key={seriesId} className={className} data-series={seriesId}>
-      {data.map(({ x, y, dataIndex, color, value, width, height, hidden }) => (
-        <BarLabelItem
-          key={dataIndex}
-          seriesId={seriesId}
-          dataIndex={dataIndex}
-          value={value}
-          color={color}
-          xOrigin={xOrigin}
-          yOrigin={yOrigin}
-          x={x}
-          y={y}
-          width={width}
-          height={height}
-          skipAnimation={skipAnimation ?? false}
-          layout={layout ?? 'vertical'}
-          hidden={hidden}
-          {...other}
-          barLabel={processedSeries.barLabel}
-          barLabelPlacement={processedSeries.barLabelPlacement || 'center'}
-        />
-      ))}
+      {data.map(({ x, y, dataIndex, color, value, width, height, hidden }) => { throw new Error("STUB"); })}
     </g>
   );
 }

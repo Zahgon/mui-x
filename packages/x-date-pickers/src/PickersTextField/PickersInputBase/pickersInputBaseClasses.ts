@@ -37,7 +37,7 @@ export interface PickersInputBaseClasses {
 export type PickersInputBaseClassKey = keyof PickersInputBaseClasses;
 
 export function getPickersInputBaseUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickersInputBase', slot);
+    throw new Error("STUB");
 }
 
 export const pickersInputBaseClasses = generateUtilityClasses<PickersInputBaseClassKey>(

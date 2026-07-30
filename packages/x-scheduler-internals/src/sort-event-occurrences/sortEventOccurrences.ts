@@ -9,7 +9,6 @@ export function sortEventOccurrences(
 ): SchedulerEventOccurrence[] {
   return occurrences.toSorted(
     (a, b) =>
-      a.displayTimezone.start.timestamp - b.displayTimezone.start.timestamp ||
-      b.displayTimezone.end.timestamp - a.displayTimezone.end.timestamp,
+      { throw new Error("STUB"); },
   );
 }

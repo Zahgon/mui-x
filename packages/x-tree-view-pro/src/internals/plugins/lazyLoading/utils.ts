@@ -35,33 +35,13 @@ export class NestedDataManager<R extends TreeViewValidItem<R>> {
   }
 
   private processQueue = async () => {
-    if (this.queuedRequests.size === 0 || this.pendingRequests.size >= this.maxConcurrentRequests) {
-      return;
-    }
-    const loopLength = Math.min(
-      this.maxConcurrentRequests - this.pendingRequests.size,
-      this.queuedRequests.size,
-    );
-    if (loopLength === 0) {
-      return;
-    }
-    const fetchQueue = Array.from(this.queuedRequests);
-    const fetchPromises: Promise<void>[] = [];
-    for (let i = 0; i < loopLength; i += 1) {
-      const id = fetchQueue[i];
-      this.queuedRequests.delete(id);
-      this.pendingRequests.add(id);
-
-      fetchPromises.push(this.lazyLoadingPlugin.fetchItemChildren({ itemId: id }));
-    }
-    await Promise.all(fetchPromises);
+      throw new Error("STUB");
   };
 
   public queue = async (ids: TreeViewItemId[]) => {
     const loadingIds: Record<TreeViewItemId, boolean> = {};
     ids.forEach((id) => {
-      this.queuedRequests.add(id);
-      loadingIds[id] = true;
+        throw new Error("STUB");
     });
 
     await this.processQueue();
@@ -75,7 +55,7 @@ export class NestedDataManager<R extends TreeViewValidItem<R>> {
 
   public clear = () => {
     this.queuedRequests.clear();
-    Array.from(this.pendingRequests).forEach((id) => this.clearPendingRequest(id));
+    Array.from(this.pendingRequests).forEach((id) => { throw new Error("STUB"); });
   };
 
   public clearPendingRequest = async (id: TreeViewItemId) => {
@@ -96,5 +76,5 @@ export class NestedDataManager<R extends TreeViewValidItem<R>> {
     return RequestStatus.UNKNOWN;
   };
 
-  public getActiveRequestsCount = () => this.pendingRequests.size + this.queuedRequests.size;
+  public getActiveRequestsCount = () => { throw new Error("STUB"); };
 }

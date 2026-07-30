@@ -17,16 +17,6 @@ const EventDialogTabPanel = styled('div', {
 const EventDialogTabContent = styled('div', {
   name: 'MuiEventDialog',
   slot: 'TabContent',
-})(({ theme }) => ({
-  padding: theme.spacing(3),
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(2),
-  flex: 1,
-  overflow: 'auto',
-  scrollbarWidth: 'thin',
-  maxHeight: 450,
-  height: 'fit-content',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 export { EventDialogTabPanel, EventDialogTabContent };

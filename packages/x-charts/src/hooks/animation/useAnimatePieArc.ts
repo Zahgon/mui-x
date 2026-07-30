@@ -26,23 +26,7 @@ type PieArcInterpolatedProps = Pick<
 >;
 
 function pieArcPropsInterpolator(from: PieArcInterpolatedProps, to: PieArcInterpolatedProps) {
-  const interpolateStartAngle = interpolateNumber(from.startAngle, to.startAngle);
-  const interpolateEndAngle = interpolateNumber(from.endAngle, to.endAngle);
-  const interpolateInnerRadius = interpolateNumber(from.innerRadius, to.innerRadius);
-  const interpolateOuterRadius = interpolateNumber(from.outerRadius, to.outerRadius);
-  const interpolatePaddingAngle = interpolateNumber(from.paddingAngle, to.paddingAngle);
-  const interpolateCornerRadius = interpolateNumber(from.cornerRadius, to.cornerRadius);
-
-  return (t: number) => {
-    return {
-      startAngle: interpolateStartAngle(t),
-      endAngle: interpolateEndAngle(t),
-      innerRadius: interpolateInnerRadius(t),
-      outerRadius: interpolateOuterRadius(t),
-      paddingAngle: interpolatePaddingAngle(t),
-      cornerRadius: interpolateCornerRadius(t),
-    };
-  };
+    throw new Error("STUB");
 }
 
 /** Animates a slice of a pie chart by increasing the start and end angles from the middle angle to their final values.
@@ -69,21 +53,7 @@ export function useAnimatePieArc(props: UseAnimatePieArcParams): UseAnimatePieAr
     },
     {
       createInterpolator: pieArcPropsInterpolator,
-      transformProps: (p) => ({
-        d: d3Arc().cornerRadius(p.cornerRadius)({
-          padAngle: p.paddingAngle,
-          innerRadius: p.innerRadius,
-          outerRadius: p.outerRadius,
-          startAngle: p.startAngle,
-          endAngle: snapEndAngleToFullCircle(
-            p.startAngle,
-            p.endAngle,
-            p.outerRadius,
-            p.paddingAngle,
-          ),
-        })!,
-        visibility: p.startAngle === p.endAngle ? ('hidden' as const) : ('visible' as const),
-      }),
+      transformProps: (p) => { throw new Error("STUB"); },
       applyProps(element, p) {
         element.setAttribute('d', p.d);
         element.setAttribute('visibility', p.visibility);

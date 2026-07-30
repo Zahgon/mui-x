@@ -13,7 +13,7 @@ export interface DayCalendarSkeletonClasses {
 export type DayCalendarSkeletonClassKey = keyof DayCalendarSkeletonClasses;
 
 export const getDayCalendarSkeletonUtilityClass = (slot: string) =>
-  generateUtilityClass('MuiDayCalendarSkeleton', slot);
+  { throw new Error("STUB"); };
 
 export const dayCalendarSkeletonClasses: DayCalendarSkeletonClasses = generateUtilityClasses(
   'MuiDayCalendarSkeleton',

@@ -17,32 +17,8 @@ export const useIsCellEditable = (
   const isCellEditableCommunity = useIsCellEditableCommunity();
   return React.useCallback(
     (params) => {
-      const isCellEditable = isCellEditableCommunity(params);
-
-      // If the cell is not editable by the community hook, return false immediately
-      if (!isCellEditable) {
-        return false;
-      }
-
-      // If the data source is not used or aggregation is disabled or both tree data and row grouping are disabled, return the community hook result
-      if (
-        !props.dataSource ||
-        props.disableAggregation ||
-        (!props.treeData && props.disableRowGrouping)
-      ) {
-        return isCellEditable;
-      }
-
-      // If the cell is not a part of the aggregation model, return the community hook result
-      const aggregationModelFields = Object.keys(gridAggregationModelSelector(apiRef));
-      if (!aggregationModelFields.includes(params.field)) {
-        return isCellEditable;
-      }
-
-      // The cell is a part of the aggregation model and it is retrieved from the server-side data.
-      // Allow editing only for the non-grouped rows.
-      return params.rowNode.type !== 'group';
-    },
+          throw new Error("STUB");
+      },
     [
       apiRef,
       props.dataSource,

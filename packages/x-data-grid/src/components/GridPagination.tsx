@@ -34,26 +34,23 @@ function GridPagination() {
   const unknownRowCount = rowCount == null || rowCount === -1;
   const disabled = unknownRowCount && paginationMode === 'server' && loading;
 
-  const lastPage = React.useMemo(() => Math.max(0, pageCount - 1), [pageCount]);
+  const lastPage = React.useMemo(() => { throw new Error("STUB"); }, [pageCount]);
 
   const computedPage = React.useMemo(() => {
-    if (unknownRowCount) {
-      return paginationModel.page;
-    }
-    return paginationModel.page <= lastPage ? paginationModel.page : lastPage;
+      throw new Error("STUB");
   }, [lastPage, paginationModel.page, unknownRowCount]);
 
   const handlePageSizeChange = React.useCallback(
     (pageSize: number) => {
-      apiRef.current.setPageSize(pageSize);
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
   const handlePageChange = React.useCallback<PaginationProps['onPageChange']>(
     (_, page) => {
-      apiRef.current.setPage(page);
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 

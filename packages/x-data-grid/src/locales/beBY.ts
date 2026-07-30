@@ -50,11 +50,7 @@ const beBYGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Схаваць фільтры',
   toolbarFiltersTooltipShow: 'Паказаць фільтры',
   toolbarFiltersTooltipActive: (count) =>
-    getPluralForm(count, {
-      one: 'актыўны фільтр',
-      few: 'актыўных фільтра',
-      many: 'актыўных фільтраў',
-    }),
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Пошук…',
@@ -163,28 +159,20 @@ const beBYGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    getPluralForm(count, {
-      one: 'актыўны фільтр',
-      few: 'актыўных фільтра',
-      many: 'актыўных фільтраў',
-    }),
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Паказаць фільтры',
   columnHeaderSortIconLabel: 'Сартыраваць',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    getPluralForm(count, {
-      one: 'абраны радок',
-      few: 'абраных радка',
-      many: 'абраных радкоў',
-    }),
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Усяго радкоў:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} з ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Выбар сцяжка',
@@ -216,8 +204,8 @@ const beBYGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Група',
-  groupColumn: (name) => `Групаваць па ${name}`,
-  unGroupColumn: (name) => `Разгрупаваць па ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Дэталі',
@@ -240,17 +228,7 @@ const beBYGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Перайсці на першую старонку';
-    }
-    if (type === 'last') {
-      return 'Перайсці на апошнюю старонку';
-    }
-    if (type === 'next') {
-      return 'Перайсці на наступную старонку';
-    }
-    // if (type === 'previous') {
-    return 'Перайсці на папярэднюю старонку';
+      throw new Error("STUB");
   },
 
   // Row reordering text

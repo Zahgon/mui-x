@@ -41,86 +41,18 @@ type SourceUrlPartComponent = ((
 ) => React.JSX.Element) & { propTypes?: any };
 
 function ExternalLinkIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="currentColor"
-      focusable="false"
-      height="1em"
-      viewBox="0 0 24 24"
-      width="1em"
-    >
-      <path d="M14 3h7v7h-2V6.41l-9.29 9.3-1.42-1.42 9.3-9.29H14V3Z" />
-      <path d="M5 5h6v2H7v10h10v-4h2v6H5V5Z" />
-    </svg>
-  );
+    throw new Error("STUB");
 }
 
 export const SourceUrlPart = React.forwardRef(function SourceUrlPart(
   props: SourceUrlPartProps,
   ref: React.Ref<HTMLSpanElement>,
 ) {
-  const { className, index, message, onToolCall, part, slots, slotProps, ...other } = props;
-  void index;
-  void onToolCall;
-  const ownerState = React.useMemo<SourceUrlPartOwnerState>(
-    () => ({
-      messageId: message.id,
-      role: message.role,
-    }),
-    [message.id, message.role],
-  );
-  const Root = slots?.root ?? 'span';
-  const Icon = slots?.icon ?? 'span';
-  const LinkSlot = slots?.link ?? 'a';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-      className,
-    },
-  });
-  const iconProps = useSlotProps({
-    elementType: Icon,
-    externalSlotProps: slotProps?.icon,
-    ownerState,
-  });
-  // Inside a roving message list the link leaves the tab order until the
-  // user drills into the message (Enter); it stays mouse-clickable.
-  const contentTabIndex = useMessageContentTabIndex();
-  const linkProps = useSlotProps({
-    elementType: LinkSlot,
-    externalSlotProps: slotProps?.link,
-    ownerState,
-    additionalProps: {
-      tabIndex: contentTabIndex,
-    },
-  });
-
-  return (
-    <Root {...rootProps}>
-      <Icon {...iconProps}>
-        <ExternalLinkIcon />
-      </Icon>
-      <LinkSlot
-        href={safeUri(part.url) || undefined}
-        rel="noreferrer noopener"
-        target="_blank"
-        {...linkProps}
-      >
-        {part.title ?? part.url}
-      </LinkSlot>
-    </Root>
-  );
+    throw new Error("STUB");
 }) as SourceUrlPartComponent;
 
 export function createSourceUrlPartRenderer(
   defaultProps: SourceUrlPartExternalProps = {},
 ): ChatPartRenderer<ChatSourceUrlMessagePart> {
-  return function SourceUrlPartRendererFn(rendererProps) {
-    return <SourceUrlPart {...defaultProps} {...rendererProps} />;
-  };
+    throw new Error("STUB");
 }

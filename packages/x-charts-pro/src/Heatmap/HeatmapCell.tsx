@@ -29,15 +29,8 @@ export interface HeatmapCellProps extends React.ComponentPropsWithRef<'rect'> {
 const HeatmapCellRoot = styled('rect', {
   name: 'MuiHeatmap',
   slot: 'Cell',
-  overridesResolver: (_, styles) => styles.cell,
-})<HeatmapCellProps>(({ ownerState }) => ({
-  filter:
-    (ownerState.isHighlighted && 'saturate(120%)') ||
-    (ownerState.isFaded && 'saturate(80%)') ||
-    undefined,
-  fill: ownerState.color,
-  shapeRendering: 'crispEdges',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})<HeatmapCellProps>(({ ownerState }) => { throw new Error("STUB"); });
 
 /**
  * Demos:
@@ -50,8 +43,8 @@ const HeatmapCellRoot = styled('rect', {
  */
 const HeatmapCell = React.forwardRef<SVGRectElement, HeatmapCellProps>(
   function HeatmapCell(props, ref) {
-    return <HeatmapCellRoot ref={ref} {...props} />;
-  },
+        throw new Error("STUB");
+    },
 );
 
 HeatmapCell.propTypes /* remove-proptypes */ = {

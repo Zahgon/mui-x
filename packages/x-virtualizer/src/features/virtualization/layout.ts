@@ -37,9 +37,7 @@ export abstract class Layout<E extends AnyElements = AnyElements> {
 
   refSetter(name: keyof E) {
     return (node: HTMLDivElement | null) => {
-      if (this.refs[name].current !== node) {
-        this.refs[name].current = node;
-      }
+        throw new Error("STUB");
     };
   }
 }
@@ -89,27 +87,13 @@ export class LayoutDataGrid extends Layout<DataGridElements> {
   }
 
   static selectors = {
-    containerProps: createSelectorMemoized(Virtualization.selectors.context, (context) => ({
-      ref: context.containerRef,
-    })),
+    containerProps: createSelectorMemoized(Virtualization.selectors.context, (context) => { throw new Error("STUB"); }),
 
     scrollerProps: createSelectorMemoized(
       Virtualization.selectors.context,
       Dimensions.selectors.autoHeight,
       Dimensions.selectors.needsHorizontalScrollbar,
-      (context, autoHeight, needsHorizontalScrollbar) => ({
-        ref: context.scrollerRef,
-        style: {
-          // TODO: fall back to overflow: 'auto' if no overflowX or overflowY is set?
-          overflowX: !needsHorizontalScrollbar ? ('hidden' as const) : undefined,
-          overflowY: autoHeight ? ('hidden' as const) : undefined,
-          // TODO: should include display: 'flex', flexDirection: 'column' since the Content has flexBasis and flexShrink?
-        },
-        role: 'presentation',
-        // `tabIndex` shouldn't be used along role=presentation, but it fixes a Firefox bug
-        // https://github.com/mui/mui-x/pull/13891#discussion_r1683416024
-        tabIndex: platform.engine.gecko ? -1 : undefined,
-      }),
+      (context, autoHeight, needsHorizontalScrollbar) => { throw new Error("STUB"); },
     ),
 
     scrollerContentProps: createSelectorMemoized(
@@ -118,120 +102,49 @@ export class LayoutDataGrid extends Layout<DataGridElements> {
       Dimensions.selectors.needsVerticalScrollbar,
       Dimensions.selectors.needsHorizontalScrollbar,
       (layoutMode, dimensions, needsVerticalScrollbar, needsHorizontalScrollbar) => {
-        let style: React.CSSProperties | undefined;
-        if (layoutMode === 'controlled') {
-          const {
-            contentSize,
-            scrollbarSize,
-            topContainerHeight,
-            bottomContainerHeight,
-            minimalContentHeight,
-            columnsTotalWidth,
-            viewportOuterSize,
-          } = dimensions;
-
-          const verticalScrollbarSize = needsVerticalScrollbar ? scrollbarSize : 0;
-          const horizontalScrollbarSize = needsHorizontalScrollbar ? scrollbarSize : 0;
-
-          const contentHeight =
-            contentSize.height === 0 ? minimalContentHeight : contentSize.height;
-
-          const width = needsHorizontalScrollbar
-            ? verticalScrollbarSize + columnsTotalWidth
-            : 'auto';
-
-          const height = cssAdd(
-            cssAdd(cssAdd(contentHeight, topContainerHeight), bottomContainerHeight),
-            horizontalScrollbarSize,
-          );
-
-          style = {
-            width: cssMax(width, viewportOuterSize.width - verticalScrollbarSize),
-            height: cssMax(height, viewportOuterSize.height - horizontalScrollbarSize),
-            flex: '0 0 auto',
-          } as React.CSSProperties;
-        }
-
-        return {
-          style,
-          role: 'presentation',
-        };
+          throw new Error("STUB");
       },
     ),
 
-    viewportProps: createSelectorMemoized(Dimensions.selectors.dimensions, (dimensions) => ({
-      style: {
-        width: dimensions.viewportOuterSize.width,
-        height: dimensions.viewportOuterSize.height,
-      },
-      role: 'presentation',
-    })),
+    viewportProps: createSelectorMemoized(Dimensions.selectors.dimensions, (dimensions) => { throw new Error("STUB"); }),
 
     contentProps: createSelectorMemoized(
       Dimensions.selectors.contentHeight,
       Dimensions.selectors.minimalContentHeight,
       Dimensions.selectors.columnsTotalWidth,
       Dimensions.selectors.needsHorizontalScrollbar,
-      (contentHeight, minimalContentHeight, columnsTotalWidth, needsHorizontalScrollbar) => ({
-        style: {
-          width: needsHorizontalScrollbar ? columnsTotalWidth : 'auto',
-          height: contentHeight === 0 ? minimalContentHeight : contentHeight,
-          flex: '0 0 auto',
-        } as React.CSSProperties,
-        role: 'presentation',
-      }),
+      (contentHeight, minimalContentHeight, columnsTotalWidth, needsHorizontalScrollbar) => { throw new Error("STUB"); },
     ),
 
     positionerProps: createSelectorMemoized(
       Virtualization.selectors.layoutMode,
       Virtualization.selectors.offsetTop,
       Virtualization.selectors.scrollPosition,
-      (layoutMode, offsetTop, scrollPosition) => ({
-        style: {
-          transform:
-            layoutMode === 'uncontrolled'
-              ? `translate3d(0, ${offsetTop}px, 0)`
-              : `translate3d(${-scrollPosition.current.left}px, ${offsetTop - scrollPosition.current.top}px, 0)`,
-        },
-      }),
+      (layoutMode, offsetTop, scrollPosition) => { throw new Error("STUB"); },
     ),
 
     containerVerticalProps: createSelectorMemoized(
       Virtualization.selectors.layoutMode,
       Virtualization.selectors.scrollPosition,
       (layoutMode, scrollPosition) =>
-        layoutMode === 'uncontrolled'
-          ? undefined
-          : {
-              style: {
-                transform: `translate3d(${-scrollPosition.current.left}px, 0, 0)`,
-              },
-            },
+        { throw new Error("STUB"); },
     ),
 
     scrollbarHorizontalProps: createSelectorMemoized(
       Virtualization.selectors.context,
       Virtualization.selectors.scrollPosition,
-      (context, scrollPosition) => ({
-        ref: context.scrollbarHorizontalRef,
-        scrollPosition,
-      }),
+      (context, scrollPosition) => { throw new Error("STUB"); },
     ),
 
     scrollbarVerticalProps: createSelectorMemoized(
       Virtualization.selectors.context,
       Virtualization.selectors.scrollPosition,
-      (context, scrollPosition) => ({
-        ref: context.scrollbarVerticalRef,
-        scrollPosition,
-      }),
+      (context, scrollPosition) => { throw new Error("STUB"); },
     ),
 
     scrollAreaProps: createSelectorMemoized(
       Virtualization.selectors.scrollPosition,
-      (scrollPosition) => ({
-        scrollPosition,
-      }),
+      (scrollPosition) => { throw new Error("STUB"); },
     ),
   };
 }
@@ -261,38 +174,12 @@ export class LayoutList extends Layout<ListElements> {
       Virtualization.selectors.context,
       Dimensions.selectors.autoHeight,
       Dimensions.selectors.needsHorizontalScrollbar,
-      (context, autoHeight, needsHorizontalScrollbar) => ({
-        ref: context.mergedRef,
-        style: {
-          overflowX: !needsHorizontalScrollbar ? 'hidden' : undefined,
-          overflowY: autoHeight ? 'hidden' : undefined,
-          position: 'relative',
-        } as React.CSSProperties,
-        role: 'presentation',
-        // `tabIndex` shouldn't be used along role=presentation, but it fixes a Firefox bug
-        // https://github.com/mui/mui-x/pull/13891#discussion_r1683416024
-        tabIndex: platform.engine.gecko ? -1 : undefined,
-      }),
+      (context, autoHeight, needsHorizontalScrollbar) => { throw new Error("STUB"); },
     ),
 
-    contentProps: createSelectorMemoized(Dimensions.selectors.contentHeight, (contentHeight) => ({
-      style: {
-        position: 'absolute',
-        display: 'inline-block',
-        width: '100%',
-        height: contentHeight,
-        top: 0,
-        left: 0,
-        zIndex: -1,
-      } as React.CSSProperties,
-      role: 'presentation',
-    })),
+    contentProps: createSelectorMemoized(Dimensions.selectors.contentHeight, (contentHeight) => { throw new Error("STUB"); }),
 
-    positionerProps: createSelectorMemoized(Virtualization.selectors.offsetTop, (offsetTop) => ({
-      style: {
-        height: offsetTop,
-      } as React.CSSProperties,
-    })),
+    positionerProps: createSelectorMemoized(Virtualization.selectors.offsetTop, (offsetTop) => { throw new Error("STUB"); }),
   };
 }
 
@@ -308,64 +195,15 @@ function useScrollbarRefCallback(
   const lastPosition = React.useRef(0);
 
   const handleScrollerScroll = useEventCallback((scrollbar: HTMLElement) => {
-    const scroller = scrollerRef.current;
-    if (!scroller) {
-      return;
-    }
-
-    const scrollerPosition = scroller[scrollProperty];
-    if (scrollerPosition === lastPosition.current) {
-      return;
-    }
-    lastPosition.current = scrollerPosition;
-
-    if (isLocked.current) {
-      isLocked.current = false;
-      return;
-    }
-    isLocked.current = true;
-
-    scrollbar[scrollProperty] = scrollerPosition;
+      throw new Error("STUB");
   });
 
   const handleScrollbarScroll = useEventCallback((scrollbar: HTMLElement) => {
-    const scroller = scrollerRef.current;
-    if (!scroller) {
-      return;
-    }
-
-    if (isLocked.current) {
-      isLocked.current = false;
-      return;
-    }
-    isLocked.current = true;
-
-    scroller[scrollProperty] = scrollbar[scrollProperty];
+      throw new Error("STUB");
   });
 
   return useRefCallback((scrollbar) => {
-    refSetter(scrollbar);
-    updateDimensions();
-
-    const scroller = scrollerRef.current;
-    if (!scroller) {
-      return () => {
-        refSetter(null);
-      };
-    }
-
-    const onScrollerScroll = () => handleScrollerScroll(scrollbar);
-    const onScrollbarScroll = () => handleScrollbarScroll(scrollbar);
-
-    const options: AddEventListenerOptions = { passive: true };
-    scroller.addEventListener('scroll', onScrollerScroll, options);
-    scrollbar.addEventListener('scroll', onScrollbarScroll, options);
-
-    return () => {
-      scroller.removeEventListener('scroll', onScrollerScroll);
-      scrollbar.removeEventListener('scroll', onScrollbarScroll);
-      refSetter(null);
-    };
+      throw new Error("STUB");
   });
 }
 

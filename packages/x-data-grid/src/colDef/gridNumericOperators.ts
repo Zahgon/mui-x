@@ -15,13 +15,7 @@ const parseNumericValue = (value: unknown) => {
 export const getGridNumericQuickFilterFn: GetApplyQuickFilterFn<any, number | string | null> = (
   value,
 ) => {
-  if (value == null || Number.isNaN(value) || value === '') {
-    return null;
-  }
-
-  return (columnValue) => {
-    return parseNumericValue(columnValue) === parseNumericValue(value);
-  };
+    throw new Error("STUB");
 };
 
 export const getGridNumericOperators = (): GridFilterOperator<
@@ -33,13 +27,7 @@ export const getGridNumericOperators = (): GridFilterOperator<
   {
     value: '=',
     getApplyFilterFn: (filterItem) => {
-      if (filterItem.value == null || Number.isNaN(filterItem.value)) {
-        return null;
-      }
-
-      return (value): boolean => {
-        return parseNumericValue(value) === filterItem.value;
-      };
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputValue,
     InputComponentProps: { type: 'number' },
@@ -47,13 +35,7 @@ export const getGridNumericOperators = (): GridFilterOperator<
   {
     value: '!=',
     getApplyFilterFn: (filterItem) => {
-      if (filterItem.value == null || Number.isNaN(filterItem.value)) {
-        return null;
-      }
-
-      return (value): boolean => {
-        return parseNumericValue(value) !== filterItem.value;
-      };
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputValue,
     InputComponentProps: { type: 'number' },
@@ -61,17 +43,7 @@ export const getGridNumericOperators = (): GridFilterOperator<
   {
     value: '>',
     getApplyFilterFn: (filterItem) => {
-      if (filterItem.value == null || Number.isNaN(filterItem.value)) {
-        return null;
-      }
-
-      return (value): boolean => {
-        if (value == null) {
-          return false;
-        }
-
-        return parseNumericValue(value)! > filterItem.value;
-      };
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputValue,
     InputComponentProps: { type: 'number' },
@@ -79,17 +51,7 @@ export const getGridNumericOperators = (): GridFilterOperator<
   {
     value: '>=',
     getApplyFilterFn: (filterItem) => {
-      if (filterItem.value == null || Number.isNaN(filterItem.value)) {
-        return null;
-      }
-
-      return (value): boolean => {
-        if (value == null) {
-          return false;
-        }
-
-        return parseNumericValue(value)! >= filterItem.value;
-      };
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputValue,
     InputComponentProps: { type: 'number' },
@@ -97,17 +59,7 @@ export const getGridNumericOperators = (): GridFilterOperator<
   {
     value: '<',
     getApplyFilterFn: (filterItem) => {
-      if (filterItem.value == null || Number.isNaN(filterItem.value)) {
-        return null;
-      }
-
-      return (value): boolean => {
-        if (value == null) {
-          return false;
-        }
-
-        return parseNumericValue(value)! < filterItem.value;
-      };
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputValue,
     InputComponentProps: { type: 'number' },
@@ -115,17 +67,7 @@ export const getGridNumericOperators = (): GridFilterOperator<
   {
     value: '<=',
     getApplyFilterFn: (filterItem) => {
-      if (filterItem.value == null || Number.isNaN(filterItem.value)) {
-        return null;
-      }
-
-      return (value): boolean => {
-        if (value == null) {
-          return false;
-        }
-
-        return parseNumericValue(value)! <= filterItem.value;
-      };
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputValue,
     InputComponentProps: { type: 'number' },
@@ -133,31 +75,21 @@ export const getGridNumericOperators = (): GridFilterOperator<
   {
     value: 'isEmpty',
     getApplyFilterFn: () => {
-      return (value): boolean => {
-        return value == null;
-      };
+        throw new Error("STUB");
     },
     requiresFilterValue: false,
   },
   {
     value: 'isNotEmpty',
     getApplyFilterFn: () => {
-      return (value): boolean => {
-        return value != null;
-      };
+        throw new Error("STUB");
     },
     requiresFilterValue: false,
   },
   {
     value: 'isAnyOf',
     getApplyFilterFn: (filterItem) => {
-      if (!Array.isArray(filterItem.value) || filterItem.value.length === 0) {
-        return null;
-      }
-
-      return (value): boolean => {
-        return value != null && filterItem.value.includes(Number(value));
-      };
+        throw new Error("STUB");
     },
     InputComponent: GridFilterInputMultipleValue,
     InputComponentProps: { type: 'number' },

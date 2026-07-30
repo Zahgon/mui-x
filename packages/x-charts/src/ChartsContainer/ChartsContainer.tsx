@@ -51,18 +51,7 @@ const ChartsContainer = React.forwardRef(function ChartsContainer<
   SeriesType extends ChartSeriesType,
   TSignatures extends readonly ChartAnyPluginSignature[] = AllPluginSignatures<SeriesType>,
 >(props: ChartsContainerProps<SeriesType, TSignatures>, ref: React.Ref<HTMLDivElement>) {
-  const { chartsDataProviderProps, children, chartsSurfaceProps } = useChartsContainerProps<
-    SeriesType,
-    TSignatures
-  >(props);
-
-  return (
-    <ChartsDataProvider {...chartsDataProviderProps}>
-      <ChartsSurface {...chartsSurfaceProps} ref={ref}>
-        {children}
-      </ChartsSurface>
-    </ChartsDataProvider>
-  );
+    throw new Error("STUB");
 }) as <SeriesType extends ChartSeriesType>(
   props: ChartsContainerProps<SeriesType> & { ref?: React.ForwardedRef<HTMLDivElement> },
 ) => React.JSX.Element;

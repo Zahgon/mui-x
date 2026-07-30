@@ -28,7 +28,7 @@ export const shouldApplySorting = (
   aggregationRules: GridAggregationRules,
   aggregatedFields: string[],
 ) => {
-  return aggregatedFields.some((field) => aggregationRules[field].aggregationFunction.applySorting);
+  return aggregatedFields.some((field) => { throw new Error("STUB"); });
 };
 
 const getGroupAggregatedValue = (
@@ -227,7 +227,7 @@ export const createAggregationLookup = ({
   const createGroupAggregationLookup = (groupNode: GridGroupNode) => {
     let children = groupNode.children;
     if (applySorting) {
-      children = children.toSorted((a, b) => rowIdToIndexMap.get(a)! - rowIdToIndexMap.get(b)!);
+      children = children.toSorted((a, b) => { throw new Error("STUB"); });
     }
     for (let i = 0; i < children.length; i += 1) {
       const childId = children[i];

@@ -61,43 +61,7 @@ const Root = styled('div', {
   name: 'MuiChartsLabelGradient',
   slot: 'Root',
 })<{ ownerState: ChartsLabelGradientProps & { isRtl: boolean } }>(({ ownerState }) => {
-  const rotation = getRotation(
-    ownerState.direction,
-    ownerState.reverse,
-    ownerState.rotate,
-    ownerState.isRtl,
-  );
-
-  return {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    [`.${labelGradientClasses.mask}`]: {
-      borderRadius: 2,
-      overflow: 'hidden',
-    },
-    [`&.${labelGradientClasses.horizontal}`]: {
-      width: '100%',
-      [`.${labelGradientClasses.mask}`]: {
-        height: ownerState.thickness,
-        width: '100%',
-      },
-    },
-    [`&.${labelGradientClasses.vertical}`]: {
-      height: '100%',
-      [`.${labelGradientClasses.mask}`]: {
-        width: ownerState.thickness,
-        height: '100%',
-        '> svg': {
-          height: '100%',
-        },
-      },
-    },
-    svg: {
-      transform: `rotate(${rotation}deg)`,
-      display: 'block',
-    },
-  };
+    throw new Error("STUB");
 });
 
 /**
@@ -114,25 +78,7 @@ const ChartsLabelGradient = consumeThemeProps(
     classesResolver: useUtilityClasses,
   },
   function ChartsLabelGradient(props: ChartsLabelGradientProps, ref: React.Ref<HTMLDivElement>) {
-    const { gradientId, direction, classes, className, rotate, reverse, thickness, ...other } =
-      props;
-    const isRtl = useRtl();
-
-    return (
-      <Root
-        className={clsx(classes?.root, className)}
-        ownerState={{ ...props, isRtl }}
-        aria-hidden="true"
-        ref={ref}
-        {...other}
-      >
-        <div className={classes?.mask}>
-          <svg viewBox="0 0 24 24">
-            <rect className={classes?.fill} width="24" height="24" fill={`url(#${gradientId})`} />
-          </svg>
-        </div>
-      </Root>
-    );
+      throw new Error("STUB");
   },
 );
 

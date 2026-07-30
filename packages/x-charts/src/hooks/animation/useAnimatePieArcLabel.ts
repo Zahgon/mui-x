@@ -24,21 +24,7 @@ function pieArcLabelPropsInterpolator(
   from: PieArcLabelInterpolatedProps,
   to: PieArcLabelInterpolatedProps,
 ) {
-  const interpolateStartAngle = interpolateNumber(from.startAngle, to.startAngle);
-  const interpolateEndAngle = interpolateNumber(from.endAngle, to.endAngle);
-  const interpolateArcLabelRadius = interpolateNumber(from.arcLabelRadius, to.arcLabelRadius);
-  const interpolatePaddingAngle = interpolateNumber(from.paddingAngle, to.paddingAngle);
-  const interpolateCornerRadius = interpolateNumber(from.cornerRadius, to.cornerRadius);
-
-  return (t: number) => {
-    return {
-      startAngle: interpolateStartAngle(t),
-      endAngle: interpolateEndAngle(t),
-      arcLabelRadius: interpolateArcLabelRadius(t),
-      paddingAngle: interpolatePaddingAngle(t),
-      cornerRadius: interpolateCornerRadius(t),
-    };
-  };
+    throw new Error("STUB");
 }
 
 /** Animates the label of pie slice from its middle point to the centroid of the slice.
@@ -66,15 +52,7 @@ export function useAnimatePieArcLabel(
     {
       createInterpolator: pieArcLabelPropsInterpolator,
       transformProps: (animatedProps) => {
-        const [x, y] = d3Arc().cornerRadius(animatedProps.cornerRadius).centroid({
-          padAngle: animatedProps.paddingAngle,
-          startAngle: animatedProps.startAngle,
-          endAngle: animatedProps.endAngle,
-          innerRadius: animatedProps.arcLabelRadius,
-          outerRadius: animatedProps.arcLabelRadius,
-        });
-
-        return { x, y };
+          throw new Error("STUB");
       },
       applyProps(element, { x, y }) {
         element.setAttribute('x', x.toString());

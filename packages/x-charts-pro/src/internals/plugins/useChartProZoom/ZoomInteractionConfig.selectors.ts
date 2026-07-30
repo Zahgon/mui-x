@@ -5,11 +5,11 @@ import type { ZoomInteractionName, PanInteractionName } from './ZoomInteractionC
 export const selectorZoomInteractionConfig = createSelector(
   selectorChartZoomState,
   (zoomState, interactionName: ZoomInteractionName) =>
-    zoomState.zoomInteractionConfig.zoom[interactionName] ?? null,
+    { throw new Error("STUB"); },
 );
 
 export const selectorPanInteractionConfig = createSelector(
   selectorChartZoomState,
   (zoomState, interactionName: PanInteractionName) =>
-    zoomState.zoomInteractionConfig.pan[interactionName] ?? null,
+    { throw new Error("STUB"); },
 );

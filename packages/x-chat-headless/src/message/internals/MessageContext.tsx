@@ -21,9 +21,7 @@ export function MessageContextProvider(props: {
   children: React.ReactNode;
   value: MessageOwnerState;
 }) {
-  const { children, value } = props;
-
-  return <MessageContext.Provider value={value}>{children}</MessageContext.Provider>;
+    throw new Error("STUB");
 }
 
 export function useMessageContext() {

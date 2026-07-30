@@ -24,15 +24,7 @@ export function useDateRangeManager(
   const { dateSeparator } = parameters;
 
   return React.useMemo(
-    () => ({
-      valueType: 'date',
-      validator: validateDateRange,
-      internal_valueManager: rangeValueManager,
-      internal_fieldValueManager: getRangeFieldValueManager({ dateSeparator }),
-      internal_useApplyDefaultValuesToFieldInternalProps:
-        useApplyDefaultValuesToDateRangeFieldInternalProps,
-      internal_useOpenPickerButtonAriaLabel: useOpenPickerButtonAriaLabel,
-    }),
+    () => { throw new Error("STUB"); },
     [dateSeparator],
   );
 }
@@ -42,24 +34,14 @@ function useOpenPickerButtonAriaLabel(value: PickerRangeValue) {
   const translations = usePickerTranslations();
 
   return React.useMemo(() => {
-    return translations.openRangePickerDialogue(formatRange(adapter, value, 'fullDate'));
+      throw new Error("STUB");
   }, [value, translations, adapter]);
 }
 
 function useApplyDefaultValuesToDateRangeFieldInternalProps(
   internalProps: DateRangeManagerFieldInternalProps,
 ): PickerManagerFieldInternalPropsWithDefaults<UseDateRangeManagerReturnValue> {
-  const adapter = usePickerAdapter();
-  const validationProps = useApplyDefaultValuesToDateValidationProps(internalProps);
-
-  return React.useMemo(
-    () => ({
-      ...internalProps,
-      ...validationProps,
-      format: internalProps.format ?? adapter.formats.keyboardDate,
-    }),
-    [internalProps, validationProps, adapter],
-  );
+    throw new Error("STUB");
 }
 
 export interface UseDateRangeManagerParameters extends RangeFieldSeparatorProps {}

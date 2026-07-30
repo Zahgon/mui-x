@@ -13,36 +13,7 @@ export const TimelineGridBodyRow = React.forwardRef(function TimelineGridBodyRow
   componentProps: TimelineGridBodyRow.Props,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {
-    // Rendering props
-    className,
-    render,
-    style,
-    // Internal props
-    index,
-    // Props forwarded to the DOM element
-    ...elementProps
-  } = componentProps;
-
-  const contextValue: TimelineGridBodyRowContext = React.useMemo(() => ({ index }), [index]);
-
-  const element = useRenderElement('div', componentProps, {
-    ref: [forwardedRef],
-    props: [
-      elementProps,
-      {
-        role: 'row',
-        // Reserve aria-rowindex=1 for the grid header row.
-        'aria-rowindex': index + 2,
-      },
-    ],
-  });
-
-  return (
-    <TimelineGridBodyRowContext.Provider value={contextValue}>
-      {element}
-    </TimelineGridBodyRowContext.Provider>
-  );
+    throw new Error("STUB");
 });
 
 export namespace TimelineGridBodyRow {

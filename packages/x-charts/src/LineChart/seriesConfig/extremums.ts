@@ -5,9 +5,7 @@ import type {
 import { findMinMax } from '../../internals/findMinMax';
 
 export const getExtremumX: CartesianExtremumGetter<'line'> = (params) => {
-  const { axis } = params;
-
-  return findMinMax(axis.data ?? []);
+    throw new Error("STUB");
 };
 
 type GetValues = (d: [number, number]) => [number, number];
@@ -20,62 +18,12 @@ function getSeriesExtremums(
 ): [number, number] {
   return stackedData.reduce<[number, number]>(
     (seriesAcc, stackedValue, index) => {
-      if (data[index] === null) {
-        return seriesAcc;
-      }
-      const [base, value] = getValues(stackedValue);
-      if (
-        filter &&
-        (!filter({ y: base, x: null }, index) || !filter({ y: value, x: null }, index))
-      ) {
-        return seriesAcc;
-      }
-
-      return [Math.min(base, value, seriesAcc[0]), Math.max(base, value, seriesAcc[1])];
-    },
+          throw new Error("STUB");
+      },
     [Infinity, -Infinity],
   );
 }
 
 export const getExtremumY: CartesianExtremumGetter<'line'> = (params) => {
-  const { series, axis, isDefaultAxis, getFilters } = params;
-
-  return Object.keys(series)
-    .filter((seriesId) => {
-      if (axis.domainSeries === 'visible' && series[seriesId].hidden) {
-        return false;
-      }
-      const yAxisId = series[seriesId].yAxisId;
-      return yAxisId === axis.id || (isDefaultAxis && yAxisId === undefined);
-    })
-    .reduce(
-      (acc, seriesId) => {
-        const { area, stackedData, visibleStackedData, data } = series[seriesId];
-        const isArea = area !== undefined;
-
-        const filter = getFilters?.({
-          currentAxisId: axis.id,
-          isDefaultAxis,
-          seriesXAxisId: series[seriesId].xAxisId,
-          seriesYAxisId: series[seriesId].yAxisId,
-        });
-
-        // Since this series is not used to display an area, we do not consider the base (the d[0]).
-        const getValues: GetValues =
-          isArea && axis.scaleType !== 'log' && typeof series[seriesId].baseline !== 'string'
-            ? (d) => d
-            : (d) => [d[1], d[1]];
-
-        const seriesExtremums = getSeriesExtremums(
-          getValues,
-          data,
-          axis.domainSeries === 'visible' ? visibleStackedData : stackedData,
-          filter,
-        );
-
-        const [seriesMin, seriesMax] = seriesExtremums;
-        return [Math.min(seriesMin, acc[0]), Math.max(seriesMax, acc[1])];
-      },
-      [Infinity, -Infinity],
-    );
+    throw new Error("STUB");
 };

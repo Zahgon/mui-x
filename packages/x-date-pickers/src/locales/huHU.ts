@@ -19,9 +19,7 @@ const huHUPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Előző nézet megnyitása',
   openNextView: 'Következő nézet megnyitása',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'az évválasztó már nyitva, váltson a naptárnézetre'
-      : 'a naptárnézet már nyitva, váltson az évválasztóra',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Kezdő dátum',
@@ -47,27 +45,25 @@ const huHUPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `${timeViews[view] ?? view} kiválasztása. ${!formattedTime ? 'Nincs kiválasztva idő' : `A kiválasztott idő ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} ${timeViews.hours.toLowerCase()}`,
-  minutesClockNumberText: (minutes) => `${minutes} ${timeViews.minutes.toLowerCase()}`,
-  secondsClockNumberText: (seconds) => `${seconds}  ${timeViews.seconds.toLowerCase()}`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `${timeViews[view]} kiválasztása`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Hét',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `${weekNumber}. hét`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate
-      ? `Válasszon dátumot, a kiválasztott dátum: ${formattedDate}`
-      : 'Válasszon dátumot',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Válasszon időt, a kiválasztott idő: ${formattedTime}` : 'Válasszon időt',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Tartalom ürítése',
 
@@ -76,14 +72,14 @@ const huHUPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'válasszon dátumot',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'É'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'HHHH' : 'HH'),
-  fieldDayPlaceholder: () => 'NN',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'NNNN' : 'NN'),
-  fieldHoursPlaceholder: () => 'óó',
-  fieldMinutesPlaceholder: () => 'pp',
-  fieldSecondsPlaceholder: () => 'mm',
-  fieldMeridiemPlaceholder: () => 'dd',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Év',

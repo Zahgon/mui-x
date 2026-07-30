@@ -7,8 +7,5 @@ export function getVisibleFractionRange(
   renderContext: { firstColumnIndex: number; lastColumnIndex: number },
   tickCount: number,
 ): { start: number; end: number } {
-  return {
-    start: Math.max(0, renderContext.firstColumnIndex - 1) / tickCount,
-    end: Math.max(0, renderContext.lastColumnIndex - 1) / tickCount,
-  };
+    throw new Error("STUB");
 }

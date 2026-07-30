@@ -14,7 +14,7 @@ export const nbNOLocaleText: Partial<ChartsLocaleText> = {
 
   // Toolbar Export Menu
   toolbarExportPrint: 'Skriv ut',
-  toolbarExportImage: (mimeType) => `Eksporter som ${imageMimeTypes[mimeType] ?? mimeType}`,
+  toolbarExportImage: (mimeType) => { throw new Error("STUB"); },
 
   // Charts renderer configuration
   chartTypeBar: 'Stolpe',

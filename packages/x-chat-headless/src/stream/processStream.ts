@@ -139,7 +139,7 @@ export async function processStream<Cursor = string>(
           options.conversationId,
           resultWithProgress.status,
         ),
-        messages: store.state.messageIds.map((id) => store.state.messagesById[id]).filter(Boolean),
+        messages: store.state.messageIds.map((id) => { throw new Error("STUB"); }).filter(Boolean),
         isAbort: resultWithProgress.isAbort,
         isDisconnect: resultWithProgress.isDisconnect,
         isError: resultWithProgress.isError,
@@ -158,17 +158,7 @@ export async function processStream<Cursor = string>(
     }
 
     updateMessage(storeUnknown, targetMessageId, (message) => {
-      const nextParts = finalizeStreamingParts(message.parts);
-      const didChange = nextParts !== message.parts || message.status !== status;
-
-      if (!didChange) {
-        return null;
-      }
-
-      return {
-        parts: nextParts,
-        status,
-      };
+        throw new Error("STUB");
     });
   };
 
@@ -249,35 +239,7 @@ export async function processStream<Cursor = string>(
     let updatedInvocation: ChatToolInvocation | ChatDynamicToolInvocation | undefined;
 
     updateMessageParts(storeUnknown, message.id, (parts) => {
-      const partIndex = parts.findIndex(
-        (part) =>
-          (part.type === 'tool' || part.type === 'dynamic-tool') &&
-          part.toolInvocation.toolCallId === toolCallId,
-      );
-
-      if (partIndex === -1) {
-        if (!getInitialToolPart) {
-          return parts;
-        }
-
-        const initialPart = getInitialToolPart();
-        updatedInvocation = updateInvocation(
-          initialPart.toolInvocation,
-        ) as typeof initialPart.toolInvocation;
-        return [...parts, { ...initialPart, toolInvocation: updatedInvocation } as ChatMessagePart];
-      }
-
-      const currentPart = parts[partIndex] as ChatToolMessagePart | ChatDynamicToolMessagePart;
-      updatedInvocation = updateInvocation(
-        currentPart.toolInvocation,
-      ) as typeof currentPart.toolInvocation;
-      const nextParts = [...parts];
-      nextParts[partIndex] = {
-        ...currentPart,
-        toolInvocation: updatedInvocation,
-      } as ChatMessagePart;
-
-      return nextParts;
+        throw new Error("STUB");
     });
 
     if (updatedInvocation && options.onToolCall) {
@@ -342,20 +304,7 @@ export async function processStream<Cursor = string>(
         });
 
         updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => {
-          const currentPart = parts[partIndex];
-
-          // Never revive a `done` part back to streaming.
-          if (
-            currentPart?.type !== partType ||
-            currentPart.state === 'streaming' ||
-            currentPart.state === 'done'
-          ) {
-            return parts;
-          }
-
-          const nextParts = [...parts];
-          nextParts[partIndex] = { ...currentPart, state: 'streaming' };
-          return nextParts;
+            throw new Error("STUB");
         });
         return;
       }
@@ -389,15 +338,7 @@ export async function processStream<Cursor = string>(
         }
 
         updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => {
-          const currentPart = parts[partIndex];
-
-          if (currentPart?.type !== partType || currentPart.state === 'done') {
-            return parts;
-          }
-
-          const nextParts = [...parts];
-          nextParts[partIndex] = { ...currentPart, state: 'done' };
-          return nextParts;
+            throw new Error("STUB");
         });
         return;
       }
@@ -406,36 +347,13 @@ export async function processStream<Cursor = string>(
         await withToolInvocation(
           chunk.toolCallId,
           () =>
-            isDynamicToolChunk(chunk)
-              ? {
-                  type: 'dynamic-tool',
-                  toolInvocation: {
-                    toolCallId: chunk.toolCallId,
-                    toolName: chunk.toolName,
-                    state: 'input-streaming',
-                  },
-                }
-              : {
-                  type: 'tool',
-                  toolInvocation: {
-                    toolCallId: chunk.toolCallId,
-                    toolName: chunk.toolName,
-                    state: 'input-streaming',
-                  },
-                },
-          (invocation) => ({
-            ...invocation,
-            toolName: chunk.toolName,
-            state: 'input-streaming',
-          }),
+            { throw new Error("STUB"); },
+          (invocation) => { throw new Error("STUB"); },
         );
         return;
 
       case 'tool-input-delta': {
-        await withToolInvocation(chunk.toolCallId, null, (invocation) => ({
-          ...invocation,
-          state: 'input-streaming',
-        }));
+        await withToolInvocation(chunk.toolCallId, null, (invocation) => { throw new Error("STUB"); });
         return;
       }
 
@@ -443,146 +361,50 @@ export async function processStream<Cursor = string>(
         await withToolInvocation(
           chunk.toolCallId,
           () =>
-            isDynamicToolChunk(chunk)
-              ? {
-                  type: 'dynamic-tool',
-                  toolInvocation: {
-                    toolCallId: chunk.toolCallId,
-                    toolName: chunk.toolName,
-                    state: 'input-available',
-                    input: chunk.input,
-                  },
-                }
-              : {
-                  type: 'tool',
-                  toolInvocation: {
-                    toolCallId: chunk.toolCallId,
-                    toolName: chunk.toolName,
-                    state: 'input-available',
-                    input: chunk.input,
-                  },
-                },
-          (invocation) => ({
-            ...invocation,
-            toolName: chunk.toolName,
-            input: chunk.input as ChatToolInvocation['input'],
-            state: 'input-available',
-          }),
+            { throw new Error("STUB"); },
+          (invocation) => { throw new Error("STUB"); },
         );
         return;
 
       case 'tool-input-error':
-        await withToolInvocation(chunk.toolCallId, null, (invocation) => ({
-          ...invocation,
-          errorText: chunk.errorText,
-          state: 'output-error',
-        }));
+        await withToolInvocation(chunk.toolCallId, null, (invocation) => { throw new Error("STUB"); });
         return;
 
       case 'tool-approval-request':
         await withToolInvocation(
           chunk.toolCallId,
           () =>
-            isDynamicToolChunk(chunk)
-              ? {
-                  type: 'dynamic-tool',
-                  toolInvocation: {
-                    toolCallId: chunk.toolCallId,
-                    toolName: chunk.toolName,
-                    input: chunk.input,
-                    approvalId: chunk.approvalId,
-                    state: 'approval-requested',
-                  },
-                }
-              : {
-                  type: 'tool',
-                  toolInvocation: {
-                    toolCallId: chunk.toolCallId,
-                    toolName: chunk.toolName,
-                    input: chunk.input,
-                    approvalId: chunk.approvalId,
-                    state: 'approval-requested',
-                  },
-                },
-          (invocation) => ({
-            ...invocation,
-            toolName: chunk.toolName,
-            input: chunk.input as ChatToolInvocation['input'],
-            approvalId: chunk.approvalId,
-            state: 'approval-requested',
-          }),
+            { throw new Error("STUB"); },
+          (invocation) => { throw new Error("STUB"); },
         );
         return;
 
       case 'tool-output-available':
-        await withToolInvocation(chunk.toolCallId, null, (invocation) => ({
-          ...invocation,
-          output: chunk.output as ChatToolInvocation['output'],
-          preliminary: chunk.preliminary,
-          state: 'output-available',
-        }));
+        await withToolInvocation(chunk.toolCallId, null, (invocation) => { throw new Error("STUB"); });
         return;
 
       case 'tool-output-error':
-        await withToolInvocation(chunk.toolCallId, null, (invocation) => ({
-          ...invocation,
-          errorText: chunk.errorText,
-          state: 'output-error',
-        }));
+        await withToolInvocation(chunk.toolCallId, null, (invocation) => { throw new Error("STUB"); });
         return;
 
       case 'tool-output-denied':
-        await withToolInvocation(chunk.toolCallId, null, (invocation) => ({
-          ...invocation,
-          approval: {
-            approved: false,
-            reason: chunk.reason,
-          },
-          state: 'output-denied',
-        }));
+        await withToolInvocation(chunk.toolCallId, null, (invocation) => { throw new Error("STUB"); });
         return;
 
       case 'source-url':
-        updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => [
-          ...parts,
-          {
-            type: 'source-url',
-            sourceId: chunk.sourceId,
-            url: chunk.url,
-            title: chunk.title,
-          },
-        ]);
+        updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => { throw new Error("STUB"); });
         return;
 
       case 'source-document':
-        updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => [
-          ...parts,
-          {
-            type: 'source-document',
-            sourceId: chunk.sourceId,
-            title: chunk.title,
-            text: chunk.text,
-          },
-        ]);
+        updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => { throw new Error("STUB"); });
         return;
 
       case 'file':
-        updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => [
-          ...parts,
-          {
-            type: 'file',
-            mediaType: chunk.mediaType,
-            url: chunk.url,
-            filename: chunk.filename,
-          },
-        ]);
+        updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => { throw new Error("STUB"); });
         return;
 
       case 'start-step':
-        updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => [
-          ...parts,
-          { type: 'step-start' },
-        ]);
+        updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => { throw new Error("STUB"); });
         return;
 
       case 'finish-step':
@@ -590,12 +412,7 @@ export async function processStream<Cursor = string>(
         return;
 
       case 'message-metadata':
-        updateMessage(storeUnknown, ensureAssistantMessage().id, (message) => ({
-          metadata: {
-            ...message.metadata,
-            ...chunk.metadata,
-          },
-        }));
+        updateMessage(storeUnknown, ensureAssistantMessage().id, (message) => { throw new Error("STUB"); });
         return;
 
       default:
@@ -608,7 +425,7 @@ export async function processStream<Cursor = string>(
             transient: chunk.transient,
           } as ChatDataMessagePart;
 
-          updateMessageParts(storeUnknown, message.id, (parts) => [...parts, part]);
+          updateMessageParts(storeUnknown, message.id, (parts) => { throw new Error("STUB"); });
 
           if (options.onData) {
             await options.onData(part);
@@ -662,10 +479,7 @@ export async function processStream<Cursor = string>(
   };
 
   const abortListener = () => {
-    aborted = true;
-    void reader.cancel().catch((error) => {
-      abortCancelError = error;
-    });
+      throw new Error("STUB");
   };
 
   options.signal?.addEventListener('abort', abortListener, { once: true });

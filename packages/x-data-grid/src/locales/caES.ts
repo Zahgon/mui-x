@@ -33,7 +33,7 @@ const caESGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Amaga filtres',
   toolbarFiltersTooltipShow: 'Mostra filtres',
   toolbarFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} filtres actius` : `${count} filtre actiu`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Cerca…',
@@ -129,7 +129,7 @@ const caESGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Menú',
-  columnMenuAriaLabel: (columnName: string) => `Menú de la columna ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Mostra columnes',
   columnMenuManageColumns: 'Gestiona columnes',
   columnMenuFilter: 'Filtre',
@@ -142,22 +142,20 @@ const caESGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} filtres actius` : `${count} filtre actiu`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Mostra filtres',
   columnHeaderSortIconLabel: 'Ordena',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count > 1
-      ? `${count.toLocaleString()} files seleccionades`
-      : `${count.toLocaleString()} fila seleccionada`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Files totals:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} de ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Casella de selecció',
@@ -189,8 +187,8 @@ const caESGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Grup',
-  groupColumn: (name) => `Agrupa per ${name}`,
-  unGroupColumn: (name) => `No agrupis per ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Alterna detall',
@@ -200,27 +198,10 @@ const caESGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Files per pàgina:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} de ${count !== -1 ? formatNumber(count) : `més de ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `al voltant de ${formatNumber(estimated)}`
-        : `més de ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} de ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Vés a la primera pàgina';
-    }
-    if (type === 'last') {
-      return "Vés a l'última pàgina";
-    }
-    if (type === 'next') {
-      return 'Vés a la pàgina següent';
-    }
-    // if (type === 'previous') {
-    return 'Vés a la pàgina anterior';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -279,8 +260,8 @@ const caESGrid: Partial<GridLocaleText> = {
   chartsFieldBlocked: 'Aquest camp no es pot afegir a cap secció',
   chartsCategories: 'Categories',
   chartsSeries: 'Sèries',
-  chartsMenuAddToDimensions: (dimensionLabel: string) => `Afegeix a ${dimensionLabel}`,
-  chartsMenuAddToValues: (valuesLabel: string) => `Afegeix a ${valuesLabel}`,
+  chartsMenuAddToDimensions: (dimensionLabel: string) => { throw new Error("STUB"); },
+  chartsMenuAddToValues: (valuesLabel: string) => { throw new Error("STUB"); },
   chartsMenuMoveUp: 'Mou amunt',
   chartsMenuMoveDown: 'Mou avall',
   chartsMenuMoveToTop: 'Mou al principi',
@@ -288,9 +269,9 @@ const caESGrid: Partial<GridLocaleText> = {
   chartsMenuOptions: 'Opcions del camp',
   chartsMenuRemove: 'Elimina',
   chartsDragToDimensions: (dimensionLabel: string) =>
-    `Arrossega aquí per utilitzar la columna com a ${dimensionLabel}`,
+    { throw new Error("STUB"); },
   chartsDragToValues: (valuesLabel: string) =>
-    `Arrossega aquí per utilitzar la columna com a ${valuesLabel}`,
+    { throw new Error("STUB"); },
 
   // AI Assistant panel
   aiAssistantPanelTitle: "Assistent d'IA",
@@ -317,36 +298,30 @@ const caESGrid: Partial<GridLocaleText> = {
   promptAppliedChanges: "S'han aplicat els canvis",
 
   // Prompt changes
-  promptChangeGroupDescription: (column: string) => `Agrupa per ${column}`,
+  promptChangeGroupDescription: (column: string) => { throw new Error("STUB"); },
   promptChangeAggregationLabel: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeAggregationDescription: (column: string, aggregation: string) =>
-    `Agrega ${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeFilterLabel: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `${column} és un de: ${value}`;
-    }
-    return `${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeFilterDescription: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `Filtra per ${column} quan sigui un de: ${value}`;
-    }
-    return `Filtra per ${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeSortDescription: (column: string, direction: string) =>
-    `Ordena per ${column} (${direction})`,
+    { throw new Error("STUB"); },
   promptChangePivotEnableLabel: 'Taula dinàmica',
   promptChangePivotEnableDescription: 'Activa la taula dinàmica',
-  promptChangePivotColumnsLabel: (count: number) => `Columnes (${count})`,
+  promptChangePivotColumnsLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotColumnsDescription: (column: string, direction: string) =>
-    `${column}${direction ? ` (${direction})` : ''}`,
-  promptChangePivotRowsLabel: (count: number) => `Files (${count})`,
-  promptChangePivotValuesLabel: (count: number) => `Valors (${count})`,
+    { throw new Error("STUB"); },
+  promptChangePivotRowsLabel: (count: number) => { throw new Error("STUB"); },
+  promptChangePivotValuesLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotValuesDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeChartsLabel: (dimensionsCount: number, valuesCount: number) =>
-    `Dimensions (${dimensionsCount}), Valors (${valuesCount})`,
+    { throw new Error("STUB"); },
 };
 
 export const caES: Localization = getGridLocalization(caESGrid);

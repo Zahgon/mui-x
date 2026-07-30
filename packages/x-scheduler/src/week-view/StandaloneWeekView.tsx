@@ -19,26 +19,7 @@ const StandaloneWeekView = React.forwardRef(function StandaloneWeekView<
   inProps: StandaloneWeekViewProps<TEvent, TResource>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  // eslint-disable-next-line mui/material-ui-name-matches-component-name
-  const props = useThemeProps({ props: inProps, name: 'MuiEventCalendar' });
-
-  const { parameters, forwardedProps } = useExtractEventCalendarParameters<
-    TEvent,
-    TResource,
-    typeof props
-  >(props);
-
-  const { localeText, ...other } = forwardedProps;
-
-  return (
-    <ResponsiveTypographyContainer>
-      <EventCalendarProvider {...parameters} localeText={localeText}>
-        <EventDialogProvider>
-          <WeekView ref={forwardedRef} {...other} />
-        </EventDialogProvider>
-      </EventCalendarProvider>
-    </ResponsiveTypographyContainer>
-  );
+    throw new Error("STUB");
 }) as StandaloneWeekViewComponent;
 
 StandaloneWeekView.propTypes /* remove-proptypes */ = {

@@ -10,12 +10,7 @@ import type { ChartInstance } from '../internals/plugins/models';
 import type { UseChartTooltipSignature } from '../internals/plugins/featurePlugins/useChartTooltip';
 
 function onPointerDown(event: React.PointerEvent) {
-  if (
-    'hasPointerCapture' in event.currentTarget &&
-    event.currentTarget.hasPointerCapture(event.pointerId)
-  ) {
-    event.currentTarget.releasePointerCapture(event.pointerId);
-  }
+    throw new Error("STUB");
 }
 
 export const useInteractionItemProps = <SeriesType extends ChartSeriesType>(
@@ -35,33 +30,19 @@ export const useInteractionItemProps = <SeriesType extends ChartSeriesType>(
     >();
   const interactionActive = React.useRef(false);
   const onPointerEnter = useEventCallback(() => {
-    interactionActive.current = true;
-    instance.setLastUpdateSource('pointer');
-    instance.setTooltipItem(data);
-    instance.setHighlight(data);
+      throw new Error("STUB");
   });
 
   const onPointerLeave = useEventCallback(() => {
-    interactionActive.current = false;
-    instance.removeTooltipItem(data);
-    instance.clearHighlight();
+      throw new Error("STUB");
   });
 
   React.useEffect(() => {
-    return () => {
-      /* Clean up state if this item is unmounted while active. */
-      if (interactionActive.current) {
-        onPointerLeave();
-      }
-    };
+      throw new Error("STUB");
   }, [onPointerLeave]);
 
   return React.useMemo(
-    () => ({
-      onPointerEnter,
-      onPointerLeave,
-      onPointerDown,
-    }),
+    () => { throw new Error("STUB"); },
     [onPointerEnter, onPointerLeave],
   );
 };

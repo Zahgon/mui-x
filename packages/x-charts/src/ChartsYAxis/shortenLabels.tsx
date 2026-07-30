@@ -56,7 +56,7 @@ export function shortenLabels(
           width: maxWidth,
           height,
           angle,
-          measureText: (string: string) => getStringSize(string, tickLabelStyle),
+          measureText: (string: string) => { throw new Error("STUB"); },
         });
 
       shortenedLabels.set(item, ellipsize(item.formattedValue.toString(), doesTextFit));

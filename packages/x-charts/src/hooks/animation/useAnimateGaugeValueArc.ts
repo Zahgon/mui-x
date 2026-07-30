@@ -27,21 +27,7 @@ function gaugeValueArcPropsInterpolator(
   from: GaugeValueArcInterpolatedProps,
   to: GaugeValueArcInterpolatedProps,
 ) {
-  const interpolateStartAngle = interpolateNumber(from.startAngle, to.startAngle);
-  const interpolateEndAngle = interpolateNumber(from.endAngle, to.endAngle);
-  const interpolateInnerRadius = interpolateNumber(from.innerRadius, to.innerRadius);
-  const interpolateOuterRadius = interpolateNumber(from.outerRadius, to.outerRadius);
-  const interpolateCornerRadius = interpolateNumber(from.cornerRadius, to.cornerRadius);
-
-  return (t: number) => {
-    return {
-      startAngle: interpolateStartAngle(t),
-      endAngle: interpolateEndAngle(t),
-      innerRadius: interpolateInnerRadius(t),
-      outerRadius: interpolateOuterRadius(t),
-      cornerRadius: interpolateCornerRadius(t),
-    };
-  };
+    throw new Error("STUB");
 }
 
 /** Animates a arc of a gauge chart by increasing the `endAngle` from the start angle to the end angle.
@@ -50,36 +36,5 @@ function gaugeValueArcPropsInterpolator(
 export function useAnimateGaugeValueArc(
   props: UseAnimateGaugeValueArcParams,
 ): UseAnimateGaugeValueArcReturnValue {
-  return useAnimate(
-    {
-      startAngle: props.startAngle,
-      endAngle: props.endAngle,
-      innerRadius: props.innerRadius,
-      outerRadius: props.outerRadius,
-      cornerRadius: props.cornerRadius,
-    },
-    {
-      createInterpolator: gaugeValueArcPropsInterpolator,
-      transformProps: (p) => ({
-        d: d3Arc().cornerRadius(p.cornerRadius)({
-          innerRadius: p.innerRadius,
-          outerRadius: p.outerRadius,
-          startAngle: p.startAngle,
-          endAngle: p.endAngle,
-        })!,
-      }),
-      applyProps(element, p) {
-        element.setAttribute('d', p.d);
-      },
-      initialProps: {
-        startAngle: props.startAngle,
-        endAngle: props.startAngle,
-        innerRadius: props.innerRadius,
-        outerRadius: props.outerRadius,
-        cornerRadius: props.cornerRadius,
-      },
-      skip: props.skipAnimation,
-      ref: props.ref,
-    },
-  );
+    throw new Error("STUB");
 }

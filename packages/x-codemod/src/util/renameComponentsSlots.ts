@@ -20,7 +20,7 @@ const lowerCase = (key: string) => `${key.slice(0, 1).toLowerCase()}${key.slice(
 const getSlotsTranslation = (translations: Record<string, string>) => {
   const lowercasedTranslation = {};
   Object.entries(translations).forEach(([key, value]) => {
-    lowercasedTranslation[lowerCase(key)] = lowerCase(value);
+      throw new Error("STUB");
   });
 
   return lowercasedTranslation;
@@ -39,29 +39,13 @@ export default function renameComponentsSlots({
   return root
     .find(j.JSXElement)
     .filter((path) => {
-      return componentNames.includes((path.value.openingElement.name as any).name);
+        throw new Error("STUB");
     })
     .find(j.JSXAttribute)
     .filter((attribute) =>
-      ['components', 'componentsProps', 'slots', 'slotProps'].includes(
-        attribute.node.name.name as string,
-      ),
+      { throw new Error("STUB"); },
     )
     .forEach((attribute) => {
-      const usedTranslation =
-        (attribute.node.name.name as string) === 'components'
-          ? translation
-          : getSlotsTranslation(translation);
-
-      j(attribute)
-        .find(j.Property)
-        .forEach((property) => {
-          if (
-            property.value.key.type === 'Identifier' &&
-            usedTranslation[property.value.key.name as string] !== undefined
-          ) {
-            property.value.key.name = usedTranslation[property.value.key.name];
-          }
-        });
+        throw new Error("STUB");
     });
 }

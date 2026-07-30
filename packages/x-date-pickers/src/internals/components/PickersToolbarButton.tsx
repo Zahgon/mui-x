@@ -42,38 +42,5 @@ export const PickersToolbarButton = React.forwardRef(function PickersToolbarButt
   inProps: PickersToolbarButtonProps,
   ref: React.Ref<HTMLButtonElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiPickersToolbarButton' });
-  const {
-    align,
-    className,
-    classes: classesProp,
-    selected,
-    typographyClassName,
-    value,
-    variant,
-    width,
-    ...other
-  } = props;
-
-  const classes = useUtilityClasses(classesProp);
-
-  return (
-    <PickersToolbarButtonRoot
-      data-testid="toolbar-button"
-      variant="text"
-      ref={ref}
-      className={clsx(classes.root, className)}
-      ownerState={props}
-      {...(width ? { sx: { width } } : {})}
-      {...other}
-    >
-      <PickersToolbarText
-        align={align}
-        className={typographyClassName}
-        variant={variant}
-        value={value}
-        selected={selected}
-      />
-    </PickersToolbarButtonRoot>
-  );
+    throw new Error("STUB");
 });

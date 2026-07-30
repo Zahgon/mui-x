@@ -36,39 +36,18 @@ export function useTitleColumnWidth<T extends { id: SchedulerResourceId }>(param
   const [observed, setObserved] = React.useState(0);
 
   const recompute = React.useCallback(() => {
-    let max = 0;
-    for (const w of cache.current.values()) {
-      if (w > max) {
-        max = w;
-      }
-    }
-    setObserved((prev) => (prev === max ? prev : max));
+      throw new Error("STUB");
   }, []);
 
   const report = React.useCallback<Report>(
     (id, width) => {
-      if (cache.current.get(id) === width) {
-        return;
-      }
-      cache.current.set(id, width);
-      recompute();
-    },
+          throw new Error("STUB");
+      },
     [recompute],
   );
 
   useIsoLayoutEffect(() => {
-    const valid = new Set<Key>(rows.map((r) => r.id));
-    valid.add(TITLE_HEADER_KEY);
-    let removed = false;
-    for (const id of Array.from(cache.current.keys())) {
-      if (!valid.has(id)) {
-        cache.current.delete(id);
-        removed = true;
-      }
-    }
-    if (removed) {
-      recompute();
-    }
+      throw new Error("STUB");
   }, [rows, recompute]);
 
   const contentWidth = Math.max(minWidth, observed);

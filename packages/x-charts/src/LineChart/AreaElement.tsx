@@ -80,7 +80,7 @@ function AreaElement(props: AreaElementProps) {
     selectorChartExperimentalFeaturesState,
     'enablePositionBasedPointerInteraction',
   );
-  const identifier = React.useMemo(() => ({ type: 'line' as const, seriesId }), [seriesId]);
+  const identifier = React.useMemo(() => { throw new Error("STUB"); }, [seriesId]);
   const interactionProps = useInteractionItemProps(identifier);
   const highlightState = useItemHighlightState(identifier);
   const isHighlighted = highlightState === 'highlighted';

@@ -58,58 +58,7 @@ function MapShapePlot(props: MapShapePlotProps) {
   return (
     <g className={className}>
       {series.map((seriesItem) => {
-        const { data, id, hidden, colorAxisId } = seriesItem;
-        if (hidden) {
-          return null;
-        }
-        const colorAxis = zAxis[colorAxisId ?? defaultZAxisId];
-        const colorGetter = mapShapeSeriesConfig.colorProcessor(
-          seriesItem,
-          undefined,
-          undefined,
-          colorAxis,
-        );
-        return (
-          <g key={id} data-series={id}>
-            {data.map((item) => {
-              if (item.hidden) {
-                return null;
-              }
-              const featureIndexes = featureIndexesByName.get(item.name);
-              if (featureIndexes === undefined || featureIndexes.length === 0) {
-                return null;
-              }
-              return (
-                <React.Fragment key={item.name}>
-                  {featureIndexes.map((featureIndex) => {
-                    const feature = geoData.features[featureIndex];
-                    const d = path(feature);
-                    const color = fill ?? colorGetter(item.name);
-                    if (!d || color === null) {
-                      return null;
-                    }
-                    return (
-                      <MapShape
-                        key={featureIndex}
-                        seriesId={id}
-                        featureName={item.name}
-                        d={d}
-                        color={color}
-                        stroke={stroke}
-                        strokeWidth={strokeWidth}
-                        onClick={
-                          onItemClick &&
-                          ((event) =>
-                            onItemClick(event, { type: 'mapShape', seriesId: id, name: item.name }))
-                        }
-                      />
-                    );
-                  })}
-                </React.Fragment>
-              );
-            })}
-          </g>
-        );
+          throw new Error("STUB");
       })}
       <FocusedMapShape />
     </g>

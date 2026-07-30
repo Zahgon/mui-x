@@ -18,9 +18,7 @@ const esESPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Abrir la última vista',
   openNextView: 'Abrir la siguiente vista',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'la vista anual está abierta, cambie a la vista de calendario'
-      : 'la vista de calendario está abierta, cambie a la vista anual',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Empezar',
@@ -46,25 +44,25 @@ const esESPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Seleccione ${views[view]}. ${!formattedTime ? 'No hay hora seleccionada' : `La hora seleccionada es ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} horas`,
-  minutesClockNumberText: (minutes) => `${minutes} minutos`,
-  secondsClockNumberText: (seconds) => `${seconds} segundos`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Seleccionar ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Número de semana',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Semana ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Elige fecha, la fecha elegida es ${formattedDate}` : 'Elige fecha',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Elige hora, la hora elegida es ${formattedTime}` : 'Elige hora',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Limpiar valor',
 
@@ -73,14 +71,14 @@ const esESPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'elige fecha',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'A'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Año',

@@ -16,15 +16,7 @@ export const useInteractionAllItemProps = (
     >();
 
   const results = React.useMemo(() => {
-    return data.map((item) => {
-      return skip
-        ? {}
-        : getInteractionItemProps(instance, {
-            type: 'radar',
-            seriesId: item.seriesId,
-            dataIndex: item.dataIndex,
-          });
-    });
+      throw new Error("STUB");
   }, [data, instance, skip]);
 
   return results;

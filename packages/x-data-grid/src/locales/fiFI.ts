@@ -31,7 +31,7 @@ const fiFIGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Piilota suodattimet',
   toolbarFiltersTooltipShow: 'Näytä suodattimet',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktiivista suodatinta` : `${count} aktiivinen suodatin`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Hae…',
@@ -140,22 +140,20 @@ const fiFIGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktiivista suodatinta` : `${count} aktiivinen suodatin`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Näytä suodattimet',
   columnHeaderSortIconLabel: 'Järjestä',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1
-      ? `${count.toLocaleString()} riviä valittu`
-      : `${count.toLocaleString()} rivi valittu`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Rivejä yhteensä:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} / ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Valintaruutu',
@@ -187,8 +185,8 @@ const fiFIGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Ryhmä',
-  groupColumn: (name) => `Ryhmittelyperuste ${name}`,
-  unGroupColumn: (name) => `Poista ryhmittelyperuste ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Yksityiskohtapaneelin vaihto',
@@ -211,17 +209,7 @@ const fiFIGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Mene ensimmäiselle sivulle';
-    }
-    if (type === 'last') {
-      return 'Mene viimeiselle sivulle';
-    }
-    if (type === 'next') {
-      return 'Mene seuraavalle sivulle';
-    }
-    // if (type === 'previous') {
-    return 'Mene edelliselle sivulle';
+      throw new Error("STUB");
   },
 
   // Row reordering text

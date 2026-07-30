@@ -38,7 +38,7 @@ const findDeepASTPath = (j, currentPath, currentIdentifiers) => {
   }
   const target = j(currentPath)
     .find(j.Identifier)
-    .filter((path) => path.value.name === currentIdentifiers[0]);
+    .filter((path) => { throw new Error("STUB"); });
   if (target.__paths.length === 0) {
     return false;
   }
@@ -59,7 +59,7 @@ export const checkPreRequisitesSatisfied = (j, root, preReqs: PreRequisiteUsage)
     // check if any of the components is imported from a package which satisfies `preReqs.packageRegex`
     const imports = root.find(j.ImportDeclaration);
     const matchingImports = preReqs.packageRegex
-      ? imports.filter((path) => !!matchImport(path, preReqs.packageRegex))
+      ? imports.filter((path) => { throw new Error("STUB"); })
       : imports;
     if (!matchingImports.__paths.length) {
       return false;
@@ -68,7 +68,7 @@ export const checkPreRequisitesSatisfied = (j, root, preReqs: PreRequisiteUsage)
     const satisfyingImports = preReqs.components?.length
       ? matchingImports
           .find(j.Identifier)
-          .filter((path) => preReqs.components!.includes(path.node.name))
+          .filter((path) => { throw new Error("STUB"); })
       : matchingImports;
 
     if (!satisfyingImports.__paths.length) {
@@ -83,7 +83,7 @@ export const checkPreRequisitesSatisfied = (j, root, preReqs: PreRequisiteUsage)
   const allComponents = root.find(j.JSXElement);
   const matchingComponents = preReqs.components?.length
     ? allComponents.filter((path) =>
-        preReqs.components!.includes(path.node.openingElement.name.name),
+        { throw new Error("STUB"); },
       )
     : allComponents;
 
@@ -91,18 +91,11 @@ export const checkPreRequisitesSatisfied = (j, root, preReqs: PreRequisiteUsage)
     .find(j.JSXAttribute)
     // filter by props first
     .filter((attribute) =>
-      preReqs.possiblePaths!.map((path) => path.split('.')[0]).includes(attribute.node.name.name),
+      { throw new Error("STUB"); },
     )
     // filter by nested levels
     .filter((attribute) =>
-      findDeepASTPath(
-        j,
-        attribute,
-        preReqs
-          .possiblePaths!.find((path) => path.startsWith(attribute.node.name.name))!
-          .split('.')
-          .slice(1),
-      ),
+      { throw new Error("STUB"); },
     );
   return matchingAttributes.__paths.length > 0;
 };
@@ -129,19 +122,8 @@ export default function renameIdentifiers({
 }: RenameIdentifiersArgs) {
   root
     .find(j.Identifier)
-    .filter((path) => identifiers.hasOwnProperty(path.node.name))
+    .filter((path) => { throw new Error("STUB"); })
     .replaceWith((path) => {
-      if (!preRequisiteUsages || !preRequisiteUsages[path.node.name]) {
-        return j.importSpecifier(j.identifier(identifiers[path.node.name]));
-      }
-      const shouldReplace = checkPreRequisitesSatisfied(
-        j,
-        root,
-        preRequisiteUsages[path.node.name],
-      );
-      if (shouldReplace) {
-        return j.importSpecifier(j.identifier(identifiers[path.node.name]));
-      }
-      return j.importSpecifier(j.identifier(path.node.name));
+        throw new Error("STUB");
     });
 }

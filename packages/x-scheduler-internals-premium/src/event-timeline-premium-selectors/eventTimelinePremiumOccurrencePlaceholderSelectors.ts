@@ -5,35 +5,9 @@ import { eventTimelinePremiumPresetSelectors } from './eventTimelinePremiumPrese
 
 export const timelineOccurrencePlaceholderSelectors = {
   placeholderInResource: createSelector((state: State, resourceId: SchedulerResourceId | null) => {
-    if (
-      state.occurrencePlaceholder === null ||
-      state.occurrencePlaceholder.surfaceType !== 'timeline' ||
-      state.occurrencePlaceholder.isHidden ||
-      state.occurrencePlaceholder.resourceId !== resourceId
-    ) {
-      return null;
-    }
-
-    const presetConfig = eventTimelinePremiumPresetSelectors.config(state);
-    if (
-      state.adapter.isBefore(state.occurrencePlaceholder.end, presetConfig.start) ||
-      state.adapter.isAfter(state.occurrencePlaceholder.start, presetConfig.end)
-    ) {
-      return null;
-    }
-
-    return state.occurrencePlaceholder;
+      throw new Error("STUB");
   }),
   isCreatingInResource: createSelector((state: State, resourceId: SchedulerResourceId | null) => {
-    const placeholder = state.occurrencePlaceholder;
-    if (
-      placeholder === null ||
-      placeholder.surfaceType !== 'timeline' ||
-      placeholder.type !== 'creation' ||
-      placeholder.resourceId !== resourceId
-    ) {
-      return false;
-    }
-    return true;
+      throw new Error("STUB");
   }),
 };

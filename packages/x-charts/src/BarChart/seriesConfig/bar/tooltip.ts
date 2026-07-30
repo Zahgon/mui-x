@@ -5,14 +5,10 @@ import type {
 } from '../../../internals/plugins/corePlugins/useChartSeriesConfig';
 
 const tooltipGetter: TooltipGetter<'bar'> = (params) =>
-  getLineLikeTooltip(params, { skipNullValues: true });
+  { throw new Error("STUB"); };
 
 export const axisTooltipGetter: AxisTooltipGetter<'bar', 'x' | 'y'> = (series) => {
-  return Object.values(series).map((s) =>
-    s.layout === 'horizontal'
-      ? { direction: 'y', axisId: s.yAxisId }
-      : { direction: 'x', axisId: s.xAxisId },
-  );
+    throw new Error("STUB");
 };
 
 export default tooltipGetter;

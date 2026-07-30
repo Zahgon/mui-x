@@ -141,14 +141,7 @@ export function useDateTimePickerDefaultizedProps<Props extends BaseDateTimePick
   const ampm = themeProps.ampm ?? adapter.is12HourCycleInCurrentLocale();
 
   const localeText = React.useMemo<PickersInputLocaleText | undefined>(() => {
-    if (themeProps.localeText?.toolbarTitle == null) {
-      return themeProps.localeText;
-    }
-
-    return {
-      ...themeProps.localeText,
-      dateTimePickerToolbarTitle: themeProps.localeText.toolbarTitle,
-    };
+      throw new Error("STUB");
   }, [themeProps.localeText]);
 
   const { openTo, views: defaultViews } = applyDefaultViewProps<DateOrTimeViewWithMeridiem>({

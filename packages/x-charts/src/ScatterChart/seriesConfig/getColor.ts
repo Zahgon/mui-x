@@ -9,61 +9,24 @@ const getColor: ColorProcessor<'scatter'> = (series, xAxis, yAxis, zAxis) => {
 
   if (zColorScale) {
     return (dataIndex?: number) => {
-      if (dataIndex === undefined) {
-        return series.color;
-      }
-
-      if (zAxis?.data?.[dataIndex] !== undefined) {
-        const color = zColorScale(zAxis?.data?.[dataIndex]);
-        if (color !== null) {
-          return color;
-        }
-      }
-      const value = series.data[dataIndex];
-      const color = zColorScale(value.colorValue ?? value.z);
-      if (typeof color !== 'string') {
-        return getSeriesColor({ value, dataIndex });
-      }
-      return color;
+        throw new Error("STUB");
     };
   }
 
   if (yColorScale) {
     return (dataIndex?: number) => {
-      if (dataIndex === undefined) {
-        return series.color;
-      }
-      const value = series.data[dataIndex];
-      const color = yColorScale(value.y);
-      if (typeof color !== 'string') {
-        return getSeriesColor({ value, dataIndex });
-      }
-      return color;
+        throw new Error("STUB");
     };
   }
 
   if (xColorScale) {
     return (dataIndex?: number) => {
-      if (dataIndex === undefined) {
-        return series.color;
-      }
-      const value = series.data[dataIndex];
-      const color = xColorScale(value.x);
-      if (typeof color !== 'string') {
-        return getSeriesColor({ value, dataIndex });
-      }
-      return color;
+        throw new Error("STUB");
     };
   }
 
   return (dataIndex?: number) => {
-    if (dataIndex === undefined) {
-      return series.color;
-    }
-
-    const value = series.data[dataIndex];
-
-    return getSeriesColor({ value, dataIndex });
+      throw new Error("STUB");
   };
 };
 

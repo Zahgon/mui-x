@@ -27,18 +27,7 @@ const DateRangePicker = React.forwardRef(function DateRangePicker(
   inProps: DateRangePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiDateRangePicker' });
-
-  const { desktopModeMediaQuery = DEFAULT_DESKTOP_MODE_MEDIA_QUERY, ...other } = props;
-
-  // defaults to `true` in environments where `window.matchMedia` would not be available (i.e. test/jsdom)
-  const isDesktop = useMediaQuery(desktopModeMediaQuery, { defaultMatches: true });
-
-  if (isDesktop) {
-    return <DesktopDateRangePicker ref={ref} {...other} />;
-  }
-
-  return <MobileDateRangePicker ref={ref} {...other} />;
+    throw new Error("STUB");
 }) as DatePickerComponent;
 
 DateRangePicker.propTypes /* remove-proptypes */ = {

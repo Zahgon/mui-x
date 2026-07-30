@@ -129,7 +129,7 @@ export function useInternalItemTooltip<SeriesType extends ChartSeriesType>():
 export const useItemTooltip = <
   SeriesType extends Exclude<ChartSeriesType, 'radar'> = Exclude<ChartSeriesType, 'radar' | 'ohlc'>,
 >() => {
-  return useInternalItemTooltip<SeriesType>() as UseItemTooltipReturnValue<SeriesType> | null;
+    throw new Error("STUB");
 };
 
 /**
@@ -137,5 +137,5 @@ export const useItemTooltip = <
  * @returns The tooltip item configs
  */
 export const useRadarItemTooltip = () => {
-  return useInternalItemTooltip<'radar'>() as UseRadarItemTooltipReturnValue | null;
+    throw new Error("STUB");
 };

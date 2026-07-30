@@ -17,43 +17,20 @@ const useThemeProps = createUseThemeProps('MuiChatMessageSource');
 const ChatMessageSourceRootStyled = styled('li', {
   name: 'MuiChatMessageSource',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(() => ({
-  display: 'flex',
-  alignItems: 'baseline',
-  gap: 6,
-  minWidth: 0,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(() => { throw new Error("STUB"); });
 
 const ChatMessageSourceIndexStyled = styled('span', {
   name: 'MuiChatMessageSource',
   slot: 'Index',
-  overridesResolver: (_, styles) => styles.index,
-})(({ theme }) => ({
-  fontSize: '0.65rem',
-  color: (theme.vars || theme).palette.text.disabled,
-  minWidth: 16,
-  textAlign: 'center',
-  flexShrink: 0,
-  fontVariantNumeric: 'tabular-nums',
-  lineHeight: 1.5,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatMessageSourceLinkStyled = styled('a', {
   name: 'MuiChatMessageSource',
   slot: 'Link',
-  overridesResolver: (_, styles) => styles.link,
-})(({ theme }) => ({
-  color: (theme.vars || theme).palette.primary.main,
-  fontSize: theme.typography.caption.fontSize,
-  textDecoration: 'none',
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  '&:hover': {
-    textDecoration: 'underline',
-  },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 export interface ChatMessageSourceSlots {
   /** The root list item element. @default 'li' */
@@ -92,67 +69,7 @@ const ChatMessageSource = React.forwardRef(function ChatMessageSource(
   inProps: ChatMessageSourceProps,
   ref: React.Ref<HTMLLIElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiChatMessageSource' });
-  const {
-    href,
-    title,
-    index: indexProp,
-    children,
-    className,
-    classes: classesProp,
-    slots,
-    slotProps,
-    ...other
-  } = props;
-  const classes = useChatMessageSourceUtilityClasses(classesProp);
-
-  const Root = slots?.root ?? ChatMessageSourceRootStyled;
-  const Index = slots?.index ?? ChatMessageSourceIndexStyled;
-  const LinkSlot = slots?.link ?? ChatMessageSourceLinkStyled;
-
-  // Inside a roving message list the source link leaves the tab order until
-  // the user drills into the message (Enter); it stays mouse-clickable.
-  const contentTabIndex = useMessageContentTabIndex();
-
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState: {},
-    additionalProps: {
-      ref,
-      className: clsx(classes.root, className),
-    },
-  });
-
-  const indexProps = useSlotProps({
-    elementType: Index,
-    externalSlotProps: slotProps?.index,
-    ownerState: {},
-    additionalProps: {
-      className: classes.index,
-    },
-  });
-
-  const linkProps = useSlotProps({
-    elementType: LinkSlot,
-    externalSlotProps: slotProps?.link,
-    ownerState: {},
-    additionalProps: {
-      href: safeUri(href) || undefined,
-      target: '_blank',
-      rel: 'noreferrer noopener',
-      className: classes.link,
-      tabIndex: contentTabIndex,
-    },
-  });
-
-  return (
-    <Root {...rootProps}>
-      {indexProp != null && <Index {...indexProps}>[{indexProp}]</Index>}
-      <LinkSlot {...linkProps}>{children ?? title ?? href}</LinkSlot>
-    </Root>
-  );
+    throw new Error("STUB");
 }) as ChatMessageSourceComponent;
 
 ChatMessageSource.propTypes /* remove-proptypes */ = {

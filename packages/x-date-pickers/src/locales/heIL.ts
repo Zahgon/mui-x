@@ -18,9 +18,7 @@ const heILPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'תצוגה קודמת',
   openNextView: 'תצוגה הבאה',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'תצוגת שנה פתוחה, מעבר לתצוגת לוח שנה'
-      : 'תצוגת לוח שנה פתוחה, מעבר לתצוגת שנה',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'תחילה',
@@ -46,25 +44,25 @@ const heILPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `בחירת ${views[view]}. ${!formattedTime ? 'לא נבחרה שעה' : `השעה הנבחרת היא ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} שעות`,
-  minutesClockNumberText: (minutes) => `${minutes} דקות`,
-  secondsClockNumberText: (seconds) => `${seconds} שניות`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `בחירת ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'שבוע מספר',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `שבוע ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `בחירת תאריך, התאריך שנבחר הוא ${formattedDate}` : 'בחירת תאריך',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `בחירת שעה, השעה שנבחרה היא ${formattedTime}` : 'בחירת שעה',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'נקה ערך',
 
@@ -73,14 +71,14 @@ const heILPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'בחירת תאריך',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'שנה',

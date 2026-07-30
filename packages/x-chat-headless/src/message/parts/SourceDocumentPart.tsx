@@ -42,52 +42,11 @@ export const SourceDocumentPart = React.forwardRef(function SourceDocumentPart(
   props: SourceDocumentPartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { className, index, message, onToolCall, part, slots, slotProps, ...other } = props;
-  void index;
-  void onToolCall;
-  const ownerState = React.useMemo<SourceDocumentPartOwnerState>(
-    () => ({
-      messageId: message.id,
-      role: message.role,
-    }),
-    [message.id, message.role],
-  );
-  const Root = slots?.root ?? 'div';
-  const Title = slots?.title ?? 'div';
-  const Excerpt = slots?.excerpt ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-      className,
-    },
-  });
-  const titleProps = useSlotProps({
-    elementType: Title,
-    externalSlotProps: slotProps?.title,
-    ownerState,
-  });
-  const excerptProps = useSlotProps({
-    elementType: Excerpt,
-    externalSlotProps: slotProps?.excerpt,
-    ownerState,
-  });
-
-  return (
-    <Root {...rootProps}>
-      {part.title ? <Title {...titleProps}>{part.title}</Title> : null}
-      {part.text ? <Excerpt {...excerptProps}>{part.text}</Excerpt> : null}
-    </Root>
-  );
+    throw new Error("STUB");
 }) as SourceDocumentPartComponent;
 
 export function createSourceDocumentPartRenderer(
   defaultProps: SourceDocumentPartExternalProps = {},
 ): ChatPartRenderer<ChatSourceDocumentMessagePart> {
-  return function SourceDocumentPartRendererFn(rendererProps) {
-    return <SourceDocumentPart {...defaultProps} {...rendererProps} />;
-  };
+    throw new Error("STUB");
 }

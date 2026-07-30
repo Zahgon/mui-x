@@ -44,22 +44,5 @@ const AnimatedRect = styled('rect', {
  * @ignore - internal component.
  */
 export function AppearingMask(props: AppearingMaskProps) {
-  const drawingArea = useDrawingArea();
-  const chartId = useChartId();
-  const clipId = cleanId(`${chartId}-${props.seriesId}`);
-
-  return (
-    <React.Fragment>
-      <clipPath id={clipId}>
-        <AnimatedRect
-          className={props.skipAnimation ? '' : appearingMaskClasses.animate}
-          x={0}
-          y={0}
-          width={drawingArea.left + drawingArea.width + drawingArea.right}
-          height={drawingArea.top + drawingArea.height + drawingArea.bottom}
-        />
-      </clipPath>
-      <g clipPath={`url(#${clipId})`}>{props.children}</g>
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }

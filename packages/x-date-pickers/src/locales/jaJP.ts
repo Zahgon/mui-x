@@ -19,9 +19,7 @@ const jaJPPickers: Partial<PickersLocaleText> = {
   openPreviousView: '前の表示を開く',
   openNextView: '次の表示を開く',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? '年選択表示からカレンダー表示に切り替える'
-      : 'カレンダー表示から年選択表示に切り替える',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: '開始',
@@ -47,29 +45,25 @@ const jaJPPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `${timeViews[view] ?? view}を選択してください ${!formattedTime ? '時間が選択されていません' : `選択した時間は ${formattedTime} です`}`,
-  hoursClockNumberText: (hours) => `${hours} ${timeViews.hours}`,
-  minutesClockNumberText: (minutes) => `${minutes} ${timeViews.minutes}`,
-  secondsClockNumberText: (seconds) => `${seconds} ${timeViews.seconds}`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `を選択 ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: '週番号',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `${weekNumber}週目`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate
-      ? `日付を選択してください。選択した日付は ${formattedDate} です`
-      : '日付を選択してください',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime
-      ? `時間を選択してください。選択した時間は ${formattedTime} です`
-      : '時間を選択してください',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'クリア',
 
@@ -78,14 +72,14 @@ const jaJPPickers: Partial<PickersLocaleText> = {
   dateTableLabel: '日付を選択',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: '年',

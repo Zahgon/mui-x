@@ -48,38 +48,7 @@ export const renderTimeViewClock = ({
   showViewSwitcher,
   disableIgnoringDatePartForTimeValidation,
   timezone,
-}: TimeViewRendererProps<TimeView, TimeClockProps<TimeView>>) => (
-  <TimeClock
-    view={view}
-    onViewChange={onViewChange}
-    focusedView={focusedView && isTimeView(focusedView) ? focusedView : null}
-    onFocusedViewChange={onFocusedViewChange}
-    views={views.filter(isTimeView)}
-    value={value}
-    defaultValue={defaultValue}
-    referenceDate={referenceDate}
-    onChange={onChange}
-    className={className}
-    classes={classes}
-    disableFuture={disableFuture}
-    disablePast={disablePast}
-    minTime={minTime}
-    maxTime={maxTime}
-    shouldDisableTime={shouldDisableTime}
-    minutesStep={minutesStep}
-    ampm={ampm}
-    ampmInClock={ampmInClock}
-    slots={slots}
-    slotProps={slotProps}
-    readOnly={readOnly}
-    disabled={disabled}
-    sx={sx}
-    autoFocus={autoFocus}
-    showViewSwitcher={showViewSwitcher}
-    disableIgnoringDatePartForTimeValidation={disableIgnoringDatePartForTimeValidation}
-    timezone={timezone}
-  />
-);
+}: TimeViewRendererProps<TimeView, TimeClockProps<TimeView>>) => { throw new Error("STUB"); };
 
 export const renderDigitalClockTimeView = ({
   view,
@@ -113,38 +82,7 @@ export const renderDigitalClockTimeView = ({
 }: TimeViewRendererProps<
   Extract<TimeView, 'hours'>,
   Omit<DigitalClockProps, 'timeStep'> & Pick<TimePickerProps, 'timeSteps'>
->) => (
-  <DigitalClock
-    view={view}
-    onViewChange={onViewChange}
-    focusedView={focusedView && isTimeView(focusedView) ? focusedView : null}
-    onFocusedViewChange={onFocusedViewChange}
-    views={views.filter(isTimeView)}
-    value={value}
-    defaultValue={defaultValue}
-    referenceDate={referenceDate}
-    onChange={onChange}
-    className={className}
-    classes={classes}
-    disableFuture={disableFuture}
-    disablePast={disablePast}
-    minTime={minTime}
-    maxTime={maxTime}
-    shouldDisableTime={shouldDisableTime}
-    minutesStep={minutesStep}
-    ampm={ampm}
-    slots={slots}
-    slotProps={slotProps}
-    readOnly={readOnly}
-    disabled={disabled}
-    sx={sx}
-    autoFocus={autoFocus}
-    disableIgnoringDatePartForTimeValidation={disableIgnoringDatePartForTimeValidation}
-    timeStep={timeSteps?.minutes}
-    skipDisabled={skipDisabled}
-    timezone={timezone}
-  />
-);
+>) => { throw new Error("STUB"); };
 
 export const renderMultiSectionDigitalClockTimeView = ({
   view,
@@ -175,35 +113,4 @@ export const renderMultiSectionDigitalClockTimeView = ({
   timeSteps,
   skipDisabled,
   timezone,
-}: TimeViewRendererProps<TimeViewWithMeridiem, MultiSectionDigitalClockProps>) => (
-  <MultiSectionDigitalClock
-    view={view}
-    onViewChange={onViewChange}
-    focusedView={focusedView && isInternalTimeView(focusedView) ? focusedView : null}
-    onFocusedViewChange={onFocusedViewChange}
-    views={views.filter(isTimeView)}
-    value={value}
-    defaultValue={defaultValue}
-    referenceDate={referenceDate}
-    onChange={onChange}
-    className={className}
-    classes={classes}
-    disableFuture={disableFuture}
-    disablePast={disablePast}
-    minTime={minTime}
-    maxTime={maxTime}
-    shouldDisableTime={shouldDisableTime}
-    minutesStep={minutesStep}
-    ampm={ampm}
-    slots={slots}
-    slotProps={slotProps}
-    readOnly={readOnly}
-    disabled={disabled}
-    sx={sx}
-    autoFocus={autoFocus}
-    disableIgnoringDatePartForTimeValidation={disableIgnoringDatePartForTimeValidation}
-    timeSteps={timeSteps}
-    skipDisabled={skipDisabled}
-    timezone={timezone}
-  />
-);
+}: TimeViewRendererProps<TimeViewWithMeridiem, MultiSectionDigitalClockProps>) => { throw new Error("STUB"); };

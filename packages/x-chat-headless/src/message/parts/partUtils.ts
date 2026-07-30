@@ -1,19 +1,11 @@
 import * as React from 'react';
 
 export function formatStructuredValue(value: unknown): string {
-  if (typeof value === 'string') {
-    return value;
-  }
-
-  try {
-    return JSON.stringify(value, null, 2);
-  } catch {
-    return String(value);
-  }
+    throw new Error("STUB");
 }
 
 export function shouldCollapsePayload(text: string): boolean {
-  return text.length > 320 || text.split('\n').length > 8;
+    throw new Error("STUB");
 }
 
 export function safeUri(uri: string | null | undefined): string {
@@ -82,13 +74,9 @@ export function normalizeMarkdownForRender(markdown: string): string {
 }
 
 export function extractLanguage(className: string | undefined): string {
-  const match = /language-([^\s]+)/.exec(className ?? '');
-
-  return match?.[1]?.trim().toLowerCase() ?? '';
+    throw new Error("STUB");
 }
 
 export function normalizeCodeContent(value: React.ReactNode): string {
-  const text = React.Children.toArray(value).join('');
-
-  return text.replace(/\n$/, '');
+    throw new Error("STUB");
 }

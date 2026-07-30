@@ -16,26 +16,9 @@ const Link = styled('a')({
 });
 
 export const DemoLink = React.memo(function DemoLink(props: DemoLinkProps) {
-  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    event.stopPropagation();
-  };
-
-  return (
-    <Link tabIndex={props.tabIndex} onClick={handleClick} href={props.href}>
-      {props.children}
-    </Link>
-  );
+    throw new Error("STUB");
 });
 
 export function renderLink(params: GridRenderCellParams<any, string, any>) {
-  if (params.value == null) {
-    return '';
-  }
-
-  return (
-    <DemoLink href={params.value} tabIndex={params.tabIndex}>
-      {params.value}
-    </DemoLink>
-  );
+    throw new Error("STUB");
 }

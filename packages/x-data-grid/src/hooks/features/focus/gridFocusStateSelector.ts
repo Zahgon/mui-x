@@ -3,49 +3,49 @@ import type { GridStateCommunity } from '../../../models/gridStateCommunity';
 import type { GridFocusState, GridTabIndexState } from './gridFocusState';
 
 export const gridFocusStateSelector = createRootSelector(
-  (state: GridStateCommunity) => state.focus,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 export const gridFocusCellSelector = createSelector(
   gridFocusStateSelector,
-  (focusState: GridFocusState) => focusState.cell,
+  (focusState: GridFocusState) => { throw new Error("STUB"); },
 );
 
 export const gridFocusColumnHeaderSelector = createSelector(
   gridFocusStateSelector,
-  (focusState: GridFocusState) => focusState.columnHeader,
+  (focusState: GridFocusState) => { throw new Error("STUB"); },
 );
 
 export const gridFocusColumnHeaderFilterSelector = createSelector(
   gridFocusStateSelector,
-  (focusState: GridFocusState) => focusState.columnHeaderFilter,
+  (focusState: GridFocusState) => { throw new Error("STUB"); },
 );
 
 export const gridFocusColumnGroupHeaderSelector = createSelector(
   gridFocusStateSelector,
-  (focusState: GridFocusState) => focusState.columnGroupHeader,
+  (focusState: GridFocusState) => { throw new Error("STUB"); },
 );
 
 export const gridTabIndexStateSelector = createRootSelector(
-  (state: GridStateCommunity) => state.tabIndex,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 export const gridTabIndexCellSelector = createSelector(
   gridTabIndexStateSelector,
-  (state: GridTabIndexState) => state.cell,
+  (state: GridTabIndexState) => { throw new Error("STUB"); },
 );
 
 export const gridTabIndexColumnHeaderSelector = createSelector(
   gridTabIndexStateSelector,
-  (state: GridTabIndexState) => state.columnHeader,
+  (state: GridTabIndexState) => { throw new Error("STUB"); },
 );
 
 export const gridTabIndexColumnHeaderFilterSelector = createSelector(
   gridTabIndexStateSelector,
-  (state: GridTabIndexState) => state.columnHeaderFilter,
+  (state: GridTabIndexState) => { throw new Error("STUB"); },
 );
 
 export const gridTabIndexColumnGroupHeaderSelector = createSelector(
   gridTabIndexStateSelector,
-  (state: GridTabIndexState) => state.columnGroupHeader,
+  (state: GridTabIndexState) => { throw new Error("STUB"); },
 );

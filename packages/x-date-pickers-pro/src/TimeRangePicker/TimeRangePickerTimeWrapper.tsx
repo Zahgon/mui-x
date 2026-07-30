@@ -74,17 +74,7 @@ function TimeRangePickerTimeWrapper<
     selectionState: PickerSelectionState,
     selectedView: TimeViewWithMeridiem,
   ) => {
-    if (!onChange || !value) {
-      return;
-    }
-    const { newRange } = calculateRangeChange({
-      newDate,
-      adapter,
-      range: value,
-      rangePosition,
-    });
-    const isFullRangeSelected = rangePosition === 'end' && isRangeValid(adapter, newRange);
-    onChange(newRange, isFullRangeSelected ? 'finish' : 'partial', selectedView);
+      throw new Error("STUB");
   };
 
   return viewRenderer({

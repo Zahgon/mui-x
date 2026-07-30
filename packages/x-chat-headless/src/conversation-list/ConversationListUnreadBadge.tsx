@@ -34,54 +34,5 @@ export const ConversationListUnreadBadge = React.forwardRef(function Conversatio
   props: ConversationListUnreadBadgeProps,
   ref: React.Ref<HTMLSpanElement>,
 ) {
-  const {
-    conversation,
-    selected = false,
-    unread = false,
-    focused = false,
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    ...other
-  } = props as ConversationListUnreadBadgeProps & {
-    ownerState?: ConversationListUnreadBadgeOwnerState;
-  };
-  const ownerState: ConversationListUnreadBadgeOwnerState = {
-    conversation,
-    selected,
-    unread,
-    focused,
-    variant: ownerStateProp?.variant ?? 'default',
-  };
-  void ownerStateProp;
-
-  const Root = slots?.root ?? 'span';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  const unreadCount =
-    conversation.unreadCount != null && conversation.unreadCount > 0
-      ? conversation.unreadCount
-      : null;
-
-  // In compact mode, render a dot indicator for any unread state (even without a numeric count).
-  if (ownerState.variant === 'compact') {
-    if (!unread) {
-      return null;
-    }
-    return <Root {...rootProps}>{unreadCount != null ? formatUnreadCount(unreadCount) : ''}</Root>;
-  }
-
-  if (!unreadCount) {
-    return null;
-  }
-
-  return <Root {...rootProps}>{unreadCount > 99 ? '99+' : unreadCount}</Root>;
+    throw new Error("STUB");
 }) as ConversationListUnreadBadgeComponent;

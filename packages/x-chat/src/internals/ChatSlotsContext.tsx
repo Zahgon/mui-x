@@ -39,12 +39,7 @@ export interface ChatSlotsProviderProps {
 }
 
 export function ChatSlotsProvider(props: ChatSlotsProviderProps) {
-  const { slots, slotProps, children } = props;
-  const value = React.useMemo<ChatSlotsContextValue>(
-    () => ({ slots: slots ?? {}, slotProps: slotProps ?? {} }),
-    [slots, slotProps],
-  );
-  return <ChatSlotsContext.Provider value={value}>{children}</ChatSlotsContext.Provider>;
+    throw new Error("STUB");
 }
 
 /**

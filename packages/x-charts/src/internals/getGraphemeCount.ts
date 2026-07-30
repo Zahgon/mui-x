@@ -5,20 +5,11 @@ const segmenter =
     : null;
 
 function getGraphemeCountFallback(text: string) {
-  return text.length;
+    throw new Error("STUB");
 }
 
 function getGraphemeCountModern(text: string) {
-  const segments = segmenter!.segment(text);
-
-  let count = 0;
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/naming-convention,no-underscore-dangle
-  for (const _unused of segments) {
-    count += 1;
-  }
-
-  return count;
+    throw new Error("STUB");
 }
 
 /** Returns the number of graphemes (basically characters) present in {@link text}. */

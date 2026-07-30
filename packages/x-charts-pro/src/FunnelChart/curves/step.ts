@@ -42,9 +42,13 @@ export class Step implements FunnelCurveGenerator {
     this.isIncreasing = isIncreasing ?? false;
   }
 
-  areaStart(): void {}
+  areaStart(): void {
+      throw new Error("STUB");
+  }
 
-  areaEnd(): void {}
+  areaEnd(): void {
+      throw new Error("STUB");
+  }
 
   lineStart(): void {}
 
@@ -71,23 +75,7 @@ export class Step implements FunnelCurveGenerator {
   }
 
   processPoints(points: Point[]): Point[] {
-    // Ensure we have rectangles instead of trapezoids.
-    const processedPoints = points.map((_, index) => {
-      const allX = points.map((p) => p.x);
-      const allY = points.map((p) => p.y);
-      if (this.isHorizontal) {
-        return {
-          x: index === 1 || index === 2 ? max(allX) : min(allX),
-          y: index <= 1 ? max(allY) : min(allY),
-        };
-      }
-      return {
-        x: index <= 1 ? min(allX) : max(allX),
-        y: index === 1 || index === 2 ? max(allY) : min(allY),
-      };
-    });
-
-    return processedPoints;
+      throw new Error("STUB");
   }
 
   point(xIn: number, yIn: number): void {

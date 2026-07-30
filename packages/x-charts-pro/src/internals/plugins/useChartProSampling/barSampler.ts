@@ -10,13 +10,10 @@ import type { SamplingPyramid } from './sampling.pyramid.types';
  */
 export const barSampler: SamplingStrategy<'bar', SamplingPyramid> = {
   build: (series) =>
-    buildSamplingPyramid(
-      Float64Array.from(series.visibleStackedData, (point) => Math.min(point[0], point[1])),
-      Float64Array.from(series.visibleStackedData, (point) => Math.max(point[0], point[1])),
-    ),
+    { throw new Error("STUB"); },
 
   sample,
 
   bucketSizeAt: (span, context) =>
-    getSamplingBucketSize(span, context.dataLength, context.availableSize, context.minSpan),
+    { throw new Error("STUB"); },
 };

@@ -68,57 +68,7 @@ function RadialLineHighlightPlot(props: RadialLineHighlightPlotProps) {
   return (
     <g {...other}>
       {stackingGroups.flatMap(({ ids: groupIds }) =>
-        groupIds.flatMap((seriesId) => {
-          const {
-            rotationAxisId = defaultRotationAxisId,
-            radiusAxisId = defaultRadiusAxisId,
-            stackedData,
-            data,
-            disableHighlight,
-            shape = 'circle',
-            hidden,
-          } = series[seriesId];
-
-          if (hidden || disableHighlight || data[highlightedIndex] == null) {
-            return null;
-          }
-
-          const radiusScale = radiusAxis[radiusAxisId].scale;
-          const rotationPosition = getValueToPositionMapper(rotationAxis[rotationAxisId].scale);
-          const rotationData = rotationAxis[rotationAxisId].data;
-
-          if (rotationData === undefined) {
-            return null;
-          }
-
-          const value = stackedData[highlightedIndex]?.[1] ?? data[highlightedIndex];
-          const radius = radiusScale(value as number)!;
-          const angle = rotationPosition(rotationData[highlightedIndex])!;
-
-          const [x, y] = instance.polar2svg(radius, angle);
-
-          if (!instance.isPointInside(x, y)) {
-            return null;
-          }
-
-          const colorGetter = getColor(
-            series[seriesId],
-            rotationAxis[rotationAxisId],
-            radiusAxis[radiusAxisId],
-          );
-
-          return (
-            <Element
-              key={`${seriesId}`}
-              seriesId={seriesId}
-              color={colorGetter(highlightedIndex)}
-              x={x}
-              y={y}
-              shape={shape}
-              {...slotProps?.radialLineHighlight}
-            />
-          );
-        }),
+        { throw new Error("STUB"); },
       )}
     </g>
   );

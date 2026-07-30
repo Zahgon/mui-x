@@ -14,4 +14,4 @@ export const pinkPaletteLight = [
 export const pinkPaletteDark = pinkPaletteLight;
 
 export const pinkPalette: ChartsColorPaletteCallback = (mode) =>
-  mode === 'dark' ? pinkPaletteDark : pinkPaletteLight;
+  { throw new Error("STUB"); };

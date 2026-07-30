@@ -60,7 +60,7 @@ export const NOT_LOCALIZED_WEEK_DAYS: RecurringEventWeekDayCode[] = [
  * A map of week day codes to their indexes in NOT_LOCALIZED_WEEK_DAYS.
  */
 export const NOT_LOCALIZED_WEEK_DAYS_INDEXES = new Map<RecurringEventWeekDayCode, number>(
-  NOT_LOCALIZED_WEEK_DAYS.map((code, index) => [code, index]),
+  NOT_LOCALIZED_WEEK_DAYS.map((code, index) => { throw new Error("STUB"); }),
 );
 
 /**
@@ -122,14 +122,14 @@ export function parsesByDayForWeeklyFrequency(
     return null;
   }
   const parsed = ruleByDay.map(tokenizeByDay);
-  if (parsed.some((item) => item.ord !== null)) {
+  if (parsed.some((item) => { throw new Error("STUB"); })) {
     throw new Error(
       'MUI X Scheduler: The byDay property must contain plain weekday codes (MO..SU) without ordinals when used with weekly frequency. ' +
         'Ordinals like "1MO" or "-1FR" are only valid for monthly recurrence. ' +
         'Remove the ordinal prefixes from the byDay values.',
     );
   }
-  return parsed.map((item) => item.code);
+  return parsed.map((item) => { throw new Error("STUB"); });
 }
 
 /**
@@ -142,18 +142,7 @@ export function parsesByDayForMonthlyFrequency(ruleByDay: RecurringEventByDayVal
   ord: number;
   code: RecurringEventWeekDayCode;
 } {
-  const { ord, code } =
-    ruleByDay.length === 1 ? tokenizeByDay(ruleByDay[0]) : { ord: null, code: null };
-
-  if (ord == null) {
-    throw new Error(
-      'MUI X Scheduler: The byDay property for monthly recurrence must contain a single element with an ordinal. ' +
-        'Examples: ["2TU"] for the second Tuesday or ["-1FR"] for the last Friday. ' +
-        'Provide exactly one byDay value with an ordinal.',
-    );
-  }
-
-  return { ord, code };
+    throw new Error("STUB");
 }
 
 /**
@@ -161,13 +150,7 @@ export function parsesByDayForMonthlyFrequency(ruleByDay: RecurringEventByDayVal
  *  @returns At least 1, start==end yields 1.
  */
 export function getEventDurationInDays(adapter: Adapter, event: SchedulerProcessedEvent): number {
-  // +1 so start/end same day = 1 day, spans include last day
-  return (
-    adapter.differenceInDays(
-      adapter.startOfDay(event.dataTimezone.end.value),
-      adapter.startOfDay(event.dataTimezone.start.value),
-    ) + 1
-  );
+    throw new Error("STUB");
 }
 
 /**
@@ -284,16 +267,7 @@ export function dayInWeek(
 export function getRemainingDailyOccurrences(
   parameters: GetRemainingOccurrencesParameters,
 ): number {
-  const { adapter, rule, seriesStartDay, date, count } = parameters;
-  if (adapter.isBefore(date, seriesStartDay)) {
-    return count;
-  }
-
-  const interval = Math.max(1, rule.interval ?? 1);
-  const totalDays = adapter.differenceInDays(adapter.startOfDay(date), seriesStartDay);
-  const occurrencesSoFar = Math.floor(totalDays / interval) + 1;
-
-  return Math.max(0, count - occurrencesSoFar);
+    throw new Error("STUB");
 }
 
 /**
@@ -305,48 +279,7 @@ export function getRemainingDailyOccurrences(
 export function getRemainingWeeklyOccurrences(
   parameters: GetRemainingOccurrencesParameters,
 ): number {
-  const { adapter, rule, seriesStartDay, date, count } = parameters;
-  if (adapter.isBefore(date, seriesStartDay)) {
-    return count;
-  }
-
-  const byDay = parsesByDayForWeeklyFrequency(rule.byDay) ?? [
-    getWeekDayCode(adapter, seriesStartDay),
-  ];
-
-  const interval = Math.max(1, rule.interval ?? 1);
-
-  // IMPORTANT: weekly COUNT math must use RRULE week boundaries (WKST, default Monday),
-  // not adapter.startOfWeek() which is locale-driven (often Sunday). Using locale weeks can
-  // make remaining occurrences off (and even produce backwards weekly navigation) for BYDAY
-  // combinations like SU+TU, especially when timezone projection shifts weekdays.
-  // See issue #20755 for reference.
-  const seriesWeekStart = startOfRRuleWeek(adapter, seriesStartDay);
-  const targetWeekStart = startOfRRuleWeek(adapter, date);
-
-  const dateEndDay = adapter.endOfDay(date);
-
-  let remaining = count;
-
-  // Iterate weeks from start to target, stepping by `interval`
-  for (
-    let week = seriesWeekStart;
-    !adapter.isAfter(week, targetWeekStart) && remaining > 0;
-    week = adapter.addWeeks(week, interval)
-  ) {
-    // For the current week, check each weekday specified in BYDAY
-    for (const code of byDay) {
-      const occurrenceDay = dayInWeek(adapter, week, code);
-
-      if (!adapter.isWithinRange(occurrenceDay, [seriesStartDay, dateEndDay])) {
-        continue;
-      }
-
-      remaining -= 1;
-    }
-  }
-
-  return remaining;
+    throw new Error("STUB");
 }
 
 /**
@@ -359,83 +292,7 @@ export function getRemainingWeeklyOccurrences(
 export function getRemainingMonthlyOccurrences(
   parameters: GetRemainingOccurrencesParameters,
 ): number {
-  const { adapter, rule, seriesStartDay, date, count } = parameters;
-  const seriesStartMonth = adapter.startOfMonth(seriesStartDay);
-  const targetMonth = adapter.startOfMonth(date);
-  if (adapter.isBefore(targetMonth, seriesStartMonth)) {
-    return count;
-  }
-
-  const dateEndDay = adapter.endOfDay(date);
-  const interval = Math.max(1, rule.interval ?? 1);
-
-  // Path A: BYDAY with ordinals (e.g. 2TU, -1FR). Not mixed with BYMONTHDAY.
-  if (rule.byDay?.length) {
-    if (rule.byMonthDay?.length) {
-      throw new Error(
-        'MUI X Scheduler: Monthly recurrences cannot have both byDay and byMonthDay properties. ' +
-          'Use either byDay for weekday-based recurrence (e.g., "2TU" for second Tuesday) ' +
-          'or byMonthDay for date-based recurrence (e.g., [15] for the 15th of each month).',
-      );
-    }
-
-    const { ord, code } = parsesByDayForMonthlyFrequency(rule.byDay);
-
-    let remaining = count;
-    for (
-      let month = seriesStartMonth;
-      !adapter.isAfter(month, targetMonth) && remaining > 0;
-      month = adapter.addMonths(month, interval)
-    ) {
-      const occurrenceDate = nthWeekdayOfMonth(adapter, month, code, ord);
-      if (!occurrenceDate) {
-        continue;
-      }
-
-      if (!adapter.isWithinRange(occurrenceDate, [seriesStartDay, dateEndDay])) {
-        continue;
-      }
-
-      remaining -= 1;
-    }
-    return remaining;
-  }
-
-  // Path B: BYMONTHDAY (single mode, default to DTSTART day)
-  if ((rule.byMonthDay?.length ?? 0) > 1) {
-    throw new Error(
-      'MUI X Scheduler: Monthly recurrences only support a single byMonthDay value. ' +
-        'Multiple byMonthDay values are not supported. ' +
-        'Provide only one day of the month value.',
-    );
-  }
-
-  // If no BYMONTHDAY is provided in a MONTHLY rule, default to the day of month of DTSTART.
-  const dayOfMonth = rule.byMonthDay?.length ? rule.byMonthDay[0] : adapter.getDate(seriesStartDay);
-
-  let remaining = count;
-
-  // Iterate months from start to target, stepping by `interval`
-  for (
-    let month = seriesStartMonth;
-    !adapter.isAfter(month, targetMonth) && remaining > 0;
-    month = adapter.addMonths(month, interval)
-  ) {
-    // if the day doesn't exist in this month, skip it
-    const daysInMonth = adapter.getDaysInMonth(month);
-    if (dayOfMonth > daysInMonth) {
-      continue;
-    }
-
-    const candidate = adapter.startOfDay(adapter.setDate(month, dayOfMonth));
-    if (!adapter.isWithinRange(candidate, [seriesStartDay, dateEndDay])) {
-      continue;
-    }
-
-    remaining -= 1;
-  }
-
-  return remaining;
+    throw new Error("STUB");
 }
 
 /**
@@ -448,58 +305,7 @@ export function getRemainingMonthlyOccurrences(
 export function getRemainingYearlyOccurrences(
   parameters: GetRemainingOccurrencesParameters,
 ): number {
-  const { adapter, rule, seriesStartDay, date, count } = parameters;
-
-  const seriesStartYear = adapter.startOfYear(seriesStartDay);
-  const dateEndDay = adapter.endOfDay(date);
-  const targetYearStart = adapter.startOfYear(date);
-  if (adapter.isBefore(targetYearStart, seriesStartYear)) {
-    return count;
-  }
-
-  const interval = Math.max(1, rule.interval ?? 1);
-
-  // Only the exact same calendar date is supported for YEARLY (month and day of DTSTART).
-  // Any use of BYMONTH, BYMONTHDAY, or BYDAY is not allowed at the moment.
-  if (rule.byMonth?.length || rule.byMonthDay?.length || rule.byDay?.length) {
-    throw new Error(
-      'MUI X Scheduler: Yearly recurrences only support exact same date recurrence based on DTSTART. ' +
-        'Properties byMonth, byMonthDay, and byDay are not supported for yearly frequency. ' +
-        'The event will recur on the same month and day as the start date.',
-    );
-  }
-
-  const targetMonth = adapter.getMonth(seriesStartDay);
-  const targetDayOfMonth = adapter.getDate(seriesStartDay);
-
-  let remaining = count;
-
-  // Iterate years from the series start (inclusive) to the target year (inclusive),
-  // stepping by `interval`.
-  for (
-    let year = seriesStartYear;
-    !adapter.isAfter(year, targetYearStart) && remaining > 0;
-    year = adapter.addYears(year, interval)
-  ) {
-    // Anchor to the target month in the current year
-    const monthAnchor = adapter.setMonth(year, targetMonth);
-
-    // Skip years where the requested day doesn't exist (e.g., Feb 29 on non-leap years)
-    const daysInMonth = adapter.getDaysInMonth(monthAnchor);
-    if (targetDayOfMonth > daysInMonth) {
-      continue;
-    }
-
-    const candidate = adapter.startOfDay(adapter.setDate(monthAnchor, targetDayOfMonth));
-
-    if (!adapter.isWithinRange(candidate, [seriesStartDay, dateEndDay])) {
-      continue;
-    }
-
-    remaining -= 1;
-  }
-
-  return remaining;
+    throw new Error("STUB");
 }
 
 /**

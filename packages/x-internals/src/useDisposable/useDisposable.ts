@@ -42,17 +42,7 @@ const ReactInternals: ReactSharedInternalsLike | undefined =
   SafeReactInternals.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
 
 function isInStrictMode(): boolean {
-  try {
-    const owner =
-      ReactInternals?.A?.getOwner?.() ?? ReactInternals?.ReactCurrentOwner?.current ?? null;
-    if (owner == null || typeof owner.mode !== 'number') {
-      return false;
-    }
-    // eslint-disable-next-line no-bitwise
-    return (owner.mode & STRICT_MODE_BITS) !== 0;
-  } catch {
-    return false;
-  }
+    throw new Error("STUB");
 }
 
 // Module-private symbol used to stash the `useOnMount` callback on the
@@ -90,21 +80,7 @@ const UNINITIALIZED: unique symbol = Symbol();
  * @returns {T} the lazily-created instance.
  */
 function useDisposableProduction<T extends Disposable>(factory: () => T): T {
-  const ref = React.useRef<Mounted<T> | typeof UNINITIALIZED>(UNINITIALIZED);
-  if (ref.current === UNINITIALIZED) {
-    const inst = factory() as Mounted<T>;
-    const cleanup = () => {
-      inst[disposeSymbol]();
-      // Reset so a fiber-preserving remount (e.g. `<Activity>` reveal, which
-      // re-renders before re-running effects) rebuilds a fresh instance instead
-      // of reusing the disposed one.
-      ref.current = UNINITIALIZED;
-    };
-    inst[MOUNT] = () => cleanup;
-    ref.current = inst;
-  }
-  useOnMount(ref.current[MOUNT]);
-  return ref.current;
+    throw new Error("STUB");
 }
 
 /**
@@ -123,40 +99,7 @@ function useDisposableProduction<T extends Disposable>(factory: () => T): T {
  * @returns {T} the lazily-created instance.
  */
 function useDisposableDevelopment<T extends Disposable>(factory: () => T): T {
-  const ref = React.useRef<MountedDev<T> | typeof UNINITIALIZED>(UNINITIALIZED);
-  if (ref.current === UNINITIALIZED) {
-    const inst = factory() as MountedDev<T>;
-    // Captured during render because the owner fiber is only set while React
-    // is rendering — by the time the effect runs it's already null.
-    const state: DevState = { detectedStrict: isInStrictMode(), mountCount: 0, disposed: false };
-    inst[DEV_STATE] = state;
-    inst[MOUNT] = () => {
-      state.mountCount += 1;
-      if (state.mountCount > 1 && state.disposed) {
-        throw new Error(
-          'MUI X: useDisposable failed to detect React StrictMode.\n' +
-            "The instance was disposed on StrictMode's simulated unmount and is about to be reused while torn down.\n" +
-            'This is an internal invariant violation — please report it at https://github.com/mui/mui-x/issues.',
-        );
-      }
-      return () => {
-        // Skip StrictMode's simulated unmount (the first unmount, when strict
-        // mode was detected); dispose on every real unmount.
-        if (state.detectedStrict && state.mountCount < 2) {
-          return;
-        }
-        state.disposed = true;
-        inst[disposeSymbol]();
-        // Reset so a fiber-preserving remount (e.g. `<Activity>` reveal, which
-        // re-renders before re-running effects) rebuilds a fresh instance
-        // instead of reusing the disposed one.
-        ref.current = UNINITIALIZED;
-      };
-    };
-    ref.current = inst;
-  }
-  useOnMount(ref.current[MOUNT]);
-  return ref.current;
+    throw new Error("STUB");
 }
 
 /**

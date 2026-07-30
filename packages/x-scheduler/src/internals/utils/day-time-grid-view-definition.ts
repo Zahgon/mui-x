@@ -34,40 +34,26 @@ export function createDayTimeGridViewDefinition(
   if (dayCount === DAYS_IN_WEEK) {
     return {
       siblingVisibleDateGetter: ({ state, delta }) =>
-        state.adapter.addWeeks(
-          getStartOfWeek(
-            state.adapter,
-            schedulerOtherSelectors.visibleDate(state),
-            eventCalendarPreferenceSelectors.weekStartsOn(state),
-          ),
-          delta,
-        ),
+        { throw new Error("STUB"); },
       visibleDaysSelector: createSelectorMemoized(
-        (state: State) => state.adapter,
+        (state: State) => { throw new Error("STUB"); },
         schedulerOtherSelectors.visibleDate,
         eventCalendarPreferenceSelectors.showWeekends,
         eventCalendarPreferenceSelectors.weekStartsOn,
         (adapter, visibleDate, showWeekends, weekStartsOn) =>
-          getDayList({
-            adapter,
-            start: getStartOfWeek(adapter, visibleDate, weekStartsOn),
-            end: getEndOfWeek(adapter, visibleDate, weekStartsOn),
-            excludeWeekends: !showWeekends,
-          }),
+          { throw new Error("STUB"); },
       ),
     };
   }
 
   return {
     siblingVisibleDateGetter: ({ state, delta }) =>
-      state.adapter.addDays(schedulerOtherSelectors.visibleDate(state), delta * dayCount),
+      { throw new Error("STUB"); },
     visibleDaysSelector: createSelectorMemoized(
-      (state: State) => state.adapter,
+      (state: State) => { throw new Error("STUB"); },
       schedulerOtherSelectors.visibleDate,
       (adapter, visibleDate): SchedulerProcessedDate[] =>
-        Array.from({ length: dayCount }, (_, index) =>
-          processDate(adapter.addDays(visibleDate, index), adapter),
-        ),
+        { throw new Error("STUB"); },
     ),
   };
 }

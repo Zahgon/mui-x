@@ -19,9 +19,7 @@ const hrHRPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Otvori prethodni prikaz',
   openNextView: 'Otvori naredni prikaz',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'Otvoren je godišnji prikaz, promijeni na kalendarski prikaz'
-      : 'Otvoren je kalendarski prikaz, promijeni na godišnji prikaz',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Početak',
@@ -47,42 +45,30 @@ const hrHRPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Odaberi ${timeViews[view] ?? view}. ${!formattedTime ? 'Vrijeme nije odabrano' : `Odabrano vrijeme je ${formattedTime}`}`,
+    { throw new Error("STUB"); },
   hoursClockNumberText: (hours) => {
-    let suffix = 'sati';
-    if (Number(hours) === 1) {
-      suffix = 'sat';
-    } else if (Number(hours) < 5) {
-      suffix = 'sata';
-    }
-    return `${hours} ${suffix}`;
+      throw new Error("STUB");
   },
   minutesClockNumberText: (minutes) =>
-    `${minutes} ${Number(minutes) > 1 && Number(minutes) < 5 ? 'minute' : 'minuta'}`,
+    { throw new Error("STUB"); },
   secondsClockNumberText: (seconds) => {
-    let suffix = 'sekundi';
-    if (Number(seconds) === 1) {
-      suffix = 'sekunda';
-    } else if (Number(seconds) < 5) {
-      suffix = 'sekunde';
-    }
-    return `${seconds} ${suffix}`;
+      throw new Error("STUB");
   },
 
   // Digital clock labels
-  selectViewText: (view) => `Odaberi ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Broj tjedna',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Tjedan ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Odaberi datum, odabrani datum je ${formattedDate}` : 'Odaberi datum',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Odaberi vrijeme, odabrano vrijeme je ${formattedTime}` : 'Odaberi vrijeme',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Izbriši',
 
@@ -91,14 +77,14 @@ const hrHRPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'Odaberi datum',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'G'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Godina',

@@ -18,9 +18,7 @@ const bnBDPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'আগের ভিউ খুলুন',
   openNextView: 'পরের ভিউ খুলুন',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'বছরের ভিউ খোলা আছে, ক্যালেন্ডার ভিউতে পরিবর্তন করুন'
-      : 'ক্যালেন্ডার ভিউ খোলা আছে, বছরের ভিউতে পরিবর্তন করুন',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'শুরু',
@@ -46,25 +44,25 @@ const bnBDPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `নির্বাচন করুন ${views[view]}. ${!formattedTime ? 'কোনও সময় নির্বাচন করা হয়নি' : `নির্বাচিত সময় ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} ঘণ্টা`,
-  minutesClockNumberText: (minutes) => `${minutes} মিনিট`,
-  secondsClockNumberText: (seconds) => `${seconds} সেকেন্ড`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `${views[view]} নির্বাচন করুন`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'সপ্তাহ সংখ্যা',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `সপ্তাহ ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `তারিখ নির্বাচন করুন, নির্বাচিত তারিখ ${formattedDate}` : 'তারিখ নির্বাচন করুন',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `সময় নির্বাচন করুন, নির্বাচিত সময় ${formattedTime}` : 'সময় নির্বাচন করুন',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'পরিষ্কার',
 
@@ -73,14 +71,14 @@ const bnBDPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'তারিখ নির্বাচন করুন',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'ব'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'ঘন্টা',
-  fieldMinutesPlaceholder: () => 'মিনিট',
-  fieldSecondsPlaceholder: () => 'সেকেন্ড',
-  fieldMeridiemPlaceholder: () => 'এএম/পিএম',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'বছর',

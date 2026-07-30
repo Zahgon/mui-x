@@ -32,35 +32,15 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
 
   // Rename imports and usages
   renameKeys.forEach((oldName) => {
-    const newName = renames[oldName as keyof typeof renames];
-    root.find(j.Identifier, { name: oldName }).forEach((keyPath) => {
-      // Avoid renaming property keys in objects unless they are shorthand or identifiers in other contexts
-      if (
-        keyPath.parent.value.type === 'Property' &&
-        keyPath.parent.value.key === keyPath.node &&
-        !keyPath.parent.value.shorthand
-      ) {
-        return;
-      }
-      // Avoid renaming member expressions like something.PickerDay2
-      if (
-        keyPath.parent.value.type === 'MemberExpression' &&
-        keyPath.parent.value.property === keyPath.node &&
-        !keyPath.parent.value.computed
-      ) {
-        return;
-      }
-
-      j(keyPath).replaceWith(j.identifier(newName));
-    });
+      throw new Error("STUB");
   });
 
   // Rename theme components in createTheme / theme augmentation
   root.find(j.Identifier, { name: 'MuiPickerDay2' }).forEach((keyPath) => {
-    j(keyPath).replaceWith(j.identifier('MuiPickerDay'));
+      throw new Error("STUB");
   });
   root.find(j.Identifier, { name: 'MuiDateRangePickerDay2' }).forEach((keyPath) => {
-    j(keyPath).replaceWith(j.identifier('MuiDateRangePickerDay'));
+      throw new Error("STUB");
   });
 
   // Also handle string literals and template literals
@@ -70,60 +50,19 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
       .replace(/MuiDateRangePickerDay2\b/g, 'MuiDateRangePickerDay');
 
   root.find(j.StringLiteral).forEach((keyPath) => {
-    if (
-      keyPath.value.value.includes('MuiPickerDay2') ||
-      keyPath.value.value.includes('MuiDateRangePickerDay2')
-    ) {
-      j(keyPath).replaceWith(j.stringLiteral(replaceClass(keyPath.value.value)));
-    }
+      throw new Error("STUB");
   });
 
   root.find(j.TemplateLiteral).forEach((keyPath) => {
-    keyPath.value.quasis.forEach((quasi) => {
-      if (
-        quasi.value.raw.includes('MuiPickerDay2') ||
-        quasi.value.raw.includes('MuiDateRangePickerDay2')
-      ) {
-        quasi.value.raw = replaceClass(quasi.value.raw);
-      }
-      if (
-        quasi.value.cooked &&
-        (quasi.value.cooked.includes('MuiPickerDay2') ||
-          quasi.value.cooked.includes('MuiDateRangePickerDay2'))
-      ) {
-        quasi.value.cooked = replaceClass(quasi.value.cooked);
-      }
-    });
+      throw new Error("STUB");
   });
 
   // Update import sources
   root.find(j.ImportDeclaration).forEach((importPath) => {
-    if (typeof importPath.value.source.value === 'string') {
-      if (importPath.value.source.value.includes('/PickerDay2')) {
-        importPath.value.source.value = importPath.value.source.value.replace(
-          '/PickerDay2',
-          '/PickerDay',
-        );
-      }
-      if (importPath.value.source.value.includes('/DateRangePickerDay2')) {
-        importPath.value.source.value = importPath.value.source.value.replace(
-          '/DateRangePickerDay2',
-          '/DateRangePickerDay',
-        );
-      }
-    }
+      throw new Error("STUB");
   });
 
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'rename-picker-day-2',
-  specFiles: [
-    {
-      name: 'rename PickerDay2 and DateRangePickerDay2 to PickerDay and DateRangePickerDay',
-      actual: readFile(path.join(import.meta.dirname, 'actual.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

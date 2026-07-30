@@ -281,17 +281,7 @@ export const updateCacheWithNewRows = ({
   const uniqueUpdates = new Map<GridRowId, GridRowModel>();
 
   updates.forEach((update) => {
-    const id = getRowIdFromRowModel(
-      update,
-      getRowId,
-      'A row was provided without id when calling updateRows():',
-    );
-
-    if (uniqueUpdates.has(id)) {
-      uniqueUpdates.set(id, { ...uniqueUpdates.get(id), ...update });
-    } else {
-      uniqueUpdates.set(id, update);
-    }
+      throw new Error("STUB");
   });
 
   const partialUpdates: GridRowsPartialUpdates = {
@@ -317,82 +307,7 @@ export const updateCacheWithNewRows = ({
   // - if you delete then insert, then you don't want to apply the deletion in the tree.
   // - if you insert, then modify, then you just want to apply the insertion in the tree.
   uniqueUpdates.forEach((partialRow, id) => {
-    const actionAlreadyAppliedToRow = partialUpdates.idToActionLookup[id];
-
-    // Action === "delete"
-    // eslint-disable-next-line no-underscore-dangle
-    if (partialRow._action === 'delete') {
-      // If the data row has been removed since the last state update,
-      // Then do nothing.
-      if (actionAlreadyAppliedToRow === 'remove' || !dataRowIdToModelLookup[id]) {
-        return;
-      }
-
-      // If the data row has been inserted / modified since the last state update,
-      // Then drop this "insert" / "modify" update.
-      if (actionAlreadyAppliedToRow != null) {
-        alreadyAppliedActionsToRemove[actionAlreadyAppliedToRow][id] = true;
-      }
-
-      // Remove the data row from the lookups and add it to the "delete" update.
-      partialUpdates.actions.remove.push(id);
-      delete dataRowIdToModelLookup[id];
-      return;
-    }
-
-    const oldRow = dataRowIdToModelLookup[id];
-
-    // Action === "modify"
-    if (oldRow) {
-      // If the data row has been removed since the last state update,
-      // Then drop this "remove" update and add it to the "modify" update instead.
-      if (actionAlreadyAppliedToRow === 'remove') {
-        alreadyAppliedActionsToRemove.remove[id] = true;
-        partialUpdates.actions.modify.push(id);
-      }
-      // If the date has not been inserted / modified since the last state update,
-      // Then add it to the "modify" update (if it has been inserted it should just remain "inserted").
-      else if (actionAlreadyAppliedToRow == null) {
-        partialUpdates.actions.modify.push(id);
-      }
-
-      // Update the data row lookups.
-      // Prototype-preservation rules:
-      //   1. If partialRow is a class instance (non-plain object), use its prototype — the
-      //      caller is passing in a fully-constructed instance and owns the prototype chain.
-      //   2. If partialRow is a plain object (Object.prototype), prefer oldRow's prototype so
-      //      that a partial-update object does not silently discard the existing row's class.
-      //   3. If both are plain objects the result is also a plain object (no-op).
-      //
-      // Note: private class fields (#field syntax) cannot be preserved through a spread-style
-      // merge because the brand check is tied to the original instance. Rows that rely on
-      // private fields must supply a fully-constructed instance as partialRow (rule 1 above)
-      // rather than a plain-object partial update.
-      const partialRowProto = Object.getPrototypeOf(partialRow);
-      const isPartialRowPlain = partialRowProto === Object.prototype || partialRowProto === null;
-      const proto = isPartialRowPlain ? Object.getPrototypeOf(oldRow) : partialRowProto;
-      const merged = Object.create(proto);
-      Object.assign(merged, oldRow, partialRow);
-      dataRowIdToModelLookup[id] = merged;
-      return;
-    }
-
-    // Action === "insert"
-    // If the data row has been removed since the last state update,
-    // Then drop the "remove" update and add it to the "insert" update instead.
-    if (actionAlreadyAppliedToRow === 'remove') {
-      alreadyAppliedActionsToRemove.remove[id] = true;
-      partialUpdates.actions.insert.push(id);
-    }
-    // If the data row has not been inserted since the last state update,
-    // Then add it to the "insert" update.
-    // `actionAlreadyAppliedToRow` can't be equal to "modify", otherwise we would have an `oldRow` above.
-    else if (actionAlreadyAppliedToRow == null) {
-      partialUpdates.actions.insert.push(id);
-    }
-
-    // Update the data row lookups.
-    dataRowIdToModelLookup[id] = partialRow;
+      throw new Error("STUB");
   });
 
   const actionTypeWithActionsToRemove = Object.keys(
@@ -403,7 +318,7 @@ export const updateCacheWithNewRows = ({
     const idsToRemove = alreadyAppliedActionsToRemove[actionType];
     if (Object.keys(idsToRemove).length > 0) {
       partialUpdates.actions[actionType] = partialUpdates.actions[actionType].filter(
-        (id) => !idsToRemove[id],
+        (id) => { throw new Error("STUB"); },
       );
     }
   }
@@ -427,26 +342,7 @@ export function computeRowsUpdates(
   const nonPinnedRowsUpdates: GridRowModelUpdate[] = [];
 
   updates.forEach((update) => {
-    const id = getRowIdFromRowModel(
-      update,
-      getRowId,
-      'A row was provided without id when calling updateRows():',
-    );
-
-    const rowNode = gridRowNodeSelector(apiRef, id);
-    if (rowNode?.type === 'pinnedRow') {
-      // @ts-ignore because otherwise `release:build` doesn't work
-      const pinnedRowsCache = apiRef.current.caches.pinnedRows;
-      const prevModel = pinnedRowsCache.idLookup[id];
-      if (prevModel) {
-        pinnedRowsCache.idLookup[id] = {
-          ...prevModel,
-          ...update,
-        };
-      }
-    } else {
-      nonPinnedRowsUpdates.push(update);
-    }
+      throw new Error("STUB");
   });
   return nonPinnedRowsUpdates;
 }

@@ -14,25 +14,12 @@ const NotRenderedDivider = NotRendered as unknown as React.ComponentType<ChartBa
 const Divider = styled(NotRenderedDivider, {
   name: 'MuiChartsToolbar',
   slot: 'Divider',
-})(({ theme }) => ({
-  margin: theme.spacing(0, 0.5),
-  height: '50%',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChartsToolbarDivider = React.forwardRef<HTMLHRElement, ChartsToolbarDividerProps>(
   function ChartsToolbarDivider(props, ref) {
-    const { slots, slotProps } = useChartsSlots<ChartsBaseSlotsPro>();
-
-    return (
-      <Divider
-        as={slots.baseDivider}
-        orientation="vertical"
-        {...slotProps.baseDivider}
-        {...props}
-        ref={ref}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChartsToolbarDivider.propTypes = {

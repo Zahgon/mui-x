@@ -33,28 +33,14 @@ export function useGridParamsApi(
   configuration: GridConfiguration,
 ) {
   const getColumnHeaderParams = React.useCallback<GridParamsApi['getColumnHeaderParams']>(
-    (field) => ({
-      field,
-      colDef: apiRef.current.getColumn(field) as GridStateColDef,
-    }),
+    (field) => { throw new Error("STUB"); },
     [apiRef],
   );
 
   const getRowParams = React.useCallback<GridParamsApi['getRowParams']>(
     (id) => {
-      const row = apiRef.current.getRow(id);
-
-      if (!row) {
-        throw new MissingRowIdError(`MUI X: No row with id #${id} found`);
-      }
-
-      const params: GridRowParams = {
-        id,
-        columns: apiRef.current.getAllColumns(),
-        row,
-      };
-      return params;
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
@@ -73,87 +59,35 @@ export function useGridParamsApi(
         formattedValue: forcedFormattedValue,
       },
     ) => {
-      const value =
-        forcedValue !== undefined ? forcedValue : apiRef.current.getRowValue(row, colDef);
-      const formattedValue =
-        forcedFormattedValue !== undefined
-          ? forcedFormattedValue
-          : apiRef.current.getRowFormattedValue(row, colDef);
-
-      const params: GridCellParams<any, any, any, any> = {
-        id,
-        field,
-        row,
-        rowNode,
-        colDef,
-        cellMode,
-        hasFocus,
-        tabIndex,
-        value,
-        formattedValue,
-        isEditable: false,
-        api: apiRef.current,
-      };
-      params.isEditable = colDef && apiRef.current.isCellEditable(params);
-
-      return params;
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
   const getCellParams = React.useCallback<GridParamsApi['getCellParams']>(
     (id, field) => {
-      const row = apiRef.current.getRow(id);
-      const rowNode = gridRowNodeSelector(apiRef, id);
-
-      if (!row || !rowNode) {
-        throw new MissingRowIdError(`MUI X: No row with id #${id} found`);
-      }
-
-      const cellFocus = gridFocusCellSelector(apiRef);
-      const cellTabIndex = gridTabIndexCellSelector(apiRef);
-      const cellMode = apiRef.current.getCellMode(id, field);
-
-      return apiRef.current.getCellParamsForRow<any, any, any, any>(id, field, row, {
-        // Params keep a non-nullable `colDef`, but it can be `undefined` at runtime for an unknown field.
-        colDef: (props.listView && props.listViewColumn?.field === field
-          ? gridListColumnSelector(apiRef)!
-          : apiRef.current.getColumn(field)) as GridStateColDef,
-        rowNode,
-        hasFocus: cellFocus !== null && cellFocus.field === field && cellFocus.id === id,
-        tabIndex: cellTabIndex && cellTabIndex.field === field && cellTabIndex.id === id ? 0 : -1,
-        cellMode,
-      });
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.listView, props.listViewColumn?.field],
   );
 
   const getColumnHeaderElement = React.useCallback<GridParamsApi['getColumnHeaderElement']>(
     (field) => {
-      if (!apiRef.current.rootElementRef!.current) {
-        return null;
-      }
-      return getGridColumnHeaderElement(apiRef.current.rootElementRef!.current!, field);
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
   const getRowElement = React.useCallback<GridParamsApi['getRowElement']>(
     (id) => {
-      if (!apiRef.current.rootElementRef!.current) {
-        return null;
-      }
-      return getGridRowElement(apiRef.current.rootElementRef!.current!, id);
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
   const getCellElement = React.useCallback<GridParamsApi['getCellElement']>(
     (id, field) => {
-      if (!apiRef.current.rootElementRef!.current) {
-        return null;
-      }
-      return getGridCellElement(apiRef.current.rootElementRef!.current!, { id, field });
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 

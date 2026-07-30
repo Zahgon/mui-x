@@ -13,16 +13,7 @@ export interface AuthedFetchOptions {
 export function createAuthedFetch(options: AuthedFetchOptions) {
   let token: string | undefined;
   return async (url: string, buildInit: (jwt: string) => RequestInit): Promise<Response> => {
-    if (token === undefined) {
-      token = await options.getToken({ signal: options.signal });
-    }
-    const response = await sendGuarded(options.fetcher, url, buildInit(token));
-    if (response.status !== 401) {
-      return response;
-    }
-    options.invalidateToken?.();
-    token = await options.getToken({ signal: options.signal });
-    return sendGuarded(options.fetcher, url, buildInit(token));
+      throw new Error("STUB");
   };
 }
 

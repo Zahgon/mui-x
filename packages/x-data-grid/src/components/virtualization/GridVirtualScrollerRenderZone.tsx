@@ -34,17 +34,7 @@ const GridVirtualScrollerRenderZone = forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement> & { sx?: SxProps<Theme> }
 >(function GridVirtualScrollerRenderZone(props, ref) {
-  const rootProps = useGridRootProps();
-  const classes = useUtilityClasses(rootProps);
-
-  return (
-    <VirtualScrollerRenderZoneRoot
-      ownerState={rootProps}
-      {...props}
-      className={clsx(classes.root, props.className)}
-      ref={ref}
-    />
-  );
+    throw new Error("STUB");
 });
 
 export { GridVirtualScrollerRenderZone };

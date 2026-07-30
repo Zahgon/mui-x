@@ -54,11 +54,7 @@ export const getSecondsInDay = (date: PickerValidDate, adapter: MuiPickersAdapte
 export const createIsAfterIgnoreDatePart =
   (disableIgnoringDatePartForTimeValidation: boolean, adapter: MuiPickersAdapter) =>
   (dateLeft: PickerValidDate, dateRight: PickerValidDate) => {
-    if (disableIgnoringDatePartForTimeValidation) {
-      return adapter.isAfter(dateLeft, dateRight);
-    }
-
-    return getSecondsInDay(dateLeft, adapter) > getSecondsInDay(dateRight, adapter);
+      throw new Error("STUB");
   };
 
 export const resolveTimeFormat = (

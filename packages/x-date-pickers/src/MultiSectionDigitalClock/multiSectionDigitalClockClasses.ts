@@ -9,7 +9,7 @@ export interface MultiSectionDigitalClockClasses {
 export type MultiSectionDigitalClockClassKey = keyof MultiSectionDigitalClockClasses;
 
 export function getMultiSectionDigitalClockUtilityClass(slot: string) {
-  return generateUtilityClass('MuiMultiSectionDigitalClock', slot);
+    throw new Error("STUB");
 }
 
 export const multiSectionDigitalClockClasses: MultiSectionDigitalClockClasses =

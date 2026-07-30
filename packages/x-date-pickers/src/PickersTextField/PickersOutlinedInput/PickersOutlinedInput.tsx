@@ -27,48 +27,7 @@ const PickersOutlinedInputRoot = styled(PickersInputBaseRoot, {
   name: 'MuiPickersOutlinedInput',
   slot: 'Root',
 })<{ ownerState: PickerTextFieldOwnerState }>(({ theme }) => {
-  const borderColor =
-    theme.palette.mode === 'light' ? 'rgba(0, 0, 0, 0.23)' : 'rgba(255, 255, 255, 0.23)';
-  return {
-    padding: '0 14px',
-    borderRadius: (theme.vars || theme).shape.borderRadius,
-    [`&:hover .${pickersOutlinedInputClasses.notchedOutline}`]: {
-      borderColor: (theme.vars || theme).palette.text.primary,
-    },
-    // Reset on touch devices, it doesn't add specificity
-    '@media (hover: none)': {
-      [`&:hover .${pickersOutlinedInputClasses.notchedOutline}`]: {
-        borderColor: theme.vars
-          ? theme.alpha(theme.vars.palette.common.onBackground, 0.23)
-          : borderColor,
-      },
-    },
-    [`&.${pickersOutlinedInputClasses.focused} .${pickersOutlinedInputClasses.notchedOutline}`]: {
-      borderStyle: 'solid',
-      borderWidth: 2,
-    },
-    [`&.${pickersOutlinedInputClasses.error} .${pickersOutlinedInputClasses.notchedOutline}`]: {
-      borderColor: (theme.vars || theme).palette.error.main,
-    },
-    [`&.${pickersOutlinedInputClasses.disabled}`]: {
-      [`& .${pickersOutlinedInputClasses.notchedOutline}`]: {
-        borderColor: (theme.vars || theme).palette.action.disabled,
-      },
-    },
-    variants: Object.keys((theme.vars ?? theme).palette)
-      // @ts-ignore
-      .filter((key) => (theme.vars ?? theme).palette[key]?.main ?? false)
-      .map((color) => ({
-        props: { inputColor: color },
-        style: {
-          [`&.${pickersOutlinedInputClasses.focused}:not(.${pickersOutlinedInputClasses.error}) .${pickersOutlinedInputClasses.notchedOutline}`]:
-            {
-              // @ts-ignore
-              borderColor: (theme.vars || theme).palette[color].main,
-            },
-        },
-      })),
-  };
+    throw new Error("STUB");
 });
 
 const PickersOutlinedInputSectionsContainer = styled(PickersInputBaseSectionsContainer, {
@@ -108,62 +67,7 @@ const PickersOutlinedInput = React.forwardRef(function PickersOutlinedInput(
   inProps: PickersOutlinedInputProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiPickersOutlinedInput',
-  });
-
-  const {
-    label,
-    autoFocus,
-    ownerState: ownerStateProp,
-    classes: classesProp,
-    notched,
-    slots: inSlots,
-    slotProps: inSlotProps,
-    ...other
-  } = props;
-
-  const muiFormControl = useFormControl();
-  const classes = useUtilityClasses(classesProp);
-
-  return (
-    <PickersInputBase
-      {...other}
-      slots={{
-        root: PickersOutlinedInputRoot,
-        input: PickersOutlinedInputSectionsContainer,
-        ...inSlots,
-      }}
-      slotProps={inSlotProps}
-      renderSuffix={(state) => {
-        const isNotched =
-          typeof notched !== 'undefined'
-            ? notched
-            : Boolean(state.adornedStart || state.focused || state.filled);
-        return (
-          <Outline
-            shrink={isNotched}
-            notched={isNotched}
-            className={classes.notchedOutline}
-            label={
-              label != null && label !== '' && muiFormControl?.required ? (
-                <React.Fragment>
-                  {label}
-                  &thinsp;{'*'}
-                </React.Fragment>
-              ) : (
-                label
-              )
-            }
-          />
-        );
-      }}
-      label={label}
-      classes={classes}
-      ref={ref as any}
-    />
-  );
+    throw new Error("STUB");
 });
 
 PickersOutlinedInput.propTypes /* remove-proptypes */ = {

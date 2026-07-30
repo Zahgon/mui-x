@@ -18,28 +18,8 @@ import { useUtilityClasses } from './chartsAxisZoomSliderTrackClasses';
 const ZoomSliderTrack = styled('rect', {
   slot: 'internal',
   shouldForwardProp: (prop) =>
-    shouldForwardProp(prop) && prop !== 'axisDirection' && prop !== 'isSelecting',
-})<{ axisDirection: 'x' | 'y'; isSelecting: boolean }>(({ theme }) => ({
-  fill: (theme.vars || theme).palette.grey[300],
-  ...theme.applyStyles('dark', {
-    fill: (theme.vars || theme).palette.grey[800],
-  }),
-  cursor: 'pointer',
-  variants: [
-    {
-      props: { axisDirection: 'x', isSelecting: true },
-      style: {
-        cursor: 'ew-resize',
-      },
-    },
-    {
-      props: { axisDirection: 'y', isSelecting: true },
-      style: {
-        cursor: 'ns-resize',
-      },
-    },
-  ],
-}));
+    { throw new Error("STUB"); },
+})<{ axisDirection: 'x' | 'y'; isSelecting: boolean }>(({ theme }) => { throw new Error("STUB"); });
 
 interface ChartsAxisZoomSliderTrackProps extends React.ComponentProps<'rect'> {
   axisId: AxisId;
@@ -57,102 +37,5 @@ export function ChartsAxisZoomSliderTrack({
   onSelectEnd,
   ...other
 }: ChartsAxisZoomSliderTrackProps) {
-  const ref = React.useRef<SVGRectElement>(null);
-  const { instance } = useChartsContext<[UseChartProZoomSignature]>();
-  const { chartsLayerContainerRef } = instance;
-  const store = useStore<[UseChartProZoomSignature]>();
-  const [isSelecting, setIsSelecting] = React.useState(false);
-  const classes = useUtilityClasses({ axisDirection });
-
-  const onPointerDown = function onPointerDown(event: React.PointerEvent<SVGRectElement>) {
-    const rect = ref.current;
-    const element = chartsLayerContainerRef.current;
-
-    if (!rect || !element) {
-      return;
-    }
-
-    const pointerDownPoint = getChartPoint(element, event);
-    const zoomFromPointerDown = calculateZoomFromPoint(store.state, axisId, pointerDownPoint);
-
-    if (zoomFromPointerDown === null) {
-      return;
-    }
-
-    const onPointerMove = rafThrottle(function onPointerMove(pointerMoveEvent: PointerEvent) {
-      const pointerMovePoint = getChartPoint(element, pointerMoveEvent);
-      const zoomFromPointerMove = calculateZoomFromPoint(store.state, axisId, pointerMovePoint);
-
-      if (zoomFromPointerMove === null) {
-        return;
-      }
-
-      const zoomOptions = selectorChartAxisZoomOptionsLookup(store.state, axisId);
-
-      instance.setAxisZoomData(axisId, (prevZoomData) => {
-        if (zoomFromPointerMove > zoomFromPointerDown) {
-          const end = calculateZoomEnd(
-            zoomFromPointerMove,
-            { ...prevZoomData, start: zoomFromPointerDown },
-            zoomOptions,
-          );
-
-          /* If the starting point is too close to the end that minSpan wouldn't be respected, we need to update the
-           * start point. */
-          const start = calculateZoomStart(
-            zoomFromPointerDown,
-            { ...prevZoomData, start: zoomFromPointerDown, end },
-            zoomOptions,
-          );
-
-          return { ...prevZoomData, start, end };
-        }
-
-        const start = calculateZoomStart(
-          zoomFromPointerMove,
-          { ...prevZoomData, end: zoomFromPointerDown },
-          zoomOptions,
-        );
-
-        /* If the starting point is too close to the start that minSpan wouldn't be respected, we need to update the
-         * start point. */
-        const end = calculateZoomEnd(
-          zoomFromPointerDown,
-          { ...prevZoomData, start, end: zoomFromPointerDown },
-          zoomOptions,
-        );
-
-        return { ...prevZoomData, start, end };
-      });
-    });
-
-    const onPointerUp = function onPointerUp(pointerUpEvent: PointerEvent) {
-      rect.releasePointerCapture(pointerUpEvent.pointerId);
-      rect.removeEventListener('pointermove', onPointerMove);
-      document.removeEventListener('pointerup', onPointerUp);
-      setIsSelecting(false);
-      onSelectEnd?.();
-    };
-
-    event.preventDefault();
-    event.stopPropagation();
-
-    rect.setPointerCapture(event.pointerId);
-    document.addEventListener('pointerup', onPointerUp);
-    rect.addEventListener('pointermove', onPointerMove);
-
-    onSelectStart?.();
-    setIsSelecting(true);
-  };
-
-  return (
-    <ZoomSliderTrack
-      ref={ref}
-      onPointerDown={onPointerDown}
-      axisDirection={axisDirection}
-      isSelecting={isSelecting}
-      {...other}
-      className={clsx(classes.background, other.className)}
-    />
-  );
+    throw new Error("STUB");
 }

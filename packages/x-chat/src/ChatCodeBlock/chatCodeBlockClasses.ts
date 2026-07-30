@@ -20,7 +20,7 @@ export interface ChatCodeBlockClasses {
 export type ChatCodeBlockClassKey = keyof ChatCodeBlockClasses;
 
 export function getChatCodeBlockUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatCodeBlock', slot);
+    throw new Error("STUB");
 }
 
 export const chatCodeBlockClasses: ChatCodeBlockClasses = generateUtilityClasses(

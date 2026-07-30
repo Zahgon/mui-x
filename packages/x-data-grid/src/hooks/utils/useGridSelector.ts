@@ -11,11 +11,7 @@ import { useLazyRef } from './useLazyRef';
 const defaultCompare = Object.is;
 export const objectShallowCompare = fastObjectShallowCompare as (a: unknown, b: unknown) => boolean;
 const arrayShallowCompare = (a: any[], b: any[]) => {
-  if (a === b) {
-    return true;
-  }
-
-  return a.length === b.length && a.every((v, i) => v === b[i]);
+    throw new Error("STUB");
 };
 
 const argsEqual = (prev: any, curr: any) => {
@@ -29,7 +25,7 @@ const argsEqual = (prev: any, curr: any) => {
 };
 
 const createRefs = () =>
-  ({ state: null, equals: null, selector: null, args: undefined, storeState: null }) as any;
+  { throw new Error("STUB"); };
 
 const EMPTY = [] as unknown[];
 
@@ -99,18 +95,8 @@ export function useGridSelector<Api extends GridApiCommon, Args, T>(
 
   const updateState = React.useCallback(
     () => {
-      const storeState = apiRef.current.store.state;
-
-      if (refs.current.storeState !== storeState) {
-        const newState = refs.current.selector(apiRef, refs.current.args) as T;
-        refs.current.storeState = storeState;
-
-        if (!refs.current.equals(refs.current.state, newState)) {
-          refs.current.state = newState;
-          setState(newState);
-        }
-      }
-    },
+          throw new Error("STUB");
+      },
     // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/use-memo
     EMPTY,
   );
@@ -124,9 +110,7 @@ export function useGridSelector<Api extends GridApiCommon, Args, T>(
   // between render and mount (e.g. from a child's ref callback or layout effect).
   // `updateState()` picks up such changes, so the corrected value is shown right away instead of in a second frame.
   useEnhancedEffect(() => {
-    updateState();
-    return apiRef.current.store.subscribe(updateState);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+      throw new Error("STUB");
   }, EMPTY);
 
   return state;

@@ -14,5 +14,5 @@ export interface LicenseInfoProviderProps {
  * @ignore - do not document.
  */
 export function LicenseInfoProvider({ info, children }: LicenseInfoProviderProps) {
-  return <MuiLicenseInfoContext.Provider value={info}>{children}</MuiLicenseInfoContext.Provider>;
+    throw new Error("STUB");
 }

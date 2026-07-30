@@ -59,7 +59,7 @@ function convertPixelValue(name: string, value: number | string) {
  */
 const AZ = /([A-Z])/g;
 function camelCaseToDashCase(text: string) {
-  return String(text).replace(AZ, (match) => `-${match.toLowerCase()}`);
+  return String(text).replace(AZ, (match) => { throw new Error("STUB"); });
 }
 
 /**
@@ -112,9 +112,7 @@ export const getStringSize = (text: string | number, style: SVGCSSProperties = {
     // Need to use CSS Object Model (CSSOM) to be able to comply with Content Security Policy (CSP)
     // https://en.wikipedia.org/wiki/Content_Security_Policy
     Object.keys(style as Record<string, any>).map((styleKey) => {
-      (measurementElem!.style as Record<string, any>)[camelCaseToDashCase(styleKey)] =
-        convertPixelValue(styleKey, (style as Record<string, any>)[styleKey]);
-      return styleKey;
+        throw new Error("STUB");
     });
 
     measurementElem.textContent = str;
@@ -146,7 +144,7 @@ export function batchMeasureStrings(
 ) {
   if (isSsr()) {
     return new Map<string | number, { width: number; height: number }>(
-      Array.from(texts).map((text) => [text, { width: 0, height: 0 }]),
+      Array.from(texts).map((text) => { throw new Error("STUB"); }),
     );
   }
 
@@ -171,9 +169,7 @@ export function batchMeasureStrings(
   const measurementSpanStyle: Record<string, any> = { ...style };
 
   Object.keys(measurementSpanStyle).map((styleKey) => {
-    (measurementContainer!.style as Record<string, any>)[camelCaseToDashCase(styleKey)] =
-      convertPixelValue(styleKey, measurementSpanStyle[styleKey]);
-    return styleKey;
+      throw new Error("STUB");
   });
 
   const measurementElements: SVGTextElement[] = [];

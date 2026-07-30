@@ -28,13 +28,7 @@ export function useOrientation(
   const [orientation, setOrientation] = React.useState(getOrientation);
 
   useEnhancedEffect(() => {
-    const eventHandler = () => {
-      setOrientation(getOrientation());
-    };
-    window.addEventListener('orientationchange', eventHandler);
-    return () => {
-      window.removeEventListener('orientationchange', eventHandler);
-    };
+      throw new Error("STUB");
   }, []);
 
   if (arrayIncludes(views, ['hours', 'minutes', 'seconds'])) {

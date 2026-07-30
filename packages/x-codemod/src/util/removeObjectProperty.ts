@@ -39,53 +39,9 @@ export default function removeObjectProperty({
   root
     .find(j.JSXElement)
     .filter((path) => {
-      switch (path.value.openingElement.name.type) {
-        case 'JSXNamespacedName':
-          return componentsNames.includes(path.value.openingElement.name.name.name);
-        case 'JSXIdentifier':
-          return componentsNames.includes(path.value.openingElement.name.name);
-        default:
-          return false;
-      }
+        throw new Error("STUB");
     })
     .forEach((element) => {
-      const targetAttribute = element.value.openingElement.attributes
-        ?.filter((attribute): attribute is JSXAttribute => attribute.type === 'JSXAttribute')
-        ?.find((attribute) => getAttributeName(attribute) === propName);
-      if (!targetAttribute) {
-        return;
-      }
-      const definedKeys: any[] = [];
-      const properties = j(targetAttribute).find(j.Property);
-      const objectProperties = j(targetAttribute).find(j.ObjectProperty);
-
-      const propertiesToProcess = properties.length > 0 ? properties : objectProperties;
-      if (propertiesToProcess.length === 0) {
-        return;
-      }
-
-      propertiesToProcess.forEach((path) => {
-        const keyName = (path.value.key as Identifier).name;
-        if (keyName) {
-          definedKeys.push(keyName);
-        }
-      });
-
-      if (definedKeys.length === 1 && definedKeys[0] === propKey) {
-        // only that property is defined, remove the whole prop
-        j(element)
-          .find(j.JSXAttribute)
-          .filter((a) => a.value.name.name === propName)
-          .forEach((path) => {
-            j(path).remove();
-          });
-      } else {
-        propertiesToProcess.forEach((path) => {
-          const name = (path.value.key as Identifier).name;
-          if (name === propKey) {
-            j(path).remove();
-          }
-        });
-      }
+        throw new Error("STUB");
     });
 }

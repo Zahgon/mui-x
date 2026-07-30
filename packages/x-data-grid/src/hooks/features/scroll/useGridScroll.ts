@@ -62,112 +62,20 @@ export const useGridScroll = (
 
   const scrollToIndexes = React.useCallback<GridScrollApi['scrollToIndexes']>(
     (params: Partial<GridCellIndexCoordinates>) => {
-      const dimensions = gridDimensionsSelector(apiRef);
-      const totalRowCount = gridRowCountSelector(apiRef);
-      const visibleColumns = gridVisibleColumnDefinitionsSelector(apiRef);
-      const scrollToHeader = params.rowIndex == null;
-      if ((!scrollToHeader && totalRowCount === 0) || visibleColumns.length === 0) {
-        return false;
-      }
-
-      logger.debug(`Scrolling to cell at row ${params.rowIndex}, col: ${params.colIndex} `);
-
-      let scrollCoordinates: Partial<GridScrollParams> = {};
-
-      if (params.colIndex !== undefined && visibleColumns[params.colIndex]) {
-        const columnPositions = gridColumnPositionsSelector(apiRef);
-
-        let cellWidth: number | undefined;
-
-        if (typeof params.rowIndex !== 'undefined') {
-          const visibleSortedRows = gridExpandedSortedRowEntriesSelector(apiRef);
-          const rowId = visibleSortedRows[params.rowIndex]?.id;
-          const cellColSpanInfo = apiRef.current.unstable_getCellColSpanInfo(
-            rowId,
-            params.colIndex,
-          );
-          if (cellColSpanInfo && !cellColSpanInfo.spannedByColSpan) {
-            cellWidth = cellColSpanInfo.cellProps.width;
-          }
-        }
-
-        if (typeof cellWidth === 'undefined') {
-          cellWidth = visibleColumns[params.colIndex].computedWidth;
-        }
-        // When using RTL, `scrollLeft` becomes negative, so we must ensure that we only compare values.
-        scrollCoordinates.left = scrollIntoView({
-          containerSize: dimensions.viewportOuterSize.width,
-          scrollPosition: Math.abs(virtualScrollerRef.current?.scrollLeft ?? 0),
-          elementSize: cellWidth,
-          elementOffset: columnPositions[params.colIndex],
-        });
-      }
-
-      if (params.rowIndex !== undefined) {
-        const rowsMeta = gridRowsMetaSelector(apiRef);
-        const page = gridPageSelector(apiRef);
-        const pageSize = gridPageSizeSelector(apiRef);
-
-        const elementIndex = !props.pagination
-          ? params.rowIndex
-          : params.rowIndex - page * pageSize;
-
-        const targetOffsetHeight = rowsMeta.positions[elementIndex + 1]
-          ? rowsMeta.positions[elementIndex + 1] - rowsMeta.positions[elementIndex]
-          : rowsMeta.currentPageTotalHeight - rowsMeta.positions[elementIndex];
-
-        scrollCoordinates.top = scrollIntoView({
-          containerSize: dimensions.viewportInnerSize.height,
-          scrollPosition: virtualScrollerRef.current?.scrollTop ?? 0,
-          elementSize: targetOffsetHeight,
-          elementOffset: rowsMeta.positions[elementIndex],
-        });
-      }
-
-      scrollCoordinates = apiRef.current.unstable_applyPipeProcessors(
-        'scrollToIndexes',
-        scrollCoordinates,
-        params,
-      );
-
-      if (
-        typeof scrollCoordinates.left !== 'undefined' ||
-        typeof scrollCoordinates.top !== 'undefined'
-      ) {
-        apiRef.current.scroll(scrollCoordinates);
-        return true;
-      }
-
-      return false;
-    },
+          throw new Error("STUB");
+      },
     [logger, apiRef, virtualScrollerRef, props.pagination],
   );
 
   const scroll = React.useCallback<GridScrollApi['scroll']>(
     (params: Partial<GridScrollParams>) => {
-      if (virtualScrollerRef.current && params.left !== undefined && colRef.current) {
-        const direction = isRtl ? -1 : 1;
-        colRef.current.scrollLeft = params.left;
-        virtualScrollerRef.current.scrollLeft = direction * params.left;
-        logger.debug(`Scrolling left: ${params.left}`);
-      }
-      if (virtualScrollerRef.current && params.top !== undefined) {
-        virtualScrollerRef.current.scrollTop = params.top;
-        logger.debug(`Scrolling top: ${params.top}`);
-      }
-      logger.debug(`Scrolling, updating container, and viewport`);
-    },
+          throw new Error("STUB");
+      },
     [virtualScrollerRef, isRtl, colRef, logger],
   );
 
   const getScrollPosition = React.useCallback<GridScrollApi['getScrollPosition']>(() => {
-    if (!virtualScrollerRef?.current) {
-      return { top: 0, left: 0 };
-    }
-    return {
-      top: virtualScrollerRef.current.scrollTop,
-      left: virtualScrollerRef.current.scrollLeft,
-    };
+      throw new Error("STUB");
   }, [virtualScrollerRef]);
 
   const scrollApi: GridScrollApi = {

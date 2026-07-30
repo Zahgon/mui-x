@@ -30,56 +30,7 @@ export function usePlaceholderInRow(
   const originalEvent = useStore(store, schedulerEventSelectors.processedEvent, originalEventId);
 
   return React.useMemo(() => {
-    if (!rawPlaceholder) {
-      return null;
-    }
-    const startProcessed = processDate(rawPlaceholder.start, adapter);
-    const endProcessed = processDate(rawPlaceholder.end, adapter);
-    const timezone = adapter.getTimezone(rawPlaceholder.start);
-    const sharedProperties = {
-      id: originalEventId ?? 'occurrence-placeholder',
-      key: 'occurrence-placeholder',
-      title: originalEvent ? originalEvent.title : '',
-      resource: rawPlaceholder.resourceId ?? originalEvent?.resource,
-      displayTimezone: {
-        start: startProcessed,
-        end: endProcessed,
-        timezone,
-      },
-    };
-
-    if (rawPlaceholder.type === 'creation') {
-      return {
-        ...sharedProperties,
-        position: {
-          firstIndex: 1,
-          lastIndex: maxIndex,
-        },
-      };
-    }
-
-    if (rawPlaceholder.type === 'external-drag') {
-      return {
-        ...sharedProperties,
-        title: rawPlaceholder.eventData.title ?? '',
-        position: {
-          firstIndex: 1,
-          lastIndex: maxIndex,
-        },
-      };
-    }
-
-    const position = occurrences.find(
-      (occurrence) => occurrence.key === rawPlaceholder.occurrenceKey,
-    )?.position ?? {
-      firstIndex: 1,
-      lastIndex: maxIndex,
-    };
-
-    return {
-      ...sharedProperties,
-      position,
-    };
+      throw new Error("STUB");
   }, [rawPlaceholder, adapter, originalEvent, originalEventId, occurrences, maxIndex]);
 }
 

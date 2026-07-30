@@ -17,19 +17,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   // Find relevant DataGrid imports
   const importedDataGrids = new Set();
   root.find(j.ImportDeclaration).forEach((path) => {
-    if (dataGridSources.has(path.node.source.value?.toString() ?? '')) {
-      path.node.specifiers?.forEach((specifier) => {
-        if (
-          specifier.type === 'ImportSpecifier' &&
-          dataGridComponents.has(specifier.imported.name.toString())
-        ) {
-          const localName = (specifier as ImportSpecifier).local?.name;
-          if (localName) {
-            importedDataGrids.add(localName);
-          }
-        }
-      });
-    }
+      throw new Error("STUB");
   });
 
   if (importedDataGrids.size === 0) {
@@ -37,35 +25,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   }
 
   root.find(j.JSXOpeningElement).forEach((path) => {
-    if (!importedDataGrids.has((path.node.name as JSXIdentifier).name)) {
-      return;
-    }
-
-    let hasSlotsToolbar = false;
-    let hasShowToolbar = false;
-
-    path.node.attributes?.forEach((attr) => {
-      if (attr.type === 'JSXAttribute') {
-        if (attr.name.name === 'slots') {
-          if (
-            attr.value &&
-            attr.value.type === 'JSXExpressionContainer' &&
-            attr.value.expression.type === 'ObjectExpression'
-          ) {
-            hasSlotsToolbar = attr.value.expression.properties.some(
-              (prop) => ((prop as ObjectProperty).key as Identifier).name === 'toolbar',
-            );
-          }
-        }
-        if (attr.name.name === 'showToolbar') {
-          hasShowToolbar = true;
-        }
-      }
-    });
-
-    if (hasSlotsToolbar && !hasShowToolbar) {
-      path.node.attributes?.push(j.jsxAttribute(j.jsxIdentifier('showToolbar')));
-    }
+      throw new Error("STUB");
   });
 
   const printOptions = options.printOptions || {

@@ -77,53 +77,7 @@ const DateRangePickerToolbar = React.forwardRef(function DateRangePickerToolbar(
   inProps: DateRangePickerToolbarProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-  const props = useThemeProps({ props: inProps, name: 'MuiDateRangePickerToolbar' });
-
-  const { toolbarFormat: toolbarFormatProp, className, classes: classesProp, ...other } = props;
-
-  const { value } = usePickerContext<PickerRangeValue>();
-  const translations = usePickerTranslations();
-  const ownerState = useToolbarOwnerState();
-  const { rangePosition, setRangePosition } = usePickerRangePositionContext();
-  const classes = useUtilityClasses(classesProp);
-
-  // This can't be a default value when spreading because it breaks the API generation.
-  const toolbarFormat = toolbarFormatProp ?? adapter.formats.shortDate;
-
-  const formatDate = (date: PickerValidDate | null, fallback: string) => {
-    if (!adapter.isValid(date)) {
-      return fallback;
-    }
-
-    return adapter.formatByString(date, toolbarFormat);
-  };
-
-  return (
-    <DateRangePickerToolbarRoot
-      {...other}
-      toolbarTitle={translations.dateRangePickerToolbarTitle}
-      className={clsx(classes.root, className)}
-      ownerState={ownerState}
-      ref={ref}
-    >
-      <DateRangePickerToolbarContainer className={classes.container}>
-        <PickersToolbarButton
-          variant={value[0] == null ? 'h6' : 'h5'}
-          value={formatDate(value[0], translations.start)}
-          selected={rangePosition === 'start'}
-          onClick={() => setRangePosition('start')}
-        />
-        <Typography variant="h5">&nbsp;{'–'}&nbsp;</Typography>
-        <PickersToolbarButton
-          variant={value[1] == null ? 'h6' : 'h5'}
-          value={formatDate(value[1], translations.end)}
-          selected={rangePosition === 'end'}
-          onClick={() => setRangePosition('end')}
-        />
-      </DateRangePickerToolbarContainer>
-    </DateRangePickerToolbarRoot>
-  );
+    throw new Error("STUB");
 }) as DateRangePickerToolbarComponent;
 
 DateRangePickerToolbar.propTypes /* remove-proptypes */ = {

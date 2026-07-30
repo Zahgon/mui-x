@@ -54,31 +54,11 @@ export function useValueAndOpenStates<
   /* eslint-disable react-hooks/rules-of-hooks, react-hooks/exhaustive-deps */
   if (process.env.NODE_ENV !== 'production') {
     React.useEffect(() => {
-      if (isValueControlled !== (valueProp !== undefined)) {
-        console.error(
-          [
-            `MUI X: A component is changing the ${
-              isValueControlled ? '' : 'un'
-            }controlled value of a Picker to be ${isValueControlled ? 'un' : ''}controlled.`,
-            'Elements should not switch from uncontrolled to controlled (or vice versa).',
-            `Decide between using a controlled or uncontrolled value` +
-              'for the lifetime of the component.',
-            "The nature of the state is determined during the first render. It's considered controlled if the value is not `undefined`.",
-            'More info: https://fb.me/react-controlled-components',
-          ].join('\n'),
-        );
-      }
+        throw new Error("STUB");
     }, [valueProp]);
 
     React.useEffect(() => {
-      if (!isValueControlled && defaultValue !== defaultValueProp) {
-        console.error(
-          [
-            `MUI X: A component is changing the defaultValue of an uncontrolled Picker after being initialized. ` +
-              `To suppress this warning opt to use a controlled value.`,
-          ].join('\n'),
-        );
-      }
+        throw new Error("STUB");
     }, [JSON.stringify(defaultValue)]);
   }
   /* eslint-enable react-hooks/rules-of-hooks, react-hooks/exhaustive-deps */
@@ -93,13 +73,7 @@ export function useValueAndOpenStates<
     valueManager,
   });
 
-  const [state, setState] = React.useState<UsePickerState<TValue>>(() => ({
-    open: false,
-    lastExternalValue: value,
-    clockShallowValue: undefined,
-    lastCommittedValue: value,
-    hasBeenModifiedSinceMount: false,
-  }));
+  const [state, setState] = React.useState<UsePickerState<TValue>>(() => { throw new Error("STUB"); });
 
   const { getValidationErrorForNewValue } = useValidation({
     props,
@@ -110,140 +84,33 @@ export function useValueAndOpenStates<
   });
 
   const setOpen = useEventCallback((action: React.SetStateAction<boolean>) => {
-    const newOpen = typeof action === 'function' ? action(state.open) : action;
-    if (!isOpenControlled) {
-      setState((prevState) => ({ ...prevState, open: newOpen }));
-    }
-
-    if (newOpen && onOpen) {
-      onOpen();
-    }
-
-    if (!newOpen) {
-      onClose?.();
-    }
+      throw new Error("STUB");
   });
 
   const setValue = useEventCallback((newValue: TValue, options?: SetValueActionOptions<TError>) => {
-    const {
-      changeImportance = 'accept',
-      skipPublicationIfPristine = false,
-      validationError,
-      shortcut,
-      source,
-      shouldClose = changeImportance === 'accept',
-    } = options ?? {};
-
-    let shouldFireOnChange: boolean;
-    let shouldFireOnAccept: boolean;
-    if (!skipPublicationIfPristine && !isValueControlled && !state.hasBeenModifiedSinceMount) {
-      // If the value is not controlled and the value has never been modified before,
-      // Then clicking on any value (including the one equal to `defaultValue`) should call `onChange` and `onAccept`
-      shouldFireOnChange = true;
-      shouldFireOnAccept = changeImportance === 'accept';
-    } else {
-      shouldFireOnChange = !valueManager.areValuesEqual(adapter, newValue, value);
-      shouldFireOnAccept =
-        changeImportance === 'accept' &&
-        !valueManager.areValuesEqual(adapter, newValue, state.lastCommittedValue);
-    }
-
-    setState((prevState) => ({
-      ...prevState,
-      // We reset the shallow value whenever we fire onChange.
-      clockShallowValue: shouldFireOnChange ? undefined : prevState.clockShallowValue,
-      lastCommittedValue: shouldFireOnAccept ? newValue : prevState.lastCommittedValue,
-      hasBeenModifiedSinceMount: true,
-    }));
-
-    let cachedContext: PickerChangeHandlerContext<TError> | null = null;
-    const getContext = (): PickerChangeHandlerContext<TError> => {
-      if (!cachedContext) {
-        let inferredSource: PickerChangeHandlerContext<TError>['source'];
-        if (source) {
-          inferredSource = source as PickerChangeHandlerContext<TError>['source'];
-        } else if (shortcut) {
-          inferredSource = 'view';
-        } else {
-          // Default to unknown when not explicitly tagged by a picker call site
-          inferredSource = 'unknown';
-        }
-        cachedContext = {
-          validationError:
-            validationError == null ? getValidationErrorForNewValue(newValue) : validationError,
-          source: inferredSource,
-        };
-
-        if (shortcut) {
-          cachedContext.shortcut = shortcut;
-        }
-      }
-
-      return cachedContext;
-    };
-
-    if (shouldFireOnChange) {
-      handleValueChange(newValue, getContext());
-    }
-
-    if (shouldFireOnAccept && onAccept) {
-      onAccept(newValue, getContext());
-    }
-
-    if (shouldClose) {
-      setOpen(false);
-    }
+      throw new Error("STUB");
   });
 
   // If `prop.value` changes, we update the state to reflect the new value
   if (value !== state.lastExternalValue) {
-    setState((prevState) => ({
-      ...prevState,
-      lastExternalValue: value,
-      clockShallowValue: undefined,
-      hasBeenModifiedSinceMount: true,
-    }));
+    setState((prevState) => { throw new Error("STUB"); });
   }
 
   const setValueFromView = useEventCallback(
     (newValue: TValue, selectionState: PickerSelectionState = 'partial') => {
-      // TODO: Expose a new method (private?) like `setView` that only updates the clock shallow value.
-      if (selectionState === 'shallow') {
-        setState((prev) => ({
-          ...prev,
-          clockShallowValue: newValue,
-          hasBeenModifiedSinceMount: true,
-        }));
-        return;
-      }
-
-      setValue(newValue, {
-        changeImportance: selectionState === 'finish' && closeOnSelect ? 'accept' : 'set',
-        source: 'view',
-      });
-    },
+          throw new Error("STUB");
+      },
   );
 
   // It is required to update inner state in useEffect in order to avoid situation when
   // Our component is not mounted yet, but `open` state is set to `true` (for example initially opened)
   React.useEffect(() => {
-    if (isOpenControlled) {
-      if (openProp === undefined) {
-        throw new Error(
-          'MUI X: You must not mix controlling and uncontrolled mode for `open` prop',
-        );
-      }
-
-      setState((prevState) => ({ ...prevState, open: openProp }));
-    }
+      throw new Error("STUB");
   }, [isOpenControlled, openProp]);
 
   const viewValue = React.useMemo(
     () =>
-      valueManager.cleanValue(
-        adapter,
-        state.clockShallowValue === undefined ? value : state.clockShallowValue,
-      ),
+      { throw new Error("STUB"); },
     [adapter, valueManager, state.clockShallowValue, value],
   );
 

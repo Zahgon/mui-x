@@ -15,12 +15,5 @@ type PluginSignaturesFromApi<Api> =
  * const apiRef = useChartApiContext<ChartApi<'bar'>>();
  */
 export function useChartApiContext<Api extends ChartApi>() {
-  const { publicAPI } = useChartsContext<PluginSignaturesFromApi<Api>>();
-  const apiRef = React.useRef<Api>(publicAPI as unknown as Api);
-
-  React.useEffect(() => {
-    apiRef.current = publicAPI as unknown as Api;
-  }, [publicAPI]);
-
-  return apiRef;
+    throw new Error("STUB");
 }

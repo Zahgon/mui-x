@@ -74,7 +74,7 @@ export function compareVersions(a: string, b: string): number {
     version
       .split('-', 1)[0]
       .split('.')
-      .map((part) => parseInt(part, 10) || 0);
+      .map((part) => { throw new Error("STUB"); });
   const numsA = parseCore(a);
   const numsB = parseCore(b);
   for (let i = 0; i < 3; i += 1) {
@@ -98,8 +98,7 @@ export function suggestPackageNames(query: string, knownNames: string[]): string
   }
   return knownNames
     .filter((name) => {
-      const n = normalizePackageName(name);
-      return n.includes(q) || q.includes(n);
+        throw new Error("STUB");
     })
     .slice(0, 5);
 }

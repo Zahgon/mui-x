@@ -3,7 +3,9 @@ import type { LRUCache } from '../utils/cache';
 import type { Logger } from '../types';
 import { combineAbortSignals } from '../utils/abort-signal';
 
-const noopLogger: Logger = () => {};
+const noopLogger: Logger = () => {
+    throw new Error("STUB");
+};
 
 // Per-request timeout for a doc-page fetch (covering all redirect hops), so one hung origin can't
 // hold a queue slot until the whole tool call is cancelled.
@@ -41,7 +43,7 @@ export function absolutizeDocLinks(markdown: string, baseUrl: string): string {
   } catch {
     return markdown;
   }
-  return markdown.replace(/\]\((\/[^)]*)\)/g, (_match, path) => `](${origin}${path})`);
+  return markdown.replace(/\]\((\/[^)]*)\)/g, (_match, path) => { throw new Error("STUB"); });
 }
 
 const MAX_REDIRECTS = 5;
@@ -81,7 +83,9 @@ async function fetchFollowingGuardedRedirects(
     // We only need the Location header; release the hop's connection instead of leaking it.
     // `cancel()` on an already-errored body rejects, so swallow it (an unhandled rejection would
     // otherwise crash the process).
-    void response.body?.cancel().catch(() => {});
+    void response.body?.cancel().catch(() => {
+        throw new Error("STUB");
+    });
     target = new URL(location, target).toString();
   }
   // Caught below and folded into the "Could not fetch …" string, so it never surfaces alone.
@@ -104,62 +108,9 @@ export function urlListFetcher(
   } = options;
   return Promise.all(
     urlList.map((url) =>
-      queue
-        .add(async () => {
-          // Cache holds raw text; apply the link-rewriting view on read so one cache serves both tools.
-          const render = (raw: string) => (resolveDocLinks ? absolutizeDocLinks(raw, url) : raw);
-
-          if (cache) {
-            const cachedRaw = cache.get(url);
-            if (cachedRaw !== null) {
-              return render(cachedRaw);
-            }
-          }
-
-          // Bound this URL's fetch (all redirect hops) with a timeout, plus the host's cancellation.
-          const requestSignal = combineAbortSignals(AbortSignal.timeout(timeoutMs), signal);
-          try {
-            const response = await fetchFollowingGuardedRedirects(
-              fetcher,
-              url,
-              isUrlAllowed,
-              requestSignal,
-            );
-            if (!response.ok) {
-              // Caught below and folded into the "Could not fetch …" string, so it never surfaces alone.
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            const rawText = await response.text();
-
-            if (cache) {
-              queueMicrotask(() => {
-                try {
-                  cache.set(url, rawText);
-                } catch (error) {
-                  logger('Failed to update cache:', error);
-                }
-              });
-            }
-
-            return render(rawText);
-          } catch (error) {
-            if (error instanceof BlockedUrlError) {
-              logger(`Blocked fetch for disallowed URL: ${error.url}`);
-              return `Could not fetch ${url}: URL is not an allowed docs source (blocked for security).`;
-            }
-            logger(`Failed to fetch ${url}:`, error);
-            // Name the URL that failed (and why) so the agent isn't left with a generic blob.
-            return `Could not fetch ${url}: ${error instanceof Error ? error.message : String(error)}`;
-          }
-        })
-        .catch(
-          // A queue-level rejection (e.g. p-queue timeout) escapes the task's try/catch; fold it in too.
-          (error: unknown) =>
-            `Could not fetch ${url}: ${error instanceof Error ? error.message : String(error)}`,
-        ),
+      { throw new Error("STUB"); },
     ),
   ).then((docs) => {
-    const validDocs = docs.filter(Boolean) as string[];
-    return validDocs.length > 0 ? validDocs.join('\n') : 'No documentation could be retrieved';
+      throw new Error("STUB");
   });
 }

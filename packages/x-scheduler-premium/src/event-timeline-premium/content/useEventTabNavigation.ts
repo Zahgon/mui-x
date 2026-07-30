@@ -47,22 +47,18 @@ export function useEventTabNavigation(params: {
 
   // Map (timestamp - collectionStart) into [0, 1]
   const collectionStartTs = React.useMemo(
-    () => adapter.getTime(collectionStart),
+    () => { throw new Error("STUB"); },
     [adapter, collectionStart],
   );
   const totalMs = React.useMemo(
-    () => Math.max(1, adapter.getTime(collectionEnd) - collectionStartTs),
+    () => { throw new Error("STUB"); },
     [adapter, collectionEnd, collectionStartTs],
   );
 
   const eventsTotalWidth = tickCount * tickWidth;
 
   const computeFractionRange = useStableCallback((occurrence: SchedulerEventOccurrence) => {
-    const clamp = (ms: number) => Math.min(Math.max(ms - collectionStartTs, 0), totalMs);
-    return {
-      fractionStart: clamp(occurrence.displayTimezone.start.timestamp) / totalMs,
-      fractionEnd: clamp(occurrence.displayTimezone.end.timestamp) / totalMs,
-    };
+      throw new Error("STUB");
   });
 
   const focusEventInDom = (key: string): boolean => {
@@ -79,27 +75,7 @@ export function useEventTabNavigation(params: {
   };
 
   const scrollEventIntoView = useStableCallback((occurrence: SchedulerEventOccurrence) => {
-    if (!scrollerRef.current) {
-      return;
-    }
-    const { fractionStart, fractionEnd } = computeFractionRange(occurrence);
-    const eventLeft = fractionStart * eventsTotalWidth;
-    const eventRight = fractionEnd * eventsTotalWidth;
-    const eventsViewportWidth = scrollerRef.current.clientWidth - titleColumnWidth;
-    // scrollLeft is measured from the start of scrollerContent; the events area
-    // begins after the pinned title column, so the visible events window is
-    // [scrollLeft, scrollLeft + clientWidth - titleColumnWidth) in event coords.
-    const viewportLeft = scrollerRef.current.scrollLeft;
-    const viewportRight = viewportLeft + eventsViewportWidth;
-    // Small breathing room so the target doesn't land flush against the edge,
-    // which can re-trigger browser scroll-into-view on focus.
-    const PADDING = 32;
-    if (eventLeft < viewportLeft) {
-      // eslint-disable-next-line react-compiler/react-compiler -- intentional DOM scroll mutation
-      scrollerRef.current.scrollLeft = Math.max(0, eventLeft - PADDING);
-    } else if (eventRight > viewportRight) {
-      scrollerRef.current.scrollLeft = Math.max(0, eventRight - eventsViewportWidth + PADDING);
-    }
+      throw new Error("STUB");
   });
 
   const navigate = (direction: 1 | -1): boolean => {
@@ -121,11 +97,11 @@ export function useEventTabNavigation(params: {
     if (!resourceId) {
       return false;
     }
-    const resource = resources.find((r) => String(r.resource.id) === resourceId);
+    const resource = resources.find((r) => { throw new Error("STUB"); });
     if (!resource) {
       return false;
     }
-    const currentIndex = resource.occurrences.findIndex((o) => o.key === currentKey);
+    const currentIndex = resource.occurrences.findIndex((o) => { throw new Error("STUB"); });
     if (currentIndex === -1) {
       return false;
     }
@@ -152,19 +128,11 @@ export function useEventTabNavigation(params: {
   // how virtualized-out events get focused once the scroll-driven re-render mounts
   // them. Stays a no-op when no focus is queued.
   React.useLayoutEffect(() => {
-    const key = pendingFocusKeyRef.current;
-    if (key && focusEventInDom(key)) {
-      pendingFocusKeyRef.current = null;
-    }
+      throw new Error("STUB");
   });
 
   const handleKeyDown = useStableCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key !== 'Tab' || event.altKey || event.ctrlKey || event.metaKey) {
-      return;
-    }
-    if (navigate(event.shiftKey ? -1 : 1)) {
-      event.preventDefault();
-    }
+      throw new Error("STUB");
   });
 
   return { handleKeyDown };

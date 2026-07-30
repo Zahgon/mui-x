@@ -31,26 +31,7 @@ const SingleInputDateTimeRangeField = React.forwardRef(function SingleInputDateT
   inProps: SingleInputDateTimeRangeFieldProps,
   inRef: React.Ref<HTMLDivElement>,
 ) {
-  const themeProps = useThemeProps({
-    props: inProps,
-    name: 'MuiSingleInputDateTimeRangeField',
-  });
-
-  const { slots, slotProps, ...other } = themeProps;
-
-  const textFieldProps = useFieldTextFieldProps<SingleInputDateTimeRangeFieldProps>({
-    slotProps,
-    ref: inRef,
-    externalForwardedProps: other,
-  });
-
-  const fieldResponse = useSingleInputDateTimeRangeField<typeof textFieldProps>(textFieldProps);
-
-  return (
-    <PickerFieldUIContextProvider slots={slots} slotProps={slotProps} inputRef={other.inputRef}>
-      <PickerFieldUI fieldResponse={fieldResponse} defaultOpenPickerIcon={DateRangeIcon} />
-    </PickerFieldUIContextProvider>
-  );
+    throw new Error("STUB");
 }) as DateRangeFieldComponent;
 
 SingleInputDateTimeRangeField.fieldType = 'single-input';

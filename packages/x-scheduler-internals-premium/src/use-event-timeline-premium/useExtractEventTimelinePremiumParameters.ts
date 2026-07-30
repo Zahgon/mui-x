@@ -44,40 +44,7 @@ export function useExtractEventTimelinePremiumParameters<
   } = props;
 
   const parameters: EventTimelinePremiumParameters<TEvent, TResource> = React.useMemo(
-    () => ({
-      areEventsDraggable,
-      areEventsResizable,
-      canDragEventsFromTheOutside,
-      canDropEventsToTheOutside,
-      collapsedResources,
-      dataSource,
-      dateLocale,
-      defaultCollapsedResources,
-      defaultPreferences,
-      defaultPreset,
-      defaultVisibleDate,
-      defaultVisibleResources,
-      displayTimezone,
-      eventColor,
-      eventCreation,
-      eventModelStructure,
-      events,
-      onCollapsedResourcesChange,
-      onEventsChange,
-      onPresetChange,
-      onVisibleDateChange,
-      onVisibleResourcesChange,
-      preferences,
-      preset,
-      presets,
-      readOnly,
-      shouldEventRequireResource,
-      resourceModelStructure,
-      resources,
-      showCurrentTimeIndicator,
-      visibleDate,
-      visibleResources,
-    }),
+    () => { throw new Error("STUB"); },
     // `dataSource` is intentionally excluded. It's re-read on every fetch, but the
     // cache + dataManager are pinned to the original instance, so runtime swaps are
     // only partially reactive — consumers should remount to swap. Including it in

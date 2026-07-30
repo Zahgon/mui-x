@@ -34,37 +34,7 @@ export const validateTimeRange: Validator<
   TimeRangeValidationError,
   ValidateTimeRangeProps
 > = ({ adapter, value, timezone, props }) => {
-  const [start, end] = value;
-
-  const dateTimeValidations: TimeRangeValidationError = [
-    validateTime({
-      adapter,
-      value: start,
-      timezone,
-      props,
-    }),
-    validateTime({
-      adapter,
-      value: end,
-      timezone,
-      props,
-    }),
-  ];
-
-  if (dateTimeValidations[0] || dateTimeValidations[1]) {
-    return dateTimeValidations;
-  }
-
-  // for partial input
-  if (start === null || end === null) {
-    return [null, null];
-  }
-
-  if (!isRangeValid(adapter, value)) {
-    return ['invalidRange', 'invalidRange'];
-  }
-
-  return [null, null];
+    throw new Error("STUB");
 };
 
 validateTimeRange.valueManager = rangeValueManager;

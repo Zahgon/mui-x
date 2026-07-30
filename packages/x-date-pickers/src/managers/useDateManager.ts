@@ -16,15 +16,7 @@ import { usePickerAdapter, usePickerTranslations } from '../hooks';
 
 export function useDateManager(): UseDateManagerReturnValue {
   return React.useMemo(
-    () => ({
-      valueType: 'date',
-      validator: validateDate,
-      internal_valueManager: singleItemValueManager,
-      internal_fieldValueManager: singleItemFieldValueManager,
-      internal_useApplyDefaultValuesToFieldInternalProps:
-        useApplyDefaultValuesToDateFieldInternalProps,
-      internal_useOpenPickerButtonAriaLabel: useOpenPickerButtonAriaLabel,
-    }),
+    () => { throw new Error("STUB"); },
     [],
   );
 }
@@ -34,25 +26,14 @@ function useOpenPickerButtonAriaLabel(value: PickerValue) {
   const translations = usePickerTranslations();
 
   return React.useMemo(() => {
-    const formattedValue = adapter.isValid(value) ? adapter.format(value, 'fullDate') : null;
-    return translations.openDatePickerDialogue(formattedValue);
+      throw new Error("STUB");
   }, [value, translations, adapter]);
 }
 
 function useApplyDefaultValuesToDateFieldInternalProps(
   internalProps: DateManagerFieldInternalProps,
 ): PickerManagerFieldInternalPropsWithDefaults<UseDateManagerReturnValue> {
-  const adapter = usePickerAdapter();
-  const validationProps = useApplyDefaultValuesToDateValidationProps(internalProps);
-
-  return React.useMemo(
-    () => ({
-      ...internalProps,
-      ...validationProps,
-      format: internalProps.format ?? adapter.formats.keyboardDate,
-    }),
-    [internalProps, validationProps, adapter],
-  );
+    throw new Error("STUB");
 }
 
 type SharedDateAndDateRangeValidationProps =
@@ -65,12 +46,7 @@ export function useApplyDefaultValuesToDateValidationProps(
   const defaultDates = useDefaultDates();
 
   return React.useMemo(
-    () => ({
-      disablePast: props.disablePast ?? false,
-      disableFuture: props.disableFuture ?? false,
-      minDate: applyDefaultDate(adapter, props.minDate, defaultDates.minDate),
-      maxDate: applyDefaultDate(adapter, props.maxDate, defaultDates.maxDate),
-    }),
+    () => { throw new Error("STUB"); },
     [props.minDate, props.maxDate, props.disableFuture, props.disablePast, adapter, defaultDates],
   );
 }

@@ -12,9 +12,8 @@ function GridColumnMenuManageItem(props: GridColumnMenuItemProps) {
 
   const showColumns = React.useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
-      onClick(event); // hide column menu
-      apiRef.current.showPreferences(GridPreferencePanelsValue.columns);
-    },
+          throw new Error("STUB");
+      },
     [apiRef, onClick],
   );
 

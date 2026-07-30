@@ -31,7 +31,7 @@ const bnBDGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'ফিল্টার লুকান',
   toolbarFiltersTooltipShow: 'ফিল্টার দেখান',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} টি সক্রিয় ফিল্টার` : `${count} টি সক্রিয় ফিল্টার`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'অনুসন্ধান করুন…',
@@ -140,22 +140,20 @@ const bnBDGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} টি সক্রিয় ফিল্টার` : `${count} টি সক্রিয় ফিল্টার`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'ফিল্টার দেখান',
   columnHeaderSortIconLabel: 'সাজান',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1
-      ? `${count.toLocaleString()} টি সারি নির্বাচিত`
-      : `${count.toLocaleString()} টি সারি নির্বাচিত`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'মোট সারি:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} of ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'চেকবক্স নির্বাচন',
@@ -187,8 +185,8 @@ const bnBDGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'গ্রুপ',
-  groupColumn: (name) => `${name} অনুসারে গ্রুপ করুন`,
-  unGroupColumn: (name) => `${name} অনুসারে গ্রুপ বন্ধ করুন`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'বিস্তারিত প্যানেল টগল করুন',
@@ -211,17 +209,7 @@ const bnBDGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'প্রথম পৃষ্ঠায় যান';
-    }
-    if (type === 'last') {
-      return 'শেষ পৃষ্ঠায় যান';
-    }
-    if (type === 'next') {
-      return 'পরবর্তী পৃষ্ঠায় যান';
-    }
-    // if (type === 'previous') {
-    return 'আগের পৃষ্ঠায় যান';
+      throw new Error("STUB");
   },
 
   // Row reordering text

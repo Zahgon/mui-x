@@ -33,53 +33,7 @@ const MobileDatePicker = React.forwardRef(function MobileDatePicker(
   inProps: MobileDatePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-
-  // Props with the default values common to all date pickers
-  const defaultizedProps = useDatePickerDefaultizedProps<MobileDatePickerProps>(
-    inProps,
-    'MuiMobileDatePicker',
-  );
-
-  const viewRenderers: DatePickerViewRenderers<DateView> = {
-    day: renderDateViewCalendar,
-    month: renderDateViewCalendar,
-    year: renderDateViewCalendar,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  // Props with the default values specific to the mobile variant
-  const props = {
-    ...defaultizedProps,
-    viewRenderers,
-    format: resolveDateFormat(adapter, defaultizedProps, false),
-    slots: {
-      field: DateField,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      toolbar: {
-        hidden: false,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useMobilePicker<DateView, typeof props>({
-    ref,
-    props,
-    valueManager: singleItemValueManager,
-    valueType: 'date',
-    validator: validateDate,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as MobileDatePickerComponent;
 
 MobileDatePicker.propTypes /* remove-proptypes */ = {

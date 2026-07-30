@@ -13,10 +13,7 @@ function GridColumnMenuPinningItem(props: GridColumnMenuItemProps) {
   const isRtl = useRtl();
 
   const pinColumn = React.useCallback(
-    (side: GridPinnedColumnPosition) => (event: React.MouseEvent<HTMLElement>) => {
-      apiRef.current.pinColumn(colDef.field, side);
-      onClick(event);
-    },
+    (side: GridPinnedColumnPosition) => { throw new Error("STUB"); },
     [apiRef, colDef.field, onClick],
   );
 

@@ -23,7 +23,7 @@ export interface TimePickerToolbarClasses {
 export type TimePickerToolbarClassKey = keyof TimePickerToolbarClasses;
 
 export function getTimePickerToolbarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiTimePickerToolbar', slot);
+    throw new Error("STUB");
 }
 
 export const timePickerToolbarClasses: TimePickerToolbarClasses = generateUtilityClasses(

@@ -18,7 +18,7 @@ const thTHPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'เปิดมุมมองก่อนหน้า',
   openNextView: 'เปิดมุมมองถัดไป',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year' ? 'มุมมองปีเปิดอยู่ สลับไปมุมมองปฏิทิน' : 'มุมมองปฏิทินเปิดอยู่ สลับไปมุมมองปี',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'เริ่มต้น',
@@ -44,27 +44,27 @@ const thTHPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `เลือก${views[view]} ${!formattedTime ? 'ยังไม่ได้เลือกเวลา' : `เวลาที่เลือกคือ ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} ชั่วโมง`,
-  minutesClockNumberText: (minutes) => `${minutes} นาที`,
-  secondsClockNumberText: (seconds) => `${seconds} วินาที`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `เลือก${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'หมายเลขสัปดาห์',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `สัปดาห์ที่ ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `เลือกวันที่ วันที่ที่เลือกคือ ${formattedDate}` : 'เลือกวันที่',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `เลือกเวลา เวลาที่เลือกคือ ${formattedTime}` : 'เลือกเวลา',
+    { throw new Error("STUB"); },
   openRangePickerDialogue: (formattedRange) =>
-    formattedRange ? `เลือกช่วง ช่วงที่เลือกคือ ${formattedRange}` : 'เลือกช่วง',
+    { throw new Error("STUB"); },
   fieldClearLabel: 'ล้าง',
 
   // Table labels
@@ -72,14 +72,14 @@ const thTHPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'เลือกวันที่',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'ป'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'ดดดด' : 'ดด'),
-  fieldDayPlaceholder: () => 'วว',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'วววว' : 'วว'),
-  fieldHoursPlaceholder: () => 'ชช',
-  fieldMinutesPlaceholder: () => 'นน',
-  fieldSecondsPlaceholder: () => 'วว',
-  fieldMeridiemPlaceholder: () => 'ทท',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'ปี',

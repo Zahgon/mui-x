@@ -40,30 +40,7 @@ export function useExtractSimpleTreeViewParameters<Multiple extends boolean | un
   } = props;
 
   const parameters: UseTreeViewStoreParameters<SimpleTreeViewStore<Multiple>> = React.useMemo(
-    () => ({
-      // Shared parameters
-      disabledItemsFocusable,
-      onItemClick,
-      itemChildrenIndentation,
-      id,
-      expandedItems,
-      defaultExpandedItems,
-      onExpandedItemsChange,
-      onItemExpansionToggle,
-      expansionTrigger,
-      disableSelection,
-      selectedItems,
-      defaultSelectedItems,
-      multiSelect,
-      checkboxSelection,
-      selectionPropagation,
-      onSelectedItemsChange,
-      onItemSelectionToggle,
-      onItemFocus,
-      itemHeight,
-
-      // SimpleTreeViewStore parameters
-    }),
+    () => { throw new Error("STUB"); },
     [
       // Shared parameters
       disabledItemsFocusable,

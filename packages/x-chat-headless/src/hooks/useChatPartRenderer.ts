@@ -6,10 +6,5 @@ import type { ChatMessagePart } from '../types/chat-message-parts';
 export function useChatPartRenderer<TPartType extends ChatMessagePart['type']>(
   partType: TPartType,
 ): ChatPartRenderer<Extract<ChatMessagePart, { type: TPartType }>> | null {
-  const { partRenderers } = useChatRuntimeContext();
-
-  return (
-    (partRenderers[partType] as
-      ChatPartRenderer<Extract<ChatMessagePart, { type: TPartType }>> | undefined) ?? null
-  );
+    throw new Error("STUB");
 }

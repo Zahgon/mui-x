@@ -139,16 +139,7 @@ export const useVirtualizer = <L extends Layout = Layout>(params: VirtualizerPar
   const paramsWithDefault = mergeDefaults<ParamsWithDefaults>(params, DEFAULT_PARAMS);
 
   const store = useLazyRef(() => {
-    return new Store(
-      FEATURES.map((f) => f.initialize(paramsWithDefault)).reduce(
-        (state, partial) => Object.assign(state, partial),
-        {},
-      ) as Dimensions.State &
-        Virtualization.State<L> &
-        Colspan.State &
-        Rowspan.State &
-        Keyboard.State,
-    );
+      throw new Error("STUB");
   }).current;
 
   const api = {} as Dimensions.API & Virtualization.API & Colspan.API & Rowspan.API & Keyboard.API;

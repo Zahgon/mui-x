@@ -19,26 +19,7 @@ const StandaloneMonthView = React.forwardRef(function StandaloneMonthView<
   inProps: StandaloneMonthViewProps<TEvent, TResource>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  // eslint-disable-next-line mui/material-ui-name-matches-component-name
-  const props = useThemeProps({ props: inProps, name: 'MuiEventCalendar' });
-
-  const { parameters, forwardedProps } = useExtractEventCalendarParameters<
-    TEvent,
-    TResource,
-    typeof props
-  >(props);
-
-  const { localeText, ...other } = forwardedProps;
-
-  return (
-    <ResponsiveTypographyContainer>
-      <EventCalendarProvider {...parameters} localeText={localeText}>
-        <EventDialogProvider>
-          <MonthView ref={forwardedRef} {...other} />
-        </EventDialogProvider>
-      </EventCalendarProvider>
-    </ResponsiveTypographyContainer>
-  );
+    throw new Error("STUB");
 }) as StandaloneMonthViewComponent;
 
 StandaloneMonthView.propTypes /* remove-proptypes */ = {

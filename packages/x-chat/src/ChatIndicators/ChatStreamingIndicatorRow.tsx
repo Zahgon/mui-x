@@ -53,61 +53,20 @@ const densityRowSpacing: Record<string, [start: number, end: number]> = {
 const ChatStreamingIndicatorRowStyled = styled('div', {
   name: 'MuiChatStreamingIndicator',
   slot: 'Row',
-  overridesResolver: (_, styles) => styles.row,
-  shouldForwardProp: (prop) => prop !== 'ownerState',
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<{
   ownerState?: { variant?: string; density?: string; hasAvatar?: boolean };
 }>(({ theme, ownerState }) => {
-  const isCompact = ownerState?.variant === 'compact';
-  const [marginStart, paddingEnd] = densityRowSpacing[ownerState?.density ?? 'standard'];
-  let avatarSize = isCompact ? '28px' : '36px';
-  if (ownerState?.hasAvatar === false) {
-    avatarSize = '0px';
-  }
-
-  return {
-    '--MuiChatMessage-avatarSize': avatarSize,
-    display: 'grid',
-    gridTemplateColumns: isCompact ? 'var(--MuiChatMessage-avatarSize) 1fr' : 'auto 1fr',
-    gridTemplateAreas: '"avatar content"',
-    columnGap: theme.spacing(isCompact ? 1 : 0.5),
-    width: '100%',
-    boxSizing: 'border-box',
-    paddingInline: theme.spacing(2),
-    // Phantom column: reserve the avatar width on the opposite side, like
-    // real message rows, so the content lane width matches the bubbles above.
-    paddingInlineEnd: `calc(${theme.spacing(2)} + var(--MuiChatMessage-avatarSize))`,
-    marginBlockStart: theme.spacing(marginStart),
-    paddingBlockEnd: theme.spacing(paddingEnd),
-    fontFamily: theme.typography.fontFamily,
-  };
+    throw new Error("STUB");
 });
 
 const ChatStreamingIndicatorBubbleStyled = styled('div', {
   name: 'MuiChatStreamingIndicator',
   slot: 'Bubble',
-  overridesResolver: (_, styles) => styles.bubble,
-  shouldForwardProp: (prop) => prop !== 'ownerState',
-})<{ ownerState?: { variant?: string } }>(({ theme, ownerState }) => ({
-  gridArea: 'content',
-  justifySelf: 'start',
-  display: 'flex',
-  alignItems: 'center',
-  // The dots' own top margin is for in-bubble (after streamed text) placement;
-  // here the bubble padding provides the spacing.
-  '& .MuiChatStreamingIndicator-root': {
-    marginTop: 0,
-  },
-  // Compact messages render without bubble chrome — match that.
-  ...(ownerState?.variant !== 'compact' && {
-    padding: theme.spacing(1, 1.5),
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: (theme.vars || theme).palette.grey[100],
-    ...theme.applyStyles('dark', {
-      backgroundColor: (theme.vars || theme).palette.grey[800],
-    }),
-  }),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
+})<{ ownerState?: { variant?: string } }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 /**
  * Waiting-phase presentation of the streaming indicator: an incoming assistant
@@ -128,27 +87,7 @@ function ChatStreamingIndicatorRow(props: ChatStreamingIndicatorRowProps) {
 
   const showAvatar = hasAvatar && assistantUser?.avatarUrl != null;
   const messageContextValue = React.useMemo<MessageOwnerState>(
-    () => ({
-      messageId: PLACEHOLDER_MESSAGE_ID,
-      message: placeholderMessage,
-      role: 'assistant',
-      status: 'streaming',
-      streaming: true,
-      error: false,
-      isGrouped: false,
-      variant,
-      density,
-      resolvedAuthor: assistantUser
-        ? {
-            id: assistantUser.id,
-            displayName: assistantUser.displayName,
-            avatarUrl: assistantUser.avatarUrl,
-            isOwnMessage: false,
-          }
-        : null,
-      showAvatar,
-      isOwnMessage: false,
-    }),
+    () => { throw new Error("STUB"); },
     [assistantUser, density, showAvatar, variant],
   );
 

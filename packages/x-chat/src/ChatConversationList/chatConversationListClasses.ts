@@ -36,7 +36,7 @@ export interface ChatConversationListClasses {
 export type ChatConversationListClassKey = keyof ChatConversationListClasses;
 
 export function getChatConversationListUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatConversationList', slot);
+    throw new Error("STUB");
 }
 
 export const chatConversationListClasses: ChatConversationListClasses = generateUtilityClasses(

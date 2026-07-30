@@ -29,8 +29,8 @@ const configuration: GridConfiguration = {
     useGridRowsOverridableMethods,
     useGridParamsOverridableMethods,
     useIsCellEditable,
-    useCellAggregationResult: () => null,
-    useFilterValueGetter: (apiRef) => apiRef.current.getRowValue,
+    useCellAggregationResult: () => { throw new Error("STUB"); },
+    useFilterValueGetter: (apiRef) => { throw new Error("STUB"); },
   },
 };
 
@@ -38,27 +38,7 @@ const DataGridRaw = function DataGrid<R extends GridValidRowModel>(
   inProps: DataGridProps<R>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useDataGridProps(inProps);
-  const privateApiRef = useGridApiInitialization<GridPrivateApiCommunity, GridApiCommunity>(
-    props.apiRef,
-    props,
-  );
-  useDataGridComponent(privateApiRef, props, configuration);
-
-  if (process.env.NODE_ENV !== 'production') {
-    validateProps(props, propValidatorsDataGrid);
-  }
-  return (
-    <GridContextProvider privateApiRef={privateApiRef} configuration={configuration} props={props}>
-      <GridRoot
-        className={props.className}
-        style={props.style}
-        sx={props.sx}
-        {...props.slotProps?.root}
-        ref={ref}
-      />
-    </GridContextProvider>
-  );
+    throw new Error("STUB");
 };
 
 interface DataGridComponent {

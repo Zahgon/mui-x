@@ -31,30 +31,12 @@ const useUtilityClasses = (classes: Partial<PickersToolbarClasses> | undefined) 
 const PickersToolbarRoot = styled('div', {
   name: 'MuiPickersToolbar',
   slot: 'Root',
-})<{ ownerState: PickerToolbarOwnerState }>(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'flex-start',
-  justifyContent: 'space-between',
-  padding: theme.spacing(2, 3),
-  variants: [
-    {
-      props: { pickerOrientation: 'landscape' },
-      style: {
-        height: 'auto',
-        maxWidth: 160,
-        padding: 16,
-        justifyContent: 'flex-start',
-        flexWrap: 'wrap',
-      },
-    },
-  ],
-}));
+})<{ ownerState: PickerToolbarOwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 const PickersToolbarContent = styled('div', {
   name: 'MuiPickersToolbar',
   slot: 'Content',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'landscapeDirection',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<{
   ownerState: PickerToolbarOwnerState;
   landscapeDirection: 'row' | 'column' | undefined;
@@ -92,52 +74,5 @@ export const PickersToolbar = React.forwardRef(function PickersToolbar(
   inProps: React.PropsWithChildren<PickersToolbarProps>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiPickersToolbar' });
-  const {
-    children,
-    className,
-    classes: classesProp,
-    toolbarTitle,
-    hidden,
-    titleId,
-    classes: inClasses,
-    landscapeDirection,
-    ...other
-  } = props;
-
-  const ownerState = useToolbarOwnerState();
-  const classes = useUtilityClasses(classesProp);
-
-  if (hidden) {
-    return null;
-  }
-
-  return (
-    <PickersToolbarRoot
-      ref={ref}
-      data-testid="picker-toolbar"
-      className={clsx(classes.root, className)}
-      ownerState={ownerState}
-      {...other}
-    >
-      <Typography
-        data-testid="picker-toolbar-title"
-        variant="overline"
-        id={titleId}
-        className={classes.title}
-        sx={{
-          color: 'text.secondary',
-        }}
-      >
-        {toolbarTitle}
-      </Typography>
-      <PickersToolbarContent
-        className={classes.content}
-        ownerState={ownerState}
-        landscapeDirection={landscapeDirection}
-      >
-        {children}
-      </PickersToolbarContent>
-    </PickersToolbarRoot>
-  );
+    throw new Error("STUB");
 }) as PickersToolbarComponent;

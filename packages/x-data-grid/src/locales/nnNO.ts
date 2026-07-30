@@ -34,7 +34,7 @@ const nnNOGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Skjul filter',
   toolbarFiltersTooltipShow: 'Vis filter',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktive filter` : `${count} aktivt filter`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Søk…',
@@ -130,7 +130,7 @@ const nnNOGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Meny',
-  columnMenuAriaLabel: (columnName: string) => `${columnName} kolonne meny`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Vis kolonner',
   columnMenuManageColumns: 'Administrer kolonner',
   columnMenuFilter: 'Filter',
@@ -143,20 +143,20 @@ const nnNOGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktive filter` : `${count} aktivt filter`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Vis filter',
   columnHeaderSortIconLabel: 'Sorter',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1 ? `${count.toLocaleString()} rader valt` : `${count.toLocaleString()} rad valt`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Totalt tal rader:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} av ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Avmerkingsboks',
@@ -188,8 +188,8 @@ const nnNOGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Grupper',
-  groupColumn: (name) => `Grupper på ${name}`,
-  unGroupColumn: (name) => `Slutt å grupper på ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Vis/gøym detaljpanel',
@@ -199,27 +199,10 @@ const nnNOGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Rader per side:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} av ${count !== -1 ? formatNumber(count) : `flere enn ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `omtrent ${formatNumber(estimated)}`
-        : `flere enn ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} av ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Gå til første side';
-    }
-    if (type === 'last') {
-      return 'Gå til siste side';
-    }
-    if (type === 'next') {
-      return 'Gå til neste side';
-    }
-    // if (type === 'previous') {
-    return 'Gå til førre side';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -313,34 +296,28 @@ const nnNOGrid: Partial<GridLocaleText> = {
   promptAppliedChanges: 'Brukte endringar',
 
   // Prompt changes
-  promptChangeGroupDescription: (column: string) => `Grupper etter ${column}`,
+  promptChangeGroupDescription: (column: string) => { throw new Error("STUB"); },
   promptChangeAggregationLabel: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeAggregationDescription: (column: string, aggregation: string) =>
-    `Aggreger ${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeFilterLabel: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `${column} er ein av: ${value}`;
-    }
-    return `${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeFilterDescription: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `Filter der ${column} er ein av: ${value}`;
-    }
-    return `Filter der ${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeSortDescription: (column: string, direction: string) =>
-    `Sorter etter ${column} (${direction})`,
+    { throw new Error("STUB"); },
   promptChangePivotEnableLabel: 'Pivot',
   promptChangePivotEnableDescription: 'Aktiver pivot',
-  promptChangePivotColumnsLabel: (count: number) => `Kolonner (${count})`,
+  promptChangePivotColumnsLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotColumnsDescription: (column: string, direction: string) =>
-    `${column}${direction ? ` (${direction})` : ''}`,
-  promptChangePivotRowsLabel: (count: number) => `Rader (${count})`,
-  promptChangePivotValuesLabel: (count: number) => `Verdiar (${count})`,
+    { throw new Error("STUB"); },
+  promptChangePivotRowsLabel: (count: number) => { throw new Error("STUB"); },
+  promptChangePivotValuesLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotValuesDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   // promptChangeChartsLabel: (dimensionsCount: number, valuesCount: number) => `Dimensions (${dimensionsCount}), Values (${valuesCount})`,
 };
 

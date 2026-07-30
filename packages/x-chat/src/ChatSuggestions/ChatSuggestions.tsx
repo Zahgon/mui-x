@@ -22,68 +22,19 @@ export interface ChatSuggestionsProps extends SuggestionsRootProps {
 const ChatSuggestionsRootStyled = styled('div', {
   name: 'MuiChatSuggestions',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(({ theme }) => ({
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: theme.spacing(1),
-  justifyContent: 'center',
-  padding: theme.spacing(2),
-  pointerEvents: 'auto',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatSuggestionItemStyled = styled('button', {
   name: 'MuiChatSuggestions',
   slot: 'Item',
-  overridesResolver: (_, styles) => styles.item,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  padding: theme.spacing(0.75, 1.5),
-  borderRadius: (theme.shape.borderRadius as number) * 4,
-  border: `1px solid ${(theme.vars || theme).palette.divider}`,
-  backgroundColor: (theme.vars || theme).palette.background.paper,
-  color: (theme.vars || theme).palette.text.primary,
-  fontSize: theme.typography.body2.fontSize,
-  fontFamily: theme.typography.fontFamily,
-  cursor: 'pointer',
-  transition: theme.transitions.create(['background-color', 'border-color']),
-  '&:hover': {
-    backgroundColor: (theme.vars || theme).palette.action.hover,
-    borderColor: (theme.vars || theme).palette.primary.main,
-  },
-  '&:focus-visible': {
-    outline: `2px solid ${(theme.vars || theme).palette.primary.main}`,
-    outlineOffset: 2,
-  },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatSuggestions = React.forwardRef<HTMLDivElement, ChatSuggestionsProps>(
   function ChatSuggestions(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatSuggestions' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatSuggestionsUtilityClasses(classesProp);
-
-    return (
-      <SuggestionsRoot
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          root: slots?.root ?? ChatSuggestionsRootStyled,
-          item: slots?.item ?? ChatSuggestionItemStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          root: mergeSlotProps(
-            { className: clsx(classes.root, className), sx },
-            slotProps?.root,
-          ) as any,
-          item: mergeSlotProps({ className: classes.item }, slotProps?.item) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatSuggestions.propTypes /* remove-proptypes */ = {

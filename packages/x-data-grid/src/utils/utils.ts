@@ -39,18 +39,13 @@ export const clamp = (value: number, min: number, max: number) =>
  * Create an array containing the range [from, to[
  */
 export function range(from: number, to: number) {
-  return Array.from({ length: to - from }).map((_, i) => from + i);
+  return Array.from({ length: to - from }).map((_, i) => { throw new Error("STUB"); });
 }
 
 // Pseudo random number. See https://stackoverflow.com/a/47593316
 function mulberry32(a: number): () => number {
   return () => {
-    /* eslint-disable */
-    let t = (a += 0x6d2b79f5);
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-    /* eslint-enable */
+      throw new Error("STUB");
   };
 }
 
@@ -63,7 +58,7 @@ function mulberry32(a: number): () => number {
  */
 export function createRandomNumberGenerator(seed: number): (min: number, max: number) => number {
   const random = mulberry32(seed);
-  return (min: number, max: number) => min + (max - min) * random();
+  return (min: number, max: number) => { throw new Error("STUB"); };
 }
 
 export function deepClone(obj: Record<string, any>) {
@@ -83,7 +78,5 @@ export function eslintUseValue(_: any) {}
 export const runIf =
   (condition: boolean, fn: Function) =>
   (...params: unknown[]) => {
-    if (condition) {
-      fn(...params);
-    }
+      throw new Error("STUB");
   };

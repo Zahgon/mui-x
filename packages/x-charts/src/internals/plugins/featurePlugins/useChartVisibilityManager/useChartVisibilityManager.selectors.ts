@@ -15,7 +15,7 @@ import type { ChartSeriesType } from '../../../../models/seriesType/config';
  */
 const selectVisibilityManager: ChartOptionalRootSelector<UseChartVisibilityManagerSignature> = (
   state,
-) => state.visibilityManager;
+) => { throw new Error("STUB"); };
 
 export const EMPTY_VISIBILITY_MAP = new Map();
 
@@ -24,17 +24,14 @@ export const EMPTY_VISIBILITY_MAP = new Map();
  */
 export const selectorVisibilityMap = createSelector(
   selectVisibilityManager,
-  (visibilityManager) => visibilityManager?.visibilityMap ?? EMPTY_VISIBILITY_MAP,
+  (visibilityManager) => { throw new Error("STUB"); },
 );
 
 const selectorIsItemVisibleFn = <SeriesType extends ChartSeriesType>(
   visibilityMap: VisibilityMap,
   seriesConfig: ChartSeriesConfig<SeriesType>,
 ) => {
-  return (identifier: VisibilityIdentifierWithType<SeriesType>) => {
-    const uniqueId = serializeIdentifier(seriesConfig, identifier);
-    return !visibilityMap.has(uniqueId);
-  };
+    throw new Error("STUB");
 };
 
 /**

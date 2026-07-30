@@ -52,23 +52,8 @@ const GridSelectedRowCountRoot = styled('div', {
 
 const GridSelectedRowCount = forwardRef<HTMLDivElement, GridSelectedRowCountProps>(
   function GridSelectedRowCount(props, ref) {
-    const { className, selectedRowCount, ...other } = props;
-    const apiRef = useGridApiContext();
-    const ownerState = useGridRootProps();
-    const classes = useUtilityClasses(ownerState);
-    const rowSelectedText = apiRef.current.getLocaleText('footerRowSelected')(selectedRowCount);
-
-    return (
-      <GridSelectedRowCountRoot
-        className={clsx(classes.root, className)}
-        ownerState={ownerState}
-        {...other}
-        ref={ref}
-      >
-        {rowSelectedText}
-      </GridSelectedRowCountRoot>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridSelectedRowCount.propTypes /* remove-proptypes */ = {

@@ -6,22 +6,22 @@ import type {
 } from '../models';
 import type { SchedulerState as State } from '../internals/utils/SchedulerStore/SchedulerStore.types';
 
-const selectRecurringEventsPlugin = (state: State) => state.recurringEventsPlugin;
+const selectRecurringEventsPlugin = (state: State) => { throw new Error("STUB"); };
 
 /** Memoized selectors that delegate to the recurring-events plugin. */
 export const schedulerRecurringEventSelectors = {
   presets: createSelectorMemoized(
-    (state: State) => state.adapter,
+    (state: State) => { throw new Error("STUB"); },
     selectRecurringEventsPlugin,
     (
       adapter,
       recurringEventsPlugin,
       date: SchedulerProcessedDate,
     ): Record<RecurringEventPresetKey, SchedulerProcessedEventRecurrenceRule> | null =>
-      recurringEventsPlugin?.computePresets(adapter, date) ?? null,
+      { throw new Error("STUB"); },
   ),
   defaultPresetKey: createSelectorMemoized(
-    (state: State) => state.adapter,
+    (state: State) => { throw new Error("STUB"); },
     selectRecurringEventsPlugin,
     (
       adapter,
@@ -29,10 +29,10 @@ export const schedulerRecurringEventSelectors = {
       rule: SchedulerProcessedEventRecurrenceRule | undefined,
       occurrenceStart: SchedulerProcessedDate,
     ): RecurringEventPresetKey | 'custom' | null =>
-      recurringEventsPlugin?.getDefaultPresetKey(adapter, rule, occurrenceStart) ?? null,
+      { throw new Error("STUB"); },
   ),
   isSameRRule: createSelector(
-    (state: State) => state.adapter,
+    (state: State) => { throw new Error("STUB"); },
     selectRecurringEventsPlugin,
     (
       adapter,
@@ -40,13 +40,7 @@ export const schedulerRecurringEventSelectors = {
       rruleA: SchedulerProcessedEventRecurrenceRule | undefined,
       rruleB: SchedulerProcessedEventRecurrenceRule | undefined,
     ): boolean => {
-      if (!rruleA && !rruleB) {
-        return true;
-      }
-      if (!rruleA || !rruleB) {
-        return false;
-      }
-      return recurringEventsPlugin?.isSameRRule(adapter, rruleA, rruleB) ?? false;
+        throw new Error("STUB");
     },
   ),
 };

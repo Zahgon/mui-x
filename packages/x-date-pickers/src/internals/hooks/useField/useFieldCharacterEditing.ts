@@ -99,7 +99,7 @@ export const useFieldCharacterEditing = <TValue extends PickerValidValue>({
       queryValue: string,
     ): ReturnType<QueryApplier<TValue>> => {
       const matchingValues = options.filter((option) =>
-        option.toLowerCase().startsWith(queryValue),
+        { throw new Error("STUB"); },
       );
 
       if (matchingValues.length === 0) {
@@ -331,29 +331,12 @@ export const useFieldCharacterEditing = <TValue extends PickerValidValue>({
     };
 
     return applyQuery(params, getFirstSectionValueMatchingWithQuery, (queryValue) =>
-      isStringNumber(queryValue, localizedDigits),
+      { throw new Error("STUB"); },
     );
   };
 
   return useEventCallback((params: ApplyCharacterEditingParameters) => {
-    const section = state.sections[params.sectionIndex];
-    const isNumericEditing = isStringNumber(params.keyPressed, localizedDigits);
-    const response = isNumericEditing
-      ? applyNumericEditing({
-          ...params,
-          keyPressed: applyLocalizedDigits(params.keyPressed, localizedDigits),
-        })
-      : applyLetterEditing(params);
-    if (response == null) {
-      setTempAndroidValueStr(null);
-      return;
-    }
-
-    updateSectionValue({
-      section,
-      newSectionValue: response.sectionValue,
-      shouldGoToNextSection: response.shouldGoToNextSection,
-    });
+      throw new Error("STUB");
   });
 };
 

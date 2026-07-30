@@ -27,18 +27,17 @@ export interface UseStreamingIndicatorVisibilityValue {
 // re-render the indicator per chunk. These recompute per chunk but return
 // stable booleans, so the subscription only re-renders when a value flips.
 const selectHasAssistantMessage = createSelectorMemoized(
-  (state: ChatInternalState<unknown>) => state.messageIds,
-  (state: ChatInternalState<unknown>) => state.messagesById,
+  (state: ChatInternalState<unknown>) => { throw new Error("STUB"); },
+  (state: ChatInternalState<unknown>) => { throw new Error("STUB"); },
   (messageIds, messagesById): boolean =>
-    messageIds.some((id) => messagesById[id]?.role === 'assistant'),
+    { throw new Error("STUB"); },
 );
 
 const selectLastMessageIsStreamingAssistant = createSelectorMemoized(
-  (state: ChatInternalState<unknown>) => state.messageIds,
-  (state: ChatInternalState<unknown>) => state.messagesById,
+  (state: ChatInternalState<unknown>) => { throw new Error("STUB"); },
+  (state: ChatInternalState<unknown>) => { throw new Error("STUB"); },
   (messageIds, messagesById): boolean => {
-    const lastMessage = messagesById[messageIds[messageIds.length - 1] ?? ''];
-    return lastMessage?.role === 'assistant' && lastMessage.status === 'streaming';
+      throw new Error("STUB");
   },
 );
 
@@ -68,5 +67,5 @@ export function useStreamingIndicatorVisibility(
     !hasStreamingAssistantMessage &&
     (mode === true || isAgentLike);
 
-  return React.useMemo(() => ({ waiting }), [waiting]);
+  return React.useMemo(() => { throw new Error("STUB"); }, [waiting]);
 }

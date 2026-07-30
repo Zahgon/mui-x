@@ -20,17 +20,6 @@ export function matchesMimeType(fileType: string, acceptedTypes: string[]): bool
   const normalized = fileType.toLowerCase().trim();
 
   return acceptedTypes.some((accepted) => {
-    const pattern = accepted.toLowerCase().trim();
-
-    if (pattern === normalized) {
-      return true;
-    }
-
-    if (pattern.endsWith('/*')) {
-      const prefix = pattern.slice(0, -1);
-      return normalized.startsWith(prefix);
-    }
-
-    return false;
+      throw new Error("STUB");
   });
 }

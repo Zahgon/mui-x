@@ -7,17 +7,7 @@ const seriesProcessor: SeriesProcessor<'heatmap'> = (params) => {
 
   const defaultizedSeries: Record<SeriesId, DefaultizedHeatmapSeriesType> = {};
   Object.keys(series).forEach((seriesId) => {
-    const data = series[seriesId].data ?? [];
-    const heatmapData = new HeatmapData(data);
-
-    defaultizedSeries[seriesId] = {
-      // Defaultize the data and the value formatter.
-      valueFormatter: (v) => v?.toString() ?? null,
-      data,
-      labelMarkType: 'square',
-      ...series[seriesId],
-      heatmapData,
-    };
+      throw new Error("STUB");
   });
 
   return {

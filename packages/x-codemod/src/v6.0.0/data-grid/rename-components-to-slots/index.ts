@@ -14,11 +14,7 @@ function transformComponentsProp(attributeNode) {
   }
 
   valueExpression.properties.forEach((property) => {
-    property.key.name = property.key.name[0].toLowerCase() + property.key.name.slice(1);
-
-    if (property.shorthand) {
-      property.shorthand = false;
-    }
+      throw new Error("STUB");
   });
 }
 
@@ -45,19 +41,11 @@ export default function transformer(file, api, options) {
     root
       .find(j.JSXElement)
       .filter((path) => {
-        return preRequisites.components.includes((path.value.openingElement.name as any).name);
+          throw new Error("STUB");
       })
       .find(j.JSXAttribute)
       .forEach((attribute) => {
-        // Only remove props from components in componentNames. Not nested ones.
-        if (!preRequisites.components.includes(attribute.parent.value.name.name)) {
-          return;
-        }
-        if (attribute.value.name.name === 'components') {
-          transformComponentsProp(attribute);
-        } else if (attribute.value.name.name === 'componentsProps') {
-          transformComponentsPropsProp(attribute);
-        }
+          throw new Error("STUB");
       });
   }
 

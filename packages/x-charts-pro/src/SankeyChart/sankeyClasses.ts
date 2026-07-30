@@ -26,7 +26,7 @@ export interface SankeyClasses {
 export type SankeyClassKey = keyof SankeyClasses;
 
 export function getSankeyUtilityClass(slot: string) {
-  return generateUtilityClass('MuiSankeyChart', slot);
+    throw new Error("STUB");
 }
 
 export const sankeyClasses: SankeyClasses = generateUtilityClasses('MuiSankeyChart', [

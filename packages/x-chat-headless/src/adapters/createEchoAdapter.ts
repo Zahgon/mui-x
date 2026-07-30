@@ -19,7 +19,7 @@ export interface CreateEchoAdapterOptions {
 }
 
 const defaultRespond = (text: string) =>
-  `You said: "${text || 'nothing'}". Replace this demo adapter with your own API call.`;
+  { throw new Error("STUB"); };
 
 /**
  * A minimal in-memory `ChatAdapter` that echoes the user's last message.
@@ -68,7 +68,7 @@ export function createEchoAdapter(options: CreateEchoAdapterOptions = {}): ChatA
       }
     };
 
-    handleAbort = () => close();
+    handleAbort = () => { throw new Error("STUB"); };
 
     return new ReadableStream<ChatMessageChunk>({
       start(controller) {
@@ -80,19 +80,7 @@ export function createEchoAdapter(options: CreateEchoAdapterOptions = {}): ChatA
         }
 
         timer = setTimeout(() => {
-          timer = null;
-          if (signal.aborted) {
-            close();
-            return;
-          }
-          closed = true;
-          cleanup();
-          controller.enqueue({ type: 'start', messageId: replyId });
-          controller.enqueue({ type: 'text-start', id: partId });
-          controller.enqueue({ type: 'text-delta', id: partId, delta: reply });
-          controller.enqueue({ type: 'text-end', id: partId });
-          controller.enqueue({ type: 'finish', messageId: replyId, finishReason: 'stop' });
-          controller.close();
+            throw new Error("STUB");
         }, delayMs);
 
         signal.addEventListener('abort', handleAbort, { once: true });
@@ -106,7 +94,7 @@ export function createEchoAdapter(options: CreateEchoAdapterOptions = {}): ChatA
   }
 
   const getMessageText = (message: ChatMessage) =>
-    message.parts.map((part) => (part.type === 'text' ? part.text : '')).join('');
+    message.parts.map((part) => { throw new Error("STUB"); }).join('');
 
   return {
     async sendMessage({ message, signal }) {
@@ -114,10 +102,7 @@ export function createEchoAdapter(options: CreateEchoAdapterOptions = {}): ChatA
       return createReplyStream(text, `reply-${message.id}`, signal);
     },
     async regenerate({ message, signal }) {
-      const text = getMessageText(message);
-      const attempt = (attemptByMessageId.get(message.id) ?? 0) + 1;
-      attemptByMessageId.set(message.id, attempt);
-      return createReplyStream(text, `reply-${message.id}-${attempt}`, signal);
+        throw new Error("STUB");
     },
   };
 }

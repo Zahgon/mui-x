@@ -28,18 +28,7 @@ function RadialAreaPlot(props: RadialAreaPlotProps) {
     <RadialAreaPlotRoot className={classes.areaPlot} transform={`translate(${cx} ${cy})`}>
       {completedData.map(
         ({ seriesId, color, hidden, area, curve, points, closePath }) =>
-          area && (
-            <RadialArea
-              key={seriesId}
-              seriesId={seriesId}
-              color={color}
-              hidden={hidden}
-              curve={curve}
-              points={points}
-              closePath={closePath}
-              className={classes.area}
-            />
-          ),
+          { throw new Error("STUB"); },
       )}
     </RadialAreaPlotRoot>
   );

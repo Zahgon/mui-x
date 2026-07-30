@@ -55,18 +55,7 @@ const ChartsContainerPro = React.forwardRef(function ChartsContainerProInner<
   SeriesType extends ChartSeriesType = ChartSeriesType,
   TSignatures extends readonly ChartAnyPluginSignature[] = AllPluginSignatures<SeriesType>,
 >(props: ChartsContainerProProps<SeriesType, TSignatures>, ref: React.Ref<HTMLDivElement>) {
-  const { chartsDataProviderProProps, children, chartsSurfaceProps } = useChartsContainerProProps<
-    SeriesType,
-    TSignatures
-  >(props);
-
-  return (
-    <ChartsDataProviderPro<SeriesType, TSignatures> {...chartsDataProviderProProps}>
-      <ChartsSurface {...chartsSurfaceProps} ref={ref}>
-        {children}
-      </ChartsSurface>
-    </ChartsDataProviderPro>
-  );
+    throw new Error("STUB");
 }) as unknown as ChartsContainerProComponent;
 
 // @ts-expect-error the type coercion breaks the prop types

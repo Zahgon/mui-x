@@ -21,32 +21,12 @@ const EVENT_HEIGHT = 22;
 const DayTimeGridAllDayEventsCell = styled(CalendarGrid.DayCell, {
   name: 'MuiEventCalendar',
   slot: 'DayTimeGridAllDayEventsCell',
-})(({ theme }) => ({
-  flexGrow: 1,
-  flexShrink: 0,
-  flexBasis: 0,
-  minWidth: 0,
-  padding: theme.spacing(0.5),
-  display: 'grid',
-  gridTemplateRows: 'repeat(var(--row-count), minmax(auto, 18px))',
-  gap: theme.spacing(0.5),
-  lineHeight: '18px',
-
-  minHeight: `calc(var(--row-count, 0) * ${EVENT_HEIGHT}px + ${theme.spacing(0.5)})`,
-
-  '&[data-weekend]': {
-    backgroundColor: (theme.vars || theme).palette.action.hover,
-  },
-  '&:focus-visible': {
-    outline: 'none',
-    backgroundColor: getCellFocusBackground(theme),
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const DayTimeGridAllDayEventsCellEvents = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'DayTimeGridAllDayEventsCellEvents',
-})(({ theme }) => ({ position: 'relative', display: 'grid', gap: theme.spacing(0.5) }));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const DayTimeGridAllDayEventContainer = styled('div', {
   name: 'MuiEventCalendar',
@@ -56,74 +36,7 @@ const DayTimeGridAllDayEventContainer = styled('div', {
 });
 
 export function DayGridCell(props: DayGridCellProps) {
-  const { day, row, colIndex } = props;
-
-  // Context hooks
-  const adapter = useAdapterContext();
-  const store = useEventCalendarStoreContext();
-  const { onOpen: startEditing } = useEventDialogContext();
-  const { schedulerId, classes } = useEventCalendarStyledContext();
-
-  // Ref hooks
-  const cellRef = React.useRef<HTMLDivElement | null>(null);
-
-  // Selector hooks
-  const isCreatingAnEvent = useStore(
-    store,
-    eventCalendarOccurrencePlaceholderSelectors.isCreatingInDayCell,
-    day.value,
-  );
-  const placeholder = CalendarGrid.usePlaceholderInDay(day.value, row);
-  const isLoading = useStore(store, schedulerOtherSelectors.isLoading);
-
-  const rowCount = Math.max(row.maxIndex, placeholder?.position.index ?? 0);
-
-  React.useEffect(() => {
-    if (!isCreatingAnEvent || !placeholder || !cellRef.current) {
-      return;
-    }
-    startEditing(cellRef, placeholder);
-  }, [isCreatingAnEvent, placeholder, startEditing]);
-
-  return (
-    <DayTimeGridAllDayEventsCell
-      className={classes.dayTimeGridAllDayEventsCell}
-      ref={cellRef}
-      value={day.value}
-      addPropertiesToDroppedEvent={addPropertiesToDroppedEvent}
-      style={
-        {
-          '--row-count': rowCount,
-        } as React.CSSProperties
-      }
-      aria-labelledby={`${schedulerId}-DayTimeGridAllDayEventsHeaderCell`}
-      aria-colindex={colIndex}
-      role="gridcell"
-      data-weekend={isWeekend(adapter, day.value) || undefined}
-    >
-      <DayTimeGridAllDayEventsCellEvents className={classes.dayTimeGridAllDayEventsCellEvents}>
-        {isLoading && <EventSkeleton data-variant="day-grid" />}
-        {day.withPosition.map((occurrence) => {
-          if (occurrence.position.isInvisible) {
-            return (
-              <DayGridEvent key={occurrence.key} occurrence={occurrence} variant="invisible" />
-            );
-          }
-
-          return (
-            <EventDialogTrigger key={occurrence.key} occurrence={occurrence}>
-              <DayGridEvent occurrence={occurrence} variant="filled" />
-            </EventDialogTrigger>
-          );
-        })}
-        {placeholder != null && (
-          <DayTimeGridAllDayEventContainer className={classes.dayTimeGridAllDayEventContainer}>
-            <DayGridEvent occurrence={placeholder} variant="placeholder" />
-          </DayTimeGridAllDayEventContainer>
-        )}
-      </DayTimeGridAllDayEventsCellEvents>
-    </DayTimeGridAllDayEventsCell>
-  );
+    throw new Error("STUB");
 }
 
 interface DayGridCellProps {

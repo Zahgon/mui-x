@@ -37,13 +37,4 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'rename-id-to-series-id',
-  specFiles: [
-    {
-      name: 'rename id to seriesId',
-      actual: readFile(path.join(import.meta.dirname, 'actual-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-imports.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

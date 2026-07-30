@@ -13,11 +13,7 @@ const muiXTelemetryEvents = {
             packageName: string;
             licenseStatus?: string;
           },
-        ) => ({
-          eventName: 'licenseVerification',
-          payload,
-          context,
-        }),
+        ) => { throw new Error("STUB"); },
 };
 
 export default muiXTelemetryEvents;

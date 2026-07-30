@@ -3,7 +3,7 @@ import type { ComposableChartSeriesType } from '../../../../models/seriesType/co
 import type { ChartSeriesType, HighlightScope } from '../../../../models/seriesType/config';
 
 function alwaysFalse(): boolean {
-  return false;
+    throw new Error("STUB");
 }
 
 /**
@@ -15,27 +15,5 @@ export function createIsHighlighted<
   highlightScope: HighlightScope<SeriesType> | null | undefined,
   highlightedItem: HighlightItemIdentifierWithType<SeriesType> | null,
 ) {
-  if (!highlightScope || !highlightedItem) {
-    return alwaysFalse;
-  }
-
-  return function isHighlighted<TestedSeriesType extends ComposableChartSeriesType<SeriesType>>(
-    item: HighlightItemIdentifierWithType<TestedSeriesType> | null,
-  ): boolean {
-    if (!item) {
-      return false;
-    }
-
-    if (highlightScope.highlight === 'series') {
-      return item.seriesId === highlightedItem.seriesId;
-    }
-
-    if (highlightScope.highlight === 'item') {
-      return (
-        item.dataIndex === highlightedItem.dataIndex && item.seriesId === highlightedItem.seriesId
-      );
-    }
-
-    return false;
-  };
+    throw new Error("STUB");
 }

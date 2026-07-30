@@ -22,27 +22,19 @@ export const extractPluginParamsFromProps = <
 
   const paramsLookup = {} as Record<keyof PluginParams, true>;
   plugins.forEach((plugin) => {
-    Object.assign(paramsLookup, plugin.params);
+      throw new Error("STUB");
   });
 
   const pluginParams = {} as PluginParams;
 
   Object.keys(props).forEach((propName) => {
-    const prop = props[propName as keyof typeof props] as any;
-
-    if (paramsLookup[propName as keyof PluginParams]) {
-      pluginParams[propName as keyof PluginParams] = prop;
-    }
+      throw new Error("STUB");
   });
 
   const defaultizedPluginParams = plugins.reduce(
     (acc, plugin: ChartPlugin<ChartAnyPluginSignature>) => {
-      if (plugin.getDefaultizedParams) {
-        return plugin.getDefaultizedParams({ params: acc });
-      }
-
-      return acc;
-    },
+          throw new Error("STUB");
+      },
     pluginParams,
   ) as unknown as MergeSignaturesProperty<TSignatures, 'defaultizedParams'>;
 

@@ -39,18 +39,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
     componentNames,
     props: ['enableKeyboardNavigation'],
     shouldRemove: (attribute) => {
-      // Only remove the prop if it's not explicitly set to false or a variable that could be false.
-      if (attribute.value === null) {
-        return true;
-      }
-
-      if (attribute.value?.type === 'JSXExpressionContainer') {
-        if (attribute.value.expression.type === 'BooleanLiteral') {
-          return attribute.value.expression.value !== false;
-        }
-        // If it's an expression, we can't be sure of its value, so we keep it.
-      }
-      return false;
+        throw new Error("STUB");
     },
     j,
   });
@@ -58,13 +47,4 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'remove-enable-keyboard-navigation',
-  specFiles: [
-    {
-      name: 'remove enableKeyboardNavigation prop',
-      actual: readFile(path.join(import.meta.dirname, 'actual.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

@@ -79,7 +79,7 @@ const getMatchingNestedImport = (
 ) => {
   const pathStr = getPathStrFromPath(path);
   const relativeEndpoint = getRelativeEndpointFromPathStr(pathStr, parameters.packageNames);
-  return parameters.imports.find((importConfig) => importConfig.oldEndpoint === relativeEndpoint);
+  return parameters.imports.find((importConfig) => { throw new Error("STUB"); });
 };
 
 const getMatchingRootImport = (
@@ -87,7 +87,7 @@ const getMatchingRootImport = (
   parameters: RenameImportsParameters,
 ) => {
   return parameters.imports.find((importConfig) => {
-    return importConfig.importsMapping.hasOwnProperty(path.node.imported.name.toString());
+      throw new Error("STUB");
   });
 };
 
@@ -110,38 +110,17 @@ export function renameImports(parameters: RenameImportsParameters) {
   importDeclarations
     // Filter out the declarations that are not nested endpoints of the matching packages or that don't have any update to apply
     .filter((path) => {
-      const pathStr = getPathStrFromPath(path);
-      if (!pathStr.match(nestedImportRegExp)) {
-        return false;
-      }
-
-      return !!getMatchingNestedImport(path, parameters);
+        throw new Error("STUB");
     })
     // Find all the import specifiers (extract A in import { A } from '...')
     .find(j.ImportSpecifier)
     // Filter out the specifiers that don't need to be updated
     .filter((path) => {
-      return getMatchingNestedImport(path, parameters)!.importsMapping.hasOwnProperty(
-        path.node.imported.name as string,
-      );
+        throw new Error("STUB");
     })
     // Rename the import specifiers
     .replaceWith((path) => {
-      const newName = getMatchingNestedImport(path, parameters)!.importsMapping[
-        path.node.imported.name as string
-      ];
-
-      // If the import is alias, we keep the alias and don't rename the variable usage
-      const hasAlias = path.node.local?.name !== path.node.imported.name;
-      if (hasAlias) {
-        return j.importSpecifier(
-          j.identifier(newName),
-          j.identifier(path.node.local!.name as string),
-        );
-      }
-
-      renamedIdentifiersMap[path.node.imported.name as string] = newName;
-      return j.importSpecifier(j.identifier(newName));
+        throw new Error("STUB");
     });
 
   // Rename the root imports specifiers
@@ -151,30 +130,15 @@ export function renameImports(parameters: RenameImportsParameters) {
   importDeclarations
     // Filter out the declarations that are not root endpoint of the matching packages
     .filter((path) => {
-      const pathStr = getPathStrFromPath(path);
-      return !!pathStr.match(rootImportRegExp);
+        throw new Error("STUB");
     })
     .find(j.ImportSpecifier)
     .filter((path) => {
-      return !!getMatchingRootImport(path, parameters);
+        throw new Error("STUB");
     })
     // Rename the import specifiers
     .replaceWith((path) => {
-      const newName = getMatchingRootImport(path, parameters)!.importsMapping[
-        path.node.imported.name as string
-      ];
-
-      // If the import is alias, we keep the alias and don't rename the variable usage
-      const hasAlias = path.node.local?.name !== path.node.imported.name;
-      if (hasAlias) {
-        return j.importSpecifier(
-          j.identifier(newName),
-          j.identifier(path.node.local!.name as string),
-        );
-      }
-
-      renamedIdentifiersMap[path.node.imported.name as string] = newName;
-      return j.importSpecifier(j.identifier(newName));
+        throw new Error("STUB");
     });
 
   // Rename the nested import declarations
@@ -183,62 +147,10 @@ export function renameImports(parameters: RenameImportsParameters) {
   importDeclarations
     // Filter out the declarations that are not nested endpoints of the matching packages or that don't have any update to apply
     .filter((path) => {
-      const pathStr = getPathStrFromPath(path);
-      if (!pathStr.match(nestedImportRegExp)) {
-        return false;
-      }
-
-      return !!getMatchingNestedImport(path, parameters)?.newEndpoint;
+        throw new Error("STUB");
     })
     .replaceWith((path) => {
-      const importConfig = getMatchingNestedImport(path, parameters)!;
-      const pathStr = getPathStrFromPath(path);
-      const oldEndpoint = getRelativeEndpointFromPathStr(pathStr, parameters.packageNames);
-      const newEndpoint = importConfig.newEndpoint!;
-      const newPathStr = pathStr.replace(oldEndpoint, newEndpoint);
-
-      // Handle splitting when splitUnmatchedSpecifiers is enabled
-      if (importConfig.splitUnmatchedSpecifiers) {
-        const specifiers = path.node.specifiers ?? [];
-        const specifiersToMove: typeof specifiers = [];
-        const specifiersToKeep: typeof specifiers = [];
-
-        for (const specifier of specifiers) {
-          if (
-            specifier.type === 'ImportSpecifier' &&
-            importConfig.importsMapping.hasOwnProperty(specifier.imported.name as string)
-          ) {
-            specifiersToMove.push(specifier);
-          } else {
-            specifiersToKeep.push(specifier);
-          }
-        }
-
-        // If no specifiers match, don't change anything
-        if (specifiersToMove.length === 0) {
-          return path.node;
-        }
-
-        // If all specifiers match, just update the path in place (no split needed)
-        if (specifiersToKeep.length === 0) {
-          path.node.source = j.stringLiteral(newPathStr);
-          return path.node;
-        }
-
-        // Split: modify current node to keep unmatched specifiers, insert new node for matched ones
-        const moveNode = j.importDeclaration(specifiersToMove, j.stringLiteral(newPathStr));
-
-        // Insert the new import after the current one
-        j(path).insertAfter(moveNode);
-
-        // Update the current node in place to only keep the unmatched specifiers
-        path.node.specifiers = specifiersToKeep;
-        return path.node;
-      }
-
-      // Default behavior: move all specifiers to the new endpoint (modify in place)
-      path.node.source = j.stringLiteral(newPathStr);
-      return path.node;
+        throw new Error("STUB");
     });
 
   // Rename the import usage
@@ -247,11 +159,10 @@ export function renameImports(parameters: RenameImportsParameters) {
   root
     .find(j.Identifier)
     .filter((path) => {
-      return renamedIdentifiersMap.hasOwnProperty(path.node.name);
+        throw new Error("STUB");
     })
     .replaceWith((path) => {
-      const newName = renamedIdentifiersMap[path.node.name];
-      return j.identifier(newName);
+        throw new Error("STUB");
     });
 
   return root;

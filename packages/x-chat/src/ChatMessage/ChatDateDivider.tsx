@@ -18,77 +18,23 @@ export interface ChatDateDividerProps extends MessageListDateDividerProps {
 const ChatDateDividerStyled = styled('div', {
   name: 'MuiChatMessage',
   slot: 'DateDivider',
-  overridesResolver: (_, styles) => styles.dateDivider,
-})(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  paddingInline: theme.spacing(2),
-  paddingBlock: theme.spacing(1),
-  fontSize: theme.typography.caption.fontSize,
-  color: (theme.vars || theme).palette.text.disabled,
-  userSelect: 'none',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatDateDividerLineStyled = styled('div', {
   name: 'MuiChatMessage',
   slot: 'DateDividerLine',
-})(({ theme }) => ({
-  flex: 1,
-  height: 1,
-  backgroundColor: (theme.vars || theme).palette.divider,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatDateDividerLabelStyled = styled('div', {
   name: 'MuiChatMessage',
   slot: 'DateDividerLabel',
-})(({ theme }) => ({
-  fontSize: theme.typography.caption.fontSize,
-  color: (theme.vars || theme).palette.text.disabled,
-  whiteSpace: 'nowrap',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatDateDivider = React.forwardRef<HTMLDivElement, ChatDateDividerProps>(
   function ChatDateDivider(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatDateDivider' });
-    // Drop a JS/theme-injected `classes` (not a prop on this sub-part — it shares
-    // the `MuiChatMessage-*` namespace) so it can't leak onto the DOM via `...other`.
-    const {
-      slots,
-      slotProps,
-      className,
-      sx,
-      classes: classesProp,
-      ...other
-    } = props as ChatDateDividerProps & { classes?: unknown };
-    void classesProp;
-    const classes = useChatMessageUtilityClasses(undefined);
-
-    return (
-      <MessageListDateDivider
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          divider: slots?.divider ?? ChatDateDividerStyled,
-          line: slots?.line ?? ChatDateDividerLineStyled,
-          label: slots?.label ?? ChatDateDividerLabelStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          divider: mergeSlotProps(
-            {
-              className: clsx(classes.dateDivider, className),
-              sx,
-            },
-            slotProps?.divider,
-          ) as any,
-          line: mergeSlotProps({ className: classes.dateDividerLine }, slotProps?.line) as any,
-          label: mergeSlotProps({ className: classes.dateDividerLabel }, slotProps?.label) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatDateDivider.propTypes /* remove-proptypes */ = {

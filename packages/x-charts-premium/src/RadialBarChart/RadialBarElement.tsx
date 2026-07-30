@@ -43,7 +43,7 @@ function RadialBarElement(props: RadialBarElementProps) {
   const classes = useUtilityClasses({ classes: innerClasses });
 
   const identifier = React.useMemo(
-    () => ({ type: 'radialBar' as const, seriesId, dataIndex }),
+    () => { throw new Error("STUB"); },
     [seriesId, dataIndex],
   );
   const highlightState = useItemHighlightState(identifier);

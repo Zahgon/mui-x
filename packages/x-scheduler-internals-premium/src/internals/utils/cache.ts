@@ -63,7 +63,7 @@ type CachedEvent<T> = {
   sourceRangeKey: string | null;
 };
 
-const getRangeKey = (start: number, end: number) => `${start}:${end}`;
+const getRangeKey = (start: number, end: number) => { throw new Error("STUB"); };
 
 export class SchedulerDataSourceCacheDefault<
   TEvent extends object,
@@ -80,125 +80,19 @@ export class SchedulerDataSourceCacheDefault<
   constructor({ ttl = 300000, getId }: SchedulerDataSourceCacheConfig<TEvent> = {}) {
     this.cache = {};
     this.ttl = ttl;
-    this.getId = getId ?? ((event: TEvent) => (event as any).id);
+    this.getId = getId ?? ((event: TEvent) => { throw new Error("STUB"); });
   }
 
   hasCoverage(start: number, end: number): boolean {
-    const now = Date.now();
-
-    // 1. Filter out expired ranges immediately
-    this.loadedRanges = this.loadedRanges.filter((r) => r.expiry > now);
-
-    // 2. Check if the requested interval is fully covered by the union of valid ranges
-    const sortedRanges = [...this.loadedRanges].sort((a, b) => a.start - b.start);
-
-    let coveredUntil = start;
-
-    for (const range of sortedRanges) {
-      // Skip ranges that end before the segment we care about
-      if (range.end <= coveredUntil) {
-        continue;
-      }
-
-      // If there's a gap between what we have covered and the next range's start, fail
-      if (range.start > coveredUntil) {
-        return false;
-      }
-
-      // Now we know range.start <= coveredUntil < range.end, so extend coverage
-      coveredUntil = range.end + 1;
-
-      // Early exit: we've covered the target range
-      if (coveredUntil >= end) {
-        return true;
-      }
-    }
-
-    // If after consuming all ranges we didn't reach `end`, it's not fully covered
-    return coveredUntil >= end;
+      throw new Error("STUB");
   }
 
   setRange(start: number, end: number, newEvents: TEvent[]) {
-    const expiry = Date.now() + this.ttl;
-    const newRangeKey = getRangeKey(start, end);
-
-    // 1. Evict events from fully-replaced ranges that are missing from `newEvents`
-    //    (server-side deletes). Without this, `getAll()` would surface the deleted
-    //    events until their TTL elapses.
-    const replacedRangeKeys = new Set<string>();
-    for (const range of this.loadedRanges) {
-      if (range.start >= start && range.end <= end) {
-        replacedRangeKeys.add(getRangeKey(range.start, range.end));
-      }
-    }
-    const newIds = new Set(newEvents.map((event) => String(this.getId(event))));
-    for (const id of Object.keys(this.cache)) {
-      const entry = this.cache[id];
-      if (
-        entry.sourceRangeKey !== null &&
-        replacedRangeKeys.has(entry.sourceRangeKey) &&
-        !newIds.has(id)
-      ) {
-        delete this.cache[id];
-      }
-    }
-
-    // 2. Update Events (Refreshes the expiry of these specific data points)
-    for (const event of newEvents) {
-      this.upsert(event, newRangeKey);
-    }
-
-    // 3. Add New Range
-    const newRange: CachedRange = { start, end, expiry };
-
-    // 4. Clean up the Registry
-    // We want to remove the parts of existing ranges that are covered by the new range.
-    const nextRanges: CachedRange[] = [];
-
-    for (const range of this.loadedRanges) {
-      // If the range is fully contained in the new range, we drop it (it's replaced).
-      if (range.start >= start && range.end <= end) {
-        continue;
-      }
-
-      // If there is no overlap, we keep it.
-      if (range.end <= start || range.start >= end) {
-        nextRanges.push(range);
-        continue;
-      }
-
-      // If we are here, there is an overlap, but it's not fully contained.
-      // We need to trim the existing range.
-
-      // Part before the new range
-      if (range.start < start) {
-        nextRanges.push({
-          start: range.start,
-          end: start,
-          expiry: range.expiry,
-        });
-      }
-
-      // Part after the new range
-      if (range.end > end) {
-        nextRanges.push({
-          start: end,
-          end: range.end,
-          expiry: range.expiry,
-        });
-      }
-    }
-
-    nextRanges.push(newRange);
-    this.loadedRanges = nextRanges;
+      throw new Error("STUB");
   }
 
   upsert(event: TEvent, sourceRangeKey: string | null = null) {
-    const resolvedId = this.getId(event);
-    checkSchedulerEventIdIsValid(resolvedId, event);
-    const id = String(resolvedId);
-    const expiry = Date.now() + this.ttl;
-    this.cache[id] = { value: event, expiry, sourceRangeKey };
+      throw new Error("STUB");
   }
 
   remove(id: string) {

@@ -73,9 +73,7 @@ function LineHighlightPlot(props: LineHighlightPlotProps) {
   const defaultYAxisId = yAxisIds[0];
 
   const hasStartEndMark = stackingGroups.some(({ ids }) =>
-    ids.some(
-      (seriesId) => series[seriesId].showMark === 'start' || series[seriesId].showMark === 'end',
-    ),
+    { throw new Error("STUB"); },
   );
 
   if (highlightedIndexes.length === 0 && !hasStartEndMark) {
@@ -84,7 +82,7 @@ function LineHighlightPlot(props: LineHighlightPlotProps) {
 
   const getHighlightedIndex = new Map<string | number, number>();
   highlightedIndexes.forEach(({ axisId, dataIndex }) => {
-    getHighlightedIndex.set(axisId, dataIndex);
+      throw new Error("STUB");
   });
 
   const Element = slots?.lineHighlight ?? LineHighlightElement;
@@ -92,69 +90,7 @@ function LineHighlightPlot(props: LineHighlightPlotProps) {
   return (
     <g {...other}>
       {stackingGroups.flatMap(({ ids: groupIds }) =>
-        groupIds.flatMap((seriesId) => {
-          const {
-            xAxisId = defaultXAxisId,
-            yAxisId = defaultYAxisId,
-            visibleStackedData,
-            data,
-            disableHighlight,
-            showMark,
-            shape = 'circle',
-            hidden,
-          } = series[seriesId];
-
-          if (hidden) {
-            return null;
-          }
-
-          const axisIndex = disableHighlight ? undefined : getHighlightedIndex.get(xAxisId);
-          const showMarkIndex =
-            showMark === 'start' || showMark === 'end'
-              ? getStartEndMarkIndex(data, showMark)
-              : undefined;
-
-          const highlightedIndex = axisIndex ?? showMarkIndex;
-
-          if (highlightedIndex === undefined || data[highlightedIndex] == null) {
-            return null;
-          }
-
-          const xScale = getValueToPositionMapper(xAxis[xAxisId].scale);
-          const yScale = yAxis[yAxisId].scale;
-          const xData = xAxis[xAxisId].data;
-
-          if (xData === undefined) {
-            throw new Error(
-              `MUI X Charts: ${
-                xAxisId === DEFAULT_X_AXIS_KEY
-                  ? 'The first `xAxis`'
-                  : `The x-axis with id "${xAxisId}"`
-              } should have a data property to be able to display a line plot. ` +
-                'The x-axis data defines the positions for each point in the line. ' +
-                'Provide a data array to the x-axis configuration.',
-            );
-          }
-
-          const x = xScale(xData[highlightedIndex]);
-          const y = yScale(visibleStackedData[highlightedIndex][1])!; // This should not be undefined since y should not be a band scale
-          if (!instance.isPointInside(x, y)) {
-            return null;
-          }
-
-          const colorGetter = getColor(series[seriesId], xAxis[xAxisId], yAxis[yAxisId]);
-          return (
-            <Element
-              key={`${seriesId}`}
-              seriesId={seriesId}
-              color={colorGetter(highlightedIndex)}
-              x={x}
-              y={y}
-              shape={shape}
-              {...slotProps?.lineHighlight}
-            />
-          );
-        }),
+        { throw new Error("STUB"); },
       )}
     </g>
   );
@@ -165,10 +101,10 @@ function LineHighlightPlot(props: LineHighlightPlotProps) {
  */
 function getStartEndMarkIndex(data: readonly (number | null)[], type: 'start' | 'end') {
   if (type === 'start') {
-    const index = data.findIndex((value) => value != null);
+    const index = data.findIndex((value) => { throw new Error("STUB"); });
     return index < 0 ? undefined : index;
   }
-  const index = data.findLastIndex((value) => value != null);
+  const index = data.findLastIndex((value) => { throw new Error("STUB"); });
   return index < 0 ? undefined : index;
 }
 

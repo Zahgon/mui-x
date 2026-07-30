@@ -10,22 +10,10 @@ export function createRangePickerStepNavigation(
   return createStepNavigation({
     steps,
     isViewMatchingStep: (view, step) => {
-      if (step.rangePosition !== rangePositionResponse.rangePosition) {
-        return false;
-      }
-
-      return step.views == null || step.views.includes(view);
+        throw new Error("STUB");
     },
     onStepChange: ({ step, defaultView, setView, view, views }) => {
-      if (step.rangePosition !== rangePositionResponse.rangePosition) {
-        rangePositionResponse.setRangePosition(step.rangePosition);
-      }
-
-      const targetView =
-        step.views == null ? defaultView : step.views.find((viewBis) => views.includes(viewBis));
-      if (targetView !== view) {
-        setView(targetView);
-      }
+        throw new Error("STUB");
     },
   });
 }

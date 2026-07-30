@@ -13,57 +13,7 @@ export const CalendarGridRoot = React.forwardRef(function CalendarGridRoot(
   componentProps: CalendarGridRoot.Props,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {
-    // Rendering props
-    className,
-    render,
-    style,
-    // Internal props
-    id: idProp,
-    rowTypes = DEFAULT_ROW_TYPES,
-    rowsPerType: rowsPerTypeProp = DEFAULT_ROWS_PER_TYPE,
-    // Props forwarded to the DOM element
-    ...elementProps
-  } = componentProps;
-
-  const id = useId(idProp);
-  const rowsPerType = rowsPerTypeProp;
-
-  const rootRef = React.useRef<HTMLDivElement>(null);
-
-  const [focusedCell, setFocusedCellState] = React.useState<GridCellCoordinates | null>(null);
-
-  const setFocusedCell = React.useCallback((coordinates: GridCellCoordinates) => {
-    setFocusedCellState((prev) =>
-      prev?.rowType === coordinates.rowType &&
-      prev.rowIndex === coordinates.rowIndex &&
-      prev.columnIndex === coordinates.columnIndex
-        ? prev
-        : coordinates,
-    );
-  }, []);
-
-  const handleBlur = React.useCallback((event: React.FocusEvent<HTMLDivElement>) => {
-    if (!rootRef.current?.contains(event.relatedTarget as Node)) {
-      setFocusedCellState(null);
-    }
-  }, []);
-
-  const contextValue: CalendarGridRootContext = React.useMemo(
-    () => ({ id, focusedCell, setFocusedCell, rowTypes, rowsPerType }),
-    [id, focusedCell, setFocusedCell, rowTypes, rowsPerType],
-  );
-
-  const element = useRenderElement('div', componentProps, {
-    ref: [forwardedRef, rootRef],
-    props: [elementProps, { role: 'grid', id, onBlur: handleBlur }],
-  });
-
-  return (
-    <CalendarGridRootContext.Provider value={contextValue}>
-      {element}
-    </CalendarGridRootContext.Provider>
-  );
+    throw new Error("STUB");
 });
 
 export namespace CalendarGridRoot {

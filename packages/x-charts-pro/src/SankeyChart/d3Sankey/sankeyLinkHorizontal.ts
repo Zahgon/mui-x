@@ -3,11 +3,11 @@ import type { Link } from '@mui/x-charts-vendor/d3-shape';
 import type { SankeyExtraProperties, SankeyLink, SankeyNodeMinimal } from './sankey.types';
 
 function horizontalSource(d: SankeyLink<true, {}, {}>): [number, number] {
-  return [(d.source as SankeyNodeMinimal<{}, {}>).x1!, d.y0!];
+    throw new Error("STUB");
 }
 
 function horizontalTarget(d: SankeyLink<true, {}, {}>): [number, number] {
-  return [(d.target as SankeyNodeMinimal<{}, {}>).x0!, d.y1!];
+    throw new Error("STUB");
 }
 
 /**
@@ -34,7 +34,5 @@ export function sankeyLinkHorizontal<
   L extends SankeyExtraProperties,
 >(): Link<any, SankeyLink<true, N, L>, [number, number]>;
 export function sankeyLinkHorizontal() {
-  return linkHorizontal<SankeyLink<true, {}, {}>, [number, number]>()
-    .source(horizontalSource)
-    .target(horizontalTarget);
+    throw new Error("STUB");
 }

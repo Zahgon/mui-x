@@ -11,7 +11,5 @@ export function useBarWebGLPlotData(
   completedData: ProcessedBarSeriesData[],
   borderRadius: number,
 ): BarWebGLPlotData {
-  return useWebGLBarLikePlotData(drawingArea, completedData, borderRadius, {
-    highlightType: 'bar',
-  });
+    throw new Error("STUB");
 }

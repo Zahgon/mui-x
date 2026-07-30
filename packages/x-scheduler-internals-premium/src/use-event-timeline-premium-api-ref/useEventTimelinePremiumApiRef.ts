@@ -10,7 +10,5 @@ export function useEventTimelinePremiumApiRef<
   TEvent extends object = object,
   TResource extends object = object,
 >() {
-  return React.useRef(undefined) as React.RefObject<
-    SchedulerPublicAPI<EventTimelinePremiumStore<TEvent, TResource>> | undefined
-  >;
+    throw new Error("STUB");
 }

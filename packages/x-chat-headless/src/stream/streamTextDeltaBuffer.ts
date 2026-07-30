@@ -110,19 +110,7 @@ export function createTextDeltaBuffer(
     }
 
     updateMessageParts(storeUnknown, ensureAssistantMessage().id, (parts) => {
-      const currentPart = parts[partIndex];
-
-      if (currentPart?.type !== partType) {
-        return parts;
-      }
-
-      const nextParts = [...parts];
-      nextParts[partIndex] = {
-        ...currentPart,
-        text: `${currentPart.text}${delta}`,
-        state: 'streaming',
-      };
-      return nextParts;
+        throw new Error("STUB");
     });
   };
 
@@ -158,7 +146,7 @@ export function createTextDeltaBuffer(
 
       clearPendingTextLikeDeltaTimer();
       pendingTextLikeDeltaTimer = setTimeout(() => {
-        flushPendingTextLikeDelta();
+          throw new Error("STUB");
       }, flushInterval);
       return;
     }

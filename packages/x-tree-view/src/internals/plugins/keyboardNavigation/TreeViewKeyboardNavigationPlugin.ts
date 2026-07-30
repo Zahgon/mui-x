@@ -31,85 +31,21 @@ export class TreeViewKeyboardNavigationPlugin {
   // We can't type `store`, otherwise we get the following TS error:
   // 'keyboardNavigation' implicitly has type 'any' because it does not have a type annotation and is referenced directly or indirectly in its own initializer.
   constructor(store: any) {
-    this.store = store;
-
-    this.labelMap = createLabelMapFromItemMetaLookup(
-      itemsSelectors.itemMetaLookup(this.store.state),
-    );
-
-    // Whenever the itemMetaLookup changes, we need to regen the label map.
-    this.store.registerStoreEffect(itemsSelectors.itemMetaLookup, (_, itemMetaLookup) => {
-      if (this.store.shouldIgnoreItemsStateUpdate()) {
-        return;
-      }
-
-      this.labelMap = createLabelMapFromItemMetaLookup(itemMetaLookup);
-    });
+      throw new Error("STUB");
   }
 
   private canToggleItemSelection = (itemId: TreeViewItemId) =>
-    selectionSelectors.canItemBeSelected(this.store.state, itemId);
+    { throw new Error("STUB"); };
 
   private canToggleItemExpansion = (itemId: TreeViewItemId) => {
-    return (
-      !itemsSelectors.isItemDisabled(this.store.state, itemId) &&
-      expansionSelectors.isItemExpandable(this.store.state, itemId)
-    );
+      throw new Error("STUB");
   };
 
   private getFirstItemMatchingTypeaheadQuery = (
     itemId: TreeViewItemId,
     newKey: string,
   ): TreeViewItemId | null => {
-    const getNextItem = (itemIdToCheck: TreeViewItemId) => {
-      const nextItemId = getNextNavigableItem(this.store.state, itemIdToCheck);
-      // We reached the end of the tree, check from the beginning
-      if (nextItemId === null) {
-        return getFirstNavigableItem(this.store.state);
-      }
-
-      return nextItemId;
-    };
-
-    const getNextMatchingItemId = (query: string): TreeViewItemId | null => {
-      let matchingItemId: TreeViewItemId | null = null;
-      const checkedItems: Record<TreeViewItemId, true> = {};
-      // If query length > 1, first check if current item matches
-      let currentItemId: TreeViewItemId = query.length > 1 ? itemId : getNextItem(itemId);
-      // The "!checkedItems[currentItemId]" condition avoids an infinite loop when there is no matching item.
-      while (matchingItemId == null && !checkedItems[currentItemId]) {
-        const itemLabel = this.labelMap[currentItemId];
-
-        if (itemLabel?.startsWith(query)) {
-          matchingItemId = currentItemId;
-        } else {
-          checkedItems[currentItemId] = true;
-          currentItemId = getNextItem(currentItemId);
-        }
-      }
-      return matchingItemId;
-    };
-
-    const cleanNewKey = newKey.toLowerCase();
-
-    // Try matching with accumulated query + new key
-    const concatenatedQuery = `${this.typeaheadQuery}${cleanNewKey}`;
-
-    // check if the entire typed query matches an item
-    const concatenatedQueryMatchingItemId = getNextMatchingItemId(concatenatedQuery);
-    if (concatenatedQueryMatchingItemId != null) {
-      this.typeaheadQuery = concatenatedQuery;
-      return concatenatedQueryMatchingItemId;
-    }
-
-    const newKeyMatchingItemId = getNextMatchingItemId(cleanNewKey);
-    if (newKeyMatchingItemId != null) {
-      this.typeaheadQuery = cleanNewKey;
-      return newKeyMatchingItemId;
-    }
-
-    this.typeaheadQuery = '';
-    return null;
+      throw new Error("STUB");
   };
 
   /**
@@ -119,7 +55,7 @@ export class TreeViewKeyboardNavigationPlugin {
    * @param {(map: TreeViewLabelMap) => TreeViewLabelMap} updater The function to update the map.
    */
   public updateLabelMap = (callback: (labelMap: TreeViewLabelMap) => TreeViewLabelMap) => {
-    this.labelMap = callback(this.labelMap);
+      throw new Error("STUB");
   };
 
   // ARIA specification: https://www.w3.org/WAI/ARIA/apg/patterns/treeview/#keyboardinteraction
@@ -339,7 +275,7 @@ export class TreeViewKeyboardNavigationPlugin {
         }
 
         this.store.timeoutManager.startTimeout('typeahead', TYPEAHEAD_TIMEOUT, () => {
-          this.typeaheadQuery = '';
+            throw new Error("STUB");
         });
         break;
       }
@@ -354,13 +290,5 @@ function isPrintableKey(string: string) {
 function createLabelMapFromItemMetaLookup(itemMetaLookup: {
   [itemId: string]: TreeViewItemMeta;
 }): TreeViewLabelMap {
-  const labelMap: { [itemId: string]: string } = {};
-
-  const processItem = (item: TreeViewItemMeta) => {
-    labelMap[item.id] = item.label!.toLowerCase();
-  };
-
-  Object.values(itemMetaLookup).forEach(processItem);
-
-  return labelMap;
+    throw new Error("STUB");
 }

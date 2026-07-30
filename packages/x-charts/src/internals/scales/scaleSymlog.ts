@@ -56,96 +56,16 @@ export function scaleSymlog(...args: any[]): ScaleSymLog<any, any, any> {
 
   // Workaround for https://github.com/d3/d3-scale/issues/162
   scale.ticks = (count?: number) => {
-    const ticks = originalTicks(count);
-    const constant = scale.constant();
-    let negativeLogTickCount = 0;
-    let linearTickCount = 0;
-    let positiveLogTickCount = 0;
-
-    ticks.forEach((tick) => {
-      if (tick > -constant && tick < constant) {
-        linearTickCount += 1;
-      }
-
-      if (tick <= -constant) {
-        negativeLogTickCount += 1;
-      }
-
-      if (tick >= constant) {
-        positiveLogTickCount += 1;
-      }
-    });
-
-    const finalTicks: number[] = [];
-
-    if (negativeLogTickCount > 0) {
-      finalTicks.push(...negativeScale.ticks(negativeLogTickCount));
-    }
-
-    if (linearTickCount > 0) {
-      const linearTicks = linearScale.ticks(linearTickCount);
-
-      if (finalTicks.at(-1) === linearTicks[0]) {
-        finalTicks.push(...linearTicks.slice(1));
-      } else {
-        finalTicks.push(...linearTicks);
-      }
-    }
-
-    if (positiveLogTickCount > 0) {
-      const positiveTicks = positiveScale.ticks(positiveLogTickCount);
-
-      if (finalTicks.at(-1) === positiveTicks[0]) {
-        finalTicks.push(...positiveTicks.slice(1));
-      } else {
-        finalTicks.push(...positiveTicks);
-      }
-    }
-
-    return finalTicks;
+      throw new Error("STUB");
   };
 
   scale.tickFormat = (count: number = 10, specifier?: string) => {
-    // Calculates the proportion of the domain that each scale occupies, and use that ratio to determine the number of ticks for each scale.
-    const constant = scale.constant();
-    const [start, end] = scale.domain();
-    const extent = end - start;
-
-    const negativeScaleDomain = negativeScale.domain();
-    const negativeScaleExtent = negativeScaleDomain[1] - negativeScaleDomain[0];
-    const negativeScaleRatio = extent === 0 ? 0 : negativeScaleExtent / extent;
-    const negativeScaleTickCount = negativeScaleRatio * count;
-
-    const linearScaleDomain = linearScale.domain();
-    const linearScaleExtent = linearScaleDomain[1] - linearScaleDomain[0];
-    const linearScaleRatio = extent === 0 ? 0 : linearScaleExtent / extent;
-    const linearScaleTickCount = linearScaleRatio * count;
-
-    const positiveScaleDomain = positiveScale.domain();
-    const positiveScaleExtent = positiveScaleDomain[1] - positiveScaleDomain[0];
-    const positiveScaleRatio = extent === 0 ? 0 : positiveScaleExtent / extent;
-    const positiveScaleTickCount = positiveScaleRatio * count;
-
-    const negativeTickFormat = negativeScale.tickFormat(negativeScaleTickCount, specifier);
-    const linearTickFormat = linearScale.tickFormat(linearScaleTickCount, specifier);
-    const positiveTickFormat = positiveScale.tickFormat(positiveScaleTickCount, specifier);
-
-    return (tick: NumberValue) => {
-      const tickFormat =
-        // eslint-disable-next-line no-nested-ternary
-        tick.valueOf() <= -constant
-          ? negativeTickFormat
-          : tick.valueOf() >= constant
-            ? positiveTickFormat
-            : linearTickFormat;
-
-      return tickFormat(tick);
-    };
+      throw new Error("STUB");
   };
 
   /* Adaptation of https://github.com/d3/d3-scale/blob/d6904a4bde09e16005e0ad8ca3e25b10ce54fa0d/src/symlog.js#L30 */
   scale.copy = () => {
-    return scaleSymlog(scale.domain(), scale.range()).constant(scale.constant());
+      throw new Error("STUB");
   };
 
   return scale;

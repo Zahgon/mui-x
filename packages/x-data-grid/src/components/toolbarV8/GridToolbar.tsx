@@ -129,20 +129,7 @@ function GridToolbar(props: GridToolbarProps) {
           {!rootProps.disableColumnFilter && (
             <rootProps.slots.baseTooltip title={apiRef.current.getLocaleText('toolbarFilters')}>
               <FilterPanelTrigger
-                render={(triggerProps, state) => (
-                  <ToolbarButton
-                    {...triggerProps}
-                    color={state.filterCount > 0 ? 'primary' : 'default'}
-                  >
-                    <rootProps.slots.baseBadge
-                      badgeContent={state.filterCount}
-                      color="primary"
-                      variant="dot"
-                    >
-                      <rootProps.slots.openFilterButtonIcon fontSize="small" />
-                    </rootProps.slots.baseBadge>
-                  </ToolbarButton>
-                )}
+                render={(triggerProps, state) => { throw new Error("STUB"); }}
               />
             </rootProps.slots.baseTooltip>
           )}
@@ -165,7 +152,7 @@ function GridToolbar(props: GridToolbarProps) {
               aria-controls={exportMenuId}
               aria-haspopup="true"
               aria-expanded={exportMenuOpen ? 'true' : undefined}
-              onClick={() => setExportMenuOpen(!exportMenuOpen)}
+              onClick={() => { throw new Error("STUB"); }}
             >
               <rootProps.slots.exportIcon fontSize="small" />
             </ToolbarButton>

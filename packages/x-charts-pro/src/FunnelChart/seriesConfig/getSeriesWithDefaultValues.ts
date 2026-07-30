@@ -9,10 +9,7 @@ const getSeriesWithDefaultValues: GetSeriesWithDefaultValues<'funnel'> = (
     ...seriesData,
     id: seriesData.id ?? `auto-generated-id-${seriesIndex}`,
     borderRadius: seriesData.borderRadius ?? 8,
-    data: seriesData.data.map((d, index) => ({
-      ...d,
-      color: d.color ?? colors[index % colors.length],
-    })),
+    data: seriesData.data.map((d, index) => { throw new Error("STUB"); }),
   };
 };
 

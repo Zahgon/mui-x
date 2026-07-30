@@ -21,24 +21,7 @@ interface PieArcLabelOwnerState {
 const PieArcLabelRoot = styled('text', {
   name: 'MuiPieArcLabel',
   slot: 'Root',
-})(({ theme }) => ({
-  fill: (theme.vars || theme).palette.text.primary,
-  textAnchor: 'middle',
-  dominantBaseline: 'middle',
-  pointerEvents: 'none',
-  animationName: 'animate-opacity',
-  animationDuration: '0s',
-  animationTimingFunction: ANIMATION_TIMING_FUNCTION,
-  transitionDuration: `${ANIMATION_DURATION_MS}ms`,
-  transitionProperty: 'opacity',
-  transitionTimingFunction: ANIMATION_TIMING_FUNCTION,
-  [`&.${pieClasses.animate}`]: {
-    animationDuration: `${ANIMATION_DURATION_MS}ms`,
-  },
-  '@keyframes animate-opacity': {
-    from: { opacity: 0 },
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 export type PieArcLabelProps = PieArcLabelOwnerState &
   Omit<React.SVGProps<SVGTextElement>, 'ref' | 'color'> & {
@@ -54,57 +37,8 @@ export type PieArcLabelProps = PieArcLabelOwnerState &
 
 const PieArcLabel = React.forwardRef<SVGTextElement, PieArcLabelProps>(
   function PieArcLabel(props, ref) {
-    const {
-      seriesId,
-      classes: innerClasses,
-      color,
-      startAngle,
-      endAngle,
-      paddingAngle,
-      arcLabelRadius,
-      cornerRadius,
-      formattedArcLabel,
-      isHighlighted,
-      isFaded,
-      skipAnimation,
-      hidden,
-      className,
-      ...other
-    } = props;
-
-    const ownerState = {
-      seriesId,
-      classes: innerClasses,
-      color,
-      isFaded,
-      isHighlighted,
-      skipAnimation,
-    };
-    const classes = useUtilityClasses(ownerState);
-
-    const animatedProps = useAnimatePieArcLabel({
-      cornerRadius,
-      startAngle,
-      endAngle,
-      arcLabelRadius,
-      paddingAngle,
-      skipAnimation,
-      ref,
-    });
-
-    return (
-      <PieArcLabelRoot
-        className={clsx(classes.arcLabel, className)}
-        data-highlighted={isHighlighted || undefined}
-        data-faded={isFaded || undefined}
-        {...other}
-        {...animatedProps}
-        opacity={hidden ? 0 : 1}
-      >
-        {formattedArcLabel}
-      </PieArcLabelRoot>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 PieArcLabel.propTypes /* remove-proptypes */ = {

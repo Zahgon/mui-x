@@ -125,59 +125,12 @@ const Root = styled('div', {
   name: 'MuiChartsWrapper',
   slot: 'Root',
   shouldForwardProp: (prop) =>
-    shouldForwardProp(prop) && prop !== 'extendVertically' && prop !== 'width',
+    { throw new Error("STUB"); },
 })<{ ownerState: ChartsWrapperOwnerState; extendVertically: boolean; width?: number }>(({
   ownerState,
   width,
 }) => {
-  const gridTemplateColumns = getTemplateColumns(
-    ownerState.hideLegend,
-    ownerState.legendDirection,
-    ownerState.legendPosition?.horizontal,
-    width,
-  );
-  const gridTemplateRows = getTemplateRows(
-    ownerState.hideLegend,
-    ownerState.legendDirection,
-    ownerState.legendPosition?.vertical,
-  );
-  const gridTemplateAreas = getGridTemplateAreas(
-    ownerState.hideLegend,
-    ownerState.legendDirection,
-    ownerState.legendPosition,
-  );
-  return {
-    variants: [
-      {
-        props: { extendVertically: true },
-        style: {
-          height: '100%',
-          minHeight: 0,
-        },
-      },
-    ],
-    flex: 1,
-    display: 'grid',
-    gridTemplateColumns,
-    gridTemplateRows,
-    gridTemplateAreas,
-    [`&:has(.${chartsToolbarClasses.root})`]: {
-      // Add a row for toolbar if there is one.
-      gridTemplateRows: `auto ${gridTemplateRows}`,
-      gridTemplateAreas: `"${gridTemplateColumns
-        .split(' ')
-        .map(() => 'toolbar')
-        .join(' ')}"
-        ${gridTemplateAreas}`,
-    },
-    [`& .${chartsToolbarClasses.root}`]: {
-      gridArea: 'toolbar',
-      justifySelf: 'center',
-    },
-    justifyContent: 'safe center',
-    justifyItems: getJustifyItems(ownerState.legendPosition),
-    alignItems: getAlignItems(ownerState.legendPosition),
-  };
+    throw new Error("STUB");
 });
 
 /**
@@ -186,46 +139,8 @@ const Root = styled('div', {
  */
 const ChartsWrapper = React.forwardRef<HTMLDivElement, ChartsWrapperProps>(
   function ChartsWrapper(props, ref) {
-    const {
-      children,
-      sx,
-      extendVertically,
-      hideLegend,
-      legendDirection,
-      legendPosition,
-      ...other
-    } = props;
-
-    const chartRootRef = useChartRootRef();
-    const handleRef = useForkRef(chartRootRef, ref);
-
-    const store = useStore();
-
-    const propsWidth = store.use(selectorChartPropsWidth);
-    const propsHeight = store.use(selectorChartPropsHeight);
-
-    const ownerState = React.useMemo(
-      () => ({
-        hideLegend,
-        legendDirection,
-        legendPosition,
-      }),
-      [hideLegend, legendDirection, legendPosition],
-    );
-
-    return (
-      <Root
-        ref={handleRef}
-        ownerState={ownerState}
-        sx={sx}
-        extendVertically={extendVertically ?? propsHeight === undefined}
-        width={propsWidth}
-        {...other}
-      >
-        {children}
-      </Root>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChartsWrapper.propTypes /* remove-proptypes */ = {

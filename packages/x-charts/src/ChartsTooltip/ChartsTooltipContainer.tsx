@@ -40,8 +40,8 @@ import { useChartsLayerContainerRef } from '../hooks';
 import { selectorBrushShouldPreventTooltip } from '../internals/plugins/featurePlugins/useChartBrush';
 import type { UseChartInteractionSignature } from '../internals/plugins/featurePlugins/useChartInteraction/useChartInteraction.types';
 
-const selectorReturnFalse = () => false;
-const selectorReturnNull = () => null;
+const selectorReturnFalse = () => { throw new Error("STUB"); };
+const selectorReturnNull = () => { throw new Error("STUB"); };
 
 function getIsOpenSelector(
   trigger: TriggerOptions,
@@ -141,10 +141,7 @@ export interface ChartsTooltipContainerProps<
 const ChartsTooltipRoot = styled(Popper, {
   name: 'MuiChartsTooltip',
   slot: 'Root',
-})(({ theme }) => ({
-  pointerEvents: 'none',
-  zIndex: theme.zIndex.modal,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 /**
  * Demos:
@@ -207,7 +204,7 @@ function ChartsTooltipContainer(inProps: ChartsTooltipContainerProps) {
   const isFineMainPointer = useIsFineMainPointer();
 
   const popperRef: PopperProps['popperRef'] = React.useRef(null);
-  const positionRef = useLazyRef(() => ({ x: 0, y: 0 }));
+  const positionRef = useLazyRef(() => { throw new Error("STUB"); });
 
   const axisSystem = useAxisSystem();
 
@@ -233,57 +230,15 @@ function ChartsTooltipContainer(inProps: ChartsTooltipContainerProps) {
   const isTooltipNodeAnchored = itemPosition !== null;
 
   React.useEffect(() => {
-    const svgElement = chartsLayerContainerRef.current;
-    if (svgElement === null) {
-      return () => {};
-    }
-
-    if (isTooltipNodeAnchored) {
-      // Tooltip position is already handled by the anchor element
-      return undefined;
-    }
-
-    const pointerUpdate = rafThrottle((x: number, y: number) => {
-      // eslint-disable-next-line react-compiler/react-compiler
-      positionRef.current = { x, y };
-      popperRef.current?.update();
-    });
-
-    const handlePointerEvent = (event: PointerEvent) => {
-      pointerUpdate(event.clientX, event.clientY);
-    };
-
-    svgElement.addEventListener('pointermove', handlePointerEvent);
-    svgElement.addEventListener('pointerenter', handlePointerEvent);
-
-    return () => {
-      svgElement.removeEventListener('pointermove', handlePointerEvent);
-      svgElement.removeEventListener('pointerenter', handlePointerEvent);
-      pointerUpdate.clear();
-    };
+      throw new Error("STUB");
   }, [chartsLayerContainerRef, positionRef, isTooltipNodeAnchored]);
 
   useEnhancedEffect(() => {
-    if (!isTooltipNodeAnchored) {
-      return;
-    }
-    popperRef.current?.update();
+      throw new Error("STUB");
   }, [isTooltipNodeAnchored, itemPosition?.x, itemPosition?.y]);
 
   const pointerAnchorEl = React.useMemo(
-    () => ({
-      getBoundingClientRect: () => ({
-        x: positionRef.current.x,
-        y: positionRef.current.y,
-        top: positionRef.current.y,
-        left: positionRef.current.x,
-        right: positionRef.current.x,
-        bottom: positionRef.current.y,
-        width: 0,
-        height: 0,
-        toJSON: () => '',
-      }),
-    }),
+    () => { throw new Error("STUB"); },
     [positionRef],
   );
 
@@ -291,31 +246,7 @@ function ChartsTooltipContainer(inProps: ChartsTooltipContainerProps) {
   const isTouch = pointerType === 'touch' || !isFineMainPointer;
 
   const modifiers = React.useMemo(
-    () => [
-      {
-        name: 'offset',
-        options: {
-          offset: () => {
-            if (isTouch && !isTooltipNodeAnchored) {
-              return [0, 64];
-            }
-            // The popper offset: [skidding, distance]
-            return [0, 8];
-          },
-        },
-      },
-      ...(!isMouse
-        ? [
-            {
-              name: 'flip',
-              options: {
-                fallbackPlacements: ['top-end', 'top-start', 'bottom-end', 'bottom'],
-              },
-            },
-          ]
-        : []), // Keep default behavior
-      { name: 'preventOverflow', options: { altAxis: true } },
-    ],
+    () => { throw new Error("STUB"); },
     [isMouse, isTooltipNodeAnchored, isTouch],
   );
 
@@ -417,14 +348,8 @@ ChartsTooltipContainer.propTypes /* remove-proptypes */ = {
    */
   container: PropTypes.oneOfType([
     (props, propName) => {
-      if (props[propName] == null) {
-        return new Error(`Prop '${propName}' is required but wasn't specified`);
-      }
-      if (typeof props[propName] !== 'object' || props[propName].nodeType !== 1) {
-        return new Error(`Expected prop '${propName}' to be of type Element`);
-      }
-      return null;
-    },
+          throw new Error("STUB");
+      },
     PropTypes.func,
   ]),
   /**

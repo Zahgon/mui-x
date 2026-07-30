@@ -19,8 +19,8 @@ import {
   selectorChartRotationAxis,
 } from './useChartPolarAxis.selectors';
 
-const optionalGetAxisId = (_: unknown, id?: AxisId) => id;
-const optionalGetAxisIds = (_: unknown, ids: AxisId[]) => ids;
+const optionalGetAxisId = (_: unknown, id?: AxisId) => { throw new Error("STUB"); };
+const optionalGetAxisIds = (_: unknown, ids: AxisId[]) => { throw new Error("STUB"); };
 
 /**
  * Get interaction indexes
@@ -59,12 +59,12 @@ function indexGetter(
   if (type === 'rotation') {
     const rotationAxes = axes as ComputeResult<ChartsRotationAxisProps>;
     return Array.isArray(ids)
-      ? ids.map((id) => getRotationAxisIndex(rotationAxes.axis[id], value))
+      ? ids.map((id) => { throw new Error("STUB"); })
       : getRotationAxisIndex(rotationAxes.axis[ids], value);
   }
   const radiusAxes = axes as ComputeResult<ChartsRadiusAxisProps>;
   return Array.isArray(ids)
-    ? ids.map((id) => getRadiusAxisIndex(radiusAxes.axis[id], value))
+    ? ids.map((id) => { throw new Error("STUB"); })
     : getRadiusAxisIndex(radiusAxes.axis[ids], value);
 }
 
@@ -78,10 +78,7 @@ const selectorChartsInteractionRotationAngle = createSelector(
   selectorChartsInteractionPointerY,
   selectorChartPolarCenter,
   (x, y, center) => {
-    if (x === null || y === null) {
-      return null;
-    }
-    return generateSvg2rotation(center)(x, y);
+      throw new Error("STUB");
   },
 );
 
@@ -90,9 +87,7 @@ export const selectorChartsInteractionRotationAxisIndex = createSelector(
   selectorChartRotationAxis,
   optionalGetAxisId,
   (rotation, rotationAxis, id) =>
-    rotation === null
-      ? null
-      : indexGetter(rotation, rotationAxis, id ?? rotationAxis.axisIds[0], 'rotation'),
+    { throw new Error("STUB"); },
 );
 
 export const selectorChartsInteractionRotationAxisIndexes = createSelector(
@@ -100,9 +95,7 @@ export const selectorChartsInteractionRotationAxisIndexes = createSelector(
   selectorChartRotationAxis,
   optionalGetAxisIds,
   (rotation, rotationAxis, ids) =>
-    rotation === null
-      ? null
-      : indexGetter(rotation, rotationAxis, ids ?? rotationAxis.axisIds, 'rotation'),
+    { throw new Error("STUB"); },
 );
 
 export const selectorChartsInteractionRotationAxisValue = createSelector(
@@ -110,16 +103,7 @@ export const selectorChartsInteractionRotationAxisValue = createSelector(
   selectorChartsInteractionRotationAxisIndex,
   optionalGetAxisId,
   (rotationAxis, rotationIndex, id) => {
-    id = id ?? rotationAxis.axisIds[0];
-    if (rotationIndex === null || rotationIndex === -1 || rotationAxis.axisIds.length === 0) {
-      return null;
-    }
-
-    const data = rotationAxis.axis[id]?.data;
-    if (!data) {
-      return null;
-    }
-    return data[rotationIndex];
+      throw new Error("STUB");
   },
 );
 
@@ -128,18 +112,7 @@ export const selectorChartsInteractionRotationAxisValues = createSelector(
   selectorChartsInteractionRotationAxisIndexes,
   optionalGetAxisIds,
   (rotationAxis, rotationIndexes, ids) => {
-    ids = ids ?? rotationAxis.axisIds;
-    if (rotationIndexes === null) {
-      return null;
-    }
-
-    return ids.map((id, axisIndex) => {
-      const rotationIndex = rotationIndexes[axisIndex];
-      if (rotationIndex === -1) {
-        return null;
-      }
-      return rotationAxis.axis[id].data?.[rotationIndex];
-    });
+      throw new Error("STUB");
   },
 );
 
@@ -154,16 +127,7 @@ export const selectorChartsInteractionTooltipRotationAxes = createSelectorMemoiz
     resultEqualityCheck: isDeepEqual,
   },
 })(selectorChartsInteractionRotationAxisIndexes, selectorChartRotationAxis, (indexes, axes) => {
-  if (indexes === null) {
-    return [];
-  }
-
-  return axes.axisIds
-    .map((axisId, axisIndex): AxisItemIdentifier => ({
-      axisId,
-      dataIndex: indexes[axisIndex],
-    }))
-    .filter(({ axisId, dataIndex }) => axes.axis[axisId].triggerTooltip && dataIndex >= 0);
+    throw new Error("STUB");
 });
 
 // ============================= Radius axis =============================
@@ -176,10 +140,7 @@ export const selectorChartsInteractionRadius = createSelector(
   selectorChartsInteractionPointerY,
   selectorChartPolarCenter,
   (x, y, center) => {
-    if (x === null || y === null) {
-      return null;
-    }
-    return Math.sqrt((x - center.cx) ** 2 + (y - center.cy) ** 2);
+      throw new Error("STUB");
   },
 );
 export const selectorChartsInteractionRadiusAxisIndex = createSelector(
@@ -187,7 +148,7 @@ export const selectorChartsInteractionRadiusAxisIndex = createSelector(
   selectorChartRadiusAxis,
   optionalGetAxisId,
   (radius, radiusAxis, id) =>
-    radius === null ? null : indexGetter(radius, radiusAxis, id ?? radiusAxis.axisIds[0], 'radius'),
+    { throw new Error("STUB"); },
 );
 
 export const selectorChartsInteractionRadiusAxisIndexes = createSelector(
@@ -195,7 +156,7 @@ export const selectorChartsInteractionRadiusAxisIndexes = createSelector(
   selectorChartRadiusAxis,
   optionalGetAxisIds,
   (radius, radiusAxis, ids) =>
-    radius === null ? null : indexGetter(radius, radiusAxis, ids ?? radiusAxis.axisIds, 'radius'),
+    { throw new Error("STUB"); },
 );
 
 export const selectorChartsInteractionRadiusAxisValue = createSelector(
@@ -203,16 +164,7 @@ export const selectorChartsInteractionRadiusAxisValue = createSelector(
   selectorChartsInteractionRadiusAxisIndex,
   optionalGetAxisId,
   (radiusAxis, radiusIndex, id) => {
-    id = id ?? radiusAxis.axisIds[0];
-    if (radiusIndex === null || radiusIndex === -1 || radiusAxis.axisIds.length === 0) {
-      return null;
-    }
-
-    const data = radiusAxis.axis[id]?.data;
-    if (!data) {
-      return null;
-    }
-    return data[radiusIndex];
+      throw new Error("STUB");
   },
 );
 
@@ -221,18 +173,7 @@ export const selectorChartsInteractionRadiusAxisValues = createSelector(
   selectorChartsInteractionRadiusAxisIndexes,
   optionalGetAxisIds,
   (radiusAxis, radiusIndexes, ids) => {
-    ids = ids ?? radiusAxis.axisIds;
-    if (radiusIndexes === null) {
-      return null;
-    }
-
-    return ids.map((id, axisIndex) => {
-      const radiusIndex = radiusIndexes[axisIndex];
-      if (radiusIndex === -1) {
-        return null;
-      }
-      return radiusAxis.axis[id].data?.[radiusIndex];
-    });
+      throw new Error("STUB");
   },
 );
 
@@ -247,16 +188,7 @@ export const selectorChartsInteractionTooltipRadiusAxes = createSelectorMemoized
     resultEqualityCheck: isDeepEqual,
   },
 })(selectorChartsInteractionRadiusAxisIndexes, selectorChartRadiusAxis, (indexes, axes) => {
-  if (indexes === null) {
-    return [];
-  }
-
-  return axes.axisIds
-    .map((axisId, axisIndex): AxisItemIdentifier => ({
-      axisId,
-      dataIndex: indexes[axisIndex],
-    }))
-    .filter(({ axisId, dataIndex }) => axes.axis[axisId].triggerTooltip && dataIndex >= 0);
+    throw new Error("STUB");
 });
 
 // ============================= Cross axes selectors =============================
@@ -267,5 +199,5 @@ export const selectorChartsInteractionTooltipRadiusAxes = createSelectorMemoized
 export const selectorChartsInteractionPolarAxisTooltip = createSelector(
   selectorChartsInteractionTooltipRotationAxes,
   selectorChartsInteractionTooltipRadiusAxes,
-  (rotationTooltip, radiusTooltip) => rotationTooltip.length > 0 || radiusTooltip.length > 0,
+  (rotationTooltip, radiusTooltip) => { throw new Error("STUB"); },
 );

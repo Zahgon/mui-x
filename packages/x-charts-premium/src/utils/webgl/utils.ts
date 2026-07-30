@@ -3,21 +3,11 @@ export function compileShader(
   shaderSource: string,
   shaderType: WebGL2RenderingContext['FRAGMENT_SHADER'] | WebGL2RenderingContext['VERTEX_SHADER'],
 ) {
-  const shader = gl.createShader(shaderType)!;
-  gl.shaderSource(shader, shaderSource);
-  gl.compileShader(shader);
-
-  return shader;
+    throw new Error("STUB");
 }
 
 export function uploadQuadBuffer(gl: WebGL2RenderingContext) {
-  const quadVertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
-
-  const buffer = gl.createBuffer();
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-  gl.bufferData(gl.ARRAY_BUFFER, quadVertices, gl.STATIC_DRAW);
-
-  return buffer;
+    throw new Error("STUB");
 }
 
 export function bindQuadBuffer(
@@ -25,11 +15,7 @@ export function bindQuadBuffer(
   program: WebGLProgram,
   quadBuffer: WebGLBuffer,
 ) {
-  gl.bindBuffer(gl.ARRAY_BUFFER, quadBuffer);
-
-  const aPosition = gl.getAttribLocation(program, 'a_position');
-  gl.enableVertexAttribArray(aPosition);
-  gl.vertexAttribPointer(aPosition, 2, gl.FLOAT, false, 0, 0);
+    throw new Error("STUB");
 }
 
 export type GrowableBuffer = {
@@ -41,7 +27,7 @@ export type GrowableBuffer = {
 };
 
 export function createGrowableBuffer(gl: WebGL2RenderingContext): GrowableBuffer {
-  return { buffer: gl.createBuffer(), capacity: 0, lastUploaded: null };
+    throw new Error("STUB");
 }
 
 /**
@@ -55,17 +41,7 @@ export function uploadGrowableBuffer(
   target: GrowableBuffer,
   data: ArrayBufferView,
 ) {
-  if (target.lastUploaded === data) {
-    return;
-  }
-  gl.bindBuffer(gl.ARRAY_BUFFER, target.buffer);
-  if (data.byteLength <= target.capacity) {
-    gl.bufferSubData(gl.ARRAY_BUFFER, 0, data);
-  } else {
-    gl.bufferData(gl.ARRAY_BUFFER, data, gl.DYNAMIC_DRAW);
-    target.capacity = data.byteLength;
-  }
-  target.lastUploaded = data;
+    throw new Error("STUB");
 }
 
 /**
@@ -86,8 +62,7 @@ export function logWebGLErrors(gl: WebGL2RenderingContext) {
 
 /** Enables the standard non-premultiplied src-alpha blending used by all premium WebGL renderers. */
 export function setupStandardBlending(gl: WebGL2RenderingContext) {
-  gl.enable(gl.BLEND);
-  gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+    throw new Error("STUB");
 }
 
 /**
@@ -100,10 +75,7 @@ export function ensurePool<T extends { length: number }>(
   length: number,
   Ctor: new (length: number) => T,
 ): T {
-  if (existing != null && existing.length >= length) {
-    return existing;
-  }
-  return new Ctor(length);
+    throw new Error("STUB");
 }
 
 export interface LinkedProgram {
@@ -121,20 +93,5 @@ export function linkProgram(
   vertexShaderSource: string,
   fragmentShaderSource: string,
 ): LinkedProgram {
-  const program = gl.createProgram();
-  const vertexShader = compileShader(gl, vertexShaderSource, gl.VERTEX_SHADER);
-  const fragmentShader = compileShader(gl, fragmentShaderSource, gl.FRAGMENT_SHADER);
-  gl.attachShader(program, vertexShader);
-  gl.attachShader(program, fragmentShader);
-  gl.linkProgram(program);
-
-  if (process.env.NODE_ENV !== 'production' && !gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    // WebGL best-practices: consult compile/link status only in dev mode
-    // https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API/WebGL_best_practices#dont_check_shader_compile_status_unless_linking_fails
-    console.error(`Program linking failed: ${gl.getProgramInfoLog(program)}`);
-    console.error(`Vertex shader info-log: ${gl.getShaderInfoLog(vertexShader)}`);
-    console.error(`Fragment shader info-log: ${gl.getShaderInfoLog(fragmentShader)}`);
-  }
-
-  return { program, shaders: [vertexShader, fragmentShader] };
+    throw new Error("STUB");
 }

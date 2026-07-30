@@ -53,58 +53,10 @@ function PiePlot(props: PiePlotProps) {
   return (
     <g className={clsx(classes.root, className)}>
       {seriesOrder.map((seriesId) => {
-        const { cornerRadius, paddingAngle, data, highlighted, faded } = series[seriesId];
-
-        return (
-          <g
-            key={seriesId}
-            className={classes.series}
-            transform={`translate(${seriesLayout[seriesId].center.x}, ${seriesLayout[seriesId].center.y})`}
-            data-series={seriesId}
-          >
-            <PieArcPlot
-              innerRadius={seriesLayout[seriesId].radius.inner}
-              outerRadius={seriesLayout[seriesId].radius.outer}
-              cornerRadius={cornerRadius}
-              paddingAngle={paddingAngle}
-              seriesId={seriesId}
-              data={data}
-              skipAnimation={skipAnimation}
-              highlighted={highlighted}
-              faded={faded}
-              onItemClick={onItemClick}
-              slots={slots}
-              slotProps={slotProps}
-            />
-          </g>
-        );
+          throw new Error("STUB");
       })}
       {seriesOrder.map((seriesId) => {
-        const { cornerRadius, paddingAngle, arcLabel, arcLabelMinAngle, data } = series[seriesId];
-
-        return (
-          <g
-            key={seriesId}
-            className={classes.seriesLabels}
-            transform={`translate(${seriesLayout[seriesId].center.x}, ${seriesLayout[seriesId].center.y})`}
-            data-series={seriesId}
-          >
-            <PieArcLabelPlot
-              innerRadius={seriesLayout[seriesId].radius.inner}
-              outerRadius={seriesLayout[seriesId].radius.outer}
-              arcLabelRadius={seriesLayout[seriesId].radius.label}
-              cornerRadius={cornerRadius}
-              paddingAngle={paddingAngle}
-              seriesId={seriesId}
-              data={data}
-              skipAnimation={skipAnimation}
-              arcLabel={arcLabel}
-              arcLabelMinAngle={arcLabelMinAngle}
-              slots={slots}
-              slotProps={slotProps}
-            />
-          </g>
-        );
+          throw new Error("STUB");
       })}
     </g>
   );

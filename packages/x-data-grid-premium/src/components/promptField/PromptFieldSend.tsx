@@ -32,32 +32,8 @@ export type PromptFieldSendProps = Omit<GridSlotProps['baseIconButton'], 'classN
  */
 const PromptFieldSend = forwardRef<HTMLButtonElement, PromptFieldSendProps>(
   function PromptFieldSend(props, ref) {
-    const { render, className, onClick, ...other } = props;
-    const rootProps = useGridRootProps();
-    const { state, onSubmit } = usePromptFieldContext();
-    const resolvedClassName = typeof className === 'function' ? className(state) : className;
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      onSubmit(state.value);
-      onClick?.(event);
-    };
-
-    const element = useComponentRenderer(
-      rootProps.slots.baseIconButton,
-      render,
-      {
-        ...rootProps.slotProps?.baseIconButton,
-        className: resolvedClassName,
-        disabled: state.disabled || state.recording || !state.value.trim(),
-        ...other,
-        onClick: handleClick,
-        ref,
-      },
-      state,
-    );
-
-    return <React.Fragment>{element}</React.Fragment>;
-  },
+        throw new Error("STUB");
+    },
 );
 
 PromptFieldSend.propTypes /* remove-proptypes */ = {

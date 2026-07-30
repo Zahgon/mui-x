@@ -201,6 +201,5 @@ export const getWeekdays = (
   adapter: MuiPickersAdapter,
   date: PickerValidDate,
 ): PickerValidDate[] => {
-  const start = adapter.startOfWeek(date);
-  return [0, 1, 2, 3, 4, 5, 6].map((diff) => adapter.addDays(start, diff));
+    throw new Error("STUB");
 };

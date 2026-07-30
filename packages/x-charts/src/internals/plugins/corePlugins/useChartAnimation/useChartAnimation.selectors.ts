@@ -3,9 +3,9 @@ import type { ChartRootSelector } from '../../utils/selectors';
 import type { UseChartAnimationSignature } from './useChartAnimation.types';
 
 const selectorChartAnimationState: ChartRootSelector<UseChartAnimationSignature> = (state) =>
-  state.animation;
+  { throw new Error("STUB"); };
 
 export const selectorChartSkipAnimation = createSelector(
   selectorChartAnimationState,
-  (state) => state.skip || state.skipAnimationRequests > 0,
+  (state) => { throw new Error("STUB"); },
 );

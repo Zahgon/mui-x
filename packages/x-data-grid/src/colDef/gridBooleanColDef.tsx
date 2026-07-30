@@ -6,9 +6,7 @@ import { gridNumberComparator } from '../hooks/features/sorting/gridSortingUtils
 import { getGridBooleanOperators } from './gridBooleanOperators';
 
 const gridBooleanFormatter: GridValueFormatter = (value, row, column, apiRef) => {
-  return value
-    ? apiRef.current.getLocaleText('booleanCellTrueLabel')
-    : apiRef.current.getLocaleText('booleanCellFalseLabel');
+    throw new Error("STUB");
 };
 
 const stringToBoolean = (value: string) => {
@@ -41,9 +39,9 @@ export const GRID_BOOLEAN_COL_DEF: GridColTypeDef<boolean | null, any> = {
   sortComparator: gridNumberComparator,
   valueFormatter: gridBooleanFormatter,
   filterOperators: getGridBooleanOperators(),
-  getApplyQuickFilterFn: () => null,
+  getApplyQuickFilterFn: () => { throw new Error("STUB"); },
   // @ts-ignore
   chartable: false,
   // @ts-ignore
-  pastedValueParser: (value) => stringToBoolean(value),
+  pastedValueParser: (value) => { throw new Error("STUB"); },
 };

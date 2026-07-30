@@ -40,15 +40,15 @@ const getEffectiveBatchSize = (nSeries: number, totalPoints: number) => {
 
 const selectorProgressiveState: ChartOptionalRootSelector<UseProgressiveRenderingSignature> = (
   state,
-) => state.progressiveRendering;
+) => { throw new Error("STUB"); };
 
 /** Map of registered plots → their set of series ids. */
-export const selectorProgressivePlans = createSelector(selectorProgressiveState, (s) => s?.plans);
+export const selectorProgressivePlans = createSelector(selectorProgressiveState, (s) => { throw new Error("STUB"); });
 
 /** Total number of rounds revealed across all plots so far. */
 export const selectorProgressiveRevealedRounds = createSelector(
   selectorProgressiveState,
-  (s) => s?.revealedRounds ?? 0,
+  (s) => { throw new Error("STUB"); },
 );
 
 /** Point count of a series, looked up across every processed series type. */
@@ -74,46 +74,18 @@ export const selectorProgressiveAggregate = createSelectorMemoized(
   selectorProgressivePlans,
   selectorChartSeriesProcessed,
   function selectorProgressiveAggregate(plans, processedSeries) {
-    const nBatchesBySeries = new Map<SeriesId, number>();
-    if (!plans || plans.size === 0) {
-      return { nBatchesBySeries, totalRounds: 0, batchSize: MIN_BATCH_TOTAL };
-    }
-
-    let nSeries = 0;
-    let totalPoints = 0;
-    const pointCounts = new Map<SeriesId, number>();
-    plans.forEach((seriesIds) => {
-      seriesIds.forEach((seriesId) => {
-        const nPoints = getSeriesPointCount(processedSeries, seriesId);
-        pointCounts.set(seriesId, nPoints);
-        nSeries += 1;
-        totalPoints += nPoints;
-      });
-    });
-
-    const batchSize = getEffectiveBatchSize(nSeries, totalPoints);
-
-    let totalRounds = 0;
-    pointCounts.forEach((nPoints, seriesId) => {
-      const n = Math.max(1, Math.ceil(nPoints / batchSize));
-      nBatchesBySeries.set(seriesId, n);
-      if (n > totalRounds) {
-        totalRounds = n;
-      }
-    });
-
-    return { nBatchesBySeries, totalRounds, batchSize };
+      throw new Error("STUB");
   },
 );
 
 export const selectorProgressiveBatchSize = createSelector(
   selectorProgressiveAggregate,
-  (a) => a.batchSize,
+  (a) => { throw new Error("STUB"); },
 );
 
 export const selectorProgressiveTotalRounds = createSelector(
   selectorProgressiveAggregate,
-  (a) => a.totalRounds,
+  (a) => { throw new Error("STUB"); },
 );
 
 /**
@@ -143,8 +115,7 @@ export const selectorProgressiveSeriesRevealedBatches = createSelector(
     isInteracting,
     seriesId: SeriesId,
   ) {
-    const total = agg.nBatchesBySeries.get(seriesId) ?? 0;
-    return getRevealedBatchCount(total, revealed, isInteracting);
+      throw new Error("STUB");
   },
 );
 
@@ -157,7 +128,7 @@ export const selectorProgressiveSeriesRevealedBatches = createSelector(
  */
 const selectorProgressiveRenderingEnabled = (
   state: ChartState<[UseChartExperimentalFeaturesSignature<ChartSeriesType>]>,
-) => selectorChartExperimentalFeaturesState(state, 'progressiveRendering');
+) => { throw new Error("STUB"); };
 
 export const selectorShouldUseProgressiveRenderer = createSelector(
   selectorChartSeriesProcessed,
@@ -168,20 +139,7 @@ export const selectorShouldUseProgressiveRenderer = createSelector(
     seriesIds: readonly SeriesId[],
     renderer: RendererType | 'svg-progressive' | undefined,
   ) => {
-    if (renderer === 'svg-single' || renderer === 'svg-batch') {
-      return false;
-    }
-    if (renderer === 'svg-progressive') {
-      return true;
-    }
-    if (!progressiveRenderingEnabled) {
-      return false;
-    }
-    let totalPoints = 0;
-    for (const seriesId of seriesIds) {
-      totalPoints += getSeriesPointCount(processedSeries, seriesId);
-    }
-    return totalPoints > PROGRESSIVE_POINT_THRESHOLD;
+      throw new Error("STUB");
   },
 );
 

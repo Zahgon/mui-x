@@ -10,4 +10,4 @@ export const multiInputDateTimeRangeFieldClasses: MultiInputRangeFieldClasses =
   generateUtilityClasses('MuiMultiInputDateTimeRangeField', ['root', 'separator']);
 
 export const getMultiInputDateTimeRangeFieldUtilityClass = (slot: string) =>
-  generateUtilityClass('MuiMultiInputDateTimeRangeField', slot);
+  { throw new Error("STUB"); };

@@ -19,73 +19,13 @@ export interface ChatComposerAttachButtonProps extends ComposerAttachButtonProps
 const ChatComposerAttachButtonStyled = styled('button', {
   name: 'MuiChatComposer',
   slot: 'AttachButton',
-  overridesResolver: (_, styles) => styles.attachButton,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: 36,
-  height: 36,
-  border: 'none',
-  borderRadius: '50%',
-  backgroundColor: 'transparent',
-  color: (theme.vars || theme).palette.text.secondary,
-  cursor: 'pointer',
-  flexShrink: 0,
-  transition: theme.transitions.create(['background-color', 'color'], {
-    duration: theme.transitions.duration.short,
-  }),
-  '@media (prefers-reduced-motion: reduce)': {
-    transition: 'none',
-  },
-  padding: 0,
-  fontSize: '1.25rem',
-  '&:hover': {
-    backgroundColor: (theme.vars || theme).palette.action.hover,
-    color: (theme.vars || theme).palette.text.primary,
-  },
-  '&:focus-visible': {
-    outline: `2px solid ${(theme.vars || theme).palette.primary.main}`,
-    outlineOffset: 2,
-  },
-  '&:disabled': {
-    color: (theme.vars || theme).palette.action.disabled,
-    cursor: 'not-allowed',
-  },
-  '& svg': {
-    width: '1em',
-    height: '1em',
-    fontSize: 'inherit',
-  },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatComposerAttachButton = React.forwardRef<HTMLButtonElement, ChatComposerAttachButtonProps>(
   function ChatComposerAttachButton(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatComposerAttachButton' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatComposerUtilityClasses(classesProp);
-
-    return (
-      <ComposerAttachButton
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          attachButton: slots?.attachButton ?? ChatComposerAttachButtonStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          attachButton: mergeSlotProps(
-            {
-              className: clsx(classes.attachButton, className),
-              sx,
-            },
-            slotProps?.attachButton,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatComposerAttachButton.propTypes /* remove-proptypes */ = {

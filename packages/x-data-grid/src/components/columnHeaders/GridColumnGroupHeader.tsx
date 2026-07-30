@@ -114,16 +114,7 @@ function GridColumnGroupHeader(props: GridColumnGroupHeaderProps) {
 
   const render = groupId && columnGroupsLookup[groupId]?.renderHeaderGroup;
   const renderParams: GridColumnGroupHeaderParams = React.useMemo(
-    () => ({
-      groupId,
-      headerName,
-      description,
-      depth,
-      maxDepth,
-      fields,
-      colIndex,
-      isLastColumn,
-    }),
+    () => { throw new Error("STUB"); },
     [groupId, headerName, description, depth, maxDepth, fields, colIndex, isLastColumn],
   );
   if (groupId && render) {
@@ -145,36 +136,18 @@ function GridColumnGroupHeader(props: GridColumnGroupHeaderProps) {
   const classes = useUtilityClasses(ownerState);
 
   React.useLayoutEffect(() => {
-    if (hasFocus) {
-      const focusableElement = headerCellRef.current!.querySelector<HTMLElement>('[tabindex="0"]');
-      const elementToFocus = focusableElement || headerCellRef.current;
-      if (!elementToFocus) {
-        return;
-      }
-      focusElement(elementToFocus, apiRef);
-    }
+      throw new Error("STUB");
   }, [apiRef, hasFocus]);
 
   const publish = React.useCallback(
-    (eventName: keyof GridColumnGroupHeaderEventLookup) => (event: React.SyntheticEvent) => {
-      // Ignore portal
-      // See https://github.com/mui/mui-x/issues/1721
-      if (isEventTargetInPortal(event)) {
-        return;
-      }
-      apiRef.current.publishEvent(eventName, renderParams, event as any);
-    },
+    (eventName: keyof GridColumnGroupHeaderEventLookup) => { throw new Error("STUB"); },
     // For now this is stupid, because renderParams change all the time.
     // Need to move it's computation in the api, such that for a given depth+columnField, I can get the group parameters
     [apiRef, renderParams],
   );
 
   const mouseEventsHandlers = React.useMemo(
-    () => ({
-      onKeyDown: publish('columnGroupHeaderKeyDown'),
-      onFocus: publish('columnGroupHeaderFocus'),
-      onBlur: publish('columnGroupHeaderBlur'),
-    }),
+    () => { throw new Error("STUB"); },
     [publish],
   );
 
@@ -186,12 +159,7 @@ function GridColumnGroupHeader(props: GridColumnGroupHeaderProps) {
   const pinnedScrollOffset = usePinnedScrollOffset(apiRef, pinnedPosition);
   const style = React.useMemo(
     () =>
-      attachPinnedStyle(
-        { ...props.style },
-        isRtl,
-        pinnedPosition,
-        pinnedOffset !== undefined ? pinnedOffset + pinnedScrollOffset : undefined,
-      ),
+      { throw new Error("STUB"); },
     [pinnedPosition, pinnedOffset, pinnedScrollOffset, props.style, isRtl],
   );
 

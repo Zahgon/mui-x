@@ -25,42 +25,14 @@ export interface ChatConversationHeaderActionsProps extends ConversationHeaderAc
 const ChatConversationHeaderActionsStyled = styled('div', {
   name: 'MuiChatConversation',
   slot: 'HeaderActions',
-  overridesResolver: (_, styles) => styles.headerActions,
-})(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(0.5),
-  marginInlineStart: 'auto',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConversationHeaderActions = React.forwardRef<
   HTMLDivElement,
   ChatConversationHeaderActionsProps
 >(function ChatConversationHeaderActions(inProps, ref) {
-  const props = useThemeProps({ props: inProps, name: 'MuiChatConversationHeaderActions' });
-  const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-  const classes = useChatConversationUtilityClasses(classesProp);
-
-  return (
-    <ConversationHeaderActions
-      ref={ref}
-      {...other}
-      slots={{
-        ...slots,
-        actions: slots?.actions ?? ChatConversationHeaderActionsStyled,
-      }}
-      slotProps={{
-        ...slotProps,
-        actions: mergeSlotProps(
-          {
-            className: clsx(classes.headerActions, className),
-            sx,
-          },
-          slotProps?.actions,
-        ) as any,
-      }}
-    />
-  );
+    throw new Error("STUB");
 });
 
 ChatConversationHeaderActions.propTypes /* remove-proptypes */ = {

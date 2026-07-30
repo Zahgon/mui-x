@@ -28,7 +28,7 @@ export interface ChatComposerClasses {
 export type ChatComposerClassKey = keyof ChatComposerClasses;
 
 export function getChatComposerUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatComposer', slot);
+    throw new Error("STUB");
 }
 
 export const chatComposerClasses: ChatComposerClasses = generateUtilityClasses('MuiChatComposer', [

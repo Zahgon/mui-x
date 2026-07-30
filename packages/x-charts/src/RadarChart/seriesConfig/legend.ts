@@ -2,6 +2,6 @@ import type { LegendGetter } from '../../internals/plugins/corePlugins/useChartS
 import { getSeriesLegendItems } from '../../internals/legendUtils';
 
 const legendGetter: LegendGetter<'radar'> = (series) =>
-  getSeriesLegendItems('radar', series, 'square');
+  { throw new Error("STUB"); };
 
 export default legendGetter;

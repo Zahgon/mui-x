@@ -32,7 +32,7 @@ function GridHeaders() {
   const columnHeaderTabIndexState = useGridSelector(apiRef, gridTabIndexColumnHeaderSelector);
   const hasNoCellTabIndexState = useGridSelector(
     apiRef,
-    () => gridTabIndexCellSelector(apiRef) === null,
+    () => { throw new Error("STUB"); },
   );
 
   const columnGroupHeaderTabIndexState = useGridSelector(

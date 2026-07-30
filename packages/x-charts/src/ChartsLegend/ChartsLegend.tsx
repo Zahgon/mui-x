@@ -56,45 +56,7 @@ export interface ChartsLegendProps {
 const RootElement = styled('ul', {
   name: 'MuiChartsLegend',
   slot: 'Root',
-})<{ ownerState: ChartsLegendProps }>(({ ownerState, theme }) => ({
-  ...theme.typography.caption,
-  color: (theme.vars || theme).palette.text.primary,
-  lineHeight: '100%',
-  display: 'flex',
-  flexDirection: ownerState.direction === 'vertical' ? 'column' : 'row',
-  alignItems: ownerState.direction === 'vertical' ? undefined : 'center',
-  flexShrink: 0,
-  gap: theme.spacing(2),
-  listStyleType: 'none',
-  paddingInlineStart: 0,
-  marginBlock: theme.spacing(1),
-  marginInline: theme.spacing(1),
-  flexWrap: 'wrap',
-  li: {
-    display: ownerState.direction === 'horizontal' ? 'inline-flex' : undefined,
-  },
-  [`button.${legendClasses.series}`]: {
-    // Reset button styles
-    background: 'none',
-    border: 'none',
-    padding: 0,
-    fontFamily: 'inherit',
-    fontWeight: 'inherit',
-    fontSize: 'inherit',
-    letterSpacing: 'inherit',
-    color: 'inherit',
-  },
-  [`& .${legendClasses.series}`]: {
-    display: ownerState.direction === 'vertical' ? 'flex' : 'inline-flex',
-    alignItems: 'center',
-    gap: theme.spacing(1),
-    cursor: ownerState.onItemClick || ownerState.toggleVisibilityOnClick ? 'pointer' : 'default',
-    [`&.${legendClasses.hidden}`]: {
-      opacity: 0.5,
-    },
-  },
-  gridArea: 'legend',
-}));
+})<{ ownerState: ChartsLegendProps }>(({ ownerState, theme }) => { throw new Error("STUB"); });
 
 const ChartsLegend = consumeSlots(
   'MuiChartsLegend',
@@ -110,85 +72,7 @@ const ChartsLegend = consumeSlots(
     props: ChartsLegendProps,
     ref: React.Ref<HTMLUListElement>,
   ) {
-    const data = useLegend();
-    const { instance } = useChartsContext<[UseChartVisibilityManagerSignature]>();
-    const store = useStore<[UseChartVisibilityManagerSignature]>();
-    const isItemVisible = store.use(selectorIsItemVisibleGetter);
-    const { direction, onItemClick, className, classes, toggleVisibilityOnClick, ...other } = props;
-
-    const isButton = Boolean(onItemClick || toggleVisibilityOnClick);
-
-    const handleClick = useEventCallback(
-      (item: SeriesLegendItemParams, i: number) =>
-        (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-          if (onItemClick && item) {
-            onItemClick(event, seriesContextBuilder(item), i);
-          }
-
-          if (toggleVisibilityOnClick) {
-            instance.toggleItemVisibility({
-              type: item.type,
-              seriesId: item.seriesId,
-              dataIndex: item.dataIndex,
-            } as VisibilityIdentifierWithType);
-          }
-        },
-    );
-
-    if (data.items.length === 0) {
-      return null;
-    }
-
-    return (
-      <RootElement
-        className={clsx(classes?.root, className)}
-        ref={ref}
-        {...other}
-        ownerState={props}
-      >
-        {data.items.map((item, i) => {
-          const isVisible = isItemVisible({
-            type: item.type,
-            seriesId: item.seriesId,
-            dataIndex: item.dataIndex,
-          });
-          return (
-            <li
-              key={`${item.seriesId}-${item.dataIndex}`}
-              className={classes?.item}
-              data-series={item.seriesId}
-              data-index={item.dataIndex}
-            >
-              {isButton ? (
-                <button
-                  className={clsx(classes?.series, !isVisible && classes?.hidden)}
-                  onClick={handleClick(item, i)}
-                  type="button"
-                >
-                  <ChartsLabelMark
-                    className={classes?.mark}
-                    color={item.color}
-                    type={item.markType}
-                    markShape={item.markShape}
-                  />
-                  <ChartsLabel className={classes?.label}>{item.label}</ChartsLabel>
-                </button>
-              ) : (
-                <div className={clsx(classes?.series, !isVisible && classes?.hidden)}>
-                  <ChartsLabelMark
-                    className={classes?.mark}
-                    color={item.color}
-                    type={item.markType}
-                    markShape={item.markShape}
-                  />
-                  <ChartsLabel className={classes?.label}>{item.label}</ChartsLabel>
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </RootElement>
-    );
+      throw new Error("STUB");
   }),
 );
 

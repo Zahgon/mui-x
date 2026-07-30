@@ -10,26 +10,7 @@ import { gridRowCountSelector } from './gridRowsSelector';
 import { gridRowHeightSelector } from '../dimensions/gridDimensionsSelectors';
 
 export const rowsMetaStateInitializer: GridStateInitializer = (state, props, apiRef) => {
-  // FIXME: This should be handled in the virtualizer eventually, but there are interdependencies
-  // between state initializers that need to be untangled carefully.
-
-  const baseRowHeight = gridRowHeightSelector(apiRef);
-  const dataRowCount = gridRowCountSelector(apiRef);
-  const pagination = gridPaginationSelector(apiRef);
-  const rowCount = Math.min(
-    pagination.enabled ? pagination.paginationModel.pageSize : dataRowCount,
-    dataRowCount,
-  );
-
-  return {
-    ...state,
-    rowsMeta: {
-      currentPageTotalHeight: rowCount * baseRowHeight,
-      positions: Array.from({ length: rowCount }, (_, i) => i * baseRowHeight),
-      pinnedTopRowsTotalHeight: 0,
-      pinnedBottomRowsTotalHeight: 0,
-    },
-  };
+    throw new Error("STUB");
 };
 
 /**

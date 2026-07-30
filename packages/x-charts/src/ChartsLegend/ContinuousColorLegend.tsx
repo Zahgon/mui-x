@@ -110,66 +110,7 @@ const templateAreas = (reverse?: boolean) => {
 const RootElement = styled('ul', {
   name: 'MuiContinuousColorLegend',
   slot: 'Root',
-})<{ ownerState: ContinuousColorLegendProps }>(({ theme, ownerState }) => ({
-  ...theme.typography.caption,
-  color: (theme.vars || theme).palette.text.primary,
-  lineHeight: '100%',
-  display: 'grid',
-  flexShrink: 0,
-  gap: theme.spacing(0.5),
-  listStyleType: 'none',
-  paddingInlineStart: 0,
-  marginBlock: theme.spacing(1),
-  marginInline: theme.spacing(1),
-  gridArea: 'legend',
-  [`&.${continuousColorLegendClasses.horizontal}`]: {
-    gridTemplateRows: 'min-content min-content',
-    gridTemplateColumns: 'min-content auto min-content',
-    [`&.${continuousColorLegendClasses.start}`]: {
-      gridTemplateAreas: templateAreas(ownerState.reverse).row.start,
-    },
-    [`&.${continuousColorLegendClasses.end}`]: {
-      gridTemplateAreas: templateAreas(ownerState.reverse).row.end,
-    },
-    [`&.${continuousColorLegendClasses.extremes}`]: {
-      gridTemplateAreas: templateAreas(ownerState.reverse).row.extremes,
-      gridTemplateRows: 'min-content',
-      alignItems: 'center',
-    },
-  },
-  [`&.${continuousColorLegendClasses.vertical}`]: {
-    gridTemplateRows: 'min-content auto min-content',
-    gridTemplateColumns: 'min-content min-content',
-    [`&.${continuousColorLegendClasses.start}`]: {
-      gridTemplateAreas: templateAreas(ownerState.reverse).column.start,
-      [`.${continuousColorLegendClasses.maxLabel}, .${continuousColorLegendClasses.minLabel}`]: {
-        justifySelf: 'end',
-      },
-    },
-    [`&.${continuousColorLegendClasses.end}`]: {
-      gridTemplateAreas: templateAreas(ownerState.reverse).column.end,
-      [`.${continuousColorLegendClasses.maxLabel}, .${continuousColorLegendClasses.minLabel}`]: {
-        justifySelf: 'start',
-      },
-    },
-    [`&.${continuousColorLegendClasses.extremes}`]: {
-      gridTemplateAreas: templateAreas(ownerState.reverse).column.extremes,
-      gridTemplateColumns: 'min-content',
-      [`.${continuousColorLegendClasses.maxLabel}, .${continuousColorLegendClasses.minLabel}`]: {
-        justifySelf: 'center',
-      },
-    },
-  },
-  [`.${continuousColorLegendClasses.gradient}`]: {
-    gridArea: 'gradient',
-  },
-  [`.${continuousColorLegendClasses.maxLabel}`]: {
-    gridArea: 'max-label',
-  },
-  [`.${continuousColorLegendClasses.minLabel}`]: {
-    gridArea: 'min-label',
-  },
-}));
+})<{ ownerState: ContinuousColorLegendProps }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 const getText = (
   label: string | LabelFormatter | undefined,
@@ -198,80 +139,7 @@ const ContinuousColorLegend = consumeThemeProps(
     props: ContinuousColorLegendProps,
     ref: React.Ref<HTMLUListElement>,
   ) {
-    const {
-      minLabel,
-      maxLabel,
-      direction,
-      axisDirection,
-      axisId,
-      rotateGradient,
-      reverse,
-      classes,
-      className,
-      gradientId,
-      labelPosition,
-      thickness,
-      ...other
-    } = props;
-
-    const generateGradientId = useChartGradientIdObjectBoundBuilder();
-    const axisItem = useAxis({ axisDirection, axisId });
-
-    const colorMap = axisItem?.colorMap;
-    if (!colorMap || !colorMap.type || colorMap.type !== 'continuous') {
-      return null;
-    }
-
-    const minValue = colorMap.min ?? 0;
-    const maxValue = colorMap.max ?? 100;
-
-    // Get texts to display
-
-    const valueFormatter = isZAxis(axisItem) ? undefined : axisItem.valueFormatter;
-
-    const formattedMin = valueFormatter
-      ? valueFormatter(minValue, { location: 'legend' })
-      : minValue.toLocaleString();
-
-    const formattedMax = valueFormatter
-      ? valueFormatter(maxValue, { location: 'legend' })
-      : maxValue.toLocaleString();
-
-    const minText = getText(minLabel, minValue, formattedMin);
-    const maxText = getText(maxLabel, maxValue, formattedMax);
-
-    const minComponent = (
-      <li className={classes?.minLabel}>
-        <ChartsLabel className={classes?.label}>{minText}</ChartsLabel>
-      </li>
-    );
-
-    const maxComponent = (
-      <li className={classes?.maxLabel}>
-        <ChartsLabel className={classes?.label}>{maxText}</ChartsLabel>
-      </li>
-    );
-
-    return (
-      <RootElement
-        className={clsx(classes?.root, className)}
-        ref={ref}
-        {...other}
-        ownerState={props}
-      >
-        {reverse ? maxComponent : minComponent}
-        <li className={classes?.gradient}>
-          <ChartsLabelGradient
-            direction={direction}
-            rotate={rotateGradient}
-            reverse={reverse}
-            thickness={thickness}
-            gradientId={gradientId ?? generateGradientId(axisItem.id)}
-          />
-        </li>
-        {reverse ? minComponent : maxComponent}
-      </RootElement>
-    );
+      throw new Error("STUB");
   },
 );
 

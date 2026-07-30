@@ -20,46 +20,13 @@ export interface ChatConversationHeaderProps extends ConversationHeaderProps {
 const ChatConversationHeaderStyled = styled('header', {
   name: 'MuiChatConversation',
   slot: 'Header',
-  overridesResolver: (_, styles) => styles.header,
-})(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  padding: theme.spacing(1.5, 2),
-  borderBottom: '1px solid',
-  borderBottomColor: (theme.vars || theme).palette.divider,
-  backgroundColor: (theme.vars || theme).palette.background.paper,
-  flexShrink: 0,
-  minHeight: 56,
-  boxSizing: 'border-box',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConversationHeader = React.forwardRef<HTMLElement, ChatConversationHeaderProps>(
   function ChatConversationHeader(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatConversationHeader' });
-    const { slots, slotProps, className, classes: classesProp, ...other } = props;
-    const classes = useChatConversationUtilityClasses(classesProp);
-
-    return (
-      <ConversationHeader
-        {...other}
-        slots={{
-          ...slots,
-          header: slots?.header ?? ChatConversationHeaderStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          header: mergeSlotProps(
-            {
-              ref,
-              className: clsx(classes.header, className),
-            },
-            slotProps?.header,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatConversationHeader.propTypes /* remove-proptypes */ = {

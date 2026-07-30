@@ -53,30 +53,7 @@ export const useSplitFieldProps = <
   valueType: TValueType,
 ) => {
   return React.useMemo(() => {
-    const forwardedProps = { ...props } as Omit<TProps, InternalPropNames<TValueType>>;
-    const internalProps = {} as ExtractInternalProps<TValueType, TProps>;
-
-    const extractProp = (propName: string) => {
-      if (forwardedProps.hasOwnProperty(propName)) {
-        // @ts-ignore
-        internalProps[propName] = forwardedProps[propName];
-        delete forwardedProps[propName as keyof typeof forwardedProps];
-      }
-    };
-
-    SHARED_FIELD_INTERNAL_PROP_NAMES.forEach(extractProp);
-
-    if (valueType === 'date') {
-      DATE_VALIDATION_PROP_NAMES.forEach(extractProp);
-    } else if (valueType === 'time') {
-      TIME_VALIDATION_PROP_NAMES.forEach(extractProp);
-    } else if (valueType === 'date-time') {
-      DATE_VALIDATION_PROP_NAMES.forEach(extractProp);
-      TIME_VALIDATION_PROP_NAMES.forEach(extractProp);
-      DATE_TIME_VALIDATION_PROP_NAMES.forEach(extractProp);
-    }
-
-    return { forwardedProps, internalProps };
+      throw new Error("STUB");
   }, [props, valueType]);
 };
 

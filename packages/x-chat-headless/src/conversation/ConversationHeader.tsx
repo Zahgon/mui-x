@@ -30,18 +30,5 @@ export const ConversationHeader = React.forwardRef(function ConversationHeader(
   props: ConversationHeaderProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { children, slots, slotProps, ...other } = props;
-  const ownerState = useConversationContext();
-  const Header = slots?.header ?? 'div';
-  const headerProps = useSlotProps({
-    elementType: Header,
-    externalSlotProps: slotProps?.header,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  return <Header {...headerProps}>{children}</Header>;
+    throw new Error("STUB");
 }) as ConversationHeaderComponent;

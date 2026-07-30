@@ -19,53 +19,5 @@ interface ChartsRadiusGridProps {
  * @ignore - internal component.
  */
 export function ChartsRadiusGrid(props: ChartsRadiusGridProps) {
-  const { store } = useChartsContext<[UseChartPolarAxisSignature]>();
-  const { axis, startAngle, endAngle, isFullCircle, classes } = props;
-  const { cx, cy } = store.use(selectorChartPolarCenter);
-
-  const { scale, tickNumber, tickInterval, tickSpacing } = axis;
-
-  const ticks = useTicks({
-    scale,
-    tickNumber,
-    tickInterval,
-    tickSpacing,
-    direction: 'radius',
-  });
-
-  if (isFullCircle) {
-    return (
-      <React.Fragment>
-        {ticks.map(({ offset: radius }) => (
-          <GridCircle
-            key={`radius-${radius}`}
-            cx={cx}
-            cy={cy}
-            r={radius}
-            className={classes.radiusLine}
-          />
-        ))}
-      </React.Fragment>
-    );
-  }
-
-  const startDx = Math.cos(startAngle - Math.PI / 2);
-  const startDy = Math.sin(startAngle - Math.PI / 2);
-  const endDx = Math.cos(endAngle - Math.PI / 2);
-  const endDy = Math.sin(endAngle - Math.PI / 2);
-
-  const isLargeArc = Math.abs(endAngle - startAngle) >= Math.PI;
-  return (
-    <React.Fragment>
-      {ticks.map(({ offset: radius }) => {
-        return (
-          <GridPath
-            key={`radius-${radius}`}
-            d={`M${cx + startDx * radius},${cy + startDy * radius} A ${radius} ${radius} 0 ${isLargeArc ? 1 : 0} 1 ${cx + endDx * radius},${cy + endDy * radius}`}
-            className={classes.radiusLine}
-          />
-        );
-      })}
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }

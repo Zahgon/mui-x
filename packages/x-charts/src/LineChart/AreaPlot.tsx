@@ -82,19 +82,7 @@ function AreaPlot(props: AreaPlotProps) {
     <AreaPlotRoot className={clsx(classes.areaPlot, className)} {...other}>
       {completedData.map(
         ({ d, seriesId, color, area, gradientId }) =>
-          !!area && (
-            <AreaElement
-              key={seriesId}
-              seriesId={seriesId}
-              d={d}
-              color={color}
-              gradientId={gradientId}
-              slots={slots}
-              slotProps={slotProps}
-              onClick={onAreaItemClick && ((event) => onAreaItemClick(event, seriesId))}
-              skipAnimation={skipAnimation}
-            />
-          ),
+          { throw new Error("STUB"); },
       )}
     </AreaPlotRoot>
   );

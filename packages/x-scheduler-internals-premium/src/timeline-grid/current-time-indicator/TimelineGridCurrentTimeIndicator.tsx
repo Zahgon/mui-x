@@ -16,51 +16,8 @@ export const TimelineGridCurrentTimeIndicator = React.forwardRef(
     componentProps: TimelineGridCurrentTimeIndicator.Props,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ) {
-    const adapter = useAdapterContext();
-
-    const {
-      // Rendering props
-      className,
-      render,
-      style,
-      // Props forwarded to the DOM element
-      ...elementProps
-    } = componentProps;
-
-    const store = useEventTimelinePremiumStoreContext();
-    const now = useStore(store, schedulerNowSelectors.nowUpdatedEveryMinute);
-    const presetConfig = useStore(store, eventTimelinePremiumPresetSelectors.config);
-
-    const processedNow = React.useMemo(() => processDate(now, adapter), [adapter, now]);
-
-    const endForCalc = React.useMemo(
-      () => processDate(adapter.addMinutes(now, 1), adapter),
-      [adapter, now],
-    );
-
-    const { position } = useElementPositionInCollection({
-      start: processedNow,
-      end: endForCalc,
-      collectionStart: presetConfig.start,
-      collectionEnd: presetConfig.end,
-    });
-
-    const isOutOfRange =
-      adapter.isBefore(now, presetConfig.start) || adapter.isAfter(now, presetConfig.end);
-
-    return useRenderElement('div', componentProps, {
-      ref: [forwardedRef],
-      props: [
-        elementProps,
-        {
-          style: {
-            [TimelineGridCurrentTimeIndicatorCssVars.xPosition]: position,
-          } as React.CSSProperties,
-        },
-      ],
-      enabled: !isOutOfRange,
-    });
-  },
+        throw new Error("STUB");
+    },
 );
 
 export namespace TimelineGridCurrentTimeIndicator {

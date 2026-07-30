@@ -33,7 +33,7 @@ const itITGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Nascondi i filtri',
   toolbarFiltersTooltipShow: 'Mostra i filtri',
   toolbarFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} filtri attivi` : `${count} filtro attivo`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Cerca…',
@@ -129,7 +129,7 @@ const itITGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Menu',
-  columnMenuAriaLabel: (columnName: string) => `Menù della colonna ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Mostra le colonne',
   columnMenuManageColumns: 'Gestisci colonne',
   columnMenuFilter: 'Filtra',
@@ -142,22 +142,20 @@ const itITGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} filtri attivi` : `${count} filtro attivo`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Mostra i filtri',
   columnHeaderSortIconLabel: 'Ordina',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count > 1
-      ? `${count.toLocaleString()} record selezionati`
-      : `${count.toLocaleString()} record selezionato`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Record totali:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} di ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Seleziona',
@@ -189,8 +187,8 @@ const itITGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Gruppo',
-  groupColumn: (name) => `Raggruppa per ${name}`,
-  unGroupColumn: (name) => `Annulla raggruppamento per ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Abilita pannello dettagli',
@@ -200,27 +198,10 @@ const itITGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Righe per pagina:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} di ${count !== -1 ? formatNumber(count) : `più di ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `circa ${formatNumber(estimated)}`
-        : `più di ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} di ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Vai alla prima pagina';
-    }
-    if (type === 'last') {
-      return "Vai all'ultima pagina";
-    }
-    if (type === 'next') {
-      return 'Vai alla pagina successiva';
-    }
-    // if (type === 'previous') {
-    return 'Vai alla pagina precedente';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -279,8 +260,8 @@ const itITGrid: Partial<GridLocaleText> = {
   chartsFieldBlocked: 'Questo attributo non può essere aggiunto ad alcuna sezione',
   chartsCategories: 'Categorie',
   chartsSeries: 'Serie',
-  chartsMenuAddToDimensions: (dimensionLabel: string) => `Aggiungi a ${dimensionLabel}`,
-  chartsMenuAddToValues: (valuesLabel: string) => `Aggiungi a ${valuesLabel}`,
+  chartsMenuAddToDimensions: (dimensionLabel: string) => { throw new Error("STUB"); },
+  chartsMenuAddToValues: (valuesLabel: string) => { throw new Error("STUB"); },
   chartsMenuMoveUp: 'Sposta in alto',
   chartsMenuMoveDown: 'Sposta in basso',
   chartsMenuMoveToTop: 'Sposta in cima',
@@ -288,9 +269,9 @@ const itITGrid: Partial<GridLocaleText> = {
   chartsMenuOptions: "Opzioni per l'attributo",
   chartsMenuRemove: 'Rimuovi',
   chartsDragToDimensions: (dimensionLabel: string) =>
-    `Trascina qui per usare la colonna come ${dimensionLabel}`,
+    { throw new Error("STUB"); },
   chartsDragToValues: (valuesLabel: string) =>
-    `Trascina qui per usare la colonna come ${valuesLabel}`,
+    { throw new Error("STUB"); },
 
   // AI Assistant panel
   aiAssistantPanelTitle: 'Assistente AI',
@@ -317,36 +298,30 @@ const itITGrid: Partial<GridLocaleText> = {
   promptAppliedChanges: 'Cambiamenti applicati',
 
   // Prompt changes
-  promptChangeGroupDescription: (column: string) => `Raggruppa per ${column}`,
+  promptChangeGroupDescription: (column: string) => { throw new Error("STUB"); },
   promptChangeAggregationLabel: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeAggregationDescription: (column: string, aggregation: string) =>
-    `Aggrega ${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeFilterLabel: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `${column} è uno tra: ${value}`;
-    }
-    return `${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeFilterDescription: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `Filtra dove ${column} è uno tra: ${value}`;
-    }
-    return `Filtra dove ${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeSortDescription: (column: string, direction: string) =>
-    `Ordina per ${column} (${direction})`,
+    { throw new Error("STUB"); },
   promptChangePivotEnableLabel: 'Pivota',
   promptChangePivotEnableDescription: 'Abilita pivoting',
-  promptChangePivotColumnsLabel: (count: number) => `Colonne (${count})`,
+  promptChangePivotColumnsLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotColumnsDescription: (column: string, direction: string) =>
-    `${column}${direction ? ` (${direction})` : ''}`,
-  promptChangePivotRowsLabel: (count: number) => `Righe (${count})`,
-  promptChangePivotValuesLabel: (count: number) => `Valori (${count})`,
+    { throw new Error("STUB"); },
+  promptChangePivotRowsLabel: (count: number) => { throw new Error("STUB"); },
+  promptChangePivotValuesLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotValuesDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeChartsLabel: (dimensionsCount: number, valuesCount: number) =>
-    `Dimensioni (${dimensionsCount}), Valori (${valuesCount})`,
+    { throw new Error("STUB"); },
 };
 
 export const itIT: Localization = getGridLocalization(itITGrid);

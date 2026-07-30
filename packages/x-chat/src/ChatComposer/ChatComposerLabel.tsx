@@ -19,43 +19,13 @@ export interface ChatComposerLabelProps extends ComposerLabelProps {
 const ChatComposerLabelStyled = styled('label', {
   name: 'MuiChatComposer',
   slot: 'Label',
-  overridesResolver: (_, styles) => styles.label,
-})(({ theme }) => ({
-  display: 'block',
-  fontSize: theme.typography.caption.fontSize,
-  lineHeight: theme.typography.caption.lineHeight,
-  color: (theme.vars || theme).palette.text.secondary,
-  marginBottom: theme.spacing(0.5),
-  paddingInline: theme.spacing(0.5),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatComposerLabel = React.forwardRef<HTMLLabelElement, ChatComposerLabelProps>(
   function ChatComposerLabel(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatComposerLabel' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatComposerUtilityClasses(classesProp);
-
-    return (
-      <ComposerLabel
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          label: slots?.label ?? ChatComposerLabelStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          label: mergeSlotProps(
-            {
-              className: clsx(classes.label, className),
-              sx,
-            },
-            slotProps?.label,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatComposerLabel.propTypes /* remove-proptypes */ = {

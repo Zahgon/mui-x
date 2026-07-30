@@ -2,21 +2,21 @@ import { createSelector, createRootSelector } from '@mui/x-data-grid-pro/interna
 import type { GridStatePremium } from '../../../models/gridStatePremium';
 import { gridSidebarStateSelector, GridSidebarValue } from '../sidebar';
 
-const gridPivotingStateSelector = createRootSelector((state: GridStatePremium) => state.pivoting);
+const gridPivotingStateSelector = createRootSelector((state: GridStatePremium) => { throw new Error("STUB"); });
 
 export const gridPivotPanelOpenSelector = createSelector(
   gridSidebarStateSelector,
-  (sidebar) => sidebar.value === GridSidebarValue.Pivot && sidebar.open,
+  (sidebar) => { throw new Error("STUB"); },
 );
 
 export const gridPivotModelSelector = createSelector(
   gridPivotingStateSelector,
-  (pivoting) => pivoting?.model,
+  (pivoting) => { throw new Error("STUB"); },
 );
 
 export const gridPivotPropsOverridesSelector = createSelector(
   gridPivotingStateSelector,
-  (pivoting) => (pivoting?.active ? pivoting.propsOverrides : undefined),
+  (pivoting) => { throw new Error("STUB"); },
 );
 
 export {

@@ -28,142 +28,16 @@ import { TimelineGridEventDataAttributes } from './TimelineGridEventDataAttribut
 
 const overflowStateAttributesMapping = {
   startingBeforeEdge: (value: boolean) =>
-    value ? { [TimelineGridEventDataAttributes.startingBeforeEdge]: '' } : null,
+    { throw new Error("STUB"); },
   endingAfterEdge: (value: boolean) =>
-    value ? { [TimelineGridEventDataAttributes.endingAfterEdge]: '' } : null,
+    { throw new Error("STUB"); },
 };
 
 export const TimelineGridEvent = React.forwardRef(function TimelineGridEvent(
   componentProps: TimelineGridEvent.Props,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {
-    // Rendering props
-    className,
-    render,
-    style,
-    // Internal props
-    start,
-    end,
-    eventId,
-    occurrenceKey,
-    renderDragPreview,
-    isDraggable,
-    nativeButton = false,
-    // Props forwarded to the DOM element
-    ...elementProps
-  } = componentProps;
-
-  // TODO: Expose a real `interactive` prop
-  // to control whether the event should behave like a button
-  const isInteractive = true;
-
-  // Context hooks
-  const adapter = useAdapterContext();
-  const store = useEventTimelinePremiumStoreContext();
-  const { hasFocus: rowHasFocus, getCursorPositionInElementMs } = useTimelineGridEventRowContext();
-
-  // Ref hooks
-  const ref = React.useRef<HTMLDivElement>(null);
-
-  // Selector hooks
-  const presetConfig = useStore(store, eventTimelinePremiumPresetSelectors.config);
-
-  // Feature hooks
-  const getSharedDragData: TimelineGridEventContext['getSharedDragData'] = useStableCallback(
-    (input) => {
-      const offsetBeforeRowStart = Math.max(
-        adapter.getTime(presetConfig.start) - start.timestamp,
-        0,
-      );
-      const event = schedulerEventSelectors.processedEvent(store.state, eventId)!;
-
-      const originalOccurrence = generateOccurrenceFromEvent({
-        event,
-        eventId,
-        occurrenceKey,
-        start,
-        end,
-      });
-
-      const offsetInsideRow = getCursorPositionInElementMs({ input, elementRef: ref });
-      return {
-        eventId,
-        occurrenceKey,
-        originalOccurrence,
-        start: start.value,
-        end: end.value,
-        initialCursorPositionInEventMs: offsetBeforeRowStart + offsetInsideRow,
-      };
-    },
-  );
-
-  const getDragData = useStableCallback((input) => ({
-    ...getSharedDragData(input),
-    source: 'TimelineGridEvent',
-  }));
-
-  const {
-    state,
-    preview,
-    contextValue: draggableEventContextValue,
-  } = useDraggableEvent({
-    ref,
-    start,
-    end,
-    occurrenceKey,
-    eventId,
-    isDraggable,
-    renderDragPreview,
-    getDragData,
-    collectionStart: presetConfig.start,
-    collectionEnd: presetConfig.end,
-  });
-
-  const { getButtonProps, buttonRef } = useButton({
-    disabled: !isInteractive,
-    native: nativeButton,
-    tabIndex: rowHasFocus ? 0 : -1,
-  });
-
-  const { position, duration, startingBeforeEdge, endingAfterEdge } =
-    useElementPositionInCollection({
-      start,
-      end,
-      collectionStart: presetConfig.start,
-      collectionEnd: presetConfig.end,
-    });
-
-  const mergedState = { ...state, startingBeforeEdge, endingAfterEdge };
-
-  const contextValue: TimelineGridEventContext = React.useMemo(
-    () => ({ ...draggableEventContextValue, getSharedDragData }),
-    [draggableEventContextValue, getSharedDragData],
-  );
-
-  const element = useRenderElement('div', componentProps, {
-    state: mergedState,
-    ref: [forwardedRef, ref, buttonRef],
-    props: [
-      elementProps,
-      {
-        style: {
-          [TimelineGridEventCssVars.xPosition]: `${position * 100}%`,
-          [TimelineGridEventCssVars.width]: `${duration * 100}%`,
-        } as React.CSSProperties,
-      },
-      { [TimelineGridEventDataAttributes.occurrenceKey]: occurrenceKey } as Record<string, string>,
-      getButtonProps,
-    ],
-    stateAttributesMapping: overflowStateAttributesMapping,
-  });
-
-  return (
-    <TimelineGridEventContext.Provider value={contextValue}>
-      {element}
-      {preview.element}
-    </TimelineGridEventContext.Provider>
-  );
+    throw new Error("STUB");
 });
 
 export namespace TimelineGridEvent {

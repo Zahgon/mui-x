@@ -30,7 +30,7 @@ export function useBarSeries(): UseBarSeriesReturnValue[];
  */
 export function useBarSeries(seriesIds: SeriesId[]): UseBarSeriesReturnValue[];
 export function useBarSeries(seriesIds?: SeriesId | SeriesId[]) {
-  return useSeriesOfType('bar', seriesIds);
+    throw new Error("STUB");
 }
 
 /**

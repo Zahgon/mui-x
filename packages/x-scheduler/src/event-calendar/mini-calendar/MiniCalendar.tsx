@@ -27,60 +27,32 @@ import { formatMonthFullLetterAndYear } from '../../internals/utils/date-utils';
 const MiniCalendarRoot = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'MiniCalendar',
-})(({ theme }) => ({
-  userSelect: 'none',
-  padding: theme.spacing(1),
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MiniCalendarHeader = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'MiniCalendarHeader',
-})(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  marginBottom: theme.spacing(1),
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MiniCalendarNavigation = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'MiniCalendarNavigation',
-})(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(0.5),
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MiniCalendarMonthLabel = styled('span', {
   name: 'MuiEventCalendar',
   slot: 'MiniCalendarMonthLabel',
-})(({ theme }) => ({
-  ...theme.typography.subtitle2,
-  fontWeight: theme.typography.fontWeightMedium,
-  paddingLeft: theme.spacing(1.25),
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MiniCalendarWeekdayHeader = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'MiniCalendarWeekdayHeader',
-})(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(7, 1fr)',
-  textAlign: 'center',
-  marginBottom: theme.spacing(0.5),
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MiniCalendarWeekdayCell = styled('span', {
   name: 'MuiEventCalendar',
   slot: 'MiniCalendarWeekdayCell',
-})(({ theme }) => ({
-  fontSize: theme.typography.caption.fontSize,
-  color: (theme.vars || theme).palette.text.secondary,
-  padding: theme.spacing(0.5, 0),
-  '&[data-weekend]': {
-    color: (theme.vars || theme).palette.error.main,
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MiniCalendarGrid = styled('div', {
   name: 'MuiEventCalendar',
@@ -111,201 +83,13 @@ const MiniCalendarDayCell = styled('div', {
 const MiniCalendarDayButton = styled('button', {
   name: 'MuiEventCalendar',
   slot: 'MiniCalendarDayButton',
-})(({ theme }) => ({
-  width: 28,
-  height: 28,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  border: 'none',
-  borderRadius: '50%',
-  background: 'none',
-  cursor: 'pointer',
-  fontSize: theme.typography.caption.fontSize,
-  color: (theme.vars || theme).palette.text.primary,
-  padding: 0,
-  '&:hover': {
-    backgroundColor: theme.alpha((theme.vars || theme).palette.primary.main, 0.08),
-  },
-  '&:focus-visible': {
-    outline: `2px solid ${(theme.vars || theme).palette.primary.main}`,
-    outlineOffset: 2,
-  },
-  '&[data-other-month]': {
-    color: (theme.vars || theme).palette.text.disabled,
-  },
-  '&[data-today]:not([data-active])': {
-    fontWeight: theme.typography.fontWeightBold,
-    color: (theme.vars || theme).palette.primary.main,
-    backgroundColor: theme.alpha((theme.vars || theme).palette.primary.main, 0.15),
-  },
-  '&[data-active]': {
-    backgroundColor: (theme.vars || theme).palette.primary.main,
-    color: (theme.vars || theme).palette.primary.contrastText,
-    '&:hover': {
-      backgroundColor: (theme.vars || theme).palette.primary.dark,
-    },
-  },
-  '&[data-today][data-active]': {
-    fontWeight: theme.typography.fontWeightBold,
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 /**
  * A compact month calendar for navigating to specific days.
  */
 export const MiniCalendar = React.forwardRef<HTMLDivElement, MiniCalendarProps>(
   function MiniCalendar(props, forwardedRef) {
-    const { className, ...other } = props;
-
-    const adapter = useAdapterContext();
-    const store = useEventCalendarStoreContext();
-    const { classes, localeText } = useEventCalendarStyledContext();
-
-    const visibleDate = useStore(store, schedulerOtherSelectors.visibleDate);
-    const now = useStore(store, schedulerNowSelectors.nowUpdatedEveryMinute);
-    const weekStartsOn = useStore(store, eventCalendarPreferenceSelectors.weekStartsOn);
-
-    const [displayedMonth, setDisplayedMonth] = React.useState<TemporalSupportedObject>(() =>
-      adapter.startOfMonth(visibleDate),
-    );
-
-    // Sync displayed month when visibleDate changes externally
-    React.useEffect(() => {
-      setDisplayedMonth(adapter.startOfMonth(visibleDate));
-    }, [adapter, visibleDate]);
-
-    // Generate days for the displayed month (including padding days from adjacent months)
-    // Always show 6 weeks (42 days) for consistent height
-    const days = React.useMemo(() => {
-      const monthStart = adapter.startOfMonth(displayedMonth);
-      const gridStart = getStartOfWeek(adapter, monthStart, weekStartsOn);
-      // 6 weeks = 42 days, so end is 41 days after start
-      const gridEnd = adapter.addDays(gridStart, 41);
-      return getDayList({
-        adapter,
-        start: gridStart,
-        end: gridEnd,
-      });
-    }, [adapter, displayedMonth, weekStartsOn]);
-
-    // Group days into weeks
-    const weeks = React.useMemo(() => {
-      const result: SchedulerProcessedDate[][] = [];
-      for (let i = 0; i < days.length; i += 7) {
-        result.push(days.slice(i, i + 7));
-      }
-      return result;
-    }, [days]);
-
-    // Get weekday headers from first week
-    const weekdays = weeks[0] ?? [];
-
-    const monthYearLabel = React.useMemo(
-      () => formatMonthFullLetterAndYear(displayedMonth, adapter),
-      [adapter, displayedMonth],
-    );
-
-    return (
-      <MiniCalendarRoot
-        ref={forwardedRef}
-        role="grid"
-        aria-label={localeText.miniCalendarLabel}
-        aria-rowcount={1 + weeks.length}
-        aria-colcount={7}
-        className={clsx(classes.miniCalendar, className)}
-        {...other}
-      >
-        <MiniCalendarHeader className={classes.miniCalendarHeader}>
-          <MiniCalendarMonthLabel className={classes.miniCalendarMonthLabel}>
-            {monthYearLabel}
-          </MiniCalendarMonthLabel>
-          <MiniCalendarNavigation className={classes.miniCalendarNavigation}>
-            <IconButton
-              className={classes.miniCalendarPreviousButton}
-              size="small"
-              aria-label={localeText.miniCalendarGoToPreviousMonth}
-              onClick={() => setDisplayedMonth((prev) => adapter.addMonths(prev, -1))}
-            >
-              <ChevronLeftIcon fontSize="small" />
-            </IconButton>
-            <IconButton
-              className={classes.miniCalendarNextButton}
-              size="small"
-              aria-label={localeText.miniCalendarGoToNextMonth}
-              onClick={() => setDisplayedMonth((prev) => adapter.addMonths(prev, 1))}
-            >
-              <ChevronRightIcon fontSize="small" />
-            </IconButton>
-          </MiniCalendarNavigation>
-        </MiniCalendarHeader>
-
-        <MiniCalendarWeekdayHeader
-          role="row"
-          aria-rowindex={1}
-          className={classes.miniCalendarWeekdayHeader}
-        >
-          {weekdays.map((day, dayIndex) => (
-            <MiniCalendarWeekdayCell
-              key={day.key}
-              role="columnheader"
-              aria-label={adapter.formatByString(day.value, adapter.formats.weekday)}
-              aria-colindex={dayIndex + 1}
-              className={classes.miniCalendarWeekdayCell}
-              data-weekend={isWeekend(adapter, day.value) || undefined}
-            >
-              {adapter.formatByString(day.value, adapter.formats.weekday1Letter)}
-            </MiniCalendarWeekdayCell>
-          ))}
-        </MiniCalendarWeekdayHeader>
-
-        <MiniCalendarGrid role="rowgroup" className={classes.miniCalendarGrid}>
-          {weeks.map((week, weekIndex) => (
-            <MiniCalendarWeekRow
-              key={weekIndex}
-              role="row"
-              aria-rowindex={weekIndex + 2}
-              className={classes.miniCalendarWeekRow}
-            >
-              {week.map((day, dayIndex) => {
-                const isToday = adapter.isSameDay(day.value, now);
-                const isActive = adapter.isSameDay(day.value, visibleDate);
-                const isOtherMonth = !adapter.isSameMonth(day.value, displayedMonth);
-
-                // Create a full date label for accessibility
-                const fullDateLabel = adapter.formatByString(
-                  day.value,
-                  adapter.formats.localizedDateWithFullMonthAndWeekDay,
-                );
-
-                return (
-                  <MiniCalendarDayCell
-                    key={day.key}
-                    role="gridcell"
-                    aria-colindex={dayIndex + 1}
-                    className={classes.miniCalendarDayCell}
-                  >
-                    <MiniCalendarDayButton
-                      type="button"
-                      className={classes.miniCalendarDayButton}
-                      data-other-month={isOtherMonth || undefined}
-                      data-today={isToday || undefined}
-                      data-active={isActive || undefined}
-                      aria-label={fullDateLabel}
-                      aria-current={isToday ? 'date' : undefined}
-                      aria-selected={isActive}
-                      tabIndex={isActive ? 0 : -1}
-                      onClick={(event) => store.goToDate(day.value, event)}
-                    >
-                      {adapter.formatByString(day.value, adapter.formats.dayOfMonth)}
-                    </MiniCalendarDayButton>
-                  </MiniCalendarDayCell>
-                );
-              })}
-            </MiniCalendarWeekRow>
-          ))}
-        </MiniCalendarGrid>
-      </MiniCalendarRoot>
-    );
-  },
+        throw new Error("STUB");
+    },
 );

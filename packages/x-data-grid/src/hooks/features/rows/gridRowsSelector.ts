@@ -6,27 +6,27 @@ import {
 } from '../../../utils/createSelector';
 import type { GridStateCommunity } from '../../../models/gridStateCommunity';
 
-export const gridRowsStateSelector = createRootSelector((state: GridStateCommunity) => state.rows);
+export const gridRowsStateSelector = createRootSelector((state: GridStateCommunity) => { throw new Error("STUB"); });
 
 export const gridRowCountSelector = createSelector(
   gridRowsStateSelector,
-  (rows) => rows.totalRowCount,
+  (rows) => { throw new Error("STUB"); },
 );
 
 export const gridRowsLoadingSelector = createSelector(
   gridRowsStateSelector,
-  (rows) => rows.loading,
+  (rows) => { throw new Error("STUB"); },
 );
 
 export const gridTopLevelRowCountSelector = createSelector(
   gridRowsStateSelector,
-  (rows) => rows.totalTopLevelRowCount,
+  (rows) => { throw new Error("STUB"); },
 );
 
 // TODO rows v6: Rename
 export const gridRowsLookupSelector = createSelector(
   gridRowsStateSelector,
-  (rows) => rows.dataRowIdToModelLookup,
+  (rows) => { throw new Error("STUB"); },
 );
 
 /**
@@ -34,49 +34,38 @@ export const gridRowsLookupSelector = createSelector(
  */
 export const gridRowSelector = createSelector(
   gridRowsLookupSelector,
-  (rows, id: GridRowId) => rows[id],
+  (rows, id: GridRowId) => { throw new Error("STUB"); },
 );
 
-export const gridRowTreeSelector = createSelector(gridRowsStateSelector, (rows) => rows.tree);
+export const gridRowTreeSelector = createSelector(gridRowsStateSelector, (rows) => { throw new Error("STUB"); });
 
 /**
  * @category Rows
  */
 export const gridRowNodeSelector = createSelector(
   gridRowTreeSelector,
-  (rowTree, rowId: GridRowId) => rowTree[rowId],
+  (rowTree, rowId: GridRowId) => { throw new Error("STUB"); },
 );
 
 export const gridRowGroupsToFetchSelector = createSelector(
   gridRowsStateSelector,
-  (rows) => rows.groupsToFetch,
+  (rows) => { throw new Error("STUB"); },
 );
 
 export const gridRowGroupingNameSelector = createSelector(
   gridRowsStateSelector,
-  (rows) => rows.groupingName,
+  (rows) => { throw new Error("STUB"); },
 );
 
 export const gridRowTreeDepthsSelector = createSelector(
   gridRowsStateSelector,
-  (rows) => rows.treeDepths,
+  (rows) => { throw new Error("STUB"); },
 );
 
 export const gridRowMaximumTreeDepthSelector = createSelectorMemoized(
   gridRowsStateSelector,
   (rows) => {
-    const entries = Object.entries(rows.treeDepths);
-
-    if (entries.length === 0) {
-      return 1;
-    }
-
-    return (
-      (entries
-        .filter(([, nodeCount]) => nodeCount > 0)
-        .map(([depth]) => Number(depth))
-        .sort((a, b) => b - a)[0] ?? 0) + 1
-    );
+      throw new Error("STUB");
   },
 );
 
@@ -85,20 +74,14 @@ export const gridRowMaximumTreeDepthSelector = createSelectorMemoized(
  */
 export const gridDataRowIdsSelector = createSelector(
   gridRowsStateSelector,
-  (rows) => rows.dataRowIds,
+  (rows) => { throw new Error("STUB"); },
 );
 
 export const gridDataRowsSelector = createSelectorMemoized(
   gridDataRowIdsSelector,
   gridRowsLookupSelector,
   (dataRowIds, rowsLookup) =>
-    dataRowIds.reduce((acc, id) => {
-      if (!rowsLookup[id]) {
-        return acc;
-      }
-      acc.push(rowsLookup[id]);
-      return acc;
-    }, [] as GridRowModel[]),
+    { throw new Error("STUB"); },
 );
 
 /**
@@ -106,7 +89,7 @@ export const gridDataRowsSelector = createSelectorMemoized(
  */
 export const gridAdditionalRowGroupsSelector = createSelector(
   gridRowsStateSelector,
-  (rows) => rows?.additionalRowGroups,
+  (rows) => { throw new Error("STUB"); },
 );
 
 /**
@@ -115,20 +98,7 @@ export const gridAdditionalRowGroupsSelector = createSelector(
 export const gridPinnedRowsSelector = createSelectorMemoized(
   gridAdditionalRowGroupsSelector,
   (additionalRowGroups) => {
-    const rawPinnedRows = additionalRowGroups?.pinnedRows;
-
-    return {
-      bottom:
-        rawPinnedRows?.bottom?.map((rowEntry) => ({
-          id: rowEntry.id,
-          model: rowEntry.model ?? {},
-        })) ?? [],
-      top:
-        rawPinnedRows?.top?.map((rowEntry) => ({
-          id: rowEntry.id,
-          model: rowEntry.model ?? {},
-        })) ?? [],
-    };
+      throw new Error("STUB");
   },
 );
 
@@ -136,5 +106,5 @@ export const gridPinnedRowsSelector = createSelectorMemoized(
  * @ignore - do not document.
  */
 export const gridPinnedRowsCountSelector = createSelector(gridPinnedRowsSelector, (pinnedRows) => {
-  return (pinnedRows?.top?.length || 0) + (pinnedRows?.bottom?.length || 0);
+    throw new Error("STUB");
 });

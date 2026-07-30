@@ -26,17 +26,7 @@ const useUtilityClasses = (props: GaugeProps) => {
 };
 
 const Gauge = React.forwardRef(function Gauge(props: GaugeProps, ref: React.Ref<HTMLDivElement>) {
-  const { text, children, classes: propsClasses, className, skipAnimation, ...other } = props;
-  const classes = useUtilityClasses(props);
-
-  return (
-    <GaugeContainer {...other} className={clsx(classes.root, className)} ref={ref}>
-      <GaugeReferenceArc />
-      <GaugeValueArc skipAnimation={skipAnimation} />
-      <GaugeValueText text={text} />
-      {children}
-    </GaugeContainer>
-  );
+    throw new Error("STUB");
 });
 
 Gauge.propTypes /* remove-proptypes */ = {

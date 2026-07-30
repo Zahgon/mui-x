@@ -2,10 +2,10 @@ import { createSelector, createRootSelector } from '@mui/x-data-grid/internals';
 import type { GridStatePro } from '../../../models/gridStatePro';
 
 export const gridColumnReorderSelector = createRootSelector(
-  (state: GridStatePro) => state.columnReorder,
+  (state: GridStatePro) => { throw new Error("STUB"); },
 );
 
 export const gridColumnReorderDragColSelector = createSelector(
   gridColumnReorderSelector,
-  (columnReorder) => columnReorder.dragCol,
+  (columnReorder) => { throw new Error("STUB"); },
 );

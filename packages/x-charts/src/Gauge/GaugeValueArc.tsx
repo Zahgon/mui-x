@@ -11,9 +11,7 @@ import { gaugeClasses } from './gaugeClasses';
 const StyledPath = styled('path', {
   name: 'MuiGauge',
   slot: 'ValueArc',
-})(({ theme }) => ({
-  fill: (theme.vars || theme).palette.primary.main,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 function GaugeValueArc({
   className,
@@ -86,17 +84,7 @@ function AnimatedGaugeValueArc({
   skipAnimation: inSkipAnimation,
   ...other
 }: AnimatedGaugeValueArcProps) {
-  const skipAnimation = useSkipAnimation(inSkipAnimation);
-  const animatedProps = useAnimateGaugeValueArc({
-    startAngle,
-    endAngle,
-    cornerRadius,
-    innerRadius,
-    outerRadius,
-    skipAnimation,
-  });
-
-  return <StyledPath {...animatedProps} transform={`translate(${cx}, ${cy})`} {...other} />;
+    throw new Error("STUB");
 }
 
 AnimatedGaugeValueArc.propTypes /* remove-proptypes */ = {

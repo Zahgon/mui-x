@@ -5,7 +5,7 @@ import type { GridRowId } from '@mui/x-data-grid-pro';
 import type { GridStatePremium } from '../../../models/gridStatePremium';
 
 export const gridAggregationStateSelector = createRootSelector(
-  (state: GridStatePremium) => state.aggregation,
+  (state: GridStatePremium) => { throw new Error("STUB"); },
 );
 
 /**
@@ -15,7 +15,7 @@ export const gridAggregationStateSelector = createRootSelector(
  */
 export const gridAggregationModelSelector = createSelector(
   gridAggregationStateSelector,
-  (aggregationState) => aggregationState.model,
+  (aggregationState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -24,42 +24,13 @@ export const gridAggregationModelSelector = createSelector(
  */
 export const gridAggregationLookupSelector = createSelector(
   gridAggregationStateSelector,
-  (aggregationState) => aggregationState.lookup,
+  (aggregationState) => { throw new Error("STUB"); },
 );
 
 export const gridCellAggregationResultSelector = createSelector(
   gridRowTreeSelector,
   gridAggregationLookupSelector,
   (rowTree, aggregationLookup, { id, field }: { id: GridRowId; field: string | undefined }) => {
-    if (!aggregationLookup || field === undefined) {
-      return null;
-    }
-
-    let cellAggregationPosition: GridAggregationPosition | null = null;
-    const rowNode = rowTree[id];
-
-    if (!rowNode) {
-      return null;
-    }
-
-    if (rowNode.type === 'group') {
-      cellAggregationPosition = 'inline';
-    } else if (id.toString().startsWith('auto-generated-group-footer-')) {
-      cellAggregationPosition = 'footer';
-    }
-
-    if (cellAggregationPosition == null) {
-      return null;
-    }
-
-    // TODO: Add custom root id
-    const groupId = cellAggregationPosition === 'inline' ? id : (rowNode.parent ?? '');
-
-    const aggregationResult = aggregationLookup?.[groupId]?.[field];
-    if (!aggregationResult || aggregationResult.position !== cellAggregationPosition) {
-      return null;
-    }
-
-    return aggregationResult;
+      throw new Error("STUB");
   },
 );

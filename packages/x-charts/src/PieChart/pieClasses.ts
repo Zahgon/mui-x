@@ -33,7 +33,7 @@ export interface PieArcOwnerState {
 }
 
 export function getPieUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPieChart', slot);
+    throw new Error("STUB");
 }
 
 export const pieClasses: PieClasses = generateUtilityClasses('MuiPieChart', [

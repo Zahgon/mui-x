@@ -236,49 +236,9 @@ const setup = () => {
 };
 
 describe('getStringSize', () => {
-  bench(
-    'without styles',
-    () => {
-      strings.forEach((countryName) => getStringSize(countryName));
-    },
-    { setup },
-  );
-
-  bench(
-    'with alternating styles',
-    () => {
-      const style1 = { fontSize: 12, fontFamily: 'Arial' };
-      const style2 = { fontSize: 16, fontFamily: 'Times New Roman', fontWeight: 'bold' };
-      const firstHalf = strings.filter((_, i) => i % 2 === 0);
-      const secondHalf = strings.filter((_, i) => i % 2 !== 0);
-
-      firstHalf.forEach((countryName) => getStringSize(countryName, style1));
-      secondHalf.forEach((countryName) => getStringSize(countryName, style2));
-    },
-    { setup },
-  );
+    throw new Error("STUB");
 });
 
 describe('batchMeasureStrings', () => {
-  bench(
-    'without styles',
-    () => {
-      batchMeasureStrings(strings);
-    },
-    { setup },
-  );
-
-  bench(
-    'with alternating styles',
-    () => {
-      const style1 = { fontSize: 12, fontFamily: 'Arial' };
-      const style2 = { fontSize: 16, fontFamily: 'Times New Roman', fontWeight: 'bold' };
-      const firstHalf = strings.filter((_, i) => i % 2 === 0);
-      const secondHalf = strings.filter((_, i) => i % 2 !== 0);
-
-      batchMeasureStrings(firstHalf, style1);
-      batchMeasureStrings(secondHalf, style2);
-    },
-    { setup },
-  );
+    throw new Error("STUB");
 });

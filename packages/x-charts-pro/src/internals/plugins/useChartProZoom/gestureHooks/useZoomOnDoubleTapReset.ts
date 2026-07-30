@@ -20,54 +20,12 @@ export const useZoomOnDoubleTapReset = (
     Object.keys(optionsLookup).length > 0 && Boolean(config);
 
   React.useEffect(() => {
-    if (!isZoomOnDoubleTapResetEnabled) {
-      return;
-    }
-
-    instance.updateZoomInteractionListeners('zoomDoubleTapReset', {
-      requiredKeys: config!.requiredKeys,
-      pointerMode: config!.pointerMode,
-      pointerOptions: {
-        mouse: config!.mouse,
-        touch: config!.touch,
-      },
-    });
+      throw new Error("STUB");
   }, [config, isZoomOnDoubleTapResetEnabled, instance]);
 
   // Reset zoom on double tap
   React.useEffect(() => {
-    const element = chartsLayerContainerRef.current;
-    if (element === null || !isZoomOnDoubleTapResetEnabled) {
-      return () => {};
-    }
-
-    const handleDoubleTapReset = () => {
-      // Reset all axes to their default zoom state
-      setZoomDataCallback((prev) => {
-        return prev.map((zoom) => {
-          const option = optionsLookup[zoom.axisId];
-          if (!option) {
-            return zoom;
-          }
-
-          // Reset to the full range (minStart to maxEnd)
-          return {
-            axisId: zoom.axisId,
-            start: option.minStart,
-            end: option.maxEnd,
-          };
-        });
-      });
-    };
-
-    const doubleTapResetHandler = instance.addInteractionListener(
-      'zoomDoubleTapReset',
-      handleDoubleTapReset,
-    );
-
-    return () => {
-      doubleTapResetHandler.cleanup();
-    };
+      throw new Error("STUB");
   }, [
     chartsLayerContainerRef,
     isZoomOnDoubleTapResetEnabled,

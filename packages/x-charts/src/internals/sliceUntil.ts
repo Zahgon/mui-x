@@ -5,25 +5,11 @@ const segmenter =
     : null;
 
 function sliceUntilFallback(text: string, endIndex: number) {
-  return text.slice(0, endIndex);
+    throw new Error("STUB");
 }
 
 function sliceUntilModern(text: string, endIndex: number) {
-  const segments = segmenter!.segment(text);
-
-  let newText = '';
-  let i = 0;
-
-  for (const segment of segments) {
-    newText += segment.segment;
-    i += 1;
-
-    if (i >= endIndex) {
-      break;
-    }
-  }
-
-  return newText;
+    throw new Error("STUB");
 }
 
 /** Creates a slice of {@link text} from the start until the {@link endIndex}th grapheme (basically character). */

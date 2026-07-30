@@ -37,57 +37,7 @@ const EventCalendarPremium = React.forwardRef(function EventCalendarPremium<
   inProps: EventCalendarPremiumProps<TEvent, TResource>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  // Use the same theme name to share theme customizations with base EventCalendar
-  // eslint-disable-next-line mui/material-ui-name-matches-component-name
-  const props = useThemeProps({ props: inProps, name: 'MuiEventCalendar' });
-  useLicenseVerifier(packageInfo);
-
-  const {
-    parameters,
-    forwardedProps: { className, classes: classesProp, ...forwardedProps },
-  } = useExtractEventCalendarParameters<TEvent, TResource, typeof props>(props);
-
-  // Use premium store with lazy loading
-  const store = useEventCalendarPremium(parameters);
-  const classes = useEventCalendarUtilityClasses(classesProp);
-
-  const { localeText, apiRef, ...other } = forwardedProps;
-  useInitializeApiRef(store, apiRef);
-
-  const schedulerId = useId();
-
-  const mergedLocaleText = React.useMemo(
-    () => ({ ...EVENT_CALENDAR_DEFAULT_LOCALE_TEXT, ...localeText }),
-    [localeText],
-  );
-
-  const calendarStyledContextValue = React.useMemo(
-    () => ({ schedulerId, classes, localeText: mergedLocaleText }),
-    [schedulerId, classes, mergedLocaleText],
-  );
-
-  const dialogStyledContextValue = React.useMemo(
-    () => ({ schedulerId, classes, localeText: mergedLocaleText }),
-    [schedulerId, classes, mergedLocaleText],
-  );
-
-  const sharedComponentsStyledContextValue = React.useMemo(() => ({ classes }), [classes]);
-
-  return (
-    <SchedulerStoreContext.Provider value={store as any}>
-      <EventCalendarStyledContext.Provider value={calendarStyledContextValue}>
-        <EventDialogStyledContext.Provider value={dialogStyledContextValue}>
-          <SharedComponentsStyledContext.Provider value={sharedComponentsStyledContextValue}>
-            <EventDialogProvider optionalRenderers={PREMIUM_EVENT_DIALOG_OPTIONAL_RENDERERS}>
-              <EventCalendarRoot className={className} {...other} ref={forwardedRef}>
-                {watermark}
-              </EventCalendarRoot>
-            </EventDialogProvider>
-          </SharedComponentsStyledContext.Provider>
-        </EventDialogStyledContext.Provider>
-      </EventCalendarStyledContext.Provider>
-    </SchedulerStoreContext.Provider>
-  );
+    throw new Error("STUB");
 }) as EventCalendarPremiumComponent;
 
 EventCalendarPremium.propTypes /* remove-proptypes */ = {

@@ -22,45 +22,13 @@ export interface ChatConversationTitleProps extends ConversationTitleProps {
 const ChatConversationTitleStyled = styled('div', {
   name: 'MuiChatConversation',
   slot: 'Title',
-  overridesResolver: (_, styles) => styles.title,
-})(({ theme }) => ({
-  margin: 0,
-  fontSize: theme.typography.subtitle1.fontSize,
-  fontWeight: theme.typography.fontWeightMedium,
-  color: (theme.vars || theme).palette.text.primary,
-  lineHeight: 1.4,
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConversationTitle = React.forwardRef<HTMLDivElement, ChatConversationTitleProps>(
   function ChatConversationTitle(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatConversationTitle' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatConversationUtilityClasses(classesProp);
-
-    return (
-      <ConversationTitle
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          title: slots?.title ?? ChatConversationTitleStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          title: mergeSlotProps(
-            {
-              className: clsx(classes.title, className),
-              sx,
-            },
-            slotProps?.title,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatConversationTitle.propTypes /* remove-proptypes */ = {

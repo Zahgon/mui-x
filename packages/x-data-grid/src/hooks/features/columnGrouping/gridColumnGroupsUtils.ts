@@ -71,11 +71,7 @@ const recurrentUnwrapGroupingColumnModel = (
 
   const { groupId, children } = columnGroupNode;
   children.forEach((child) => {
-    recurrentUnwrapGroupingColumnModel(
-      child,
-      [...parents, groupId],
-      unwrappedGroupingModelToComplete,
-    );
+      throw new Error("STUB");
   });
 };
 
@@ -94,7 +90,7 @@ export const unwrapGroupingColumnModel = (
 
   const unwrappedSubTree: UnwrappedGroupingModel = {};
   columnGroupingModel.forEach((columnGroupNode) => {
-    recurrentUnwrapGroupingColumnModel(columnGroupNode, [], unwrappedSubTree);
+      throw new Error("STUB");
   });
 
   return unwrappedSubTree;
@@ -108,7 +104,7 @@ export const getColumnGroupsHeaderStructure = (
   const getParents = (field: string) => unwrappedGroupingModel[field] ?? [];
 
   const groupingHeaderStructure: GridGroupingStructure[][] = [];
-  const maxDepth = Math.max(0, ...orderedColumns.map((field) => getParents(field).length));
+  const maxDepth = Math.max(0, ...orderedColumns.map((field) => { throw new Error("STUB"); }));
 
   const haveSameParents = (field1: string, field2: string, depth: number): boolean => {
     const a = getParents(field1);

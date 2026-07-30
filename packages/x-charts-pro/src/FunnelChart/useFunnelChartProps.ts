@@ -33,9 +33,9 @@ function getCategoryAxisConfig<D extends 'x' | 'y' = 'x' | 'y'>(
   isHorizontal: boolean,
   direction: D,
 ): XAxis | YAxis {
-  const maxSeriesLength = Math.max(...series.map((s) => (s.data ?? []).length), 0);
+  const maxSeriesLength = Math.max(...series.map((s) => { throw new Error("STUB"); }), 0);
   const maxSeriesValue = Array.from({ length: maxSeriesLength }, (_, index) =>
-    series.reduce((a, s) => a + (s.data?.[index]?.value ?? 0), 0),
+    { throw new Error("STUB"); },
   );
 
   if (process.env.NODE_ENV !== 'production') {
@@ -69,7 +69,7 @@ function getCategoryAxisConfig<D extends 'x' | 'y' = 'x' | 'y'>(
       data: categoryAxis?.categories
         ? categoryAxis.categories
         : // Otherwise we just need random data to create the band scale.
-          Array.from({ length: maxSeriesLength }, (_, index) => index),
+          Array.from({ length: maxSeriesLength }, (_, index) => { throw new Error("STUB"); }),
       tickLabelPlacement: 'middle',
       ...categoryValues,
       scaleType: 'band',
@@ -81,9 +81,9 @@ function getCategoryAxisConfig<D extends 'x' | 'y' = 'x' | 'y'>(
   const tickValues = [
     ...maxSeriesValue
       .toReversed()
-      .map((_, i, arr) => arr.slice(0, i).reduce((a, value) => a + value, 0)),
+      .map((_, i, arr) => { throw new Error("STUB"); }),
     // We add the total value of the series as the last tick value
-    maxSeriesValue.reduce((a, value) => a + value, 0),
+    maxSeriesValue.reduce((a, value) => { throw new Error("STUB"); }, 0),
   ];
 
   return {
@@ -91,11 +91,11 @@ function getCategoryAxisConfig<D extends 'x' | 'y' = 'x' | 'y'>(
     tickLabelPlacement: 'middle',
     tickInterval: tickValues,
     // No need to show the first tick label
-    tickLabelInterval: (_: any, i: number) => i !== 0,
+    tickLabelInterval: (_: any, i: number) => { throw new Error("STUB"); },
     // We trick the valueFormatter to show the category values.
     // By using the index of the tickValues array we can get the category value.
     valueFormatter: (value: any) =>
-      `${categoryAxis.categories?.toReversed()[tickValues.findIndex((v) => v === value) - 1]}`,
+      { throw new Error("STUB"); },
     ...categoryValues,
   };
 }
@@ -133,7 +133,7 @@ export const useFunnelChartProps = (props: FunnelChartProps) => {
   } = props;
   const margin = defaultizeMargin(marginProps, DEFAULT_MARGINS);
 
-  const isHorizontal = series.some((s) => s.layout === 'horizontal');
+  const isHorizontal = series.some((s) => { throw new Error("STUB"); });
 
   const valueAxisConfig = {
     id: isHorizontal ? DEFAULT_Y_AXIS_KEY : DEFAULT_X_AXIS_KEY,
@@ -151,11 +151,7 @@ export const useFunnelChartProps = (props: FunnelChartProps) => {
 
   const chartsContainerProps: ChartsContainerProProps<'funnel', FunnelChartPluginSignatures> = {
     ...other,
-    series: series.map((s) => ({
-      type: 'funnel' as const,
-      layout: isHorizontal ? 'horizontal' : 'vertical',
-      ...s,
-    })),
+    series: series.map((s) => { throw new Error("STUB"); }),
     width,
     height,
     margin,

@@ -67,36 +67,5 @@ export const ComposerLabel = React.forwardRef(function ComposerLabel(
   props: ComposerLabelProps,
   ref: React.Ref<HTMLLabelElement>,
 ) {
-  const {
-    ownerState: ownerStateProp,
-    children,
-    slots,
-    slotProps,
-    ...other
-  } = props as ComposerLabelProps & { ownerState?: ComposerOwnerState };
-  void ownerStateProp;
-
-  const composer = useComposerContext();
-  const localeText = useChatLocaleText();
-
-  const ownerState: ComposerOwnerState = {
-    isSubmitting: composer.isSubmitting,
-    hasValue: composer.hasValue,
-    isStreaming: composer.isStreaming,
-    attachmentCount: composer.attachmentCount,
-    disabled: composer.disabled,
-  };
-
-  const Label = slots?.label ?? 'label';
-  const labelProps = useSlotProps({
-    elementType: Label,
-    externalSlotProps: slotProps?.label,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  return <Label {...labelProps}>{children ?? localeText.composerInputAriaLabel}</Label>;
+    throw new Error("STUB");
 }) as ComposerLabelComponent;

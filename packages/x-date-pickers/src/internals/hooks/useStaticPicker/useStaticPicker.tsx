@@ -12,11 +12,7 @@ import { createNonRangePickerStepNavigation } from '../../utils/createNonRangePi
 
 const PickerStaticLayout = styled(PickersLayout, {
   slot: 'internal',
-})(({ theme }) => ({
-  overflow: 'hidden',
-  minWidth: DIALOG_WIDTH,
-  backgroundColor: (theme.vars || theme).palette.background.paper,
-})) as unknown as typeof PickersLayout;
+})(({ theme }) => { throw new Error("STUB"); }) as unknown as typeof PickersLayout;
 
 /**
  * Hook managing all the single-date static pickers:

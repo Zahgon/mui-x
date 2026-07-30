@@ -89,7 +89,7 @@ export class SchedulerStore<
   // own resources.
   protected timeoutManager = this.disposables.use(new TimeoutManager());
 
-  private eventManager = this.disposables.adopt(new EventManager(), (m) => m.removeAllListeners());
+  private eventManager = this.disposables.adopt(new EventManager(), (m) => { throw new Error("STUB"); });
 
   /**
    * Plugin that provides event-scheduling support (dependencies). `null` when not attached.
@@ -103,60 +103,7 @@ export class SchedulerStore<
     mapper: SchedulerParametersToStateMapper<State, Parameters>,
     recurringEventsPlugin: SchedulerRecurringEventsPluginInterface | null = null,
   ) {
-    const stateFromParameters = SchedulerStore.deriveStateFromParameters(parameters, adapter);
-
-    const schedulerInitialState: Omit<SchedulerState<TEvent>, 'shouldEventRequireResource'> = {
-      ...SchedulerStore.deriveStateFromParameters(parameters, adapter),
-      ...(parameters.dataSource
-        ? { ...MOCK_EVENT_STATE, eventModelStructure: parameters.eventModelStructure ?? {} }
-        : buildEventsState(
-            parameters,
-            adapter,
-            stateFromParameters.displayTimezone,
-            recurringEventsPlugin,
-          )),
-      ...buildResourcesState(parameters),
-      preferences: DEFAULT_SCHEDULER_PREFERENCES,
-      adapter,
-      occurrencePlaceholder: null,
-      editedOccurrenceKey: null,
-      copiedEvent: null,
-      nowUpdatedEveryMinute: adapter.now(stateFromParameters.displayTimezone),
-      pendingRecurringEventOperation: null,
-      visibleResources:
-        parameters.visibleResources ?? parameters.defaultVisibleResources ?? EMPTY_OBJECT,
-      collapsedResources:
-        parameters.collapsedResources ?? parameters.defaultCollapsedResources ?? EMPTY_OBJECT,
-      visibleDate:
-        parameters.visibleDate ??
-        parameters.defaultVisibleDate ??
-        adapter.startOfDay(adapter.now(stateFromParameters.displayTimezone)),
-      errors: [],
-      isLoading: !!parameters.dataSource,
-      recurringEventsPlugin,
-    };
-
-    const initialState = mapper.getInitialState(schedulerInitialState, parameters, adapter);
-
-    super(initialState);
-    this.parameters = parameters;
-    this.instanceName = instanceName;
-    this.mapper = mapper;
-
-    const currentDate = new Date();
-    const timeUntilNextMinuteMs =
-      ONE_MINUTE_IN_MS - (currentDate.getSeconds() * 1000 + currentDate.getMilliseconds());
-
-    this.timeoutManager.startTimeout('set-now', timeUntilNextMinuteMs, () => {
-      this.set('nowUpdatedEveryMinute', this.state.adapter.now(this.state.displayTimezone));
-      this.timeoutManager.startInterval('set-now', ONE_MINUTE_IN_MS, () => {
-        this.set('nowUpdatedEveryMinute', this.state.adapter.now(this.state.displayTimezone));
-      });
-    });
-
-    if (process.env.NODE_ENV !== 'production') {
-      this.initialParameters = parameters;
-    }
+      throw new Error("STUB");
   }
 
   /**
@@ -273,19 +220,7 @@ export class SchedulerStore<
    * unmount, so this method does not need to defer the teardown itself.
    */
   [disposeSymbol](): void {
-    if (this.disposables.disposed) {
-      return;
-    }
-    try {
-      this.disposables.dispose();
-    } catch (error) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error(
-          'MUI X Scheduler: error while disposing the store.',
-          ...unwrapSuppressedErrors(error),
-        );
-      }
-    }
+      throw new Error("STUB");
   }
 
   /**
@@ -293,10 +228,7 @@ export class SchedulerStore<
    * The key is the one carried by the matching `StoredError` entry.
    */
   public dismissError = (key: string) => {
-    this.set(
-      'errors',
-      this.state.errors.filter((entry) => entry.key !== key),
-    );
+      throw new Error("STUB");
   };
 
   private nextErrorKey = 0;
@@ -310,12 +242,7 @@ export class SchedulerStore<
    * @internal
    */
   public pushError = (error: unknown) => {
-    const wrapped =
-      error instanceof Error
-        ? error
-        : /* minify-error-disabled */ new Error(String(error), { cause: error });
-    this.nextErrorKey += 1;
-    this.set('errors', [...this.state.errors, { error: wrapped, key: String(this.nextErrorKey) }]);
+      throw new Error("STUB");
   };
 
   /**
@@ -325,15 +252,7 @@ export class SchedulerStore<
     selector: (state: State) => Value,
     effect: (previous: Value, next: Value) => void,
   ) => {
-    let previousValue = selector(this.state);
-
-    return this.subscribe((state) => {
-      const nextValue = selector(state);
-      if (nextValue !== previousValue) {
-        effect(previousValue, nextValue);
-        previousValue = nextValue;
-      }
-    });
+      throw new Error("STUB");
   };
 
   /**
@@ -354,7 +273,7 @@ export class SchedulerStore<
     handler: SchedulerEventListener<TEvent, E>,
   ): (() => void) => {
     this.eventManager.on(eventName, handler);
-    return () => this.eventManager.removeListener(eventName, handler);
+    return () => { throw new Error("STUB"); };
   };
 
   protected setVisibleDate = ({
@@ -382,109 +301,14 @@ export class SchedulerStore<
    * Adds, updates and / or deletes events in the calendar.
    */
   protected updateEvents(parameters: UpdateEventsParameters) {
-    const eventDetails = createChangeEventDetails('none');
-    const { deleted: deletedParam, updated: updatedParam = [], created = [] } = parameters;
-
-    const updated = new Map(updatedParam.map((ev) => [ev.id, ev]));
-    const deleted = new Set(deletedParam);
-
-    if (process.env.NODE_ENV !== 'production') {
-      for (const id of deleted) {
-        if (updated.has(id)) {
-          warnOnce([
-            `MUI X Scheduler: id "${String(id)}" appears in both \`deleted\` and \`updated\`.`,
-            'These two arrays must be disjoint, otherwise the order of operations is undefined.',
-          ]);
-        }
-      }
-    }
-    const originalEventIds = schedulerEventSelectors.idList(this.state);
-    const originalEventModelLookup = schedulerEventSelectors.modelLookup(this.state);
-    const newEvents: TEvent[] = [];
-    const updatedEvents: TEvent[] = [];
-
-    if (deleted.size > 0 || updated.size > 0) {
-      for (const eventId of originalEventIds) {
-        if (deleted.has(eventId)) {
-          continue;
-        }
-        if (updated.has(eventId)) {
-          const processedEvent = this.state.processedEventLookup.get(eventId);
-          const newEvent = getUpdatedEventModelFromChanges<TEvent>(
-            originalEventModelLookup.get(eventId),
-            updated.get(eventId)!,
-            this.state.eventModelStructure,
-            this.state.adapter,
-            processedEvent!.modelInBuiltInFormat,
-          );
-          newEvents.push(newEvent);
-          updatedEvents.push(newEvent);
-        } else {
-          newEvents.push(originalEventModelLookup.get(eventId));
-        }
-      }
-    } else {
-      newEvents.push(...schedulerEventSelectors.modelList(this.state));
-    }
-
-    const createdIds: SchedulerEventId[] = [];
-    const createdEvents: TEvent[] = [];
-    for (const createdEvent of created) {
-      // Events created from an existing one (split, duplicate, paste) inherit its custom fields.
-      const source =
-        createdEvent.extractedFromId == null
-          ? undefined
-          : originalEventModelLookup.get(createdEvent.extractedFromId);
-      const response = createEventModel(
-        source ? { ...getCustomEventProperties(source), ...createdEvent } : createdEvent,
-        this.state.eventModelStructure,
-        this.state.adapter,
-      );
-      newEvents.push(response.model);
-      createdEvents.push(response.model);
-      createdIds.push(response.id);
-    }
-
-    this.schedulingPlugin?.handleEventsUpdate(parameters);
-
-    if (process.env.NODE_ENV !== 'production') {
-      if (!this.parameters.onEventsChange && !this.parameters.dataSource) {
-        warnOnce([
-          'MUI X Scheduler: An event update was ignored because no `onEventsChange` handler nor `dataSource` is provided.',
-          'The `events` prop is fully controlled, so without one of them the changes are lost and the UI does not update.',
-          'Pass an `onEventsChange` handler that updates the `events` prop, provide a `dataSource`, or set `readOnly` to disable editing.',
-        ]);
-      }
-    }
-
-    this.parameters.onEventsChange?.(newEvents, eventDetails);
-
-    // Publish event for premium plugins (e.g., lazy loading) to sync caches
-    queueMicrotask(() =>
-      this.publishEvent('eventsUpdated', {
-        deleted: deletedParam ?? [],
-        updated: updatedEvents,
-        created: createdEvents,
-        newEvents,
-      }),
-    );
-
-    return {
-      deleted: deletedParam ?? [],
-      updated: Array.from(updated.keys()) as SchedulerEventId[],
-      created: createdIds,
-    };
+      throw new Error("STUB");
   }
 
   /**
    * Goes to today's date without changing the view.
    */
   public goToToday = (event: React.UIEvent) => {
-    const { adapter } = this.state;
-    this.setVisibleDate({
-      visibleDate: adapter.startOfDay(adapter.now(this.state.displayTimezone)),
-      event,
-    });
+      throw new Error("STUB");
   };
 
   /**
@@ -498,45 +322,14 @@ export class SchedulerStore<
    * Creates a new event in the calendar.
    */
   public createEvent = (calendarEvent: SchedulerEventCreationProperties) => {
-    if (this.state.recurringEventsPlugin == null && calendarEvent.rrule) {
-      if (process.env.NODE_ENV !== 'production') {
-        warnOnce([
-          'MUI X Scheduler: Recurring events are a premium feature. The `rrule` property will be ignored.',
-          'Use <EventCalendarPremium /> or <EventTimelinePremium /> to enable recurring events.',
-        ]);
-      }
-      return this.updateEvents({ created: [{ ...calendarEvent, rrule: undefined }] }).created[0];
-    }
-    return this.updateEvents({ created: [calendarEvent] }).created[0];
+      throw new Error("STUB");
   };
 
   /**
    * Updates an event in the calendar.
    */
   public updateEvent = (calendarEvent: SchedulerEventUpdatedProperties) => {
-    const original = schedulerEventSelectors.processedEventRequired(this.state, calendarEvent.id);
-    if (this.state.recurringEventsPlugin != null && original.dataTimezone.rrule) {
-      throw new Error(
-        'MUI X Scheduler: This event is recurring and cannot be updated with updateEvent(). ' +
-          'Recurring events require special handling to manage series and exceptions. ' +
-          'Use updateRecurringEvent() instead to update recurring events.',
-      );
-    }
-
-    if (this.state.recurringEventsPlugin == null && calendarEvent.rrule != null) {
-      if (process.env.NODE_ENV !== 'production') {
-        warnOnce([
-          'MUI X Scheduler: Recurring events are a premium feature. The `rrule` property will be ignored.',
-          'Use <EventCalendarPremium /> or <EventTimelinePremium /> to enable recurring events.',
-        ]);
-      }
-      this.updateEvents({ updated: [{ ...calendarEvent, rrule: undefined }] });
-      return;
-    }
-
-    this.updateEvents({
-      updated: [calendarEvent],
-    });
+      throw new Error("STUB");
   };
 
   /**
@@ -636,7 +429,7 @@ export class SchedulerStore<
     this.updateEvents(updatedEvents);
 
     if (onSubmit) {
-      queueMicrotask(() => onSubmit());
+      queueMicrotask(() => { throw new Error("STUB"); });
     }
   };
 
@@ -644,7 +437,7 @@ export class SchedulerStore<
    * Deletes an event from the calendar.
    */
   public deleteEvent = (eventId: SchedulerEventId) => {
-    this.updateEvents({ deleted: [eventId] });
+      throw new Error("STUB");
   };
 
   /**
@@ -658,87 +451,28 @@ export class SchedulerStore<
     start: TemporalSupportedObject,
     end: TemporalSupportedObject,
   ) => {
-    const { adapter } = this.state;
-    const original = schedulerEventSelectors.processedEventRequired(this.state, eventId);
-    const originalModel = original.modelInBuiltInFormat;
-    const dataTimezone = originalModel.timezone ?? 'default';
-    const duplicatedEvent = extractStandaloneEvent(original, {
-      start: dateToEventString(adapter, start, originalModel.start, dataTimezone),
-      end: dateToEventString(adapter, end, originalModel.end, dataTimezone),
-    });
-    return this.updateEvents({ created: [duplicatedEvent] }).created[0];
+      throw new Error("STUB");
   };
 
   /**
    * Copies an event to be pasted later.
    */
   public copyEvent = (eventId: SchedulerEventId) => {
-    // Asserts that the event exists.
-    schedulerEventSelectors.processedEventRequired(this.state, eventId);
-
-    this.set('copiedEvent', { id: eventId, action: 'copy' });
+      throw new Error("STUB");
   };
 
   /**
    * Cuts an event to be pasted later.
    */
   public cutEvent = (eventId: SchedulerEventId) => {
-    // Asserts that the event exists.
-    schedulerEventSelectors.processedEventRequired(this.state, eventId);
-
-    this.set('copiedEvent', { id: eventId, action: 'cut' });
+      throw new Error("STUB");
   };
 
   /**
    * Pastes the copied or cut event with the provided changes.
    */
   public pasteEvent = (changes: SchedulerEventPasteProperties) => {
-    const { adapter, copiedEvent } = this.state;
-    if (!copiedEvent) {
-      return null;
-    }
-
-    const original = schedulerEventSelectors.processedEventRequired(this.state, copiedEvent.id);
-    const cleanChanges: Partial<SchedulerEventUpdatedProperties> = { ...changes };
-    if (cleanChanges.start != null) {
-      cleanChanges.end = adapter.addMilliseconds(
-        cleanChanges.start,
-        original.dataTimezone.end.timestamp - original.dataTimezone.start.timestamp,
-      );
-    }
-
-    if (copiedEvent.action === 'cut') {
-      const updatedEvent = { id: copiedEvent.id, ...cleanChanges };
-      const result = this.updateEvents({ updated: [updatedEvent] }).updated[0];
-      this.set('copiedEvent', null);
-      return result;
-    }
-
-    const { id, ...copiedEventWithoutId } = original.modelInBuiltInFormat;
-    const dataTimezone = original.modelInBuiltInFormat.timezone ?? 'default';
-    const stringifiedChanges: Record<string, any> = { ...cleanChanges };
-    if (cleanChanges.start != null) {
-      stringifiedChanges.start = dateToEventString(
-        adapter,
-        cleanChanges.start,
-        original.modelInBuiltInFormat.start,
-        dataTimezone,
-      );
-    }
-    if (stringifiedChanges.end != null) {
-      stringifiedChanges.end = dateToEventString(
-        adapter,
-        stringifiedChanges.end,
-        original.modelInBuiltInFormat.end,
-        dataTimezone,
-      );
-    }
-    const createdEvent: SchedulerEventCreationProperties = {
-      ...copiedEventWithoutId,
-      ...stringifiedChanges,
-      extractedFromId: id,
-    };
-    return this.updateEvents({ created: [createdEvent] }).created[0];
+      throw new Error("STUB");
   };
 
   /**
@@ -782,24 +516,14 @@ export class SchedulerStore<
    * Toggles the collapsed state of a single resource.
    */
   public toggleResourceCollapse = (resourceId: SchedulerResourceId, event: Event | undefined) => {
-    const isCollapsed = this.state.collapsedResources[resourceId] === true;
-    const nextCollapsedResources = { ...this.state.collapsedResources };
-    if (isCollapsed) {
-      delete nextCollapsedResources[resourceId];
-    } else {
-      nextCollapsedResources[resourceId] = true;
-    }
-    this.setCollapsedResources(nextCollapsedResources, event);
+      throw new Error("STUB");
   };
 
   /**
    * Sets the occurrence placeholder to render while creating a new event or dragging an existing event occurrence.
    */
   public setOccurrencePlaceholder = (newPlaceholder: SchedulerOccurrencePlaceholder | null) => {
-    const { adapter, occurrencePlaceholder: previous } = this.state;
-    if (shouldUpdateOccurrencePlaceholder(adapter, previous, newPlaceholder)) {
-      this.set('occurrencePlaceholder', newPlaceholder);
-    }
+      throw new Error("STUB");
   };
 
   /**
@@ -807,7 +531,7 @@ export class SchedulerStore<
    * Pass `null` to clear the active occurrence.
    */
   public setEditedOccurrenceKey = (occurrenceKey: string | null) => {
-    this.set('editedOccurrenceKey', occurrenceKey);
+      throw new Error("STUB");
   };
 
   /**

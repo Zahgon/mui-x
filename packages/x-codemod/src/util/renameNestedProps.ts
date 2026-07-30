@@ -28,27 +28,10 @@ export default function renameNestedProps({
 }: RenamePropsArgs) {
   return root
     .find(j.JSXElement)
-    .filter((path) => componentNames.includes((path.value.openingElement.name as any).name))
+    .filter((path) => { throw new Error("STUB"); })
     .find(j.JSXAttribute)
-    .filter((attribute) => Object.keys(nestedProps).includes(attribute.node.name.name as string))
+    .filter((attribute) => { throw new Error("STUB"); })
     .forEach((attribute) => {
-      Object.entries(nestedProps).forEach(([rootPropName, props]) => {
-        if (
-          attribute.node.name.name === rootPropName &&
-          attribute.node.value?.type === 'JSXExpressionContainer' &&
-          attribute.node.value?.expression.type === 'ObjectExpression'
-        ) {
-          const existingProperties = attribute.node.value.expression.properties;
-          existingProperties.forEach((property) => {
-            if (
-              property.type === 'Property' &&
-              property.key.type === 'Identifier' &&
-              props[property.key.name]
-            ) {
-              property.key.name = props[property.key.name];
-            }
-          });
-        }
-      });
+        throw new Error("STUB");
     });
 }

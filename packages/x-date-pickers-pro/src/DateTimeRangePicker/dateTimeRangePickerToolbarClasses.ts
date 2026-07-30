@@ -13,7 +13,7 @@ export interface DateTimeRangePickerToolbarClasses {
 export type DateTimeRangePickerToolbarClassKey = keyof DateTimeRangePickerToolbarClasses;
 
 export function getDateTimeRangePickerToolbarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiDateTimeRangePickerToolbar', slot);
+    throw new Error("STUB");
 }
 
 export const dateTimeRangePickerToolbarClasses: DateTimeRangePickerToolbarClasses =

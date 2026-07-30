@@ -40,16 +40,9 @@ const configuration: GridConfiguration<GridPrivateApiPremium, DataGridPremiumPro
     useGridAriaAttributes: useGridAriaAttributesPremium,
     useGridRowAriaAttributes: useGridRowAriaAttributesPremium,
     useCellAggregationResult: (id, field) => {
-      const apiRef = useGridApiContext();
-      return useGridSelector(apiRef, gridCellAggregationResultSelector, { id, field });
+        throw new Error("STUB");
     },
-    useFilterValueGetter: (apiRef, props) => (row, column) => {
-      if (props.aggregationRowsScope === 'all') {
-        return apiRef.current.getRowValue(row, column);
-      }
-
-      return getRowValue(row, column, apiRef);
-    },
+    useFilterValueGetter: (apiRef, props) => { throw new Error("STUB"); },
     useIsCellEditable,
     useGridRowsOverridableMethods,
     useGridParamsOverridableMethods,
@@ -72,45 +65,7 @@ const DataGridPremiumRaw = forwardRef(function DataGridPremium<R extends GridVal
   inProps: DataGridPremiumProps<R>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const initialProps = useDataGridPremiumProps(inProps);
-  const privateApiRef = useGridApiInitialization<GridPrivateApiPremium, GridApiPremium>(
-    initialProps.apiRef,
-    initialProps,
-  );
-
-  const props = useDataGridPremiumComponent(
-    privateApiRef,
-    initialProps,
-    configuration as GridConfiguration,
-  );
-  useLicenseVerifier(packageInfo);
-
-  if (process.env.NODE_ENV !== 'production') {
-    validateProps(props, dataGridPremiumPropValidators);
-  }
-
-  const sidebarOpen = useGridSelector(privateApiRef, gridSidebarOpenSelector);
-  const sidePanel = sidebarOpen ? <Sidebar /> : null;
-
-  return (
-    <GridContextProvider
-      privateApiRef={privateApiRef}
-      configuration={configuration as GridConfiguration}
-      props={props}
-    >
-      <GridRoot
-        className={props.className}
-        style={props.style}
-        sx={props.sx}
-        {...props.slotProps?.root}
-        ref={ref}
-        sidePanel={sidePanel}
-      >
-        {watermark}
-        <GridMultiSelectMeasurer />
-      </GridRoot>
-    </GridContextProvider>
-  );
+    throw new Error("STUB");
 });
 
 DataGridPremiumRaw.propTypes /* remove-proptypes */ = {

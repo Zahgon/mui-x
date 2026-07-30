@@ -11,7 +11,7 @@ export interface ClockPointerClasses {
 export type ClockPointerClassKey = keyof ClockPointerClasses;
 
 export function getClockPointerUtilityClass(slot: string) {
-  return generateUtilityClass('MuiClockPointer', slot);
+    throw new Error("STUB");
 }
 
 export const clockPointerClasses: ClockPointerClasses = generateUtilityClasses('MuiClockPointer', [

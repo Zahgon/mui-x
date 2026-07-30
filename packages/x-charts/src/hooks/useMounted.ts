@@ -6,15 +6,11 @@ export function useMounted(defer = false) {
   const [mountedState, setMountedState] = React.useState(false);
 
   useEnhancedEffect(() => {
-    if (!defer) {
-      setMountedState(true);
-    }
+      throw new Error("STUB");
   }, [defer]);
 
   React.useEffect(() => {
-    if (defer) {
-      setMountedState(true);
-    }
+      throw new Error("STUB");
   }, [defer]);
 
   return mountedState;

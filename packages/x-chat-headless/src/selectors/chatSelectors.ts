@@ -8,29 +8,29 @@ import type { ChatStoreParameters } from '../store';
 type State<Cursor = string> = ChatInternalState<Cursor>;
 
 export const chatSelectors = {
-  messageIds: createSelector((state: State) => state.messageIds),
-  messagesById: createSelector((state: State) => state.messagesById),
-  conversationIds: createSelector((state: State) => state.conversationIds),
-  conversationsById: createSelector((state: State) => state.conversationsById),
-  activeConversationId: createSelector((state: State) => state.activeConversationId),
-  isStreaming: createSelector((state: State) => state.isStreaming),
-  streamingConversationId: createSelector((state: State) => state.streamingConversationId),
-  hasMoreHistory: createSelector((state: State) => state.hasMoreHistory),
-  isLoadingHistory: createSelector((state: State) => state.isLoadingHistory),
-  error: createSelector((state: State) => state.error),
+  messageIds: createSelector((state: State) => { throw new Error("STUB"); }),
+  messagesById: createSelector((state: State) => { throw new Error("STUB"); }),
+  conversationIds: createSelector((state: State) => { throw new Error("STUB"); }),
+  conversationsById: createSelector((state: State) => { throw new Error("STUB"); }),
+  activeConversationId: createSelector((state: State) => { throw new Error("STUB"); }),
+  isStreaming: createSelector((state: State) => { throw new Error("STUB"); }),
+  streamingConversationId: createSelector((state: State) => { throw new Error("STUB"); }),
+  hasMoreHistory: createSelector((state: State) => { throw new Error("STUB"); }),
+  isLoadingHistory: createSelector((state: State) => { throw new Error("STUB"); }),
+  error: createSelector((state: State) => { throw new Error("STUB"); }),
   messages: createSelectorMemoized(
-    (state: State) => state.messageIds,
-    (state: State) => state.messagesById,
-    (messageIds, messagesById): ChatMessage[] => messageIds.map((id) => messagesById[id]!),
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
+    (messageIds, messagesById): ChatMessage[] => { throw new Error("STUB"); },
   ),
   message: createSelector(
-    (state: State) => state.messagesById,
-    (messagesById, id: string): ChatMessage | undefined => messagesById[id],
+    (state: State) => { throw new Error("STUB"); },
+    (messagesById, id: string): ChatMessage | undefined => { throw new Error("STUB"); },
   ),
   messageAuthor: createSelectorMemoized(
-    (state: State) => state.messagesById,
-    (state: State) => state.conversationsById,
-    (state: State) => state.activeConversationId,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (
       messagesById,
       conversationsById,
@@ -38,77 +38,51 @@ export const chatSelectors = {
       id: string,
       parameters: ChatStoreParameters<any>,
     ) => {
-      const activeConversation =
-        activeConversationId == null ? undefined : conversationsById[activeConversationId];
-
-      return resolveMessageAuthor(messagesById[id] ?? null, {
-        currentUser: parameters.currentUser,
-        members: parameters.members,
-        activeConversation,
-        getMessageAuthorId: parameters.getMessageAuthorId,
-        getMessageAuthorDisplayName: parameters.getMessageAuthorDisplayName,
-        getMessageAuthorAvatarUrl: parameters.getMessageAuthorAvatarUrl,
-        roleDisplayNames: parameters.roleDisplayNames,
-      });
+        throw new Error("STUB");
     },
   ),
   messageError: createSelector(
-    (state: State) => state.messageErrorsById,
-    (state: State) => state.messagesById,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (messageErrorsById, messagesById, id: string): ChatError | null => {
-      const message = messagesById[id];
-      const error = messageErrorsById[id];
-
-      if (!error || message?.status !== 'error') {
-        return null;
-      }
-
-      return error;
+        throw new Error("STUB");
     },
   ),
   conversations: createSelectorMemoized(
-    (state: State) => state.conversationIds,
-    (state: State) => state.conversationsById,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (conversationIds, conversationsById): ChatConversation[] =>
-      conversationIds.map((id) => conversationsById[id]!),
+      { throw new Error("STUB"); },
   ),
   conversation: createSelector(
-    (state: State) => state.conversationsById,
-    (conversationsById, id: string): ChatConversation | undefined => conversationsById[id],
+    (state: State) => { throw new Error("STUB"); },
+    (conversationsById, id: string): ChatConversation | undefined => { throw new Error("STUB"); },
   ),
   activeConversation: createSelector(
-    (state: State) => state.activeConversationId,
-    (state: State) => state.conversationsById,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (activeConversationId, conversationsById): ChatConversation | undefined =>
-      activeConversationId == null ? undefined : conversationsById[activeConversationId],
+      { throw new Error("STUB"); },
   ),
   messageCount: createSelector(
-    (state: State) => state.messageIds,
-    (messageIds): number => messageIds.length,
+    (state: State) => { throw new Error("STUB"); },
+    (messageIds): number => { throw new Error("STUB"); },
   ),
   conversationCount: createSelector(
-    (state: State) => state.conversationIds,
-    (conversationIds): number => conversationIds.length,
+    (state: State) => { throw new Error("STUB"); },
+    (conversationIds): number => { throw new Error("STUB"); },
   ),
-  composerValue: createSelector((state: State) => state.composerValue),
-  composerAttachments: createSelector((state: State) => state.composerAttachments),
+  composerValue: createSelector((state: State) => { throw new Error("STUB"); }),
+  composerAttachments: createSelector((state: State) => { throw new Error("STUB"); }),
   /**
    * Returns the IDs of users currently typing in the given conversation.
    * If no conversationId argument is provided, falls back to the active conversation.
    */
   typingUserIds: createSelectorMemoized(
-    (state: State) => state.typingByConversation,
-    (state: State) => state.activeConversationId,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (typingByConversation, activeConversationId, conversationId: string | undefined): string[] => {
-      const id = conversationId ?? activeConversationId;
-      if (!id) {
-        return [];
-      }
-      const byUser = typingByConversation[id];
-      if (!byUser) {
-        return [];
-      }
-      return Object.keys(byUser).filter((userId) => byUser[userId]);
+        throw new Error("STUB");
     },
   ),
   /**
@@ -117,17 +91,10 @@ export const chatSelectors = {
    * function that would defeat memoization.
    */
   typingUserIdsForActiveConversation: createSelectorMemoized(
-    (state: State) => state.typingByConversation,
-    (state: State) => state.activeConversationId,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (typingByConversation, activeConversationId): string[] => {
-      if (!activeConversationId) {
-        return [];
-      }
-      const byUser = typingByConversation[activeConversationId];
-      if (!byUser) {
-        return [];
-      }
-      return Object.keys(byUser).filter((userId) => byUser[userId]);
+        throw new Error("STUB");
     },
   ),
 } as const;

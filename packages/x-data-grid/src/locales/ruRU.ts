@@ -51,11 +51,7 @@ const ruRUGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Скрыть фильтры',
   toolbarFiltersTooltipShow: 'Показать фильтры',
   toolbarFiltersTooltipActive: (count) =>
-    getPluralForm(count, {
-      one: 'активный фильтр',
-      few: 'активных фильтра',
-      many: 'активных фильтров',
-    }),
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Поиск…',
@@ -164,28 +160,20 @@ const ruRUGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    getPluralForm(count, {
-      one: 'активный фильтр',
-      few: 'активных фильтра',
-      many: 'активных фильтров',
-    }),
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Показать фильтры',
   columnHeaderSortIconLabel: 'Сортировать',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    getPluralForm(count, {
-      one: 'строка выбрана',
-      few: 'строки выбраны',
-      many: 'строк выбрано',
-    }),
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Всего строк:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} из ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Выбор флажка',
@@ -217,8 +205,8 @@ const ruRUGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Группа',
-  groupColumn: (name) => `Сгруппировать по ${name}`,
-  unGroupColumn: (name) => `Разгруппировать по ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Детали',
@@ -241,17 +229,7 @@ const ruRUGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Перейти на первую страницу';
-    }
-    if (type === 'last') {
-      return 'Перейти на последнюю страницу';
-    }
-    if (type === 'next') {
-      return 'Перейти на следующую страницу';
-    }
-    // if (type === 'previous') {
-    return 'Перейти на предыдущую страницу';
+      throw new Error("STUB");
   },
 
   // Row reordering text

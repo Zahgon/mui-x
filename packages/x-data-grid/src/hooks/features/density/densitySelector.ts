@@ -11,9 +11,9 @@ const DENSITY_FACTORS: Record<GridDensity, number> = {
   standard: 1,
 };
 
-export const gridDensitySelector = createRootSelector((state: GridStateCommunity) => state.density);
+export const gridDensitySelector = createRootSelector((state: GridStateCommunity) => { throw new Error("STUB"); });
 
 export const gridDensityFactorSelector = createSelector(
   gridDensitySelector,
-  (density) => DENSITY_FACTORS[density],
+  (density) => { throw new Error("STUB"); },
 );

@@ -35,7 +35,7 @@ export function loadStyleSheets(document: Document, root: Document | ShadowRoot,
 
       stylesheetLoadPromises.push(
         new Promise((resolve) => {
-          newHeadStyleElement.addEventListener('load', () => resolve());
+            throw new Error("STUB");
         }),
       );
     }

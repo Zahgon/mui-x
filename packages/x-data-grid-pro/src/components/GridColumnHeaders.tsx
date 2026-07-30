@@ -20,49 +20,8 @@ export interface GridColumnHeadersProps
 
 const GridColumnHeaders = forwardRef<HTMLDivElement, GridColumnHeadersProps>(
   function GridColumnHeaders(props, ref) {
-    const {
-      style,
-      className,
-      visibleColumns,
-      sortColumnLookup,
-      filterColumnLookup,
-      columnHeaderTabIndexState,
-      columnGroupHeaderTabIndexState,
-      columnHeaderFocus,
-      columnGroupHeaderFocus,
-      headerGroupingMaxDepth,
-      columnMenuState,
-      columnVisibility,
-      columnGroupsHeaderStructure,
-      hasOtherElementInTabSequence,
-      ...other
-    } = props;
-
-    const { getInnerProps, getColumnHeadersRow, getColumnFiltersRow, getColumnGroupHeadersRows } =
-      useGridColumnHeadersPro({
-        visibleColumns,
-        sortColumnLookup,
-        filterColumnLookup,
-        columnHeaderTabIndexState,
-        hasOtherElementInTabSequence,
-        columnGroupHeaderTabIndexState,
-        columnHeaderFocus,
-        columnGroupHeaderFocus,
-        headerGroupingMaxDepth,
-        columnMenuState,
-        columnVisibility,
-        columnGroupsHeaderStructure,
-      });
-
-    return (
-      <GridBaseColumnHeaders className={className} {...other} {...getInnerProps()} ref={ref}>
-        {getColumnGroupHeadersRows()}
-        {getColumnHeadersRow()}
-        {getColumnFiltersRow()}
-        <Filler />
-      </GridBaseColumnHeaders>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridColumnHeaders.propTypes /* remove-proptypes */ = {

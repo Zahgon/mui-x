@@ -28,16 +28,7 @@ function getAppender(name: string, logLevel: string, appender: Logger = console)
   }
 
   const logger = LOG_LEVELS.reduce((loggerObj, method, idx) => {
-    if (idx >= minLogLevelIdx) {
-      loggerObj[method] = (...args: any[]) => {
-        const [message, ...other] = args;
-
-        (appender as any)[method](`MUI X: ${name} - ${message}`, ...other);
-      };
-    } else {
-      loggerObj[method] = noop;
-    }
-    return loggerObj;
+      throw new Error("STUB");
   }, {} as any);
 
   return logger as Logger;
@@ -49,16 +40,8 @@ export const useGridLoggerFactory = (
 ) => {
   const getLogger = React.useCallback<GridLoggerApi['getLogger']>(
     (name: string): Logger => {
-      if (forceDebug) {
-        return getAppender(name, 'debug', props.logger);
-      }
-
-      if (!props.logLevel) {
-        return noopLogger;
-      }
-
-      return getAppender(name, props.logLevel!.toString(), props.logger);
-    },
+          throw new Error("STUB");
+      },
     [props.logLevel, props.logger],
   );
 

@@ -5,35 +5,28 @@ import type { UseChartProZoomSignature } from './useChartProZoom.types';
 
 export const selectorChartZoomState: ChartRootSelector<UseChartProZoomSignature, 'zoom'> = (
   state,
-) => state.zoom;
+) => { throw new Error("STUB"); };
 
 export const selectorChartZoomIsInteracting = createSelector(
   selectorChartZoomState,
-  (zoom) => zoom.isInteracting,
+  (zoom) => { throw new Error("STUB"); },
 );
 
 export const selectorChartZoomIsEnabled = createSelector(
   selectorChartZoomOptionsLookup,
-  (optionsLookup) => Object.keys(optionsLookup).length > 0,
+  (optionsLookup) => { throw new Error("STUB"); },
 );
 
 export const selectorChartAxisZoomData = createSelector(
   selectorChartZoomMap,
-  (zoomMap, axisId: AxisId) => zoomMap?.get(axisId),
+  (zoomMap, axisId: AxisId) => { throw new Error("STUB"); },
 );
 
 export const selectorChartCanZoomOut = createSelector(
   selectorChartZoomState,
   selectorChartZoomOptionsLookup,
   (zoomState, zoomOptions) => {
-    return !zoomState.zoomData.every((zoomData) => {
-      const span = zoomData.end - zoomData.start;
-      const options = zoomOptions[zoomData.axisId];
-      return (
-        (zoomData.start === options.minStart && zoomData.end === options.maxEnd) ||
-        span === options.maxSpan
-      );
-    });
+      throw new Error("STUB");
   },
 );
 
@@ -41,10 +34,6 @@ export const selectorChartCanZoomIn = createSelector(
   selectorChartZoomState,
   selectorChartZoomOptionsLookup,
   (zoomState, zoomOptions) => {
-    return !zoomState.zoomData.every((zoomData) => {
-      const span = zoomData.end - zoomData.start;
-      const options = zoomOptions[zoomData.axisId];
-      return span === options.minSpan;
-    });
+      throw new Error("STUB");
   },
 );

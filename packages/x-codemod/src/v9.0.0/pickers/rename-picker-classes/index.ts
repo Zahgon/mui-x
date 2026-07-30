@@ -49,99 +49,29 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   // Rename properties in styleOverrides
   const componentsToHandle = ['MuiDateRangePickerDay', 'MuiPickerDay', 'MuiPickersDay'];
   root.find(j.ObjectProperty).forEach((objPropPath) => {
-    const keyName =
-      objPropPath.node.key.type === 'Identifier'
-        ? objPropPath.node.key.name
-        : (objPropPath.node.key as any).value;
-    if (
-      componentsToHandle.includes(keyName) &&
-      objPropPath.node.value.type === 'ObjectExpression'
-    ) {
-      j(objPropPath.node.value)
-        .find(j.ObjectProperty)
-        .filter((p) => {
-          const k = p.node.key.type === 'Identifier' ? p.node.key.name : (p.node.key as any).value;
-          return k === 'styleOverrides';
-        })
-        .forEach((styleOverridesPath) => {
-          if (styleOverridesPath.node.value.type === 'ObjectExpression') {
-            const seenProperties = new Map<string, any>();
-            const indicesToRemove = new Set<number>();
-            styleOverridesPath.node.value.properties.forEach((prop, index) => {
-              if (prop.type === 'ObjectProperty') {
-                const propKey =
-                  prop.key.type === 'Identifier' ? prop.key.name : (prop.key as any).value;
-                const newKey = classRenames[propKey];
-                if (newKey) {
-                  if (seenProperties.has(newKey)) {
-                    const firstProp = seenProperties.get(newKey);
-                    if (
-                      firstProp.value.type === 'ObjectExpression' &&
-                      prop.value.type === 'ObjectExpression'
-                    ) {
-                      firstProp.value.properties.push(...prop.value.properties);
-                    }
-                    indicesToRemove.add(index);
-                  } else {
-                    if (prop.key.type === 'Identifier') {
-                      prop.key.name = newKey;
-                    } else if (prop.key.type === 'StringLiteral') {
-                      prop.key.value = newKey;
-                    }
-                    seenProperties.set(newKey, prop);
-                  }
-                }
-              }
-            });
-            styleOverridesPath.node.value.properties =
-              styleOverridesPath.node.value.properties.filter(
-                (_, index) => !indicesToRemove.has(index),
-              );
-          }
-        });
-    }
+      throw new Error("STUB");
   });
 
   // Rename class names in strings and template literals.
   // Only replace within known MUI component CSS class prefixes to avoid false positives.
-  const muiClassPrefixes = componentsToHandle.map((c) => `${c}-`);
+  const muiClassPrefixes = componentsToHandle.map((c) => { throw new Error("STUB"); });
   const replaceClasses = (value: string) => {
     let newValue = value;
     muiClassPrefixes.forEach((prefix) => {
-      Object.keys(classRenames).forEach((oldClass) => {
-        const newClass = classRenames[oldClass];
-        newValue = newValue.replace(
-          new RegExp(`${prefix}${oldClass}\\b`, 'g'),
-          `${prefix}${newClass}`,
-        );
-      });
+        throw new Error("STUB");
     });
     return newValue;
   };
 
   root.find(j.StringLiteral).forEach((strPath) => {
-    strPath.node.value = replaceClasses(strPath.node.value);
+      throw new Error("STUB");
   });
 
   root.find(j.TemplateLiteral).forEach((templatePath) => {
-    templatePath.node.quasis.forEach((quasi) => {
-      quasi.value.raw = replaceClasses(quasi.value.raw);
-      if (quasi.value.cooked) {
-        quasi.value.cooked = replaceClasses(quasi.value.cooked);
-      }
-    });
+      throw new Error("STUB");
   });
 
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'rename-picker-classes',
-  specFiles: [
-    {
-      name: 'rename PickerDay and DateRangePickerDay class keys',
-      actual: readFile(path.join(import.meta.dirname, 'actual.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

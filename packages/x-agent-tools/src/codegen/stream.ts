@@ -31,91 +31,17 @@ export async function consumeCodegenStream(
       return;
     }
     progressChain = progressChain.then(async () => {
-      try {
-        await onProgress(event);
-      } catch (err) {
-        // UX-only; never fail the run on a host bug. Surface via logger if the host wants it.
-        logger?.('codegen.onProgress hook failed', err);
-      }
+        throw new Error("STUB");
     });
   };
   const drainProgress = (): Promise<void> => progressChain;
 
   await new Promise<void>((resolve, reject) => {
-    let finished = false;
-    const parser = createParser({
-      onEvent: (event: EventSourceMessage) => {
-        if (finished) {
-          return;
-        }
-        const raw = event.data;
-        if (raw === undefined) {
-          return;
-        }
-
-        // The backend emits `[DONE]` as a literal token, JSON-encoded or not.
-        if (raw === '[DONE]' || raw === '"[DONE]"') {
-          finished = true;
-          fireProgress({ kind: 'done', filesSeen: files.size });
-          // Drain queued progress before resolving so the final notification lands first.
-          void drainProgress().then(resolve);
-          return;
-        }
-
-        let chunk: unknown;
-        try {
-          chunk = JSON.parse(raw);
-        } catch {
-          // The backend emits JSON chunks only; ignore anything that isn't parseable.
-          return;
-        }
-
-        const outcome = handleCodegenChunk(chunk, files, explanationParts);
-        if (outcome.kind === 'error') {
-          if (finished) {
-            return;
-          }
-          finished = true;
-          reject(new Error(`MUI X Agent Tools: ${outcome.message}`));
-          return;
-        }
-        if (outcome.kind === 'file') {
-          // Emit progress AFTER the Map is updated so `filesSeen` reflects the unique count.
-          fireProgress({ kind: 'file', filename: outcome.filename, filesSeen: files.size });
-        }
-      },
-    });
-
-    void pumpStream(
-      response.body!,
-      parser,
-      (err) => {
-        if (finished) {
-          return;
-        }
-        finished = true;
-        if (err) {
-          // Preserve cancellation so hosts can detect it; don't relabel it as a stream failure.
-          if (err.name === 'AbortError') {
-            reject(err);
-          } else {
-            reject(new Error(`MUI X Agent Tools: SSE stream errored: ${err.message}`));
-          }
-        } else {
-          // Stream closed without `[DONE]`: treat as truncated so the agent retries.
-          reject(
-            new Error(
-              'MUI X Agent Tools: Generation stream ended unexpectedly before `[DONE]`. Retry the request.',
-            ),
-          );
-        }
-      },
-      () => finished,
-    );
+      throw new Error("STUB");
   });
 
   return {
-    files: Array.from(files.entries()).map(([filename, contents]) => ({ filename, contents })),
+    files: Array.from(files.entries()).map(([filename, contents]) => { throw new Error("STUB"); }),
     explanation: explanationParts.join(''),
   };
 }

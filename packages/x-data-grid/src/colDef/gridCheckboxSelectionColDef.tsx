@@ -20,13 +20,12 @@ export const GRID_CHECKBOX_SELECTION_COL_DEF: GridColDef = {
   disableColumnMenu: true,
   disableReorder: true,
   disableExport: true,
-  getApplyQuickFilterFn: () => null,
+  getApplyQuickFilterFn: () => { throw new Error("STUB"); },
   display: 'flex',
   valueGetter: (value, row, column, apiRef) => {
-    const rowId = gridRowIdSelector(apiRef, row);
-    return apiRef.current.isRowSelected(rowId);
+      throw new Error("STUB");
   },
-  rowSpanValueGetter: (_, row, column, apiRef) => gridRowIdSelector(apiRef, row),
-  renderHeader: (params) => <GridHeaderCheckbox {...params} />,
-  renderCell: (params) => <GridCellCheckboxRenderer {...params} />,
+  rowSpanValueGetter: (_, row, column, apiRef) => { throw new Error("STUB"); },
+  renderHeader: (params) => { throw new Error("STUB"); },
+  renderCell: (params) => { throw new Error("STUB"); },
 };

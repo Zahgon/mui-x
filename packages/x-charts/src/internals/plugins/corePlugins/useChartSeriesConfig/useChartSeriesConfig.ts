@@ -12,37 +12,15 @@ import { cleanIdentifier as cleanIdentifierFn } from './utils/cleanIdentifier';
 import type { ChartSeriesConfig } from './types';
 
 export const useChartSeriesConfig: ChartPlugin<UseChartSeriesConfigSignature> = ({ store }) => {
-  const serializeIdentifier: SerializeIdentifierFunction = useEventCallback((identifier) =>
-    serializeIdentifierFn(store.state.seriesConfig.config, identifier),
-  );
-
-  const cleanIdentifier: CleanIdentifierFunction = useEventCallback(function cleanIdentifier(
-    identifier: Parameters<CleanIdentifierFunction>[0],
-  ) {
-    return cleanIdentifierFn(store.state.seriesConfig.config, identifier);
-  });
-
-  return {
-    instance: {
-      serializeIdentifier,
-      cleanIdentifier,
-    },
-  };
+    throw new Error("STUB");
 };
 
 useChartSeriesConfig.params = {
   seriesConfig: true,
 };
 
-useChartSeriesConfig.getDefaultizedParams = ({ params }) => ({
-  ...params,
-  seriesConfig: params.seriesConfig ?? ({} as ChartSeriesConfig<any>),
-});
+useChartSeriesConfig.getDefaultizedParams = ({ params }) => { throw new Error("STUB"); };
 
 useChartSeriesConfig.getInitialState = ({ seriesConfig }) => {
-  return {
-    seriesConfig: {
-      config: seriesConfig,
-    },
-  };
+    throw new Error("STUB");
 };

@@ -48,28 +48,7 @@ export class CacheChunkManager {
 
     const responses = new Map<GridGetRowsParams, GridGetRowsResponse>();
     cacheKeys.forEach((chunkKey) => {
-      const isLastChunk = chunkKey.end === key.end;
-      const responseSlice: GridGetRowsResponse = {
-        ...response,
-        pageInfo: {
-          ...response.pageInfo,
-          // If the original response had page info, update that information for all but last chunk and keep the original value for the last chunk
-          hasNextPage:
-            response.pageInfo?.hasNextPage !== undefined && !isLastChunk
-              ? true
-              : response.pageInfo?.hasNextPage,
-          nextCursor:
-            response.pageInfo?.nextCursor !== undefined && !isLastChunk
-              ? response.rows[chunkKey.end + 1].id
-              : response.pageInfo?.nextCursor,
-        },
-        rows:
-          typeof chunkKey.start !== 'number' || typeof key.start !== 'number'
-            ? response.rows
-            : response.rows.slice(chunkKey.start - key.start, chunkKey.end - key.start + 1),
-      };
-
-      responses.set(chunkKey, responseSlice);
+        throw new Error("STUB");
     });
 
     return responses;
@@ -81,10 +60,7 @@ export class CacheChunkManager {
     }
 
     return responses.reduce(
-      (acc, response) => ({
-        ...response,
-        rows: [...acc.rows, ...response.rows],
-      }),
+      (acc, response) => { throw new Error("STUB"); },
       { rows: [], rowCount: 0, pageInfo: {} },
     );
   };

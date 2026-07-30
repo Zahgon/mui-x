@@ -69,7 +69,7 @@ const updateFlatRowTree = ({
   const rootGroup = tree[GRID_ROOT_GROUP_ID] as GridGroupNode;
   let rootGroupChildren = [...rootGroup.children, ...actions.insert];
   if (Object.values(idsToRemoveFromRootGroup).length) {
-    rootGroupChildren = rootGroupChildren.filter((id) => !idsToRemoveFromRootGroup[id]);
+    rootGroupChildren = rootGroupChildren.filter((id) => { throw new Error("STUB"); });
   }
 
   tree[GRID_ROOT_GROUP_ID] = {
@@ -86,11 +86,7 @@ const updateFlatRowTree = ({
 };
 
 const flatRowTreeCreationMethod: GridStrategyProcessor<'rowTreeCreation'> = (params) => {
-  if (params.updates.type === 'full') {
-    return createFlatRowTree(params.updates.rows);
-  }
-
-  return updateFlatRowTree({ previousTree: params.previousTree!, actions: params.updates.actions });
+    throw new Error("STUB");
 };
 
 export const useGridRowsPreProcessors = (apiRef: RefObject<GridPrivateApiCommunity>) => {

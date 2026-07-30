@@ -18,9 +18,7 @@ const bgBGPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Отвори предишен изглед',
   openNextView: 'Отвори следващ изглед',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'отворен е изглед на година, премини на изглед на календар'
-      : 'отворен е изглед на календар, премини на изглед на година',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Начало',
@@ -46,25 +44,25 @@ const bgBGPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Избери ${views[view]}. ${!formattedTime ? 'Не е избран час' : `Избраният час е ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} часа`,
-  minutesClockNumberText: (minutes) => `${minutes} минути`,
-  secondsClockNumberText: (seconds) => `${seconds} секунди`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Избери ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Седмица',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Седмица ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Избери дата, избраната дата е ${formattedDate}` : 'Избери дата',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Избери час, избраният час е ${formattedTime}` : 'Избери час',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Изчисти стойност',
 
@@ -73,14 +71,14 @@ const bgBGPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'избери дата',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Г'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'ММММ' : 'ММ'),
-  fieldDayPlaceholder: () => 'ДД',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'СССС' : 'СС'),
-  fieldHoursPlaceholder: () => 'чч',
-  fieldMinutesPlaceholder: () => 'мм',
-  fieldSecondsPlaceholder: () => 'сс',
-  fieldMeridiemPlaceholder: () => 'пс',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Година',

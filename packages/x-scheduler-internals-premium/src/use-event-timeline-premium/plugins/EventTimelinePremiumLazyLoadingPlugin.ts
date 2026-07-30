@@ -20,29 +20,6 @@ export class EventTimelinePremiumLazyLoadingPlugin<
   EventTimelinePremiumParameters<TEvent, any>
 > {
   constructor(store: EventTimelinePremiumStore<TEvent, any>) {
-    super(store);
-
-    this.disposables.defer(
-      store.registerStoreEffect(
-        (state) => {
-          if (!state.hasInitialized) {
-            return null;
-          }
-          const viewConfig = eventTimelinePremiumPresetSelectors.config(state);
-          return `${state.adapter.getTime(viewConfig.start)}|${state.adapter.getTime(viewConfig.end)}`;
-        },
-
-        (previousKey, nextKey) => {
-          if (previousKey === nextKey || !store.parameters.dataSource) {
-            return;
-          }
-
-          this.scheduleFetch(() => {
-            const viewConfig = eventTimelinePremiumPresetSelectors.config(store.state);
-            return { start: viewConfig.start, end: viewConfig.end };
-          }, previousKey === null);
-        },
-      ),
-    );
+      throw new Error("STUB");
   }
 }

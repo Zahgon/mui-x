@@ -50,37 +50,13 @@ const columnsTotalWidthSelector = createSelector(
   gridVisibleColumnDefinitionsSelector,
   gridColumnPositionsSelector,
   (visibleColumns, positions) => {
-    const colCount = visibleColumns.length;
-    if (colCount === 0) {
-      return 0;
-    }
-    return roundToDecimalPlaces(
-      positions[colCount - 1] + visibleColumns[colCount - 1].computedWidth,
-      1,
-    );
+      throw new Error("STUB");
   },
 );
 
 /** Translates virtualizer state to grid state */
 const addGridDimensionsCreator = () =>
-  lruMemoize(
-    (
-      dimensions: Dimensions.State['dimensions'],
-      headerHeight: number,
-      groupHeaderHeight: number,
-      headerFilterHeight: number,
-      headersTotalHeight: number,
-    ) => {
-      return {
-        ...dimensions,
-        headerHeight,
-        groupHeaderHeight,
-        headerFilterHeight,
-        headersTotalHeight,
-      };
-    },
-    { maxSize: 1 },
-  );
+  { throw new Error("STUB"); };
 
 /**
  * Virtualizer setup
@@ -97,7 +73,7 @@ export function useGridVirtualizer() {
 
   const rowSelectionManager = useGridSelector(apiRef, gridRowSelectionManagerSelector);
   const isRowSelected = React.useCallback(
-    (id: any) => rowSelectionManager.has(id) && apiRef.current.isRowSelectable(id),
+    (id: any) => { throw new Error("STUB"); },
     [rowSelectionManager, apiRef],
   );
 
@@ -130,8 +106,8 @@ export function useGridVirtualizer() {
   const columnsTotalWidth = useGridSelector(apiRef, columnsTotalWidthSelector);
   const headersTotalHeight = getTotalHeaderHeight(apiRef, rootProps);
 
-  const leftPinnedWidth = pinnedColumns.left.reduce((w, col) => w + col.computedWidth, 0);
-  const rightPinnedWidth = pinnedColumns.right.reduce((w, col) => w + col.computedWidth, 0);
+  const leftPinnedWidth = pinnedColumns.left.reduce((w, col) => { throw new Error("STUB"); }, 0);
+  const rightPinnedWidth = pinnedColumns.right.reduce((w, col) => { throw new Error("STUB"); }, 0);
 
   const overlayState = useGridOverlays(apiRef, rootProps);
 
@@ -171,12 +147,7 @@ export function useGridVirtualizer() {
 
   const layout = useLazyRef(
     () =>
-      new LayoutDataGrid({
-        container: apiRef.current.mainElementRef,
-        scroller: apiRef.current.virtualScrollerRef,
-        scrollbarVertical: apiRef.current.virtualScrollbarVerticalRef,
-        scrollbarHorizontal: apiRef.current.virtualScrollbarHorizontalRef,
-      }),
+      { throw new Error("STUB"); },
   ).current;
 
   const virtualizer = useVirtualizer({
@@ -193,13 +164,8 @@ export function useGridVirtualizer() {
       enabled: hasColSpan,
       getColspan: React.useCallback(
         (rowId, column) => {
-          if (typeof column.colSpan === 'function') {
-            const row = apiRef.current.getRow(rowId);
-            const value = apiRef.current.getRowValue(row, column as GridStateColDef);
-            return column.colSpan(value, row, column, apiRef) ?? 0;
-          }
-          return column.colSpan ?? 1;
-        },
+              throw new Error("STUB");
+          },
         [apiRef],
       ),
     },
@@ -221,97 +187,47 @@ export function useGridVirtualizer() {
       overlayState.overlayType === 'noColumnsOverlay' ||
       overlayState.loadingOverlayVariant === 'skeleton',
     getRowHeight: React.useMemo(() => {
-      if (!getRowHeight) {
-        return undefined;
-      }
-      return (rowEntry) => getRowHeight({ ...rowEntry, densityFactor: density });
+        throw new Error("STUB");
     }, [getRowHeight, density]),
     getEstimatedRowHeight: React.useMemo(
       () =>
-        getEstimatedRowHeight
-          ? (rowEntry) => getEstimatedRowHeight({ ...rowEntry, densityFactor: density })
-          : undefined,
+        { throw new Error("STUB"); },
       [getEstimatedRowHeight, density],
     ),
     getRowSpacing: React.useMemo(
       () =>
-        getRowSpacing
-          ? (rowEntry) => {
-              const indexRelativeToCurrentPage = currentPage.rowIdToIndexMap.get(rowEntry.id) ?? -1;
-
-              const visibility = {
-                isFirstVisible: indexRelativeToCurrentPage === 0,
-                isLastVisible: indexRelativeToCurrentPage === currentPage.rows.length - 1,
-                indexRelativeToCurrentPage,
-              };
-
-              return getRowSpacing({
-                ...rowEntry,
-                ...visibility,
-                indexRelativeToCurrentPage: apiRef.current.getRowIndexRelativeToVisibleRows(
-                  rowEntry.id,
-                ),
-              });
-            }
-          : undefined,
+        { throw new Error("STUB"); },
       [apiRef, getRowSpacing, currentPage.rows, currentPage.rowIdToIndexMap],
     ),
     applyRowHeight: useEventCallback((entry, row) =>
-      apiRef.current.unstable_applyPipeProcessors('rowHeight', entry, row),
+      { throw new Error("STUB"); },
     ),
     virtualizeColumnsWithAutoRowHeight: rootProps.virtualizeColumnsWithAutoRowHeight,
 
-    focusedVirtualCell: useEventCallback(() => gridFocusedVirtualCellSelector(apiRef)),
+    focusedVirtualCell: useEventCallback(() => { throw new Error("STUB"); }),
 
     resizeThrottleMs: rootProps.resizeThrottleMs,
-    onResize: useEventCallback((size) => apiRef.current.publishEvent('resize', size)),
+    onResize: useEventCallback((size) => { throw new Error("STUB"); }),
     onWheel: useEventCallback((event: React.WheelEvent) => {
-      apiRef.current.publishEvent('virtualScrollerWheel', {}, event);
+        throw new Error("STUB");
     }),
     onTouchMove: useEventCallback((event: React.TouchEvent) => {
-      apiRef.current.publishEvent('virtualScrollerTouchMove', {}, event);
+        throw new Error("STUB");
     }),
     onRenderContextChange: useEventCallback((nextRenderContext) => {
-      apiRef.current.publishEvent('renderedRowsIntervalChange', nextRenderContext);
+        throw new Error("STUB");
     }),
     onScrollChange: React.useCallback<NonNullable<VirtualizerParams['onScrollChange']>>(
       (scrollPosition, nextRenderContext) => {
-        apiRef.current.publishEvent('scrollPositionChange', {
-          top: scrollPosition.top,
-          left: scrollPosition.left,
-          renderContext: nextRenderContext,
-        });
-      },
+            throw new Error("STUB");
+        },
       [apiRef],
     ),
 
     scrollReset,
 
     renderRow: React.useCallback(
-      (params) => (
-        <RowSlot
-          key={params.id}
-          row={params.model}
-          rowId={params.id}
-          index={params.rowIndex}
-          selected={isRowSelected(params.id)}
-          offsetLeft={params.offsetLeft}
-          columnsTotalWidth={columnsTotalWidth}
-          rowHeight={params.baseRowHeight}
-          pinnedColumns={pinnedColumns}
-          visibleColumns={visibleColumns}
-          firstColumnIndex={params.firstColumnIndex}
-          lastColumnIndex={params.lastColumnIndex}
-          focusedColumnIndex={params.focusedColumnIndex}
-          isFirstVisible={params.isFirstVisible}
-          isLastVisible={params.isLastVisible}
-          isNotVisible={params.isVirtualFocusRow}
-          showBottomBorder={params.showBottomBorder}
-          scrollbarWidth={verticalScrollbarWidth}
-          gridHasFiller={hasFiller}
-          {...rowSlotProps}
-        />
-      ),
+      (params) => { throw new Error("STUB"); },
       [
         columnsTotalWidth,
         hasFiller,
@@ -325,7 +241,7 @@ export function useGridVirtualizer() {
     ),
 
     renderInfiniteLoadingTrigger: React.useCallback(
-      (id: any) => (apiRef as any).current.getInfiniteLoadingTriggerElement?.({ lastRowId: id }),
+      (id: any) => { throw new Error("STUB"); },
       [apiRef],
     ),
   });
@@ -336,52 +252,19 @@ export function useGridVirtualizer() {
   //
   // TODO(v9): Remove this
   useFirstRender(() => {
-    apiRef.current.store.state.dimensions = addGridDimensions(
-      virtualizer.store.state.dimensions,
-      headerHeight,
-      groupHeaderHeight,
-      headerFilterHeight,
-      headersTotalHeight,
-    );
-    apiRef.current.store.state.rowsMeta = virtualizer.store.state.rowsMeta;
-    apiRef.current.store.state.virtualization = virtualizer.store.state.virtualization;
+      throw new Error("STUB");
   });
 
   useStoreEffect(virtualizer.store, Dimensions.selectors.dimensions, (_, dimensions) => {
-    if (!dimensions.isReady) {
-      return;
-    }
-    apiRef.current.setState((gridState) => ({
-      ...gridState,
-      dimensions: addGridDimensions(
-        dimensions,
-        headerHeight,
-        groupHeaderHeight,
-        headerFilterHeight,
-        headersTotalHeight,
-      ),
-    }));
+      throw new Error("STUB");
   });
 
   useStoreEffect(virtualizer.store, Dimensions.selectors.rowsMeta, (_, rowsMeta) => {
-    if (rowsMeta !== apiRef.current.state.rowsMeta) {
-      apiRef.current.setState((gridState) => ({
-        ...gridState,
-        rowsMeta,
-      }));
-    }
+      throw new Error("STUB");
   });
 
   useStoreEffect(virtualizer.store, Virtualization.selectors.store, (_, virtualization) => {
-    if (virtualization.renderContext === EMPTY_RENDER_CONTEXT) {
-      return;
-    }
-    if (virtualization !== apiRef.current.state.virtualization) {
-      apiRef.current.setState((gridState) => ({
-        ...gridState,
-        virtualization,
-      }));
-    }
+      throw new Error("STUB");
   });
 
   apiRef.current.register('private', {

@@ -54,15 +54,7 @@ function SankeyLinkPlot(props: SankeyLinkPlotProps) {
 
   return (
     <SankeyLinkPlotRoot className={classes.links}>
-      {layout.links.map((link) => (
-        <SankeyLinkElement
-          seriesId={sankeySeries.id}
-          key={`${link.source.id}-${link.target.id}`}
-          link={link}
-          opacity={sankeySeries?.linkOptions?.opacity}
-          onClick={onClick}
-        />
-      ))}
+      {layout.links.map((link) => { throw new Error("STUB"); })}
     </SankeyLinkPlotRoot>
   );
 }

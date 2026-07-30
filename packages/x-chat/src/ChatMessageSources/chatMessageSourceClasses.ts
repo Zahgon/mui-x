@@ -14,7 +14,7 @@ export interface ChatMessageSourceClasses {
 export type ChatMessageSourceClassKey = keyof ChatMessageSourceClasses;
 
 export function getChatMessageSourceUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatMessageSource', slot);
+    throw new Error("STUB");
 }
 
 export const chatMessageSourceClasses: ChatMessageSourceClasses = generateUtilityClasses(

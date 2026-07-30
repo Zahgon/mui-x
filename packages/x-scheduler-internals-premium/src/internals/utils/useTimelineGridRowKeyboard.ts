@@ -42,16 +42,14 @@ export function useTimelineGridRowKeyboard(params: { columnType: TimelineGridCol
   const hasFocus = focusedCell?.columnType === columnType && focusedCell?.rowIndex === index;
 
   React.useEffect(() => {
-    if (hasFocus && rowRef.current && !rowRef.current.contains(document.activeElement)) {
-      rowRef.current.focus({ preventScroll: true });
-    }
+      throw new Error("STUB");
   }, [hasFocus]);
 
   // Clear focusedCell on unmount if this row still owns it.
   const clearOnUnmount = useStableCallback(() => {
-    clearFocusedCellIfMatches(columnType, index);
+      throw new Error("STUB");
   });
-  React.useEffect(() => clearOnUnmount, [clearOnUnmount]);
+  React.useEffect(() => { throw new Error("STUB"); }, [clearOnUnmount]);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>): boolean => {
     const typeIndex = columnTypes.indexOf(columnType);
@@ -88,9 +86,7 @@ export function useTimelineGridRowKeyboard(params: { columnType: TimelineGridCol
   };
 
   const handleFocus = (event: React.FocusEvent<HTMLDivElement>) => {
-    if (rowRef.current?.contains(event.target)) {
-      setFocusedCell({ columnType, rowIndex: index });
-    }
+      throw new Error("STUB");
   };
 
   return { rowRef, index, hasFocus, handleKeyDown, handleFocus };

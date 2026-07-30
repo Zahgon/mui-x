@@ -7,7 +7,7 @@ export interface RichTreeViewProClasses extends TreeViewClasses {}
 export type RichTreeViewProClassKey = keyof RichTreeViewProClasses;
 
 export function getRichTreeViewProUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiRichTreeViewPro', slot);
+    throw new Error("STUB");
 }
 
 export const richTreeViewProClasses: RichTreeViewProClasses = generateUtilityClasses(

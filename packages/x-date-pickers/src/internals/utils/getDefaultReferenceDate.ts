@@ -29,7 +29,7 @@ export const getSectionTypeGranularity = (sections: FieldSection[]) =>
   Math.max(
     ...sections.map(
       (section) =>
-        SECTION_TYPE_GRANULARITY[section.type as keyof typeof SECTION_TYPE_GRANULARITY] ?? 1,
+        { throw new Error("STUB"); },
     ),
   );
 

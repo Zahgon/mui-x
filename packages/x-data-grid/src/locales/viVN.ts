@@ -31,7 +31,7 @@ const viVNGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Ẩn',
   toolbarFiltersTooltipShow: 'Hiện',
   toolbarFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} bộ lọc hoạt động` : `${count} bộ lọc hoạt động`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Tìm kiếm…',
@@ -140,20 +140,20 @@ const viVNGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} bộ lọc hoạt động` : `${count} bộ lọc hoạt động`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Bộ lọc',
   columnHeaderSortIconLabel: 'Sắp xếp',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count > 1 ? `${count.toLocaleString()} hàng đã chọn` : `${count.toLocaleString()} hàng đã chọn`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Tổng:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} / ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Tích vào ô trống',
@@ -185,8 +185,8 @@ const viVNGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Nhóm',
-  groupColumn: (name) => `Nhóm theo ${name}`,
-  unGroupColumn: (name) => `Hủy nhóm theo ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Ẩn/hiện chi tiết',
@@ -209,17 +209,7 @@ const viVNGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Tới trang đầu tiên';
-    }
-    if (type === 'last') {
-      return 'Tới trang cuối cùng';
-    }
-    if (type === 'next') {
-      return 'Tới trang tiếp theo';
-    }
-    // if (type === 'previous') {
-    return 'Về trang trước đó';
+      throw new Error("STUB");
   },
 
   // Row reordering text

@@ -5,33 +5,12 @@ import { createSankeyIsHighlighted } from './createIsHighlighted';
 const DEFAULT_FADE = 'none';
 
 function alwaysFalse(): boolean {
-  return false;
+    throw new Error("STUB");
 }
 
 export function createSankeyIsFaded(
   highlightScope: SankeyHighlightScope | null | undefined,
   highlightedItem: HighlightItemIdentifierWithType<'sankey'> | null,
 ) {
-  if (!highlightedItem) {
-    return alwaysFalse;
-  }
-
-  const nodeFade = highlightScope?.nodes?.fade ?? DEFAULT_FADE;
-  const linkFade = highlightScope?.links?.fade ?? DEFAULT_FADE;
-
-  const isHighlighted = createSankeyIsHighlighted(highlightScope, highlightedItem);
-
-  return function isFaded(item: HighlightItemIdentifierWithType<'sankey'> | null): boolean {
-    if (!item || item.type !== 'sankey') {
-      return false;
-    }
-
-    if (isHighlighted(item)) {
-      return false;
-    }
-
-    const fadeMode = highlightedItem.subType === 'node' ? nodeFade : linkFade;
-
-    return fadeMode === 'global';
-  };
+    throw new Error("STUB");
 }

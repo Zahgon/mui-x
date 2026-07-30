@@ -12,31 +12,8 @@ import type { GridFilterPanelProps } from './GridFilterPanelBase';
 
 const GridFilterPanel = forwardRef<HTMLDivElement, GridFilterPanelProps>(
   function GridFilterPanel(props, ref) {
-    const apiRef = useGridApiContext();
-    const filterModel = useGridSelector(apiRef, gridFilterModelSelector);
-
-    const handleFilterModelChange = React.useCallback(
-      (model: GridFilterModel, reason?: GridControlledStateReasonLookup['filter']) => {
-        apiRef.current.setFilterModel(model, reason);
-      },
-      [apiRef],
-    );
-
-    const handleClose = React.useCallback(() => {
-      apiRef.current.hideFilterPanel();
-    }, [apiRef]);
-
-    return (
-      <GridFilterPanelBase
-        {...props}
-        filterModel={filterModel}
-        onFilterModelChange={handleFilterModelChange}
-        onClose={handleClose}
-        ref={ref}
-        disableDebounce={false}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridFilterPanel.propTypes /* remove-proptypes */ = {

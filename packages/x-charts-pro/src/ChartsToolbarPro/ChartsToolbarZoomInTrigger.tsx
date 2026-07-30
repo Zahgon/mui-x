@@ -24,20 +24,7 @@ const ChartsToolbarZoomInTrigger = React.forwardRef<
   HTMLButtonElement,
   React.PropsWithChildren<ChartsToolbarZoomInTriggerProps>
 >(function ChartsToolbarZoomInTrigger({ render, ...other }, ref) {
-  const { slots, slotProps } = useChartsSlots();
-  const { instance, store } =
-    useChartsContext<[UseChartCartesianAxisSignature, UseChartProZoomSignature]>();
-  const disabled = !store.use(selectorChartCanZoomIn);
-
-  const element = useComponentRenderer(slots.baseButton, render, {
-    ...slotProps.baseButton,
-    onClick: () => instance.zoomIn(),
-    disabled,
-    ...other,
-    ref,
-  });
-
-  return <React.Fragment>{element}</React.Fragment>;
+    throw new Error("STUB");
 });
 
 ChartsToolbarZoomInTrigger.propTypes /* remove-proptypes */ = {

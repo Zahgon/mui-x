@@ -36,9 +36,11 @@ export const PickerPrivateContext = React.createContext<PickerPrivateContextValu
   },
   rootRefObject: { current: null },
   labelId: undefined,
-  dismissViews: () => {},
+  dismissViews: () => {
+      throw new Error("STUB");
+  },
   hasUIView: true,
-  getCurrentViewMode: () => 'UI',
+  getCurrentViewMode: () => { throw new Error("STUB"); },
   triggerElement: null,
   viewContainerRole: null,
   defaultActionBarActions: [],
@@ -55,29 +57,7 @@ export const PickerPrivateContext = React.createContext<PickerPrivateContextValu
 export function PickerProvider<TValue extends PickerValidValue>(
   props: PickerProviderProps<TValue>,
 ) {
-  const {
-    contextValue,
-    actionsContextValue,
-    privateContextValue,
-    fieldPrivateContextValue,
-    isValidContextValue,
-    localeText,
-    children,
-  } = props;
-
-  return (
-    <PickerContext.Provider value={contextValue}>
-      <PickerActionsContext.Provider value={actionsContextValue}>
-        <PickerPrivateContext.Provider value={privateContextValue}>
-          <PickerFieldPrivateContext.Provider value={fieldPrivateContextValue}>
-            <IsValidValueContext.Provider value={isValidContextValue}>
-              <LocalizationProvider localeText={localeText}>{children}</LocalizationProvider>
-            </IsValidValueContext.Provider>
-          </PickerFieldPrivateContext.Provider>
-        </PickerPrivateContext.Provider>
-      </PickerActionsContext.Provider>
-    </PickerContext.Provider>
-  );
+    throw new Error("STUB");
 }
 
 export interface PickerProviderProps<TValue extends PickerValidValue> {

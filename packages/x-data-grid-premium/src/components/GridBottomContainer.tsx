@@ -38,34 +38,5 @@ const Element = styled('div', {
 });
 
 export function GridBottomContainer(props: GridBottomContainerProps) {
-  const classes = useUtilityClasses();
-  const rootProps = useGridRootProps();
-  const apiRef = useGridPrivateApiContext();
-  const isLoading = useGridSelector(apiRef, gridRowsLoadingSelector);
-  const tree = useGridSelector(apiRef, gridRowTreeSelector);
-  const aggregationModel = useGridSelector(apiRef, gridAggregationModelSelector);
-
-  const aggregationPosition = rootProps.getAggregationPosition(
-    tree[GRID_ROOT_GROUP_ID] as GridGroupNode,
-  );
-  const hasAggregation = React.useMemo(
-    () => Object.keys(aggregationModel).length > 0,
-    [aggregationModel],
-  );
-
-  const { children, ...other } = props;
-
-  return (
-    <Element
-      {...other}
-      className={clsx(classes.root, gridClasses['container--bottom'])}
-      role="none"
-    >
-      {hasAggregation && isLoading && aggregationPosition === 'footer' ? (
-        <GridAggregationRowOverlay />
-      ) : (
-        children
-      )}
-    </Element>
-  );
+    throw new Error("STUB");
 }

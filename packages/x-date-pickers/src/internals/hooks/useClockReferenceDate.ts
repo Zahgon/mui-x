@@ -20,15 +20,7 @@ export const useClockReferenceDate = <TProps extends {}>({
 }): PickerValidDate => {
   const referenceDate = React.useMemo(
     () =>
-      singleItemValueManager.getInitialReferenceValue({
-        value,
-        adapter,
-        props,
-        referenceDate: referenceDateProp,
-        granularity: SECTION_TYPE_GRANULARITY.day,
-        timezone,
-        getTodayDate: () => getTodayDate(adapter, timezone, 'date'),
-      }), // We want the `referenceDate` to update on prop and `timezone` change (https://github.com/mui/mui-x/issues/10804)
+      { throw new Error("STUB"); }, // We want the `referenceDate` to update on prop and `timezone` change (https://github.com/mui/mui-x/issues/10804)
     [referenceDateProp, timezone], // eslint-disable-line react-hooks/exhaustive-deps
   );
 

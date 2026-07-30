@@ -7,15 +7,8 @@ import type { GridOverlayProps } from './containers/GridOverlay';
 
 const GridNoRowsOverlay = forwardRef<HTMLDivElement, GridOverlayProps>(
   function GridNoRowsOverlay(props, ref) {
-    const apiRef = useGridApiContext();
-    const noRowsLabel = apiRef.current.getLocaleText('noRowsLabel');
-
-    return (
-      <GridOverlay {...props} ref={ref}>
-        {noRowsLabel}
-      </GridOverlay>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridNoRowsOverlay.propTypes /* remove-proptypes */ = {

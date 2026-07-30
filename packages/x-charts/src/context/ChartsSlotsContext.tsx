@@ -44,12 +44,5 @@ interface ChartsSlotsProviderProps {
 }
 
 export function ChartsSlotsProvider(props: React.PropsWithChildren<ChartsSlotsProviderProps>) {
-  const { slots, slotProps = {}, defaultSlots, children } = props;
-
-  const value = React.useMemo(
-    () => ({ slots: { ...defaultSlots, ...slots }, slotProps }),
-    [defaultSlots, slots, slotProps],
-  );
-
-  return <ChartsSlotsContext.Provider value={value}>{children}</ChartsSlotsContext.Provider>;
+    throw new Error("STUB");
 }

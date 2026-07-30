@@ -27,7 +27,7 @@ export interface TreeItemClasses {
 export type TreeItemClassKey = keyof TreeItemClasses;
 
 export function getTreeItemUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiTreeItem', slot);
+    throw new Error("STUB");
 }
 
 export const treeItemClasses: TreeItemClasses = generateUtilityClasses('MuiTreeItem', [

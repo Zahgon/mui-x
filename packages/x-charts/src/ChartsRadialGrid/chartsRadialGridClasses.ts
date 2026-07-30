@@ -15,7 +15,7 @@ export interface ChartsRadialGridClasses {
 export type ChartsRadialGridClassKey = keyof ChartsRadialGridClasses;
 
 export function getChartsRadialGridUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsRadialGrid', slot);
+    throw new Error("STUB");
 }
 export const chartsRadialGridClasses: ChartsRadialGridClasses = generateUtilityClasses(
   'MuiChartsRadialGrid',

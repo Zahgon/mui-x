@@ -144,56 +144,7 @@ const LineChart = React.forwardRef(function LineChart(
   inProps: LineChartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiLineChart' });
-  const {
-    chartsWrapperProps,
-    chartsContainerProps,
-    gridProps,
-    clipPathProps,
-    clipPathGroupProps,
-    areaPlotProps,
-    linePlotProps,
-    markPlotProps,
-    overlayProps,
-    chartsAxisProps,
-    axisHighlightProps,
-    lineHighlightPlotProps,
-    legendProps,
-    children,
-  } = useLineChartProps(props);
-  const { chartsDataProviderProps, chartsSurfaceProps } =
-    useChartsContainerProps(chartsContainerProps);
-
-  const Tooltip = props.slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = props.slots?.toolbar;
-
-  return (
-    <ChartsDataProvider<'line', LineChartPluginSignatures> {...chartsDataProviderProps}>
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {props.showToolbar && Toolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!props.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <ChartsGrid {...gridProps} />
-          <g {...clipPathGroupProps}>
-            <AreaPlot {...areaPlotProps} />
-            <LinePlot {...linePlotProps} />
-            <ChartsOverlay {...overlayProps} />
-            <ChartsAxisHighlight {...axisHighlightProps} />
-          </g>
-          <FocusedLineMark />
-          <ChartsAxis {...chartsAxisProps} />
-          <g data-drawing-container>
-            {/* The `data-drawing-container` indicates that children are part of the drawing area. Ref: https://github.com/mui/mui-x/issues/13659 */}
-            <MarkPlot {...markPlotProps} />
-          </g>
-          <LineHighlightPlot {...lineHighlightPlotProps} />
-          <ChartsClipPath {...clipPathProps} />
-          {children}
-        </ChartsSurface>
-        {!props.loading && <Tooltip {...props.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProvider>
-  );
+    throw new Error("STUB");
 });
 
 LineChart.propTypes /* remove-proptypes */ = {

@@ -339,18 +339,7 @@ export default function getItemAtPosition(
           : (radiusScale(stacked[1]) as number);
       };
       const getPosition = (position: 0 | 1) => (idx: number) => {
-        const rotation = getRotation(idx);
-        const radius = getRadius(idx, position);
-        if (rotation == null || radius == null) {
-          return null;
-        }
-        return {
-          radius,
-          rotation,
-          // coordinate centered at (0, 0)
-          x: radius * Math.sin(rotation),
-          y: -radius * Math.cos(rotation),
-        };
+          throw new Error("STUB");
       };
 
       // Build pixel-coordinate points for the top and bottom curves,

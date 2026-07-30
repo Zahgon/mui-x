@@ -13,7 +13,7 @@ export interface DigitalClockClasses {
 export type DigitalClockClassKey = keyof DigitalClockClasses;
 
 export function getDigitalClockUtilityClass(slot: string) {
-  return generateUtilityClass('MuiDigitalClock', slot);
+    throw new Error("STUB");
 }
 
 export const digitalClockClasses: DigitalClockClasses = generateUtilityClasses('MuiDigitalClock', [

@@ -61,7 +61,7 @@ export const getDaysInWeekStr = (adapter: MuiPickersAdapter, format: string) => 
     current = adapter.addDays(current, 1);
   }
 
-  return elements.map((weekDay) => adapter.formatByString(weekDay, format));
+  return elements.map((weekDay) => { throw new Error("STUB"); });
 };
 
 export const getLetterEditingOptions = (
@@ -73,7 +73,7 @@ export const getLetterEditingOptions = (
   switch (sectionType) {
     case 'month': {
       return getMonthsInYear(adapter, adapter.date(undefined, timezone)).map((month) =>
-        adapter.formatByString(month, format!),
+        { throw new Error("STUB"); },
       );
     }
 
@@ -84,7 +84,7 @@ export const getLetterEditingOptions = (
     case 'meridiem': {
       const now = adapter.date(undefined, timezone);
       return [adapter.startOfDay(now), adapter.endOfDay(now)].map((date) =>
-        adapter.formatByString(date, format),
+        { throw new Error("STUB"); },
       );
     }
 
@@ -112,7 +112,7 @@ export const getLocalizedDigits = (adapter: MuiPickersAdapter) => {
   }
 
   return Array.from({ length: 10 }).map((_, index) =>
-    adapter.formatByString(adapter.setSeconds(today, index), FORMAT_SECONDS_NO_LEADING_ZEROS),
+    { throw new Error("STUB"); },
   );
 };
 
@@ -142,7 +142,7 @@ export const applyLocalizedDigits = (valueStr: string, localizedDigits: string[]
 
   return valueStr
     .split('')
-    .map((char) => localizedDigits[Number(char)])
+    .map((char) => { throw new Error("STUB"); })
     .join('');
 };
 
@@ -332,7 +332,7 @@ export const getDateFromDateSections = (
   // If we have both a day and a weekDay section,
   // Then we skip the weekDay in the parsing because libraries like dayjs can't parse complicated formats containing a weekDay.
   // dayjs(dayjs().format('dddd MMMM D YYYY'), 'dddd MMMM D YYYY')) // returns `Invalid Date` even if the format is valid.
-  const shouldSkipWeekDays = sections.some((section) => section.type === 'day');
+  const shouldSkipWeekDays = sections.some((section) => { throw new Error("STUB"); });
 
   const sectionFormats: string[] = [];
   const sectionValues: string[] = [];
@@ -355,9 +355,7 @@ export const getDateFromDateSections = (
 export const createDateStrForHiddenInputFromSections = (sections: FieldSection[]) =>
   sections
     .map((section) => {
-      return `${section.startSeparator}${section.value || section.placeholder}${
-        section.endSeparator
-      }`;
+        throw new Error("STUB");
     })
     .join('');
 
@@ -372,100 +370,25 @@ export const getSectionsBoundaries = (
 
   const { maxDaysInMonth, longestMonth } = getMonthsInYear(adapter, today).reduce(
     (acc, month) => {
-      const daysInMonth = adapter.getDaysInMonth(month);
-
-      if (daysInMonth > acc.maxDaysInMonth) {
-        return { maxDaysInMonth: daysInMonth, longestMonth: month };
-      }
-
-      return acc;
-    },
+          throw new Error("STUB");
+      },
     { maxDaysInMonth: 0, longestMonth: null as PickerValidDate | null },
   );
 
   return {
-    year: ({ format }) => ({
-      minimum: 0,
-      maximum: isFourDigitYearFormat(adapter, format) ? 9999 : 99,
-    }),
-    month: () => ({
-      minimum: 1,
-      // Assumption: All years have the same amount of months
-      maximum: adapter.getMonth(endOfYear) + 1,
-    }),
-    day: ({ currentDate }) => ({
-      minimum: 1,
-      maximum: adapter.isValid(currentDate) ? adapter.getDaysInMonth(currentDate) : maxDaysInMonth,
-      longestMonth: longestMonth!,
-    }),
+    year: ({ format }) => { throw new Error("STUB"); },
+    month: () => { throw new Error("STUB"); },
+    day: ({ currentDate }) => { throw new Error("STUB"); },
     weekDay: ({ format, contentType }) => {
-      if (contentType === 'digit') {
-        const daysInWeek = getDaysInWeekStr(adapter, format).map(Number);
-        return {
-          minimum: Math.min(...daysInWeek),
-          maximum: Math.max(...daysInWeek),
-        };
-      }
-
-      return {
-        minimum: 1,
-        maximum: 7,
-      };
+        throw new Error("STUB");
     },
     hours: ({ format }) => {
-      const lastHourInDay = adapter.getHours(endOfDay);
-
-      const formattedMidnight = Number(
-        removeLocalizedDigits(
-          adapter.formatByString(adapter.startOfDay(today), format),
-          localizedDigits,
-        ),
-      );
-
-      const formattedEndOfDay = Number(
-        removeLocalizedDigits(
-          adapter.formatByString(adapter.endOfDay(today), format),
-          localizedDigits,
-        ),
-      );
-
-      const hasMeridiem = formattedEndOfDay !== lastHourInDay;
-
-      if (hasMeridiem) {
-        // K/KK format (hour 0-11): midnight formats as 0
-        if (formattedMidnight === 0) {
-          return { minimum: 0, maximum: formattedEndOfDay };
-        }
-        // h/hh format (hour 1-12): midnight formats as 12
-        return { minimum: 1, maximum: formattedMidnight };
-      }
-
-      // k/kk format (hour 1-24): midnight formats as 24 (> lastHourInDay)
-      if (formattedMidnight > lastHourInDay) {
-        return { minimum: 1, maximum: formattedMidnight };
-      }
-
-      // H/HH format (hour 0-23)
-      return { minimum: 0, maximum: lastHourInDay };
+        throw new Error("STUB");
     },
-    minutes: () => ({
-      minimum: 0,
-      // Assumption: All years have the same amount of minutes
-      maximum: adapter.getMinutes(endOfDay),
-    }),
-    seconds: () => ({
-      minimum: 0,
-      // Assumption: All years have the same amount of seconds
-      maximum: adapter.getSeconds(endOfDay),
-    }),
-    meridiem: () => ({
-      minimum: 0,
-      maximum: 1,
-    }),
-    empty: () => ({
-      minimum: 0,
-      maximum: 0,
-    }),
+    minutes: () => { throw new Error("STUB"); },
+    seconds: () => { throw new Error("STUB"); },
+    meridiem: () => { throw new Error("STUB"); },
+    empty: () => { throw new Error("STUB"); },
   };
 };
 
@@ -485,7 +408,7 @@ export const validateSections = <TValue extends PickerValidValue>(
         supportedSections.push('hours', 'minutes', 'seconds', 'meridiem');
       }
 
-      const invalidSection = sections.find((section) => !supportedSections.includes(section.type));
+      const invalidSection = sections.find((section) => { throw new Error("STUB"); });
 
       if (invalidSection) {
         console.warn(
@@ -575,22 +498,16 @@ export const mergeDateIntoReferenceDate = (
   // cloning sections before sort to avoid mutating it
   [...sections]
     .sort(
-      (a, b) => reliableSectionModificationOrder[a.type] - reliableSectionModificationOrder[b.type],
+      (a, b) => { throw new Error("STUB"); },
     )
     .reduce((mergedDate, section) => {
-      if (!shouldLimitToEditedSections || section.modified) {
-        return transferDateSectionValue(adapter, section, dateToTransferFrom, mergedDate);
-      }
-
-      return mergedDate;
+        throw new Error("STUB");
     }, referenceDate);
 
 export const getSectionOrder = (sections: FieldSection[]): SectionOrdering => {
   const neighbors: SectionNeighbors = {};
   sections.forEach((_, index) => {
-    const leftIndex = index === 0 ? null : index - 1;
-    const rightIndex = index === sections.length - 1 ? null : index + 1;
-    neighbors[index] = { leftIndex, rightIndex };
+      throw new Error("STUB");
   });
   return { neighbors, startIndex: 0, endIndex: sections.length - 1 };
 };
@@ -608,7 +525,7 @@ export const parseSelectedSections = (
   }
 
   if (typeof selectedSections === 'string') {
-    const index = sections.findIndex((section) => section.type === selectedSections);
+    const index = sections.findIndex((section) => { throw new Error("STUB"); });
     return index === -1 ? null : index;
   }
 

@@ -18,23 +18,13 @@ export const usePanOnDrag = (
   const config = store.use(selectorPanInteractionConfig, 'drag' as const);
 
   const isPanOnDragEnabled: boolean =
-    Object.values(optionsLookup).some((v) => v.panning) && Boolean(config);
+    Object.values(optionsLookup).some((v) => { throw new Error("STUB"); }) && Boolean(config);
 
   useDragGesture(instance, {
     config: config ?? undefined,
     enabled: isPanOnDragEnabled,
     onPan: (delta) => {
-      setZoomDataCallback((prev) =>
-        translateZoom(
-          prev,
-          { x: delta.x, y: -delta.y },
-          {
-            width: drawingArea.width,
-            height: drawingArea.height,
-          },
-          optionsLookup,
-        ),
-      );
+        throw new Error("STUB");
     },
   });
 };

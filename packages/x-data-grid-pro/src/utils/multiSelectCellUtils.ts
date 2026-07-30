@@ -18,14 +18,7 @@ export function getOverflowChipWidth(
   hiddenCount: number,
   widths: number[] = DEFAULT_OVERFLOW_CHIP_WIDTHS,
 ): number {
-  if (hiddenCount <= 0) {
-    return 0;
-  }
-  if (widths.length === 0) {
-    return 0;
-  }
-  const digits = String(hiddenCount).length;
-  return widths[Math.min(digits - 1, widths.length - 1)];
+    throw new Error("STUB");
 }
 
 /**
@@ -40,33 +33,5 @@ export function calculateVisibleCount(
   overflowChipWidths: number[] = DEFAULT_OVERFLOW_CHIP_WIDTHS,
   gap: number = DEFAULT_GAP,
 ): number {
-  let usedWidth = 0;
-  let count = 0;
-
-  for (let i = 0; i < arrayLength; i += 1) {
-    const chipWidth = chipWidths.get(i);
-    if (chipWidth === undefined) {
-      // Not all chips measured yet, show up to this point
-      return i;
-    }
-
-    const hiddenIfStopHere = arrayLength - (i + 1);
-    const overflowChipWidth = getOverflowChipWidth(hiddenIfStopHere, overflowChipWidths);
-    const spaceNeeded =
-      usedWidth +
-      chipWidth +
-      (count > 0 ? gap : 0) +
-      (hiddenIfStopHere > 0 ? overflowChipWidth + gap : 0);
-
-    // Both `containerWidth` and chip widths are read via getBoundingClientRect (sub-
-    // pixel), so no tolerance needed — the math matches the laid-out widths exactly.
-    if (spaceNeeded <= containerWidth || i === 0) {
-      usedWidth += chipWidth + (count > 0 ? gap : 0);
-      count += 1;
-    } else {
-      break;
-    }
-  }
-
-  return count;
+    throw new Error("STUB");
 }

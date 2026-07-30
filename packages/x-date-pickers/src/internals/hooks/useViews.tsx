@@ -164,16 +164,7 @@ export function useViews<
     : DEFAULT_STEP_NAVIGATION;
 
   React.useEffect(() => {
-    // Update the current view when `openTo` or `views` props change
-    if (
-      (previousOpenTo.current && previousOpenTo.current !== openTo) ||
-      (previousViews.current &&
-        previousViews.current.some((previousView) => !views.includes(previousView)))
-    ) {
-      setView(views.includes(openTo!) ? openTo! : views[0]);
-      previousViews.current = views;
-      previousOpenTo.current = openTo;
-    }
+      throw new Error("STUB");
   }, [openTo, setView, view, views]);
 
   const viewIndex = views.indexOf(view);
@@ -181,74 +172,21 @@ export function useViews<
   const nextView: TView | null = views[viewIndex + 1] ?? null;
 
   const handleFocusedViewChange = useEventCallback((viewToFocus: TView, hasFocus: boolean) => {
-    if (hasFocus) {
-      // Focus event
-      setFocusedView(viewToFocus);
-    } else {
-      // Blur event
-      setFocusedView(
-        (prevFocusedView) => (viewToFocus === prevFocusedView ? null : prevFocusedView), // If false the blur is due to view switching
-      );
-    }
-
-    onFocusedViewChange?.(viewToFocus, hasFocus);
+      throw new Error("STUB");
   });
 
   const handleChangeView = useEventCallback((newView: TView) => {
-    // always keep the focused view in sync
-    handleFocusedViewChange(newView, true);
-    if (newView === view) {
-      return;
-    }
-    setView(newView);
-    if (onViewChange) {
-      onViewChange(newView);
-    }
+      throw new Error("STUB");
   });
 
   const goToNextView = useEventCallback(() => {
-    if (nextView) {
-      handleChangeView(nextView);
-    }
+      throw new Error("STUB");
   });
 
   const setValueAndGoToNextView = useEventCallback(
     (value: TValue, currentViewSelectionState?: PickerSelectionState, selectedView?: TView) => {
-      const isSelectionFinishedOnCurrentView = currentViewSelectionState === 'finish';
-      const hasMoreViews = selectedView
-        ? // handles case like `DateTimePicker`, where a view might return a `finish` selection state
-          // but when it's not the final view given all `views` -> overall selection state should be `partial`.
-          views.indexOf(selectedView) < views.length - 1
-        : Boolean(nextView);
-
-      const globalSelectionState =
-        isSelectionFinishedOnCurrentView && hasMoreViews ? 'partial' : currentViewSelectionState;
-
-      onChange(value, globalSelectionState, selectedView);
-
-      // The selected view can be different from the active view,
-      // This can happen if multiple views are displayed, like in `DesktopDateTimePicker` or `MultiSectionDigitalClock`.
-      let currentView: TView | null = null;
-      if (selectedView != null && selectedView !== view) {
-        currentView = selectedView;
-      } else if (isSelectionFinishedOnCurrentView) {
-        currentView = view;
-      }
-
-      if (currentView == null) {
-        return;
-      }
-
-      const viewToNavigateTo = views[views.indexOf(currentView) + 1];
-      if (
-        viewToNavigateTo == null ||
-        !stepNavigation.areViewsInSameStep(currentView, viewToNavigateTo)
-      ) {
-        return;
-      }
-
-      handleChangeView(viewToNavigateTo);
-    },
+          throw new Error("STUB");
+      },
   );
 
   return {

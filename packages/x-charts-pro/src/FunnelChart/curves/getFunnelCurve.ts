@@ -28,5 +28,5 @@ export const getFunnelCurve = (curve: FunnelCurveType | undefined, options: Curv
   }
 
   return (context: CanvasRenderingContext2D | Path) =>
-    new (curveConstructor(curve))(context as any, options);
+    { throw new Error("STUB"); };
 };

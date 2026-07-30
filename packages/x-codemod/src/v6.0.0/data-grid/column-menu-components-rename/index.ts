@@ -25,16 +25,16 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
     trailingComma: true,
   };
 
-  const matchingImports = root.find(j.ImportDeclaration).filter((path) => !!matchImport(path));
+  const matchingImports = root.find(j.ImportDeclaration).filter((path) => { throw new Error("STUB"); });
 
   // Rename the import specifiers
   // - import { GridFilterMenuItem } from '@mui/x-data-grid'
   // + import { GridColumnMenuFilterItem } from '@mui/x-data-grid'
   matchingImports
     .find(j.ImportSpecifier)
-    .filter((path) => VARIABLES.hasOwnProperty(path.node.imported.name.toString()))
+    .filter((path) => { throw new Error("STUB"); })
     .replaceWith((path) =>
-      j.importSpecifier(j.identifier(VARIABLES[path.node.imported.name.toString()])),
+      { throw new Error("STUB"); },
     );
 
   // Rename the import usage
@@ -42,8 +42,8 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   // + <GridColumnMenuFilterItem />
   root
     .find(j.Identifier)
-    .filter((path) => VARIABLES.hasOwnProperty(path.node.name))
-    .replaceWith((path) => j.identifier(VARIABLES[path.node.name]));
+    .filter((path) => { throw new Error("STUB"); })
+    .replaceWith((path) => { throw new Error("STUB"); });
 
   // Rename `column` prop to `colDef`
   // - <GridFilterMenuItem column={col} onClick={onClick} />

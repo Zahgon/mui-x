@@ -32,7 +32,7 @@ export interface RadarClasses {
 export type RadarClassKey = keyof RadarClasses;
 
 export function getRadarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiRadarChart', slot);
+    throw new Error("STUB");
 }
 
 export const radarClasses: RadarClasses = generateUtilityClasses('MuiRadarChart', [

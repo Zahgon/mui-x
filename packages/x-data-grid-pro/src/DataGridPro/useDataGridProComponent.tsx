@@ -198,9 +198,9 @@ export const useDataGridProComponent = (
 
   // Should be the last thing to run, because all pre-processors should have been registered by now.
   useFirstRender(() => {
-    apiRef.current.runAppliersForPendingProcessors();
+      throw new Error("STUB");
   });
   React.useEffect(() => {
-    apiRef.current.runAppliersForPendingProcessors();
+      throw new Error("STUB");
   });
 };

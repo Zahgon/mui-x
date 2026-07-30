@@ -52,13 +52,13 @@ import type { ScatterSizeGetter } from '../../../../ScatterChart/seriesConfig/ge
 export const createZoomMap = (zoom: readonly ZoomData[]) => {
   const zoomItemMap = new Map<AxisId, ZoomData>();
   zoom.forEach((zoomItem) => {
-    zoomItemMap.set(zoomItem.axisId, zoomItem);
+      throw new Error("STUB");
   });
   return zoomItemMap;
 };
 
 const selectorChartZoomState = (state: ChartState<[], [UseChartCartesianAxisSignature]>) =>
-  state.zoom;
+  { throw new Error("STUB"); };
 
 /**
  * Following selectors are not exported because they exist in the MIT chart only to ba able to reuse the Zoom state from the pro.
@@ -66,48 +66,45 @@ const selectorChartZoomState = (state: ChartState<[], [UseChartCartesianAxisSign
 
 export const selectorChartZoomIsInteracting = createSelector(
   selectorChartZoomState,
-  (zoom) => zoom?.isInteracting,
+  (zoom) => { throw new Error("STUB"); },
 );
 
 export const selectorChartZoomMap = createSelectorMemoized(
   selectorChartZoomState,
   function selectorChartZoomMap(zoom) {
-    return zoom?.zoomData && createZoomMap(zoom?.zoomData);
+      throw new Error("STUB");
   },
 );
 
 export const selectorChartAxisZoomData = createSelector(
   selectorChartZoomMap,
-  (zoomMap, axisId: AxisId) => zoomMap?.get(axisId),
+  (zoomMap, axisId: AxisId) => { throw new Error("STUB"); },
 );
 
 export const selectorChartZoomOptionsLookup = createSelectorMemoized(
   selectorChartRawXAxis,
   selectorChartRawYAxis,
   function selectorChartZoomOptionsLookup(xAxis, yAxis) {
-    return {
-      ...createZoomLookup('x')(xAxis),
-      ...createZoomLookup('y')(yAxis),
-    };
+      throw new Error("STUB");
   },
 );
 
 export const selectorChartAxisZoomOptionsLookup = createSelector(
   selectorChartZoomOptionsLookup,
-  (axisLookup, axisId: AxisId) => axisLookup[axisId],
+  (axisLookup, axisId: AxisId) => { throw new Error("STUB"); },
 );
 
 export const selectorDefaultXAxisTickNumber = createSelector(
   selectorChartDrawingArea,
   function selectorDefaultXAxisTickNumber(drawingArea) {
-    return getDefaultTickNumber(drawingArea.width);
+      throw new Error("STUB");
   },
 );
 
 export const selectorDefaultYAxisTickNumber = createSelector(
   selectorChartDrawingArea,
   function selectorDefaultYAxisTickNumber(drawingArea) {
-    return getDefaultTickNumber(drawingArea.height);
+      throw new Error("STUB");
   },
 );
 
@@ -117,14 +114,7 @@ export const selectorChartXAxisWithDomains = createSelectorMemoized(
   selectorDefaultXAxisTickNumber,
   selectorChartXAxisExtrema,
   function selectorChartXAxisWithDomains(axes, formattedSeries, defaultTickNumber, extremaMap) {
-    const domains = computeAxisDomainsMap(
-      axes,
-      formattedSeries,
-      defaultTickNumber,
-      extremaMap,
-      'x',
-    );
-    return { axes, domains };
+      throw new Error("STUB");
   },
 );
 
@@ -134,14 +124,7 @@ export const selectorChartYAxisWithDomains = createSelectorMemoized(
   selectorDefaultYAxisTickNumber,
   selectorChartYAxisExtrema,
   function selectorChartYAxisWithDomains(axes, formattedSeries, defaultTickNumber, extremaMap) {
-    const domains = computeAxisDomainsMap(
-      axes,
-      formattedSeries,
-      defaultTickNumber,
-      extremaMap,
-      'y',
-    );
-    return { axes, domains };
+      throw new Error("STUB");
   },
 );
 
@@ -157,56 +140,7 @@ export const selectorChartZoomAxisFilters = createSelectorMemoized(
     { axes: xAxis, domains: xDomains },
     { axes: yAxis, domains: yDomains },
   ) {
-    if (!zoomMap || !zoomOptions) {
-      return undefined;
-    }
-
-    let hasFilter = false;
-    const filters: Record<AxisId, ExtremumFilter> = {};
-    const axes = [...(xAxis ?? []), ...(yAxis ?? [])];
-
-    for (let i = 0; i < axes.length; i += 1) {
-      const axis = axes[i];
-
-      if (!zoomOptions[axis.id] || zoomOptions[axis.id].filterMode !== 'discard') {
-        continue;
-      }
-
-      const zoom = zoomMap.get(axis.id);
-      if (zoom === undefined || (zoom.start <= 0 && zoom.end >= 100)) {
-        // No zoom, or zoom with all data visible
-        continue;
-      }
-
-      const axisDirection = i < (xAxis?.length ?? 0) ? 'x' : 'y';
-
-      if (axis.scaleType === 'band' || axis.scaleType === 'point') {
-        filters[axis.id] = createDiscreteScaleGetAxisFilter(
-          axis.data,
-          zoom.start,
-          zoom.end,
-          axisDirection,
-        );
-      } else {
-        const { domain } = axisDirection === 'x' ? xDomains[axis.id] : yDomains[axis.id];
-        filters[axis.id] = createContinuousScaleGetAxisFilter(
-          // For continuous scales, the domain is always a two-value array.
-          domain as readonly [NumberValue, NumberValue],
-          zoom.start,
-          zoom.end,
-          axisDirection,
-          axis.data,
-        );
-      }
-
-      hasFilter = true;
-    }
-
-    if (!hasFilter) {
-      return undefined;
-    }
-
-    return createGetAxisFilters(filters);
+      throw new Error("STUB");
   },
 );
 
@@ -226,46 +160,7 @@ export const selectorChartFilteredXDomains = createSelectorMemoized(
     getFilters,
     { axes, domains },
   ) {
-    const filteredDomains: Record<AxisId, ReadonlyArray<string | NumberValue>> = {};
-
-    axes?.forEach((axis, axisIndex) => {
-      const domain = domains[axis.id].domain;
-
-      if (isBandScaleConfig(axis) || isPointScaleConfig(axis)) {
-        filteredDomains[axis.id] = domain;
-        return;
-      }
-
-      const zoom = zoomMap?.get(axis.id);
-      const zoomOption = zoomOptions?.[axis.id];
-      const filter = zoom === undefined && !zoomOption ? getFilters : undefined; // Do not apply filtering if zoom is already defined.
-
-      if (!filter) {
-        filteredDomains[axis.id] = domain;
-        return;
-      }
-
-      const rawTickNumber = domains[axis.id].tickNumber!;
-      const axisExtrema = getAxisExtrema(
-        axis,
-        'x',
-        seriesConfig as ChartSeriesConfig<CartesianChartSeriesType>,
-        axisIndex,
-        formattedSeries,
-        filter,
-      );
-
-      filteredDomains[axis.id] = calculateFinalDomain(
-        axis as Readonly<DefaultedAxis<ContinuousScaleName, any, Readonly<ChartsAxisProps>>>,
-        'x',
-        axisIndex,
-        formattedSeries,
-        axisExtrema,
-        rawTickNumber,
-      );
-    });
-
-    return filteredDomains;
+      throw new Error("STUB");
   },
 );
 
@@ -284,46 +179,7 @@ export const selectorChartFilteredYDomains = createSelectorMemoized(
     getFilters,
     { axes, domains },
   ) {
-    const filteredDomains: Record<AxisId, ReadonlyArray<string | NumberValue>> = {};
-
-    axes?.forEach((axis, axisIndex) => {
-      const domain = domains[axis.id].domain;
-
-      if (isBandScaleConfig(axis) || isPointScaleConfig(axis)) {
-        filteredDomains[axis.id] = domain;
-        return;
-      }
-
-      const zoom = zoomMap?.get(axis.id);
-      const zoomOption = zoomOptions?.[axis.id];
-      const filter = zoom === undefined && !zoomOption ? getFilters : undefined; // Do not apply filtering if zoom is already defined.
-
-      if (!filter) {
-        filteredDomains[axis.id] = domain;
-        return;
-      }
-
-      const rawTickNumber = domains[axis.id].tickNumber!;
-      const axisExtrema = getAxisExtrema(
-        axis,
-        'y',
-        seriesConfig as ChartSeriesConfig<CartesianChartSeriesType>,
-        axisIndex,
-        formattedSeries,
-        filter,
-      );
-
-      filteredDomains[axis.id] = calculateFinalDomain(
-        axis as Readonly<DefaultedAxis<ContinuousScaleName, any, Readonly<ChartsAxisProps>>>,
-        'y',
-        axisIndex,
-        formattedSeries,
-        axisExtrema,
-        rawTickNumber,
-      );
-    });
-
-    return filteredDomains;
+      throw new Error("STUB");
   },
 );
 
@@ -331,16 +187,7 @@ export const selectorChartNormalizedXScales = createSelectorMemoized(
   selectorChartRawXAxis,
   selectorChartFilteredXDomains,
   function selectorChartNormalizedXScales(axes, filteredDomains) {
-    const scales: Record<AxisId, D3Scale> = {};
-
-    axes?.forEach((eachAxis) => {
-      const axis = eachAxis as Readonly<DefaultedAxis<ScaleName, any, Readonly<ChartsAxisProps>>>;
-      const domain = filteredDomains[axis.id]!;
-
-      scales[axis.id] = getNormalizedAxisScale(axis, domain);
-    });
-
-    return scales;
+      throw new Error("STUB");
   },
 );
 
@@ -348,16 +195,7 @@ export const selectorChartNormalizedYScales = createSelectorMemoized(
   selectorChartRawYAxis,
   selectorChartFilteredYDomains,
   function selectorChartNormalizedYScales(axes, filteredDomains) {
-    const scales: Record<AxisId, D3Scale> = {};
-
-    axes?.forEach((eachAxis) => {
-      const axis = eachAxis as Readonly<DefaultedAxis<ScaleName, any, Readonly<ChartsAxisProps>>>;
-      const domain = filteredDomains[axis.id]!;
-
-      scales[axis.id] = getNormalizedAxisScale(axis, domain);
-    });
-
-    return scales;
+      throw new Error("STUB");
   },
 );
 
@@ -367,24 +205,7 @@ export const selectorChartXScales = createSelectorMemoized(
   selectorChartDrawingArea,
   selectorChartZoomMap,
   function selectorChartXScales(axes, normalizedScales, drawingArea, zoomMap) {
-    const scales: Record<AxisId, D3Scale> = {};
-
-    axes?.forEach((eachAxis) => {
-      const axis = eachAxis as Readonly<DefaultedAxis<ScaleName, any, Readonly<ChartsAxisProps>>>;
-      const zoom = zoomMap?.get(axis.id);
-
-      const zoomRange: [number, number] = zoom ? [zoom.start, zoom.end] : [0, 100];
-      const range = getRange(drawingArea, 'x', axis);
-
-      const scale = normalizedScales[axis.id].copy();
-      const zoomedRange = zoomScaleRange(range, zoomRange);
-
-      scale.range(zoomedRange);
-
-      scales[axis.id] = scale;
-    });
-
-    return scales;
+      throw new Error("STUB");
   },
 );
 
@@ -394,26 +215,7 @@ export const selectorChartYScales = createSelectorMemoized(
   selectorChartDrawingArea,
   selectorChartZoomMap,
   function selectorChartYScales(axes, normalizedScales, drawingArea, zoomMap) {
-    const scales: Record<AxisId, D3Scale> = {};
-
-    axes?.forEach((eachAxis) => {
-      const axis = eachAxis as Readonly<DefaultedAxis<ScaleName, any, Readonly<ChartsAxisProps>>>;
-      const zoom = zoomMap?.get(axis.id);
-
-      const zoomRange: [number, number] = zoom ? [zoom.start, zoom.end] : [0, 100];
-      const range = getRange(drawingArea, 'y', axis);
-
-      const scale = normalizedScales[axis.id].copy();
-
-      const scaleRange = isOrdinalScale(scale) ? range.reverse() : range;
-      const zoomedRange = zoomScaleRange(scaleRange, zoomRange);
-
-      scale.range(zoomedRange);
-
-      scales[axis.id] = scale;
-    });
-
-    return scales;
+      throw new Error("STUB");
   },
 );
 
@@ -441,18 +243,7 @@ export const selectorChartXAxis = createSelectorMemoized(
     autoSizes,
     axesGap,
   ) {
-    return computeAxisValue({
-      scales,
-      drawingArea,
-      formattedSeries,
-      axis: axes,
-      seriesConfig,
-      axisDirection: 'x',
-      zoomMap,
-      domains,
-      autoSizes,
-      axesGap,
-    });
+      throw new Error("STUB");
   },
 );
 
@@ -476,49 +267,32 @@ export const selectorChartYAxis = createSelectorMemoized(
     autoSizes,
     axesGap,
   ) {
-    return computeAxisValue({
-      scales,
-      drawingArea,
-      formattedSeries,
-      axis: axes,
-      seriesConfig,
-      axisDirection: 'y',
-      zoomMap,
-      domains,
-      autoSizes,
-      axesGap,
-    });
+      throw new Error("STUB");
   },
 );
 
 export const selectorChartAxis = createSelector(
   selectorChartXAxis,
   selectorChartYAxis,
-  (xAxes, yAxes, axisId: AxisId) => xAxes?.axis[axisId] ?? yAxes?.axis[axisId],
+  (xAxes, yAxes, axisId: AxisId) => { throw new Error("STUB"); },
 );
 
 export const selectorChartRawAxis = createSelector(
   selectorChartRawXAxis,
   selectorChartRawYAxis,
   (xAxes, yAxes, axisId: AxisId) => {
-    const axis = xAxes?.find((a) => a.id === axisId) ?? yAxes?.find((a) => a.id === axisId) ?? null;
-
-    if (!axis) {
-      return undefined;
-    }
-
-    return axis;
+      throw new Error("STUB");
   },
 );
 
 export const selectorChartDefaultXAxisId = createSelector(
   selectorChartRawXAxis,
-  (xAxes) => xAxes![0].id,
+  (xAxes) => { throw new Error("STUB"); },
 );
 
 export const selectorChartDefaultYAxisId = createSelector(
   selectorChartRawYAxis,
-  (yAxes) => yAxes![0].id,
+  (yAxes) => { throw new Error("STUB"); },
 );
 
 export type ScatterFlatbushEntry = {
@@ -530,7 +304,7 @@ export type ScatterFlatbushEntry = {
 };
 
 const EMPTY_MAP = new Map<SeriesId, ScatterFlatbushEntry>();
-export const selectorChartSeriesEmptyFlatbushMap = () => EMPTY_MAP;
+export const selectorChartSeriesEmptyFlatbushMap = () => { throw new Error("STUB"); };
 
 export const selectorChartSeriesFlatbushMap = createSelectorMemoized(
   selectorChartSeriesProcessed,
@@ -547,52 +321,6 @@ export const selectorChartSeriesFlatbushMap = createSelectorMemoized(
     defaultYAxisId,
     zAxisState,
   ) {
-    // FIXME: Do we want to support non-scatter series here?
-    const validSeries = allSeries.scatter;
-    const flatbushMap = new Map<SeriesId, ScatterFlatbushEntry>();
-
-    if (!validSeries) {
-      return flatbushMap;
-    }
-
-    const zAxes = zAxisState?.axis ?? {};
-    const zAxisIds = zAxisState?.axisIds ?? [];
-
-    validSeries.seriesOrder.forEach((seriesId) => {
-      const series = validSeries.series[seriesId];
-      const { data, xAxisId = defaultXAxisId, yAxisId = defaultYAxisId } = series;
-
-      if (data.length === 0) {
-        return;
-      }
-
-      const flatbush = new Flatbush(data.length);
-
-      const sizeAxis = zAxes[series.sizeAxisId ?? zAxisIds[0]];
-
-      const isFixedSize = !sizeAxis || !sizeAxis.sizeScale;
-      const getItemRadius = isFixedSize
-        ? (series.markerSize ?? 0)
-        : getMarkerSize(series, sizeAxis);
-
-      let maxItemRadius = isFixedSize ? (getItemRadius as number) : 0;
-
-      const originalXScale = xAxesScaleMap[xAxisId];
-      const originalYScale = yAxesScaleMap[yAxisId];
-
-      for (let i = 0; i < data.length; i += 1) {
-        if (!isFixedSize) {
-          maxItemRadius = Math.max(maxItemRadius, (getItemRadius as ScatterSizeGetter)(i));
-        }
-        // Add the points using a [0, 1] range so that we don't need to recreate the Flatbush structure when zooming.
-        // This doesn't happen in practice, though, because currently the scales depend on the drawing area.
-        flatbush.add(originalXScale(data[i].x)!, originalYScale(data[i].y)!);
-      }
-
-      flatbush.finish();
-      flatbushMap.set(seriesId, { flatbush, getItemRadius, maxItemRadius });
-    });
-
-    return flatbushMap;
+      throw new Error("STUB");
   },
 );

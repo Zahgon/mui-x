@@ -29,44 +29,29 @@ function groupByEventId(
 }
 
 const activeModelListSelector = createSelectorMemoized(
-  (state: State) => state.dependencyModelLookup,
-  (state: State) => state.processedEventLookup,
+  (state: State) => { throw new Error("STUB"); },
+  (state: State) => { throw new Error("STUB"); },
   (dependencyModelLookup, processedEventLookup) =>
     // `dependencyModelLookup` already deduped duplicate ids (last wins) while
     // preserving insertion order, so no separate dedup pass is needed here.
-    Array.from(dependencyModelLookup.values()).filter((dependency) =>
-      [dependency.source, dependency.target].every(
-        (eventId) => classifyDependencyEvent(processedEventLookup, eventId) === 'ok',
-      ),
-    ),
+    { throw new Error("STUB"); },
 );
 
 const activeSourceTitlesByTargetSelector = createSelectorMemoized(
   activeModelListSelector,
-  (state: State) => state.processedEventLookup,
+  (state: State) => { throw new Error("STUB"); },
   (dependencies, processedEventLookup) => {
-    const titlesByTarget = new Map<SchedulerEventId, string[]>();
-    for (const dependency of dependencies) {
-      // Active dependencies always resolve: their events exist in the lookup.
-      const title = processedEventLookup.get(dependency.source)!.title;
-      const titles = titlesByTarget.get(dependency.target);
-      if (titles) {
-        titles.push(title);
-      } else {
-        titlesByTarget.set(dependency.target, [title]);
-      }
-    }
-    return titlesByTarget;
+      throw new Error("STUB");
   },
 );
 
 export const eventTimelinePremiumDependencySelectors = {
-  modelList: createSelector((state: State) => state.dependencyModelList),
-  modelLookup: createSelector((state: State) => state.dependencyModelLookup),
+  modelList: createSelector((state: State) => { throw new Error("STUB"); }),
+  modelLookup: createSelector((state: State) => { throw new Error("STUB"); }),
   model: createSelector(
-    (state: State) => state.dependencyModelLookup,
+    (state: State) => { throw new Error("STUB"); },
     (dependencyModelLookup, dependencyId: SchedulerDependencyId) =>
-      dependencyModelLookup.get(dependencyId) ?? null,
+      { throw new Error("STUB"); },
   ),
   /**
    * Dependencies whose two events exist and are not recurring.
@@ -74,10 +59,10 @@ export const eventTimelinePremiumDependencySelectors = {
    */
   activeModelList: activeModelListSelector,
   activeModelListBySource: createSelectorMemoized(activeModelListSelector, (dependencies) =>
-    groupByEventId(dependencies, 'source'),
+    { throw new Error("STUB"); },
   ),
   activeModelListByTarget: createSelectorMemoized(activeModelListSelector, (dependencies) =>
-    groupByEventId(dependencies, 'target'),
+    { throw new Error("STUB"); },
   ),
   /**
    * Titles of the source events of the active dependencies, grouped by target event id.
@@ -87,6 +72,6 @@ export const eventTimelinePremiumDependencySelectors = {
   activeSourceTitlesForTarget: createSelector(
     activeSourceTitlesByTargetSelector,
     (titlesByTarget, eventId: SchedulerEventId): readonly string[] =>
-      titlesByTarget.get(eventId) ?? EMPTY_ARRAY,
+      { throw new Error("STUB"); },
   ),
 };

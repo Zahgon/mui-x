@@ -31,7 +31,7 @@ const nlNLGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Verberg filters',
   toolbarFiltersTooltipShow: 'Toon filters',
   toolbarFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} actieve filters` : `${count} filter actief`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Zoeken…',
@@ -140,22 +140,20 @@ const nlNLGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} actieve filters` : `${count} filter actief`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Toon filters',
   columnHeaderSortIconLabel: 'Sorteren',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count > 1
-      ? `${count.toLocaleString()} rijen geselecteerd`
-      : `${count.toLocaleString()} rij geselecteerd`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Totaal:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} van ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Checkbox selectie',
@@ -187,8 +185,8 @@ const nlNLGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Groep',
-  groupColumn: (name) => `Groepeer op ${name}`,
-  unGroupColumn: (name) => `Stop groeperen op ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Detailmenu in- of uitklappen',
@@ -211,17 +209,7 @@ const nlNLGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Ga naar eerste pagina';
-    }
-    if (type === 'last') {
-      return 'Ga naar laatste pagina';
-    }
-    if (type === 'next') {
-      return 'Ga naar volgende pagina';
-    }
-    // if (type === 'previous') {
-    return 'Ga naar vorige pagina';
+      throw new Error("STUB");
   },
 
   // Row reordering text

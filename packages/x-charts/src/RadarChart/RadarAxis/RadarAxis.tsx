@@ -59,18 +59,7 @@ function RadarAxis(props: RadarAxisProps) {
         strokeOpacity={0.3}
         className={classes.axisLine}
       />
-      {labels.map(({ x, y, formattedValue }) => (
-        <text
-          key={formattedValue}
-          fontSize={12}
-          fill={(theme.vars ?? theme).palette.text.primary}
-          stroke="none"
-          className={classes.axisLabel}
-          {...getLabelAttributes({ labelOrientation, x, y, angle, textAnchor, dominantBaseline })}
-        >
-          {formattedValue}
-        </text>
-      ))}
+      {labels.map(({ x, y, formattedValue }) => { throw new Error("STUB"); })}
     </g>
   );
 }

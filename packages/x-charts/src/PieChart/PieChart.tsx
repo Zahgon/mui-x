@@ -101,76 +101,7 @@ const PieChart = React.forwardRef(function PieChart(
   inProps: PieChartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiPieChart' });
-  const {
-    series,
-    width,
-    height,
-    margin: marginProps,
-    colors,
-    sx,
-    skipAnimation,
-    hideLegend,
-    children,
-    slots,
-    slotProps,
-    onItemClick,
-    loading,
-    highlightedItem,
-    onHighlightChange,
-    className,
-    showToolbar,
-    ...other
-  } = props;
-  const margin = defaultizeMargin(marginProps, DEFAULT_PIE_CHART_MARGIN);
-
-  const { chartsDataProviderProps, chartsSurfaceProps } = useChartsContainerProps<
-    'pie',
-    PieChartPluginSignatures
-  >({
-    ...other,
-    series: series.map((s) => ({ type: 'pie', ...s })),
-    width,
-    height,
-    margin,
-    colors,
-    highlightedItem,
-    onHighlightChange,
-    skipAnimation,
-    plugins: PIE_CHART_PLUGINS,
-  });
-
-  const Tooltip = slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = slots?.toolbar;
-
-  return (
-    <ChartsDataProvider<'pie', PieChartPluginSignatures> {...chartsDataProviderProps}>
-      <ChartsWrapper
-        legendPosition={slotProps?.legend?.position}
-        legendDirection={slotProps?.legend?.direction ?? 'vertical'}
-        sx={sx}
-        hideLegend={hideLegend ?? false}
-        className={className}
-        ref={ref}
-      >
-        {showToolbar && Toolbar ? <Toolbar {...slotProps?.toolbar} /> : null}
-        {!hideLegend && (
-          <ChartsLegend
-            direction={slotProps?.legend?.direction ?? 'vertical'}
-            slots={slots}
-            slotProps={slotProps}
-          />
-        )}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <PiePlot slots={slots} slotProps={slotProps} onItemClick={onItemClick} />
-          <FocusedPieArc />
-          <ChartsOverlay loading={loading} slots={slots} slotProps={slotProps} />
-          {children}
-        </ChartsSurface>
-        {!loading && <Tooltip trigger="item" {...slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProvider>
-  );
+    throw new Error("STUB");
 });
 
 PieChart.propTypes /* remove-proptypes */ = {

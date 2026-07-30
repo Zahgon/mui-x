@@ -96,44 +96,12 @@ function ChartsSingleXAxisTicks(inProps: ChartsSingleXAxisProps) {
         isRtl,
         axisTickLabelProps.style,
       )
-    : new Map(Array.from(visibleLabels).map((item) => [item, item.formattedValue]));
+    : new Map(Array.from(visibleLabels).map((item) => { throw new Error("STUB"); }));
 
   return (
     <React.Fragment>
       {xTicks.map((item, index) => {
-        const { offset: tickOffset, labelOffset } = item;
-        const xTickLabel = labelOffset ?? 0;
-        const yTickLabel = positionSign * (tickSize + TICK_LABEL_GAP);
-
-        const showTick = instance.isXInside(tickOffset);
-        const tickLabel = tickLabels.get(item);
-        const showTickLabel = visibleLabels.has(item);
-
-        return (
-          <g
-            key={index}
-            transform={`translate(${tickOffset}, 0)`}
-            className={classes.tickContainer}
-          >
-            {!disableTicks && showTick && (
-              <Tick
-                y2={positionSign * tickSize}
-                className={classes.tick}
-                {...slotProps?.axisTick}
-              />
-            )}
-
-            {tickLabel !== undefined && showTickLabel && (
-              <TickLabel
-                x={xTickLabel}
-                y={yTickLabel}
-                data-testid="ChartsXAxisTickLabel"
-                {...axisTickLabelProps}
-                text={tickLabel}
-              />
-            )}
-          </g>
-        );
+          throw new Error("STUB");
       })}
     </React.Fragment>
   );

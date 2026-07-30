@@ -27,13 +27,7 @@ const ChartsLabel = consumeThemeProps(
     classesResolver: useUtilityClasses,
   },
   function ChartsLabel(props: ChartsLabelProps, ref: React.Ref<HTMLSpanElement>) {
-    const { children, className, classes, ...other } = props;
-
-    return (
-      <span className={clsx(classes?.root, className)} ref={ref} {...other}>
-        {children}
-      </span>
-    );
+      throw new Error("STUB");
   },
 );
 

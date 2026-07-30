@@ -19,16 +19,11 @@ export default function renameProps({ root, componentNames, props, j }: RenamePr
   return root
     .find(j.JSXElement)
     .filter((path) => {
-      return componentNames.includes((path.value.openingElement.name as any).name);
+        throw new Error("STUB");
     })
     .find(j.JSXAttribute)
-    .filter((attribute) => Object.keys(props).includes(attribute.node.name.name as string))
+    .filter((attribute) => { throw new Error("STUB"); })
     .forEach((attribute) => {
-      j(attribute).replaceWith(
-        j.jsxAttribute(
-          j.jsxIdentifier(props[attribute.node.name.name as string]),
-          attribute.node.value,
-        ),
-      );
+        throw new Error("STUB");
     });
 }

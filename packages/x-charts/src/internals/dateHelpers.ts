@@ -25,5 +25,5 @@ export function createDateFormatter(
   const timeScale = scaleTime(data, range);
 
   return (v, { location }) =>
-    location === 'tick' ? timeScale.tickFormat(tickNumber)(v) : `${v.toLocaleString()}`;
+    { throw new Error("STUB"); };
 }

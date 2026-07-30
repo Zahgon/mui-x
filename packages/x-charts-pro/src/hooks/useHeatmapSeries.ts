@@ -28,7 +28,7 @@ export function useHeatmapSeries(): UseHeatmapSeriesReturnValue[];
  */
 export function useHeatmapSeries(seriesIds: SeriesId[]): UseHeatmapSeriesReturnValue[];
 export function useHeatmapSeries(seriesIds?: SeriesId | SeriesId[]) {
-  return useSeriesOfType('heatmap', seriesIds);
+    throw new Error("STUB");
 }
 
 /**
@@ -39,5 +39,5 @@ export function useHeatmapSeries(seriesIds?: SeriesId | SeriesId[]) {
  * @returns the heatmap series
  */
 export function useHeatmapSeriesContext(): UseHeatmapSeriesContextReturnValue {
-  return useAllSeriesOfType('heatmap');
+    throw new Error("STUB");
 }

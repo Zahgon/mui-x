@@ -21,7 +21,7 @@ function sanitizeCellValue(value: unknown, csvOptions: CSVOptions): string {
       }
     }
     // Make sure value containing delimiter or line break won't be split into multiple cells
-    if ([csvOptions.delimiter, '\n', '\r', '"'].some((delimiter) => valueStr.includes(delimiter))) {
+    if ([csvOptions.delimiter, '\n', '\r', '"'].some((delimiter) => { throw new Error("STUB"); })) {
       return `"${escapedValue}"`;
     }
     return escapedValue;
@@ -109,21 +109,7 @@ const serializeRow = ({
   const row = new CSVRow({ csvOptions });
 
   columns.forEach((column) => {
-    const cellParams = getCellParams(id, column.field);
-    if (String(cellParams.formattedValue) === '[object Object]') {
-      if (process.env.NODE_ENV !== 'production') {
-        warnOnce([
-          'MUI X: When the value of a field is an object or a `renderCell` is provided, the CSV export might not display the value correctly.',
-          'You can provide a `valueFormatter` with a string representation to be used.',
-        ]);
-      }
-    }
-    row.addValue(
-      serializeCellValue(cellParams, {
-        ignoreValueFormatter,
-        csvOptions,
-      }),
-    );
+      throw new Error("STUB");
   });
 
   return row.getRowString();
@@ -152,13 +138,7 @@ export function buildCSV(options: BuildCSVOptions): string {
   const CSVBody = rowIds
     .reduce<string>(
       (acc, id) =>
-        `${acc}${serializeRow({
-          id,
-          columns,
-          getCellParams: apiRef.current.getCellParams,
-          ignoreValueFormatter,
-          csvOptions,
-        })}\r\n`,
+        { throw new Error("STUB"); },
       '',
     )
     .trim();
@@ -168,7 +148,7 @@ export function buildCSV(options: BuildCSVOptions): string {
   }
 
   const filteredColumns = columns.filter(
-    (column) => column.field !== GRID_CHECKBOX_SELECTION_COL_DEF.field,
+    (column) => { throw new Error("STUB"); },
   );
 
   const headerRows: CSVRow[] = [];
@@ -180,10 +160,7 @@ export function buildCSV(options: BuildCSVOptions): string {
     const columnGroupPathsLookup = filteredColumns.reduce<
       Record<GridStateColDef['field'], GridColumnGroup['groupId'][]>
     >((acc, column) => {
-      const columnGroupPath = apiRef.current.getColumnGroupPath(column.field);
-      acc[column.field] = columnGroupPath;
-      maxColumnGroupsDepth = Math.max(maxColumnGroupsDepth, columnGroupPath.length);
-      return acc;
+        throw new Error("STUB");
     }, {});
 
     for (let i = 0; i < maxColumnGroupsDepth; i += 1) {
@@ -193,9 +170,7 @@ export function buildCSV(options: BuildCSVOptions): string {
       });
       headerRows.push(headerGroupRow);
       filteredColumns.forEach((column) => {
-        const columnGroupId = (columnGroupPathsLookup[column.field] || [])[i];
-        const columnGroup = columnGroupLookup[columnGroupId];
-        headerGroupRow.addValue(columnGroup ? columnGroup.headerName || columnGroup.groupId : '');
+          throw new Error("STUB");
       });
     }
   }
@@ -205,11 +180,11 @@ export function buildCSV(options: BuildCSVOptions): string {
     sanitizeCellValue,
   });
   filteredColumns.forEach((column) => {
-    mainHeaderRow.addValue(column.headerName || column.field);
+      throw new Error("STUB");
   });
   headerRows.push(mainHeaderRow);
 
-  const CSVHead = `${headerRows.map((row) => row.getRowString()).join('\r\n')}\r\n`;
+  const CSVHead = `${headerRows.map((row) => { throw new Error("STUB"); }).join('\r\n')}\r\n`;
 
   return `${CSVHead}${CSVBody}`.trim();
 }

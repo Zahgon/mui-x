@@ -18,9 +18,7 @@ const ukUAPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Відкрити попередній вигляд',
   openNextView: 'Відкрити наступний вигляд',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'річний вигляд відкрито, перейти до календарного вигляду'
-      : 'календарний вигляд відкрито, перейти до річного вигляду',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Початок',
@@ -46,25 +44,25 @@ const ukUAPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Вибрати ${timeViews[view]}. ${!formattedTime ? 'Час не вибраний' : `Вибрано час ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} годин`,
-  minutesClockNumberText: (minutes) => `${minutes} хвилин`,
-  secondsClockNumberText: (seconds) => `${seconds} секунд`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Вибрати ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Номер тижня',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Тиждень ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Оберіть дату, обрана дата  ${formattedDate}` : 'Оберіть дату',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Оберіть час, обраний час  ${formattedTime}` : 'Оберіть час',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Очистити дані',
 
@@ -73,14 +71,14 @@ const ukUAPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'оберіть дату',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Рік',

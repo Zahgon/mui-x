@@ -147,7 +147,7 @@ const INITIAL_DRAG_STATE = { active: false, dropZone: null, initialModelKey: nul
 function GridPivotPanelBody({ searchValue }: { searchValue: string }) {
   const apiRef = useGridPrivateApiContext();
   const initialColumns = useGridSelector(apiRef, gridPivotInitialColumnsSelector);
-  const fields = React.useMemo(() => Array.from(initialColumns.keys()), [initialColumns]);
+  const fields = React.useMemo(() => { throw new Error("STUB"); }, [initialColumns]);
   const rootProps = useGridRootProps();
   const [drag, setDrag] = React.useState<{
     active: boolean;
@@ -159,82 +159,41 @@ function GridPivotPanelBody({ searchValue }: { searchValue: string }) {
 
   const getColumnName = React.useCallback(
     (field: string) => {
-      const column = initialColumns.get(field);
-      return column?.headerName || field;
-    },
+          throw new Error("STUB");
+      },
     [initialColumns],
   );
 
   const pivotModelFields = React.useMemo(() => {
-    const pivotModelArray = pivotModel.rows.concat(pivotModel.columns, pivotModel.values);
-    return new Set(pivotModelArray.map((item) => item.field));
+      throw new Error("STUB");
   }, [pivotModel]);
 
   const availableFields = React.useMemo(() => {
-    return fields.filter((field) => {
-      if (pivotModelFields.has(field)) {
-        return false;
-      }
-      const column = initialColumns.get(field);
-      if (column?.pivotable === false || column?.type === 'multiSelect') {
-        return false;
-      }
-      if (searchValue) {
-        const fieldName = getColumnName(field);
-        return fieldName.toLowerCase().includes(searchValue.toLowerCase());
-      }
-      return true;
-    });
+      throw new Error("STUB");
   }, [searchValue, fields, getColumnName, pivotModelFields, initialColumns]);
 
   const handleDragStart = (modelKey: FieldTransferObject['modelKey']) => {
-    setDrag({ active: true, initialModelKey: modelKey, dropZone: null });
+      throw new Error("STUB");
   };
 
   const handleDragEnd = () => {
-    setDrag(INITIAL_DRAG_STATE);
+      throw new Error("STUB");
   };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    setDrag(INITIAL_DRAG_STATE);
-
-    // The drop event was already handled by a child
-    if (event.defaultPrevented) {
-      return;
-    }
-
-    event.preventDefault();
-
-    const { field, modelKey: originSection } = JSON.parse(
-      event.dataTransfer.getData('text/plain'),
-    ) as FieldTransferObject;
-    const targetSection = event.currentTarget.getAttribute(
-      'data-section',
-    ) as FieldTransferObject['modelKey'];
-    if (originSection === targetSection) {
-      return;
-    }
-    apiRef.current.updatePivotModel({ field, targetSection, originSection });
+      throw new Error("STUB");
   };
 
   const handleDragOver = React.useCallback((event: React.DragEvent) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
+      throw new Error("STUB");
   }, []);
 
   const handleDragEnter = React.useCallback((event: React.DragEvent<HTMLDivElement>) => {
-    if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-      const dropZone = event.currentTarget.getAttribute(
-        'data-section',
-      ) as FieldTransferObject['modelKey'];
-      setDrag((v) => ({ ...v, active: true, dropZone }));
-    }
+      throw new Error("STUB");
   }, []);
 
   const handleDragLeave = React.useCallback((event: React.DragEvent) => {
-    if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-      setDrag((v) => ({ ...v, active: true, dropZone: v.initialModelKey }));
-    }
+      throw new Error("STUB");
   }, []);
 
   const rowsLabel = apiRef.current.getLocaleText('pivotRows');
@@ -264,17 +223,7 @@ function GridPivotPanelBody({ searchValue }: { searchValue: string }) {
         )}
         {availableFields.length > 0 && (
           <GridPivotPanelFieldList ownerState={rootProps} className={classes.fieldList}>
-            {availableFields.map((field) => (
-              <GridPivotPanelField
-                key={field}
-                field={field}
-                modelKey={null}
-                onDragStart={handleDragStart}
-                onDragEnd={handleDragEnd}
-              >
-                {getColumnName(field)}
-              </GridPivotPanelField>
-            ))}
+            {availableFields.map((field) => { throw new Error("STUB"); })}
           </GridPivotPanelFieldList>
         )}
       </GridPivotPanelAvailableFields>
@@ -311,19 +260,7 @@ function GridPivotPanelBody({ searchValue }: { searchValue: string }) {
               )}
               {pivotModel.rows.length > 0 && (
                 <GridPivotPanelFieldList ownerState={rootProps} className={classes.fieldList}>
-                  {pivotModel.rows.map((modelValue) => (
-                    <GridPivotPanelField
-                      key={modelValue.field}
-                      field={modelValue.field}
-                      modelKey="rows"
-                      modelValue={modelValue}
-                      data-field={modelValue.field}
-                      onDragStart={handleDragStart}
-                      onDragEnd={handleDragEnd}
-                    >
-                      {getColumnName(modelValue.field)}
-                    </GridPivotPanelField>
-                  ))}
+                  {pivotModel.rows.map((modelValue) => { throw new Error("STUB"); })}
                 </GridPivotPanelFieldList>
               )}
             </CollapsiblePanel>
@@ -354,18 +291,7 @@ function GridPivotPanelBody({ searchValue }: { searchValue: string }) {
               )}
               {pivotModel.columns.length > 0 && (
                 <GridPivotPanelFieldList ownerState={rootProps} className={classes.fieldList}>
-                  {pivotModel.columns.map((modelValue) => (
-                    <GridPivotPanelField
-                      key={modelValue.field}
-                      field={modelValue.field}
-                      modelKey="columns"
-                      modelValue={modelValue}
-                      onDragStart={handleDragStart}
-                      onDragEnd={handleDragEnd}
-                    >
-                      {getColumnName(modelValue.field)}
-                    </GridPivotPanelField>
-                  ))}
+                  {pivotModel.columns.map((modelValue) => { throw new Error("STUB"); })}
                 </GridPivotPanelFieldList>
               )}
             </CollapsiblePanel>
@@ -396,18 +322,7 @@ function GridPivotPanelBody({ searchValue }: { searchValue: string }) {
               )}
               {pivotModel.values.length > 0 && (
                 <GridPivotPanelFieldList ownerState={rootProps} className={classes.fieldList}>
-                  {pivotModel.values.map((modelValue) => (
-                    <GridPivotPanelField
-                      key={modelValue.field}
-                      field={modelValue.field}
-                      modelKey="values"
-                      modelValue={modelValue}
-                      onDragStart={handleDragStart}
-                      onDragEnd={handleDragEnd}
-                    >
-                      {getColumnName(modelValue.field)}
-                    </GridPivotPanelField>
-                  ))}
+                  {pivotModel.values.map((modelValue) => { throw new Error("STUB"); })}
                 </GridPivotPanelFieldList>
               )}
             </CollapsiblePanel>

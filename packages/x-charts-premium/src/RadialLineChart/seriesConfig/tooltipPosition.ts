@@ -1,4 +1,4 @@
 import type { TooltipItemPositionSelector } from '@mui/x-charts/internals';
 
 // Todo: to implement
-export const selectorTooltipItemPosition: TooltipItemPositionSelector<'radialLine'> = () => null;
+export const selectorTooltipItemPosition: TooltipItemPositionSelector<'radialLine'> = () => { throw new Error("STUB"); };

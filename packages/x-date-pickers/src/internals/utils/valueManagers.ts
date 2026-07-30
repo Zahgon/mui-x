@@ -17,35 +17,27 @@ export const singleItemValueManager: SingleItemPickerValueManager = {
   emptyValue: null,
   getTodayValue: getTodayDate,
   getInitialReferenceValue: ({ value, referenceDate, ...params }) => {
-    if (params.adapter.isValid(value)) {
-      return value;
-    }
-
-    if (referenceDate != null) {
-      return referenceDate;
-    }
-
-    return getDefaultReferenceDate(params);
+      throw new Error("STUB");
   },
   cleanValue: replaceInvalidDateByNull,
   areValuesEqual: areDatesEqual,
-  isSameError: (a, b) => a === b,
-  hasError: (error) => error != null,
+  isSameError: (a, b) => { throw new Error("STUB"); },
+  hasError: (error) => { throw new Error("STUB"); },
   defaultErrorState: null,
-  getTimezone: (adapter, value) => (adapter.isValid(value) ? adapter.getTimezone(value) : null),
+  getTimezone: (adapter, value) => { throw new Error("STUB"); },
   setTimezone: (adapter, timezone, value) =>
-    value == null ? null : adapter.setTimezone(value, timezone),
+    { throw new Error("STUB"); },
 };
 
 export const singleItemFieldValueManager: FieldValueManager<PickerValue> = {
   updateReferenceValue: (adapter, value, prevReferenceValue) =>
-    adapter.isValid(value) ? value : prevReferenceValue,
-  getSectionsFromValue: (date, getSectionsFromDate) => getSectionsFromDate(date),
+    { throw new Error("STUB"); },
+  getSectionsFromValue: (date, getSectionsFromDate) => { throw new Error("STUB"); },
   getHiddenInputValueFromSections: createDateStrForHiddenInputFromSections,
   parseValueStr: (valueStr, referenceValue, parseDate) =>
-    parseDate(valueStr.trim(), referenceValue),
-  getDateFromSection: (value) => value,
-  getDateSectionsFromValue: (sections) => sections,
-  updateDateInValue: (value, activeSection, activeDate) => activeDate,
-  clearDateSections: (sections) => sections.map((section) => ({ ...section, value: '' })),
+    { throw new Error("STUB"); },
+  getDateFromSection: (value) => { throw new Error("STUB"); },
+  getDateSectionsFromValue: (sections) => { throw new Error("STUB"); },
+  updateDateInValue: (value, activeSection, activeDate) => { throw new Error("STUB"); },
+  clearDateSections: (sections) => { throw new Error("STUB"); },
 };

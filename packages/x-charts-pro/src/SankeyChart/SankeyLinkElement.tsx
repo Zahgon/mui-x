@@ -36,56 +36,6 @@ export interface SankeyLinkElementProps {
  */
 export const SankeyLinkElement = React.forwardRef<SVGPathElement, SankeyLinkElementProps>(
   function SankeyLinkElement(props, ref) {
-    const { link, opacity = 0.4, onClick, seriesId } = props;
-
-    const identifier: SankeyLinkIdentifierWithData = {
-      type: 'sankey',
-      seriesId,
-      subType: 'link',
-      targetId: link.target.id,
-      sourceId: link.source.id,
-      link,
-    };
-
-    const highlightState = useSankeyLinkHighlightState(identifier);
-    const isFaded = highlightState === 'faded';
-    const isHighlighted = highlightState === 'highlighted';
-
-    // Add interaction props for tooltips
-    const interactionProps = useInteractionItemProps(identifier);
-
-    const classes = useUtilityClasses();
-
-    const handleClick = useEventCallback((event: React.MouseEvent<SVGPathElement>) => {
-      onClick?.(event, identifier);
-    });
-
-    if (!link.path) {
-      return null;
-    }
-
-    let finalOpacity = opacity;
-    if (isFaded) {
-      finalOpacity = opacity * 0.3;
-    } else if (isHighlighted) {
-      finalOpacity = Math.min(opacity * 1.2, 1);
-    }
-
-    return (
-      <path
-        ref={ref}
-        className={classes.link}
-        d={link.path}
-        fill={link.color}
-        opacity={finalOpacity}
-        data-link-source={link.source.id}
-        data-link-target={link.target.id}
-        data-highlighted={isHighlighted || undefined}
-        data-faded={isFaded || undefined}
-        onClick={onClick ? handleClick : undefined}
-        cursor={onClick ? 'pointer' : 'default'}
-        {...interactionProps}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );

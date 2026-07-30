@@ -9,7 +9,7 @@ export interface PickersFadeTransitionGroupClasses {
 export type PickersFadeTransitionGroupClassKey = keyof PickersFadeTransitionGroupClasses;
 
 export const getPickersFadeTransitionGroupUtilityClass = (slot: string) =>
-  generateUtilityClass('MuiPickersFadeTransitionGroup', slot);
+  { throw new Error("STUB"); };
 
 export const pickersFadeTransitionGroupClasses: PickersFadeTransitionGroupClasses =
   generateUtilityClasses('MuiPickersFadeTransitionGroup', ['root']);

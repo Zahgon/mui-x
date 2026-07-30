@@ -35,124 +35,15 @@ export interface PickerFilledInputOwnerState extends PickerTextFieldOwnerState {
 const PickersFilledInputRoot = styled(PickersInputBaseRoot, {
   name: 'MuiPickersFilledInput',
   slot: 'Root',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'disableUnderline',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<{ ownerState: PickerFilledInputOwnerState }>(({ theme }) => {
-  const light = theme.palette.mode === 'light';
-  const bottomLineColor = light ? 'rgba(0, 0, 0, 0.42)' : 'rgba(255, 255, 255, 0.7)';
-  const backgroundColor = light ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.09)';
-  const hoverBackground = light ? 'rgba(0, 0, 0, 0.09)' : 'rgba(255, 255, 255, 0.13)';
-  const disabledBackground = light ? 'rgba(0, 0, 0, 0.12)' : 'rgba(255, 255, 255, 0.12)';
-
-  return {
-    backgroundColor: theme.vars ? theme.vars.palette.FilledInput.bg : backgroundColor,
-    borderTopLeftRadius: (theme.vars || theme).shape.borderRadius,
-    borderTopRightRadius: (theme.vars || theme).shape.borderRadius,
-    transition: theme.transitions.create('background-color', {
-      duration: theme.transitions.duration.shorter,
-      easing: theme.transitions.easing.easeOut,
-    }),
-    '&:hover': {
-      backgroundColor: theme.vars ? theme.vars.palette.FilledInput.hoverBg : hoverBackground,
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: theme.vars ? theme.vars.palette.FilledInput.bg : backgroundColor,
-      },
-    },
-    [`&.${pickersFilledInputClasses.focused}`]: {
-      backgroundColor: theme.vars ? theme.vars.palette.FilledInput.bg : backgroundColor,
-    },
-    [`&.${pickersFilledInputClasses.disabled}`]: {
-      backgroundColor: theme.vars ? theme.vars.palette.FilledInput.disabledBg : disabledBackground,
-    },
-    variants: [
-      ...Object.keys((theme.vars ?? theme).palette)
-        // @ts-ignore
-        .filter((key) => (theme.vars ?? theme).palette[key].main)
-        .map((color) => ({
-          props: { inputColor: color, disableUnderline: false },
-          style: {
-            '&::after': {
-              // @ts-ignore
-              borderBottom: `2px solid ${(theme.vars || theme).palette[color]?.main}`,
-            },
-          },
-        })),
-      {
-        props: { disableUnderline: false },
-        style: {
-          '&::after': {
-            left: 0,
-            bottom: 0,
-            // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
-            content: '""',
-            position: 'absolute',
-            right: 0,
-            transform: 'scaleX(0)',
-            transition: theme.transitions.create('transform', {
-              duration: theme.transitions.duration.shorter,
-              easing: theme.transitions.easing.easeOut,
-            }),
-            pointerEvents: 'none', // Transparent to the hover style.
-          },
-          [`&.${pickersFilledInputClasses.focused}:after`]: {
-            // translateX(0) is a workaround for Safari transform scale bug
-            // See https://github.com/mui/material-ui/issues/31766
-            transform: 'scaleX(1) translateX(0)',
-          },
-          [`&.${pickersFilledInputClasses.error}`]: {
-            '&:before, &:after': {
-              borderBottomColor: (theme.vars || theme).palette.error.main,
-            },
-          },
-          '&::before': {
-            borderBottom: `1px solid ${
-              theme.vars
-                ? theme.alpha(
-                    theme.vars.palette.common.onBackground,
-                    theme.vars.opacity.inputUnderline,
-                  )
-                : bottomLineColor
-            }`,
-            left: 0,
-            bottom: 0,
-            // Doing the other way around crash on IE 11 "''" https://github.com/cssinjs/jss/issues/242
-            content: '"\\00a0"',
-            position: 'absolute',
-            right: 0,
-            transition: theme.transitions.create('border-bottom-color', {
-              duration: theme.transitions.duration.shorter,
-            }),
-            pointerEvents: 'none', // Transparent to the hover style.
-          },
-          [`&:hover:not(.${pickersFilledInputClasses.disabled}, .${pickersFilledInputClasses.error}):before`]:
-            {
-              borderBottom: `1px solid ${(theme.vars || theme).palette.text.primary}`,
-            },
-          [`&.${pickersFilledInputClasses.disabled}:before`]: {
-            borderBottomStyle: 'dotted',
-          },
-        },
-      },
-      {
-        props: { hasStartAdornment: true },
-        style: {
-          paddingLeft: 12,
-        },
-      },
-      {
-        props: { hasEndAdornment: true },
-        style: {
-          paddingRight: 12,
-        },
-      },
-    ],
-  };
+    throw new Error("STUB");
 });
 
 const PickersFilledSectionsContainer = styled(PickersInputBaseSectionsContainer, {
   name: 'MuiPickersFilledInput',
   slot: 'sectionsContainer',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'hiddenLabel',
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
 })<{ ownerState: PickerFilledInputOwnerState }>({
   paddingTop: 25,
   paddingRight: 12,
@@ -221,48 +112,7 @@ const PickersFilledInput = React.forwardRef(function PickersFilledInput(
   inProps: PickersFilledInputProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiPickersFilledInput',
-  });
-
-  const {
-    label,
-    autoFocus,
-    disableUnderline = false,
-    hiddenLabel = false,
-    classes: classesProp,
-    slots: inSlots,
-    slotProps: inSlotProps,
-    ...other
-  } = props;
-
-  const pickerTextFieldOwnerState = usePickerTextFieldOwnerState();
-  const ownerState: PickerFilledInputOwnerState = {
-    ...pickerTextFieldOwnerState,
-    inputHasUnderline: !disableUnderline,
-  };
-  const classes = useUtilityClasses(classesProp, ownerState);
-
-  return (
-    <PickersInputBase
-      {...other}
-      slots={{
-        root: PickersFilledInputRoot,
-        input: PickersFilledSectionsContainer,
-        ...inSlots,
-      }}
-      slotProps={{
-        ...inSlotProps,
-        root: { disableUnderline, ...inSlotProps?.root },
-        input: { hiddenLabel, ...inSlotProps?.input },
-      }}
-      label={label}
-      classes={classes}
-      ref={ref as any}
-      ownerState={ownerState}
-    />
-  );
+    throw new Error("STUB");
 });
 
 PickersFilledInput.propTypes /* remove-proptypes */ = {

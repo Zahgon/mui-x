@@ -69,47 +69,7 @@ const RadarChartPro = React.forwardRef(function RadarChartPro(
   inProps: RadarChartProProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiRadarChartPro' });
-  const {
-    chartsWrapperProps,
-    chartsSurfaceProps,
-    radarDataProviderProps,
-    radarGrid,
-    overlayProps,
-    legendProps,
-    highlight,
-    children,
-  } = useRadarChartProps(props);
-
-  const Tooltip = props.slots?.tooltip ?? ChartsTooltip;
-  const Toolbar = props.slots?.toolbar ?? ChartsToolbarPro;
-
-  const radarDataProviderProProps: RadarDataProviderProps<RadarChartProPluginSignatures> = {
-    ...radarDataProviderProps,
-    apiRef:
-      radarDataProviderProps.apiRef as RadarDataProviderProps<RadarChartProPluginSignatures>['apiRef'],
-    plugins: RADAR_CHART_PRO_PLUGINS,
-  };
-
-  return (
-    <RadarDataProvider<RadarChartProPluginSignatures> {...radarDataProviderProProps}>
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {props.showToolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!props.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <RadarGrid {...radarGrid} />
-          <RadarMetricLabels />
-          <RadarSeriesArea />
-          {highlight === 'axis' && <RadarAxisHighlight />}
-          <RadarSeriesMarks />
-          <FocusedRadarMark />
-          <ChartsOverlay {...overlayProps} />
-          {children}
-        </ChartsSurface>
-        {!props.loading && <Tooltip {...props.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </RadarDataProvider>
-  );
+    throw new Error("STUB");
 });
 
 RadarChartPro.propTypes /* remove-proptypes */ = {

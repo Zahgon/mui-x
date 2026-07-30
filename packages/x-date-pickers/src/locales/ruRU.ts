@@ -19,9 +19,7 @@ const ruRUPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Открыть предыдущий вид',
   openNextView: 'Открыть следующий вид',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'открыт годовой вид, переключить на календарный вид'
-      : 'открыт календарный вид, переключить на годовой вид',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Начало',
@@ -47,25 +45,25 @@ const ruRUPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Выбрать ${timeViews[view]}. ${!formattedTime ? 'Время не выбрано' : `Выбрано время ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} часов`,
-  minutesClockNumberText: (minutes) => `${minutes} минут`,
-  secondsClockNumberText: (seconds) => `${seconds} секунд`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Выбрать ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Номер недели',
   calendarWeekNumberHeaderText: '№',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Неделя ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Выберите дату, выбрана дата ${formattedDate}` : 'Выберите дату',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Выберите время, выбрано время ${formattedTime}` : 'Выберите время',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Очистить значение',
 
@@ -74,14 +72,14 @@ const ruRUPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'выбрать дату',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Г'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'ММММ' : 'ММ'),
-  fieldDayPlaceholder: () => 'ДД',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'ДДДД' : 'ДД'),
-  fieldHoursPlaceholder: () => 'чч',
-  fieldMinutesPlaceholder: () => 'мм',
-  fieldSecondsPlaceholder: () => 'сс',
-  fieldMeridiemPlaceholder: () => '(д|п)п',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Год',

@@ -56,10 +56,7 @@ export const DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES: DataGridPremiumPropsWithDef
   cellSelectionFillHandle: false,
   disableClipboardPaste: false,
   splitClipboardPastedText: (pastedText, delimiter = '\t') => {
-    // Excel on Windows adds an empty line break at the end of the copied text.
-    // See https://github.com/mui/mui-x/issues/9103
-    const text = pastedText.replace(/\r?\n$/, '');
-    return text.split(/\r\n|\n|\r/).map((row) => row.split(delimiter));
+      throw new Error("STUB");
   },
   disablePivoting: false,
   aiAssistant: false,
@@ -74,35 +71,23 @@ const defaultSlots = DATA_GRID_PREMIUM_DEFAULT_SLOTS_COMPONENTS;
 export const useDataGridPremiumProps = (inProps: DataGridPremiumProps) => {
   const theme = useTheme();
   const themedProps = React.useMemo(
-    () => getThemeProps({ props: inProps, theme, name: 'MuiDataGrid' }),
+    () => { throw new Error("STUB"); },
     [theme, inProps],
   );
 
   const localeText = React.useMemo(
-    () => ({ ...GRID_DEFAULT_LOCALE_TEXT, ...themedProps.localeText }),
+    () => { throw new Error("STUB"); },
     [themedProps.localeText],
   );
 
   const slots = React.useMemo<GridPremiumSlotsComponent>(
     () =>
-      computeSlots<GridPremiumSlotsComponent>({
-        defaultSlots,
-        slots: themedProps.slots,
-      }),
+      { throw new Error("STUB"); },
     [themedProps.slots],
   );
 
   return React.useMemo<DataGridPremiumProcessedProps>(
-    () => ({
-      ...DATA_GRID_PREMIUM_PROPS_DEFAULT_VALUES,
-      ...(themedProps.dataSource
-        ? { aggregationFunctions: {} }
-        : { getPivotDerivedColumns: defaultGetPivotDerivedColumns }),
-      ...themedProps,
-      localeText,
-      slots,
-      ...getDataGridPremiumForcedProps(themedProps),
-    }),
+    () => { throw new Error("STUB"); },
     [themedProps, localeText, slots],
   );
 };

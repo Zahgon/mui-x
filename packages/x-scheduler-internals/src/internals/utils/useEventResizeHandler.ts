@@ -20,22 +20,12 @@ export function useEventResizeHandler(
     (side === 'end' && !doesEventEndAfterCollectionEnd);
 
   const state: useEventResizeHandler.State = React.useMemo(
-    () => ({ start: side === 'start', end: side === 'end' }),
+    () => { throw new Error("STUB"); },
     [side],
   );
 
   React.useEffect(() => {
-    if (!ref.current || !enabled) {
-      return undefined;
-    }
-
-    return draggable({
-      element: ref.current,
-      getInitialData: ({ input }) => getDragData(input),
-      onGenerateDragPreview: ({ nativeSetDragImage }) => {
-        disableNativeDragPreview({ nativeSetDragImage });
-      },
-    });
+      throw new Error("STUB");
   }, [ref, enabled, side, getDragData]);
 
   return { state, enabled };

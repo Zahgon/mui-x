@@ -2,7 +2,7 @@ import { min } from '@mui/x-charts-vendor/d3-array';
 import type { SankeyLink, SankeyNode, SankeyNodeMinimal } from './sankey.types';
 
 function targetDepth<WithPosition extends boolean>(d: SankeyLink<WithPosition, {}, {}>): number {
-  return (d.target as SankeyNodeMinimal<{}, {}>).depth ?? 0;
+    throw new Error("STUB");
 }
 
 /**
@@ -14,7 +14,7 @@ function targetDepth<WithPosition extends boolean>(d: SankeyLink<WithPosition, {
 export function sankeyLeft<WithPosition extends boolean>(
   node: SankeyNode<WithPosition, {}, {}>,
 ): number {
-  return node.depth ?? 0;
+    throw new Error("STUB");
 }
 
 /**
@@ -28,7 +28,7 @@ export function sankeyRight<WithPosition extends boolean>(
   node: SankeyNode<WithPosition, {}, {}>,
   n: number,
 ): number {
-  return n - 1 - (node.height ?? 0);
+    throw new Error("STUB");
 }
 
 /**
@@ -43,7 +43,7 @@ export function sankeyJustify<WithPosition extends boolean>(
   node: SankeyNode<WithPosition, {}, {}>,
   n: number,
 ): number {
-  return node.sourceLinks?.length ? (node.depth ?? 0) : n - 1;
+    throw new Error("STUB");
 }
 
 /**
@@ -56,11 +56,5 @@ export function sankeyJustify<WithPosition extends boolean>(
 export function sankeyCenter<WithPosition extends boolean>(
   node: SankeyNode<WithPosition, {}, {}>,
 ): number {
-  if (node.targetLinks?.length) {
-    return node.depth ?? 0;
-  }
-  if (node.sourceLinks?.length) {
-    return (min(node.sourceLinks, targetDepth) ?? 0) - 1;
-  }
-  return 0;
+    throw new Error("STUB");
 }

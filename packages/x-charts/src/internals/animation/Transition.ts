@@ -28,15 +28,11 @@ export class Transition {
    * @param onTick Callback function called on each animation frame with the eased time in range [0, 1].
    */
   constructor(duration: number, easingFn: (t: number) => number, onTick: (easedT: number) => void) {
-    this.duration = duration;
-    this.easingFn = easingFn;
-    this.onTickCallback = onTick;
-
-    this.resume();
+      throw new Error("STUB");
   }
 
   private get running() {
-    return this.transitionTimer !== null;
+      throw new Error("STUB");
   }
 
   private timerCallback(elapsed: number) {
@@ -64,7 +60,7 @@ export class Transition {
     /* If we're resuming the transition, then subtract elapsed to continue the easing. */
     const time = now() - this.elapsed;
 
-    this.transitionTimer = timer((elapsed) => this.timerCallback(elapsed), 0, time);
+    this.transitionTimer = timer((elapsed) => { throw new Error("STUB"); }, 0, time);
 
     return this;
   }
@@ -91,7 +87,7 @@ export class Transition {
   finish(): this {
     this.stop();
 
-    timeout(() => this.timerCallback(this.duration));
+    timeout(() => { throw new Error("STUB"); });
 
     return this;
   }

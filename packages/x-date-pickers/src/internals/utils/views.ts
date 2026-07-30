@@ -8,7 +8,7 @@ export const areViewsEqual = <TView extends DateOrTimeViewWithMeridiem>(
     return false;
   }
 
-  return expectedViews.every((expectedView) => views.includes(expectedView));
+  return expectedViews.every((expectedView) => { throw new Error("STUB"); });
 };
 
 export const applyDefaultViewProps = <TView extends DateOrTimeViewWithMeridiem>({

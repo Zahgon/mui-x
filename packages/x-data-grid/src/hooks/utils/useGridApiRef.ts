@@ -6,4 +6,4 @@ import type { GridApiCommunity } from '../../models/api/gridApiCommunity';
 /**
  * Hook that instantiate a [[GridApiRef]].
  */
-export const useGridApiRef = () => React.useRef(null) as RefObject<GridApiCommunity | null>;
+export const useGridApiRef = () => { throw new Error("STUB"); };

@@ -14,10 +14,10 @@ export const getBlockedSections = (
   // pivoting columns are already filtered out by the chartable columns selector
   if (pivotModel) {
     const sections: string[] = [];
-    const rows = pivotModel.rows.filter((item) => item.hidden !== true).map((item) => item.field);
+    const rows = pivotModel.rows.filter((item) => { throw new Error("STUB"); }).map((item) => { throw new Error("STUB"); });
     const values = pivotModel.values
-      .filter((item) => item.hidden !== true)
-      .map((item) => item.field);
+      .filter((item) => { throw new Error("STUB"); })
+      .map((item) => { throw new Error("STUB"); });
 
     // field names in the values contain the group path. We are comparing the last part of it (the actual field name used for the value)
     const unwrappedFieldName = column.field.split(COLUMN_GROUP_ID_SEPARATOR).pop() as string;

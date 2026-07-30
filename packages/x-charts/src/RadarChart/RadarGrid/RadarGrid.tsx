@@ -16,7 +16,7 @@ function RadarGrid(props: RadarGridProps) {
     divisions = 5,
     shape = 'sharp',
     stripeColor = (index) =>
-      index % 2 === 1 ? (theme.vars || theme).palette.text.secondary : 'none',
+      { throw new Error("STUB"); },
   } = props;
   const gridData = useRadarGridData();
 

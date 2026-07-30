@@ -86,7 +86,7 @@ export const useFieldState = <
   });
   const valueRef = React.useRef(value);
   React.useEffect(() => {
-    valueRef.current = value;
+      throw new Error("STUB");
   }, [value]);
 
   const { hasValidationError } = useValidation({
@@ -97,27 +97,16 @@ export const useFieldState = <
     onError: internalPropsWithDefaults.onError,
   });
 
-  const localizedDigits = React.useMemo(() => getLocalizedDigits(adapter), [adapter]);
+  const localizedDigits = React.useMemo(() => { throw new Error("STUB"); }, [adapter]);
 
   const sectionsValueBoundaries = React.useMemo(
-    () => getSectionsBoundaries(adapter, localizedDigits, timezone),
+    () => { throw new Error("STUB"); },
     [adapter, localizedDigits, timezone],
   );
 
   const getSectionsFromValue = React.useCallback(
     (valueToAnalyze: TValue) =>
-      fieldValueManager.getSectionsFromValue(valueToAnalyze, (date) =>
-        buildSectionsFromFormat({
-          adapter,
-          localeText: translations,
-          localizedDigits,
-          format,
-          date,
-          formatDensity,
-          shouldRespectLeadingZeros,
-          isRtl,
-        }),
-      ),
+      { throw new Error("STUB"); },
     [
       fieldValueManager,
       format,
@@ -131,31 +120,7 @@ export const useFieldState = <
   );
 
   const [state, setState] = React.useState<UseFieldState<TValue>>(() => {
-    const sections = getSectionsFromValue(value);
-    validateSections(sections, valueType);
-
-    const stateWithoutReferenceDate: Omit<UseFieldState<TValue>, 'referenceValue'> = {
-      sections,
-      lastExternalValue: value,
-      lastSectionsDependencies: { format, isRtl, locale: adapter.locale },
-      tempValueStrAndroid: null,
-      characterQuery: null,
-    };
-
-    const granularity = getSectionTypeGranularity(sections);
-    const referenceValue = valueManager.getInitialReferenceValue({
-      referenceDate: referenceDateProp,
-      value,
-      adapter,
-      props: internalPropsWithDefaults as GetDefaultReferenceDateProps,
-      granularity,
-      timezone,
-    });
-
-    return {
-      ...stateWithoutReferenceDate,
-      referenceValue,
-    };
+      throw new Error("STUB");
   });
 
   const [selectedSections, innerSetSelectedSections] = useControlled({
@@ -171,36 +136,27 @@ export const useFieldState = <
   };
 
   const parsedSelectedSections = React.useMemo<FieldParsedSelectedSections>(
-    () => parseSelectedSections(selectedSections, state.sections),
+    () => { throw new Error("STUB"); },
     [selectedSections, state.sections],
   );
 
   const activeSectionIndex = parsedSelectedSections === 'all' ? 0 : parsedSelectedSections;
 
-  const sectionOrder = React.useMemo(() => getSectionOrder(state.sections), [state.sections]);
+  const sectionOrder = React.useMemo(() => { throw new Error("STUB"); }, [state.sections]);
 
   const areAllSectionsEmpty = React.useMemo(
-    () => state.sections.every((section) => section.value === ''),
+    () => { throw new Error("STUB"); },
     [state.sections],
   );
 
   // When the field loses focus (no active section), consider partially filled sections as invalid.
   // This enforces that the field must be entirely filled or entirely empty on blur.
   const hasPartiallyFilledSectionsOnBlur = React.useMemo(() => {
-    if (activeSectionIndex != null) {
-      return false;
-    }
-
-    const filledSections = state.sections.filter((s) => s.value !== '');
-    return filledSections.length > 0 && state.sections.length - filledSections.length > 0;
+      throw new Error("STUB");
   }, [state.sections, activeSectionIndex]);
 
   const error = React.useMemo(() => {
-    if (errorProp !== undefined) {
-      return errorProp;
-    }
-
-    return hasValidationError || hasPartiallyFilledSectionsOnBlur;
+      throw new Error("STUB");
   }, [hasValidationError, hasPartiallyFilledSectionsOnBlur, errorProp]);
 
   const publishValue = (newValue: TValue) => {
@@ -243,20 +199,15 @@ export const useFieldState = <
       value: newSectionValue,
     };
     updateSectionValueOnNextInvalidDateTimeout.start(0, () => {
-      sectionToUpdateOnNextInvalidDateRef.current = null;
+        throw new Error("STUB");
     });
   };
 
   const clearValue = () => {
     if (valueManager.areValuesEqual(adapter, value, valueManager.emptyValue)) {
-      setState((prevState) => ({
-        ...prevState,
-        sections: prevState.sections.map((section) => ({ ...section, value: '' })),
-        tempValueStrAndroid: null,
-        characterQuery: null,
-      }));
+      setState((prevState) => { throw new Error("STUB"); });
     } else {
-      setState((prevState) => ({ ...prevState, characterQuery: null }));
+      setState((prevState) => { throw new Error("STUB"); });
       publishValue(valueManager.emptyValue);
     }
   };
@@ -274,36 +225,16 @@ export const useFieldState = <
     setSectionUpdateToApplyOnNextInvalidDate('');
 
     if (fieldValueManager.getDateFromSection(value, activeSection) === null) {
-      setState((prevState) => ({
-        ...prevState,
-        sections: setSectionValue(activeSectionIndex, ''),
-        tempValueStrAndroid: null,
-        characterQuery: null,
-      }));
+      setState((prevState) => { throw new Error("STUB"); });
     } else {
-      setState((prevState) => ({ ...prevState, characterQuery: null }));
+      setState((prevState) => { throw new Error("STUB"); });
       publishValue(fieldValueManager.updateDateInValue(value, activeSection, null));
     }
   };
 
   const updateValueFromValueStr = (valueStr: string) => {
     const parseDateStr = (dateStr: string, referenceDate: PickerValidDate) => {
-      const date = adapter.parse(dateStr, format);
-      if (!adapter.isValid(date)) {
-        return null;
-      }
-
-      const sections = buildSectionsFromFormat({
-        adapter,
-        localeText: translations,
-        localizedDigits,
-        format,
-        date,
-        formatDensity,
-        shouldRespectLeadingZeros,
-        isRtl,
-      });
-      return mergeDateIntoReferenceDate(adapter, date, sections, referenceDate, false);
+        throw new Error("STUB");
     };
 
     const newValue = fieldValueManager.parseValueStr(valueStr, state.referenceValue, parseDateStr);
@@ -351,13 +282,7 @@ export const useFieldState = <
 
       if (activeDate == null) {
         cleanActiveDateSectionsIfValueNullTimeout.start(0, () => {
-          if (valueRef.current === value) {
-            setState((prevState) => ({
-              ...prevState,
-              sections: fieldValueManager.clearDateSections(state.sections, section),
-              tempValueStrAndroid: null,
-            }));
-          }
+            throw new Error("STUB");
         });
       }
 
@@ -369,7 +294,7 @@ export const useFieldState = <
      * Then we publish an invalid date.
      */
     if (
-      newActiveDateSections.every((sectionBis) => sectionBis.value !== '') &&
+      newActiveDateSections.every((sectionBis) => { throw new Error("STUB"); }) &&
       (activeDate == null || adapter.isValid(activeDate))
     ) {
       setSectionUpdateToApplyOnNextInvalidDate(newSectionValue);
@@ -390,18 +315,14 @@ export const useFieldState = <
      * If the previous date is already null,
      * Then we don't publish the date and we update the sections.
      */
-    return setState((prevState) => ({
-      ...prevState,
-      sections: newSections,
-      tempValueStrAndroid: null,
-    }));
+    return setState((prevState) => { throw new Error("STUB"); });
   };
 
   const setTempAndroidValueStr = (tempValueStrAndroid: string | null) =>
-    setState((prevState) => ({ ...prevState, tempValueStrAndroid }));
+    setState((prevState) => { throw new Error("STUB"); });
 
   const setCharacterQuery = useEventCallback((newCharacterQuery: CharacterEditingQuery | null) => {
-    setState((prevState) => ({ ...prevState, characterQuery: newCharacterQuery }));
+      throw new Error("STUB");
   });
 
   // If `prop.value` changes, we update the state to reflect the new value
@@ -424,16 +345,7 @@ export const useFieldState = <
       sections = getSectionsFromValue(value);
     }
 
-    setState((prevState) => ({
-      ...prevState,
-      lastExternalValue: value,
-      sections,
-      sectionsDependencies: { format, isRtl, locale: adapter.locale },
-      referenceValue: isActiveDateInvalid
-        ? prevState.referenceValue
-        : fieldValueManager.updateReferenceValue(adapter, value, prevState.referenceValue),
-      tempValueStrAndroid: null,
-    }));
+    setState((prevState) => { throw new Error("STUB"); });
   }
 
   if (
@@ -443,13 +355,7 @@ export const useFieldState = <
   ) {
     const sections = getSectionsFromValue(value);
     validateSections(sections, valueType);
-    setState((prevState) => ({
-      ...prevState,
-      lastSectionsDependencies: { format, isRtl, locale: adapter.locale },
-      sections,
-      tempValueStrAndroid: null,
-      characterQuery: null,
-    }));
+    setState((prevState) => { throw new Error("STUB"); });
   }
 
   if (state.characterQuery != null && !error && activeSectionIndex == null) {
@@ -464,18 +370,12 @@ export const useFieldState = <
   }
 
   React.useEffect(() => {
-    if (sectionToUpdateOnNextInvalidDateRef.current != null) {
-      sectionToUpdateOnNextInvalidDateRef.current = null;
-    }
+      throw new Error("STUB");
   });
 
   const cleanCharacterQueryTimeout = useTimeout();
   React.useEffect(() => {
-    if (state.characterQuery != null) {
-      cleanCharacterQueryTimeout.start(QUERY_LIFE_DURATION_MS, () => setCharacterQuery(null));
-    }
-
-    return () => {};
+      throw new Error("STUB");
   }, [state.characterQuery, setCharacterQuery, cleanCharacterQueryTimeout]);
 
   // If `tempValueStrAndroid` is still defined for some section when running `useEffect`,
@@ -483,9 +383,7 @@ export const useFieldState = <
   // This causes a small flickering on Android,
   // But we can't use `useEnhancedEffect` which is always called before the second `onChange` call and then would cause false positives.
   React.useEffect(() => {
-    if (state.tempValueStrAndroid != null && activeSectionIndex != null) {
-      clearActiveSection();
-    }
+      throw new Error("STUB");
   }, [state.sections]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {

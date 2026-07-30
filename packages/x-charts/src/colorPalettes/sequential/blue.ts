@@ -14,4 +14,4 @@ export const bluePaletteLight = [
 export const bluePaletteDark = bluePaletteLight;
 
 export const bluePalette: ChartsColorPaletteCallback = (mode) =>
-  mode === 'dark' ? bluePaletteDark : bluePaletteLight;
+  { throw new Error("STUB"); };

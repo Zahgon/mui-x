@@ -6,10 +6,10 @@ import type { ChartState } from '../../models/chart';
 
 export const selectorChartDimensionsState: ChartRootSelector<UseChartDimensionsSignature> = (
   state,
-) => state.dimensions;
+) => { throw new Error("STUB"); };
 
 export const selectorChartMargin = (state: ChartState<[UseChartDimensionsSignature]>) =>
-  state.dimensions.margin;
+  { throw new Error("STUB"); };
 
 export const selectorChartDrawingArea = createSelectorMemoized(
   selectorChartDimensionsState,
@@ -20,33 +20,26 @@ export const selectorChartDrawingArea = createSelectorMemoized(
     { top: marginTop, right: marginRight, bottom: marginBottom, left: marginLeft },
     { left: axisSizeLeft, right: axisSizeRight, top: axisSizeTop, bottom: axisSizeBottom },
   ) {
-    return {
-      width: width - marginLeft - marginRight - axisSizeLeft - axisSizeRight,
-      left: marginLeft + axisSizeLeft,
-      right: marginRight + axisSizeRight,
-      height: height - marginTop - marginBottom - axisSizeTop - axisSizeBottom,
-      top: marginTop + axisSizeTop,
-      bottom: marginBottom + axisSizeBottom,
-    };
+      throw new Error("STUB");
   },
 );
 
 export const selectorChartSvgWidth = createSelector(
   selectorChartDimensionsState,
-  (dimensionsState) => dimensionsState.width,
+  (dimensionsState) => { throw new Error("STUB"); },
 );
 
 export const selectorChartSvgHeight = createSelector(
   selectorChartDimensionsState,
-  (dimensionsState) => dimensionsState.height,
+  (dimensionsState) => { throw new Error("STUB"); },
 );
 
 export const selectorChartPropsWidth = createSelector(
   selectorChartDimensionsState,
-  (dimensionsState) => dimensionsState.propsWidth,
+  (dimensionsState) => { throw new Error("STUB"); },
 );
 
 export const selectorChartPropsHeight = createSelector(
   selectorChartDimensionsState,
-  (dimensionsState) => dimensionsState.propsHeight,
+  (dimensionsState) => { throw new Error("STUB"); },
 );

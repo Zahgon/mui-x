@@ -25,8 +25,7 @@ export const fallbackRepair: RepairMarkdown = normalizeMarkdownForRender;
 // (or a CJS `require()` of the ESM module) costs nothing beyond the failed attempt.
 const REMEND_SPECIFIER = 'remend';
 function defaultRemendImporter(): Promise<unknown> {
-  // eslint-disable-next-line jsdoc/no-bad-blocks -- bundler hint comments, not JSDoc
-  return import(/* @vite-ignore */ /* webpackIgnore: true */ REMEND_SPECIFIER);
+    throw new Error("STUB");
 }
 
 let remendPromise: Promise<RepairMarkdown> | undefined;
@@ -42,26 +41,12 @@ let remendPromise: Promise<RepairMarkdown> | undefined;
 export function loadRemend(
   importer: () => Promise<unknown> = defaultRemendImporter,
 ): Promise<RepairMarkdown> {
-  if (!remendPromise) {
-    remendPromise = importer()
-      .then((mod) => {
-        const remend = (mod as { default?: unknown })?.default ?? mod;
-        if (typeof remend !== 'function') {
-          return fallbackRepair;
-        }
-        const repair = remend as (text: string, options?: Record<string, unknown>) => string;
-        // Only complete constructs the renderer actually understands; math is
-        // opt-in, so completing `$…$` would just surface literal dollar signs.
-        return (text: string) => repair(text, { katex: false });
-      })
-      .catch(() => fallbackRepair);
-  }
-  return remendPromise;
+    throw new Error("STUB");
 }
 
 /** Resets the module-level cache. Test-only. */
 export function resetRemendCache(): void {
-  remendPromise = undefined;
+    throw new Error("STUB");
 }
 
 /**
@@ -72,31 +57,5 @@ export function resetRemendCache(): void {
  * so a missing/blocked `remend` costs nothing beyond the one import attempt.
  */
 export function useStreamingMarkdownRepair(): RepairMarkdown {
-  const [repair, setRepair] = React.useState<RepairMarkdown>(() => fallbackRepair);
-
-  React.useEffect(() => {
-    // Skip the lazy `remend` upgrade under test. `remend` resolves from node_modules,
-    // so the async `setRepair` below would land after a test's synchronous render and
-    // trip React's "update not wrapped in act(...)" warning, which `vitest-fail-on-console`
-    // turns into a failure across every component that renders markdown. The fallback
-    // repair still runs, and `loadRemend`'s real wiring is covered directly in
-    // `streamingMarkdownRepair.test.ts` via an injected importer.
-    if (process.env.NODE_ENV === 'test') {
-      return undefined;
-    }
-    let active = true;
-    loadRemend().then((fn) => {
-      // Only update when `remend` actually loaded (a different function). When it
-      // can't load, `fn` IS `fallbackRepair` — skip the no-op state update.
-      if (active && fn !== fallbackRepair) {
-        // Functional update form so the function value isn't called as an updater.
-        setRepair(() => fn);
-      }
-    });
-    return () => {
-      active = false;
-    };
-  }, []);
-
-  return repair;
+    throw new Error("STUB");
 }

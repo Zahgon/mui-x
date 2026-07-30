@@ -142,10 +142,7 @@ export class PressGesture<GestureName extends string> extends PointerGesture<Ges
   }
 
   protected updateOptions(options: typeof this.mutableOptionsType): void {
-    super.updateOptions(options);
-
-    this.duration = options.duration ?? this.duration;
-    this.maxDistance = options.maxDistance ?? this.maxDistance;
+      throw new Error("STUB");
   }
 
   protected resetState(): void {
@@ -178,108 +175,7 @@ export class PressGesture<GestureName extends string> extends PointerGesture<Ges
     pointers: Map<number, PointerData>,
     event: PointerEvent,
   ): void => {
-    const pointersArray = Array.from(pointers.values());
-
-    // Check for our forceCancel event to handle interrupted gestures (from contextmenu, blur)
-    if (event.type === 'forceCancel') {
-      // Reset all active press gestures when we get a force reset event
-      this.cancelPress(event.target as null, pointersArray, event);
-      return;
-    }
-
-    // Find which element (if any) is being targeted
-    const targetElement = this.getTargetElement(event);
-    if (!targetElement) {
-      return;
-    }
-
-    // Check if this gesture should be prevented by active gestures
-    if (this.shouldPreventGesture(targetElement, event.pointerType)) {
-      if (this.isActive) {
-        // If the gesture was active but now should be prevented, cancel it gracefully
-        this.cancelPress(targetElement, pointersArray, event);
-      }
-      return;
-    }
-
-    // Filter pointers to only include those targeting our element or its children
-    const relevantPointers = this.getRelevantPointers(pointersArray, targetElement);
-
-    if (!this.isWithinPointerCount(relevantPointers, event.pointerType)) {
-      if (this.isActive) {
-        // Cancel or end the gesture if it was active
-        this.cancelPress(targetElement, relevantPointers, event);
-      }
-      return;
-    }
-
-    switch (event.type) {
-      case 'pointerdown':
-        if (!this.isActive && !this.state.startCentroid) {
-          // Calculate and store the starting centroid
-          this.state.startCentroid = calculateCentroid(relevantPointers);
-          this.state.lastPosition = { ...this.state.startCentroid };
-          this.state.startTime = event.timeStamp;
-          this.isActive = true;
-
-          // Store the original target element
-          this.originalTarget = targetElement;
-
-          // Start the timer for press recognition
-          this.clearPressTimer(); // Clear any existing timer first
-          this.state.timerId = setTimeout(() => {
-            if (this.isActive && this.state.startCentroid) {
-              this.state.pressThresholdReached = true;
-              const lastPosition = this.state.lastPosition;
-
-              // Emit press start event
-              this.emitPressEvent(targetElement, 'start', relevantPointers, event, lastPosition!);
-              this.emitPressEvent(targetElement, 'ongoing', relevantPointers, event, lastPosition!);
-            }
-          }, this.duration);
-        }
-        break;
-
-      case 'pointermove':
-        if (this.isActive && this.state.startCentroid) {
-          // Calculate current position
-          const currentPosition = calculateCentroid(relevantPointers);
-          this.state.lastPosition = currentPosition;
-
-          // Calculate distance from start position
-          const deltaX = currentPosition.x - this.state.startCentroid.x;
-          const deltaY = currentPosition.y - this.state.startCentroid.y;
-          const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-
-          // If moved too far, cancel the press gesture
-          if (distance > this.maxDistance) {
-            this.cancelPress(targetElement, relevantPointers, event);
-          }
-        }
-        break;
-
-      case 'pointerup':
-        if (this.isActive) {
-          if (this.state.pressThresholdReached) {
-            // Complete the press gesture if we've held long enough
-            const position = this.state.lastPosition || this.state.startCentroid!;
-            this.emitPressEvent(targetElement, 'end', relevantPointers, event, position);
-          }
-
-          // Reset state
-          this.resetState();
-        }
-        break;
-
-      case 'pointercancel':
-      case 'forceCancel':
-        // Cancel the gesture
-        this.cancelPress(targetElement, relevantPointers, event);
-        break;
-
-      default:
-        break;
-    }
+      throw new Error("STUB");
   };
 
   /**
@@ -292,49 +188,7 @@ export class PressGesture<GestureName extends string> extends PointerGesture<Ges
     event: PointerEvent,
     position: { x: number; y: number },
   ): void {
-    // Get list of active gestures
-    const activeGestures = this.gesturesRegistry.getActiveGestures(element);
-
-    // Calculate current duration of the press
-    const currentDuration = event.timeStamp - this.state.startTime;
-
-    // Create custom event data
-    const customEventData: PressGestureEventData = {
-      gestureName: this.name,
-      centroid: position,
-      target: event.target,
-      srcEvent: event,
-      phase,
-      pointers,
-      timeStamp: event.timeStamp,
-      x: position.x,
-      y: position.y,
-      duration: currentDuration,
-      activeGestures,
-      customData: this.customData,
-    };
-
-    // Event names to trigger
-    const eventName = createEventName(this.name, phase);
-
-    // Dispatch custom events on the element
-    const domEvent = new CustomEvent(eventName, {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: customEventData,
-    });
-
-    element.dispatchEvent(domEvent);
-
-    // Apply preventDefault/stopPropagation if configured
-    if (this.preventDefault) {
-      event.preventDefault();
-    }
-
-    if (this.stopPropagation) {
-      event.stopPropagation();
-    }
+      throw new Error("STUB");
   }
 
   /**
@@ -345,13 +199,6 @@ export class PressGesture<GestureName extends string> extends PointerGesture<Ges
     pointers: PointerData[],
     event: PointerEvent,
   ): void {
-    if (this.isActive && this.state.pressThresholdReached) {
-      const position = this.state.lastPosition || this.state.startCentroid!;
-
-      this.emitPressEvent(element ?? this.element, 'cancel', pointers, event, position);
-      this.emitPressEvent(element ?? this.element, 'end', pointers, event, position);
-    }
-
-    this.resetState();
+      throw new Error("STUB");
   }
 }

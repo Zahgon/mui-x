@@ -9,7 +9,7 @@ export interface PickersToolbarTextClasses {
 export type PickersToolbarTextClassKey = keyof PickersToolbarTextClasses;
 
 export function getPickersToolbarTextUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickersToolbarText', slot);
+    throw new Error("STUB");
 }
 
 export const pickersToolbarTextClasses = generateUtilityClasses('MuiPickersToolbarText', ['root']);

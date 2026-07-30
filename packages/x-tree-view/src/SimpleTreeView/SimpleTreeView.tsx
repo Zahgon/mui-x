@@ -24,20 +24,7 @@ const useUtilityClasses = <Multiple extends boolean | undefined>(
   const { classes } = ownerState;
 
   return React.useMemo(() => {
-    const slots = {
-      root: ['root'],
-      item: ['item'],
-      itemContent: ['itemContent'],
-      itemGroupTransition: ['itemGroupTransition'],
-      itemIconContainer: ['itemIconContainer'],
-      itemLabel: ['itemLabel'],
-      // itemLabelInput: ['itemLabelInput'], => feature not available on this component
-      itemCheckbox: ['itemCheckbox'],
-      // itemDragAndDropOverlay: ['itemDragAndDropOverlay'], => feature not available on this component
-      // itemErrorIcon: ['itemErrorIcon'], => feature not available on this component
-    };
-
-    return composeClasses(slots, getSimpleTreeViewUtilityClass, classes);
+      throw new Error("STUB");
   }, [classes]);
 };
 
@@ -69,51 +56,7 @@ type SimpleTreeViewComponent = (<Multiple extends boolean | undefined = undefine
 const SimpleTreeView = React.forwardRef(function SimpleTreeView<
   Multiple extends boolean | undefined = undefined,
 >(inProps: SimpleTreeViewProps<Multiple>, forwardedRef: React.Ref<HTMLUListElement>) {
-  const props = useThemeProps({ props: inProps, name: 'MuiSimpleTreeView' });
-  if (process.env.NODE_ENV !== 'production') {
-    if ((props as any).items != null) {
-      warnOnce([
-        'MUI X: The Simple Tree View component does not support the `items` prop.',
-        'If you want to add items, you need to pass them as JSX children.',
-        'Check the documentation for more details: https://mui.com/x/react-tree-view/simple-tree-view/items/.',
-      ]);
-    }
-  }
-
-  const { slots, slotProps, apiRef, parameters, forwardedProps } =
-    useExtractSimpleTreeViewParameters(props);
-  const store = useTreeViewStore(SimpleTreeViewStore, parameters);
-
-  const ref = React.useRef<HTMLUListElement | null>(null);
-  const handleRef = useMergedRefs(forwardedRef, ref);
-  const getRootProps = useTreeViewRootProps(store, forwardedProps, handleRef);
-  const classes = useUtilityClasses(props);
-
-  const Root = slots?.root ?? SimpleTreeViewRoot;
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    className: classes.root,
-    getSlotProps: getRootProps,
-    ownerState: props as SimpleTreeViewProps<any>,
-  });
-
-  return (
-    <TreeViewProvider
-      store={store}
-      classes={classes}
-      slots={slots}
-      slotProps={slotProps}
-      apiRef={apiRef}
-      rootRef={ref}
-    >
-      <TreeViewChildrenItemProvider itemId={null} idAttribute={null}>
-        <TreeViewItemDepthContext.Provider value={0}>
-          <Root {...rootProps} />
-        </TreeViewItemDepthContext.Provider>
-      </TreeViewChildrenItemProvider>
-    </TreeViewProvider>
-  );
+    throw new Error("STUB");
 }) as SimpleTreeViewComponent;
 
 SimpleTreeView.propTypes /* remove-proptypes */ = {

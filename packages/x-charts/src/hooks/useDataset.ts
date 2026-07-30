@@ -9,6 +9,5 @@ import type { DatasetType } from '../models/seriesType/config';
  * @returns {DatasetType | undefined} The dataset array if provided, otherwise undefined.
  */
 export function useDataset<T extends DatasetType>(): Readonly<T> | undefined {
-  const store = useStore<[UseChartSeriesSignature]>();
-  return store.use(selectorChartsDataset) as T | undefined;
+    throw new Error("STUB");
 }

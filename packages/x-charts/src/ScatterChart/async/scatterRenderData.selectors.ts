@@ -29,45 +29,7 @@ export const selectorScatterRenderData = createSelectorMemoized(
   selectorChartYAxis,
   selectorChartDrawingArea,
   function selectorScatterRenderData(processedSeries, xAxes, yAxes, drawingArea) {
-    const scatter = processedSeries.scatter;
-    if (scatter === undefined) {
-      return EMPTY_RENDER_DATA;
-    }
-
-    const defaultXAxisId = xAxes.axisIds[0];
-    const defaultYAxisId = yAxes.axisIds[0];
-
-    const result = new Map<SeriesId, ScatterSeriesRenderData>();
-
-    const xMin = drawingArea.left - 1;
-    const xMax = drawingArea.left + drawingArea.width;
-    const yMin = drawingArea.top - 1;
-    const yMax = drawingArea.top + drawingArea.height;
-
-    for (const seriesId of scatter.seriesOrder) {
-      const series = scatter.series[seriesId];
-      const xAxis = xAxes.axis[series.xAxisId ?? defaultXAxisId];
-      const yAxis = yAxes.axis[series.yAxisId ?? defaultYAxisId];
-
-      if (xAxis === undefined || yAxis === undefined) {
-        continue;
-      }
-
-      const getXPosition = getValueToPositionMapper(xAxis.scale);
-      const getYPosition = getValueToPositionMapper(yAxis.scale);
-
-      result.set(
-        seriesId,
-        packScatterSeriesCoords(series.data, getXPosition, getYPosition, {
-          xMin,
-          xMax,
-          yMin,
-          yMax,
-        }),
-      );
-    }
-
-    return result;
+      throw new Error("STUB");
   },
 );
 
@@ -108,5 +70,5 @@ export function packScatterSeriesCoords(
 /** Render data for one series, or `undefined` while processors/axes are pending. */
 export const selectorScatterSeriesRenderData = createSelector(
   selectorScatterRenderData,
-  (renderData, seriesId: SeriesId) => renderData.get(seriesId),
+  (renderData, seriesId: SeriesId) => { throw new Error("STUB"); },
 );

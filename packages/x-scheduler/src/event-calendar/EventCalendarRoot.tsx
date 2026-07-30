@@ -43,57 +43,12 @@ export interface EventCalendarRootProps extends React.HTMLAttributes<HTMLDivElem
 const EventCalendarRootStyled = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'Root',
-})(({ theme }) => ({
-  // Layout
-  boxSizing: 'border-box',
-  '*, *::before, *::after': {
-    boxSizing: 'inherit',
-  },
-  position: 'relative',
-  width: '100%',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(1),
-  height: '100%',
-  minHeight: 0,
-  overflow: 'hidden',
-  fontFamily: theme.typography.fontFamily,
-
-  // Root container so the toolbar and drawer react to the overall calendar width
-  // with CSS (distinct from the content-scoped typography container one level down).
-  containerType: 'inline-size',
-  containerName: EVENT_CALENDAR_ROOT_CONTAINER_NAME,
-
-  // Compact/expanded toggle via the root container query (both layouts always
-  // rendered, SSR-safe): hide `data-expanded-only` in the compact layout,
-  // `data-compact-only` in the expanded layout.
-  [eventCalendarRootCompactQuery]: {
-    '& [data-expanded-only]': {
-      display: 'none',
-    },
-  },
-  [eventCalendarRootExpandedQuery]: {
-    '& [data-compact-only]': {
-      display: 'none',
-    },
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const EventCalendarSidePanel = styled('aside', {
   name: 'MuiEventCalendar',
   slot: 'SidePanel',
-})(({ theme }) => ({
-  minWidth: 250,
-  width: 'fit-content',
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing(2),
-  border: '1px solid',
-  borderColor: (theme.vars || theme).palette.divider,
-  borderRadius: theme.shape.borderRadius,
-  maxHeight: '100%',
-  overflowY: 'hidden',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const EventCalendarSidePanelCollapse = styled(Collapse, {
   name: 'MuiEventCalendar',
@@ -109,36 +64,12 @@ const EventCalendarSidePanelCollapse = styled(Collapse, {
 const EventCalendarMainPanel = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'MainPanel',
-})(({ theme }) => ({
-  display: 'flex',
-  flexGrow: 1,
-  gap: theme.spacing(1),
-  minHeight: 0,
-
-  '&[data-view="month"]': {
-    maxHeight: '100%',
-    overflow: 'hidden',
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const EventCalendarContent = styled('section', {
   name: 'MuiEventCalendar',
   slot: 'Content',
-})(() => ({
-  display: 'flex',
-  flex: 1,
-  overflow: 'auto',
-  height: '100%',
-  maxHeight: '100%',
-
-  // The container lives on ResponsiveTypographyContainer one level up; these rules
-  // fire against it and retarget the effective vars on this slot for descendants.
-  ...responsiveTypographyContainerQueries,
-
-  '&[data-side-panel-open="false"]': {
-    gridColumn: '1 / -1',
-  },
-}));
+})(() => { throw new Error("STUB"); });
 
 /**
  * Internal component that renders the EventCalendar UI.
@@ -147,95 +78,6 @@ const EventCalendarContent = styled('section', {
  */
 export const EventCalendarRoot = React.forwardRef<HTMLDivElement, EventCalendarRootProps>(
   function EventCalendarRoot(props, forwardedRef) {
-    const { children, className, ...other } = props;
-
-    const store = useEventCalendarStoreContext();
-    const { classes, localeText } = useEventCalendarStyledContext();
-
-    const view = useStore(store, eventCalendarViewSelectors.view);
-    const isSidePanelOpen = useStore(store, eventCalendarPreferenceSelectors.isSidePanelOpen);
-
-    // The compact drawer keeps its own state (default closed) rather than reusing
-    // `isSidePanelOpen` (default open), so it never covers the calendar on load.
-    const [isCompactDrawerOpen, setIsCompactDrawerOpen] = React.useState(false);
-
-    let content: React.ReactNode;
-
-    switch (view) {
-      case 'week':
-        content = <WeekView />;
-        break;
-      case 'day':
-        content = <DayView />;
-        break;
-      case 'month':
-        content = <MonthView />;
-        break;
-      case 'agenda':
-        content = <AgendaView />;
-        break;
-      default:
-        content = null;
-    }
-
-    const rootRef = React.useRef<HTMLElement | null>(null);
-    const handleRootRef = useMergedRefs(forwardedRef, rootRef);
-
-    // The container query only hides the drawer in the expanded layout; the modal
-    // underneath would stay open (aria-hiding the calendar, trapping focus). Close it
-    // when the root grows past the breakpoint so the drawer fully unmounts instead of
-    // just disappearing. Only active while the drawer is open.
-    useResizeObserver(
-      rootRef,
-      (entries) => {
-        const width = entries[0].contentRect.width;
-        if (width >= RESPONSIVE_TYPOGRAPHY_BREAKPOINT_SM) {
-          setIsCompactDrawerOpen(false);
-        }
-      },
-      isCompactDrawerOpen,
-    );
-
-    return (
-      <EventCalendarRootStyled
-        className={clsx(classes.root, className)}
-        {...other}
-        ref={handleRootRef}
-      >
-        <HeaderToolbar onCompactMenuClick={() => setIsCompactDrawerOpen(true)} />
-
-        <EventCalendarMainPanel className={classes.mainPanel} data-view={view}>
-          <EventCalendarSidePanelCollapse
-            in={isSidePanelOpen}
-            orientation="horizontal"
-            className={classes.sidePanelCollapse}
-          >
-            <EventCalendarSidePanel className={classes.sidePanel}>
-              <MiniCalendar />
-              <Divider className={classes.sidePanelDivider} />
-              <ResourcesTree />
-            </EventCalendarSidePanel>
-          </EventCalendarSidePanelCollapse>
-
-          <ResponsiveTypographyContainer>
-            <EventCalendarContent
-              className={classes.content}
-              data-view={view}
-              data-side-panel-open={isSidePanelOpen}
-              aria-label={localeText.calendarContentAriaLabel}
-            >
-              {content}
-            </EventCalendarContent>
-          </ResponsiveTypographyContainer>
-        </EventCalendarMainPanel>
-        <SidePanelDrawer
-          open={isCompactDrawerOpen}
-          onClose={() => setIsCompactDrawerOpen(false)}
-          container={rootRef}
-        />
-        <ErrorContainer />
-        {children}
-      </EventCalendarRootStyled>
-    );
-  },
+        throw new Error("STUB");
+    },
 );

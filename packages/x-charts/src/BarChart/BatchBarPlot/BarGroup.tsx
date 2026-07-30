@@ -28,11 +28,7 @@ interface BarGroupProps extends React.HTMLAttributes<SVGGElement> {
 }
 
 export function BarGroup({ skipAnimation, layout, xOrigin, yOrigin, ...props }: BarGroupProps) {
-  if (skipAnimation) {
-    return <PathGroup {...props} />;
-  }
-
-  return <AnimatedGroup {...props} layout={layout} xOrigin={xOrigin} yOrigin={yOrigin} />;
+    throw new Error("STUB");
 }
 
 interface AnimatedGroupProps extends React.HTMLAttributes<SVGGElement> {
@@ -69,74 +65,5 @@ const AnimatedRect = styled('rect')({
 });
 
 function AnimatedGroup({ children, layout, xOrigin, yOrigin, ...props }: AnimatedGroupProps) {
-  const store = useStore();
-  const drawingArea = store.use(selectorChartDrawingArea);
-  const clipPathId = useId();
-
-  const animateChildren: React.ReactNode[] = [];
-
-  if (layout === 'horizontal') {
-    animateChildren.push(
-      <AnimatedRect
-        key="left"
-        data-orientation="horizontal"
-        x={drawingArea.left}
-        width={xOrigin - drawingArea.left}
-        y={drawingArea.top}
-        height={drawingArea.height}
-        style={{
-          transformOrigin: `${xOrigin}px ${drawingArea.top + drawingArea.height / 2}px`,
-        }}
-      />,
-    );
-    animateChildren.push(
-      <AnimatedRect
-        key="right"
-        data-orientation="horizontal"
-        x={xOrigin}
-        width={drawingArea.left + drawingArea.width - xOrigin}
-        y={drawingArea.top}
-        height={drawingArea.height}
-        style={{
-          transformOrigin: `${xOrigin}px ${drawingArea.top + drawingArea.height / 2}px`,
-        }}
-      />,
-    );
-  } else {
-    animateChildren.push(
-      <AnimatedRect
-        key="top"
-        data-orientation="vertical"
-        x={drawingArea.left}
-        width={drawingArea.width}
-        y={drawingArea.top}
-        height={yOrigin - drawingArea.top}
-        style={{
-          transformOrigin: `${drawingArea.left + drawingArea.width / 2}px ${yOrigin}px`,
-        }}
-      />,
-    );
-    animateChildren.push(
-      <AnimatedRect
-        key="bottom"
-        data-orientation="vertical"
-        x={drawingArea.left}
-        width={drawingArea.width}
-        y={yOrigin}
-        height={drawingArea.top + drawingArea.height - yOrigin}
-        style={{
-          transformOrigin: `${drawingArea.left + drawingArea.width / 2}px ${yOrigin}px`,
-        }}
-      />,
-    );
-  }
-
-  return (
-    <React.Fragment>
-      <clipPath id={clipPathId}>{animateChildren}</clipPath>
-      <PathGroup clipPath={`url(#${clipPathId})`} {...props}>
-        {children}
-      </PathGroup>
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }

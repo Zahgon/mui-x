@@ -20,11 +20,10 @@ export function useAnimateArea(props: UseAnimateAreaParams): UseAnimatedAreaRetu
     { d: props.d },
     {
       createInterpolator: (lastProps, newProps) => {
-        const interpolate = interpolateString(lastProps.d, newProps.d);
-        return (t) => ({ d: interpolate(t) });
-      },
-      applyProps: (element: SVGPathElement, { d }) => element.setAttribute('d', d),
-      transformProps: (p) => p,
+            throw new Error("STUB");
+        },
+      applyProps: (element: SVGPathElement, { d }) => { throw new Error("STUB"); },
+      transformProps: (p) => { throw new Error("STUB"); },
       skip: props.skipAnimation,
       ref: props.ref,
     },

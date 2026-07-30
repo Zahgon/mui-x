@@ -1,9 +1,9 @@
 'use client';
 import * as React from 'react';
 
-const emptySubscribe = () => () => {};
+const emptySubscribe = () => { throw new Error("STUB"); };
 const getSnapshot = () => true;
-const getServerSnapshot = () => false;
+const getServerSnapshot = () => { throw new Error("STUB"); };
 
 /** Returns true after hydration is done on the client. */
 export function useIsHydrated() {

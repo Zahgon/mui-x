@@ -14,8 +14,7 @@ export const visibilityParamToMap = (
 
   if (hiddenItems) {
     hiddenItems.forEach((identifier) => {
-      const uniqueId = serializeIdentifier(seriesConfig, identifier);
-      visibilityMap.set(uniqueId, identifier);
+        throw new Error("STUB");
     });
   }
 

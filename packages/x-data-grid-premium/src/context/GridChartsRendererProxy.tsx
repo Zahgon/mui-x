@@ -44,17 +44,7 @@ function GridChartsRendererProxy(props: GridChartsRendererProxyProps) {
   const { chartStateLookup, setChartState } = useGridChartsIntegrationContext();
 
   React.useEffect(() => {
-    if (!chartStateLookup[id]) {
-      // With this, the proxy "registers" the chart to the context
-      setChartState(id, {
-        ...EMPTY_CHART_INTEGRATION_CONTEXT_STATE,
-        label,
-      });
-    }
-
-    return () => {
-      delete chartStateLookup[id];
-    };
+      throw new Error("STUB");
   }, [id, label, setChartState, chartStateLookup]);
 
   if (!chartStateLookup[id]) {

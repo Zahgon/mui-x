@@ -135,12 +135,7 @@ export class AdapterLuxon implements MuiPickersAdapter<string> {
   }
 
   private setLocaleToValue = (value: DateTime) => {
-    const expectedLocale = this.getCurrentLocaleCode();
-    if (expectedLocale === value.locale) {
-      return value;
-    }
-
-    return value.setLocale(expectedLocale);
+      throw new Error("STUB");
   };
 
   public date = <T extends string | null | undefined>(
@@ -164,7 +159,7 @@ export class AdapterLuxon implements MuiPickersAdapter<string> {
     return DateTime.fromISO(value, { locale: this.locale, zone: timezone }) as unknown as R;
   };
 
-  public getInvalidDate = () => DateTime.fromJSDate(new Date('Invalid Date'));
+  public getInvalidDate = () => { throw new Error("STUB"); };
 
   public getTimezone = (value: DateTime): string => {
     // When using the system zone, we want to return "system", not something like "Europe/Paris"
@@ -225,20 +220,7 @@ export class AdapterLuxon implements MuiPickersAdapter<string> {
       format
         .match(catchEscapedSectionsRegexp)!
         .map((token: string) => {
-          const firstCharacter = token[0];
-          if (firstCharacter === "'") {
-            return token;
-          }
-          const expandedToken = DateTime.expandFormat(token, { locale: this.locale });
-
-          return expandedToken.replace(catchWordsRegexp, (substring, g1, g2) => {
-            const word = g1 || g2; // words are either in group 1 or group 2
-
-            if (isWordComposedOfTokens.test(word)) {
-              return substring;
-            }
-            return `'${substring}'`;
-          });
+            throw new Error("STUB");
         })
         .join('')
         // The returned format can contain `yyyyy` which means year between 4 and 6 digits.
@@ -296,8 +278,7 @@ export class AdapterLuxon implements MuiPickersAdapter<string> {
   };
 
   public isSameHour = (value: DateTime, comparing: DateTime) => {
-    const comparingInValueTimezone = this.setTimezone(comparing, this.getTimezone(value));
-    return value.hasSame(comparingInValueTimezone, 'hour');
+      throw new Error("STUB");
   };
 
   public isAfter = (value: DateTime, comparing: DateTime) => {
@@ -389,7 +370,7 @@ export class AdapterLuxon implements MuiPickersAdapter<string> {
   };
 
   public addHours = (value: DateTime, amount: number) => {
-    return value.plus({ hours: amount });
+      throw new Error("STUB");
   };
 
   public addMinutes = (value: DateTime, amount: number) => {
@@ -397,7 +378,7 @@ export class AdapterLuxon implements MuiPickersAdapter<string> {
   };
 
   public addSeconds = (value: DateTime, amount: number) => {
-    return value.plus({ seconds: amount });
+      throw new Error("STUB");
   };
 
   public getYear = (value: DateTime) => {
@@ -462,26 +443,7 @@ export class AdapterLuxon implements MuiPickersAdapter<string> {
   };
 
   public getWeekArray = (value: DateTime) => {
-    const firstDay = this.startOfWeek(this.startOfMonth(value));
-    const lastDay = this.endOfWeek(this.endOfMonth(value));
-
-    const { days } = lastDay.diff(firstDay, 'days').toObject();
-
-    const weeks: DateTime[][] = [];
-    new Array<number>(Math.round(days!))
-      .fill(0)
-      .map((_, i) => i)
-      .map((day) => firstDay.plus({ days: day }))
-      .forEach((v, i) => {
-        if (i === 0 || (i % 7 === 0 && i > 6)) {
-          weeks.push([v]);
-          return;
-        }
-
-        weeks[weeks.length - 1].push(v);
-      });
-
-    return weeks;
+      throw new Error("STUB");
   };
 
   public getWeekNumber = (value: DateTime) => {

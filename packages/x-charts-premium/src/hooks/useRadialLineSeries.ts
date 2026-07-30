@@ -30,7 +30,7 @@ export function useRadialLineSeries(): UseRadialLineSeriesReturnValue[];
  */
 export function useRadialLineSeries(seriesIds: SeriesId[]): UseRadialLineSeriesReturnValue[];
 export function useRadialLineSeries(seriesIds?: SeriesId | SeriesId[]) {
-  return useSeriesOfType('radialLine', seriesIds);
+    throw new Error("STUB");
 }
 
 /**

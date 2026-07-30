@@ -6,20 +6,20 @@ import {
 import type { GridStatePro } from '../../../models/gridStatePro';
 
 export const gridDetailPanelStateSelector = createRootSelector(
-  (state: GridStatePro) => state.detailPanel,
+  (state: GridStatePro) => { throw new Error("STUB"); },
 );
 
 export const gridDetailPanelExpandedRowIdsSelector = createSelector(
   gridDetailPanelStateSelector,
-  (detailPanelState) => detailPanelState.expandedRowIds,
+  (detailPanelState) => { throw new Error("STUB"); },
 );
 
 export const gridDetailPanelExpandedRowsContentCacheSelector = createSelector(
   gridDetailPanelStateSelector,
-  (detailPanelState) => detailPanelState.contentCache,
+  (detailPanelState) => { throw new Error("STUB"); },
 );
 
 export const gridDetailPanelRawHeightCacheSelector = createSelectorMemoized(
   gridDetailPanelStateSelector,
-  (detailPanelState) => detailPanelState.heightCache,
+  (detailPanelState) => { throw new Error("STUB"); },
 );

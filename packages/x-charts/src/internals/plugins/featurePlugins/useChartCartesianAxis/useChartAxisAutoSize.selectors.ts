@@ -15,7 +15,7 @@ import {
 
 // Direct state access to avoid circular dependency
 const selectorIsHydrated = (state: ChartState<[UseChartDimensionsSignature]>) =>
-  state.dimensions.width && state.dimensions.height;
+  { throw new Error("STUB"); };
 
 const EMPTY_SIZES: Record<AxisId, number> = {};
 const EMPTY_RESULTS: Record<AxisId, AxisAutoSizeResult> = {};
@@ -29,28 +29,7 @@ export const selectorChartXAxisAutoSizeResults = createSelectorMemoized(
   selectorIsHydrated,
   selectorChartXAxisDomainsForAutoSize,
   function selectorChartXAxisAutoSizeResults(xAxes, isHydrated, domainsMap) {
-    const hasAutoAxis = xAxes?.some((axis) => axis.height === 'auto');
-    if (!hasAutoAxis || !isHydrated) {
-      return EMPTY_RESULTS;
-    }
-
-    const results: Record<AxisId, AxisAutoSizeResult> = {};
-
-    for (let axisIndex = 0; axisIndex < (xAxes?.length ?? 0); axisIndex += 1) {
-      const axis = xAxes![axisIndex];
-      if (axis.height === 'auto') {
-        const computed = computeAxisAutoSize({
-          axis,
-          direction: 'x',
-          domain: domainsMap[axis.id],
-        });
-        if (computed !== undefined) {
-          results[axis.id] = computed;
-        }
-      }
-    }
-
-    return results;
+      throw new Error("STUB");
   },
 );
 
@@ -61,15 +40,7 @@ export const selectorChartXAxisAutoSizeResults = createSelectorMemoized(
 export const selectorChartXAxisAutoSizes = createSelectorMemoized(
   selectorChartXAxisAutoSizeResults,
   function selectorChartXAxisAutoSizes(results) {
-    if (results === EMPTY_RESULTS) {
-      return EMPTY_SIZES;
-    }
-
-    const sizes: Record<AxisId, number> = {};
-    for (const [axisId, result] of Object.entries(results)) {
-      sizes[axisId as AxisId] = result.size;
-    }
-    return sizes;
+      throw new Error("STUB");
   },
 );
 
@@ -82,28 +53,7 @@ export const selectorChartYAxisAutoSizeResults = createSelectorMemoized(
   selectorIsHydrated,
   selectorChartYAxisDomainsForAutoSize,
   function selectorChartYAxisAutoSizeResults(yAxes, isHydrated, domainsMap) {
-    const hasAutoAxis = yAxes?.some((axis) => axis.width === 'auto');
-    if (!hasAutoAxis || !isHydrated) {
-      return EMPTY_RESULTS;
-    }
-
-    const results: Record<AxisId, AxisAutoSizeResult> = {};
-
-    for (let axisIndex = 0; axisIndex < (yAxes?.length ?? 0); axisIndex += 1) {
-      const axis = yAxes![axisIndex];
-      if (axis.width === 'auto') {
-        const computed = computeAxisAutoSize({
-          axis,
-          direction: 'y',
-          domain: domainsMap[axis.id],
-        });
-        if (computed !== undefined) {
-          results[axis.id] = computed;
-        }
-      }
-    }
-
-    return results;
+      throw new Error("STUB");
   },
 );
 
@@ -114,14 +64,6 @@ export const selectorChartYAxisAutoSizeResults = createSelectorMemoized(
 export const selectorChartYAxisAutoSizes = createSelectorMemoized(
   selectorChartYAxisAutoSizeResults,
   function selectorChartYAxisAutoSizes(results) {
-    if (results === EMPTY_RESULTS) {
-      return EMPTY_SIZES;
-    }
-
-    const sizes: Record<AxisId, number> = {};
-    for (const [axisId, result] of Object.entries(results)) {
-      sizes[axisId as AxisId] = result.size;
-    }
-    return sizes;
+      throw new Error("STUB");
   },
 );

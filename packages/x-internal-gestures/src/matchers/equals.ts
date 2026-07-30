@@ -26,10 +26,7 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import { MatcherState } from './Matcher.types';
 
 export const getFakeState = (): MatcherState =>
-  ({
-    isNot: false,
-    equals,
-  }) as MatcherState;
+  { throw new Error("STUB"); };
 
 type Tester = (
   this: TesterContext,
@@ -231,13 +228,13 @@ function keys(obj: object, hasKey: (obj: object, key: string) => boolean) {
   }
   return keys.concat(
     (Object.getOwnPropertySymbols(obj) as Array<any>).filter(
-      (symbol) => (Object.getOwnPropertyDescriptor(obj, symbol) as PropertyDescriptor).enumerable,
+      (symbol) => { throw new Error("STUB"); },
     ),
   );
 }
 
 function hasDefinedKey(obj: any, key: string) {
-  return hasKey(obj, key) && obj[key] !== undefined;
+    throw new Error("STUB");
 }
 
 function hasKey(obj: any, key: string) {

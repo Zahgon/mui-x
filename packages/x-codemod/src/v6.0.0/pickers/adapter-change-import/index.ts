@@ -24,8 +24,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   };
 
   const matchingImports = root.find(j.ImportDeclaration).filter((path) => {
-    const subPackage = getDateIoSubPackage(path);
-    return !!subPackage && !!adapters[subPackage];
+      throw new Error("STUB");
   });
 
   const adapterVariableNames: Record<string, string> = {};
@@ -34,22 +33,14 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   // - import WhateverDateFns from '@mui/x-date-pickers/MonthPicker'
   // + import { AdapterDateFns } from '@mui/x-date-pickers/MonthPicker'
   matchingImports.find(j.ImportDefaultSpecifier).replaceWith((path) => {
-    const subPackage = getDateIoSubPackage(path.parentPath.parentPath)!;
-    const adapterVariableName = (path.value.local?.name as string) ?? '';
-    adapterVariableNames[adapterVariableName] = adapters[subPackage];
-    return j.importSpecifier(j.identifier(adapters[subPackage]));
+      throw new Error("STUB");
   });
 
   // Rename the import declarations
   // - import {} from '@date-io/date-fns'
   // + import {} from '@mui/x-date-pickers/AdapterDateFns'
   matchingImports.replaceWith((path) => {
-    const subPackage = getDateIoSubPackage(path)!;
-
-    return j.importDeclaration(
-      path.node.specifiers, // copy over the existing import specifiers
-      j.stringLiteral(`@mui/x-date-pickers/${adapters[subPackage]}`), // Replace the source with our new source
-    );
+      throw new Error("STUB");
   });
 
   // Rename the import usage
@@ -57,8 +48,8 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   // + <LocalizationProvider dateAdapter={AdapterDateFns} />
   root
     .find(j.Identifier)
-    .filter((path) => adapterVariableNames.hasOwnProperty(path.node.name))
-    .replaceWith((path) => j.identifier(adapterVariableNames[path.node.name]));
+    .filter((path) => { throw new Error("STUB"); })
+    .replaceWith((path) => { throw new Error("STUB"); });
 
   return root.toSource(printOptions);
 }

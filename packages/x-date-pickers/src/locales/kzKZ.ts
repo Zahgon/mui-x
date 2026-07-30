@@ -19,9 +19,7 @@ const kzKZPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Алдыңғы көріністі ашу',
   openNextView: 'Келесі көріністі ашу',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'жылдық көріністі ашу, күнтізбе көрінісіне ауысу'
-      : 'күнтізбе көрінісін ашу, жылдық көрінісіне ауысу',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Бастау',
@@ -47,25 +45,25 @@ const kzKZPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `${timeViews[view]} таңдау. ${!formattedTime ? 'Уақыт таңдалмаған' : `Таңдалған уақыт ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} сағат`,
-  minutesClockNumberText: (minutes) => `${minutes} минут`,
-  secondsClockNumberText: (seconds) => `${seconds} секунд`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `${timeViews[view]} таңдау`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Апта нөмірі',
   calendarWeekNumberHeaderText: '№',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Апта ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Күнді таңдаңыз, таңдалған күн ${formattedDate}` : 'Күнді таңдаңыз',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Уақытты таңдаңыз, таңдалған уақыт ${formattedTime}` : 'Уақытты таңдаңыз',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   // fieldClearLabel: 'Clear',
 
@@ -74,14 +72,14 @@ const kzKZPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'күнді таңдау',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Ж'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'AAAA' : 'AA'),
-  fieldDayPlaceholder: () => 'КК',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
   // fieldWeekDayPlaceholder: params => params.contentType === 'letter' ? 'EEEE' : 'EE',
-  fieldHoursPlaceholder: () => 'сс',
-  fieldMinutesPlaceholder: () => 'мм',
-  fieldSecondsPlaceholder: () => 'сс',
-  fieldMeridiemPlaceholder: () => '(т|к)',
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   // year: 'Year',

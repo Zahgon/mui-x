@@ -13,34 +13,11 @@ import { CandlestickWebGLProgram } from './CandlestickWebGLProgram';
 export interface CandlestickPlotProps {}
 
 export function CandlestickPlot() {
-  return <CandlestickWebGLPlot />;
+    throw new Error("STUB");
 }
 
 function CandlestickWebGLPlot() {
-  const layer = useWebGLLayer();
-  const series = useOHLCSeriesContext();
-
-  const seriesToDisplay = series?.series[series.seriesOrder[0]];
-  const isHidden = !seriesToDisplay || seriesToDisplay.hidden;
-
-  React.useEffect(() => {
-    if (layer && isHidden) {
-      layer.requestRender();
-    }
-  }, [layer, isHidden]);
-
-  if (!layer || isHidden) {
-    return null;
-  }
-
-  return (
-    <CandlestickWebGLPlotImpl
-      gl={layer.gl}
-      registerDraw={layer.registerDraw}
-      requestRender={layer.requestRender}
-      series={seriesToDisplay}
-    />
-  );
+    throw new Error("STUB");
 }
 
 function CandlestickWebGLPlotImpl({
@@ -54,55 +31,5 @@ function CandlestickWebGLPlotImpl({
   requestRender: () => void;
   series: DefaultizedOHLCSeriesType;
 }) {
-  const drawingArea = useDrawingArea();
-  const xScale = useXScale<'band'>();
-  const yScale = useYScale<ContinuousScaleName>();
-  checkCandlestickScaleErrors(series.id, xScale);
-
-  const [program, setProgram] = React.useState<CandlestickWebGLProgram | null>(null);
-  const dataLength = series.data.length;
-
-  const drawRef = React.useRef<(() => void) | null>(null);
-
-  React.useEffect(() => {
-    drawRef.current = () => {
-      program?.render(dataLength);
-    };
-  }, [program, dataLength]);
-
-  React.useEffect(() => {
-    const unregister = registerDraw(drawRef);
-    return unregister;
-  }, [registerDraw]);
-
-  React.useEffect(() => {
-    const prog = new CandlestickWebGLProgram(gl);
-    setProgram(prog);
-
-    return () => {
-      prog.dispose();
-    };
-  }, [gl]);
-
-  React.useEffect(() => {
-    program?.setResolution(drawingArea.width, drawingArea.height);
-
-    requestRender();
-  }, [drawingArea.height, drawingArea.width, gl, requestRender, program]);
-
-  const candleWidth = xScale.bandwidth();
-  React.useEffect(() => {
-    program?.setCandleWidth(candleWidth);
-
-    requestRender();
-  }, [candleWidth, gl, program, requestRender]);
-
-  const plotData = useCandlestickPlotData(drawingArea, series, xScale, yScale);
-  React.useEffect(() => {
-    program?.plot(plotData);
-
-    requestRender();
-  }, [gl, plotData, program, requestRender]);
-
-  return null;
+    throw new Error("STUB");
 }

@@ -165,8 +165,7 @@ function getPinnedWidth(dimensions: any, isRtl: boolean, pinnedPosition: GridPin
 }
 
 function preventClick(event: MouseEvent) {
-  event.preventDefault();
-  event.stopImmediatePropagation();
+    throw new Error("STUB");
 }
 
 /**
@@ -179,20 +178,11 @@ function useColumnVirtualizationDisabled(apiRef: RefObject<GridPrivateApiCommuni
   const value = useGridSelector(apiRef, selector);
 
   React.useEffect(() => {
-    if (promise.current && value === false) {
-      promise.current.resolve();
-      promise.current = undefined;
-    }
+      throw new Error("STUB");
   });
 
   const asyncCheck = () => {
-    if (!promise.current) {
-      if (selector() === false) {
-        return Promise.resolve();
-      }
-      promise.current = createControllablePromise();
-    }
-    return promise.current;
+      throw new Error("STUB");
   };
 
   return asyncCheck;
@@ -208,7 +198,7 @@ function excludeOutliers(inputValues: number[], factor: number) {
   }
 
   const values = inputValues.slice();
-  values.sort((a, b) => a - b);
+  values.sort((a, b) => { throw new Error("STUB"); });
 
   const q1 = values[Math.floor(values.length * 0.25)];
   const q3 = values[Math.floor(values.length * 0.75) - 1];
@@ -221,7 +211,7 @@ function excludeOutliers(inputValues: number[], factor: number) {
   // rather than showing a cropped cell.
   const deviation = iqr < 5 ? 5 : iqr * factor;
 
-  return values.filter((v) => v > q1 - deviation && v < q3 + deviation);
+  return values.filter((v) => { throw new Error("STUB"); });
 }
 
 function extractColumnWidths(
@@ -238,72 +228,7 @@ function extractColumnWidths(
     options.includeHeaderFilters && gridHeaderFilteringEnabledSelector(apiRef);
 
   columns.forEach((column) => {
-    const cells = findGridCells(apiRef.current, column.field);
-
-    const widths = cells.map((cell) => {
-      return cell.getBoundingClientRect().width ?? 0;
-    });
-
-    const filteredWidths = options.includeOutliers
-      ? widths
-      : excludeOutliers(widths, options.outliersFactor);
-
-    if (options.includeHeaders) {
-      const header = findGridHeader(apiRef.current, column.field);
-      if (header) {
-        const titleContainer = header.querySelector(`.${gridClasses.columnHeaderTitleContainer}`)!;
-        const children = Array.from(titleContainer.children);
-        const menuContainer = header.querySelector(`.${gridClasses.menuIcon}`);
-
-        const titleContainerStyle = window.getComputedStyle(titleContainer, null);
-        const gap = parseInt(titleContainerStyle.gap, 10) || 0;
-
-        const headerStyle = window.getComputedStyle(header, null);
-        const paddingWidth =
-          parseInt(headerStyle.paddingLeft, 10) + parseInt(headerStyle.paddingRight, 10);
-
-        let totalChildren = 0;
-        let childrenWidth = 0;
-        for (let i = 0; i < children.length; i += 1) {
-          const child = children[i] as HTMLElement;
-          if (child.clientWidth > 0) {
-            totalChildren += 1;
-            childrenWidth += child.scrollWidth;
-          }
-        }
-
-        childrenWidth += 1;
-
-        const width =
-          childrenWidth +
-          gap * (totalChildren - 1) +
-          paddingWidth +
-          (menuContainer?.clientWidth ?? 0);
-
-        filteredWidths.push(width);
-      }
-    }
-
-    if (includeHeaderFilters) {
-      const headerFilter = findGridHeaderFilter(apiRef.current, column.field);
-      if (headerFilter) {
-        const style = window.getComputedStyle(headerFilter, null);
-        const paddingWidth = parseInt(style.paddingLeft, 10) + parseInt(style.paddingRight, 10);
-        const contentWidth = headerFilter.scrollWidth;
-        const width = contentWidth + paddingWidth;
-
-        filteredWidths.push(width);
-      }
-    }
-
-    const hasColumnMin = column.minWidth !== -Infinity && column.minWidth !== undefined;
-    const hasColumnMax = column.maxWidth !== Infinity && column.maxWidth !== undefined;
-
-    const min = hasColumnMin ? column.minWidth! : 0;
-    const max = hasColumnMax ? column.maxWidth! : Infinity;
-    const maxContent = filteredWidths.length === 0 ? 0 : Math.max(...filteredWidths);
-
-    widthByField[column.field] = clamp(maxContent, min, max);
+      throw new Error("STUB");
   });
 
   root.classList.remove(gridClasses.autosizing);
@@ -311,28 +236,10 @@ function extractColumnWidths(
   return widthByField;
 }
 
-export const columnResizeStateInitializer: GridStateInitializer = (state) => ({
-  ...state,
-  columnResize: { resizingColumnField: '' },
-});
+export const columnResizeStateInitializer: GridStateInitializer = (state) => { throw new Error("STUB"); };
 
 function createResizeRefs() {
-  return {
-    colDef: undefined as undefined | GridStateColDef,
-    initialColWidth: 0,
-    initialTotalWidth: 0,
-    previousMouseClickEvent: undefined as undefined | MouseEvent,
-    columnHeaderElement: undefined as undefined | HTMLDivElement,
-    headerFilterElement: undefined as undefined | HTMLDivElement,
-    groupHeaderElements: [] as Element[],
-    cellElements: [] as Element[],
-    leftPinnedCellsAfter: [] as HTMLElement[],
-    rightPinnedCellsBefore: [] as HTMLElement[],
-    fillerLeft: undefined as undefined | HTMLElement,
-    fillerRight: undefined as undefined | HTMLElement,
-    leftPinnedHeadersAfter: [] as HTMLElement[],
-    rightPinnedHeadersBefore: [] as HTMLElement[],
-  };
+    throw new Error("STUB");
 }
 
 /**
@@ -392,33 +299,11 @@ export const useGridColumnResize = (
     }
 
     refs.groupHeaderElements!.forEach((element) => {
-      const div = element as HTMLDivElement;
-      let finalWidth: `${number}px`;
-
-      if (div.getAttribute('aria-colspan') === '1') {
-        finalWidth = `${newWidth}px`;
-      } else {
-        // Cell with colspan > 1 cannot be just updated width new width.
-        // Instead, we add width diff to the current width.
-        finalWidth = `${div.offsetWidth + widthDiff}px`;
-      }
-
-      div.style.width = finalWidth;
+        throw new Error("STUB");
     });
 
     refs.cellElements!.forEach((element) => {
-      const div = element as HTMLDivElement;
-      let finalWidth: `${number}px`;
-
-      if (div.getAttribute('aria-colspan') === '1') {
-        finalWidth = `${newWidth}px`;
-      } else {
-        // Cell with colspan > 1 cannot be just updated width new width.
-        // Instead, we add width diff to the current width.
-        finalWidth = `${div.offsetWidth + widthDiff}px`;
-      }
-
-      div.style.setProperty('--width', finalWidth);
+        throw new Error("STUB");
     });
 
     const dimensions = gridDimensionsSelector(apiRef);
@@ -432,10 +317,10 @@ export const useGridColumnResize = (
       updateProperty(refs.fillerLeft, 'width', widthDiff);
 
       refs.leftPinnedCellsAfter.forEach((cell) => {
-        updateProperty(cell, 'left', widthDiff);
+          throw new Error("STUB");
       });
       refs.leftPinnedHeadersAfter.forEach((header) => {
-        updateProperty(header, 'left', widthDiff);
+          throw new Error("STUB");
       });
 
       apiRef.current.rootElementRef?.current?.style.setProperty(
@@ -448,10 +333,10 @@ export const useGridColumnResize = (
       updateProperty(refs.fillerRight, 'width', widthDiff);
 
       refs.rightPinnedCellsBefore.forEach((cell) => {
-        updateProperty(cell, 'right', widthDiff);
+          throw new Error("STUB");
       });
       refs.rightPinnedHeadersBefore.forEach((header) => {
-        updateProperty(header, 'right', widthDiff);
+          throw new Error("STUB");
       });
 
       apiRef.current.rootElementRef?.current?.style.setProperty(
@@ -493,23 +378,12 @@ export const useGridColumnResize = (
       // So we reapply the same logic as in https://github.com/mui/mui-x/blob/0511bf65543ca05d2602a5a3e0a6156f2fc8e759/packages/x-data-grid/src/hooks/features/columnHeaders/useGridColumnHeaders.tsx#L405
       const columnsState = gridColumnsStateSelector(apiRef);
       refs.groupHeaderElements!.forEach((element) => {
-        const fields = getFieldsFromGroupHeaderElem(element);
-        const div = element as HTMLDivElement;
-
-        const newWidth = fields.reduce((acc, field) => {
-          if (columnsState.columnVisibilityModel[field] !== false) {
-            return acc + columnsState.lookup[field].computedWidth;
-          }
-          return acc;
-        }, 0);
-        const finalWidth: `${number}px` = `${newWidth}px`;
-
-        div.style.width = finalWidth;
+          throw new Error("STUB");
       });
     }
 
     stopResizeEventTimeout.start(0, () => {
-      apiRef.current.publishEvent('columnResizeStop', null, nativeEvent);
+        throw new Error("STUB");
     });
   };
 
@@ -591,194 +465,44 @@ export const useGridColumnResize = (
   const handleResizeMouseUp = useEventCallback(finishResize);
 
   const handleResizeMouseMove = useEventCallback((nativeEvent: MouseEvent) => {
-    // Cancel move in case some other element consumed a mouseup event and it was not fired.
-    if (nativeEvent.buttons === 0) {
-      handleResizeMouseUp(nativeEvent);
-      return;
-    }
-
-    let newWidth = computeNewWidth(
-      initialOffsetToSeparator.current!,
-      nativeEvent.clientX,
-      refs.columnHeaderElement!.getBoundingClientRect(),
-      resizeDirection.current!,
-    );
-
-    newWidth = clamp(newWidth, refs.colDef!.minWidth!, refs.colDef!.maxWidth!);
-    updateWidth(newWidth);
-
-    const params: GridColumnResizeParams = {
-      element: refs.columnHeaderElement,
-      colDef: refs.colDef!,
-      width: newWidth,
-    };
-    apiRef.current.publishEvent('columnResize', params, nativeEvent);
+      throw new Error("STUB");
   });
 
   const handleTouchEnd = useEventCallback((nativeEvent: any) => {
-    const finger = trackFinger(nativeEvent, touchId.current);
-
-    if (!finger) {
-      return;
-    }
-
-    finishResize(nativeEvent);
+      throw new Error("STUB");
   });
 
   const handleTouchMove = useEventCallback((nativeEvent: any) => {
-    const finger = trackFinger(nativeEvent, touchId.current);
-    if (!finger) {
-      return;
-    }
-
-    // Cancel move in case some other element consumed a touchmove event and it was not fired.
-    if (nativeEvent.type === 'mousemove' && nativeEvent.buttons === 0) {
-      handleTouchEnd(nativeEvent);
-      return;
-    }
-
-    let newWidth = computeNewWidth(
-      initialOffsetToSeparator.current!,
-      (finger as CursorCoordinates).x,
-      refs.columnHeaderElement!.getBoundingClientRect(),
-      resizeDirection.current!,
-    );
-
-    newWidth = clamp(newWidth, refs.colDef!.minWidth!, refs.colDef!.maxWidth!);
-    updateWidth(newWidth);
-
-    const params: GridColumnResizeParams = {
-      element: refs.columnHeaderElement,
-      colDef: refs.colDef!,
-      width: newWidth,
-    };
-    apiRef.current.publishEvent('columnResize', params, nativeEvent);
+      throw new Error("STUB");
   });
 
   const handleTouchStart = useEventCallback((event: any) => {
-    const cellSeparator = findParentElementFromClassName(
-      event.target,
-      gridClasses['columnSeparator--resizable'],
-    ) as HTMLElement | null;
-    // Let the event bubble if the target is not a col separator
-    if (!cellSeparator) {
-      return;
-    }
-
-    const touch = event.changedTouches[0];
-    if (touch != null) {
-      // A number that uniquely identifies the current finger in the touch session.
-      touchId.current = touch.identifier;
-    }
-
-    const columnHeaderElement = findParentElementFromClassName(
-      event.target,
-      gridClasses.columnHeader,
-    ) as HTMLDivElement;
-    const field = getFieldFromHeaderElem(columnHeaderElement);
-    const colDef = apiRef.current.getColumn(field);
-    if (!colDef) {
-      return;
-    }
-
-    logger.debug(`Start Resize on col ${colDef.field}`);
-    apiRef.current.publishEvent('columnResizeStart', { field }, event);
-
-    storeReferences(colDef, cellSeparator, touch.clientX);
-
-    const doc = ownerDocument(event.currentTarget as HTMLElement);
-    doc.addEventListener('touchmove', handleTouchMove);
-    doc.addEventListener('touchend', handleTouchEnd);
+      throw new Error("STUB");
   });
 
   const stopListening = React.useCallback(() => {
-    const doc = ownerDocument(apiRef.current.rootElementRef!.current);
-    doc.body.style.removeProperty('cursor');
-    doc.removeEventListener('mousemove', handleResizeMouseMove);
-    doc.removeEventListener('mouseup', handleResizeMouseUp);
-    doc.removeEventListener('touchmove', handleTouchMove);
-    doc.removeEventListener('touchend', handleTouchEnd);
-    // The click event runs right after the mouseup event, we want to wait until it
-    // has been canceled before removing our handler.
-    setTimeout(() => {
-      doc.removeEventListener('click', preventClick, true);
-    }, 100);
-    if (refs.columnHeaderElement) {
-      refs.columnHeaderElement!.style.pointerEvents = 'unset';
-    }
+      throw new Error("STUB");
   }, [apiRef, refs, handleResizeMouseMove, handleResizeMouseUp, handleTouchMove, handleTouchEnd]);
 
   const handleResizeStart = React.useCallback<GridEventListener<'columnResizeStart'>>(
     ({ field }) => {
-      apiRef.current.setState((state) => ({
-        ...state,
-        columnResize: { ...state.columnResize, resizingColumnField: field },
-      }));
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
   const handleResizeStop = React.useCallback<GridEventListener<'columnResizeStop'>>(() => {
-    apiRef.current.setState((state) => ({
-      ...state,
-      columnResize: { ...state.columnResize, resizingColumnField: '' },
-    }));
+      throw new Error("STUB");
   }, [apiRef]);
 
   const handleColumnResizeMouseDown: GridEventListener<'columnSeparatorMouseDown'> =
     useEventCallback(({ colDef }, event) => {
-      // Only handle left clicks
-      if (event.button !== 0) {
-        return;
-      }
-
-      // Skip if the column isn't resizable
-      if (!event.currentTarget.classList.contains(gridClasses['columnSeparator--resizable'])) {
-        return;
-      }
-
-      // Avoid text selection
-      event.preventDefault();
-
-      logger.debug(`Start Resize on col ${colDef.field}`);
-      apiRef.current.publishEvent('columnResizeStart', { field: colDef.field }, event);
-
-      storeReferences(colDef, event.currentTarget, event.clientX);
-
-      const doc = ownerDocument(apiRef.current.rootElementRef!.current);
-      doc.body.style.cursor = 'col-resize';
-
-      refs.previousMouseClickEvent = event.nativeEvent;
-
-      doc.addEventListener('mousemove', handleResizeMouseMove);
-      doc.addEventListener('mouseup', handleResizeMouseUp);
-
-      // Prevent the click event if we have resized the column.
-      // Fixes https://github.com/mui/mui-x/issues/4777
-      doc.addEventListener('click', preventClick, true);
+        throw new Error("STUB");
     });
 
   const handleColumnSeparatorDoubleClick: GridEventListener<'columnSeparatorDoubleClick'> =
     useEventCallback((params, event) => {
-      if (props.disableAutosize) {
-        return;
-      }
-
-      // Only handle left clicks
-      if (event.button !== 0) {
-        return;
-      }
-
-      const column = apiRef.current.state.columns.lookup[params.field];
-      if (column.resizable === false) {
-        return;
-      }
-
-      apiRef.current.autosizeColumns({
-        ...props.autosizeOptions,
-        disableColumnVirtualization: false,
-        columns: [column.field],
-      });
+        throw new Error("STUB");
     });
 
   /**
@@ -789,83 +513,8 @@ export const useGridColumnResize = (
   const isAutosizingRef = React.useRef(false);
   const autosizeColumns = React.useCallback<GridColumnResizeApi['autosizeColumns']>(
     async (userOptions) => {
-      const root = apiRef.current.rootElementRef?.current;
-      if (!root) {
-        return;
-      }
-      if (isAutosizingRef.current) {
-        return;
-      }
-      isAutosizingRef.current = true;
-
-      const state = gridColumnsStateSelector(apiRef);
-      const options = {
-        ...DEFAULT_GRID_AUTOSIZE_OPTIONS,
-        ...userOptions,
-        columns: userOptions?.columns ?? state.orderedFields,
-      };
-      options.columns = options.columns.filter((c) => state.columnVisibilityModel[c] !== false);
-
-      const columns = options.columns.map((c) => apiRef.current.state.columns.lookup[c]);
-
-      try {
-        if (!props.disableVirtualization && options.disableColumnVirtualization) {
-          apiRef.current.unstable_setColumnVirtualization(false);
-          await columnVirtualizationDisabled();
-        }
-
-        const widthByField = extractColumnWidths(apiRef, options, columns);
-
-        const newColumns = columns.map((column) => ({
-          ...column,
-          width: widthByField[column.field],
-          computedWidth: widthByField[column.field],
-          flex: 0,
-        }));
-
-        if (options.expand) {
-          const visibleColumns = state.orderedFields
-            .map((field) => state.lookup[field])
-            .filter((c) => state.columnVisibilityModel[c.field] !== false);
-
-          const totalWidth = visibleColumns.reduce(
-            (total, column) =>
-              total + (widthByField[column.field] ?? column.computedWidth ?? column.width),
-            0,
-          );
-          const dimensions = apiRef.current.getRootDimensions();
-          const availableWidth = dimensions.viewportInnerSize.width;
-          const remainingWidth = availableWidth - totalWidth;
-
-          if (remainingWidth > 0) {
-            const widthPerColumn = remainingWidth / (newColumns.length || 1);
-            newColumns.forEach((column) => {
-              column.width += widthPerColumn;
-              column.computedWidth += widthPerColumn;
-            });
-          }
-        }
-
-        apiRef.current.updateColumns(newColumns);
-
-        newColumns.forEach((newColumn, index) => {
-          if (newColumn.width !== columns[index].width) {
-            const width = newColumn.width;
-            apiRef.current.publishEvent('columnWidthChange', {
-              element: apiRef.current.getColumnHeaderElement(newColumn.field),
-              colDef: newColumn,
-              width,
-            });
-          }
-        });
-      } finally {
-        if (!props.disableVirtualization) {
-          apiRef.current.unstable_setColumnVirtualization(true);
-        }
-
-        isAutosizingRef.current = false;
-      }
-    },
+          throw new Error("STUB");
+      },
     [apiRef, columnVirtualizationDisabled, props.disableVirtualization],
   );
 
@@ -873,61 +522,15 @@ export const useGridColumnResize = (
    * EFFECTS
    */
 
-  React.useEffect(() => stopListening, [stopListening]);
+  React.useEffect(() => { throw new Error("STUB"); }, [stopListening]);
 
   useOnMount(() => {
-    if (props.autosizeOnMount) {
-      let frameHandle: number | undefined;
-      let unsubscribeStateChange: (() => void) | undefined;
-      let unsubscribeRenderedRowsIntervalChange: (() => void) | undefined;
-
-      const cleanupListeners = () => {
-        unsubscribeStateChange?.();
-        unsubscribeRenderedRowsIntervalChange?.();
-        unsubscribeStateChange = undefined;
-        unsubscribeRenderedRowsIntervalChange = undefined;
-      };
-
-      const runAutosize = () => {
-        frameHandle = undefined;
-        cleanupListeners();
-        apiRef.current.autosizeColumns(props.autosizeOptions);
-      };
-
-      const scheduleAutosize = () => {
-        if (frameHandle === undefined) {
-          frameHandle = requestAnimationFrame(runAutosize);
-        }
-      };
-
-      const checkRenderContext = () => {
-        if (isRenderContextReadyForAutosizeOnMount(apiRef)) {
-          scheduleAutosize();
-        }
-      };
-
-      unsubscribeStateChange = apiRef.current.subscribeEvent('stateChange', checkRenderContext);
-      unsubscribeRenderedRowsIntervalChange = apiRef.current.subscribeEvent(
-        'renderedRowsIntervalChange',
-        checkRenderContext,
-      );
-
-      checkRenderContext();
-
-      return () => {
-        cleanupListeners();
-        if (frameHandle !== undefined) {
-          cancelAnimationFrame(frameHandle);
-        }
-      };
-    }
-
-    return undefined;
+      throw new Error("STUB");
   });
 
   useGridNativeEventListener(
     apiRef,
-    () => apiRef.current.columnHeadersContainerRef?.current,
+    () => { throw new Error("STUB"); },
     'touchstart',
     handleTouchStart,
     { passive: true },
@@ -947,13 +550,7 @@ export const useGridColumnResize = (
   useGridEvent(apiRef, 'columnSeparatorDoubleClick', handleColumnSeparatorDoubleClick);
 
   useGridEvent(apiRef, 'rowsSet', () => {
-    // if the user is still resizing the column, update the cell references included in the resize action
-    if (gridResizingColumnFieldSelector(apiRef) !== '') {
-      // wait until the rows are in the DOM
-      requestAnimationFrame(() => {
-        setCellElementsRef();
-      });
-    }
+      throw new Error("STUB");
   });
 
   useGridEventPriority(apiRef, 'columnResize', props.onColumnResize);

@@ -16,9 +16,8 @@ function getSeriesToDisplay(
 ) {
   return (Object.keys(series) as ChartSeriesType[]).flatMap(
     <SeriesType extends ChartSeriesType>(seriesType: SeriesType) => {
-      const getter = seriesConfig[seriesType as SeriesType].legendGetter;
-      return getter === undefined ? [] : getter(series[seriesType as SeriesType]!);
-    },
+          throw new Error("STUB");
+      },
   );
 }
 

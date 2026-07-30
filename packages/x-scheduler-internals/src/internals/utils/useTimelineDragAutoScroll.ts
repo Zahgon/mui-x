@@ -24,32 +24,6 @@ export function useTimelineDragAutoScroll(params: {
   pinnedLeftWidthRef.current = pinnedLeftWidth;
 
   React.useEffect(() => {
-    const scroller = scrollerRef.current;
-    // The library warns when attached to a non-scrollable element, which is what
-    // jsdom reports because it doesn't lay out. Matches CalendarGridTimeScrollableContent.
-    if (!scroller || process.env.NODE_ENV === 'test') {
-      return undefined;
-    }
-
-    const nativeGetBoundingClientRect =
-      Object.getOwnPropertyDescriptor(Element.prototype, 'getBoundingClientRect')?.value ??
-      Element.prototype.getBoundingClientRect;
-    scroller.getBoundingClientRect = function shiftedGetBoundingClientRect() {
-      const rect = nativeGetBoundingClientRect.call(this);
-      const shift = pinnedLeftWidthRef.current;
-      return DOMRect.fromRect({
-        x: rect.x + shift,
-        y: rect.y,
-        width: Math.max(0, rect.width - shift),
-        height: rect.height,
-      });
-    };
-
-    const cleanupAutoScroll = autoScrollForElements({ element: scroller });
-
-    return () => {
-      cleanupAutoScroll();
-      delete (scroller as Partial<HTMLElement>).getBoundingClientRect;
-    };
+      throw new Error("STUB");
   }, [scrollerRef]);
 }

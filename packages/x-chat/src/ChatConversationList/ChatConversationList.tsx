@@ -53,38 +53,14 @@ export interface ChatConversationListProps extends ConversationListRootProps {
 const ChatConversationListStyled = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  padding: theme.spacing(0.5, 0),
-  listStyle: 'none',
-  margin: 0,
-  width: '100%',
-  boxSizing: 'border-box',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConversationListScrollerStyled = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'Scroller',
-  overridesResolver: (_, styles) => styles.scroller,
-})(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  borderRight: '1px solid',
-  borderRightColor: (theme.vars || theme).palette.divider,
-  backgroundColor: (theme.vars || theme).palette.background.paper,
-  width: '100%',
-  height: '100%',
-  overflow: 'hidden',
-  flexShrink: 0,
-  // Conversation-list visibility is driven by `ChatBox`'s JS layout: in narrow
-  // (auto) modes it renders a drawer instead of the inline sidebar, and the
-  // headless `ConversationListRoot` pins an inline `display: flex` on this
-  // scroller. A width-based `@container { display: none }` here could never win
-  // against that inline style and would only bite forced `layoutMode="standard"`
-  // (where the sidebar must stay visible), so the scroller carries no such hide.
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 // Plain-div viewport: the scroller above is a regular div (not ScrollArea.Root),
 // so we must also replace the viewport slot to avoid rendering ScrollArea.Viewport
@@ -92,20 +68,13 @@ const ChatConversationListScrollerStyled = styled('div', {
 const ChatConversationListViewportStyled = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'Viewport',
-  overridesResolver: (_, styles) => styles.viewport,
-})(() => ({
-  flex: 1,
-  overflow: 'auto',
-  overscrollBehavior: 'contain',
-  display: 'flex',
-  flexDirection: 'column',
-  minHeight: 0,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(() => { throw new Error("STUB"); });
 
 // No-op scrollbar: native overflow on the viewport above handles scrolling,
 // so we don't need the Base UI ScrollArea.Scrollbar / Thumb components.
 const NoopScrollbar = React.forwardRef<HTMLDivElement>(function NoopScrollbar() {
-  return null;
+    throw new Error("STUB");
 });
 
 // Props forwarded by ConversationListRenderedItem as additionalProps to every item slot.
@@ -114,23 +83,13 @@ const NoopScrollbar = React.forwardRef<HTMLDivElement>(function NoopScrollbar() 
 // must also explicitly exclude 'ownerState', 'theme', 'sx', and 'as' here.
 
 const itemSlotShouldForwardProp = (prop: string) =>
-  ![
-    'conversation',
-    'selected',
-    'unread',
-    'focused',
-    'variant',
-    'ownerState',
-    'theme',
-    'sx',
-    'as',
-  ].includes(prop);
+  { throw new Error("STUB"); };
 
 const ChatConversationListItemStyled = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'Item',
   shouldForwardProp: itemSlotShouldForwardProp,
-  overridesResolver: (_, styles) => styles.item,
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
 })<{
   ownerState?: {
     selected?: boolean;
@@ -138,44 +97,7 @@ const ChatConversationListItemStyled = styled('div', {
     focused?: boolean;
     variant?: ConversationListVariant;
   };
-}>(({ theme, ownerState }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1.5),
-  padding: theme.spacing(1, 2),
-  cursor: 'pointer',
-  outline: 'none',
-  borderRadius: 0,
-  transition: theme.transitions.create('background-color', {
-    duration: theme.transitions.duration.shortest,
-  }),
-  '@media (prefers-reduced-motion: reduce)': {
-    transition: 'none',
-  },
-  backgroundColor: ownerState?.selected
-    ? (theme.vars || theme).palette.action.selected
-    : 'transparent',
-  '&:hover': {
-    backgroundColor: ownerState?.selected
-      ? (theme.vars || theme).palette.action.selected
-      : (theme.vars || theme).palette.action.hover,
-  },
-  '&:focus-visible': {
-    outline: `2px solid ${(theme.vars || theme).palette.primary.main}`,
-    outlineOffset: -2,
-  },
-  ...(ownerState?.variant === 'compact' && {
-    gap: theme.spacing(1),
-    padding: theme.spacing(0.75, 1.5),
-    borderRadius: theme.shape.borderRadius,
-    '&:hover .MuiChatConversationList-itemActions': {
-      opacity: 1,
-    },
-    '&:focus-within .MuiChatConversationList-itemActions': {
-      opacity: 1,
-    },
-  }),
-}));
+}>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 // ---------------------------------------------------------------------------
 // Styled inner roots — pure styling, no rendering logic.
@@ -186,114 +108,43 @@ const ChatConversationListItemAvatarRoot = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'ItemAvatar',
   shouldForwardProp: itemSlotShouldForwardProp,
-  overridesResolver: (_, styles) => styles.itemAvatar,
-})(({ theme }) => ({
-  width: 40,
-  height: 40,
-  borderRadius: '50%',
-  flexShrink: 0,
-  backgroundColor: (theme.vars || theme).palette.grey[300],
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  overflow: 'hidden',
-  fontSize: theme.typography.body2.fontSize,
-  fontWeight: theme.typography.fontWeightMedium,
-  color: (theme.vars || theme).palette.text.secondary,
-  '& img': {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConversationListItemContentRoot = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'ItemContent',
   shouldForwardProp: itemSlotShouldForwardProp,
-  overridesResolver: (_, styles) => styles.itemContent,
-})(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  minWidth: 0,
-  flex: 1,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(() => { throw new Error("STUB"); });
 
 const ChatConversationListTitleRoot = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'ItemTitle',
   shouldForwardProp: itemSlotShouldForwardProp,
-  overridesResolver: (_, styles) => styles.itemTitle,
-})<{ ownerState?: { unread?: boolean } }>(({ theme, ownerState }) => ({
-  fontSize: theme.typography.body2.fontSize,
-  fontWeight: ownerState?.unread
-    ? theme.typography.fontWeightBold
-    : theme.typography.fontWeightMedium,
-  color: (theme.vars || theme).palette.text.primary,
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  lineHeight: 1.4,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})<{ ownerState?: { unread?: boolean } }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 const ChatConversationListPreviewRoot = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'ItemPreview',
   shouldForwardProp: itemSlotShouldForwardProp,
-  overridesResolver: (_, styles) => styles.itemPreview,
-})(({ theme }) => ({
-  fontSize: theme.typography.caption.fontSize,
-  color: (theme.vars || theme).palette.text.secondary,
-  overflow: 'hidden',
-  textOverflow: 'ellipsis',
-  whiteSpace: 'nowrap',
-  lineHeight: 1.4,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConversationListTimestampRoot = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'ItemTimestamp',
   shouldForwardProp: itemSlotShouldForwardProp,
-  overridesResolver: (_, styles) => styles.itemTimestamp,
-})(({ theme }) => ({
-  fontSize: theme.typography.caption.fontSize,
-  color: (theme.vars || theme).palette.text.disabled,
-  flexShrink: 0,
-  alignSelf: 'flex-start',
-  paddingTop: '2px',
-  whiteSpace: 'nowrap',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatConversationListUnreadBadgeRoot = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'ItemUnreadBadge',
   shouldForwardProp: itemSlotShouldForwardProp,
-  overridesResolver: (_, styles) => styles.itemUnreadBadge,
-})<{ ownerState?: { variant?: ConversationListVariant } }>(({ theme, ownerState }) => ({
-  minWidth: 18,
-  height: 18,
-  borderRadius: 9,
-  backgroundColor: (theme.vars || theme).palette.primary.main,
-  color: (theme.vars || theme).palette.primary.contrastText,
-  fontSize: '0.65rem',
-  fontWeight: theme.typography.fontWeightBold,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  padding: theme.spacing(0, 0.5),
-  flexShrink: 0,
-  alignSelf: 'center',
-  lineHeight: 1,
-  ...(ownerState?.variant === 'compact' && {
-    minWidth: 8,
-    width: 8,
-    height: 8,
-    borderRadius: '50%',
-    padding: 0,
-    fontSize: 0,
-    overflow: 'hidden',
-  }),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})<{ ownerState?: { variant?: ConversationListVariant } }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 // ---------------------------------------------------------------------------
 // Item actions — only rendered in the compact variant, revealed on hover/focus.
@@ -303,24 +154,8 @@ const ChatConversationListItemActionsRoot = styled('div', {
   name: 'MuiChatConversationList',
   slot: 'ItemActions',
   shouldForwardProp: itemSlotShouldForwardProp,
-  overridesResolver: (_, styles) => styles.itemActions,
-})<{ ownerState?: { variant?: ConversationListVariant } }>(({ theme, ownerState }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  flexShrink: 0,
-  ...(ownerState?.variant === 'compact' && {
-    opacity: 0,
-    transition: theme.transitions.create('opacity', {
-      duration: theme.transitions.duration.shortest,
-    }),
-    '@media (prefers-reduced-motion: reduce)': {
-      transition: 'none',
-    },
-    '&:focus-within': {
-      opacity: 1,
-    },
-  }),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})<{ ownerState?: { variant?: ConversationListVariant } }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 // ---------------------------------------------------------------------------
 // Wrapper slot components — keep the unstyled rendering logic, inject the
@@ -333,8 +168,8 @@ const ChatConversationListItemActionsRoot = styled('div', {
 // runtime, so we just spread them through.
 const ChatConversationListItemSlot = React.forwardRef<HTMLDivElement, ConversationListItemProps>(
   function ChatConversationListItemSlot(props, ref) {
-    return <ChatConversationListItemStyled ref={ref} {...props} />;
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatConversationListItemSlot.propTypes /* remove-proptypes */ = {
@@ -374,13 +209,7 @@ const ChatConversationListItemAvatarStyled = React.forwardRef<
   HTMLDivElement,
   ConversationListItemAvatarProps
 >(function ChatConversationListItemAvatarStyled(props, ref) {
-  return (
-    <ConversationListItemAvatar
-      ref={ref}
-      {...props}
-      slots={{ root: ChatConversationListItemAvatarRoot, ...props.slots }}
-    />
-  );
+    throw new Error("STUB");
 });
 
 ChatConversationListItemAvatarStyled.propTypes /* remove-proptypes */ = {
@@ -419,13 +248,7 @@ const ChatConversationListItemContentStyled = React.forwardRef<
   HTMLDivElement,
   ConversationListItemContentProps
 >(function ChatConversationListItemContentStyled(props, ref) {
-  return (
-    <ConversationListItemContent
-      ref={ref}
-      {...props}
-      slots={{ root: ChatConversationListItemContentRoot, ...props.slots }}
-    />
-  );
+    throw new Error("STUB");
 });
 
 ChatConversationListItemContentStyled.propTypes /* remove-proptypes */ = {
@@ -464,13 +287,7 @@ const ChatConversationListTitleStyled = React.forwardRef<
   HTMLDivElement,
   ConversationListTitleProps
 >(function ChatConversationListTitleStyled(props, ref) {
-  return (
-    <ConversationListTitle
-      ref={ref}
-      {...props}
-      slots={{ root: ChatConversationListTitleRoot, ...props.slots }}
-    />
-  );
+    throw new Error("STUB");
 });
 
 ChatConversationListTitleStyled.propTypes /* remove-proptypes */ = {
@@ -509,13 +326,7 @@ const ChatConversationListPreviewStyled = React.forwardRef<
   HTMLDivElement,
   ConversationListPreviewProps
 >(function ChatConversationListPreviewStyled(props, ref) {
-  return (
-    <ConversationListPreview
-      ref={ref}
-      {...props}
-      slots={{ root: ChatConversationListPreviewRoot, ...props.slots }}
-    />
-  );
+    throw new Error("STUB");
 });
 
 ChatConversationListPreviewStyled.propTypes /* remove-proptypes */ = {
@@ -554,13 +365,7 @@ const ChatConversationListTimestampStyled = React.forwardRef<
   HTMLDivElement,
   ConversationListTimestampProps
 >(function ChatConversationListTimestampStyled(props, ref) {
-  return (
-    <ConversationListTimestamp
-      ref={ref}
-      {...props}
-      slots={{ root: ChatConversationListTimestampRoot, ...props.slots }}
-    />
-  );
+    throw new Error("STUB");
 });
 
 ChatConversationListTimestampStyled.propTypes /* remove-proptypes */ = {
@@ -599,13 +404,7 @@ const ChatConversationListUnreadBadgeStyled = React.forwardRef<
   HTMLDivElement,
   ConversationListUnreadBadgeProps
 >(function ChatConversationListUnreadBadgeStyled(props, ref) {
-  return (
-    <ConversationListUnreadBadge
-      ref={ref}
-      {...props}
-      slots={{ root: ChatConversationListUnreadBadgeRoot, ...props.slots }}
-    />
-  );
+    throw new Error("STUB");
 });
 
 // Default inline SVG for the 3-dot "more" icon (MoreHoriz style).
@@ -643,28 +442,14 @@ ChatConversationListUnreadBadgeStyled.propTypes /* remove-proptypes */ = {
 } as any;
 
 function DefaultMoreIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <circle cx="6" cy="12" r="2" />
-      <circle cx="12" cy="12" r="2" />
-      <circle cx="18" cy="12" r="2" />
-    </svg>
-  );
+    throw new Error("STUB");
 }
 
 const ChatConversationListItemActionsStyled = React.forwardRef<
   HTMLDivElement,
   ConversationListItemActionsProps
 >(function ChatConversationListItemActionsStyled(props, ref) {
-  return (
-    <ConversationListItemActions
-      ref={ref}
-      {...props}
-      slots={{ root: ChatConversationListItemActionsRoot, ...props.slots }}
-    >
-      {props.children ?? <DefaultMoreIcon />}
-    </ConversationListItemActions>
-  );
+    throw new Error("STUB");
 });
 
 ChatConversationListItemActionsStyled.propTypes /* remove-proptypes */ = {
@@ -701,100 +486,8 @@ ChatConversationListItemActionsStyled.propTypes /* remove-proptypes */ = {
 
 const ChatConversationList = React.forwardRef<HTMLDivElement, ChatConversationListProps>(
   function ChatConversationList(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatConversationList' });
-    const {
-      variant = 'default',
-      slots,
-      slotProps,
-      className,
-      classes: classesProp,
-      sx,
-      ...other
-    } = props;
-    const classes = useChatConversationListUtilityClasses(classesProp);
-    const isCompact = variant === 'compact';
-
-    const resolvedSlots: Partial<ConversationListRootSlots> = {
-      ...slots,
-      root: slots?.root ?? ChatConversationListStyled,
-      scroller: slots?.scroller ?? ChatConversationListScrollerStyled,
-      viewport: slots?.viewport ?? ChatConversationListViewportStyled,
-      scrollbar: slots?.scrollbar ?? NoopScrollbar,
-      scrollbarThumb: slots?.scrollbarThumb ?? NoopScrollbar,
-      item: slots?.item ?? ChatConversationListItemSlot,
-      itemAvatar: slots?.itemAvatar ?? ChatConversationListItemAvatarStyled,
-      itemContent: slots?.itemContent ?? ChatConversationListItemContentStyled,
-      title: slots?.title ?? ChatConversationListTitleStyled,
-      preview: slots?.preview ?? ChatConversationListPreviewStyled,
-      timestamp: slots?.timestamp ?? ChatConversationListTimestampStyled,
-      unreadBadge: slots?.unreadBadge ?? ChatConversationListUnreadBadgeStyled,
-      itemActions: slots?.itemActions ?? ChatConversationListItemActionsStyled,
-    };
-
-    // The headless `root` slot is typed as `SlotComponentProps<'div', ...>`,
-    // which intentionally does NOT include `sx`. We funnel `sx` to the styled
-    // root via a localized assertion — strictly typing the rest of the slot
-    // wiring still catches signature drift.
-    const rootSlotProps = mergeSlotProps(
-      {
-        className: clsx(classes.root, isCompact && classes.compact, className),
-        sx,
-      },
-      slotProps?.root,
-    ) as unknown as ConversationListRootSlotProps['root'];
-
-    const resolvedSlotProps: ConversationListRootSlotProps = {
-      ...slotProps,
-      root: rootSlotProps,
-      scroller: mergeSlotProps({ className: classes.scroller }, slotProps?.scroller) as any,
-      item: (ownerState: ConversationListItemOwnerState) => {
-        // `resolveComponentProps` types its return as `T | undefined`, but `mergeSlotProps`
-        // never returns `undefined` here, so `?? {}` only satisfies the type.
-        return (
-          resolveComponentProps(
-            mergeSlotProps(
-              {
-                className: clsx(
-                  classes.item,
-                  ownerState.selected && classes.itemSelected,
-                  ownerState.unread && classes.itemUnread,
-                  ownerState.focused && classes.itemFocused,
-                ),
-              },
-              slotProps?.item,
-            ),
-            ownerState,
-          ) ?? {}
-        );
-      },
-      itemAvatar: mergeSlotProps({ className: classes.itemAvatar }, slotProps?.itemAvatar) as any,
-      itemContent: mergeSlotProps(
-        { className: classes.itemContent },
-        slotProps?.itemContent,
-      ) as any,
-      title: mergeSlotProps({ className: classes.itemTitle }, slotProps?.title) as any,
-      preview: mergeSlotProps({ className: classes.itemPreview }, slotProps?.preview) as any,
-      timestamp: mergeSlotProps({ className: classes.itemTimestamp }, slotProps?.timestamp) as any,
-      unreadBadge: mergeSlotProps(
-        { className: classes.itemUnreadBadge },
-        slotProps?.unreadBadge,
-      ) as any,
-      itemActions: mergeSlotProps(
-        { className: classes.itemActions },
-        slotProps?.itemActions,
-      ) as any,
-    };
-
-    return (
-      <ConversationListRoot
-        ref={ref}
-        variant={variant}
-        {...other}
-        slots={resolvedSlots}
-        slotProps={resolvedSlotProps}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatConversationList.propTypes /* remove-proptypes */ = {

@@ -17,62 +17,8 @@ export const CalendarGridCurrentTimeIndicator = React.forwardRef(
     componentProps: CalendarGridCurrentTimeIndicator.Props,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ) {
-    const adapter = useAdapterContext();
-
-    const {
-      // Rendering props
-      className,
-      render,
-      style,
-      // Props forwarded to the DOM element
-      ...elementProps
-    } = componentProps;
-
-    const {
-      start: columnStart,
-      end: columnEnd,
-      dayStartMinute,
-      dayEndMinute,
-    } = useCalendarGridTimeColumnContext();
-    const store = useEventCalendarStoreContext();
-    const now = useStore(store, schedulerNowSelectors.nowUpdatedEveryMinute);
-
-    const nowForColumn = React.useMemo(
-      () => processDate(mergeDateAndTime(adapter, columnStart, now), adapter),
-      [adapter, columnStart, now],
-    );
-
-    const endForCalc = React.useMemo(
-      () => processDate(adapter.addMinutes(nowForColumn.value, 1), adapter),
-      [adapter, nowForColumn],
-    );
-
-    const { position } = useElementPositionInCollection({
-      start: nowForColumn,
-      end: endForCalc,
-      collectionStart: columnStart,
-      collectionEnd: columnEnd,
-      dayStartMinute,
-      dayEndMinute,
-    });
-
-    const isOutOfRange =
-      adapter.isBefore(nowForColumn.value, columnStart) ||
-      adapter.isAfter(nowForColumn.value, columnEnd);
-
-    return useRenderElement('div', componentProps, {
-      ref: [forwardedRef],
-      props: [
-        elementProps,
-        {
-          style: {
-            [CalendarGridCurrentTimeIndicatorCssVars.yPosition]: `${position * 100}%`,
-          } as React.CSSProperties,
-        },
-      ],
-      enabled: !isOutOfRange,
-    });
-  },
+        throw new Error("STUB");
+    },
 );
 
 export namespace CalendarGridCurrentTimeIndicator {

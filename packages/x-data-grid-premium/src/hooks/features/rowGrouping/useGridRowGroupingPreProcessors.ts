@@ -56,55 +56,8 @@ export const useGridRowGroupingPreProcessors = (
 ) => {
   const getGroupingColDefs = React.useCallback(
     (columnsState: GridHydrateColumnsValue) => {
-      if (props.disableRowGrouping) {
-        return [];
-      }
-
-      const strategy = props.dataSource
-        ? RowGroupingStrategy.DataSource
-        : RowGroupingStrategy.Default;
-
-      const groupingColDefProp = props.groupingColDef;
-
-      // We can't use `gridGroupingRowsSanitizedModelSelector` here because the new columns are not in the state yet
-      const rowGroupingModel = gridRowGroupingModelSelector(apiRef).filter(
-        (field) => !!columnsState.lookup[field],
-      );
-
-      if (rowGroupingModel.length === 0) {
-        return [];
-      }
-
-      switch (props.rowGroupingColumnMode) {
-        case 'single': {
-          return [
-            createGroupingColDefForAllGroupingCriteria({
-              apiRef,
-              rowGroupingModel,
-              colDefOverride: getColDefOverrides(groupingColDefProp, rowGroupingModel, strategy),
-              columnsLookup: columnsState.lookup,
-              strategy,
-            }),
-          ];
-        }
-
-        case 'multiple': {
-          return rowGroupingModel.map((groupingCriteria) =>
-            createGroupingColDefForOneGroupingCriteria({
-              groupingCriteria,
-              colDefOverride: getColDefOverrides(groupingColDefProp, [groupingCriteria]),
-              groupedByColDef: columnsState.lookup[groupingCriteria],
-              columnsLookup: columnsState.lookup,
-              strategy,
-            }),
-          );
-        }
-
-        default: {
-          return [];
-        }
-      }
-    },
+          throw new Error("STUB");
+      },
     [
       apiRef,
       props.groupingColDef,
@@ -116,125 +69,29 @@ export const useGridRowGroupingPreProcessors = (
 
   const updateGroupingColumn = React.useCallback<GridPipeProcessor<'hydrateColumns'>>(
     (columnsState) => {
-      const groupingColDefs = getGroupingColDefs(columnsState);
-      let newColumnFields: string[] = [];
-      const newColumnsLookup: GridColumnRawLookup = {};
-
-      // We only keep the non-grouping columns
-      columnsState.orderedFields.forEach((field) => {
-        if (!isGroupingColumn(field)) {
-          newColumnFields.push(field);
-          newColumnsLookup[field] = columnsState.lookup[field];
-        }
-      });
-
-      // We add the grouping column
-      groupingColDefs.forEach((groupingColDef) => {
-        const matchingGroupingColDef = columnsState.lookup[groupingColDef.field];
-        if (matchingGroupingColDef) {
-          groupingColDef.width = matchingGroupingColDef.width;
-          groupingColDef.flex = matchingGroupingColDef.flex;
-        }
-
-        newColumnsLookup[groupingColDef.field] = groupingColDef;
-      });
-
-      newColumnFields = [...groupingColDefs.map((colDef) => colDef.field), ...newColumnFields];
-
-      columnsState.orderedFields = newColumnFields;
-      columnsState.lookup = newColumnsLookup;
-
-      return columnsState;
-    },
+          throw new Error("STUB");
+      },
     [getGroupingColDefs],
   );
 
   const createRowTreeForRowGrouping = React.useCallback<GridStrategyProcessor<'rowTreeCreation'>>(
     (params) => {
-      const sanitizedRowGroupingModel = gridRowGroupingSanitizedModelSelector(apiRef);
-      const columnsLookup = gridColumnLookupSelector(apiRef);
-      const groupingRules = getGroupingRules({
-        sanitizedRowGroupingModel,
-        columnsLookup,
-      });
-      apiRef.current.caches.rowGrouping.rulesOnLastRowTreeCreation = groupingRules;
-
-      const getRowTreeBuilderNode = (rowId: GridRowId) => {
-        const row = params.dataRowIdToModelLookup[rowId];
-        const parentPath = groupingRules
-          .map((groupingRule) =>
-            getCellGroupingCriteria({
-              row,
-              groupingRule,
-              colDef: columnsLookup[groupingRule.field],
-              apiRef,
-            }),
-          )
-          .filter((cell) => cell.key != null) as RowTreeBuilderGroupingCriterion[];
-
-        const leafGroupingCriteria: RowTreeBuilderGroupingCriterion = {
-          key: rowId.toString(),
-          field: null,
-        };
-
-        return {
-          path: [...parentPath, leafGroupingCriteria],
-          id: rowId,
-        };
-      };
-
-      if (params.updates.type === 'full') {
-        return createRowTree({
-          previousTree: params.previousTree,
-          nodes: params.updates.rows.map(getRowTreeBuilderNode),
-          defaultGroupingExpansionDepth: props.defaultGroupingExpansionDepth,
-          isGroupExpandedByDefault: props.isGroupExpandedByDefault,
-          groupingName: RowGroupingStrategy.Default,
-        });
-      }
-
-      return updateRowTree({
-        nodes: {
-          inserted: params.updates.actions.insert.map(getRowTreeBuilderNode),
-          modified: params.updates.actions.modify.map(getRowTreeBuilderNode),
-          removed: params.updates.actions.remove,
-        },
-        previousTree: params.previousTree!,
-        previousTreeDepth: params.previousTreeDepths!,
-        defaultGroupingExpansionDepth: props.defaultGroupingExpansionDepth,
-        isGroupExpandedByDefault: props.isGroupExpandedByDefault,
-        groupingName: RowGroupingStrategy.Default,
-      });
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.defaultGroupingExpansionDepth, props.isGroupExpandedByDefault],
   );
 
   const filterRows = React.useCallback<GridStrategyProcessor<'filtering'>>(
     (params) => {
-      const rowTree = gridRowTreeSelector(apiRef);
-
-      return filterRowTreeFromGroupingColumns({
-        rowTree,
-        isRowMatchingFilters: params.isRowMatchingFilters,
-        filterModel: params.filterModel,
-        filterValueGetter: params.filterValueGetter,
-        apiRef,
-      });
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
   const sortRows = React.useCallback<GridStrategyProcessor<'sorting'>>(
     (params) => {
-      const rowTree = gridRowTreeSelector(apiRef);
-
-      return sortRowTree({
-        rowTree,
-        sortRowList: params.sortRowList,
-        disableChildrenSorting: false,
-        shouldRenderGroupBelowLeaves: true,
-      });
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
@@ -255,15 +112,11 @@ export const useGridRowGroupingPreProcessors = (
   );
 
   useFirstRender(() => {
-    setStrategyAvailability(apiRef, props.disableRowGrouping, props.dataSource);
+      throw new Error("STUB");
   });
 
   const isFirstRender = React.useRef(true);
   React.useEffect(() => {
-    if (!isFirstRender.current) {
-      setStrategyAvailability(apiRef, props.disableRowGrouping, props.dataSource);
-    } else {
-      isFirstRender.current = false;
-    }
+      throw new Error("STUB");
   }, [apiRef, props.disableRowGrouping, props.dataSource]);
 };

@@ -38,23 +38,17 @@ function GridFilterInputMultipleMultiSelect(props: GridFilterInputMultipleMultiS
   const getOptionLabel = resolvedColumn!.getOptionLabel!;
 
   const resolvedValueOptions = React.useMemo(() => {
-    return getValueOptions(resolvedColumn!) || [];
+      throw new Error("STUB");
   }, [resolvedColumn]);
 
   const filterValues = React.useMemo(() => {
-    if (!Array.isArray(item.value)) {
-      return [];
-    }
-    return item.value.filter((val: any) =>
-      resolvedValueOptions.some((option) => getOptionValue(option) === val),
-    );
+      throw new Error("STUB");
   }, [getOptionValue, item.value, resolvedValueOptions]);
 
   const handleChange = React.useCallback(
     (event: React.ChangeEvent<{ value: unknown }>) => {
-      const value = event.target.value;
-      applyValue({ ...item, value: typeof value === 'string' ? value.split(',') : value });
-    },
+          throw new Error("STUB");
+      },
     [applyValue, item],
   );
 
@@ -75,12 +69,7 @@ function GridFilterInputMultipleMultiSelect(props: GridFilterInputMultipleMultiS
         value={filterValues}
         onChange={handleChange as any}
         renderValue={(selected: any[]) =>
-          selected
-            .map((val) => {
-              const option = resolvedValueOptions.find((opt) => getOptionValue(opt) === val);
-              return option ? getOptionLabel(option) : val;
-            })
-            .join(', ')
+          { throw new Error("STUB"); }
         }
         slotProps={{
           htmlInput: {
@@ -94,17 +83,7 @@ function GridFilterInputMultipleMultiSelect(props: GridFilterInputMultipleMultiS
         {...slotProps?.root}
       >
         {resolvedValueOptions.map((option) => {
-          const value = getOptionValue(option);
-          return (
-            <rootProps.slots.baseSelectOption
-              {...rootProps.slotProps?.baseSelectOption}
-              native={false}
-              key={value}
-              value={value}
-            >
-              {getOptionLabel(option)}
-            </rootProps.slots.baseSelectOption>
-          );
+            throw new Error("STUB");
         })}
       </rootProps.slots.baseSelect>
       {headerFilterMenu}
@@ -139,14 +118,8 @@ GridFilterInputMultipleMultiSelect.propTypes /* remove-proptypes */ = {
     PropTypes.func,
     PropTypes.shape({
       current: (props, propName) => {
-        if (props[propName] == null) {
-          return null;
-        }
-        if (typeof props[propName] !== 'object' || props[propName].nodeType !== 1) {
-          return new Error(`Expected prop '${propName}' to be of type Element`);
-        }
-        return null;
-      },
+            throw new Error("STUB");
+        },
     }),
   ]),
   /**

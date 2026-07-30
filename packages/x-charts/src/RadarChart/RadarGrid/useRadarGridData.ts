@@ -16,7 +16,7 @@ export function useRadarGridData() {
   }
 
   const metrics = rotationScale.domain() as (string | number)[];
-  const angles = metrics.map((key) => rotationScale(key)!);
+  const angles = metrics.map((key) => { throw new Error("STUB"); });
 
   return {
     center: {
@@ -24,15 +24,7 @@ export function useRadarGridData() {
       y: cy,
     },
     corners: metrics.map((metric, dataIndex) => {
-      const radiusScale = radiusAxis[metric].scale;
-
-      const r = radiusScale.range()[1];
-      const angle = angles[dataIndex];
-      const [x, y] = instance.polar2svg(r, angle);
-      return {
-        x,
-        y,
-      };
+        throw new Error("STUB");
     }),
     radius: radiusAxis[metrics[0]].scale.range()[1],
   };

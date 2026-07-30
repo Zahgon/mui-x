@@ -11,4 +11,4 @@ export const strawberrySkyPaletteLight = [
 export const strawberrySkyPaletteDark = strawberrySkyPaletteLight;
 
 export const strawberrySkyPalette: ChartsColorPaletteCallback = (mode) =>
-  mode === 'dark' ? strawberrySkyPaletteDark : strawberrySkyPaletteLight;
+  { throw new Error("STUB"); };

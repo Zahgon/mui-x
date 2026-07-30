@@ -21,7 +21,7 @@ export interface PickersLayoutClasses {
 export type PickersLayoutClassKey = keyof PickersLayoutClasses;
 
 export function getPickersLayoutUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickersLayout', slot);
+    throw new Error("STUB");
 }
 
 export const pickersLayoutClasses = generateUtilityClasses<PickersLayoutClassKey>(

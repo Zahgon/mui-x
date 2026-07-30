@@ -36,23 +36,7 @@ const ChartsToolbarImageExportTrigger = forwardRef<
   HTMLButtonElement,
   ChartsToolbarImageExportTriggerProps
 >(function ChartsToolbarImageExportTrigger(props, ref) {
-  const { render, options, onClick, ...other } = props;
-  const { slots, slotProps } = useChartsSlots<ChartsSlotsPro>();
-  const apiRef = useChartProApiContext();
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    apiRef.current.exportAsImage(options);
-    onClick?.(event);
-  };
-
-  const element = useComponentRenderer(slots.baseButton, render, {
-    ...slotProps?.baseButton,
-    onClick: handleClick,
-    ...other,
-    ref,
-  });
-
-  return <React.Fragment>{element}</React.Fragment>;
+    throw new Error("STUB");
 });
 
 ChartsToolbarImageExportTrigger.propTypes /* remove-proptypes */ = {

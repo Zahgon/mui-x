@@ -10,7 +10,7 @@ export interface ChatTypingIndicatorClasses {
 export type ChatTypingIndicatorClassKey = keyof ChatTypingIndicatorClasses;
 
 export function getChatTypingIndicatorUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatTypingIndicator', slot);
+    throw new Error("STUB");
 }
 
 export const chatTypingIndicatorClasses: ChatTypingIndicatorClasses = generateUtilityClasses(

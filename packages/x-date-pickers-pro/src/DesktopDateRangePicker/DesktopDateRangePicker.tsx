@@ -33,55 +33,7 @@ const DesktopDateRangePicker = React.forwardRef(function DesktopDateRangePicker(
   inProps: DesktopDateRangePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-
-  // Props with the default values common to all date time pickers
-  const defaultizedProps = useDateRangePickerDefaultizedProps<DesktopDateRangePickerProps>(
-    inProps,
-    'MuiDesktopDateRangePicker',
-  );
-
-  const viewRenderers: PickerViewRendererLookup<PickerRangeValue, any, any> = {
-    day: renderDateRangeViewCalendar,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  const props = {
-    ...defaultizedProps,
-    closeOnSelect: defaultizedProps.closeOnSelect ?? true,
-    viewRenderers,
-    // TODO: Replace with resolveDateFormat() once we support month and year views
-    format: defaultizedProps.format ?? adapter.formats.keyboardDate,
-    calendars: defaultizedProps.calendars ?? 2,
-    views: ['day'] as const,
-    openTo: 'day' as const,
-    slots: {
-      field: SingleInputDateRangeField,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      toolbar: {
-        hidden: true,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useDesktopRangePicker<'day', typeof props>({
-    ref,
-    props,
-    valueManager: rangeValueManager,
-    valueType: 'date',
-    validator: validateDateRange,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as DesktopDateRangePickerComponent;
 
 DesktopDateRangePicker.propTypes /* remove-proptypes */ = {

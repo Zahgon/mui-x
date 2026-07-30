@@ -36,7 +36,7 @@ export function exportAs<ExtraExtensions extends string>(
 
     // https://github.com/eligrey/FileSaver.js/issues/205
     setTimeout(() => {
-      URL.revokeObjectURL(url);
+        throw new Error("STUB");
     });
     return;
   }

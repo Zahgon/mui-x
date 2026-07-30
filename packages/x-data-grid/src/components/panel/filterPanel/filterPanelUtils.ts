@@ -34,8 +34,7 @@ export function getValueFromValueOptions(
     return undefined;
   }
   const result = valueOptions.find((option) => {
-    const optionValue = getOptionValue(option);
-    return String(optionValue) === String(value);
+      throw new Error("STUB");
   });
   return getOptionValue(result);
 }

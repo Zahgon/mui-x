@@ -32,7 +32,7 @@ const jaJPGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: 'フィルター表示',
   toolbarFiltersTooltipHide: 'フィルター非表示',
   toolbarFiltersTooltipShow: 'フィルター表示',
-  toolbarFiltersTooltipActive: (count) => `${count}件のフィルターを適用中`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: '検索…',
@@ -128,7 +128,7 @@ const jaJPGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'メニュー',
-  columnMenuAriaLabel: (columnName: string) => `${columnName} 列メニュー`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: '列表示',
   columnMenuManageColumns: '列管理',
   columnMenuFilter: 'フィルター',
@@ -140,19 +140,19 @@ const jaJPGrid: Partial<GridLocaleText> = {
   columnMenuManageCharts: 'チャートを管理',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) => `${count}件のフィルターを適用中`,
+  columnHeaderFiltersTooltipActive: (count) => { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'フィルター表示',
   columnHeaderSortIconLabel: 'ソート',
 
   // Rows selected footer text
-  footerRowSelected: (count) => `${count}行を選択中`,
+  footerRowSelected: (count) => { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: '総行数:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} / ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'チェックボックス',
@@ -184,8 +184,8 @@ const jaJPGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'グループ',
-  groupColumn: (name) => `${name}でグループ化`,
-  unGroupColumn: (name) => `${name}のグループを解除`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: '詳細パネルの切り替え',
@@ -195,25 +195,10 @@ const jaJPGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'ページあたりの行数:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} of ${count !== -1 ? formatNumber(count) : `${formatNumber(to)}以上`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to ? `${formatNumber(estimated)}前後` : `${formatNumber(to)}以上`;
-    return `${formatNumber(from)}–${formatNumber(to)} of ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return '最初のページへ';
-    }
-    if (type === 'last') {
-      return '最後のページへ';
-    }
-    if (type === 'next') {
-      return '次のページへ';
-    }
-    // if (type === 'previous') {
-    return '前のページへ';
+      throw new Error("STUB");
   },
 
   // Row reordering text

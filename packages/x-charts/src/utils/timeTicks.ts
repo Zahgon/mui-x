@@ -1,7 +1,7 @@
 import type { TickFrequency, TickFrequencyDefinition } from '../models/timeTicks';
 
 function yearNumber(from: Date, to: Date) {
-  return Math.abs(to.getFullYear() - from.getFullYear());
+    throw new Error("STUB");
 }
 function monthNumber(from: Date, to: Date) {
   return Math.abs(
@@ -12,47 +12,46 @@ function dayNumber(from: Date, to: Date) {
   return Math.abs(to.getTime() - from.getTime()) / (1000 * 60 * 60 * 24);
 }
 function hourNumber(from: Date, to: Date) {
-  return Math.abs(to.getTime() - from.getTime()) / (1000 * 60 * 60);
+    throw new Error("STUB");
 }
 
 export const tickFrequencies: Record<TickFrequency, TickFrequencyDefinition> = {
   years: {
     getTickNumber: yearNumber,
-    isTick: (prev: Date, value: Date) => value.getFullYear() !== prev.getFullYear(),
-    format: (d: Date) => d.getFullYear().toString(),
+    isTick: (prev: Date, value: Date) => { throw new Error("STUB"); },
+    format: (d: Date) => { throw new Error("STUB"); },
   },
   quarterly: {
-    getTickNumber: (from: Date, to: Date) => Math.floor(monthNumber(from, to) / 3),
+    getTickNumber: (from: Date, to: Date) => { throw new Error("STUB"); },
     isTick: (prev: Date, value: Date) =>
-      value.getMonth() !== prev.getMonth() && value.getMonth() % 3 === 0,
+      { throw new Error("STUB"); },
     format: new Intl.DateTimeFormat('default', { month: 'short' }).format,
   },
   months: {
     getTickNumber: monthNumber,
-    isTick: (prev: Date, value: Date) => value.getMonth() !== prev.getMonth(),
+    isTick: (prev: Date, value: Date) => { throw new Error("STUB"); },
     format: new Intl.DateTimeFormat('default', { month: 'short' }).format,
   },
   biweekly: {
-    getTickNumber: (from: Date, to: Date) => dayNumber(from, to) / 14,
+    getTickNumber: (from: Date, to: Date) => { throw new Error("STUB"); },
     isTick: (prev: Date, value: Date) =>
-      (value.getDay() < prev.getDay() || dayNumber(value, prev) > 7) &&
-      Math.floor(value.getDate() / 7) % 2 === 1,
+      { throw new Error("STUB"); },
     format: new Intl.DateTimeFormat('default', { day: 'numeric' }).format,
   },
   weeks: {
-    getTickNumber: (from: Date, to: Date) => dayNumber(from, to) / 7,
+    getTickNumber: (from: Date, to: Date) => { throw new Error("STUB"); },
     isTick: (prev: Date, value: Date) =>
-      value.getDay() < prev.getDay() || dayNumber(value, prev) >= 7,
+      { throw new Error("STUB"); },
     format: new Intl.DateTimeFormat('default', { day: 'numeric' }).format,
   },
   days: {
     getTickNumber: dayNumber,
-    isTick: (prev: Date, value: Date) => value.getDate() !== prev.getDate(),
+    isTick: (prev: Date, value: Date) => { throw new Error("STUB"); },
     format: new Intl.DateTimeFormat('default', { day: 'numeric' }).format,
   },
   hours: {
     getTickNumber: hourNumber,
-    isTick: (prev: Date, value: Date) => value.getHours() !== prev.getHours(),
+    isTick: (prev: Date, value: Date) => { throw new Error("STUB"); },
     format: new Intl.DateTimeFormat('default', { hour: '2-digit', minute: '2-digit' }).format,
   },
 };

@@ -30,7 +30,7 @@ export function useOHLCSeries(): UseOHLCSeriesReturnValue[];
  */
 export function useOHLCSeries(seriesIds: SeriesId[]): UseOHLCSeriesReturnValue[];
 export function useOHLCSeries(seriesIds?: SeriesId | SeriesId[]) {
-  return useSeriesOfType('ohlc', seriesIds);
+    throw new Error("STUB");
 }
 
 /**
@@ -41,5 +41,5 @@ export function useOHLCSeries(seriesIds?: SeriesId | SeriesId[]) {
  * @returns the OHLC series
  */
 export function useOHLCSeriesContext(): UseOHLCSeriesContextReturnValue {
-  return useAllSeriesOfType('ohlc');
+    throw new Error("STUB");
 }

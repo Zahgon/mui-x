@@ -42,7 +42,7 @@ import { Menu } from '@base-ui/react/menu';
 export type MessageActionsMenuRootProps = Menu.Root.Props;
 
 export function MessageActionsMenuRoot(props: MessageActionsMenuRootProps) {
-  return <Menu.Root {...props} />;
+    throw new Error("STUB");
 }
 
 // ---------------------------------------------------------------------------
@@ -60,7 +60,7 @@ export const MessageActionsMenuTrigger = React.forwardRef<
   HTMLButtonElement,
   MessageActionsMenuTriggerProps
 >(function MessageActionsMenuTrigger(props, ref) {
-  return <Menu.Trigger {...props} ref={ref} />;
+    throw new Error("STUB");
 });
 
 // ---------------------------------------------------------------------------
@@ -78,7 +78,7 @@ export const MessageActionsMenuPositioner = React.forwardRef<
   HTMLDivElement,
   MessageActionsMenuPositionerProps
 >(function MessageActionsMenuPositioner(props, ref) {
-  return <Menu.Positioner {...props} ref={ref} />;
+    throw new Error("STUB");
 });
 
 // ---------------------------------------------------------------------------
@@ -93,7 +93,7 @@ export const MessageActionsMenuPopup = React.forwardRef<
   HTMLDivElement,
   MessageActionsMenuPopupProps
 >(function MessageActionsMenuPopup(props, ref) {
-  return <Menu.Popup {...props} ref={ref} />;
+    throw new Error("STUB");
 });
 
 // ---------------------------------------------------------------------------
@@ -108,8 +108,8 @@ export type MessageActionsMenuItemProps = Menu.Item.Props;
 
 export const MessageActionsMenuItem = React.forwardRef<HTMLDivElement, MessageActionsMenuItemProps>(
   function MessageActionsMenuItem(props, ref) {
-    return <Menu.Item {...props} ref={ref} />;
-  },
+        throw new Error("STUB");
+    },
 );
 
 // ---------------------------------------------------------------------------
@@ -124,7 +124,7 @@ export const MessageActionsMenuGroup = React.forwardRef<
   HTMLDivElement,
   MessageActionsMenuGroupProps
 >(function MessageActionsMenuGroup(props, ref) {
-  return <Menu.Group {...props} ref={ref} />;
+    throw new Error("STUB");
 });
 
 // ---------------------------------------------------------------------------
@@ -139,7 +139,7 @@ export const MessageActionsMenuGroupLabel = React.forwardRef<
   HTMLDivElement,
   MessageActionsMenuGroupLabelProps
 >(function MessageActionsMenuGroupLabel(props, ref) {
-  return <Menu.GroupLabel {...props} ref={ref} />;
+    throw new Error("STUB");
 });
 
 // ---------------------------------------------------------------------------

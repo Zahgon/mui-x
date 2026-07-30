@@ -32,7 +32,7 @@ export const idIDGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: 'Tampilkan filter',
   toolbarFiltersTooltipHide: 'Sembunyikan filter',
   toolbarFiltersTooltipShow: 'Tampilkan filter',
-  toolbarFiltersTooltipActive: (count) => `${count} filter aktif`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Cari…',
@@ -128,7 +128,7 @@ export const idIDGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Menu',
-  columnMenuAriaLabel: (columnName: string) => `Menu kolom ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Tampilkan kolom',
   columnMenuManageColumns: 'Kelola kolom',
   columnMenuFilter: 'Filter',
@@ -140,19 +140,19 @@ export const idIDGrid: Partial<GridLocaleText> = {
   // columnMenuManageCharts: 'Manage charts',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) => `${count} filter aktif`,
+  columnHeaderFiltersTooltipActive: (count) => { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Tampilkan filter',
   columnHeaderSortIconLabel: 'Urutkan',
 
   // Rows selected footer text
-  footerRowSelected: (count) => `${count.toLocaleString()} baris dipilih`,
+  footerRowSelected: (count) => { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Total Baris:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} dari ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Pilihan kotak centang',
@@ -184,8 +184,8 @@ export const idIDGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Kelompok',
-  groupColumn: (name) => `Kelompokkan berdasarkan ${name}`,
-  unGroupColumn: (name) => `Hentikan pengelompokan berdasarkan ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Pengalih panel detail',
@@ -195,27 +195,10 @@ export const idIDGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Baris per halaman:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} dari ${count !== -1 ? formatNumber(count) : `lebih dari ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `sekitar ${formatNumber(estimated)}`
-        : `lebih dari ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} dari ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Pergi ke halaman pertama';
-    }
-    if (type === 'last') {
-      return 'Pergi ke halaman terakhir';
-    }
-    if (type === 'next') {
-      return 'Pergi ke halaman berikutnya';
-    }
-    // if (type === 'previous') {
-    return 'Pergi ke halaman sebelumnya';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -309,34 +292,28 @@ export const idIDGrid: Partial<GridLocaleText> = {
   promptAppliedChanges: 'Perubahan diterapkan',
 
   // Prompt changes
-  promptChangeGroupDescription: (column: string) => `Kelompokkan berdasarkan ${column}`,
+  promptChangeGroupDescription: (column: string) => { throw new Error("STUB"); },
   promptChangeAggregationLabel: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeAggregationDescription: (column: string, aggregation: string) =>
-    `Agregasikan ${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeFilterLabel: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `${column} salah satu dari: ${value}`;
-    }
-    return `${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeFilterDescription: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `Filter di mana ${column} salah satu dari: ${value}`;
-    }
-    return `Filter di mana ${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeSortDescription: (column: string, direction: string) =>
-    `Urutkan berdasarkan ${column} (${direction})`,
+    { throw new Error("STUB"); },
   promptChangePivotEnableLabel: 'Pivot',
   promptChangePivotEnableDescription: 'Aktifkan pivot',
-  promptChangePivotColumnsLabel: (count: number) => `Kolom (${count})`,
+  promptChangePivotColumnsLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotColumnsDescription: (column: string, direction: string) =>
-    `${column}${direction ? ` (${direction})` : ''}`,
-  promptChangePivotRowsLabel: (count: number) => `Baris (${count})`,
-  promptChangePivotValuesLabel: (count: number) => `Nilai (${count})`,
+    { throw new Error("STUB"); },
+  promptChangePivotRowsLabel: (count: number) => { throw new Error("STUB"); },
+  promptChangePivotValuesLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotValuesDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   // promptChangeChartsLabel: (dimensionsCount: number, valuesCount: number) => `Dimensions (${dimensionsCount}), Values (${valuesCount})`,
 };
 

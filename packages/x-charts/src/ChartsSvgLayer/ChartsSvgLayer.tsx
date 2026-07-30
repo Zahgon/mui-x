@@ -47,34 +47,8 @@ const ChartsSvgLayerStyles = styled('svg', {
  */
 const ChartsSvgLayer = React.forwardRef<SVGSVGElement, ChartsSvgLayerProps>(
   function ChartsSvgLayer(inProps, ref) {
-    const { store } = useChartsContext<
-      [],
-      [UseChartInteractionSignature, UseChartItemClickSignature]
-    >();
-
-    const svgWidth = store.use(selectorChartSvgWidth);
-    const svgHeight = store.use(selectorChartSvgHeight);
-
-    const themeProps = useThemeProps({ props: inProps, name: 'MuiChartsSvgLayer' });
-
-    const { children, className, ...other } = themeProps;
-
-    const classes = useUtilityClasses();
-    const hasIntrinsicSize = svgHeight > 0 && svgWidth > 0;
-
-    return (
-      <ChartsSvgLayerStyles
-        viewBox={`0 0 ${svgWidth} ${svgHeight}`}
-        className={clsx(classes.root, className)}
-        {...other}
-        ref={ref}
-        aria-hidden
-      >
-        <ChartsAxesGradients />
-        {hasIntrinsicSize && children}
-      </ChartsSvgLayerStyles>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChartsSvgLayer.propTypes /* remove-proptypes */ = {

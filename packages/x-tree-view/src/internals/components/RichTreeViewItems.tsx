@@ -19,9 +19,9 @@ const RichTreeViewItemsContext = React.createContext<
   ((itemId: TreeViewItemId) => React.ReactNode) | null
 >(null);
 
-const selectorNoChildren = () => EMPTY_ARRAY;
+const selectorNoChildren = () => { throw new Error("STUB"); };
 const selectorChildrenIdsNull = (state: MinimalTreeViewState<any, any>) =>
-  itemsSelectors.itemOrderedChildrenIds(state, null);
+  { throw new Error("STUB"); };
 
 export const RichTreeViewItem = React.memo(function RichTreeViewItem({
   itemSlot,
@@ -29,77 +29,11 @@ export const RichTreeViewItem = React.memo(function RichTreeViewItem({
   itemId,
   skipChildren,
 }: RichTreeViewItemProps) {
-  const renderItemForRichTreeView = React.useContext(RichTreeViewItemsContext);
-  const { store } = useTreeViewContext<RichTreeViewStore<any, any>>();
-
-  const itemMeta = useStore(store, itemsSelectors.itemMeta, itemId);
-  const children = useStore(
-    store,
-    skipChildren ? selectorNoChildren : itemsSelectors.itemOrderedChildrenIds,
-    itemId,
-  );
-  const Item = (itemSlot ?? TreeItem) as React.JSXElementConstructor<TreeItemProps>;
-
-  const { ownerState, ...itemProps } = useSlotProps({
-    elementType: Item,
-    externalSlotProps: itemSlotProps,
-    additionalProps: { label: itemMeta?.label, id: itemMeta?.idAttribute, itemId },
-    ownerState: { itemId, label: itemMeta?.label as string },
-  });
-
-  return (
-    <Item {...itemProps}>
-      {renderItemForRichTreeView ? children?.map(renderItemForRichTreeView) : null}
-    </Item>
-  );
+    throw new Error("STUB");
 }, fastObjectShallowCompare);
 
 export function RichTreeViewItems<TProps extends object>(props: RichTreeViewItemsProps<TProps>) {
-  const { slots, slotProps, ownerState, forwardedProps, rootRef } = props;
-  const { store } = useTreeViewContext<RichTreeViewStore<any, any>>();
-  const { classes } = useTreeViewStyleContext();
-
-  const itemSlot = slots?.item as React.JSXElementConstructor<TreeItemProps> | undefined;
-  const itemSlotProps = slotProps?.item;
-  const domStructure = useStore(store, itemsSelectors.domStructure);
-  const items = useStore(
-    store,
-    domStructure === 'flat' ? expansionSelectors.flatList : selectorChildrenIdsNull,
-  );
-
-  const getRootProps = useTreeViewRootProps(store, forwardedProps, rootRef);
-
-  const Root = slots.root;
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    className: classes.root,
-    getSlotProps: getRootProps,
-    ownerState,
-  });
-
-  const skipChildren = domStructure === 'flat';
-
-  const renderItem = React.useCallback(
-    (itemId: TreeViewItemId) => {
-      return (
-        <RichTreeViewItem
-          itemSlot={itemSlot}
-          itemSlotProps={itemSlotProps}
-          key={itemId}
-          itemId={itemId}
-          skipChildren={skipChildren}
-        />
-      );
-    },
-    [itemSlot, itemSlotProps, skipChildren],
-  );
-
-  return (
-    <RichTreeViewItemsContext.Provider value={renderItem}>
-      <Root {...rootProps}>{items.map(renderItem)}</Root>
-    </RichTreeViewItemsContext.Provider>
-  );
+    throw new Error("STUB");
 }
 
 interface RichTreeViewItemsOwnerState {

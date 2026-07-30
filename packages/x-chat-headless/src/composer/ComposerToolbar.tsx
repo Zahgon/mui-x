@@ -26,25 +26,5 @@ export const ComposerToolbar = React.forwardRef(function ComposerToolbar(
   props: ComposerToolbarProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { slots, slotProps, ...other } = props;
-  const composer = useComposerContext();
-  const ownerState: ComposerToolbarOwnerState = {
-    isSubmitting: composer.isSubmitting,
-    hasValue: composer.hasValue,
-    isStreaming: composer.isStreaming,
-    attachmentCount: composer.attachmentCount,
-    disabled: composer.disabled,
-  };
-  const Toolbar = slots?.toolbar ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Toolbar,
-    externalSlotProps: slotProps?.toolbar,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  return <Toolbar {...rootProps} />;
+    throw new Error("STUB");
 }) as ComposerToolbarComponent;

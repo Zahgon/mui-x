@@ -31,7 +31,7 @@ const faIRGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'مخفی کردن فیلترها',
   toolbarFiltersTooltipShow: 'نمایش فیلترها',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} فیلترهای فعال` : `${count} فیلتر فعال`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'جستجو…',
@@ -140,22 +140,20 @@ const faIRGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} فیلتر‌های فعال` : `${count} فیلتر فعال`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'نمایش فیلترها',
   columnHeaderSortIconLabel: 'مرتب‌سازی',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1
-      ? `${count.toLocaleString()} سطرهای انتخاب شده`
-      : `${count.toLocaleString()} سطر انتخاب شده`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'مجموع سطرها:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} از ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'چک‌باکس انتخاب',
@@ -187,8 +185,8 @@ const faIRGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'گروه‌بندی',
-  groupColumn: (name) => `گروه‌بندی براساس ${name}`,
-  unGroupColumn: (name) => `لغو گروه‌بندی براساس ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'پنل جزئیات',
@@ -211,17 +209,7 @@ const faIRGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'رفتن به اولین صفحه';
-    }
-    if (type === 'last') {
-      return 'رفتن به آخرین صفحه';
-    }
-    if (type === 'next') {
-      return 'رفتن به صفحه‌ی بعدی';
-    }
-    // if (type === 'previous') {
-    return 'رفتن به صفحه‌ی قبلی';
+      throw new Error("STUB");
   },
 
   // Row reordering text

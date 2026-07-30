@@ -8,29 +8,25 @@ import { ScrollArea } from '@base-ui/react/scroll-area';
 // ---------------------------------------------------------------------------
 
 export const ScrollRoot = React.forwardRef<HTMLDivElement>(function ScrollRoot(props: any, ref) {
-  const { ownerState, ...other } = props;
-  return <ScrollArea.Root {...other} ref={ref} />;
+    throw new Error("STUB");
 });
 
 export const ScrollViewport = React.forwardRef<HTMLDivElement>(function ScrollViewport(
   props: any,
   ref,
 ) {
-  const { ownerState, ...other } = props;
-  return <ScrollArea.Viewport {...other} ref={ref} />;
+    throw new Error("STUB");
 });
 
 export const ScrollScrollbar = React.forwardRef<HTMLDivElement>(function ScrollScrollbar(
   props: any,
   ref,
 ) {
-  const { ownerState, ...other } = props;
-  return <ScrollArea.Scrollbar {...other} ref={ref} />;
+    throw new Error("STUB");
 });
 
 export const ScrollThumb = React.forwardRef<HTMLDivElement>(function ScrollThumb(props: any, ref) {
-  const { ownerState, ...other } = props;
-  return <ScrollArea.Thumb {...other} ref={ref} />;
+    throw new Error("STUB");
 });
 
 // ---------------------------------------------------------------------------

@@ -13,42 +13,8 @@ import { useGridRootProps } from '../hooks/utils/useGridRootProps';
 
 const GridFooter = forwardRef<HTMLDivElement, GridFooterContainerProps>(
   function GridFooter(props, ref) {
-    const apiRef = useGridApiContext();
-    const rootProps = useGridRootProps();
-    const totalTopLevelRowCount = useGridSelector(apiRef, gridTopLevelRowCountSelector);
-    const selectedRowCount = useGridSelector(apiRef, gridRowSelectionCountSelector);
-    const visibleTopLevelRowCount = useGridSelector(apiRef, gridFilteredTopLevelRowCountSelector);
-
-    const selectedRowCountElement =
-      !rootProps.hideFooterSelectedRowCount && selectedRowCount > 0 ? (
-        <GridSelectedRowCount selectedRowCount={selectedRowCount} />
-      ) : (
-        <div />
-      );
-
-    const rowCountElement =
-      !rootProps.hideFooterRowCount && !rootProps.pagination ? (
-        <rootProps.slots.footerRowCount
-          {...rootProps.slotProps?.footerRowCount}
-          rowCount={totalTopLevelRowCount}
-          visibleRowCount={visibleTopLevelRowCount}
-        />
-      ) : null;
-
-    const paginationElement = rootProps.pagination &&
-      !rootProps.hideFooterPagination &&
-      rootProps.slots.pagination && (
-        <rootProps.slots.pagination {...rootProps.slotProps?.pagination} />
-      );
-
-    return (
-      <GridFooterContainer {...props} ref={ref}>
-        {selectedRowCountElement}
-        {rowCountElement}
-        {paginationElement}
-      </GridFooterContainer>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridFooter.propTypes /* remove-proptypes */ = {

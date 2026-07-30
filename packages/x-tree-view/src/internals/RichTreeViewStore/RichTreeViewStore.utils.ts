@@ -11,20 +11,9 @@ export const parametersToStateMapper: TreeViewParametersToStateMapper<
   RichTreeViewState<any, any>,
   RichTreeViewStoreParameters<any, any>
 > = {
-  getInitialState: (minimalInitialState, parameters) => ({
-    ...minimalInitialState,
-    ...deriveStateFromParameters(parameters),
-    editedItemId: null,
-    lazyLoadedItems: null,
-    domStructure: parameters.domStructure ?? 'nested',
-  }),
+  getInitialState: (minimalInitialState, parameters) => { throw new Error("STUB"); },
   updateStateFromParameters: (newMinimalState, parameters) => {
-    const newState: Partial<RichTreeViewState<any, any>> = {
-      ...newMinimalState,
-      ...deriveStateFromParameters(parameters),
-    };
-
-    return newState;
+      throw new Error("STUB");
   },
-  shouldIgnoreItemsStateUpdate: () => false,
+  shouldIgnoreItemsStateUpdate: () => { throw new Error("STUB"); },
 };

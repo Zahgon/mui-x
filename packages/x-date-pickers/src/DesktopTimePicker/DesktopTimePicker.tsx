@@ -38,78 +38,7 @@ const DesktopTimePicker = React.forwardRef(function DesktopTimePicker(
   inProps: DesktopTimePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-
-  // Props with the default values common to all time pickers
-  const defaultizedProps = useTimePickerDefaultizedProps<
-    TimeViewWithMeridiem,
-    DesktopTimePickerProps
-  >(inProps, 'MuiDesktopTimePicker');
-
-  const {
-    shouldRenderTimeInASingleColumn,
-    views: resolvedViews,
-    timeSteps,
-  } = resolveTimeViewsResponse<TimeView, TimeViewWithMeridiem>(defaultizedProps);
-
-  const renderTimeView = shouldRenderTimeInASingleColumn
-    ? renderDigitalClockTimeView
-    : renderMultiSectionDigitalClockTimeView;
-
-  const viewRenderers: TimePickerViewRenderers<TimeViewWithMeridiem> = {
-    hours: renderTimeView,
-    minutes: renderTimeView,
-    seconds: renderTimeView,
-    meridiem: renderTimeView,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  const ampmInClock = defaultizedProps.ampmInClock ?? true;
-  // Need to avoid adding the `meridiem` view when unexpected renderer is specified
-  const shouldHoursRendererContainMeridiemView =
-    viewRenderers.hours?.name === renderMultiSectionDigitalClockTimeView.name;
-  const views = !shouldHoursRendererContainMeridiemView
-    ? resolvedViews.filter((view) => view !== 'meridiem')
-    : resolvedViews;
-
-  // Props with the default values specific to the desktop variant
-  const props = {
-    ...defaultizedProps,
-    ampmInClock,
-    timeSteps,
-    viewRenderers,
-    format: resolveTimeFormat(adapter, defaultizedProps),
-    // Setting only `hours` time view in case of single column time picker
-    // Allows for easy view lifecycle management
-    views: shouldRenderTimeInASingleColumn ? ['hours' as TimeViewWithMeridiem] : views,
-    slots: {
-      field: TimeField,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      toolbar: {
-        hidden: true,
-        ampmInClock,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useDesktopPicker<TimeViewWithMeridiem, typeof props>({
-    ref,
-    props,
-    valueManager: singleItemValueManager,
-    valueType: 'time',
-    validator: validateTime,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as DesktopTimePickerComponent;
 
 DesktopTimePicker.propTypes /* remove-proptypes */ = {

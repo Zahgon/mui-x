@@ -40,7 +40,7 @@ const LEGACY_PREFIX = 'MuiPiecewiseColorLegendClasses';
 
 // Used by `useUtilityClasses` to also emit the legacy prefix in the rendered className.
 function getLegendUtilityClass(slot: string) {
-  return `${generateUtilityClass(CORRECT_PREFIX, slot)} ${generateUtilityClass(LEGACY_PREFIX, slot)}`;
+    throw new Error("STUB");
 }
 
 export const useUtilityClasses = (props: PiecewiseColorLegendProps & ChartsLegendSlotExtension) => {
@@ -49,7 +49,7 @@ export const useUtilityClasses = (props: PiecewiseColorLegendProps & ChartsLegen
     root: [
       'root',
       direction,
-      labelPosition?.replaceAll(/-(\w)/g, (match) => match[1].toUpperCase()),
+      labelPosition?.replaceAll(/-(\w)/g, (match) => { throw new Error("STUB"); }),
     ],
     minLabel: ['minLabel'],
     maxLabel: ['maxLabel'],

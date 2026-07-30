@@ -23,16 +23,13 @@ It looks like you forgot to pass a \`dateAdapter\` to your LocalizationProvider.
   }
 
   const localeText = React.useMemo(
-    () => ({ ...DEFAULT_LOCALE, ...localization.localeText }),
+    () => { throw new Error("STUB"); },
     [localization.localeText],
   );
 
   return React.useMemo(
     () =>
-      ({
-        ...localization,
-        localeText,
-      }) as UseLocalizationContextReturnValue,
+      { throw new Error("STUB"); },
     [localization, localeText],
   );
 };

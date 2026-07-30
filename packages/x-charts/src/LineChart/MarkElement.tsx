@@ -23,14 +23,7 @@ export interface MarkElementOwnerState {
 const MarkElementPath = styled('path', {
   name: 'MuiMarkElement',
   slot: 'Root',
-})<{ ownerState: MarkElementOwnerState }>(({ theme }) => ({
-  fill: (theme.vars || theme).palette.background.paper,
-  [`&.${lineClasses.markAnimate}`]: {
-    transitionDuration: `${ANIMATION_DURATION_MS}ms`,
-    transitionProperty: 'transform, transform-origin, opacity',
-    transitionTimingFunction: ANIMATION_TIMING_FUNCTION,
-  },
-}));
+})<{ ownerState: MarkElementOwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 export type MarkElementProps = Omit<MarkElementOwnerState, 'isFaded' | 'isHighlighted'> &
   Omit<React.SVGProps<SVGPathElement>, 'ref'> & {

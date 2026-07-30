@@ -19,31 +19,5 @@ export function gridDefaultPromptResolver(
   conversationId?: string,
   optionsOrAdditionalContext: string | PromptResolverOptions = '',
 ) {
-  // Handle backward compatibility: if string is passed, treat it as additionalContext
-  const options: PromptResolverOptions =
-    typeof optionsOrAdditionalContext === 'string'
-      ? { additionalContext: optionsOrAdditionalContext }
-      : optionsOrAdditionalContext;
-
-  return fetch(url, {
-    mode: 'cors',
-    method: 'POST',
-    headers: {
-      'content-type': 'application/json',
-    },
-    credentials: 'include',
-    body: JSON.stringify({
-      context,
-      query,
-      conversationId,
-      options,
-    }),
-  })
-    .then((result) => result.json())
-    .then((result: Result<PromptResponse>) => {
-      if (result.ok === false) {
-        return Promise.reject(/* minify-error-disabled */ new Error(result.message));
-      }
-      return result.data;
-    });
+    throw new Error("STUB");
 }

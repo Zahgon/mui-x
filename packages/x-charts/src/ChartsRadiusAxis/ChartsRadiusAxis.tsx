@@ -122,54 +122,7 @@ function ChartsRadiusAxis(props: ChartsRadiusAxisProps) {
         />
       )}
       {ticks.map(({ offset: radius, labelOffset, formattedValue }, index) => {
-        if (!formattedValue) {
-          return null;
-        }
-
-        const tickX = cx + dx * radius;
-        const tickY = cy + dy * radius;
-
-        // Compute the label position.
-        let labelX = cx + dx * (radius + labelOffset);
-        let labelY = cy + dy * (radius + labelOffset);
-
-        if (tickLabelGap !== 0) {
-          labelX += tickLabelGapDx;
-          labelY += tickLabelGapDy;
-        }
-        if (!isCentered && tickLabelPosition === tickPosition && !disableTicks) {
-          // Add the size of the tick if they are in the same direction.
-          labelX += tickDx;
-          labelY += tickDy;
-        }
-
-        return (
-          <g key={index} className={classes.tickContainer}>
-            {!disableTicks && (
-              <line
-                x1={tickX}
-                y1={tickY}
-                x2={tickX + tickDx}
-                y2={tickY + tickDy}
-                stroke={stroke}
-                className={classes.tick}
-              />
-            )}
-            {!disableTickLabel && (
-              <text
-                x={labelX}
-                y={labelY}
-                fill={stroke}
-                fontSize={12}
-                className={classes.tickLabel}
-                pointerEvents="none"
-                {...getLabelTextAnchors(dx, dy, tickLabelPosition)}
-              >
-                {formattedValue}
-              </text>
-            )}
-          </g>
-        );
+          throw new Error("STUB");
       })}
     </g>
   );

@@ -40,24 +40,7 @@ export class NestedDataManager {
   }
 
   private processQueue = async () => {
-    if (this.queuedRequests.size === 0 || this.pendingRequests.size >= this.maxConcurrentRequests) {
-      return;
-    }
-    const loopLength = Math.min(
-      this.maxConcurrentRequests - this.pendingRequests.size,
-      this.queuedRequests.size,
-    );
-    if (loopLength === 0) {
-      return;
-    }
-    const fetchQueue = Array.from(this.queuedRequests);
-
-    for (let i = 0; i < loopLength; i += 1) {
-      const id = fetchQueue[i];
-      this.queuedRequests.delete(id);
-      this.pendingRequests.add(id);
-      this.api.fetchRowChildren(id, this.fetchParams.get(id));
-    }
+      throw new Error("STUB");
   };
 
   public queue = async (
@@ -67,27 +50,10 @@ export class NestedDataManager {
   ) => {
     const loadingIds: Record<GridRowId, boolean> = {};
     ids.forEach((id, index) => {
-      this.queuedRequests.add(id);
-      if (fetchParams?.[index]) {
-        this.fetchParams.set(id, fetchParams[index]);
-      } else {
-        this.fetchParams.delete(id);
-      }
-      if (showChildrenLoading) {
-        loadingIds[id] = true;
-      }
+        throw new Error("STUB");
     });
     if (showChildrenLoading) {
-      this.api.setState((state) => ({
-        ...state,
-        dataSource: {
-          ...state.dataSource,
-          loading: {
-            ...state.dataSource.loading,
-            ...loadingIds,
-          },
-        },
-      }));
+      this.api.setState((state) => { throw new Error("STUB"); });
     }
     this.processQueue();
   };
@@ -100,7 +66,7 @@ export class NestedDataManager {
 
   public clear = () => {
     this.queuedRequests.clear();
-    Array.from(this.pendingRequests).forEach((id) => this.clearPendingRequest(id));
+    Array.from(this.pendingRequests).forEach((id) => { throw new Error("STUB"); });
   };
 
   public clearPendingRequest = (id: GridRowId) => {
@@ -122,7 +88,7 @@ export class NestedDataManager {
     return RequestStatus.UNKNOWN;
   };
 
-  public getActiveRequestsCount = () => this.pendingRequests.size + this.queuedRequests.size;
+  public getActiveRequestsCount = () => { throw new Error("STUB"); };
 }
 
 export const getGroupKeys = (tree: GridRowTreeConfig, rowId: GridRowId) => {

@@ -14,22 +14,7 @@ export function useEventOccurrencesWithTimelinePosition(
   const adapter = useAdapterContext();
 
   return React.useMemo(() => {
-    const sortedOccurrences = sortEventOccurrences(occurrences);
-    const conflicts = buildOccurrenceConflicts(adapter, sortedOccurrences);
-
-    const { firstIndexLookup, maxIndex } = buildFirstIndexLookup(conflicts);
-
-    const lastIndexLookup = buildLastIndexLookup(conflicts, firstIndexLookup, maxIndex, maxSpan);
-
-    const occurrencesWithPosition = sortedOccurrences.map((occurrence) => ({
-      ...occurrence,
-      position: {
-        firstIndex: firstIndexLookup[occurrence.key],
-        lastIndex: lastIndexLookup[occurrence.key],
-      },
-    }));
-
-    return { occurrences: occurrencesWithPosition, maxIndex };
+      throw new Error("STUB");
   }, [adapter, occurrences, maxSpan]);
 }
 
@@ -56,9 +41,7 @@ export function computeOccurrencesFirstIndexLookup(
   adapter: Adapter,
   occurrences: readonly SchedulerEventOccurrence[],
 ): { [occurrenceKey: string]: number } {
-  const sortedOccurrences = sortEventOccurrences(occurrences);
-  const conflicts = buildOccurrenceConflicts(adapter, sortedOccurrences);
-  return buildFirstIndexLookup(conflicts).firstIndexLookup;
+    throw new Error("STUB");
 }
 
 export namespace useEventOccurrencesWithTimelinePosition {
@@ -203,7 +186,7 @@ function buildFirstIndexLookup(conflicts: OccurrenceConflicts[]) {
     } else {
       const usedIndexes = new Set(
         Array.from(occurrence.before).map(
-          (conflictingOccurrence) => firstIndexLookup[conflictingOccurrence],
+          (conflictingOccurrence) => { throw new Error("STUB"); },
         ),
       );
       let i = 1;
@@ -234,7 +217,7 @@ function buildLastIndexLookup(
   for (const occurrence of conflicts) {
     const usedIndexes = new Set(
       [...Array.from(occurrence.before), ...Array.from(occurrence.after)].map(
-        (conflictingOccurrence) => firstIndexLookup[conflictingOccurrence],
+        (conflictingOccurrence) => { throw new Error("STUB"); },
       ),
     );
     const firstIndex = firstIndexLookup[occurrence.key];

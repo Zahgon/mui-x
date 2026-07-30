@@ -10,19 +10,11 @@ export interface OutputSelector<State, Args, Result> {
 }
 
 export const createSelector = ((...args: Function[]) => {
-  const baseSelector = baseCreateSelector(...(args as any)) as any;
-
-  const selector = (apiRef: RefObject<any>, a1: unknown, a2: unknown, a3: unknown) =>
-    baseSelector(unwrapIfNeeded(apiRef), a1, a2, a3);
-
-  return selector;
+    throw new Error("STUB");
 }) as unknown as CreateSelectorFunction;
 
 export const createSelectorMemoized: CreateSelectorFunction = ((...args: any) => {
-  const baseSelector = baseCreateSelectorMemoized(...args) as any;
-  const selector = (apiRef: RefObject<any>, a1: unknown, a2: unknown, a3: unknown) =>
-    baseSelector(unwrapIfNeeded(apiRef), a1, a2, a3);
-  return selector;
+    throw new Error("STUB");
 }) as unknown as CreateSelectorFunction;
 
 /**
@@ -35,7 +27,7 @@ export const createRootSelector =
     fn: (state: State, args: Args) => Result,
   ): OutputSelector<State, Args, Result> =>
   (apiRef: RefObject<{ state: State } | null>, args?: Args) =>
-    fn(unwrapIfNeeded(apiRef), args!);
+    { throw new Error("STUB"); };
 
 function unwrapIfNeeded(refOrState: any) {
   if ('current' in refOrState) {

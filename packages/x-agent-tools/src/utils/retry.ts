@@ -26,19 +26,6 @@ export async function withRetry<T>(
 // ref'd (kept alive) so an awaited retry always settles; pass `signal` to cancel a pending wait.
 function sleep(delayMs: number, signal?: AbortSignal): Promise<void> {
   return new Promise((resolve, reject) => {
-    if (signal?.aborted) {
-      reject(signal.reason);
-      return;
-    }
-    let timer: ReturnType<typeof setTimeout>;
-    const onAbort = () => {
-      clearTimeout(timer);
-      reject(signal!.reason);
-    };
-    timer = setTimeout(() => {
-      signal?.removeEventListener('abort', onAbort);
-      resolve();
-    }, delayMs);
-    signal?.addEventListener('abort', onAbort, { once: true });
+      throw new Error("STUB");
   });
 }

@@ -45,9 +45,7 @@ export const useChartsContainerProProps = <
   const samplingSeriesType = samplingOptions?.seriesType;
   const samplingConfig = React.useMemo(
     () =>
-      samplingMethod
-        ? ({ [samplingSeriesType as ChartSeriesType]: samplingMethod } as SamplingConfig)
-        : undefined,
+      { throw new Error("STUB"); },
     [samplingMethod, samplingSeriesType],
   );
 

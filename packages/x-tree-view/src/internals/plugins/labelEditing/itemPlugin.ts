@@ -9,77 +9,7 @@ import type { ExtendableRichTreeViewStore } from '../../RichTreeViewStore';
 import type { TreeItemLabelInputProps } from '../../../TreeItemLabelInput';
 
 export const useLabelEditingItemPlugin: TreeViewItemPlugin = ({ props }) => {
-  const { store } = useTreeViewContext<ExtendableRichTreeViewStore<any, any, any, any>>();
-  const { label, itemId } = props;
-
-  const [labelInputValue, setLabelInputValue] = React.useState(label as string);
-
-  const isItemEditable = useStore(store, labelSelectors.isItemEditable, itemId);
-  const isItemBeingEdited = useStore(store, labelSelectors.isItemBeingEdited, itemId);
-
-  // When not editing, the input must mirror the current label. This resets any
-  // uncommitted edits when the user cancels (Escape) and syncs external label changes.
-  if (!isItemBeingEdited && labelInputValue !== label) {
-    setLabelInputValue(label as string);
-  }
-
-  return {
-    propsEnhancers: {
-      label: () => ({ editable: isItemEditable }),
-      labelInput: ({
-        externalEventHandlers,
-        interactions,
-      }): UseTreeItemLabelInputSlotPropsFromLabelEditing => {
-        if (!isItemEditable) {
-          return {};
-        }
-
-        const handleKeydown = (
-          event: React.KeyboardEvent<HTMLInputElement> & TreeViewCancellableEvent,
-        ) => {
-          externalEventHandlers.onKeyDown?.(event);
-          if (event.defaultMuiPrevented) {
-            return;
-          }
-          const target = event.target as HTMLInputElement;
-
-          if (event.key === 'Enter' && target.value) {
-            interactions.handleSaveItemLabel(event, target.value);
-          } else if (event.key === 'Escape') {
-            interactions.handleCancelItemLabelEditing(event);
-          }
-        };
-
-        const handleBlur = (
-          event: React.FocusEvent<HTMLInputElement> & TreeViewCancellableEvent,
-        ) => {
-          externalEventHandlers.onBlur?.(event);
-          if (event.defaultMuiPrevented) {
-            return;
-          }
-
-          if (event.target.value) {
-            interactions.handleSaveItemLabel(event, event.target.value);
-          }
-        };
-
-        const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-          externalEventHandlers.onChange?.(event);
-          setLabelInputValue(event.target.value);
-        };
-
-        return {
-          value: labelInputValue ?? '',
-          'data-element': 'labelInput',
-          onChange: handleInputChange,
-          onKeyDown: handleKeydown,
-          onBlur: handleBlur,
-          autoFocus: true,
-          type: 'text',
-        };
-      },
-    },
-  };
+    throw new Error("STUB");
 };
 
 interface UseTreeItemLabelInputSlotPropsFromLabelEditing extends TreeItemLabelInputProps {}

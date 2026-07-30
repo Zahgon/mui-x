@@ -9,26 +9,8 @@ export const CalendarGridDayEventPlaceholder = React.forwardRef(
     componentProps: CalendarGridDayEventPlaceholder.Props,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ) {
-    const {
-      // Rendering props
-      className,
-      render,
-      style,
-      // Internal props
-      start,
-      end,
-      // Props forwarded to the DOM element
-      ...elementProps
-    } = componentProps;
-
-    const { state } = useEvent({ start, end });
-
-    return useRenderElement('div', componentProps, {
-      state,
-      ref: [forwardedRef],
-      props: [elementProps, { style: { pointerEvents: 'none' as const } }],
-    });
-  },
+        throw new Error("STUB");
+    },
 );
 
 export namespace CalendarGridDayEventPlaceholder {

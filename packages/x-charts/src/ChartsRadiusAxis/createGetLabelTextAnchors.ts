@@ -20,36 +20,5 @@ export const createGetLabelTextAnchors =
     textAnchor: 'start' | 'middle' | 'end';
     dominantBaseline: 'hanging' | 'middle' | 'auto';
   } => {
-    const { verticalAlign, horizontalAlign } = getLabelTransform(px, py, tickLabelPosition);
-
-    let textAnchor: 'start' | 'middle' | 'end';
-    let dominantBaseline: 'hanging' | 'middle' | 'auto';
-
-    switch (verticalAlign) {
-      case 'start':
-        dominantBaseline = 'hanging';
-        break;
-      case 'middle':
-        dominantBaseline = 'middle';
-        break;
-      case 'end':
-      default:
-        dominantBaseline = 'auto';
-        break;
-    }
-
-    switch (horizontalAlign) {
-      case 'start':
-        textAnchor = 'start';
-        break;
-      case 'middle':
-        textAnchor = 'middle';
-        break;
-      case 'end':
-      default:
-        textAnchor = 'end';
-        break;
-    }
-
-    return { textAnchor, dominantBaseline };
+      throw new Error("STUB");
   };

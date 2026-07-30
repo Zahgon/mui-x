@@ -78,33 +78,5 @@ const PickersModalDialogContent = styled(DialogContent, {
 });
 
 export function PickersModalDialog(props: React.PropsWithChildren<PickersModalDialogProps>) {
-  const { children, slots, slotProps } = props;
-
-  const { open } = usePickerContext();
-  const { dismissViews, onPopperExited } = usePickerPrivateContext();
-
-  const Dialog = slots?.dialog ?? PickersModalDialogRoot;
-
-  return (
-    <Dialog
-      open={open}
-      onClose={() => {
-        dismissViews();
-        onPopperExited?.();
-      }}
-      {...slotProps?.dialog}
-      PaperComponent={slots?.mobilePaper}
-      slots={{
-        transition: slots?.mobileTransition ?? Fade,
-        ...slotProps?.dialog?.slots,
-      }}
-      slotProps={{
-        transition: slotProps?.mobileTransition,
-        paper: slotProps?.mobilePaper,
-        ...slotProps?.dialog?.slotProps,
-      }}
-    >
-      <PickersModalDialogContent>{children}</PickersModalDialogContent>
-    </Dialog>
-  );
+    throw new Error("STUB");
 }

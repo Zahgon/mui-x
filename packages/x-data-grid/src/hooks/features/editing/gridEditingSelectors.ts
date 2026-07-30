@@ -8,13 +8,13 @@ import type { GridEditMode } from '../../../models/gridEditRowModel';
  * Select the row editing state.
  */
 export const gridEditRowsStateSelector = createRootSelector(
-  (state: GridStateCommunity) => state.editRows,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 export const gridRowIsEditingSelector = createSelector(
   gridEditRowsStateSelector,
   (editRows, { rowId, editMode }: { rowId: GridRowId; editMode: GridEditMode }) =>
-    editMode === GridEditModes.Row && Boolean(editRows[rowId]),
+    { throw new Error("STUB"); },
 );
 
 export const gridEditCellStateSelector = createSelector(
@@ -28,5 +28,5 @@ export const gridEditCellStateSelector = createSelector(
       rowId: GridRowId;
       field: string;
     },
-  ) => editRows[rowId]?.[field] ?? null,
+  ) => { throw new Error("STUB"); },
 );

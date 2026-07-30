@@ -127,60 +127,31 @@ export const usePicker = <
   });
 
   const clearValue = useEventCallback(() => {
-    if (value === null && internalFieldRef.current?.clearValue) {
-      internalFieldRef.current.clearValue();
-    }
-    setValue(valueManager.emptyValue, { source: 'view' });
+      throw new Error("STUB");
   });
 
   const setValueToToday = useEventCallback(() =>
-    setValue(valueManager.getTodayValue(adapter, timezone, valueType), {
-      source: 'view',
-    }),
+    { throw new Error("STUB"); },
   );
 
-  const acceptValueChanges = useEventCallback(() => setValue(value, { source: 'view' }));
+  const acceptValueChanges = useEventCallback(() => { throw new Error("STUB"); });
 
   const cancelValueChanges = useEventCallback(() =>
-    setValue(state.lastCommittedValue, {
-      skipPublicationIfPristine: true,
-      source: 'view',
-    }),
+    { throw new Error("STUB"); },
   );
 
   const dismissViews = useEventCallback(() => {
-    setValue(value, {
-      skipPublicationIfPristine: true,
-      source: 'view',
-    });
+      throw new Error("STUB");
   });
 
   const { hasUIView, viewModeLookup, timeViewsCount } = React.useMemo(
     () =>
-      views.reduce(
-        (acc, viewForReduce) => {
-          const viewMode = viewRenderers[viewForReduce] == null ? 'field' : 'UI';
-          acc.viewModeLookup[viewForReduce] = viewMode;
-          if (viewMode === 'UI') {
-            acc.hasUIView = true;
-            if (isTimeView(viewForReduce)) {
-              acc.timeViewsCount += 1;
-            }
-          }
-
-          return acc;
-        },
-        {
-          hasUIView: false,
-          viewModeLookup: {} as Record<TView, 'field' | 'UI'>,
-          timeViewsCount: 0,
-        },
-      ),
+      { throw new Error("STUB"); },
     [viewRenderers, views],
   );
 
   const currentViewMode = viewModeLookup[view];
-  const getCurrentViewMode = useEventCallback(() => currentViewMode);
+  const getCurrentViewMode = useEventCallback(() => { throw new Error("STUB"); });
 
   const [popperView, setPopperView] = React.useState<TView | null>(
     currentViewMode === 'UI' ? view : null,
@@ -190,54 +161,15 @@ export const usePicker = <
   }
 
   useEnhancedEffect(() => {
-    // Handle case of Date Time Picker without time renderers
-    if (currentViewMode === 'field' && state.open) {
-      setOpen(false);
-      setTimeout(() => {
-        internalFieldRef?.current?.setSelectedSections(view);
-        // focusing the input before the range selection is done
-        // calling it outside of timeout results in an inconsistent behavior between Safari And Chrome
-        internalFieldRef?.current?.focusField(view);
-      });
-    }
+      throw new Error("STUB");
   }, [view]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEnhancedEffect(() => {
-    if (!state.open) {
-      return;
-    }
-
-    let newView = view;
-
-    // If the current view is a field view, go to the last popper view
-    if (currentViewMode === 'field' && popperView != null) {
-      newView = popperView;
-    }
-
-    // If the current view is not the default view and both are UI views
-    if (
-      newView !== defaultView &&
-      viewModeLookup[newView] === 'UI' &&
-      viewModeLookup[defaultView] === 'UI'
-    ) {
-      newView = defaultView;
-    }
-
-    if (newView !== view) {
-      setView(newView);
-    }
-    setFocusedView(newView, true);
+      throw new Error("STUB");
   }, [state.open]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const ownerState = React.useMemo<PickerOwnerState>(
-    () => ({
-      isPickerValueEmpty: valueManager.areValuesEqual(adapter, value, valueManager.emptyValue),
-      isPickerOpen: state.open,
-      isPickerDisabled: props.disabled ?? false,
-      isPickerReadOnly: props.readOnly ?? false,
-      pickerOrientation: orientation,
-      pickerVariant: variant,
-    }),
+    () => { throw new Error("STUB"); },
     [
       adapter,
       valueManager,
@@ -251,38 +183,17 @@ export const usePicker = <
   );
 
   const triggerStatus = React.useMemo(() => {
-    if (disableOpenPicker || !hasUIView) {
-      return 'hidden';
-    }
-
-    if (disabled || readOnly) {
-      return 'disabled';
-    }
-
-    return 'enabled';
+      throw new Error("STUB");
   }, [disableOpenPicker, hasUIView, disabled, readOnly]);
 
   const wrappedGoToNextStep = useEventCallback(goToNextStep);
 
   const defaultActionBarActions = React.useMemo<PickersActionBarAction[]>(() => {
-    if (closeOnSelect && !hasSeveralSteps) {
-      return [];
-    }
-
-    return ['cancel', 'nextOrAccept'];
+      throw new Error("STUB");
   }, [closeOnSelect, hasSeveralSteps]);
 
   const actionsContextValue = React.useMemo<PickerActionsContextValue<TValue, TView, TError>>(
-    () => ({
-      setValue,
-      setOpen,
-      clearValue,
-      setValueToToday,
-      acceptValueChanges,
-      cancelValueChanges,
-      setView,
-      goToNextStep: wrappedGoToNextStep,
-    }),
+    () => { throw new Error("STUB"); },
     [
       setValue,
       setOpen,
@@ -296,32 +207,7 @@ export const usePicker = <
   );
 
   const contextValue = React.useMemo<PickerContextValue<TValue, TView, TError>>(
-    () => ({
-      ...actionsContextValue,
-      value,
-      timezone,
-      open: state.open,
-      views,
-      view: popperView,
-      initialView,
-      disabled: disabled ?? false,
-      readOnly: readOnly ?? false,
-      autoFocus: autoFocus ?? false,
-      variant,
-      orientation,
-      popupRef,
-      reduceAnimations,
-      triggerRef,
-      triggerStatus,
-      keepOpenDuringFieldFocus: Boolean(keepOpenDuringFieldFocus),
-      hasNextStep,
-      fieldFormat: format ?? '',
-      name,
-      label,
-      rootSx: sx,
-      rootRef,
-      rootClassName: className,
-    }),
+    () => { throw new Error("STUB"); },
     [
       actionsContextValue,
       value,
@@ -349,18 +235,7 @@ export const usePicker = <
   );
 
   const privateContextValue = React.useMemo<PickerPrivateContextValue>(
-    () => ({
-      dismissViews,
-      ownerState,
-      hasUIView,
-      getCurrentViewMode,
-      rootRefObject,
-      labelId,
-      triggerElement,
-      viewContainerRole,
-      defaultActionBarActions,
-      onPopperExited,
-    }),
+    () => { throw new Error("STUB"); },
     [
       dismissViews,
       ownerState,
@@ -375,24 +250,12 @@ export const usePicker = <
   );
 
   const fieldPrivateContextValue = React.useMemo<PickerFieldPrivateContextValue>(
-    () => ({
-      formatDensity,
-      selectedSections,
-      onSelectedSectionsChange,
-      internalFieldRef,
-    }),
+    () => { throw new Error("STUB"); },
     [formatDensity, selectedSections, onSelectedSectionsChange, internalFieldRef],
   );
 
   const isValidContextValue = (testedValue: TValue) => {
-    const error = validator({
-      adapter,
-      value: testedValue,
-      timezone,
-      props,
-    });
-
-    return !valueManager.hasError(error);
+      throw new Error("STUB");
   };
 
   const renderCurrentView = () => {
@@ -416,7 +279,9 @@ export const usePicker = <
       showViewSwitcher: timeViewsCount > 1,
       timeViewsCount,
       ...(viewContainerRole === 'tooltip'
-        ? { focusedView: null, onFocusedViewChange: () => {} }
+        ? { focusedView: null, onFocusedViewChange: () => {
+            throw new Error("STUB");
+        } }
         : {
             focusedView,
             onFocusedViewChange: setFocusedView,

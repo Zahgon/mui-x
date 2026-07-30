@@ -51,34 +51,7 @@ function RadarSeriesArea(props: RadarSeriesAreaProps) {
   return (
     <React.Fragment>
       {seriesCoordinates?.map(({ seriesId: id, points, color, fillArea, hidden }, seriesIndex) => {
-        if (hidden) {
-          return null;
-        }
-
-        return (
-          <path
-            key={id}
-            data-series={id}
-            {...getPathProps({
-              seriesId: id,
-              points,
-              color,
-              fillArea,
-              getHighlightState,
-              classes,
-            })}
-            onClick={(event) =>
-              onItemClick?.(event, {
-                type: 'radar',
-                seriesId: id,
-                dataIndex: getRotationIndex(event),
-              })
-            }
-            cursor={onItemClick ? 'pointer' : 'unset'}
-            {...interactionProps[seriesIndex]}
-            {...other}
-          />
-        );
+          throw new Error("STUB");
       })}
     </React.Fragment>
   );

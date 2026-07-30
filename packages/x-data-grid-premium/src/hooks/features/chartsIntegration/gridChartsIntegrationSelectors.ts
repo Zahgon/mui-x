@@ -11,22 +11,22 @@ import { gridSidebarStateSelector, GridSidebarValue } from '../sidebar';
 import { gridPivotModelSelector } from '../pivoting/gridPivotingSelectors';
 
 const gridChartsIntegrationStateSelector = createRootSelector(
-  (state: GridStatePremium) => state.chartsIntegration,
+  (state: GridStatePremium) => { throw new Error("STUB"); },
 );
 
 export const gridChartsIntegrationActiveChartIdSelector = createSelector(
   gridChartsIntegrationStateSelector,
-  (chartsIntegration) => chartsIntegration.activeChartId,
+  (chartsIntegration) => { throw new Error("STUB"); },
 );
 
 export const gridChartsIntegrationChartsLookupSelector = createSelector(
   gridChartsIntegrationStateSelector,
-  (chartsIntegration) => chartsIntegration.charts,
+  (chartsIntegration) => { throw new Error("STUB"); },
 );
 
 export const gridChartsPanelOpenSelector = createSelector(
   gridSidebarStateSelector,
-  (sidebar) => sidebar.value === GridSidebarValue.Charts && sidebar.open,
+  (sidebar) => { throw new Error("STUB"); },
 );
 
 export const gridChartableColumnsSelector = createSelectorMemoized(
@@ -34,36 +34,16 @@ export const gridChartableColumnsSelector = createSelectorMemoized(
   gridPivotActiveSelector,
   gridPivotModelSelector,
   (columns, pivotActive, pivotModel) => {
-    let chartableColumns = Object.values(columns).filter((column) => column.chartable);
-    if (pivotActive) {
-      const pivotColumns = pivotModel.columns
-        .filter((column) => column.hidden !== true)
-        .map((column) => column.field);
-      const pivotValues = pivotModel.values
-        .filter((value) => value.hidden !== true)
-        .map((value) => value.field);
-      // pivot columns are not visualized
-      // once the columns are set, value fields are created dynamically. those fields remain chartable, but we remove the initial value columns
-      if (pivotColumns.length > 0) {
-        chartableColumns = chartableColumns.filter(
-          (column) => !pivotColumns.includes(column.field) && !pivotValues.includes(column.field),
-        );
-      }
-    }
-
-    return chartableColumns.reduce((acc, column) => {
-      acc[column.field] = column;
-      return acc;
-    }, {} as GridColumnLookup);
+      throw new Error("STUB");
   },
 );
 
 export const gridChartsDimensionsSelector = createSelector(
   gridChartsIntegrationStateSelector,
-  (chartsIntegration, chartId) => chartsIntegration.charts[chartId]?.dimensions || [],
+  (chartsIntegration, chartId) => { throw new Error("STUB"); },
 );
 
 export const gridChartsValuesSelector = createSelector(
   gridChartsIntegrationStateSelector,
-  (chartsIntegration, chartId) => chartsIntegration.charts[chartId]?.values || [],
+  (chartsIntegration, chartId) => { throw new Error("STUB"); },
 );

@@ -62,65 +62,7 @@ const GridPanelContent = styled('div', {
 });
 
 const GridPanel = forwardRef<HTMLDivElement, GridPanelProps>((props, ref) => {
-  const { children, className, classes: classesProp, onClose, ...other } = props;
-  const apiRef = useGridApiContext();
-  const rootProps = useGridRootProps();
-  const classes = gridPanelClasses;
-  const [isPlaced, setIsPlaced] = React.useState(false);
-  const variablesClass = useCSSVariablesClass();
-
-  const onDidShow = useEventCallback(() => setIsPlaced(true));
-  const onDidHide = useEventCallback(() => setIsPlaced(false));
-
-  const handleClickAway = useEventCallback(() => {
-    onClose?.();
-  });
-
-  const handleKeyDown = useEventCallback((event: React.KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      onClose?.();
-    }
-  });
-
-  const [fallbackTarget, setFallbackTarget] = React.useState<Element | null>(null);
-
-  React.useEffect(() => {
-    const panelAnchor = apiRef.current.rootElementRef?.current?.querySelector(
-      '[data-id="gridPanelAnchor"]',
-    );
-
-    if (panelAnchor) {
-      setFallbackTarget(panelAnchor);
-    }
-  }, [apiRef]);
-
-  if (!fallbackTarget) {
-    return null;
-  }
-
-  return (
-    <GridPanelRoot
-      as={rootProps.slots.basePopper}
-      ownerState={rootProps}
-      placement="bottom-end"
-      className={clsx(classes.panel, className, variablesClass)}
-      flip
-      onDidShow={onDidShow}
-      onDidHide={onDidHide}
-      onClickAway={handleClickAway}
-      clickAwayMouseEvent="onPointerUp"
-      clickAwayTouchEvent={false}
-      focusTrap
-      {...other}
-      {...rootProps.slotProps?.basePopper}
-      target={props.target ?? fallbackTarget}
-      ref={ref}
-    >
-      <GridPanelContent className={classes.paper} ownerState={rootProps} onKeyDown={handleKeyDown}>
-        {isPlaced && children}
-      </GridPanelContent>
-    </GridPanelRoot>
-  );
+    throw new Error("STUB");
 });
 
 GridPanel.propTypes /* remove-proptypes */ = {

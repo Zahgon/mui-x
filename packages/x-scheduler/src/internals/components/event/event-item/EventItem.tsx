@@ -25,118 +25,27 @@ import { ARROW_DEPTH, LEFT_ARROW_CLIP, RIGHT_ARROW_CLIP, BOTH_ARROWS_CLIP } from
 const EventItemCard = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'EventItemCard',
-})<{ 'data-variant'?: 'compact' | 'filled' | 'regular'; palette?: PaletteName }>(({ theme }) => ({
-  padding: 0,
-  borderRadius: theme.shape.borderRadius,
-  '&:hover': {
-    backgroundColor: (theme.vars || theme).palette.action.hover,
-  },
-  '&:focus-visible': {
-    outline: '2px solid var(--event-surface-accent)',
-    outlineOffset: 1,
-  },
-  '&[data-variant="compact"], &[data-variant="regular"]': {
-    containerType: 'inline-size',
-    cursor: 'pointer',
-    height: 'fit-content',
-  },
-  '&[data-variant="filled"]': {
-    backgroundColor: 'var(--event-surface-bold)',
-    color: 'var(--event-on-surface-bold)',
-    '&:hover': {
-      backgroundColor: 'var(--event-surface-bold-hover)',
-    },
-    '&[data-editing]': {
-      backgroundColor: 'var(--event-surface-selected)',
-      color: 'var(--event-on-surface-selected)',
-      '&:hover': {
-        backgroundColor: 'var(--event-surface-selected-hover)',
-      },
-    },
-    '&[data-starting-before-edge]': {
-      borderTopLeftRadius: 0,
-      borderBottomLeftRadius: 0,
-      clipPath: LEFT_ARROW_CLIP,
-      paddingLeft: ARROW_DEPTH,
-    },
-    '&[data-ending-after-edge]': {
-      borderTopRightRadius: 0,
-      borderBottomRightRadius: 0,
-      clipPath: RIGHT_ARROW_CLIP,
-      paddingRight: ARROW_DEPTH,
-    },
-    '&[data-starting-before-edge][data-ending-after-edge]': {
-      clipPath: BOTH_ARROWS_CLIP,
-    },
-  },
-  '&[data-variant="regular"]': {
-    cursor: 'pointer',
-  },
-  '&[data-editing]': {
-    backgroundColor: 'var(--event-surface-selected)',
-    '&:hover': {
-      backgroundColor: 'var(--event-surface-selected-hover)',
-    },
-  },
-  variants: getPaletteVariants(theme),
-}));
+})<{ 'data-variant'?: 'compact' | 'filled' | 'regular'; palette?: PaletteName }>(({ theme }) => { throw new Error("STUB"); });
 
 const EventItemCardWrapper = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'EventItemCardWrapper',
-})<{ 'data-variant'?: 'compact' | 'filled' | 'regular' }>(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  padding: theme.spacing(0.5, 1),
-  '&[data-variant="compact"], &[data-variant="filled"]': {
-    padding: `0 ${theme.spacing(0.5)}`,
-  },
-}));
+})<{ 'data-variant'?: 'compact' | 'filled' | 'regular' }>(({ theme }) => { throw new Error("STUB"); });
 
 const EventItemTitle = styled('span', {
   name: 'MuiEventCalendar',
   slot: 'EventItemTitle',
-})(({ theme }) => ({
-  margin: 0,
-  color: (theme.vars || theme).palette.text.primary,
-  fontWeight: theme.typography.fontWeightMedium,
-  fontSize: 'var(--EventCalendar-fontSize-eventTitle, 0.75rem)',
-  lineHeight: 1.43,
-  '[data-editing] &': {
-    color: 'var(--event-on-surface-selected)',
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const EventItemTime = styled('time', {
   name: 'MuiEventCalendar',
   slot: 'EventItemTime',
-})<{ 'data-compact'?: boolean }>(({ theme }) => ({
-  display: 'inline-block',
-  color: (theme.vars || theme).palette.text.secondary,
-  fontWeight: theme.typography.fontWeightRegular,
-  fontSize: theme.typography.caption.fontSize,
-  lineHeight: 1.43,
-  whiteSpace: 'nowrap',
-  width: 150,
-  '&[data-compact]': {
-    width: 'fit-content',
-    marginInlineEnd: theme.spacing(0.5),
-  },
-  '[data-editing] &': {
-    color: 'var(--event-on-surface-selected)',
-  },
-}));
+})<{ 'data-compact'?: boolean }>(({ theme }) => { throw new Error("STUB"); });
 
 const EventItemRecurringIcon = styled(RepeatRounded, {
   name: 'MuiEventCalendar',
   slot: 'EventItemRecurringIcon',
-})(({ theme }) => ({
-  color: (theme.vars || theme).palette.text.primary,
-  '[data-editing] &': {
-    color: 'var(--event-on-surface-selected)',
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ResourceLegendColor = styled('span', {
   name: 'MuiEventCalendar',
@@ -182,198 +91,12 @@ export const EventItem = React.forwardRef(function EventItem(
   props: EventItemProps,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {
-    occurrence,
-    date,
-    ariaLabelledBy,
-    id: idProp,
-    variant = 'regular',
-    className,
-    onClick,
-    ...other
-  } = props;
-
-  // Context hooks
-  const { classes, localeText } = useEventCalendarStyledContext();
-  const store = useEventCalendarStoreContext();
-  const isEditing = useStore(store, schedulerOtherSelectors.isEditedOccurrence, occurrence.key);
-
-  // State hooks
-  const id = useId(idProp);
-
-  // Selector hooks
-  const resource = useStore(
-    store,
-    schedulerResourceSelectors.processedResource,
-    getPrimaryResourceId(occurrence.resource),
-  );
-  const color = useStore(store, schedulerEventSelectors.color, occurrence.id);
-  const isRecurring = useStore(store, schedulerEventSelectors.isRecurring, occurrence.id);
-
-  const formatTime = useFormatTime();
-
-  const adapter = useAdapterContext();
-  const startsBeforeDay =
-    !adapter.isSameDay(occurrence.displayTimezone.start.value, date.value) &&
-    adapter.isBefore(occurrence.displayTimezone.start.value, date.value);
-  const endsAfterDay =
-    !adapter.isSameDay(occurrence.displayTimezone.end.value, date.value) &&
-    adapter.isAfter(occurrence.displayTimezone.end.value, date.value);
-
-  const content = React.useMemo(() => {
-    switch (variant) {
-      case 'compact':
-        return (
-          <React.Fragment>
-            <ResourceLegendColor
-              className={classes.resourceLegendColor}
-              role="img"
-              aria-label={
-                resource?.title
-                  ? localeText.resourceAriaLabel(resource.title)
-                  : localeText.noResourceAriaLabel
-              }
-            />
-            <EventItemLinesClamp
-              className={classes.eventItemLinesClamp}
-              style={{ '--number-of-lines': 1 } as React.CSSProperties}
-            >
-              <EventItemCardContent className={classes.eventItemCardContent}>
-                <EventItemTime className={classes.eventItemTime} data-compact>
-                  <span>{formatTime(occurrence.displayTimezone.start.value)}</span>
-                </EventItemTime>
-                <EventItemTitle className={classes.eventItemTitle}>
-                  {occurrence.title}
-                </EventItemTitle>
-              </EventItemCardContent>
-            </EventItemLinesClamp>
-            {isRecurring && (
-              <EventItemRecurringIcon
-                className={classes.eventItemRecurringIcon}
-                aria-hidden="true"
-                fontSize="small"
-              />
-            )}
-          </React.Fragment>
-        );
-
-      case 'filled':
-        return (
-          <React.Fragment>
-            <EventItemLinesClamp
-              className={classes.eventItemLinesClamp}
-              style={{ '--number-of-lines': 1 } as React.CSSProperties}
-            >
-              <EventItemTitle className={classes.eventItemTitle}>{occurrence.title}</EventItemTitle>
-            </EventItemLinesClamp>
-            {isRecurring && (
-              <EventItemRecurringIcon
-                className={classes.eventItemRecurringIcon}
-                aria-hidden="true"
-                fontSize="small"
-              />
-            )}
-          </React.Fragment>
-        );
-      case 'regular':
-        return (
-          <React.Fragment>
-            <ResourceLegendColor
-              className={classes.resourceLegendColor}
-              role="img"
-              aria-label={
-                resource?.title
-                  ? localeText.resourceAriaLabel(resource.title)
-                  : localeText.noResourceAriaLabel
-              }
-            />
-            <EventItemLinesClamp
-              className={classes.eventItemLinesClamp}
-              style={{ '--number-of-lines': 1 } as React.CSSProperties}
-            >
-              <EventItemCardContent className={classes.eventItemCardContent}>
-                <MultiDayDateLabel occurrence={occurrence} formatTime={formatTime} />
-                <EventItemTitle className={classes.eventItemTitle}>
-                  {occurrence.title}
-                </EventItemTitle>
-              </EventItemCardContent>
-            </EventItemLinesClamp>
-            {isRecurring && (
-              <EventItemRecurringIcon
-                className={classes.eventItemRecurringIcon}
-                aria-hidden="true"
-                fontSize="small"
-              />
-            )}
-          </React.Fragment>
-        );
-      default:
-        throw new Error(
-          'MUI X Scheduler: Unsupported variant provided to EventItem component. ' +
-            'The EventItem component only supports specific variant values. ' +
-            'Check the component documentation for supported variants.',
-        );
-    }
-  }, [variant, resource?.title, localeText, formatTime, occurrence, isRecurring, classes]);
-
-  return (
-    <Button
-      nativeButton={false}
-      onClick={onClick}
-      render={
-        <EventItemCard
-          ref={forwardedRef}
-          id={id}
-          data-variant={variant}
-          data-palette={color}
-          data-editing={isEditing || undefined}
-          aria-labelledby={`${ariaLabelledBy} ${id}`}
-          {...(startsBeforeDay ? { 'data-starting-before-edge': '' } : {})}
-          {...(endsAfterDay ? { 'data-ending-after-edge': '' } : {})}
-          {...other}
-          className={clsx(className, classes.eventItemCard, occurrence.className)}
-        />
-      }
-    >
-      <EventItemCardWrapper className={classes.eventItemCardWrapper} data-variant={variant}>
-        {content}
-      </EventItemCardWrapper>
-    </Button>
-  );
+    throw new Error("STUB");
 });
 
 function MultiDayDateLabel(props: {
   occurrence: SchedulerEventOccurrence;
   formatTime: ReturnType<typeof useFormatTime>;
 }) {
-  const { occurrence, formatTime } = props;
-
-  const adapter = useAdapterContext();
-  const { classes, localeText } = useEventCalendarStyledContext();
-
-  if (
-    !adapter.isSameDay(occurrence.displayTimezone.start.value, occurrence.displayTimezone.end.value)
-  ) {
-    const format = `${adapter.formats.dayOfMonth} ${adapter.formats.month3Letters}`;
-    return (
-      <EventItemTime className={classes.eventItemTime} as="span">
-        {localeText.eventItemMultiDayLabel(
-          adapter.formatByString(occurrence.displayTimezone.end.value, format),
-        )}
-      </EventItemTime>
-    );
-  }
-  if (occurrence.allDay) {
-    return (
-      <EventItemTime className={classes.eventItemTime} as="span">
-        {localeText.allDay}
-      </EventItemTime>
-    );
-  }
-  return (
-    <EventItemTime className={classes.eventItemTime}>
-      <span>{formatTime(occurrence.displayTimezone.start.value)}</span>
-      <span> - {formatTime(occurrence.displayTimezone.end.value)}</span>
-    </EventItemTime>
-  );
+    throw new Error("STUB");
 }

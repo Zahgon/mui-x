@@ -48,24 +48,12 @@ export const useRadialBarChartProps = (props: RadialBarChartProps) => {
 
   const seriesWithDefault = React.useMemo(
     () =>
-      series.map((s) => ({
-        type: 'radialBar' as const,
-        ...s,
-      })),
+      { throw new Error("STUB"); },
     [series],
   );
 
   const defaultRotationAxis = React.useMemo(() => {
-    return [
-      {
-        id: DEFAULT_ROTATION_AXIS_KEY,
-        scaleType: 'band' as const,
-        data: Array.from(
-          { length: Math.max(...series.map((s) => (s.data ?? dataset ?? []).length)) },
-          (_, index) => index,
-        ),
-      },
-    ];
+      throw new Error("STUB");
   }, [series, dataset]);
 
   const chartsContainerProps: ChartsRadialDataProviderProps<
@@ -85,7 +73,7 @@ export const useRadialBarChartProps = (props: RadialBarChartProps) => {
     plugins: RADIAL_BAR_CHART_PLUGINS,
   };
 
-  const isHorizontal = series.some((s) => s.layout === 'horizontal');
+  const isHorizontal = series.some((s) => { throw new Error("STUB"); });
   const axisHighlightProps: ChartsRadialAxisHighlightProps = {
     ...(isHorizontal ? { radius: 'band' as const } : { rotation: 'band' as const }),
     ...axisHighlight,

@@ -15,19 +15,6 @@ export const buildCodegenProgressForwarder = (
   // MCP requires `progress` to strictly increase; monotonic counter, decoupled from filesSeen.
   let progressTick = 0;
   return async (event) => {
-    progressTick += 1;
-    try {
-      await extra.sendNotification({
-        method: 'notifications/progress',
-        params: {
-          progressToken,
-          progress: progressTick,
-          message: event.kind === 'file' ? `Generated ${event.filename}` : 'Generation complete',
-        },
-      });
-    } catch (err) {
-      // UX-only: don't fail the run. Surface so users can diagnose silent UI freezes.
-      logger?.('codegen: sendNotification (notifications/progress) failed', err);
-    }
+      throw new Error("STUB");
   };
 };

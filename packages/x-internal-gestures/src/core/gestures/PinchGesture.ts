@@ -160,7 +160,7 @@ export class PinchGesture<GestureName extends string> extends PointerGesture<Ges
   }
 
   protected updateOptions(options: typeof this.mutableOptionsType): void {
-    super.updateOptions(options);
+      throw new Error("STUB");
   }
 
   protected resetState(): void {
@@ -183,129 +183,7 @@ export class PinchGesture<GestureName extends string> extends PointerGesture<Ges
     pointers: Map<number, PointerData>,
     event: PointerEvent,
   ): void => {
-    const pointersArray = Array.from(pointers.values());
-
-    // Find which element (if any) is being targeted
-    const targetElement = this.getTargetElement(event);
-    if (!targetElement) {
-      return;
-    }
-
-    // Check if this gesture should be prevented by active gestures
-    if (this.shouldPreventGesture(targetElement, event.pointerType)) {
-      if (this.isActive) {
-        // If the gesture was active but now should be prevented, end it gracefully
-        this.emitPinchEvent(targetElement, 'cancel', pointersArray, event);
-        this.resetState();
-      }
-      return;
-    }
-
-    // Filter pointers to only include those targeting our element or its children
-    const relevantPointers = this.getRelevantPointers(pointersArray, targetElement);
-
-    switch (event.type) {
-      case 'pointerdown':
-        if (relevantPointers.length >= 2 && !this.isActive) {
-          // Calculate and store the starting distance between pointers
-          const initialDistance = calculateAverageDistance(relevantPointers);
-          this.state.startDistance = initialDistance;
-          this.state.lastDistance = initialDistance;
-          this.state.lastTime = event.timeStamp;
-
-          // Store the original target element
-          this.originalTarget = targetElement;
-        } else if (this.isActive && relevantPointers.length >= 2) {
-          // A new pointer was added during an active gesture
-          // Adjust the start distance to prevent jumping (similar to pointer removal logic)
-          const newDistance = calculateAverageDistance(relevantPointers);
-          // Adjust startDistance so that the current scale is preserved
-          this.state.startDistance = newDistance / this.state.lastScale;
-          this.state.lastDistance = newDistance;
-          this.state.lastTime = event.timeStamp;
-        }
-        break;
-
-      case 'pointermove':
-        if (
-          this.state.startDistance &&
-          this.isWithinPointerCount(relevantPointers, event.pointerType)
-        ) {
-          // Calculate current distance between pointers
-          const currentDistance = calculateAverageDistance(relevantPointers);
-
-          // Calculate absolute distance change
-          const distanceChange = Math.abs(currentDistance - this.state.lastDistance);
-
-          // Only proceed if the distance between pointers has changed enough
-          if (distanceChange !== 0 && distanceChange >= this.threshold) {
-            // Calculate scale relative to starting distance
-            const scale = this.state.startDistance ? currentDistance / this.state.startDistance : 1;
-
-            // Calculate the relative scale change since last event
-            const scaleChange = scale / this.state.lastScale;
-            // Apply this change to the total accumulated scale
-            this.state.totalScale *= scaleChange;
-            // Calculate velocity (change in scale over time)
-            const deltaTime = (event.timeStamp - this.state.lastTime) / 1000; // convert to seconds
-            if (this.state.lastDistance) {
-              const deltaDistance = currentDistance - this.state.lastDistance;
-              const result = deltaDistance / deltaTime;
-              this.state.velocity = Number.isNaN(result) ? 0 : result;
-            }
-
-            // Update state
-            this.state.lastDistance = currentDistance;
-            this.state.deltaScale = scale - this.state.lastScale;
-            this.state.lastScale = scale;
-            this.state.lastTime = event.timeStamp;
-
-            if (!this.isActive) {
-              // Mark gesture as active
-              this.isActive = true;
-
-              // Emit start event
-              this.emitPinchEvent(targetElement, 'start', relevantPointers, event);
-              this.emitPinchEvent(targetElement, 'ongoing', relevantPointers, event);
-            } else {
-              // Emit ongoing event
-              this.emitPinchEvent(targetElement, 'ongoing', relevantPointers, event);
-            }
-          }
-        }
-        break;
-
-      case 'pointerup':
-      case 'pointercancel':
-      case 'forceCancel':
-        if (this.isActive) {
-          const remainingPointers = relevantPointers.filter(
-            (p) => p.type !== 'pointerup' && p.type !== 'pointercancel',
-          );
-
-          // If we no longer meet the pointer count requirements, end the gesture
-          if (!this.isWithinPointerCount(remainingPointers, event.pointerType)) {
-            if (event.type === 'pointercancel') {
-              this.emitPinchEvent(targetElement, 'cancel', relevantPointers, event);
-            }
-            this.emitPinchEvent(targetElement, 'end', relevantPointers, event);
-
-            // Reset state
-            this.resetState();
-          } else if (remainingPointers.length >= 2) {
-            // If we still have enough pointers, update the start distance
-            // to prevent jumping when a finger is lifted
-            const newDistance = calculateAverageDistance(remainingPointers);
-            this.state.startDistance = newDistance / this.state.lastScale;
-            this.state.lastDistance = newDistance;
-            this.state.lastTime = event.timeStamp;
-          }
-        }
-        break;
-
-      default:
-        break;
-    }
+      throw new Error("STUB");
   };
 
   /**
@@ -317,54 +195,6 @@ export class PinchGesture<GestureName extends string> extends PointerGesture<Ges
     pointers: PointerData[],
     event: PointerEvent,
   ): void {
-    // Calculate current centroid
-    const centroid = calculateCentroid(pointers);
-
-    // Create custom event data
-    const distance = this.state.lastDistance;
-    const scale = this.state.lastScale;
-
-    // Get list of active gestures
-    const activeGestures = this.gesturesRegistry.getActiveGestures(element);
-
-    const customEventData: PinchGestureEventData = {
-      gestureName: this.name,
-      centroid,
-      target: event.target,
-      srcEvent: event,
-      phase,
-      pointers,
-      timeStamp: event.timeStamp,
-      scale,
-      deltaScale: this.state.deltaScale,
-      totalScale: this.state.totalScale,
-      distance,
-      velocity: this.state.velocity,
-      activeGestures,
-      direction: getPinchDirection(this.state.velocity),
-      customData: this.customData,
-    };
-
-    // Handle default event behavior
-    if (this.preventDefault) {
-      event.preventDefault();
-    }
-
-    if (this.stopPropagation) {
-      event.stopPropagation();
-    }
-
-    // Event names to trigger
-    const eventName = createEventName(this.name, phase);
-
-    // Dispatch custom events on the element
-    const domEvent = new CustomEvent(eventName, {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: customEventData,
-    });
-
-    element.dispatchEvent(domEvent);
+      throw new Error("STUB");
   }
 }

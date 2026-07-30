@@ -19,10 +19,7 @@ export interface FunnelSectionProps extends Omit<React.SVGProps<SVGPathElement>,
 export const FunnelSectionPath = styled('path', {
   name: 'MuiFunnelChart',
   slot: 'Section',
-})(() => ({
-  transition:
-    'opacity 0.2s ease-in, fill 0.2s ease-in, fill-opacity 0.2s ease-in, filter 0.2s ease-in',
-}));
+})(() => { throw new Error("STUB"); });
 
 /**
  * @ignore - internal component.
@@ -37,48 +34,7 @@ const FunnelSection = consumeSlots<FunnelSectionProps, SVGPathElement>(
     props: FunnelSectionProps,
     ref: React.Ref<SVGPathElement>,
   ) {
-    const {
-      seriesId,
-      dataIndex,
-      classes,
-      color,
-      onClick,
-      className,
-      variant = 'filled',
-      ...other
-    } = props;
-
-    const identifier = React.useMemo(
-      () => ({ type: 'funnel' as const, seriesId, dataIndex }),
-      [seriesId, dataIndex],
-    );
-
-    const interactionProps = useInteractionItemProps(identifier);
-    const highlightState = useItemHighlightState(identifier);
-    const isHighlighted = highlightState === 'highlighted';
-    const isFaded = highlightState === 'faded';
-
-    const isOutlined = variant === 'outlined';
-
-    return (
-      <FunnelSectionPath
-        {...interactionProps}
-        filter={isHighlighted && !isOutlined ? 'brightness(120%)' : undefined}
-        opacity={isFaded && !isOutlined ? 0.3 : 1}
-        fill={color}
-        stroke={isOutlined ? color : 'none'}
-        fillOpacity={isOutlined && !isHighlighted ? 0.4 : 1}
-        strokeOpacity={1}
-        strokeWidth={isOutlined ? 1.5 : 0}
-        cursor={onClick ? 'pointer' : 'unset'}
-        onClick={onClick}
-        data-highlighted={isHighlighted || undefined}
-        data-faded={isFaded || undefined}
-        className={clsx(classes?.section, className)}
-        {...other}
-        ref={ref}
-      />
-    );
+      throw new Error("STUB");
   }),
 );
 

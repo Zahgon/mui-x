@@ -23,11 +23,7 @@ function GridColumnMenuAggregationItem(props: GridColumnMenuItemProps) {
   const aggregationModel = useGridSelector(apiRef, gridAggregationModelSelector);
   const availableAggregationFunctions = React.useMemo(
     () =>
-      getAvailableAggregationFunctions({
-        aggregationFunctions: rootProps.aggregationFunctions,
-        colDef,
-        isDataSource: !!rootProps.dataSource,
-      }),
+      { throw new Error("STUB"); },
     [colDef, rootProps.aggregationFunctions, rootProps.dataSource],
   );
   const { native: isBaseSelectNative = false, ...baseSelectProps } =
@@ -36,49 +32,21 @@ function GridColumnMenuAggregationItem(props: GridColumnMenuItemProps) {
   const baseSelectOptionProps = rootProps.slotProps?.baseSelectOption || {};
 
   const selectedAggregationRule = React.useMemo(() => {
-    if (!colDef || !aggregationModel[colDef.field]) {
-      return '';
-    }
-    const aggregationFunctionName = aggregationModel[colDef.field];
-    if (
-      canColumnHaveAggregationFunction({
-        colDef,
-        aggregationFunctionName,
-        aggregationFunction: rootProps.aggregationFunctions[aggregationFunctionName],
-        isDataSource: !!rootProps.dataSource,
-      })
-    ) {
-      return aggregationFunctionName;
-    }
-
-    return '';
+      throw new Error("STUB");
   }, [rootProps.aggregationFunctions, rootProps.dataSource, aggregationModel, colDef]);
 
   const handleAggregationItemChange = (event: React.ChangeEvent<unknown>) => {
-    const newAggregationItem = (event.target as HTMLSelectElement | null)?.value || undefined;
-    const currentModel = gridAggregationModelSelector(apiRef);
-    const { [colDef.field]: columnItem, ...otherColumnItems } = currentModel;
-    const newModel: GridAggregationModel =
-      newAggregationItem == null
-        ? otherColumnItems
-        : { ...otherColumnItems, [colDef?.field]: newAggregationItem };
-
-    apiRef.current.setAggregationModel(newModel);
-    apiRef.current.hideColumnMenu();
+      throw new Error("STUB");
   };
 
   const label = apiRef.current.getLocaleText('aggregationMenuItemHeader');
 
   const handleMenuItemKeyDown = React.useCallback((event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      inputRef.current.focus();
-    }
+      throw new Error("STUB");
   }, []);
 
   const handleSelectKeyDown = React.useCallback((event: React.KeyboardEvent) => {
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === ' ') {
-      event.stopPropagation();
-    }
+      throw new Error("STUB");
   }, []);
 
   return (
@@ -94,7 +62,7 @@ function GridColumnMenuAggregationItem(props: GridColumnMenuItemProps) {
         label={label}
         onChange={handleAggregationItemChange}
         onKeyDown={handleSelectKeyDown}
-        onBlur={(event) => event.stopPropagation()}
+        onBlur={(event) => { throw new Error("STUB"); }}
         native={isBaseSelectNative}
         fullWidth
         size="small"
@@ -113,22 +81,7 @@ function GridColumnMenuAggregationItem(props: GridColumnMenuItemProps) {
         >
           ...
         </rootProps.slots.baseSelectOption>
-        {availableAggregationFunctions.map((aggFunc) => (
-          <rootProps.slots.baseSelectOption
-            {...baseSelectOptionProps}
-            key={aggFunc}
-            value={aggFunc}
-            native={isBaseSelectNative}
-          >
-            {getAggregationFunctionLabel({
-              apiRef,
-              aggregationRule: {
-                aggregationFunctionName: aggFunc,
-                aggregationFunction: rootProps.aggregationFunctions[aggFunc],
-              },
-            })}
-          </rootProps.slots.baseSelectOption>
-        ))}
+        {availableAggregationFunctions.map((aggFunc) => { throw new Error("STUB"); })}
       </rootProps.slots.baseSelect>
     </rootProps.slots.baseMenuItem>
   );

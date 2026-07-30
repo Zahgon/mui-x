@@ -70,16 +70,7 @@ const useUtilityClasses = (classes: Partial<DateTimePickerTabsClasses> | undefin
 const DateTimePickerTabsRoot = styled(Tabs, {
   name: 'MuiDateTimePickerTabs',
   slot: 'Root',
-})<{ ownerState: PickerOwnerState }>(({ theme }) => ({
-  boxShadow: `0 -1px 0 0 inset ${(theme.vars || theme).palette.divider}`,
-  '&:last-child': {
-    boxShadow: `0 1px 0 0 inset ${(theme.vars || theme).palette.divider}`,
-    [`& .${tabsClasses.indicator}`]: {
-      bottom: 'auto',
-      top: 0,
-    },
-  },
-}));
+})<{ ownerState: PickerOwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 /**
  * Demos:
@@ -109,7 +100,7 @@ const DateTimePickerTabs = function DateTimePickerTabs(inProps: DateTimePickerTa
   const classes = useUtilityClasses(classesProp);
 
   const handleChange = (event: React.SyntheticEvent, value: TabValue) => {
-    setView(tabToView(value));
+      throw new Error("STUB");
   };
 
   if (hidden) {

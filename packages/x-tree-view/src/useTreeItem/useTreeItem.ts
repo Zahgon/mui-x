@@ -57,10 +57,7 @@ const depthSelector = (
   itemId: string,
   depthContext: number | ((state: MinimalTreeViewState<any, any>, itemId: string) => number),
 ) => {
-  if (typeof depthContext === 'function') {
-    return depthContext(state, itemId);
-  }
-  return depthContext;
+    throw new Error("STUB");
 };
 
 export const useTreeItem = <TStore extends TreeViewAnyStore = DefaultStore>(
@@ -98,112 +95,39 @@ export const useTreeItem = <TStore extends TreeViewAnyStore = DefaultStore>(
   const createRootHandleFocus =
     (otherHandlers: EventHandlers) =>
     (event: React.FocusEvent<HTMLElement> & TreeViewCancellableEvent) => {
-      otherHandlers.onFocus?.(event);
-      if (event.defaultMuiPrevented) {
-        return;
-      }
-
-      if (
-        !status.focused &&
-        itemsSelectors.canItemBeFocused(store.state, itemId) &&
-        event.currentTarget === event.target
-      ) {
-        store.focus.focusItem(event, itemId);
-      }
+        throw new Error("STUB");
     };
 
   const createRootHandleBlur =
     (otherHandlers: EventHandlers) =>
     (event: React.FocusEvent<HTMLElement> & TreeViewCancellableEvent) => {
-      otherHandlers.onBlur?.(event);
-      if (event.defaultMuiPrevented) {
-        return;
-      }
-
-      const rootElement = store.items.getItemDOMElement(itemId);
-
-      // Don't blur the root when switching to editing mode
-      // the input that triggers the root blur can be either the relatedTarget (when entering editing state) or the target (when exiting editing state)
-      // when we enter the editing state, we focus the input -> we don't want to remove the focused item from the state
-      if (
-        status.editing ||
-        // we can exit the editing state by clicking outside the input (within the Tree Item) or by pressing Enter or Escape -> we don't want to remove the focused item from the state in these cases
-        // we can also exit the editing state by clicking on the root itself -> want to remove the focused item from the state in this case
-        (event.relatedTarget &&
-          isTargetInDescendants(event.relatedTarget as HTMLElement, rootElement) &&
-          ((event.target &&
-            (event.target as HTMLElement)?.dataset?.element === 'labelInput' &&
-            isTargetInDescendants(event.target as HTMLElement, rootElement)) ||
-            (event.relatedTarget as HTMLElement)?.dataset?.element === 'labelInput'))
-      ) {
-        return;
-      }
-
-      store.focus.removeFocusedItem();
+        throw new Error("STUB");
     };
 
   const createRootHandleKeyDown =
     (otherHandlers: EventHandlers) =>
     (event: React.KeyboardEvent<HTMLElement> & TreeViewCancellableEvent) => {
-      otherHandlers.onKeyDown?.(event);
-      if (
-        event.defaultMuiPrevented ||
-        (event.target as HTMLElement)?.dataset?.element === 'labelInput'
-      ) {
-        return;
-      }
-
-      store.keyboardNavigation.handleItemKeyDown(event, itemId);
+        throw new Error("STUB");
     };
 
   const createLabelHandleDoubleClick =
     (otherHandlers: EventHandlers) => (event: React.MouseEvent & TreeViewCancellableEvent) => {
-      otherHandlers.onDoubleClick?.(event);
-      if (event.defaultMuiPrevented) {
-        return;
-      }
-      interactions.toggleItemEditing();
+        throw new Error("STUB");
     };
 
   const createContentHandleClick =
     (otherHandlers: EventHandlers) => (event: React.MouseEvent & TreeViewCancellableEvent) => {
-      otherHandlers.onClick?.(event);
-      store.items.handleItemClick(event, itemId);
-
-      if (event.defaultMuiPrevented || checkboxRef.current?.contains(event.target as HTMLElement)) {
-        return;
-      }
-      if (expansionSelectors.triggerSlot(store.state) === 'content') {
-        interactions.handleExpansion(event);
-      }
-
-      if (!isCheckboxSelectionEnabled) {
-        interactions.handleSelection(event);
-      }
+        throw new Error("STUB");
     };
 
   const createContentHandleMouseDown =
     (otherHandlers: EventHandlers) => (event: React.MouseEvent & TreeViewCancellableEvent) => {
-      otherHandlers.onMouseDown?.(event);
-      if (event.defaultMuiPrevented) {
-        return;
-      }
-
-      // Prevent text selection
-      if (event.shiftKey || event.ctrlKey || event.metaKey || status.disabled) {
-        event.preventDefault();
-      }
+        throw new Error("STUB");
     };
 
   const createIconContainerHandleClick =
     (otherHandlers: EventHandlers) => (event: React.MouseEvent & TreeViewCancellableEvent) => {
-      otherHandlers.onClick?.(event);
-      if (event.defaultMuiPrevented) {
-        return;
-      }
-      if (expansionSelectors.triggerSlot(store.state) === 'iconContainer') {
-        interactions.handleExpansion(event);
-      }
+        throw new Error("STUB");
     };
 
   const getContextProviderProps = () => ({ itemId, id });
@@ -259,10 +183,8 @@ export const useTreeItem = <TStore extends TreeViewAnyStore = DefaultStore>(
 
     (['expanded', 'selected', 'focused', 'disabled', 'editing', 'editable'] as const).forEach(
       (key) => {
-        if (status[key]) {
-          props[`data-${key}`] = '';
-        }
-      },
+            throw new Error("STUB");
+        },
     );
 
     const enhancedContentProps =
@@ -356,24 +278,12 @@ export const useTreeItem = <TStore extends TreeViewAnyStore = DefaultStore>(
   const getErrorContainerProps = <ExternalProps extends Record<string, any> = {}>(
     externalProps: ExternalProps = {} as ExternalProps,
   ): UseTreeItemErrorContainerSlotProps<ExternalProps> => {
-    const externalEventHandlers = extractEventHandlers(externalProps);
-
-    return {
-      ...externalEventHandlers,
-      ...externalProps,
-    };
+      throw new Error("STUB");
   };
   const getLoadingContainerProps = <ExternalProps extends Record<string, any> = {}>(
     externalProps: ExternalProps = {} as ExternalProps,
   ): UseTreeItemLoadingContainerSlotProps<ExternalProps> => {
-    const externalEventHandlers = extractEventHandlers(externalProps);
-
-    return {
-      size: '12px',
-      thickness: 6,
-      ...externalEventHandlers,
-      ...externalProps,
-    };
+      throw new Error("STUB");
   };
 
   const getGroupTransitionProps = <ExternalProps extends Record<string, any> = {}>(

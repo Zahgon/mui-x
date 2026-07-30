@@ -12,29 +12,7 @@ import {
 export function useMultiInputRangeFieldRootProps<TForwardedProps extends { [key: string]: any }>(
   forwardedProps: TForwardedProps,
 ): UseMultiInputRangeFieldRootPropsReturnValue<TForwardedProps> {
-  const pickerContext = useNullablePickerContext();
-  const privatePickerContext = usePickerPrivateContext();
-
-  const handleBlur = useEventCallback(() => {
-    if (!pickerContext || privatePickerContext.viewContainerRole !== 'tooltip') {
-      return;
-    }
-
-    executeInTheNextEventLoopTick(() => {
-      if (
-        privatePickerContext.rootRefObject.current?.contains(
-          getActiveElement(privatePickerContext.rootRefObject.current),
-        ) ||
-        pickerContext.popupRef.current?.contains(getActiveElement(pickerContext.popupRef.current))
-      ) {
-        return;
-      }
-
-      privatePickerContext.dismissViews();
-    });
-  });
-
-  return { ...forwardedProps, onBlur: handleBlur };
+    throw new Error("STUB");
 }
 
 export type UseMultiInputRangeFieldRootPropsReturnValue<

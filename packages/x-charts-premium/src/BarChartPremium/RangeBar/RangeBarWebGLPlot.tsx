@@ -17,25 +17,7 @@ export interface RangeBarWebGLPlotProps {
 export function RangeBarWebGLPlot({
   borderRadius = 0,
 }: RangeBarWebGLPlotProps): React.JSX.Element | null {
-  const layer = useWebGLLayer();
-  const drawingArea = useDrawingArea();
-  const { xAxis: xAxes } = useXAxes();
-  const { yAxis: yAxes } = useYAxes();
-  const completedData = useRangeBarPlotData(drawingArea, xAxes, yAxes);
-
-  if (!layer) {
-    return null;
-  }
-
-  return (
-    <RangeBarWebGLPlotImpl
-      gl={layer.gl}
-      registerDraw={layer.registerDraw}
-      requestRender={layer.requestRender}
-      borderRadius={borderRadius}
-      completedData={completedData}
-    />
-  );
+    throw new Error("STUB");
 }
 
 function RangeBarWebGLPlotImpl(props: {
@@ -45,45 +27,5 @@ function RangeBarWebGLPlotImpl(props: {
   borderRadius: number;
   completedData: ProcessedRangeBarSeriesData[];
 }) {
-  const { gl, registerDraw, requestRender, borderRadius, completedData } = props;
-
-  const drawingArea = useDrawingArea();
-  const plotData = useWebGLBarLikePlotData(drawingArea, completedData, borderRadius, {
-    highlightType: 'rangeBar',
-    fullRoundedCorners: true,
-  });
-
-  const [program, setProgram] = React.useState<BarWebGLProgram | null>(null);
-  const drawRef = React.useRef<(() => void) | null>(null);
-
-  React.useEffect(() => {
-    const prog = new BarWebGLProgram(gl);
-    setProgram(prog);
-    return () => {
-      prog.dispose();
-    };
-  }, [gl]);
-
-  React.useEffect(() => {
-    drawRef.current = () => {
-      program?.render(plotData.count);
-    };
-  }, [program, plotData.count]);
-
-  React.useEffect(() => {
-    const unregister = registerDraw(drawRef);
-    return unregister;
-  }, [registerDraw]);
-
-  React.useEffect(() => {
-    program?.setResolution(drawingArea.width, drawingArea.height);
-    requestRender();
-  }, [drawingArea.width, drawingArea.height, program, requestRender]);
-
-  React.useEffect(() => {
-    program?.plot(plotData);
-    requestRender();
-  }, [program, plotData, requestRender]);
-
-  return null;
+    throw new Error("STUB");
 }

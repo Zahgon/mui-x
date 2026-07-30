@@ -3,7 +3,7 @@
 export type Size = { width: number; height: number };
 export const Size = {
   EMPTY: { width: 0, height: 0 },
-  equals: (a: Size, b: Size) => a.width === b.width && a.height === b.height,
+  equals: (a: Size, b: Size) => { throw new Error("STUB"); },
 };
 
 export type Row = { [key: string | symbol]: any };
@@ -64,7 +64,7 @@ export type PinnedRowPosition = keyof PinnedRows;
 export type ScrollPosition = { top: number; left: number };
 export const ScrollPosition = {
   EMPTY: { top: 0, left: 0 },
-  equals: (a: ScrollPosition, b: ScrollPosition) => a.top === b.top && a.left === b.left,
+  equals: (a: ScrollPosition, b: ScrollPosition) => { throw new Error("STUB"); },
 };
 
 export enum ScrollDirection {
@@ -76,24 +76,7 @@ export enum ScrollDirection {
 }
 export namespace ScrollDirection {
   export function forDelta(dx: number, dy: number) {
-    if (dx === 0 && dy === 0) {
-      return ScrollDirection.NONE;
-    }
-    /* eslint-disable */
-    if (Math.abs(dy) >= Math.abs(dx)) {
-      if (dy > 0) {
-        return ScrollDirection.DOWN;
-      } else {
-        return ScrollDirection.UP;
-      }
-    } else {
-      if (dx > 0) {
-        return ScrollDirection.RIGHT;
-      } else {
-        return ScrollDirection.LEFT;
-      }
-    }
-    /* eslint-enable */
+      throw new Error("STUB");
   }
 }
 

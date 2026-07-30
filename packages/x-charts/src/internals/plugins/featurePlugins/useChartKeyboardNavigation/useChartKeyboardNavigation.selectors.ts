@@ -15,26 +15,24 @@ import type { AxisId, AxisItemIdentifier, ChartsAxisProps } from '../../../../mo
 
 const selectKeyboardNavigation: ChartOptionalRootSelector<UseChartKeyboardNavigationSignature> = (
   state,
-) => state.keyboardNavigation;
+) => { throw new Error("STUB"); };
 
 export const selectorChartsItemIsFocused = createSelector(
   selectKeyboardNavigation,
   (keyboardNavigationState, item: FocusedItemIdentifier<ChartSeriesType>) =>
-    keyboardNavigationState?.isFocused === true &&
-    keyboardNavigationState?.item != null &&
-    fastObjectShallowCompare(keyboardNavigationState.item, item),
+    { throw new Error("STUB"); },
 );
 
 export const selectorChartsHasFocusedItem = createSelector(
   selectKeyboardNavigation,
   (keyboardNavigationState) =>
-    keyboardNavigationState?.isFocused === true && keyboardNavigationState?.item != null,
+    { throw new Error("STUB"); },
 );
 
 export const selectorChartsFocusedItem = createSelector(
   selectKeyboardNavigation,
   (keyboardNavigationState) =>
-    keyboardNavigationState?.isFocused === true ? (keyboardNavigationState?.item ?? null) : null,
+    { throw new Error("STUB"); },
 );
 
 /**
@@ -44,12 +42,12 @@ export const selectorChartsFocusedItem = createSelector(
  */
 export const selectorChartsFocusedOrToFocusedItem = createSelector(
   selectKeyboardNavigation,
-  (keyboardNavigationState) => keyboardNavigationState?.item ?? null,
+  (keyboardNavigationState) => { throw new Error("STUB"); },
 );
 
 export const selectorChartsIsKeyboardNavigationEnabled = createSelector(
   selectKeyboardNavigation,
-  (keyboardNavigationState) => !!keyboardNavigationState?.enabled,
+  (keyboardNavigationState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -63,25 +61,7 @@ const createSelectAxisHighlight =
     axis: ComputeResult<ChartsAxisProps>,
     series: ProcessedSeries<SeriesType>,
   ): AxisItemIdentifier | undefined => {
-    if (item == null || !('dataIndex' in item) || item.dataIndex === undefined) {
-      return undefined;
-    }
-
-    const seriesConfig = series[item.type as SeriesType]?.series[item.seriesId];
-    if (!seriesConfig) {
-      return undefined;
-    }
-
-    let axisId: AxisId | false | undefined =
-      direction === 'x'
-        ? 'xAxisId' in seriesConfig && seriesConfig.xAxisId
-        : 'yAxisId' in seriesConfig && seriesConfig.yAxisId;
-
-    if (axisId === undefined || axisId === false) {
-      axisId = axis.axisIds[0];
-    }
-
-    return { axisId, dataIndex: item.dataIndex };
+      throw new Error("STUB");
   };
 
 export const selectorChartsKeyboardXAxisIndex = createSelector(
@@ -101,14 +81,6 @@ export const selectorChartsKeyboardYAxisIndex = createSelector(
 export const selectorChartsKeyboardItem = createSelectorMemoized(
   selectKeyboardNavigation,
   function selectorChartsKeyboardItem(keyboardState) {
-    if (keyboardState?.isFocused !== true || keyboardState?.item == null) {
-      return null;
-    }
-    const { type, seriesId } = keyboardState.item;
-
-    if (type === undefined || seriesId === undefined) {
-      return null;
-    }
-    return keyboardState.item;
+      throw new Error("STUB");
   },
 );

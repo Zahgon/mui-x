@@ -73,28 +73,7 @@ function GridEditDateCell(props: GridEditDateCellProps) {
   const inputRef = React.useRef<HTMLInputElement>(null);
 
   const valueTransformed = React.useMemo(() => {
-    let parsedDate: Date | null;
-
-    if (valueProp == null) {
-      parsedDate = null;
-    } else if (valueProp instanceof Date) {
-      parsedDate = valueProp;
-    } else {
-      parsedDate = new Date((valueProp ?? '').toString());
-    }
-
-    let formattedDate: string;
-    if (parsedDate == null || Number.isNaN(parsedDate.getTime())) {
-      formattedDate = '';
-    } else {
-      const localDate = new Date(parsedDate.getTime() - parsedDate.getTimezoneOffset() * 60 * 1000);
-      formattedDate = localDate.toISOString().substr(0, isDateTime ? 16 : 10);
-    }
-
-    return {
-      parsed: parsedDate,
-      formatted: formattedDate,
-    };
+      throw new Error("STUB");
   }, [valueProp, isDateTime]);
 
   const [valueState, setValueState] = React.useState(valueTransformed);
@@ -103,56 +82,22 @@ function GridEditDateCell(props: GridEditDateCellProps) {
   const classes = useUtilityClasses(ownerState);
 
   const parseValueToDate = React.useCallback((value: string) => {
-    if (value === '') {
-      return null;
-    }
-
-    const [date, time] = value.split('T');
-    const [year, month, day] = date.split('-');
-
-    const parsedDate = new Date();
-    parsedDate.setFullYear(Number(year), Number(month) - 1, Number(day));
-    parsedDate.setHours(0, 0, 0, 0);
-
-    if (time) {
-      const [hours, minutes] = time.split(':');
-      parsedDate.setHours(Number(hours), Number(minutes), 0, 0);
-    }
-
-    return parsedDate;
+      throw new Error("STUB");
   }, []);
 
   const handleChange = React.useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newFormattedDate = event.target.value;
-      const newParsedDate = parseValueToDate(newFormattedDate);
-
-      if (onValueChange) {
-        await onValueChange(event, newParsedDate);
-      }
-
-      setValueState({ parsed: newParsedDate, formatted: newFormattedDate });
-      apiRef.current.setEditCellValue({ id, field, value: newParsedDate }, event);
-    },
+          throw new Error("STUB");
+      },
     [apiRef, field, id, onValueChange, parseValueToDate],
   );
 
   React.useEffect(() => {
-    setValueState((state) => {
-      if (
-        valueTransformed.parsed !== state.parsed &&
-        valueTransformed.parsed?.getTime() !== state.parsed?.getTime()
-      ) {
-        return valueTransformed;
-      }
-      return state;
-    });
+      throw new Error("STUB");
   }, [valueTransformed]);
 
   useEnhancedEffect(() => {
-    if (hasFocus) {
-      inputRef.current!.focus();
-    }
+      throw new Error("STUB");
   }, [hasFocus]);
   return (
     <StyledInputBase
@@ -244,6 +189,4 @@ GridEditDateCell.propTypes /* remove-proptypes */ = {
 
 export { GridEditDateCell };
 
-export const renderEditDateCell = (params: GridRenderEditCellParams) => (
-  <GridEditDateCell {...params} />
-);
+export const renderEditDateCell = (params: GridRenderEditCellParams) => { throw new Error("STUB"); };

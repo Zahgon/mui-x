@@ -49,9 +49,8 @@ function GridCsvExportMenuItem(props: GridCsvExportMenuItemProps) {
   return (
     <rootProps.slots.baseMenuItem
       onClick={() => {
-        apiRef.current.exportDataAsCsv(options);
-        hideMenu?.();
-      }}
+              throw new Error("STUB");
+          }}
       {...other}
     >
       {apiRef.current.getLocaleText('toolbarExportCSV')}
@@ -88,9 +87,8 @@ function GridPrintExportMenuItem(props: GridPrintExportMenuItemProps) {
   return (
     <rootProps.slots.baseMenuItem
       onClick={() => {
-        apiRef.current.exportDataAsPrint(options);
-        hideMenu?.();
-      }}
+              throw new Error("STUB");
+          }}
       {...other}
     >
       {apiRef.current.getLocaleText('toolbarExportPrint')}
@@ -124,31 +122,8 @@ GridPrintExportMenuItem.propTypes /* remove-proptypes */ = {
  */
 const GridToolbarExport = forwardRef<HTMLButtonElement, GridToolbarExportProps>(
   function GridToolbarExport(props, ref) {
-    const {
-      csvOptions = {},
-      printOptions = {},
-      excelOptions,
-      ...other
-    } = props as typeof props & { excelOptions: any };
-
-    const apiRef = useGridApiContext();
-
-    const preProcessedButtons = apiRef.current
-      .unstable_applyPipeProcessors('exportMenu', [], { excelOptions, csvOptions, printOptions })
-      .sort((a, b) => (a.componentName > b.componentName ? 1 : -1));
-
-    if (preProcessedButtons.length === 0) {
-      return null;
-    }
-
-    return (
-      <GridToolbarExportContainer {...other} ref={ref}>
-        {preProcessedButtons.map((button, index) =>
-          React.cloneElement(button.component, { key: index }),
-        )}
-      </GridToolbarExportContainer>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridToolbarExport.propTypes /* remove-proptypes */ = {

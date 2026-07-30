@@ -22,25 +22,7 @@ export function usePolarGeometry<
   AngleScale extends ScaleName = ScaleName,
   RadiusScale extends ScaleName = ScaleName,
 >(): PolarGeometry<AngleScale, RadiusScale> | null {
-  const { left, top, width, height } = useDrawingArea();
-  const rotationAxis = useRotationAxis();
-  const radiusAxis = useRadiusAxis();
-
-  if (!rotationAxis || !radiusAxis) {
-    return null;
-  }
-
-  const angleScale = rotationAxis.scale as AxisScaleConfig[AngleScale]['scale'];
-  const radiusScale = radiusAxis.scale as AxisScaleConfig[RadiusScale]['scale'];
-
-  return {
-    cx: left + width / 2,
-    cy: top + height / 2,
-    angleScale,
-    radiusScale,
-    point: (radius, angle) => [radius * Math.sin(angle), -radius * Math.cos(angle)],
-    pointInverse: (x, y) => [Math.sqrt(x * x + y * y), Math.atan2(x, -y)],
-  };
+    throw new Error("STUB");
 }
 
 export interface PolarGeometry<

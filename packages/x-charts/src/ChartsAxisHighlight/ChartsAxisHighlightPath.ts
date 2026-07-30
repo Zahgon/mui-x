@@ -5,32 +5,4 @@ import type { ChartsAxisHighlightType } from './ChartsAxisHighlight.types';
 export const ChartsAxisHighlightPath = styled('path', {
   name: 'MuiChartsAxisHighlight',
   slot: 'Root',
-})<{ ownerState: { axisHighlight: ChartsAxisHighlightType } }>(({ theme }) => ({
-  pointerEvents: 'none',
-  variants: [
-    {
-      props: {
-        axisHighlight: 'band',
-      },
-      style: {
-        fill: 'white',
-        fillOpacity: 0.1,
-        ...theme.applyStyles('light', {
-          fill: 'gray',
-        }),
-      },
-    },
-    {
-      props: {
-        axisHighlight: 'line',
-      },
-      style: {
-        strokeDasharray: '5 2',
-        stroke: '#ffffff',
-        ...theme.applyStyles('light', {
-          stroke: '#000000',
-        }),
-      },
-    },
-  ],
-}));
+})<{ ownerState: { axisHighlight: ChartsAxisHighlightType } }>(({ theme }) => { throw new Error("STUB"); });

@@ -64,21 +64,8 @@ function GridColumnHeaderFilterIconButton(props: ColumnHeaderFilterIconButtonPro
 
   const toggleFilter = React.useCallback(
     (event: React.MouseEvent<HTMLButtonElement>) => {
-      event.preventDefault();
-      event.stopPropagation();
-
-      const { open, openedPanelValue } = gridPreferencePanelStateSelector(apiRef);
-
-      if (open && openedPanelValue === GridPreferencePanelsValue.filters) {
-        apiRef.current.hideFilterPanel();
-      } else {
-        apiRef.current.showFilterPanel(undefined, panelId, labelId);
-      }
-
-      if (onClick) {
-        onClick(apiRef.current.getColumnHeaderParams(field), event);
-      }
-    },
+          throw new Error("STUB");
+      },
     [apiRef, field, onClick, panelId, labelId],
   );
 

@@ -9,10 +9,10 @@ export function useEventTimelinePremium<TEvent extends object, TResource extends
   parameters: EventTimelinePremiumParameters<TEvent, TResource>,
 ): EventTimelinePremiumStore<TEvent, TResource> {
   const adapter = useAdapter(parameters.dateLocale);
-  const store = useDisposable(() => new EventTimelinePremiumStore(parameters, adapter));
+  const store = useDisposable(() => { throw new Error("STUB"); });
 
   useIsoLayoutEffect(
-    () => store.updateStateFromParameters(parameters, adapter),
+    () => { throw new Error("STUB"); },
     [store, adapter, parameters],
   );
 

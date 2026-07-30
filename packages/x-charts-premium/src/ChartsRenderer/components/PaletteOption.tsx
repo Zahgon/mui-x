@@ -5,22 +5,12 @@ import { GridChartsPaletteIcon } from '../icons';
 const PaletteOptionRoot = styled('div', {
   name: 'MuiDataGrid',
   slot: 'PaletteOptionRoot',
-})(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const PaletteOptionIcon = styled('div', {
   name: 'MuiDataGrid',
   slot: 'PaletteOptionIcon',
-})(({ theme }) => ({
-  width: 24,
-  height: 24,
-  borderRadius: 4,
-  border: `1px solid ${(theme.vars || theme).palette.divider}`,
-  backgroundColor: (theme.vars || theme).palette.background.default,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 function PaletteOption(props: {
   palette: (mode: 'light' | 'dark') => string[];
@@ -34,7 +24,7 @@ function PaletteOption(props: {
         <GridChartsPaletteIcon
           style={
             Object.fromEntries(
-              colors.map((color, index) => [`--color-${index + 1}`, color]),
+              colors.map((color, index) => { throw new Error("STUB"); }),
             ) as React.CSSProperties
           }
         />

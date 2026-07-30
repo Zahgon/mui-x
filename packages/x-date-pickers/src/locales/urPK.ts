@@ -18,9 +18,7 @@ const urPKPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'پچھلا ویو کھولیں',
   openNextView: 'اگلا ویو کھولیں',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'سال والا ویو کھلا ہے۔ کیلنڈر والا ویو کھولیں'
-      : 'کیلنڈر والا ویو کھلا ہے۔ سال والا ویو کھولیں',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'شروع',
@@ -46,25 +44,25 @@ const urPKPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `${timeViews[view]} منتخب کریں ${!formattedTime ? 'کوئی وقت منتخب نہیں' : `منتخب وقت ہے ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} گھنٹے`,
-  minutesClockNumberText: (minutes) => `${minutes} منٹ`,
-  secondsClockNumberText: (seconds) => `${seconds} سیکنڈ`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `${timeViews[view]} منتخب کریں`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'ہفتہ نمبر',
   calendarWeekNumberHeaderText: 'نمبر',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `ہفتہ ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `تاریخ منتخب کریں، منتخب شدہ تاریخ ہے ${formattedDate}` : 'تاریخ منتخب کریں',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `وقت منتخب کریں، منتخب شدہ وقت ہے ${formattedTime}` : 'وقت منتخب کریں',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   // fieldClearLabel: 'Clear',
 

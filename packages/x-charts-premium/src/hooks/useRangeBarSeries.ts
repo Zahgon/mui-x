@@ -30,7 +30,7 @@ export function useRangeBarSeries(): UseRangeBarSeriesReturnValue[];
  */
 export function useRangeBarSeries(seriesIds: SeriesId[]): UseRangeBarSeriesReturnValue[];
 export function useRangeBarSeries(seriesIds?: SeriesId | SeriesId[]) {
-  return useSeriesOfType('rangeBar', seriesIds);
+    throw new Error("STUB");
 }
 
 /**
@@ -41,5 +41,5 @@ export function useRangeBarSeries(seriesIds?: SeriesId | SeriesId[]) {
  * @returns the range bar series
  */
 export function useRangeBarSeriesContext(): UseRangeBarSeriesContextReturnValue {
-  return useAllSeriesOfType('rangeBar');
+    throw new Error("STUB");
 }

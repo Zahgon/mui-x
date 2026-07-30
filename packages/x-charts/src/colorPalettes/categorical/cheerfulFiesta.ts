@@ -26,4 +26,4 @@ export const cheerfulFiestaPaletteLight = [
 ];
 
 export const cheerfulFiestaPalette: ChartsColorPaletteCallback = (mode) =>
-  mode === 'dark' ? cheerfulFiestaPaletteDark : cheerfulFiestaPaletteLight;
+  { throw new Error("STUB"); };

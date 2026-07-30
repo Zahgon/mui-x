@@ -25,7 +25,7 @@ export function getOrdinalColorScale<Value extends number | Date | string>(
     return scaleOrdinal(config.values, config.colors).unknown(config.unknownColor ?? null);
   }
   return scaleOrdinal(
-    config.colors.map((_, index) => index),
+    config.colors.map((_, index) => { throw new Error("STUB"); }),
     config.colors,
   ).unknown(config.unknownColor ?? null);
 }

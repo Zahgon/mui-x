@@ -30,36 +30,8 @@ export const useGridRowAriaAttributesPro = (addTreeDataAttributes?: boolean) => 
 
   return React.useCallback(
     (rowNode: GridTreeNode, index: number) => {
-      const ariaAttributes = getRowAriaAttributesCommunity(rowNode, index);
-
-      if (!rowNode || !(props.treeData || addTreeDataAttributes)) {
-        return ariaAttributes;
-      }
-
-      // pinned and footer rows are not part of the rowgroup and should not get the set specific aria attributes
-      if (rowNode.type === 'footer' || rowNode.type === 'pinnedRow') {
-        return ariaAttributes;
-      }
-
-      ariaAttributes['aria-level'] = rowNode.depth + 1;
-
-      const filteredChildrenCount = filteredChildrenCountLookup[rowNode.id] ?? 0;
-      // aria-expanded should only be added to the rows that contain children
-      if (rowNode.type === 'group' && filteredChildrenCount > 0) {
-        ariaAttributes['aria-expanded'] = Boolean(rowNode.childrenExpanded);
-      }
-
-      // if the parent is null, set size and position cannot be determined
-      if (rowNode.parent !== null) {
-        ariaAttributes['aria-setsize'] =
-          rowNode.parent === GRID_ROOT_GROUP_ID
-            ? filteredTopLevelRowCount
-            : filteredChildrenCountLookup[rowNode.parent];
-        ariaAttributes['aria-posinset'] = sortedVisibleRowPositionsLookup[rowNode.id];
-      }
-
-      return ariaAttributes;
-    },
+          throw new Error("STUB");
+      },
     [
       props.treeData,
       addTreeDataAttributes,

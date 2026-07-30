@@ -22,28 +22,5 @@ interface UseParsedFormatParameters {
  * @returns
  */
 export const useParsedFormat = (parameters: UseParsedFormatParameters = {}) => {
-  const pickerContext = useNullablePickerContext();
-  const adapter = usePickerAdapter();
-  const translations = usePickerTranslations();
-  const localizedDigits = React.useMemo(() => getLocalizedDigits(adapter), [adapter]);
-  const { format = pickerContext?.fieldFormat ?? adapter.formats.fullDate } = parameters;
-
-  return React.useMemo(() => {
-    const sections = buildSectionsFromFormat({
-      adapter,
-      format,
-      formatDensity: 'dense',
-      // Pass `isRtl: false` to prevent RTL format reversal.
-      // `useParsedFormat` builds a display string, not a field layout.
-      isRtl: false,
-      shouldRespectLeadingZeros: true,
-      localeText: translations,
-      localizedDigits,
-      date: null,
-    });
-
-    return sections
-      .map((section) => `${section.startSeparator}${section.placeholder}${section.endSeparator}`)
-      .join('');
-  }, [adapter, translations, localizedDigits, format]);
+    throw new Error("STUB");
 };

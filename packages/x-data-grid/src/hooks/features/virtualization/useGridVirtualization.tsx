@@ -26,19 +26,7 @@ export type GridVirtualizationState = {
 // XXX: We want to use the virtualizer as the source of truth for its state, but this needs to
 // stay because some parts of the grid require the `virtualization` state during initialization.
 export const virtualizationStateInitializer: GridStateInitializer<RootProps> = (state, props) => {
-  const { disableVirtualization, autoHeight } = props;
-
-  const virtualization = {
-    enabled: !disableVirtualization && HAS_LAYOUT,
-    enabledForColumns: !disableVirtualization && HAS_LAYOUT,
-    enabledForRows: !disableVirtualization && !autoHeight && HAS_LAYOUT,
-    renderContext: EMPTY_RENDER_CONTEXT,
-  };
-
-  return {
-    ...state,
-    virtualization,
-  };
+    throw new Error("STUB");
 };
 
 export function useGridVirtualization(
@@ -71,16 +59,7 @@ export function useGridVirtualization(
   };
 
   const setColumnVirtualization = (enabled: boolean) => {
-    const { virtualizer } = apiRef.current;
-    enabled &&= HAS_LAYOUT;
-    const snapshot = virtualizer.store.getSnapshot();
-    if (snapshot.virtualization.enabledForColumns === enabled) {
-      return;
-    }
-    virtualizer.store.set('virtualization', {
-      ...virtualizer.store.state.virtualization,
-      enabledForColumns: enabled,
-    });
+      throw new Error("STUB");
   };
 
   const api = {
@@ -91,8 +70,7 @@ export function useGridVirtualization(
   useGridApiMethod(apiRef, api, 'public');
 
   const forceUpdateRenderContext = () => {
-    const { virtualizer } = apiRef.current;
-    virtualizer?.api.scheduleUpdateRenderContext();
+      throw new Error("STUB");
   };
 
   apiRef.current.register('private', {
@@ -109,10 +87,7 @@ export function useGridVirtualization(
 
   /* eslint-disable react-hooks/exhaustive-deps */
   React.useEffect(() => {
-    if (!apiRef.current.virtualizer) {
-      return;
-    }
-    setVirtualization(!rootProps.disableVirtualization);
+      throw new Error("STUB");
   }, [apiRef, disableVirtualization, autoHeight]);
   /* eslint-enable react-hooks/exhaustive-deps */
 }

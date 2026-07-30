@@ -15,7 +15,7 @@ function arraysEqual(left: string[], right: string[]) {
     return false;
   }
 
-  return left.every((value, index) => value === right[index]);
+  return left.every((value, index) => { throw new Error("STUB"); });
 }
 
 function startsWithSequence(values: string[], prefix: string[]) {
@@ -23,7 +23,7 @@ function startsWithSequence(values: string[], prefix: string[]) {
     return false;
   }
 
-  return prefix.every((value, index) => values[index] === value);
+  return prefix.every((value, index) => { throw new Error("STUB"); });
 }
 
 function endsWithSequence(values: string[], suffix: string[]) {
@@ -33,7 +33,7 @@ function endsWithSequence(values: string[], suffix: string[]) {
 
   const offset = values.length - suffix.length;
 
-  return suffix.every((value, index) => values[offset + index] === value);
+  return suffix.every((value, index) => { throw new Error("STUB"); });
 }
 
 function classifyItemChange(previous: string[], next: string[]): ChangeKind {
@@ -101,16 +101,10 @@ export function useMessageListBehavior(parameters: {
   const isAtBottomRef = React.useRef(true);
   const unseenMessageCountRef = React.useRef(0);
   const setRootElement = React.useCallback((node: HTMLDivElement | null) => {
-    rootRef.current = node;
+      throw new Error("STUB");
   }, []);
   const messageById = React.useMemo(() => {
-    const nextMap = new Map<string, ChatMessage>();
-
-    messages.forEach((message) => {
-      nextMap.set(message.id, message);
-    });
-
-    return nextMap;
+      throw new Error("STUB");
   }, [messages]);
 
   // Latest-ref so `updateIsAtBottom` (which sits in many dependency arrays)
@@ -120,191 +114,44 @@ export function useMessageListBehavior(parameters: {
 
   const updateIsAtBottom = React.useCallback(
     (options?: { silent?: boolean }) => {
-      const nextIsAtBottom = isScrollableToBottom(rootRef.current, autoScrollBuffer);
-      const previousIsAtBottom = isAtBottomRef.current;
-
-      isAtBottomRef.current = nextIsAtBottom;
-      setIsAtBottom((previous) => (previous === nextIsAtBottom ? previous : nextIsAtBottom));
-
-      // `onReachBottom` fires only on a `false → true` transition (strict
-      // "reach" semantics): once per entry into the bottom zone, never while
-      // pinned (streaming growth and appends-while-pinned are `true → true`).
-      // The `silent` mode re-seeds the latch without firing — used for
-      // item-set replacement (conversation switch) so switch-induced layout
-      // can never fire the callback.
-      if (!options?.silent && !previousIsAtBottom && nextIsAtBottom) {
-        onReachBottomRef.current?.();
-      }
-
-      return nextIsAtBottom;
-    },
+          throw new Error("STUB");
+      },
     [autoScrollBuffer],
   );
 
   const updateUnseenMessageCount = React.useCallback((nextCount: number) => {
-    unseenMessageCountRef.current = nextCount;
-    setUnseenMessageCount((previous) => (previous === nextCount ? previous : nextCount));
+      throw new Error("STUB");
   }, []);
 
   const captureAnchor = React.useCallback((ids: string[]): ScrollAnchor | null => {
-    const root = rootRef.current;
-
-    if (!root) {
-      return null;
-    }
-
-    const containerRect = root.getBoundingClientRect();
-
-    for (const id of ids) {
-      const element = rowElementsRef.current.get(id);
-
-      if (!element) {
-        continue;
-      }
-
-      const rect = element.getBoundingClientRect();
-
-      if (rect.bottom <= containerRect.top || rect.top >= containerRect.bottom) {
-        continue;
-      }
-
-      return {
-        id,
-        offsetFromBottom: containerRect.bottom - rect.bottom,
-      };
-    }
-
-    return null;
+      throw new Error("STUB");
   }, []);
 
   const restoreAnchor = React.useCallback((anchor: ScrollAnchor | null) => {
-    const root = rootRef.current;
-
-    if (!root || !anchor) {
-      return false;
-    }
-
-    const element = rowElementsRef.current.get(anchor.id);
-
-    if (!element) {
-      return false;
-    }
-
-    const containerBottom = root.getBoundingClientRect().bottom;
-    const nextOffsetFromBottom = containerBottom - element.getBoundingClientRect().bottom;
-
-    root.scrollTop += anchor.offsetFromBottom - nextOffsetFromBottom;
-
-    return true;
+      throw new Error("STUB");
   }, []);
 
   const scrollToBottom = React.useCallback(
     (options?: { behavior?: ScrollBehavior }) => {
-      const root = rootRef.current;
-
-      if (!root) {
-        return;
-      }
-
-      if (typeof root.scrollTo === 'function') {
-        root.scrollTo({
-          top: root.scrollHeight,
-          behavior: options?.behavior ?? 'auto',
-        });
-      } else {
-        root.scrollTop = root.scrollHeight;
-      }
-      updateIsAtBottom();
-      updateUnseenMessageCount(0);
-      anchorRef.current = captureAnchor(itemIdsRef.current);
-    },
+          throw new Error("STUB");
+      },
     [captureAnchor, updateIsAtBottom, updateUnseenMessageCount],
   );
 
   const registerRowElement = React.useCallback((id: string, element: HTMLDivElement | null) => {
-    if (element == null) {
-      rowElementsRef.current.delete(id);
-      return;
-    }
-
-    rowElementsRef.current.set(id, element);
+      throw new Error("STUB");
   }, []);
 
   const scheduleResizeRestore = React.useCallback(() => {
-    if (typeof requestAnimationFrame !== 'function') {
-      // SSR / non-browser environments don't have rAF — bail rather than throw.
-      return;
-    }
-    cancelAnimationFrame(resizeFrameRef.current);
-    resizeFrameRef.current = requestAnimationFrame(() => {
-      // Guard against the frame firing after unmount: once the cleanup runs
-      // we shouldn't touch DOM refs or call state setters (#10).
-      if (!isMountedRef.current) {
-        return;
-      }
-      if (isAtBottomRef.current && autoScrollEnabled && isStreamingRef.current) {
-        // Follow streaming content: the row grew (new tokens), scroll to stay at bottom.
-        // Only auto-scroll during streaming so that user-initiated resizes (e.g.
-        // expanding/collapsing tool or reasoning sections) do not cause unwanted scrolling.
-        // scrollToBottom() already calls updateIsAtBottom() and captureAnchor() internally.
-        scrollToBottom();
-      } else {
-        if (!isAtBottomRef.current) {
-          restoreAnchor(anchorRef.current);
-        }
-        updateIsAtBottom();
-        anchorRef.current = captureAnchor(itemIdsRef.current);
-      }
-    });
+      throw new Error("STUB");
   }, [autoScrollEnabled, captureAnchor, restoreAnchor, scrollToBottom, updateIsAtBottom]);
 
   const maybeLoadMoreHistory = React.useCallback(async () => {
-    const root = rootRef.current;
-
-    if (!root || !hasMoreHistory || topLoadInFlightRef.current) {
-      return;
-    }
-
-    if (root.scrollTop > estimatedItemSize) {
-      topReachedRef.current = false;
-      return;
-    }
-
-    if (topReachedRef.current) {
-      return;
-    }
-
-    topReachedRef.current = true;
-    topLoadInFlightRef.current = true;
-    onReachTop?.();
-
-    try {
-      await loadMoreHistory();
-    } finally {
-      topLoadInFlightRef.current = false;
-    }
+      throw new Error("STUB");
   }, [estimatedItemSize, hasMoreHistory, loadMoreHistory, onReachTop]);
 
   const handleScroll = React.useCallback(() => {
-    const root = rootRef.current;
-
-    if (!root) {
-      return;
-    }
-
-    anchorRef.current = captureAnchor(itemIdsRef.current);
-    const nextIsAtBottom = updateIsAtBottom();
-
-    if (nextIsAtBottom) {
-      updateUnseenMessageCount(0);
-    }
-
-    if (root.scrollTop > estimatedItemSize) {
-      topReachedRef.current = false;
-      return;
-    }
-
-    void maybeLoadMoreHistory();
+      throw new Error("STUB");
   }, [
     captureAnchor,
     estimatedItemSize,
@@ -314,38 +161,11 @@ export function useMessageListBehavior(parameters: {
   ]);
 
   React.useLayoutEffect(() => {
-    updateIsAtBottom();
-    anchorRef.current = captureAnchor(itemIdsRef.current);
+      throw new Error("STUB");
   }, [captureAnchor, updateIsAtBottom]);
 
   React.useLayoutEffect(() => {
-    const previousItemIds = previousItemIdsRef.current;
-    const changeKind = classifyItemChange(previousItemIds, itemIds);
-
-    if (changeKind === 'prepend' || changeKind === 'other') {
-      restoreAnchor(anchorRef.current);
-    } else if (changeKind === 'append') {
-      const appendedIds = itemIds.slice(previousItemIds.length);
-      const lastAppendedMessage = appendedIds.length
-        ? messageById.get(appendedIds[appendedIds.length - 1])
-        : null;
-
-      if ((autoScrollEnabled && isAtBottomRef.current) || lastAppendedMessage?.role === 'user') {
-        scrollToBottom();
-      } else if (appendedIds.length > 0) {
-        updateUnseenMessageCount(unseenMessageCountRef.current + appendedIds.length);
-      }
-    }
-
-    const nextIsAtBottom = updateIsAtBottom({ silent: changeKind === 'other' });
-
-    if (nextIsAtBottom) {
-      updateUnseenMessageCount(0);
-    }
-
-    anchorRef.current = captureAnchor(itemIds);
-    topReachedRef.current = false;
-    previousItemIdsRef.current = itemIds;
+      throw new Error("STUB");
   }, [
     autoScrollEnabled,
     captureAnchor,
@@ -358,24 +178,11 @@ export function useMessageListBehavior(parameters: {
   ]);
 
   React.useEffect(() => {
-    // Restore on (re)mount so the resize-driven auto-scroll keeps working after
-    // a StrictMode mount → cleanup → mount cycle, which would otherwise leave
-    // `isMountedRef.current` stuck at `false` from the dev-only first cleanup.
-    isMountedRef.current = true;
-    return () => {
-      isMountedRef.current = false;
-      if (typeof cancelAnimationFrame === 'function') {
-        cancelAnimationFrame(resizeFrameRef.current);
-      }
-    };
+      throw new Error("STUB");
   }, []);
 
   const contextValue = React.useMemo(
-    () => ({
-      isAtBottom,
-      unseenMessageCount,
-      scrollToBottom,
-    }),
+    () => { throw new Error("STUB"); },
     [isAtBottom, scrollToBottom, unseenMessageCount],
   );
 

@@ -8,51 +8,8 @@ import { styled } from '../internals/zero-styled';
 const TreeItemDragAndDropOverlayRoot = styled('div', {
   name: 'MuiTreeItemDragAndDropOverlay',
   slot: 'Root',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'action',
-})<{ action?: TreeViewItemsReorderingAction | null }>(({ theme }) => ({
-  position: 'absolute',
-  left: 0,
-  display: 'flex',
-  top: 0,
-  bottom: 0,
-  right: 0,
-  pointerEvents: 'none',
-  variants: [
-    {
-      props: { action: 'make-child' },
-      style: {
-        marginLeft: 'calc(var(--TreeView-indentMultiplier) * var(--TreeView-itemDepth))',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: theme.alpha(
-          (theme.vars || theme).palette.primary.dark,
-          (theme.vars || theme).palette.action.focusOpacity,
-        ),
-      },
-    },
-    {
-      props: { action: 'reorder-above' },
-      style: {
-        marginLeft: 'calc(var(--TreeView-indentMultiplier) * var(--TreeView-itemDepth))',
-        borderTop: `1px solid ${(theme.vars || theme).palette.action.active}`,
-      },
-    },
-    {
-      props: { action: 'reorder-below' },
-      style: {
-        marginLeft: 'calc(var(--TreeView-indentMultiplier) * var(--TreeView-itemDepth))',
-        borderBottom: `1px solid ${(theme.vars || theme).palette.action.active}`,
-      },
-    },
-    {
-      props: { action: 'move-to-parent' },
-      style: {
-        marginLeft:
-          'calc(var(--TreeView-indentMultiplier) * calc(var(--TreeView-itemDepth) - 1))' as any,
-        borderBottom: `1px solid ${(theme.vars || theme).palette.action.active}`,
-      },
-    },
-  ],
-}));
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
+})<{ action?: TreeViewItemsReorderingAction | null }>(({ theme }) => { throw new Error("STUB"); });
 
 function TreeItemDragAndDropOverlay(props: TreeItemDragAndDropOverlayProps) {
   if (props.action == null) {

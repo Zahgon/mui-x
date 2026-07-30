@@ -18,7 +18,7 @@ const zhCNPickers: Partial<PickersLocaleText> = {
   openPreviousView: '前一个视图',
   openNextView: '下一个视图',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year' ? '年视图已打开，切换为日历视图' : '日历视图已打开，切换为年视图',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: '开始',
@@ -44,27 +44,27 @@ const zhCNPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `选择 ${views[view]}. ${!formattedTime ? '未选择时间' : `已选择${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours}小时`,
-  minutesClockNumberText: (minutes) => `${minutes}分钟`,
-  secondsClockNumberText: (seconds) => `${seconds}秒`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `选择 ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: '周数',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `第${weekNumber}周`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `选择日期，已选择${formattedDate}` : '选择日期',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `选择时间，已选择${formattedTime}` : '选择时间',
+    { throw new Error("STUB"); },
   openRangePickerDialogue: (formattedRange) =>
-    formattedRange ? `选择范围，已选范围是 ${formattedRange}` : '选择范围',
+    { throw new Error("STUB"); },
   fieldClearLabel: '清除',
 
   // Table labels
@@ -72,14 +72,14 @@ const zhCNPickers: Partial<PickersLocaleText> = {
   dateTableLabel: '选择日期',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: '年份',

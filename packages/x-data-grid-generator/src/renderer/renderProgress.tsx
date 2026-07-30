@@ -13,14 +13,7 @@ const Center = styled('div')({
   alignItems: 'center',
 });
 
-const Element = styled('div')(({ theme }) => ({
-  border: `1px solid ${(theme.vars || theme).palette.divider}`,
-  position: 'relative',
-  overflow: 'hidden',
-  width: '100%',
-  height: 26,
-  borderRadius: 2,
-}));
+const Element = styled('div')(({ theme }) => { throw new Error("STUB"); });
 
 const Value = styled('div')({
   position: 'absolute',
@@ -44,42 +37,9 @@ const Bar = styled('div')({
 });
 
 const ProgressBar = React.memo(function ProgressBar(props: ProgressBarProps) {
-  const { value } = props;
-  const valueInPercent = value * 100;
-
-  return (
-    <Element>
-      <Value>{`${valueInPercent.toLocaleString()} %`}</Value>
-      <Bar
-        className={clsx({
-          low: valueInPercent < 30,
-          medium: valueInPercent >= 30 && valueInPercent <= 70,
-          high: valueInPercent > 70,
-        })}
-        style={{ maxWidth: `${valueInPercent}%` }}
-      />
-    </Element>
-  );
+    throw new Error("STUB");
 });
 
 export function renderProgress(params: GridRenderCellParams<any, number, any>) {
-  if (params.value == null) {
-    return '';
-  }
-
-  if (params.rowNode.type === 'group') {
-    return `${(params.value * 100).toLocaleString()} %`;
-  }
-
-  // If the aggregated value does not have the same unit as the other cell
-  // Then we fall back to the default rendering based on `valueGetter` instead of rendering a progress bar.
-  if (params.aggregation && !params.aggregation.hasCellUnit) {
-    return null;
-  }
-
-  return (
-    <Center>
-      <ProgressBar value={params.value} />
-    </Center>
-  );
+    throw new Error("STUB");
 }

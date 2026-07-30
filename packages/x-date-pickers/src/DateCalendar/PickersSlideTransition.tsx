@@ -64,111 +64,14 @@ const PickersSlideTransitionRoot = styled(TransitionGroup, {
   name: 'MuiPickersSlideTransition',
   slot: 'Root',
   overridesResolver: (_, styles) =>
-    elementOverrides.reduce(
-      (acc, key) => {
-        acc.push({ [`.${pickersSlideTransitionClasses[key]}`]: styles[key] });
-        return acc;
-      },
-      [styles.root],
-    ),
+    { throw new Error("STUB"); },
 })<TransitionGroupProps & { ownerState?: PickerSlideTransitionOwnerState }>(({ theme }) => {
-  const slideTransition = theme.transitions.create('transform', {
-    duration: theme.transitions.duration.complex,
-    easing: 'cubic-bezier(0.35, 0.8, 0.4, 1)',
-  });
-  return {
-    display: 'block',
-    position: 'relative',
-    overflowX: 'hidden',
-    '& > *': {
-      position: 'absolute',
-      top: 0,
-      right: 0,
-      left: 0,
-    },
-    [`& .${pickersSlideTransitionClasses['slideEnter-left']}`]: {
-      willChange: 'transform',
-      transform: 'translate(100%)',
-      zIndex: 1,
-    },
-    [`& .${pickersSlideTransitionClasses['slideEnter-right']}`]: {
-      willChange: 'transform',
-      transform: 'translate(-100%)',
-      zIndex: 1,
-    },
-    [`& .${pickersSlideTransitionClasses.slideEnterActive}`]: {
-      transform: 'translate(0%)',
-      transition: slideTransition,
-    },
-    [`& .${pickersSlideTransitionClasses.slideExit}`]: {
-      transform: 'translate(0%)',
-    },
-    [`& .${pickersSlideTransitionClasses['slideExitActiveLeft-left']}`]: {
-      willChange: 'transform',
-      transform: 'translate(-100%)',
-      transition: slideTransition,
-      zIndex: 0,
-    },
-    [`& .${pickersSlideTransitionClasses['slideExitActiveLeft-right']}`]: {
-      willChange: 'transform',
-      transform: 'translate(100%)',
-      transition: slideTransition,
-      zIndex: 0,
-    },
-  };
+    throw new Error("STUB");
 });
 
 /**
  * @ignore - do not document.
  */
 export function PickersSlideTransition(inProps: SlideTransitionProps) {
-  const props = useThemeProps({ props: inProps, name: 'MuiPickersSlideTransition' });
-  const {
-    children,
-    className,
-    reduceAnimations,
-    slideDirection,
-    transKey,
-    classes: classesProp,
-    ...other
-  } = props;
-
-  const { ownerState: pickerOwnerState } = usePickerPrivateContext();
-  const ownerState = { ...pickerOwnerState, slideDirection };
-  const classes = useUtilityClasses(classesProp, ownerState);
-  const theme = useTheme();
-  if (reduceAnimations) {
-    return <div className={clsx(classes.root, className)}>{children}</div>;
-  }
-
-  const transitionClasses = {
-    exit: classes.exit,
-    enterActive: classes.enterActive,
-    enter: classes.enter,
-    exitActive: classes.exitActive,
-  };
-
-  return (
-    <PickersSlideTransitionRoot
-      className={clsx(classes.root, className)}
-      childFactory={(element: React.ReactElement<any>) =>
-        React.cloneElement(element, {
-          classNames: transitionClasses,
-        })
-      }
-      role="none"
-      ownerState={ownerState}
-    >
-      <CSSTransition
-        mountOnEnter
-        unmountOnExit
-        key={transKey}
-        timeout={theme.transitions.duration.complex}
-        classNames={transitionClasses}
-        {...other}
-      >
-        {children}
-      </CSSTransition>
-    </PickersSlideTransitionRoot>
-  );
+    throw new Error("STUB");
 }

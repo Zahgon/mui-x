@@ -42,13 +42,7 @@ export const sanitizeSortModel = (model: GridSortModel, disableMultipleColumnsSo
 
 export const mergeStateWithSortModel =
   (sortModel: GridSortModel, disableMultipleColumnsSorting: boolean) =>
-  (state: GridStateCommunity): GridStateCommunity => ({
-    ...state,
-    sorting: {
-      ...state.sorting,
-      sortModel: sanitizeSortModel(sortModel, disableMultipleColumnsSorting),
-    },
-  });
+  (state: GridStateCommunity): GridStateCommunity => { throw new Error("STUB"); };
 
 const isDesc = (direction: GridSortDirection) => direction === 'desc';
 
@@ -76,7 +70,7 @@ const parseSortItem = (
     comparator = column.getSortComparator(sortItem.sort);
   } else {
     comparator = isDesc(sortItem.sort)
-      ? (...args) => -1 * column.sortComparator!(...args)
+      ? (...args) => { throw new Error("STUB"); }
       : column.sortComparator!;
   }
 
@@ -114,20 +108,7 @@ const compareRows = (
   row2: GridRowAggregatedSortingParams,
 ) => {
   return parsedSortItems.reduce((res, item, index) => {
-    if (res !== 0) {
-      // return the results of the first comparator which distinguish the two rows
-      return res;
-    }
-
-    const sortCellParams1 = row1.params[index];
-    const sortCellParams2 = row2.params[index];
-    res = item.comparator(
-      sortCellParams1.value,
-      sortCellParams2.value,
-      sortCellParams1,
-      sortCellParams2,
-    );
-    return res;
+      throw new Error("STUB");
   }, 0);
 };
 
@@ -142,21 +123,15 @@ export const buildAggregatedSortingApplier = (
   apiRef: RefObject<GridApiCommunity>,
 ): GridSortingModelApplier | null => {
   const comparatorList = sortModel
-    .map((item) => parseSortItem(item, apiRef))
-    .filter((comparator): comparator is GridSortingFieldComparator => !!comparator);
+    .map((item) => { throw new Error("STUB"); })
+    .filter((comparator): comparator is GridSortingFieldComparator => { throw new Error("STUB"); });
 
   if (comparatorList.length === 0) {
     return null;
   }
 
   return (rowList: GridTreeNode[]) =>
-    rowList
-      .map((node) => ({
-        node,
-        params: comparatorList.map((el) => el.getSortCellParams(node.id)),
-      }))
-      .sort((a, b) => compareRows(comparatorList, a, b))
-      .map((row) => row.node.id);
+    { throw new Error("STUB"); };
 };
 
 export const getNextGridSortDirection = (
@@ -209,16 +184,5 @@ export const gridNumberComparator: GridComparatorFn = (value1, value2) => {
 };
 
 export const gridDateComparator: GridComparatorFn = (value1, value2) => {
-  const nillResult = gridNillComparator(value1, value2);
-  if (nillResult !== null) {
-    return nillResult;
-  }
-
-  if (value1! > value2!) {
-    return 1;
-  }
-  if (value1! < value2!) {
-    return -1;
-  }
-  return 0;
+    throw new Error("STUB");
 };

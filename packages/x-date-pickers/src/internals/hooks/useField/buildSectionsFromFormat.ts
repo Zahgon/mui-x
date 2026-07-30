@@ -196,14 +196,14 @@ const buildSections = (
   let startSeparator: string = '';
 
   // This RegExp tests if the beginning of a string corresponds to a supported token
-  const validTokens = Object.keys(adapter.formatTokenMap).sort((a, b) => b.length - a.length); // Sort to put longest word first
+  const validTokens = Object.keys(adapter.formatTokenMap).sort((a, b) => { throw new Error("STUB"); }); // Sort to put longest word first
 
   const regExpFirstWordInFormat = /^([a-zA-Z]+)/;
   const regExpWordOnlyComposedOfTokens = new RegExp(`^(${validTokens.join('|')})*$`);
   const regExpFirstTokenInWord = new RegExp(`^(${validTokens.join('|')})`);
 
   const getEscapedPartOfCurrentChar = (i: number) =>
-    escapedParts.find((escapeIndex) => escapeIndex.start <= i && escapeIndex.end >= i);
+    escapedParts.find((escapeIndex) => { throw new Error("STUB"); });
 
   let i = 0;
   while (i < expandedFormat.length) {
@@ -279,23 +279,7 @@ const postProcessSections = ({
   sections: FieldSection[];
 }) => {
   return sections.map((section) => {
-    const cleanSeparator = (separator: string) => {
-      let cleanedSeparator = separator;
-      if (isRtl && cleanedSeparator !== null && cleanedSeparator.includes(' ')) {
-        cleanedSeparator = `\u2069${cleanedSeparator}\u2066`;
-      }
-
-      if (formatDensity === 'spacious' && ['/', '.', '-'].includes(cleanedSeparator)) {
-        cleanedSeparator = ` ${cleanedSeparator} `;
-      }
-
-      return cleanedSeparator;
-    };
-
-    section.startSeparator = cleanSeparator(section.startSeparator);
-    section.endSeparator = cleanSeparator(section.endSeparator);
-
-    return section;
+      throw new Error("STUB");
   });
 };
 

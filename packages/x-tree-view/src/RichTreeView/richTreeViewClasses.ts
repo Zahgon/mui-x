@@ -10,7 +10,7 @@ export interface RichTreeViewClasses extends Omit<
 export type RichTreeViewClassKey = keyof RichTreeViewClasses;
 
 export function getRichTreeViewUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiRichTreeView', slot);
+    throw new Error("STUB");
 }
 
 export const richTreeViewClasses: RichTreeViewClasses = generateUtilityClasses('MuiRichTreeView', [

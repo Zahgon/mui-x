@@ -14,7 +14,7 @@ export interface ChatStreamingIndicatorClasses {
 export type ChatStreamingIndicatorClassKey = keyof ChatStreamingIndicatorClasses;
 
 export function getChatStreamingIndicatorUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatStreamingIndicator', slot);
+    throw new Error("STUB");
 }
 
 export const chatStreamingIndicatorClasses: ChatStreamingIndicatorClasses = generateUtilityClasses(

@@ -11,7 +11,7 @@ import type { GridStateCommunity } from '../../../models/gridStateCommunity';
  * @category Virtualization
  */
 export const gridVirtualizationSelector = createRootSelector(
-  (state: GridStateCommunity) => state.virtualization,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 /**
@@ -21,7 +21,7 @@ export const gridVirtualizationSelector = createRootSelector(
  */
 export const gridVirtualizationEnabledSelector = createSelector(
   gridVirtualizationSelector,
-  (state) => state.enabled,
+  (state) => { throw new Error("STUB"); },
 );
 
 /**
@@ -30,7 +30,7 @@ export const gridVirtualizationEnabledSelector = createSelector(
  */
 export const gridVirtualizationColumnEnabledSelector = createSelector(
   gridVirtualizationSelector,
-  (state) => state.enabledForColumns,
+  (state) => { throw new Error("STUB"); },
 );
 
 /**
@@ -39,7 +39,7 @@ export const gridVirtualizationColumnEnabledSelector = createSelector(
  */
 export const gridVirtualizationRowEnabledSelector = createSelector(
   gridVirtualizationSelector,
-  (state) => state.enabledForRows,
+  (state) => { throw new Error("STUB"); },
 );
 
 /**
@@ -49,7 +49,7 @@ export const gridVirtualizationRowEnabledSelector = createSelector(
  */
 export const gridVirtualizationLayoutModeSelector = createSelector(
   gridVirtualizationSelector,
-  (state) => state.layoutMode,
+  (state) => { throw new Error("STUB"); },
 );
 
 /**
@@ -59,14 +59,14 @@ export const gridVirtualizationLayoutModeSelector = createSelector(
  */
 export const gridRenderContextSelector = createSelector(
   gridVirtualizationSelector,
-  (state) => state.renderContext,
+  (state) => { throw new Error("STUB"); },
 );
 
 const firstColumnIndexSelector = createRootSelector(
-  (state: GridStateCommunity) => state.virtualization.renderContext.firstColumnIndex,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 const lastColumnIndexSelector = createRootSelector(
-  (state: GridStateCommunity) => state.virtualization.renderContext.lastColumnIndex,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 /**
@@ -78,8 +78,5 @@ const lastColumnIndexSelector = createRootSelector(
 export const gridRenderContextColumnsSelector = createSelectorMemoized(
   firstColumnIndexSelector,
   lastColumnIndexSelector,
-  (firstColumnIndex, lastColumnIndex): GridColumnsRenderContext => ({
-    firstColumnIndex,
-    lastColumnIndex,
-  }),
+  (firstColumnIndex, lastColumnIndex): GridColumnsRenderContext => { throw new Error("STUB"); },
 );

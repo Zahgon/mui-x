@@ -54,16 +54,7 @@ const ChartsContainerPremium = React.forwardRef(function ChartsContainerPremium<
   SeriesType extends ChartSeriesType = ChartSeriesType,
   TSignatures extends readonly ChartAnyPluginSignature[] = AllPluginSignatures<SeriesType>,
 >(props: ChartsContainerPremiumProps<SeriesType, TSignatures>, ref: React.Ref<HTMLDivElement>) {
-  const { chartsDataProviderPremiumProps, children, chartsSurfaceProps } =
-    useChartsContainerPremiumProps<SeriesType, TSignatures>(props);
-
-  return (
-    <ChartsDataProviderPremium<SeriesType, TSignatures> {...chartsDataProviderPremiumProps}>
-      <ChartsSurface {...chartsSurfaceProps} ref={ref}>
-        {children}
-      </ChartsSurface>
-    </ChartsDataProviderPremium>
-  );
+    throw new Error("STUB");
 }) as unknown as ChartsContainerPremiumComponent;
 
 export { ChartsContainerPremium };

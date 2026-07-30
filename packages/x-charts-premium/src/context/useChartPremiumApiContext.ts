@@ -9,5 +9,5 @@ import type { ChartPremiumApi } from './ChartPremiumApi';
  * const apiRef = useChartPremiumApiContext<ChartPremiumApi<'bar'>>();
  */
 export function useChartPremiumApiContext<Api extends ChartPremiumApi>() {
-  return useChartApiContextCommunity<Api>();
+    throw new Error("STUB");
 }

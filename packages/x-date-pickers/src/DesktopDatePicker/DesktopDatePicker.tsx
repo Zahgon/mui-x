@@ -33,55 +33,7 @@ const DesktopDatePicker = React.forwardRef(function DesktopDatePicker(
   inProps: DesktopDatePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-
-  // Props with the default values common to all date pickers
-  const defaultizedProps = useDatePickerDefaultizedProps<DesktopDatePickerProps>(
-    inProps,
-    'MuiDesktopDatePicker',
-  );
-
-  const viewRenderers: DatePickerViewRenderers<DateView> = {
-    day: renderDateViewCalendar,
-    month: renderDateViewCalendar,
-    year: renderDateViewCalendar,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  // Props with the default values specific to the desktop variant
-  const props = {
-    ...defaultizedProps,
-    closeOnSelect: defaultizedProps.closeOnSelect ?? true,
-    viewRenderers,
-    format: resolveDateFormat(adapter, defaultizedProps, false),
-    yearsPerRow: defaultizedProps.yearsPerRow ?? 4,
-    slots: {
-      field: DateField,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      toolbar: {
-        hidden: true,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useDesktopPicker<DateView, typeof props>({
-    ref,
-    props,
-    valueManager: singleItemValueManager,
-    valueType: 'date',
-    validator: validateDate,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as DesktopDatePickerComponent;
 
 DesktopDatePicker.propTypes /* remove-proptypes */ = {

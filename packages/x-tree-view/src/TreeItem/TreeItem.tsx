@@ -37,83 +37,14 @@ export const TreeItemRoot = styled('li', {
 export const TreeItemContent = styled('div', {
   name: 'MuiTreeItem',
   slot: 'Content',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'status',
-})<{ status: UseTreeItemStatus }>(({ theme }) => ({
-  padding: theme.spacing(0.5, 1),
-  paddingLeft: `calc(${theme.spacing(1)} + var(--TreeView-itemChildrenIndentation) * var(--TreeView-itemDepth))`,
-  borderRadius: theme.shape.borderRadius,
-  width: '100%',
-  height: 'var(--TreeView-itemHeight, unset)',
-  boxSizing: 'border-box', // prevent width + padding to overflow
-  position: 'relative',
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  cursor: 'pointer',
-  WebkitTapHighlightColor: 'transparent',
-  '&:hover': {
-    backgroundColor: (theme.vars || theme).palette.action.hover,
-    // Reset on touch devices, it doesn't add specificity
-    '@media (hover: none)': {
-      backgroundColor: 'transparent',
-    },
-  },
-  '&[data-disabled]': {
-    opacity: (theme.vars || theme).palette.action.disabledOpacity,
-    backgroundColor: 'transparent',
-    cursor: 'auto',
-  },
-  '&[data-focused]': {
-    backgroundColor: (theme.vars || theme).palette.action.focus,
-  },
-  '&[data-selected]': {
-    backgroundColor: theme.alpha(
-      (theme.vars || theme).palette.primary.main,
-      (theme.vars || theme).palette.action.selectedOpacity,
-    ),
-    '&:hover': {
-      backgroundColor: theme.alpha(
-        (theme.vars || theme).palette.primary.main,
-        `${(theme.vars || theme).palette.action.selectedOpacity} + ${(theme.vars || theme).palette.action.hoverOpacity}`,
-      ),
-      // Reset on touch devices, it doesn't add specificity
-      '@media (hover: none)': {
-        backgroundColor: theme.alpha(
-          (theme.vars || theme).palette.primary.main,
-          (theme.vars || theme).palette.action.selectedOpacity,
-        ),
-      },
-    },
-  },
-  '&[data-selected][data-focused]': {
-    backgroundColor: theme.alpha(
-      (theme.vars || theme).palette.primary.main,
-      `${(theme.vars || theme).palette.action.selectedOpacity} + ${(theme.vars || theme).palette.action.focusOpacity}`,
-    ),
-  },
-}));
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
+})<{ status: UseTreeItemStatus }>(({ theme }) => { throw new Error("STUB"); });
 
 export const TreeItemLabel = styled('div', {
   name: 'MuiTreeItem',
   slot: 'Label',
-  shouldForwardProp: (prop) => shouldForwardProp(prop) && prop !== 'editable',
-})<{ editable?: boolean }>(({ theme }) => ({
-  width: '100%',
-  boxSizing: 'border-box', // prevent width + padding to overflow
-  // fixes overflow - see https://github.com/mui/material-ui/issues/27372
-  minWidth: 0,
-  position: 'relative',
-  overflow: 'hidden',
-  ...theme.typography.body1,
-  variants: [
-    {
-      props: ({ editable }: UseTreeItemLabelSlotOwnProps) => editable,
-      style: {
-        paddingLeft: '2px',
-      },
-    },
-  ],
-}));
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
+})<{ editable?: boolean }>(({ theme }) => { throw new Error("STUB"); });
 
 export const TreeItemIconContainer = styled('div', {
   name: 'MuiTreeItem',
@@ -133,7 +64,7 @@ export const TreeItemIconContainer = styled('div', {
 export const TreeItemGroupTransition = styled(Collapse, {
   name: 'MuiTreeItem',
   slot: 'GroupTransition',
-  overridesResolver: (props, styles) => styles.groupTransition,
+  overridesResolver: (props, styles) => { throw new Error("STUB"); },
 })({
   margin: 0,
   padding: 0,
@@ -161,13 +92,8 @@ export const TreeItemLoadingContainer = styled(CircularProgress, {
 export const TreeItemCheckbox = styled(
   React.forwardRef(
     (props: CheckboxProps & { visible?: boolean }, ref: React.Ref<HTMLButtonElement>) => {
-      const { visible, ...other } = props;
-      if (!visible) {
-        return null;
-      }
-
-      return <MuiCheckbox {...other} ref={ref} />;
-    },
+          throw new Error("STUB");
+      },
   ),
   {
     name: 'MuiTreeItem',
@@ -231,160 +157,7 @@ export const TreeItem = React.forwardRef(function TreeItem(
   inProps: TreeItemProps,
   forwardedRef: React.Ref<HTMLLIElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiTreeItem' });
-
-  const {
-    id,
-    itemId,
-    label,
-    disabled,
-    disableSelection,
-    children,
-    slots = {},
-    slotProps = {},
-    classes: classesProp,
-    ...other
-  } = props;
-
-  const {
-    getContextProviderProps,
-    getRootProps,
-    getContentProps,
-    getIconContainerProps,
-    getCheckboxProps,
-    getLabelProps,
-    getGroupTransitionProps,
-    getLabelInputProps,
-    getDragAndDropOverlayProps,
-    getErrorContainerProps,
-    getLoadingContainerProps,
-    status,
-  } = useTreeItem({
-    id,
-    itemId,
-    children,
-    label,
-    disabled,
-    disableSelection,
-  });
-
-  const classes = useUtilityClasses(classesProp);
-
-  const Root: React.ElementType = slots.root ?? TreeItemRoot;
-  const rootProps = useSlotProps({
-    elementType: Root,
-    getSlotProps: getRootProps,
-    externalForwardedProps: other,
-    externalSlotProps: slotProps.root,
-    additionalProps: {
-      ref: forwardedRef,
-    },
-    ownerState: {},
-    className: classes.root,
-  });
-
-  const Content: React.ElementType = slots.content ?? TreeItemContent;
-  const contentProps = useSlotProps({
-    elementType: Content,
-    getSlotProps: getContentProps,
-    externalSlotProps: slotProps.content,
-    ownerState: {},
-    className: classes.content,
-  });
-
-  const IconContainer: React.ElementType = slots.iconContainer ?? TreeItemIconContainer;
-  const iconContainerProps = useSlotProps({
-    elementType: IconContainer,
-    getSlotProps: getIconContainerProps,
-    externalSlotProps: slotProps.iconContainer,
-    ownerState: {},
-    className: classes.iconContainer,
-  });
-
-  const Label: React.ElementType = slots.label ?? TreeItemLabel;
-  const labelProps = useSlotProps({
-    elementType: Label,
-    getSlotProps: getLabelProps,
-    externalSlotProps: slotProps.label,
-    ownerState: {},
-    className: classes.label,
-  });
-
-  const Checkbox: React.ElementType = slots.checkbox ?? TreeItemCheckbox;
-  const checkboxProps = useSlotProps({
-    elementType: Checkbox,
-    getSlotProps: getCheckboxProps,
-    externalSlotProps: slotProps.checkbox,
-    ownerState: {},
-    className: classes.checkbox,
-  });
-
-  const GroupTransition: React.ElementType | undefined = slots.groupTransition ?? undefined;
-  const groupTransitionProps = useSlotProps({
-    elementType: GroupTransition,
-    getSlotProps: getGroupTransitionProps,
-    externalSlotProps: slotProps.groupTransition,
-    ownerState: {},
-    className: classes.groupTransition,
-  });
-
-  const LabelInput: React.ElementType = slots.labelInput ?? TreeItemLabelInput;
-  const labelInputProps = useSlotProps({
-    elementType: LabelInput,
-    getSlotProps: getLabelInputProps,
-    externalSlotProps: slotProps.labelInput,
-    ownerState: {},
-    className: classes.labelInput,
-  });
-
-  const DragAndDropOverlay: React.ElementType | undefined =
-    slots.dragAndDropOverlay ?? TreeItemDragAndDropOverlay;
-  const dragAndDropOverlayProps = useSlotProps({
-    elementType: DragAndDropOverlay,
-    getSlotProps: getDragAndDropOverlayProps,
-    externalSlotProps: slotProps.dragAndDropOverlay,
-    ownerState: {},
-    className: classes.dragAndDropOverlay,
-  });
-
-  const ErrorIcon: React.ElementType = slots.errorIcon ?? TreeItemErrorContainer;
-  const errorContainerProps = useSlotProps({
-    elementType: ErrorIcon,
-    getSlotProps: getErrorContainerProps,
-    externalSlotProps: slotProps.errorIcon,
-    ownerState: {},
-    className: classes.errorIcon,
-  });
-
-  const LoadingIcon: React.ElementType = slots.loadingIcon ?? TreeItemLoadingContainer;
-  const loadingContainerProps = useSlotProps({
-    elementType: LoadingIcon,
-    getSlotProps: getLoadingContainerProps,
-    externalSlotProps: slotProps.loadingIcon,
-    ownerState: {},
-    className: classes.loadingIcon,
-  });
-
-  return (
-    <TreeItemProvider {...getContextProviderProps()}>
-      <Root {...rootProps}>
-        <Content {...contentProps}>
-          <IconContainer {...iconContainerProps}>
-            {status.error && <ErrorIcon {...errorContainerProps} />}
-            {status.loading ? (
-              <LoadingIcon {...loadingContainerProps} />
-            ) : (
-              <TreeItemIcon status={status} slots={slots} slotProps={slotProps} />
-            )}
-          </IconContainer>
-          <Checkbox {...checkboxProps} />
-          {status.editing ? <LabelInput {...labelInputProps} /> : <Label {...labelProps} />}
-          <DragAndDropOverlay {...dragAndDropOverlayProps} />
-        </Content>
-        {children && <TreeItemGroupTransition as={GroupTransition} {...groupTransitionProps} />}
-      </Root>
-    </TreeItemProvider>
-  );
+    throw new Error("STUB");
 }) as TreeItemComponent;
 
 TreeItem.propTypes /* remove-proptypes */ = {

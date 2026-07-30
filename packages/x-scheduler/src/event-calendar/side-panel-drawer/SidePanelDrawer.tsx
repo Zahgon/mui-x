@@ -31,70 +31,27 @@ import type { SidePanelDrawerProps } from './SidePanelDrawer.types';
 const SidePanelDrawerRoot = styled(Drawer, {
   name: 'MuiEventCalendar',
   slot: 'SidePanelDrawerViewport',
-})(({ theme }) => ({
-  // Scope the modal to the calendar root (which is `position: relative` and owns the
-  // root container query), instead of the default fixed, full-viewport overlay.
-  position: 'absolute',
-  zIndex: theme.zIndex.drawer,
-  '& .MuiBackdrop-root': {
-    position: 'absolute',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-  },
-  '& .MuiDrawer-paper': {
-    position: 'absolute',
-    boxSizing: 'border-box',
-    width: 'min(20rem, 85%)',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: (theme.vars || theme).palette.background.paper,
-    borderRight: '1px solid',
-    borderColor: (theme.vars || theme).palette.divider,
-    overflowY: 'auto',
-    overscrollBehavior: 'contain',
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const SidePanelDrawerHeader = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'SidePanelDrawerHeader',
-})(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  borderBottom: '1px solid',
-  borderColor: (theme.vars || theme).palette.divider,
-  padding: theme.spacing(2),
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const SidePanelDrawerTitle = styled('h2', {
   name: 'MuiEventCalendar',
   slot: 'SidePanelDrawerTitle',
-})(({ theme }) => ({
-  flex: 1,
-  margin: 0,
-  ...theme.typography.h6,
-  fontWeight: theme.typography.fontWeightBold,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const SidePanelDrawerViewList = styled(MenuList, {
   name: 'MuiEventCalendar',
   slot: 'SidePanelDrawerViewList',
-})(({ theme }) => ({
-  borderBottom: '1px solid',
-  borderColor: (theme.vars || theme).palette.divider,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const SidePanelDrawerResources = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'SidePanelDrawerResources',
-})(({ theme }) => ({
-  flexShrink: 0,
-  display: 'flex',
-  flexDirection: 'column',
-  borderBottom: '1px solid',
-  borderColor: (theme.vars || theme).palette.divider,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const VIEW_ICONS = {
   day: <CalendarViewDayOutlined fontSize="small" />,
@@ -111,122 +68,5 @@ export const SidePanelDrawer = React.forwardRef(function SidePanelDrawer(
   props: SidePanelDrawerProps,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const { open, onClose, container, className, ...other } = props;
-
-  const store = useEventCalendarStoreContext();
-  const adapter = useAdapterContext();
-  const { schedulerId, classes, localeText } = useEventCalendarStyledContext();
-
-  const views = useStore(store, eventCalendarViewSelectors.views);
-  const view = useStore(store, eventCalendarViewSelectors.view);
-  const visibleDate = useStore(store, schedulerOtherSelectors.visibleDate);
-
-  const { hasAnyOption, items: preferencesItems } = usePreferencesMenuItems();
-
-  const [preferencesOpen, setPreferencesOpen] = React.useState(false);
-
-  const showViewSwitcher = views.length > 1;
-
-  const titleId = `${schedulerId}-side-panel-drawer-title`;
-
-  // Scope the drawer to the calendar root so it renders inside its bounds and
-  // container query rather than portaling to `document.body`.
-  const portalContainer = container?.current ?? undefined;
-
-  // Collapse the preferences section when the drawer closes, so the next open
-  // always starts with it collapsed.
-  React.useEffect(() => {
-    if (!open) {
-      setPreferencesOpen(false);
-    }
-  }, [open]);
-
-  return (
-    <SidePanelDrawerRoot
-      anchor="left"
-      open={open}
-      onClose={onClose}
-      className={classes.sidePanelDrawerViewport}
-      // Hide the drawer in the expanded layout via the root container query, so an
-      // open compact drawer can never linger over the expanded calendar after a resize.
-      // `EventCalendarRoot` also resets the open state so the modal fully unmounts.
-      data-compact-only=""
-      slotProps={{
-        root: { container: portalContainer, disableScrollLock: true },
-        backdrop: { className: classes.sidePanelDrawerBackdrop },
-        paper: {
-          ref: forwardedRef,
-          ...other,
-          className: clsx(className, classes.sidePanelDrawer),
-          role: 'dialog',
-          'aria-modal': true,
-          'aria-labelledby': titleId,
-        },
-      }}
-    >
-      <SidePanelDrawerHeader className={classes.sidePanelDrawerHeader}>
-        <SidePanelDrawerTitle id={titleId} className={classes.sidePanelDrawerTitle}>
-          {adapter.format(visibleDate, 'monthFullLetter')}{' '}
-          {adapter.format(visibleDate, 'yearPadded')}
-        </SidePanelDrawerTitle>
-        <IconButton
-          className={classes.sidePanelDrawerCloseButton}
-          aria-label={localeText.closeSidePanel}
-          onClick={onClose}
-        >
-          <Close />
-        </IconButton>
-      </SidePanelDrawerHeader>
-
-      {showViewSwitcher && (
-        <SidePanelDrawerViewList className={classes.sidePanelDrawerViewList} role="listbox">
-          {views.map((viewItem) => (
-            <MenuItem
-              key={viewItem}
-              className={classes.sidePanelDrawerViewItem}
-              role="option"
-              selected={view === viewItem}
-              aria-selected={view === viewItem}
-              onClick={(event) => store.setView(viewItem, event.nativeEvent)}
-            >
-              <ListItemIcon>{VIEW_ICONS[viewItem]}</ListItemIcon>
-              <ListItemText>{localeText[viewItem]}</ListItemText>
-            </MenuItem>
-          ))}
-        </SidePanelDrawerViewList>
-      )}
-
-      <SidePanelDrawerResources>
-        <ResourcesTree />
-      </SidePanelDrawerResources>
-
-      {hasAnyOption && (
-        <React.Fragment>
-          <div className={classes.sidePanelDrawerPreferences}>
-            <ListItemButton
-              className={classes.sidePanelDrawerPreferencesButton}
-              aria-expanded={preferencesOpen}
-              onClick={() => setPreferencesOpen((prev) => !prev)}
-            >
-              <ListItemIcon>
-                <SettingsOutlined />
-              </ListItemIcon>
-              <ListItemText>{localeText.preferencesMenu}</ListItemText>
-              <ListItemIcon>
-                {preferencesOpen ? <ExpandLessOutlined /> : <ExpandMoreOutlined />}
-              </ListItemIcon>
-            </ListItemButton>
-          </div>
-          <Collapse in={preferencesOpen} unmountOnExit>
-            <MenuList
-              className={classes.sidePanelDrawerPreferencesList}
-              aria-label={localeText.preferencesMenu}
-            >
-              {preferencesItems}
-            </MenuList>
-          </Collapse>
-        </React.Fragment>
-      )}
-    </SidePanelDrawerRoot>
-  );
+    throw new Error("STUB");
 });

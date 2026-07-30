@@ -41,17 +41,11 @@ function getConfigDirectory(distDir: string): string {
 type ConfigData = Record<string, unknown>;
 
 function readConfigFile(configPath: string): ConfigData {
-  try {
-    return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-  } catch {
-    return {};
-  }
+    throw new Error("STUB");
 }
 
 function writeConfigFile(configPath: string, data: ConfigData): void {
-  const dir = path.dirname(configPath);
-  fs.mkdirSync(dir, { recursive: true });
-  fs.writeFileSync(configPath, JSON.stringify(data, null, '\t'));
+    throw new Error("STUB");
 }
 
 export class TelemetryStorage {
@@ -72,8 +66,7 @@ export class TelemetryStorage {
   }
 
   private constructor(filePath: string | null) {
-    this.configPath = filePath;
-    this.notify();
+      throw new Error("STUB");
   }
 
   private notify = () => {
@@ -96,19 +89,6 @@ export class TelemetryStorage {
   };
 
   get anonymousId(): string {
-    if (this.configPath) {
-      const data = readConfigFile(this.configPath);
-      const existing = data[TELEMETRY_KEY_ID];
-      if (typeof existing === 'string') {
-        return existing;
-      }
-
-      const generated = randomBytes(32).toString('hex');
-      data[TELEMETRY_KEY_ID] = generated;
-      writeConfigFile(this.configPath, data);
-      return generated;
-    }
-
-    return randomBytes(32).toString('hex');
+      throw new Error("STUB");
   }
 }

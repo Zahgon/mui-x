@@ -30,26 +30,7 @@ const DateTimeField = React.forwardRef(function DateTimeField(
   inProps: DateTimeFieldProps,
   inRef: React.Ref<HTMLDivElement>,
 ) {
-  const themeProps = useThemeProps({
-    props: inProps,
-    name: 'MuiDateTimeField',
-  });
-
-  const { slots, slotProps, ...other } = themeProps;
-
-  const textFieldProps = useFieldTextFieldProps<DateTimeFieldProps>({
-    slotProps,
-    ref: inRef,
-    externalForwardedProps: other,
-  });
-
-  const fieldResponse = useDateTimeField<typeof textFieldProps>(textFieldProps);
-
-  return (
-    <PickerFieldUIContextProvider slots={slots} slotProps={slotProps} inputRef={other.inputRef}>
-      <PickerFieldUI fieldResponse={fieldResponse} defaultOpenPickerIcon={CalendarIcon} />
-    </PickerFieldUIContextProvider>
-  );
+    throw new Error("STUB");
 }) as DateTimeFieldComponent;
 
 DateTimeField.propTypes /* remove-proptypes */ = {

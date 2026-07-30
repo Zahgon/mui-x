@@ -17,7 +17,7 @@ import { GridActionsCellItem } from './GridActionsCellItem';
 import type { GridActionsCellItemProps } from './GridActionsCellItem';
 
 const hasActions = (colDef: any): colDef is GridActionsColDef =>
-  typeof colDef.getActions === 'function';
+  { throw new Error("STUB"); };
 
 interface TouchRippleActions {
   stop: (event: any, callback?: () => void) => void;
@@ -104,69 +104,28 @@ function GridActionsCell<
 
   const actions: React.ReactElement<GridActionsCellItemProps>[] = [];
   React.Children.forEach(children, (child) => {
-    // Unwrap React.Fragment
-    if (React.isValidElement<GridActionsCellItemProps>(child)) {
-      if (child.type === React.Fragment) {
-        React.Children.forEach(child.props.children, (fragChild) => {
-          if (React.isValidElement<GridActionsCellItemProps>(fragChild)) {
-            actions.push(fragChild);
-          }
-        });
-      } else if (child.type === GridActionsCellItem || suppressChildrenValidation) {
-        actions.push(child);
-      } else if (process.env.NODE_ENV !== 'production') {
-        const childType = typeof child.type === 'function' ? child.type.name : child.type;
-        warnOnce(
-          `MUI X: Invalid child type in \`GridActionsCell\`. Expected \`GridActionsCellItem\` or \`React.Fragment\`, got \`${childType}\`.
-If this is intentional, you can suppress this warning by passing the \`suppressChildrenValidation\` prop to \`GridActionsCell\`.`,
-          'error',
-        );
-      }
-    }
+      throw new Error("STUB");
   });
 
-  const iconButtons = actions.filter((option) => !option.props.showInMenu);
-  const menuButtons = actions.filter((option) => option.props.showInMenu);
+  const iconButtons = actions.filter((option) => { throw new Error("STUB"); });
+  const menuButtons = actions.filter((option) => { throw new Error("STUB"); });
   const numberOfButtons = iconButtons.length + (menuButtons.length ? 1 : 0);
 
   React.useLayoutEffect(() => {
-    if (!hasFocus) {
-      Object.entries(touchRippleRefs.current).forEach(([index, ref]) => {
-        ref?.stop({}, () => {
-          delete touchRippleRefs.current[index];
-        });
-      });
-    }
+      throw new Error("STUB");
   }, [hasFocus]);
 
   React.useEffect(() => {
-    if (focusedButtonIndex < 0 || !rootRef.current) {
-      return;
-    }
-
-    if (focusedButtonIndex >= rootRef.current.children.length) {
-      return;
-    }
-
-    const child = rootRef.current.children[focusedButtonIndex] as HTMLElement;
-    child.focus({ preventScroll: true });
+      throw new Error("STUB");
   }, [focusedButtonIndex]);
 
-  const firstFocusableButtonIndex = actions.findIndex((o) => !o.props.disabled);
+  const firstFocusableButtonIndex = actions.findIndex((o) => { throw new Error("STUB"); });
   React.useEffect(() => {
-    if (hasFocus && focusedButtonIndex === -1) {
-      setFocusedButtonIndex(firstFocusableButtonIndex);
-    }
-    if (!hasFocus) {
-      setFocusedButtonIndex(-1);
-      ignoreCallToFocus.current = false;
-    }
+      throw new Error("STUB");
   }, [hasFocus, focusedButtonIndex, firstFocusableButtonIndex]);
 
   React.useEffect(() => {
-    if (focusedButtonIndex >= numberOfButtons) {
-      setFocusedButtonIndex(numberOfButtons - 1);
-    }
+      throw new Error("STUB");
   }, [focusedButtonIndex, numberOfButtons]);
 
   const showMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -188,67 +147,22 @@ If this is intentional, you can suppress this warning by passing the \`suppressC
   };
 
   const toggleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    event.stopPropagation();
-    event.preventDefault();
-    if (open) {
-      hideMenu(event);
-    } else {
-      showMenu(event);
-    }
+      throw new Error("STUB");
   };
 
   const handleTouchRippleRef =
     (index: string | number) => (instance: TouchRippleActions | null) => {
-      touchRippleRefs.current[index] = instance;
+        throw new Error("STUB");
     };
 
   const handleButtonClick =
     (index: number, onClick?: React.MouseEventHandler): React.MouseEventHandler =>
     (event) => {
-      setFocusedButtonIndex(index);
-      ignoreCallToFocus.current = true;
-
-      if (onClick) {
-        onClick(event);
-      }
+        throw new Error("STUB");
     };
 
   const handleRootKeyDown = (event: React.KeyboardEvent) => {
-    if (numberOfButtons <= 1) {
-      return;
-    }
-
-    const getNewIndex = (index: number, direction: 'left' | 'right'): number => {
-      if (index < 0 || index > actions.length) {
-        return index;
-      }
-
-      // for rtl mode we need to reverse the direction
-      const rtlMod = isRtl ? -1 : 1;
-      const indexMod = (direction === 'left' ? -1 : 1) * rtlMod;
-
-      // if the button that should receive focus is disabled go one more step
-      return actions[index + indexMod]?.props.disabled
-        ? getNewIndex(index + indexMod, direction)
-        : index + indexMod;
-    };
-
-    let newIndex: number = focusedButtonIndex;
-    if (event.key === 'ArrowRight') {
-      newIndex = getNewIndex(focusedButtonIndex, 'right');
-    } else if (event.key === 'ArrowLeft') {
-      newIndex = getNewIndex(focusedButtonIndex, 'left');
-    }
-
-    if (newIndex < 0 || newIndex >= numberOfButtons) {
-      return; // We're already in the first or last item = do nothing and let the grid listen the event
-    }
-
-    if (newIndex !== focusedButtonIndex) {
-      event.preventDefault(); // Prevent scrolling
-      event.stopPropagation(); // Don't stop propagation for other keys, for example ArrowUp
-      setFocusedButtonIndex(newIndex);
-    }
+      throw new Error("STUB");
   };
 
   // role="menu" requires at least one child element
@@ -263,12 +177,7 @@ If this is intentional, you can suppress this warning by passing the \`suppressC
   return (
     <div ref={rootRef} tabIndex={-1} className={gridClasses.actionsCell} {...attributes} {...other}>
       {iconButtons.map((button, index) =>
-        React.cloneElement(button, {
-          key: index,
-          touchRippleRef: handleTouchRippleRef(index),
-          onClick: handleButtonClick(index, button.props.onClick),
-          tabIndex: focusedButtonIndex === index ? tabIndex : -1,
-        }),
+        { throw new Error("STUB"); },
       )}
 
       {menuButtons.length > 0 && buttonId && (
@@ -299,7 +208,7 @@ If this is intentional, you can suppress this warning by passing the \`suppressC
             autoFocusItem
           >
             {menuButtons.map((button, index) =>
-              React.cloneElement(button, { key: index, closeMenu: hideMenu }),
+              { throw new Error("STUB"); },
             )}
           </rootProps.slots.baseMenuList>
         </GridMenu>
@@ -407,20 +316,7 @@ export { GridActionsCell };
 // Only used to support `getActions` method in `GridColDef`.
 // TODO(v9): Remove this wrapper and the default `renderCell` in gridActionsColDef
 function GridActionsCellWrapper(props: GridRenderCellParams) {
-  const { colDef, id } = props;
-  const apiRef = useGridApiContext();
-
-  if (!hasActions(colDef)) {
-    throw new Error('MUI X: Missing the `getActions` property in the `GridColDef`.');
-  }
-
-  const actions = colDef.getActions(apiRef.current.getRowParams(id));
-
-  return (
-    <GridActionsCell suppressChildrenValidation {...props}>
-      {actions}
-    </GridActionsCell>
-  );
+    throw new Error("STUB");
 }
 
 GridActionsCellWrapper.propTypes /* remove-proptypes */ = {
@@ -479,6 +375,4 @@ GridActionsCellWrapper.propTypes /* remove-proptypes */ = {
   value: PropTypes.any,
 } as any;
 
-export const renderActionsCell = (params: GridRenderCellParams) => (
-  <GridActionsCellWrapper {...params} />
-);
+export const renderActionsCell = (params: GridRenderCellParams) => { throw new Error("STUB"); };

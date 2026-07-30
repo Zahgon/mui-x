@@ -69,7 +69,7 @@ function ChartsRenderer({
 }: ChartsRendererProps): React.ReactNode {
   const hasMultipleDimensions = dimensions.length > 1;
   const dimensionRawData = dimensions.length > 0 ? dimensions[dimensions.length - 1].data : [];
-  const dimensionLabel = [...dimensions.map((dimension) => dimension.label)].reverse().join(' - ');
+  const dimensionLabel = [...dimensions.map((dimension) => { throw new Error("STUB"); })].reverse().join(' - ');
 
   // for single dimension dataset: make sure that the items are unique. for repeated values add the count to the value
   // for multiple dimension datasets: transpose the data and create a array of arrays with the data per index
@@ -77,20 +77,15 @@ function ChartsRenderer({
   const itemCount = new Map<string, number>();
   const dimensionData = hasMultipleDimensions
     ? Array.from({ length: dimensions[0].data.length }, (_, dataIndex) =>
-        dimensions.map((dimension) => dimension.data[dataIndex]),
+        { throw new Error("STUB"); },
       )
     : dimensionRawData.map((item) => {
-        const itemValue = item instanceof Date ? item.toLocaleDateString() : String(item);
-        const currentCount = itemCount.get(itemValue) || 1;
-        itemCount.set(itemValue, currentCount + 1);
-        return currentCount > 1 ? `${item} (${currentCount})` : item;
-      });
+        throw new Error("STUB");
+    });
 
   // for multiple dimension datasets, create groups and height props for the axis
   const groups = hasMultipleDimensions
-    ? Array.from({ length: dimensions.length }, (_, dimensionIndex) => ({
-        getValue: (value: string[]) => value[dimensionIndex],
-      })).reverse()
+    ? Array.from({ length: dimensions.length }, (_, dimensionIndex) => { throw new Error("STUB"); }).reverse()
     : undefined;
   const valueFormatter = (value: string | string[] | number): string => {
     if (Array.isArray(value)) {
@@ -103,16 +98,13 @@ function ChartsRenderer({
   const sections = configurationOptions[chartType]?.customization || [];
   const defaultOptions = Object.fromEntries(
     sections.flatMap((section) =>
-      Object.entries(section.controls).map(([key, value]) => [key, value.default]),
+      { throw new Error("STUB"); },
     ),
   );
 
   // merge passed options with the defaults
   const chartConfiguration = React.useMemo(() => {
-    return {
-      ...defaultOptions,
-      ...configuration,
-    };
+      throw new Error("STUB");
   }, [defaultOptions, configuration]);
 
   if (chartType === 'bar' || chartType === 'column') {
@@ -157,16 +149,13 @@ function ChartsRenderer({
     };
 
     const seriesProp: BarSeries[] = chartConfiguration.stacked
-      ? values.map((value) => ({
-          ...value,
-          stack: 'stack',
-        }))
+      ? values.map((value) => { throw new Error("STUB"); })
       : values;
 
     const barLabel = chartConfiguration.itemLabel === 'value' ? ('value' as const) : undefined;
     if (barLabel) {
       seriesProp.forEach((series) => {
-        series.barLabel = series.barLabel ?? barLabel;
+          throw new Error("STUB");
       });
     }
 
@@ -206,13 +195,7 @@ function ChartsRenderer({
 
   if (chartType === 'line' || chartType === 'area') {
     const area = chartType === 'area';
-    const seriesProp = values.map((value) => ({
-      ...value,
-      area,
-      curve: chartConfiguration.interpolation,
-      showMark: chartConfiguration.showMark,
-      stack: chartConfiguration.stacked ? 'stack' : undefined,
-    }));
+    const seriesProp = values.map((value) => { throw new Error("STUB"); });
 
     // Build axis configuration
     const xAxisConfig = {
@@ -276,31 +259,7 @@ function ChartsRenderer({
         1) /
       values.length;
 
-    const seriesProp = values.map((valueItem, valueIndex) => ({
-      data: valueItem.data.map((item, itemIndex) => ({
-        id: `${valueItem.id}-${itemIndex}`,
-        value: item || 0,
-        label: `${String(dimensionData[itemIndex])} - ${valueItem.label}`,
-      })),
-      arcLabel: chartConfiguration.itemLabel === 'value' ? ('value' as const) : undefined,
-      // each series starts from
-      // - inner radius of the chart
-      // - plus all the series before
-      // - plus the gap between the series
-      innerRadius:
-        chartConfiguration.innerRadius +
-        valueIndex * radiusPerSeries +
-        chartConfiguration.seriesGap * valueIndex,
-      // each series ends at the radius that is the same as start plus the radius of one series
-      outerRadius:
-        chartConfiguration.innerRadius +
-        (valueIndex + 1) * radiusPerSeries +
-        chartConfiguration.seriesGap * valueIndex,
-      cornerRadius: chartConfiguration.cornerRadius,
-      startAngle: chartConfiguration.startAngle,
-      endAngle: chartConfiguration.endAngle,
-      paddingAngle: chartConfiguration.paddingAngle,
-    }));
+    const seriesProp = values.map((valueItem, valueIndex) => { throw new Error("STUB"); });
 
     const legendPosition = getLegendPosition(
       chartConfiguration.pieLegendDirection === 'vertical'

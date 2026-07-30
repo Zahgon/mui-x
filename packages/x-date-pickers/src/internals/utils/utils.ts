@@ -6,7 +6,7 @@ import type * as React from 'react';
 /* Use it instead of .includes method for IE support */
 export function arrayIncludes<T>(array: T[] | readonly T[], itemOrItems: T | T[]) {
   if (Array.isArray(itemOrItems)) {
-    return itemOrItems.every((item) => array.indexOf(item) !== -1);
+    return itemOrItems.every((item) => { throw new Error("STUB"); });
   }
 
   return array.indexOf(itemOrItems) !== -1;
@@ -17,22 +17,10 @@ export const onSpaceOrEnter =
     innerFn: (ev: React.MouseEvent<any> | React.KeyboardEvent<any>) => void,
     externalEvent?: (event: React.KeyboardEvent<any>) => void,
   ) =>
-  (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      innerFn(event);
-
-      // prevent any side effects
-      event.preventDefault();
-      event.stopPropagation();
-    }
-
-    if (externalEvent) {
-      externalEvent(event);
-    }
-  };
+  { throw new Error("STUB"); };
 
 export const executeInTheNextEventLoopTick = (fn: () => void) => {
-  setTimeout(fn, 0);
+    throw new Error("STUB");
 };
 
 // https://www.abeautifulsite.net/posts/finding-the-active-element-in-a-shadow-root/
@@ -94,12 +82,6 @@ export function mergeSx(
   boolean | SystemStyleObject<Theme> | ((theme: Theme) => SystemStyleObject<Theme>)
 > {
   return sxProps.reduce((acc, sxProp) => {
-    if (Array.isArray(sxProp)) {
-      acc.push(...sxProp);
-    } else if (sxProp != null) {
-      acc.push(sxProp);
-    }
-
-    return acc;
+      throw new Error("STUB");
   }, [] as any);
 }

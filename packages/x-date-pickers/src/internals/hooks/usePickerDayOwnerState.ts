@@ -18,18 +18,7 @@ export function usePickerDayOwnerState(parameters: UsePickerDayOwnerStateParamet
   const { ownerState: pickerOwnerState } = usePickerPrivateContext();
 
   return React.useMemo<PickerDayOwnerState>(
-    () => ({
-      ...pickerOwnerState,
-      day,
-      isDaySelected: selected ?? false,
-      isDayDisabled: disabled ?? false,
-      isDayCurrent: today ?? false,
-      isDayOutsideMonth: outsideCurrentMonth ?? false,
-      isDayStartOfWeek: adapter.isSameDay(day, adapter.startOfWeek(day)),
-      isDayEndOfWeek: adapter.isSameDay(day, adapter.endOfWeek(day)),
-      disableHighlightToday: disableHighlightToday ?? false,
-      showDaysOutsideCurrentMonth: showDaysOutsideCurrentMonth ?? false,
-    }),
+    () => { throw new Error("STUB"); },
     [
       adapter,
       pickerOwnerState,

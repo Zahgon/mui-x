@@ -17,23 +17,8 @@ export type ToolbarButtonProps = ChartsSlotProps['baseIconButton'] & {
 
 const ToolbarButton = React.forwardRef<HTMLButtonElement, ToolbarButtonProps>(
   function ToolbarButton(props, ref) {
-    const { render, onKeyDown, onFocus, disabled, 'aria-disabled': ariaDisabled, ...other } = props;
-    const { slots, slotProps } = useChartsSlots();
-
-    const buttonRef = React.useRef<HTMLButtonElement>(null);
-    const handleRef = useForkRef(buttonRef, ref);
-    const { tabIndex, ...toolbarButtonProps } = useRegisterToolbarButton(props, buttonRef);
-
-    const element = useComponentRenderer(slots.baseIconButton, render, {
-      ...slotProps?.baseIconButton,
-      tabIndex,
-      ...other,
-      ...toolbarButtonProps,
-      ref: handleRef,
-    });
-
-    return <React.Fragment>{element}</React.Fragment>;
-  },
+        throw new Error("STUB");
+    },
 );
 
 ToolbarButton.propTypes /* remove-proptypes */ = {

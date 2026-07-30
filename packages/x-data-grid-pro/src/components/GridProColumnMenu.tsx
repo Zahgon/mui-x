@@ -23,15 +23,8 @@ export const GRID_COLUMN_MENU_SLOT_PROPS_PRO = {
 
 export const GridProColumnMenu = forwardRef<HTMLUListElement, GridColumnMenuProps>(
   function GridProColumnMenu(props, ref) {
-    return (
-      <GridGenericColumnMenu
-        {...props}
-        defaultSlots={GRID_COLUMN_MENU_SLOTS_PRO}
-        defaultSlotProps={GRID_COLUMN_MENU_SLOT_PROPS_PRO}
-        ref={ref}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 ) as GridColumnMenuComponent;
 
 GridProColumnMenu.defaultSlots = GRID_COLUMN_MENU_SLOTS_PRO;

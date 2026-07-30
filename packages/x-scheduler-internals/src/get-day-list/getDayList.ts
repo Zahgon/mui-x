@@ -40,7 +40,7 @@ export function getDayList(parameters: GetDaytListParameters): GetDaytListReturn
     }
   }
 
-  return days.map((day) => processDate(day, adapter));
+  return days.map((day) => { throw new Error("STUB"); });
 }
 
 export interface GetDaytListParameters {

@@ -14,7 +14,7 @@ export interface RangeBarClasses {
 export type RangeBarClassKey = keyof RangeBarClasses;
 
 export function getRangeBarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiRangeBar', slot);
+    throw new Error("STUB");
 }
 
 export const rangeBarClasses: RangeBarClasses = generateUtilityClasses('MuiRangeBar', [

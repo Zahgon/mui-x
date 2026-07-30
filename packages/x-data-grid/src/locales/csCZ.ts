@@ -33,13 +33,7 @@ const csCZGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Skrýt filtry',
   toolbarFiltersTooltipShow: 'Zobrazit filtry',
   toolbarFiltersTooltipActive: (count) => {
-    let pluralForm = 'aktivních filtrů';
-    if (count > 1 && count < 5) {
-      pluralForm = 'aktivní filtry';
-    } else if (count === 1) {
-      pluralForm = 'aktivní filtr';
-    }
-    return `${count} ${pluralForm}`;
+      throw new Error("STUB");
   },
 
   // Quick filter toolbar field
@@ -136,7 +130,7 @@ const csCZGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Menu',
-  columnMenuAriaLabel: (columnName: string) => `Možnosti sloupce ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Zobrazit sloupce',
   columnMenuManageColumns: 'Spravovat sloupce',
   columnMenuFilter: 'Filtr',
@@ -149,26 +143,14 @@ const csCZGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) => {
-    let pluralForm = 'aktivních filtrů';
-    if (count > 1 && count < 5) {
-      pluralForm = 'aktivní filtry';
-    } else if (count === 1) {
-      pluralForm = 'aktivní filtr';
-    }
-    return `${count} ${pluralForm}`;
+      throw new Error("STUB");
   },
   columnHeaderFiltersLabel: 'Zobrazit filtry',
   columnHeaderSortIconLabel: 'Řadit',
 
   // Rows selected footer text
   footerRowSelected: (count) => {
-    let pluralForm = 'vybraných záznamů';
-    if (count > 1 && count < 5) {
-      pluralForm = 'vybrané záznamy';
-    } else if (count === 1) {
-      pluralForm = 'vybraný záznam';
-    }
-    return `${count} ${pluralForm}`;
+      throw new Error("STUB");
   },
 
   // Total row amount footer text
@@ -176,13 +158,7 @@ const csCZGrid: Partial<GridLocaleText> = {
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) => {
-    const str = totalCount.toString();
-    const firstDigit = str[0];
-    const op =
-      ['4', '6', '7'].includes(firstDigit) || (firstDigit === '1' && str.length % 3 === 0)
-        ? 'ze'
-        : 'z';
-    return `${visibleCount.toLocaleString()} ${op} ${totalCount.toLocaleString()}`;
+      throw new Error("STUB");
   },
 
   // Checkbox selection text
@@ -215,8 +191,8 @@ const csCZGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Skupina',
-  groupColumn: (name) => `Seskupit podle ${name}`,
-  unGroupColumn: (name) => `Přestat seskupovat podle ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Přepnout detail panelu',
@@ -226,27 +202,10 @@ const csCZGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Řádků na stránce:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} z ${count !== -1 ? formatNumber(count) : `více než ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `přibližně ${formatNumber(estimated)}`
-        : `více než ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} z ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Jít na první stránku';
-    }
-    if (type === 'last') {
-      return 'Jít na poslední stránku';
-    }
-    if (type === 'next') {
-      return 'Jít na další stránku';
-    }
-    // if (type === 'previous') {
-    return 'Jít na předchozí stránku';
+      throw new Error("STUB");
   },
 
   // Row reordering text

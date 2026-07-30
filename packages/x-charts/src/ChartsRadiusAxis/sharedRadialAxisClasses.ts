@@ -23,7 +23,7 @@ export interface ChartsRadialAxisClasses {
 export type ChartsRadialAxisClassKey = keyof ChartsRadialAxisClasses;
 
 export function getRadialAxisUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsRadialAxis', slot);
+    throw new Error("STUB");
 }
 
 export const chartsRadialAxisClasses: ChartsRadialAxisClasses = generateUtilityClasses(

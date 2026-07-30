@@ -81,30 +81,22 @@ type MessageContentComponent = ((
 ) => React.JSX.Element) & { propTypes?: any };
 
 function DefaultPartFallback(props: { part: ChatMessagePart }) {
-  const { part } = props;
-
-  return <div data-part-type={part.type} />;
+    throw new Error("STUB");
 }
 
 function TextPart(props: { text: string; renderText: (text: string) => React.ReactNode }) {
-  const { text, renderText } = props;
-  const rendered = React.useMemo(() => renderText(text), [text, renderText]);
-  return <React.Fragment>{rendered}</React.Fragment>;
+    throw new Error("STUB");
 }
 
 function JsonBlock(props: { value: unknown }) {
-  const { value } = props;
-
-  return <pre>{JSON.stringify(value, null, 2)}</pre>;
+    throw new Error("STUB");
 }
 
-const renderDefaultStepStartPart: ChatPartRenderer<ChatStepStartMessagePart> = () => (
-  <div role="separator" />
-);
+const renderDefaultStepStartPart: ChatPartRenderer<ChatStepStartMessagePart> = () => { throw new Error("STUB"); };
 
 const renderDefaultDataPart: ChatPartRenderer<
   Extract<ChatMessagePart, { type: `data-${string}` }>
-> = ({ part }) => <JsonBlock value={part.data} />;
+> = ({ part }) => { throw new Error("STUB"); };
 
 function renderDefaultStepStartMessagePart(props: {
   part: ChatStepStartMessagePart;
@@ -112,7 +104,7 @@ function renderDefaultStepStartMessagePart(props: {
   message: NonNullable<MessageContentOwnerState['message']>;
   onToolCall: ReturnType<typeof useChatOnToolCall>;
 }) {
-  return renderDefaultStepStartPart(props);
+    throw new Error("STUB");
 }
 
 function renderDefaultDataMessagePart(props: {
@@ -121,7 +113,7 @@ function renderDefaultDataMessagePart(props: {
   message: NonNullable<MessageContentOwnerState['message']>;
   onToolCall: ReturnType<typeof useChatOnToolCall>;
 }) {
-  return renderDefaultDataPart(props);
+    throw new Error("STUB");
 }
 
 function MessageRenderedPart(props: {
@@ -134,115 +126,12 @@ function MessageRenderedPart(props: {
     localeText: ChatLocaleText,
   ) => ChatPartRenderer<ChatMessagePart> | null;
 }) {
-  const { part, index, message, partProps, resolveBuiltInPartRenderer } = props;
-  const customRenderer = useChatPartRenderer(part.type as ChatMessagePart['type']);
-  const localeText = useChatLocaleText();
-  const onToolCall = useChatOnToolCall();
-
-  // Priority 1: User-provided custom renderer from ChatProvider
-  if (customRenderer != null) {
-    return <React.Fragment>{customRenderer({ part, message, index, onToolCall })}</React.Fragment>;
-  }
-
-  // Priority 2: Legacy resolveBuiltInPartRenderer callback (deprecated)
-  if (resolveBuiltInPartRenderer != null) {
-    const builtInRenderer = resolveBuiltInPartRenderer(part, localeText);
-
-    if (builtInRenderer != null) {
-      return (
-        <React.Fragment>{builtInRenderer({ part, message, index, onToolCall })}</React.Fragment>
-      );
-    }
-  }
-
-  // Priority 3: Built-in unstyled part renderer components with partProps
-  const baseProps = { part, message, index, onToolCall };
-  switch (part.type) {
-    case 'text':
-      if (partProps?.text?.renderText) {
-        return <TextPart text={part.text} renderText={partProps.text.renderText} />;
-      }
-      return <div>{part.text}</div>;
-    case 'reasoning':
-      return <ReasoningPart {...partProps?.reasoning} {...baseProps} part={part} />;
-    case 'tool':
-      return <ToolPart {...partProps?.tool} {...baseProps} part={part} />;
-    case 'dynamic-tool':
-      return <ToolPart {...partProps?.['dynamic-tool']} {...baseProps} part={part} />;
-    case 'file':
-      return <FilePart {...partProps?.file} {...baseProps} part={part} />;
-    case 'source-url':
-      return <SourceUrlPart {...partProps?.['source-url']} {...baseProps} part={part} />;
-    case 'source-document':
-      return <SourceDocumentPart {...partProps?.['source-document']} {...baseProps} part={part} />;
-    case 'step-start':
-      return (
-        <React.Fragment>{renderDefaultStepStartMessagePart({ ...baseProps, part })}</React.Fragment>
-      );
-    default:
-      if (part.type.startsWith('data-')) {
-        const dataPart = part as Extract<ChatMessagePart, { type: `data-${string}` }>;
-        return (
-          <React.Fragment>
-            {renderDefaultDataMessagePart({ ...baseProps, part: dataPart })}
-          </React.Fragment>
-        );
-      }
-
-      return <DefaultPartFallback part={part} />;
-  }
+    throw new Error("STUB");
 }
 
 export const MessageContent = React.forwardRef(function MessageContent(
   props: MessageContentProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    ownerState: ownerStateProp,
-    partProps,
-    resolveBuiltInPartRenderer,
-    afterContent,
-    slots,
-    slotProps,
-    ...other
-  } = props as MessageContentProps & { ownerState?: MessageContentOwnerState };
-  const ownerState = useMessageContext();
-  void ownerStateProp;
-  const Content = slots?.content ?? 'div';
-  const Bubble = slots?.bubble ?? 'div';
-  const message = ownerState.message;
-  const contentProps = useSlotProps({
-    elementType: Content,
-    externalSlotProps: slotProps?.content,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-  const bubbleProps = useSlotProps({
-    elementType: Bubble,
-    externalSlotProps: slotProps?.bubble,
-    ownerState,
-  });
-
-  return (
-    <Content {...contentProps}>
-      <Bubble {...bubbleProps}>
-        {message
-          ? message.parts.map((part, idx) => (
-              <MessageRenderedPart
-                part={part}
-                index={idx}
-                key={`${ownerState.messageId}-${idx}-${part.type}`}
-                message={message}
-                partProps={partProps}
-                resolveBuiltInPartRenderer={resolveBuiltInPartRenderer}
-              />
-            ))
-          : null}
-        {afterContent}
-      </Bubble>
-    </Content>
-  );
+    throw new Error("STUB");
 }) as MessageContentComponent;

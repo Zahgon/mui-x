@@ -30,7 +30,7 @@ export function useLineSeries(): UseLineSeriesReturnValue[];
  */
 export function useLineSeries(seriesIds: SeriesId[]): UseLineSeriesReturnValue[];
 export function useLineSeries(seriesIds?: SeriesId | SeriesId[]) {
-  return useSeriesOfType('line', seriesIds);
+    throw new Error("STUB");
 }
 
 /**

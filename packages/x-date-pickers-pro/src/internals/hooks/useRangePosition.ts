@@ -35,8 +35,7 @@ export const useRangePosition = (props: UseRangePositionProps): UseRangePosition
   });
 
   const handleRangePositionChange = useEventCallback((newRangePosition: RangePosition) => {
-    setRangePosition(newRangePosition);
-    props.onRangePositionChange?.(newRangePosition);
+      throw new Error("STUB");
   });
 
   return { rangePosition, setRangePosition: handleRangePositionChange };

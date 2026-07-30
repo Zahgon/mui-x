@@ -7,21 +7,21 @@ import type { GridStatePremium } from '../../../models/gridStatePremium';
 import type { Conversation } from './gridAiAssistantInterfaces';
 
 const gridAiAssistantStateSelector = createRootSelector(
-  (state: GridStatePremium) => state.aiAssistant,
+  (state: GridStatePremium) => { throw new Error("STUB"); },
 );
 
 export const gridAiAssistantActiveConversationIndexSelector = createSelector(
   gridAiAssistantStateSelector,
-  (aiAssistant) => aiAssistant?.activeConversationIndex,
+  (aiAssistant) => { throw new Error("STUB"); },
 );
 
 export const gridAiAssistantConversationsSelector = createSelector(
   gridAiAssistantStateSelector,
-  (aiAssistant) => aiAssistant?.conversations,
+  (aiAssistant) => { throw new Error("STUB"); },
 );
 
 export const gridAiAssistantActiveConversationSelector = createSelectorMemoized(
   gridAiAssistantConversationsSelector,
   gridAiAssistantActiveConversationIndexSelector,
-  (conversations, index) => conversations[index] as Conversation | undefined,
+  (conversations, index) => { throw new Error("STUB"); },
 );

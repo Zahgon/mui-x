@@ -74,26 +74,17 @@ function GridEditBooleanCell(props: GridEditBooleanCellProps) {
 
   const handleChange = React.useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.target.checked;
-
-      if (onValueChange) {
-        await onValueChange(event, newValue);
-      }
-
-      setValueState(newValue);
-      await apiRef.current.setEditCellValue({ id: idProp, field, value: newValue }, event);
-    },
+          throw new Error("STUB");
+      },
     [apiRef, field, idProp, onValueChange],
   );
 
   React.useEffect(() => {
-    setValueState(value);
+      throw new Error("STUB");
   }, [value]);
 
   useEnhancedEffect(() => {
-    if (hasFocus) {
-      inputRef.current!.focus();
-    }
+      throw new Error("STUB");
   }, [hasFocus]);
 
   return (
@@ -178,6 +169,4 @@ GridEditBooleanCell.propTypes /* remove-proptypes */ = {
 
 export { GridEditBooleanCell };
 
-export const renderEditBooleanCell = (params: GridEditBooleanCellProps) => (
-  <GridEditBooleanCell {...params} />
-);
+export const renderEditBooleanCell = (params: GridEditBooleanCellProps) => { throw new Error("STUB"); };

@@ -76,13 +76,7 @@ const useUtilityClasses = (classes: Partial<DateTimeRangePickerTabsClasses> | un
 const DateTimeRangePickerTabsRoot = styled('div', {
   name: 'MuiDateTimeRangePickerTabs',
   slot: 'Root',
-})<{ ownerState: PickerOwnerState }>(({ theme }) => ({
-  display: 'flex',
-  justifyContent: 'space-between',
-  alignItems: 'center',
-  borderBottom: `1px solid ${(theme.vars || theme).palette.divider}`,
-  minHeight: 48,
-}));
+})<{ ownerState: PickerOwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 const DateTimeRangePickerTab = styled(Button, {
   name: 'MuiDateTimeRangePickerTabs',
@@ -119,24 +113,13 @@ const DateTimeRangePickerTabs = function DateTimeRangePickerTabs(
   const { rangePosition, setRangePosition } = usePickerRangePositionContext();
 
   const value = React.useMemo(
-    () => (view == null ? null : viewToTab(view, rangePosition)),
+    () => { throw new Error("STUB"); },
     [view, rangePosition],
   );
   const isPreviousHidden = value === 'start-date';
   const isNextHidden = value === 'end-time';
   const tabLabel = React.useMemo(() => {
-    switch (value) {
-      case 'start-date':
-        return translations.startDate;
-      case 'start-time':
-        return translations.startTime;
-      case 'end-date':
-        return translations.endDate;
-      case 'end-time':
-        return translations.endTime;
-      default:
-        return '';
-    }
+      throw new Error("STUB");
   }, [
     translations.endDate,
     translations.endTime,
@@ -146,23 +129,15 @@ const DateTimeRangePickerTabs = function DateTimeRangePickerTabs(
   ]);
 
   const handleRangePositionChange = useEventCallback((newTab: TabValue) => {
-    if (newTab.includes('start')) {
-      setRangePosition('start');
-    } else {
-      setRangePosition('end');
-    }
+      throw new Error("STUB");
   });
 
   const changeToPreviousTab = useEventCallback(() => {
-    const previousTab = value == null ? tabOptions[0] : tabOptions[tabOptions.indexOf(value) - 1];
-    setView(tabToView(previousTab));
-    handleRangePositionChange(previousTab);
+      throw new Error("STUB");
   });
 
   const changeToNextTab = useEventCallback(() => {
-    const nextTab = value == null ? tabOptions[0] : tabOptions[tabOptions.indexOf(value) + 1];
-    setView(tabToView(nextTab));
-    handleRangePositionChange(nextTab);
+      throw new Error("STUB");
   });
 
   if (hidden) {

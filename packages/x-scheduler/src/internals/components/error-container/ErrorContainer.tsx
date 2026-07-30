@@ -48,25 +48,5 @@ const ErrorMessage = styled(Typography, {
 });
 
 export function ErrorContainer(props: ErrorContainerProps) {
-  const { className } = props;
-  const store = useSchedulerStoreContext();
-  const { classes } = useSharedComponentsStyledContext();
-  const errors = useStore(store, schedulerOtherSelectors.errors);
-
-  return (
-    <ErrorContainerRoot className={clsx(classes.errorContainer, className)}>
-      {errors.map(({ error, key }) => (
-        <ErrorAlert
-          className={classes.errorAlert}
-          severity="error"
-          key={key}
-          onClose={() => store.dismissError(key)}
-        >
-          <ErrorMessage className={classes.errorMessage} variant="body2">
-            {error.message}
-          </ErrorMessage>
-        </ErrorAlert>
-      ))}
-    </ErrorContainerRoot>
-  );
+    throw new Error("STUB");
 }

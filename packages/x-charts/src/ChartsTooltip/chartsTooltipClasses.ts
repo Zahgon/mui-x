@@ -32,7 +32,7 @@ export type ChartsTooltipClassKey = keyof Omit<
 >;
 
 export function getChartsTooltipUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsTooltip', slot);
+    throw new Error("STUB");
 }
 export const chartsTooltipClasses: ChartsTooltipClasses = generateUtilityClasses(
   'MuiChartsTooltip',

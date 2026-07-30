@@ -18,35 +18,7 @@ export function useFocusableWhenDisabled(
   // we can't explicitly assign `undefined` to any of these props because it
   // would otherwise prevent subsequently merged props from setting them
   const props = React.useMemo(() => {
-    const additionalProps = {
-      // allow Tabbing away from focusableWhenDisabled elements
-      onKeyDown(event: React.KeyboardEvent) {
-        if (disabled && focusableWhenDisabled && event.key !== 'Tab') {
-          event.preventDefault();
-        }
-      },
-    } as FocusableWhenDisabledProps;
-
-    if (!composite) {
-      additionalProps.tabIndex = tabIndexProp;
-
-      if (!isNativeButton && disabled) {
-        additionalProps.tabIndex = focusableWhenDisabled ? tabIndexProp : -1;
-      }
-    }
-
-    if (
-      (isNativeButton && (focusableWhenDisabled || isFocusableComposite)) ||
-      (!isNativeButton && disabled)
-    ) {
-      additionalProps['aria-disabled'] = disabled;
-    }
-
-    if (isNativeButton && (!focusableWhenDisabled || isNonFocusableComposite)) {
-      additionalProps.disabled = disabled;
-    }
-
-    return additionalProps;
+      throw new Error("STUB");
   }, [
     composite,
     disabled,

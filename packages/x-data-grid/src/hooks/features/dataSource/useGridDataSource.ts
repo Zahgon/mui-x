@@ -31,10 +31,10 @@ export const useGridDataSource = (
   );
 
   Object.entries(events).forEach(([event, handler]) => {
-    addEventHandler(apiRef, event as keyof GridEventLookup, handler);
+      throw new Error("STUB");
   });
 
   React.useEffect(() => {
-    setStrategyAvailability();
+      throw new Error("STUB");
   }, [setStrategyAvailability]);
 };

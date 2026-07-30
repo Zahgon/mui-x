@@ -40,38 +40,7 @@ const STEPS: PickerRangeStep[] = [
 const rendererInterceptor = function rendererInterceptor(
   props: PickerRendererInterceptorProps<PickerRangeValue, TimeViewWithMeridiem, any>,
 ) {
-  const { viewRenderers, popperView, rendererProps } = props;
-  const finalProps = {
-    ...rendererProps,
-    sx: [
-      {
-        width: DIALOG_WIDTH,
-        [`.${multiSectionDigitalClockSectionClasses.root}`]: {
-          flex: 1,
-          // account for the border on `MultiSectionDigitalClock`
-          maxHeight: VIEW_HEIGHT - 1,
-          [`.${multiSectionDigitalClockSectionClasses.item}`]: {
-            width: 'auto',
-          },
-        },
-        [`&.${digitalClockClasses.root}`]: {
-          maxHeight: RANGE_VIEW_HEIGHT,
-          [`.${digitalClockClasses.item}`]: {
-            justifyContent: 'center',
-          },
-        },
-        [`&.${multiSectionDigitalClockClasses.root}, .${multiSectionDigitalClockSectionClasses.root}`]:
-          {
-            maxHeight: RANGE_VIEW_HEIGHT - 1,
-          },
-      },
-    ],
-  };
-  const viewRenderer = viewRenderers[popperView];
-  if (!viewRenderer) {
-    return null;
-  }
-  return <TimeRangePickerTimeWrapper {...finalProps} viewRenderer={viewRenderer} />;
+    throw new Error("STUB");
 };
 
 type MobileTimeRangePickerComponent = ((
@@ -82,66 +51,7 @@ const MobileTimeRangePicker = React.forwardRef(function MobileTimeRangePicker(
   inProps: MobileTimeRangePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-
-  // Props with the default values common to all time range pickers
-  const defaultizedProps = useTimeRangePickerDefaultizedProps<MobileTimeRangePickerProps>(
-    inProps,
-    'MuiMobileTimeRangePicker',
-  );
-
-  const renderTimeView = defaultizedProps.shouldRenderTimeInASingleColumn
-    ? renderDigitalClockTimeView
-    : renderMultiSectionDigitalClockTimeView;
-
-  const viewRenderers: PickerViewRendererLookup<any, TimeViewWithMeridiem, any> = {
-    hours: renderTimeView,
-    minutes: renderTimeView,
-    seconds: renderTimeView,
-    meridiem: renderTimeView,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  const props = {
-    ...defaultizedProps,
-    ampmInClock: true,
-    viewRenderers,
-    format: resolveTimeFormat(adapter, {
-      ...defaultizedProps,
-      views: defaultizedProps.viewsForFormatting,
-    }),
-    slots: {
-      field: SingleInputTimeRangeField,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      tabs: {
-        hidden: false,
-        ...defaultizedProps.slotProps?.tabs,
-      },
-      toolbar: {
-        hidden: false,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useMobileRangePicker<TimeViewWithMeridiem, typeof props>({
-    ref,
-    props,
-    valueManager: rangeValueManager,
-    valueType: 'time',
-    validator: validateTimeRange,
-    rendererInterceptor,
-    steps: STEPS,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as MobileTimeRangePickerComponent;
 
 MobileTimeRangePicker.propTypes /* remove-proptypes */ = {

@@ -3,25 +3,25 @@ import type { GridRowId } from '@mui/x-data-grid';
 import type { GridStatePro } from '../../../models/gridStatePro';
 
 export const gridDataSourceStateSelector = createRootSelector(
-  (state: GridStatePro) => state.dataSource,
+  (state: GridStatePro) => { throw new Error("STUB"); },
 );
 
 export const gridDataSourceLoadingSelector = createSelector(
   gridDataSourceStateSelector,
-  (dataSource) => dataSource.loading,
+  (dataSource) => { throw new Error("STUB"); },
 );
 
 export const gridDataSourceLoadingIdSelector = createSelector(
   gridDataSourceStateSelector,
-  (dataSource, id: GridRowId) => dataSource.loading[id] ?? false,
+  (dataSource, id: GridRowId) => { throw new Error("STUB"); },
 );
 
 export const gridDataSourceErrorsSelector = createSelector(
   gridDataSourceStateSelector,
-  (dataSource) => dataSource.errors,
+  (dataSource) => { throw new Error("STUB"); },
 );
 
 export const gridDataSourceErrorSelector = createSelector(
   gridDataSourceStateSelector,
-  (dataSource, id: GridRowId) => dataSource.errors[id],
+  (dataSource, id: GridRowId) => { throw new Error("STUB"); },
 );

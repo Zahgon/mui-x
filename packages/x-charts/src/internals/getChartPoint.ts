@@ -14,7 +14,7 @@ export function getChartPoint(
 
   if (typeof DOMMatrix === 'undefined') {
     // Fallback for environments like JSDOM where DOMMatrix is not available.
-    return { x, y, z: 0, w: 1, matrixTransform: () => ({ x, y, z: 0, w: 1 }) } as DOMPoint;
+    return { x, y, z: 0, w: 1, matrixTransform: () => { throw new Error("STUB"); } } as DOMPoint;
   }
 
   const style = getComputedStyle(element);

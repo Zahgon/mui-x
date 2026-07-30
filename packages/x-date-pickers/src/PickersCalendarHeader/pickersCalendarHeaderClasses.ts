@@ -17,7 +17,7 @@ export interface PickersCalendarHeaderClasses {
 export type PickersCalendarHeaderClassKey = keyof PickersCalendarHeaderClasses;
 
 export const getPickersCalendarHeaderUtilityClass = (slot: string) =>
-  generateUtilityClass('MuiPickersCalendarHeader', slot);
+  { throw new Error("STUB"); };
 
 export const pickersCalendarHeaderClasses: PickersCalendarHeaderClasses = generateUtilityClasses(
   'MuiPickersCalendarHeader',

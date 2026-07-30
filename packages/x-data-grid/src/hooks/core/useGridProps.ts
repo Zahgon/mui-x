@@ -6,17 +6,7 @@ import type { GridStateCommunity, GridStateProps } from '../../models/gridStateC
 import type { GridStateInitializer } from '../utils/useGridInitializeState';
 
 export const propsStateInitializer: GridStateInitializer<GridStateProps> = (state, props) => {
-  return {
-    ...state,
-    props: {
-      listView: props.listView,
-      getRowId: props.getRowId,
-      isCellEditable: props.isCellEditable,
-      isRowSelectable: props.isRowSelectable,
-      dataSource: props.dataSource,
-      signature: props.signature,
-    },
-  };
+    throw new Error("STUB");
 };
 
 export const useGridProps = <PrivateApi extends GridPrivateApiCommon>(
@@ -25,21 +15,7 @@ export const useGridProps = <PrivateApi extends GridPrivateApiCommon>(
 ) => {
   const isFirstRender = React.useRef(true);
   React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    apiRef.current.setState((state: GridStateCommunity) => ({
-      ...state,
-      props: {
-        listView: props.listView,
-        getRowId: props.getRowId,
-        isCellEditable: props.isCellEditable,
-        isRowSelectable: props.isRowSelectable,
-        dataSource: props.dataSource,
-        signature: props.signature,
-      },
-    }));
+      throw new Error("STUB");
   }, [
     apiRef,
     props.listView,

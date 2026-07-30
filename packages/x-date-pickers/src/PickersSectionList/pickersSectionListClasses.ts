@@ -13,7 +13,7 @@ export interface PickersSectionListClasses {
 export type PickersSectionListClassKey = keyof PickersSectionListClasses;
 
 export function getPickersSectionListUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickersSectionList', slot);
+    throw new Error("STUB");
 }
 
 export const pickersSectionListClasses = generateUtilityClasses<PickersSectionListClassKey>(

@@ -31,59 +31,14 @@ export function useWheelGesture(instance: GestureInstance, options: UseWheelGest
   const startedOutsideTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const onWheelRef = React.useRef(onWheel);
   React.useEffect(() => {
-    onWheelRef.current = onWheel;
+      throw new Error("STUB");
   });
 
   React.useEffect(() => {
-    if (!enabled) {
-      return;
-    }
-    instance.updateZoomInteractionListeners('zoomTurnWheel', { requiredKeys });
+      throw new Error("STUB");
   }, [enabled, requiredKeys, instance]);
 
   React.useEffect(() => {
-    const element = chartsLayerContainerRef.current;
-    if (element === null || !enabled) {
-      return () => {};
-    }
-
-    const rafThrottledOnWheel = rafThrottle((point: ChartPoint, event: WheelEvent) =>
-      onWheelRef.current(point, event),
-    );
-
-    const handler = instance.addInteractionListener('zoomTurnWheel', (event) => {
-      const point = getChartPoint(element, {
-        clientX: event.detail.centroid.x,
-        clientY: event.detail.centroid.y,
-      });
-
-      // Ignore wheel events that started outside the chart area (e.g. while page-scrolling
-      // over the chart). The timeout debounces re-entry caused by the scroll itself.
-      if (startedOutsideRef.current || !instance.isPointInside(point.x, point.y)) {
-        startedOutsideRef.current = true;
-        if (startedOutsideTimeoutRef.current) {
-          clearTimeout(startedOutsideTimeoutRef.current);
-        }
-        startedOutsideTimeoutRef.current = setTimeout(() => {
-          startedOutsideRef.current = false;
-          startedOutsideTimeoutRef.current = null;
-        }, 100);
-        return;
-      }
-
-      event.detail.srcEvent.preventDefault();
-
-      rafThrottledOnWheel(point, event.detail.srcEvent as WheelEvent);
-    });
-
-    return () => {
-      handler.cleanup();
-      if (startedOutsideTimeoutRef.current) {
-        clearTimeout(startedOutsideTimeoutRef.current);
-        startedOutsideTimeoutRef.current = null;
-      }
-      startedOutsideRef.current = false;
-      rafThrottledOnWheel.clear();
-    };
+      throw new Error("STUB");
   }, [chartsLayerContainerRef, enabled, instance]);
 }

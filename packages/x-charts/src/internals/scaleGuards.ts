@@ -22,5 +22,5 @@ export function isPointScale<
   Range = number,
   Output = number,
 >(scale: D3Scale<Domain, Range, Output>): scale is D3OrdinalScale<Domain> {
-  return isOrdinalScale(scale) && !('paddingOuter' in scale);
+    throw new Error("STUB");
 }

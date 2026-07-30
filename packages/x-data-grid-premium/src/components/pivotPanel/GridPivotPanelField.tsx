@@ -62,10 +62,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const GridPivotPanelFieldRoot = styled('div', {
   name: 'MuiDataGrid',
   slot: 'PivotPanelField',
-  overridesResolver: (props, styles) => [
-    { [`&.${gridClasses['pivotPanelField--sorted']}`]: styles['pivotPanelField--sorted'] },
-    styles.pivotPanelField,
-  ],
+  overridesResolver: (props, styles) => { throw new Error("STUB"); },
 })<{ ownerState: OwnerState }>({
   flexShrink: 0,
   position: 'relative',
@@ -148,92 +145,7 @@ function AggregationSelect({
   aggFunc: GridPivotModel['values'][number]['aggFunc'];
   field: FieldTransferObject['field'];
 }) {
-  const rootProps = useGridRootProps();
-  const [aggregationMenuOpen, setAggregationMenuOpen] = React.useState(false);
-  const aggregationMenuTriggerRef = React.useRef<HTMLDivElement>(null);
-  const aggregationMenuTriggerId = useId();
-  const aggregationMenuId = useId();
-
-  const apiRef = useGridApiContext();
-  const initialColumns = useGridSelector(apiRef, gridPivotInitialColumnsSelector);
-  const colDef = initialColumns.get(field) as GridColDef;
-
-  const availableAggregationFunctions = React.useMemo(
-    () =>
-      getAvailableAggregationFunctions({
-        aggregationFunctions: rootProps.aggregationFunctions,
-        colDef,
-        isDataSource: !!rootProps.dataSource,
-      }),
-    [colDef, rootProps.aggregationFunctions, rootProps.dataSource],
-  );
-
-  const handleClick = (func: string) => {
-    apiRef.current.setPivotModel((prev) => {
-      return {
-        ...prev,
-        values: prev.values.map((col) => {
-          if (col.field === field) {
-            return { ...col, aggFunc: func };
-          }
-          return col;
-        }),
-      };
-    });
-    setAggregationMenuOpen(false);
-  };
-
-  return availableAggregationFunctions.length > 0 ? (
-    <React.Fragment>
-      <rootProps.slots.baseChip
-        label={getAggregationFunctionLabel({
-          apiRef,
-          aggregationRule: {
-            aggregationFunctionName: aggFunc,
-            aggregationFunction: rootProps.aggregationFunctions[aggFunc],
-          },
-        })}
-        size="small"
-        variant="outlined"
-        ref={aggregationMenuTriggerRef}
-        id={aggregationMenuTriggerId}
-        aria-haspopup="true"
-        aria-controls={aggregationMenuOpen ? aggregationMenuId : undefined}
-        aria-expanded={aggregationMenuOpen ? 'true' : undefined}
-        onClick={() => setAggregationMenuOpen(!aggregationMenuOpen)}
-      />
-      <GridMenu
-        open={aggregationMenuOpen}
-        onClose={() => setAggregationMenuOpen(false)}
-        target={aggregationMenuTriggerRef.current}
-        position="bottom-start"
-      >
-        <rootProps.slots.baseMenuList
-          id={aggregationMenuId}
-          aria-labelledby={aggregationMenuTriggerId}
-          autoFocusItem
-          {...rootProps.slotProps?.baseMenuList}
-        >
-          {availableAggregationFunctions.map((func) => (
-            <rootProps.slots.baseMenuItem
-              key={func}
-              selected={aggFunc === func}
-              onClick={() => handleClick(func)}
-              {...rootProps.slotProps?.baseMenuItem}
-            >
-              {getAggregationFunctionLabel({
-                apiRef,
-                aggregationRule: {
-                  aggregationFunctionName: func,
-                  aggregationFunction: rootProps.aggregationFunctions[func],
-                },
-              })}
-            </rootProps.slots.baseMenuItem>
-          ))}
-        </rootProps.slots.baseMenuList>
-      </GridMenu>
-    </React.Fragment>
-  ) : null;
+    throw new Error("STUB");
 }
 
 function GridPivotPanelField(props: GridPivotPanelFieldProps) {
@@ -247,105 +159,39 @@ function GridPivotPanelField(props: GridPivotPanelFieldProps) {
 
   const handleDragStart = React.useCallback(
     (event: React.DragEvent) => {
-      const data: FieldTransferObject = { field, modelKey: section };
-      event.dataTransfer.setData('text/plain', JSON.stringify(data));
-      event.dataTransfer.dropEffect = 'move';
-      onDragStart(section);
-    },
+          throw new Error("STUB");
+      },
     [field, onDragStart, section],
   );
 
   const getDropPosition = React.useCallback((event: React.DragEvent): DropPosition => {
-    const rect = (event.target as HTMLElement).getBoundingClientRect();
-    const y = event.clientY - rect.top;
-    if (y < rect.height / 2) {
-      return 'top';
-    }
-    return 'bottom';
+      throw new Error("STUB");
   }, []);
 
   const handleDragOver = React.useCallback(
     (event: React.DragEvent) => {
-      if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-        setDropPosition(getDropPosition(event));
-      }
-    },
+          throw new Error("STUB");
+      },
     [getDropPosition],
   );
 
   const handleDragLeave = React.useCallback((event: React.DragEvent) => {
-    if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-      setDropPosition(null);
-    }
+      throw new Error("STUB");
   }, []);
 
   const handleDrop = React.useCallback(
     (event: React.DragEvent) => {
-      setDropPosition(null);
-
-      if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-        event.preventDefault();
-
-        const position = getDropPosition(event);
-
-        const { field: droppedField, modelKey: originSection } = JSON.parse(
-          event.dataTransfer.getData('text/plain'),
-        ) as FieldTransferObject;
-
-        apiRef.current.updatePivotModel({
-          field: droppedField,
-          targetField: field,
-          targetFieldPosition: position,
-          originSection,
-          targetSection: section,
-        });
-      }
-    },
+          throw new Error("STUB");
+      },
     [getDropPosition, apiRef, field, section],
   );
 
   const handleSort = () => {
-    const currentSort = section === 'columns' ? props.modelValue.sort : null;
-    let newValue: GridSortDirection;
-
-    if (currentSort === 'asc') {
-      newValue = 'desc';
-    } else if (currentSort === 'desc') {
-      newValue = undefined;
-    } else {
-      newValue = 'asc';
-    }
-
-    apiRef.current.setPivotModel((prev) => {
-      return {
-        ...prev,
-        columns: prev.columns.map((col) => {
-          if (col.field === field) {
-            return {
-              ...col,
-              sort: newValue,
-            };
-          }
-          return col;
-        }),
-      };
-    });
+      throw new Error("STUB");
   };
 
   const handleVisibilityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (section) {
-      apiRef.current.setPivotModel((prev) => {
-        return {
-          ...prev,
-          [section]: prev[section].map((col) => {
-            if (col.field === field) {
-              return { ...col, hidden: !event.target.checked };
-            }
-            return col;
-          }),
-        };
-      });
-    }
+      throw new Error("STUB");
   };
 
   const hideable = section !== null;

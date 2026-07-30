@@ -14,7 +14,7 @@ export interface RadialBarClasses {
 export type RadialBarClassKey = keyof RadialBarClasses;
 
 function getRadialBarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiRadialBarChart', slot);
+    throw new Error("STUB");
 }
 
 export const radialBarClasses: RadialBarClasses = generateUtilityClasses('MuiRadialBarChart', [

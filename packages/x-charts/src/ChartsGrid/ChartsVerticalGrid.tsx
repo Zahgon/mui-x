@@ -16,34 +16,5 @@ interface ChartsGridVerticalProps {
  * @ignore - internal component.
  */
 export function ChartsGridVertical(props: ChartsGridVerticalProps) {
-  const { instance } = useChartsContext();
-  const { axis, start, end, classes } = props;
-
-  const { scale, tickNumber, tickInterval, tickSpacing } = axis;
-
-  const xTicks = useTicks({
-    scale,
-    tickNumber,
-    tickInterval,
-    tickSpacing,
-    direction: 'x',
-    ordinalTimeTicks: 'ordinalTimeTicks' in axis ? axis.ordinalTimeTicks : undefined,
-  });
-
-  return (
-    <React.Fragment>
-      {xTicks.map(({ value, offset }) =>
-        !instance.isXInside(offset) ? null : (
-          <GridLine
-            key={`vertical-${value?.getTime?.() ?? value}`}
-            y1={start}
-            y2={end}
-            x1={offset}
-            x2={offset}
-            className={classes.verticalLine}
-          />
-        ),
-      )}
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }

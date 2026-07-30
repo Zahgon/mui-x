@@ -91,19 +91,8 @@ const GridChartsPanelDataScrollArea = styled(GridShadowScrollArea, {
 const GridChartsPanelDataSection = styled(Collapsible, {
   name: 'MuiDataGrid',
   slot: 'ChartsPanelDataSection',
-  shouldForwardProp: (prop) => prop !== 'disabled',
-})<{ ownerState: OwnerState; disabled: boolean }>(({ disabled }) => ({
-  opacity: disabled ? 0.5 : 1,
-  margin: vars.spacing(0.5, 1),
-  transition: vars.transition(['border-color', 'background-color'], {
-    duration: vars.transitions.duration.short,
-    easing: vars.transitions.easing.easeInOut,
-  }),
-  '&[data-drag-over="true"]': {
-    backgroundColor: vars.colors.interactive.hover,
-    outline: `2px solid ${vars.colors.interactive.selected}`,
-  },
-}));
+  shouldForwardProp: (prop) => { throw new Error("STUB"); },
+})<{ ownerState: OwnerState; disabled: boolean }>(({ disabled }) => { throw new Error("STUB"); });
 
 const GridChartsPanelDataSectionTitle = styled('div', {
   name: 'MuiDataGrid',
@@ -178,73 +167,27 @@ function GridChartsPanelDataBody(props: GridChartsPanelDataBodyProps) {
 
   const dimensionsLabel = React.useMemo(
     () =>
-      chartStateLookup[activeChartId]?.dimensionsLabel ||
-      apiRef.current.getLocaleText('chartsCategories'),
+      { throw new Error("STUB"); },
     [chartStateLookup, activeChartId, apiRef],
   );
   const valuesLabel = React.useMemo(
     () =>
-      chartStateLookup[activeChartId]?.valuesLabel || apiRef.current.getLocaleText('chartsSeries'),
+      { throw new Error("STUB"); },
     [chartStateLookup, activeChartId, apiRef],
   );
 
   const fullSections = React.useMemo(() => {
-    const sections: string[] = [];
-
-    if (
-      chartStateLookup[activeChartId]?.maxDimensions &&
-      dimensions.length >= chartStateLookup[activeChartId]?.maxDimensions
-    ) {
-      sections.push('dimensions');
-    }
-
-    if (
-      chartStateLookup[activeChartId]?.maxValues &&
-      values.length >= chartStateLookup[activeChartId]?.maxValues
-    ) {
-      sections.push('values');
-    }
-
-    return sections;
+      throw new Error("STUB");
   }, [dimensions, values, chartStateLookup, activeChartId]);
 
   const blockedSectionsLookup = React.useMemo(
     () =>
-      new Map<string, string[]>(
-        Object.values(chartableColumns).map((column) => [
-          column.field,
-          Array.from(
-            new Set([
-              ...getBlockedSections(column, rowGroupingModel, pivotActive ? pivotModel : undefined),
-              ...fullSections,
-            ]),
-          ),
-        ]),
-      ),
+      { throw new Error("STUB"); },
     [rowGroupingModel, chartableColumns, pivotActive, pivotModel, fullSections],
   );
 
   const availableFields = React.useMemo(() => {
-    const notUsedFields = Object.keys(chartableColumns).filter(
-      (field) =>
-        !dimensions.some((dimension) => dimension.field === field) &&
-        !values.some((value) => value.field === field),
-    );
-    if (searchValue) {
-      return notUsedFields.filter((field) => {
-        const fieldName = apiRef.current.chartsIntegration.getColumnName(field);
-        return fieldName.toLowerCase().includes(searchValue.toLowerCase());
-      });
-    }
-
-    // Fields with all sections blocked should be at the end
-    return notUsedFields.sort((a, b) => {
-      const aBlockedSections = blockedSectionsLookup.get(a)!.length;
-      const bBlockedSections = blockedSectionsLookup.get(b)!.length;
-      return (
-        (aBlockedSections >= SECTION_COUNT ? 1 : 0) - (bBlockedSections >= SECTION_COUNT ? 1 : 0)
-      );
-    });
+      throw new Error("STUB");
   }, [apiRef, searchValue, chartableColumns, dimensions, values, blockedSectionsLookup]);
 
   const [drag, setDrag] = React.useState<{
@@ -255,75 +198,37 @@ function GridChartsPanelDataBody(props: GridChartsPanelDataBodyProps) {
   }>(INITIAL_DRAG_STATE);
 
   const disabledSections = React.useMemo(() => {
-    if (!drag.field) {
-      return new Set<string>();
-    }
-    return new Set<string>(blockedSectionsLookup.get(drag.field));
+      throw new Error("STUB");
   }, [blockedSectionsLookup, drag.field]);
 
   const handleDragStart = (field: string, section: FieldTransferObject['section']) => {
-    setDrag({ active: true, field, initialSection: section, dropSection: null });
+      throw new Error("STUB");
   };
 
   const handleDragEnd = () => {
-    setDrag(INITIAL_DRAG_STATE);
+      throw new Error("STUB");
   };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    setDrag(INITIAL_DRAG_STATE);
-
-    // The drop event was already handled by a child
-    if (event.defaultPrevented) {
-      return;
-    }
-
-    event.preventDefault();
-
-    const { field, section: originSection } = JSON.parse(
-      event.dataTransfer.getData('text/plain'),
-    ) as FieldTransferObject;
-    const targetSection = event.currentTarget.getAttribute(
-      'data-section',
-    ) as FieldTransferObject['section'];
-    if (originSection === targetSection) {
-      return;
-    }
-
-    apiRef.current.chartsIntegration.updateDataReference(field, originSection, targetSection);
+      throw new Error("STUB");
   };
 
   const handleDragOver = React.useCallback((event: React.DragEvent) => {
-    event.preventDefault();
-    event.dataTransfer.dropEffect = 'move';
+      throw new Error("STUB");
   }, []);
 
   const handleDragEnter = React.useCallback((event: React.DragEvent<HTMLDivElement>) => {
-    if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-      const dropSection = event.currentTarget.getAttribute(
-        'data-section',
-      ) as FieldTransferObject['section'];
-      setDrag((v) => ({ ...v, active: true, dropSection }));
-    }
+      throw new Error("STUB");
   }, []);
 
   const handleDragLeave = React.useCallback((event: React.DragEvent) => {
-    if (!event.currentTarget.contains(event.relatedTarget as HTMLElement)) {
-      setDrag((v) => ({ ...v, active: true, dropSection: v.initialSection }));
-    }
+      throw new Error("STUB");
   }, []);
 
   const handleChange = React.useCallback(
     (field: string, section: GridChartsIntegrationSection) => {
-      const apiMethod =
-        section === 'dimensions'
-          ? apiRef.current.updateChartDimensionsData
-          : apiRef.current.updateChartValuesData;
-      apiMethod(activeChartId, (currentItems) =>
-        currentItems.map((item) =>
-          item.field === field ? { ...item, hidden: item.hidden !== true } : item,
-        ),
-      );
-    },
+          throw new Error("STUB");
+      },
     [apiRef, activeChartId],
   );
 
@@ -350,21 +255,7 @@ function GridChartsPanelDataBody(props: GridChartsPanelDataBodyProps) {
         )}
         {availableFields.length > 0 && (
           <GridChartsPanelDataFieldList ownerState={rootProps} className={classes.fieldList}>
-            {availableFields.map((field) => (
-              <GridChartsPanelDataField
-                key={field}
-                field={field}
-                section={null}
-                disabled={blockedSectionsLookup.get(field)!.length >= SECTION_COUNT}
-                blockedSections={blockedSectionsLookup.get(field)}
-                dimensionsLabel={dimensionsLabel}
-                valuesLabel={valuesLabel}
-                onDragStart={handleDragStart}
-                onDragEnd={handleDragEnd}
-              >
-                {apiRef.current.chartsIntegration.getColumnName(field)}
-              </GridChartsPanelDataField>
-            ))}
+            {availableFields.map((field) => { throw new Error("STUB"); })}
           </GridChartsPanelDataFieldList>
         )}
       </GridChartsPanelDataAvailableFields>
@@ -415,23 +306,7 @@ function GridChartsPanelDataBody(props: GridChartsPanelDataBodyProps) {
               )}
               {dimensions.length > 0 && (
                 <GridChartsPanelDataFieldList ownerState={rootProps} className={classes.fieldList}>
-                  {dimensions.map((dimension) => (
-                    <GridChartsPanelDataField
-                      key={dimension.field}
-                      field={dimension.field}
-                      selected={dimension.hidden !== true}
-                      onChange={handleChange}
-                      section="dimensions"
-                      blockedSections={blockedSectionsLookup.get(dimension.field)}
-                      dimensionsLabel={dimensionsLabel}
-                      valuesLabel={valuesLabel}
-                      disabled={disabledSections.has('dimensions')}
-                      onDragStart={handleDragStart}
-                      onDragEnd={handleDragEnd}
-                    >
-                      {apiRef.current.chartsIntegration.getColumnName(dimension.field)}
-                    </GridChartsPanelDataField>
-                  ))}
+                  {dimensions.map((dimension) => { throw new Error("STUB"); })}
                 </GridChartsPanelDataFieldList>
               )}
             </CollapsiblePanel>
@@ -475,23 +350,7 @@ function GridChartsPanelDataBody(props: GridChartsPanelDataBodyProps) {
               )}
               {values.length > 0 && (
                 <GridChartsPanelDataFieldList ownerState={rootProps} className={classes.fieldList}>
-                  {values.map((value) => (
-                    <GridChartsPanelDataField
-                      key={value.field}
-                      field={value.field}
-                      selected={value.hidden !== true}
-                      onChange={handleChange}
-                      section="values"
-                      blockedSections={blockedSectionsLookup.get(value.field)}
-                      dimensionsLabel={dimensionsLabel}
-                      valuesLabel={valuesLabel}
-                      disabled={disabledSections.has('values')}
-                      onDragStart={handleDragStart}
-                      onDragEnd={handleDragEnd}
-                    >
-                      {apiRef.current.chartsIntegration.getColumnName(value.field)}
-                    </GridChartsPanelDataField>
-                  ))}
+                  {values.map((value) => { throw new Error("STUB"); })}
                 </GridChartsPanelDataFieldList>
               )}
             </CollapsiblePanel>

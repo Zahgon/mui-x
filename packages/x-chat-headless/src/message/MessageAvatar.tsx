@@ -28,50 +28,5 @@ export const MessageAvatar = React.forwardRef(function MessageAvatar(
   props: MessageAvatarProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    ...other
-  } = props as MessageAvatarProps & { ownerState?: MessageAvatarOwnerState };
-  const ownerState = useMessageContext();
-  const avatarUrl = ownerState.resolvedAuthor?.avatarUrl;
-  const displayName = ownerState.resolvedAuthor?.displayName;
-  void ownerStateProp;
-
-  const Avatar = slots?.avatar ?? 'div';
-  const avatarProps = useSlotProps({
-    elementType: Avatar,
-    externalSlotProps: slotProps?.avatar,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  const Image = slots?.image ?? 'img';
-  const imageProps = useSlotProps({
-    elementType: Image,
-    externalSlotProps: slotProps?.image,
-    ownerState,
-    additionalProps: {
-      alt: displayName ?? '',
-      src: avatarUrl ?? undefined,
-    },
-  });
-
-  if (ownerState.role === 'system' || ownerState.message == null) {
-    return null;
-  }
-
-  if (ownerState.isGrouped) {
-    return null;
-  }
-
-  if (avatarUrl == null && slots?.avatar == null) {
-    return null;
-  }
-
-  return <Avatar {...avatarProps}>{avatarUrl ? <Image {...imageProps} /> : null}</Avatar>;
+    throw new Error("STUB");
 }) as MessageAvatarComponent;

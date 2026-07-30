@@ -6,12 +6,7 @@ import { SchedulerStoreContext } from '../use-scheduler-store-context/useSchedul
 export function EventCalendarProvider<TEvent extends object, TResource extends object>(
   props: EventCalendarProvider.Props<TEvent, TResource>,
 ) {
-  const { children, storeClass, ...parameters } = props;
-  const store = useEventCalendar(parameters, storeClass);
-
-  return (
-    <SchedulerStoreContext.Provider value={store as any}>{children}</SchedulerStoreContext.Provider>
-  );
+    throw new Error("STUB");
 }
 
 export namespace EventCalendarProvider {

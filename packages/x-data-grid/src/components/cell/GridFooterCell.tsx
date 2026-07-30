@@ -34,31 +34,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 };
 
 function GridFooterCellRaw(props: GridFooterCellProps) {
-  const {
-    formattedValue,
-    colDef,
-    cellMode,
-    row,
-    api,
-    id,
-    value,
-    rowNode,
-    field,
-    hasFocus,
-    tabIndex,
-    isEditable,
-    ...other
-  } = props;
-  const rootProps = useGridRootProps();
-
-  const ownerState = { classes: rootProps.classes };
-  const classes = useUtilityClasses(ownerState);
-
-  return (
-    <GridFooterCellRoot ownerState={ownerState} className={classes.root} {...other}>
-      {formattedValue}
-    </GridFooterCellRoot>
-  );
+    throw new Error("STUB");
 }
 
 const GridFooterCell = React.memo(GridFooterCellRaw);

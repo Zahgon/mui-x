@@ -54,9 +54,7 @@ function SankeyNodePlot(props: SankeyNodePlotProps) {
 
   return (
     <SankeyNodePlotRoot className={classes.nodes}>
-      {layout.nodes.map((node) => (
-        <SankeyNodeElement seriesId={sankeySeries.id} key={node.id} node={node} onClick={onClick} />
-      ))}
+      {layout.nodes.map((node) => { throw new Error("STUB"); })}
     </SankeyNodePlotRoot>
   );
 }

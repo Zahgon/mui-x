@@ -30,5 +30,5 @@ export function warnOnce(message: string | string[], gravity: 'warning' | 'error
 }
 
 export function clearWarningsCache() {
-  warnedOnceCache.clear();
+    throw new Error("STUB");
 }

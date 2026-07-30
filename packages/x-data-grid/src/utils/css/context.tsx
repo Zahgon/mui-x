@@ -19,37 +19,13 @@ export function useCSSVariablesContext() {
 }
 
 export function GridPortalWrapper({ children }: { children: React.ReactNode }) {
-  const className = useCSSVariablesClass();
-  return <div className={className}>{children}</div>;
+    throw new Error("STUB");
 }
 
 export function GridCSSVariablesContext(props: { children: any }) {
-  const config = useGridConfiguration();
-  const rootProps = useGridRootProps();
-  const description = config.hooks.useCSSVariables();
-
-  const context = React.useMemo(() => {
-    const className = `${CLASSNAME_PREFIX}-${description.id}`;
-    const cssString = `.${className}{${variablesToString(description.variables)}}`;
-    const tag = (
-      <style href={`/${className}`} nonce={rootProps.nonce}>
-        {cssString}
-      </style>
-    );
-    return { className, tag };
-  }, [rootProps.nonce, description]);
-
-  return (
-    <CSSVariablesContext.Provider value={context}>{props.children}</CSSVariablesContext.Provider>
-  );
+    throw new Error("STUB");
 }
 
 function variablesToString(variables: Record<string, any>) {
-  let output = '';
-  for (const key in variables) {
-    if (Object.hasOwn(variables, key) && variables[key] !== undefined) {
-      output += `${key}:${variables[key]};`;
-    }
-  }
-  return output;
+    throw new Error("STUB");
 }

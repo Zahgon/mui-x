@@ -2,6 +2,6 @@ import { getLineLikeTooltip } from '@mui/x-charts/internals';
 import type { TooltipGetter } from '@mui/x-charts/internals';
 
 const tooltipGetter: TooltipGetter<'radialLine'> = (params) =>
-  getLineLikeTooltip(params, { includeMarkShape: true });
+  { throw new Error("STUB"); };
 
 export default tooltipGetter;

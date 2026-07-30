@@ -33,111 +33,12 @@ export function useTitleScrollSync(params: UseTitleScrollSyncParameters): void {
   // Mirror the scrollbar's scrollLeft onto a CSS variable read by every
   // title cell. Direct DOM mutation avoids re-rendering each row on scroll.
   React.useEffect(() => {
-    const container = containerRef.current;
-    if (!container) {
-      return undefined;
-    }
-    if (!enabled) {
-      container.style.setProperty('--title-scroll-left', '0');
-      return undefined;
-    }
-    const scrollbar = scrollbarRef.current;
-    if (!scrollbar) {
-      return undefined;
-    }
-    const onScroll = () => {
-      container.style.setProperty('--title-scroll-left', String(scrollbar.scrollLeft));
-    };
-    onScroll();
-    scrollbar.addEventListener('scroll', onScroll, { passive: true });
-    return () => scrollbar.removeEventListener('scroll', onScroll);
+      throw new Error("STUB");
   }, [enabled, containerRef, scrollbarRef]);
 
   // Redirect wheel and touch gestures that originate over a title cell to
   // the dedicated scrollbar, so the title column scrolls as a block.
   React.useEffect(() => {
-    const grid = gridRef.current;
-    const scrollbar = scrollbarRef.current;
-    if (!grid || !scrollbar || !enabled) {
-      return undefined;
-    }
-
-    const isOverTitleCell = (target: EventTarget | null) =>
-      target instanceof Element && target.closest(`.${titleCellClassName}`) != null;
-
-    const onWheel = (event: WheelEvent) => {
-      if (event.deltaX === 0 || !isOverTitleCell(event.target)) {
-        return;
-      }
-      event.preventDefault();
-      scrollbar.scrollLeft += event.deltaX;
-      // Forward any concurrent vertical delta manually since preventDefault
-      // cancels the browser's default scroll for the whole event.
-      if (event.deltaY !== 0) {
-        grid.scrollTop += event.deltaY;
-      }
-    };
-
-    let touchActive = false;
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchLastX = 0;
-    let touchDirection: 'unknown' | 'horizontal' | 'vertical' = 'unknown';
-
-    const onTouchStart = (event: TouchEvent) => {
-      if (event.touches.length !== 1 || !isOverTitleCell(event.target)) {
-        touchActive = false;
-        return;
-      }
-      touchActive = true;
-      touchDirection = 'unknown';
-      touchStartX = event.touches[0].clientX;
-      touchStartY = event.touches[0].clientY;
-      touchLastX = touchStartX;
-    };
-
-    const onTouchMove = (event: TouchEvent) => {
-      if (!touchActive || event.touches.length !== 1) {
-        return;
-      }
-      const x = event.touches[0].clientX;
-      const y = event.touches[0].clientY;
-
-      if (touchDirection === 'unknown') {
-        const dx = x - touchStartX;
-        const dy = y - touchStartY;
-        if (Math.abs(dx) < TOUCH_DIRECTION_THRESHOLD && Math.abs(dy) < TOUCH_DIRECTION_THRESHOLD) {
-          return;
-        }
-        touchDirection = Math.abs(dx) > Math.abs(dy) ? 'horizontal' : 'vertical';
-      }
-
-      if (touchDirection !== 'horizontal') {
-        // Let the browser handle vertical row scrolling for the rest of this gesture.
-        touchActive = false;
-        return;
-      }
-
-      event.preventDefault();
-      scrollbar.scrollLeft -= x - touchLastX;
-      touchLastX = x;
-    };
-
-    const onTouchEnd = () => {
-      touchActive = false;
-    };
-
-    const controller = new AbortController();
-    const options = { passive: false, signal: controller.signal };
-
-    grid.addEventListener('wheel', onWheel, options);
-    grid.addEventListener('touchstart', onTouchStart, options);
-    grid.addEventListener('touchmove', onTouchMove, options);
-    grid.addEventListener('touchend', onTouchEnd, options);
-    grid.addEventListener('touchcancel', onTouchEnd, options);
-
-    return () => {
-      controller.abort();
-    };
+      throw new Error("STUB");
   }, [enabled, gridRef, scrollbarRef, titleCellClassName]);
 }

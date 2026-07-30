@@ -25,7 +25,7 @@ export const useGridRowCount = (
 ) => {
   const logger = useGridLogger(apiRef, 'useGridRowCount');
 
-  const previousPageSize = useLazyRef(() => gridPaginationModelSelector(apiRef).pageSize);
+  const previousPageSize = useLazyRef(() => { throw new Error("STUB"); });
 
   const onRowCountChangeProp = props.onRowCountChange;
 
@@ -42,37 +42,8 @@ export const useGridRowCount = (
    */
   const setRowCount = React.useCallback<GridPaginationRowCountApi['setRowCount']>(
     (newRowCount) => {
-      const rowCountState = gridPaginationRowCountSelector(apiRef);
-      if (rowCountState === newRowCount) {
-        return;
-      }
-      logger.debug("Setting 'rowCount' to", newRowCount);
-
-      if (rowCountState == null || rowCountState === -1) {
-        const newState = {
-          ...apiRef.current.state,
-          pagination: {
-            ...apiRef.current.state.pagination,
-            rowCount: newRowCount,
-          },
-        };
-        apiRef.current.state = newState;
-        apiRef.current.store.update(newState);
-        apiRef.current.publishEvent('rowCountChange', newRowCount);
-        if (onRowCountChangeProp) {
-          onRowCountChangeProp(newRowCount);
-        }
-        return;
-      }
-
-      apiRef.current.setState((state) => ({
-        ...state,
-        pagination: {
-          ...state.pagination,
-          rowCount: newRowCount,
-        },
-      }));
-    },
+          throw new Error("STUB");
+      },
     [apiRef, logger, onRowCountChangeProp],
   );
 
@@ -87,45 +58,15 @@ export const useGridRowCount = (
    */
   const stateExportPreProcessing = React.useCallback<GridPipeProcessor<'exportState'>>(
     (prevState, context) => {
-      const exportedRowCount = gridPaginationRowCountSelector(apiRef);
-
-      const shouldExportRowCount =
-        // Always export if the `exportOnlyDirtyModels` property is not activated
-        !context.exportOnlyDirtyModels ||
-        // Always export if the `rowCount` is controlled
-        props.rowCount != null ||
-        // Always export if the `rowCount` has been initialized
-        props.initialState?.pagination?.rowCount != null;
-
-      if (!shouldExportRowCount) {
-        return prevState;
-      }
-
-      return {
-        ...prevState,
-        pagination: {
-          ...prevState.pagination,
-          rowCount: exportedRowCount,
-        },
-      };
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.rowCount, props.initialState?.pagination?.rowCount],
   );
 
   const stateRestorePreProcessing = React.useCallback<GridPipeProcessor<'restoreState'>>(
     (params, context) => {
-      const restoredRowCount = context.stateToRestore.pagination?.rowCount
-        ? context.stateToRestore.pagination.rowCount
-        : gridPaginationRowCountSelector(apiRef);
-      apiRef.current.setState((state) => ({
-        ...state,
-        pagination: {
-          ...state.pagination,
-          rowCount: restoredRowCount,
-        },
-      }));
-      return params;
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
@@ -137,18 +78,8 @@ export const useGridRowCount = (
    */
   const handlePaginationModelChange = React.useCallback(
     (model: GridPaginationState['paginationModel']) => {
-      if (props.paginationMode === 'client' || !previousPageSize.current) {
-        return;
-      }
-      if (model.pageSize !== previousPageSize.current) {
-        previousPageSize.current = model.pageSize;
-        const rowCountState = gridPaginationRowCountSelector(apiRef);
-        if (rowCountState === -1) {
-          // Row count unknown and page size changed, reset the page
-          apiRef.current.setPage(0);
-        }
-      }
-    },
+          throw new Error("STUB");
+      },
     [props.paginationMode, previousPageSize, apiRef],
   );
 
@@ -158,41 +89,21 @@ export const useGridRowCount = (
    * EFFECTS
    */
   React.useEffect(() => {
-    if (props.paginationMode === 'server' && props.rowCount != null) {
-      apiRef.current.setRowCount(props.rowCount);
-    }
+      throw new Error("STUB");
   }, [apiRef, props.paginationMode, props.rowCount]);
 
   useStoreEffect(
     // typings not supported currently, but methods work
     apiRef.current.store as any,
     () => {
-      const isLastPage = gridPaginationMetaSelector(apiRef).hasNextPage === false;
-      if (isLastPage) {
-        return true;
-      }
-      if (props.paginationMode === 'client') {
-        return gridFilteredTopLevelRowCountSelector(apiRef);
-      }
-      return undefined;
+        throw new Error("STUB");
     },
     (_, isLastPageOrRowCount) => {
-      const rowCount = gridPaginationRowCountSelector(apiRef);
-      if (isLastPageOrRowCount === true && (rowCount == null || rowCount === -1)) {
-        const visibleTopLevelRowCount = gridFilteredTopLevelRowCountSelector(apiRef);
-        const paginationModel = gridPaginationModelSelector(apiRef);
-        apiRef.current.setRowCount(
-          paginationModel.pageSize * paginationModel.page + visibleTopLevelRowCount,
-        );
-      } else if (typeof isLastPageOrRowCount === 'number') {
-        apiRef.current.setRowCount(isLastPageOrRowCount);
-      }
+        throw new Error("STUB");
     },
   );
 
   React.useEffect(() => {
-    if (props.paginationMode === 'client') {
-      apiRef.current.setRowCount(gridFilteredTopLevelRowCountSelector(apiRef));
-    }
+      throw new Error("STUB");
   }, [apiRef, props.paginationMode]);
 };

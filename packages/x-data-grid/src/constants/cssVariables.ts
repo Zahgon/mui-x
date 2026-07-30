@@ -11,9 +11,7 @@ const breakpoints = {
     xl: 1536, // large screen
   },
   up: (key: any) => {
-    const values = breakpoints.values as any;
-    const value = typeof values[key] === 'number' ? values[key] : key;
-    return `@media (min-width:${value}px)`;
+      throw new Error("STUB");
   },
 };
 
@@ -176,7 +174,7 @@ function transition(
     easing = vars.transitions.easing.easeInOut,
     delay = 0,
   } = options ?? {};
-  return props.map((prop) => `${prop} ${duration} ${easing} ${delay}ms`).join(', ');
+  return props.map((prop) => { throw new Error("STUB"); }).join(', ');
 }
 
 function wrap<T>(input: T): T {

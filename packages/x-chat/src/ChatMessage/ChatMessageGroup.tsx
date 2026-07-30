@@ -47,7 +47,7 @@ export interface ChatMessageGroupProps extends Omit<MessageGroupProps, 'slots' |
 const ChatMessageGroupStyled = styled('div', {
   name: 'MuiChatMessage',
   slot: 'Group',
-  overridesResolver: (_, styles) => styles.group,
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
 })<{
   ownerState?: {
     variant?: string;
@@ -56,191 +56,27 @@ const ChatMessageGroupStyled = styled('div', {
     density?: string;
   };
 }>(({ theme, ownerState }) => {
-  const densityMarginBlockStart: Record<string, string> = {
-    compact: theme.spacing(0.25),
-    standard: theme.spacing(1),
-    comfortable: theme.spacing(2),
-  };
-  const marginBlockStart =
-    ownerState?.isFirst && !ownerState?.isFirstInList
-      ? densityMarginBlockStart[ownerState?.density ?? 'standard']
-      : 0;
-
-  return {
-    '--MuiChatMessage-avatarSize': ownerState?.variant === 'compact' ? '28px' : '36px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 0,
-    width: '100%',
-    marginBlockStart,
-    // When the avatar slot is hidden, drop the reserved avatar size so any
-    // descendant relying on the variable (padding, author-name offset) collapses too.
-    '&.MuiChatMessage-noAvatar': {
-      '--MuiChatMessage-avatarSize': '0px',
-    },
-  };
+    throw new Error("STUB");
 });
 
 const ChatMessageGroupAuthorNameStyled = styled('div', {
   name: 'MuiChatMessage',
   slot: 'GroupAuthorName',
-})<{ ownerState?: { isOwnMessage?: boolean; variant?: string } }>(({ theme, ownerState }) => ({
-  fontSize: theme.typography.caption.fontSize,
-  fontWeight: theme.typography.fontWeightMedium,
-  color: (theme.vars || theme).palette.text.secondary,
-  marginBottom: 0,
-  ...(ownerState?.variant === 'compact'
-    ? {
-        gridArea: 'authorName',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: theme.spacing(1),
-        lineHeight: 1,
-        color: (theme.vars || theme).palette.primary.main,
-      }
-    : {
-        ...(ownerState?.isOwnMessage
-          ? {
-              textAlign: 'right' as const,
-              paddingInlineEnd: `calc(var(--MuiChatMessage-avatarSize) + ${theme.spacing(2)} + ${theme.spacing(0.5)})`,
-            }
-          : {
-              paddingInlineStart: `calc(var(--MuiChatMessage-avatarSize) + ${theme.spacing(2)} + ${theme.spacing(0.5)})`,
-            }),
-      }),
-}));
+})<{ ownerState?: { isOwnMessage?: boolean; variant?: string } }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 function HiddenAuthorName() {
-  return null;
+    throw new Error("STUB");
 }
 
 const ChatMessageGroupTimestampStyled = styled('span', {
   name: 'MuiChatMessage',
   slot: 'GroupTimestamp',
-})(({ theme }) => ({
-  fontSize: theme.typography.caption.fontSize,
-  fontWeight: theme.typography.fontWeightRegular,
-  color: (theme.vars || theme).palette.text.disabled,
-  whiteSpace: 'nowrap',
-  flexShrink: 0,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatMessageGroup = React.forwardRef<HTMLDivElement, ChatMessageGroupProps>(
   function ChatMessageGroup(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatMessageGroup' });
-    const {
-      slots,
-      slotProps,
-      className,
-      sx,
-      children,
-      messageId,
-      classes: classesProp,
-      ...other
-    } = props as ChatMessageGroupProps & { classes?: unknown };
-    void classesProp;
-    const classes = useChatMessageUtilityClasses(undefined);
-
-    // `slotProps.messageGroup` is typed `Partial<ChatMessageGroupProps>`, so it can
-    // carry MessageGroup-primitive props (notably `groupKey` for time-window
-    // grouping) alongside wrapper styling. Route the primitives to the headless
-    // `<MessageGroup>` and keep only wrapper props (className/sx/DOM) on the group
-    // slot — otherwise `groupKey` is ignored and these non-DOM props leak onto the
-    // wrapper element. Row-structural values (index/items/messageId) from the props
-    // win, so the slotProps copies act only as a fallback.
-    const {
-      groupKey: messageGroupGroupKey,
-      index: messageGroupIndex,
-      items: messageGroupItems,
-      messageId: messageGroupMessageIdProp,
-      ...messageGroupWrapperProps
-    } = (slotProps?.messageGroup ?? {}) as Partial<ChatMessageGroupProps>;
-    void messageGroupMessageIdProp;
-
-    // Map the flat `message*` keys onto the inner `ChatMessage`'s short local
-    // slots. `messageRoot` swaps ChatMessage's own styled root — it is applied by
-    // ChatMessage (not hoisted to the row component), so a raw element (e.g.
-    // `'section'`) never receives `messageId`/`slots` it can't read.
-    const innerMessageSlots: Partial<ChatMessageSlots> = {
-      root: slots?.messageRoot,
-      avatar: slots?.messageAvatar,
-      content: slots?.messageContent,
-      meta: slots?.messageMeta,
-      inlineMeta: slots?.messageInlineMeta,
-      error: slots?.messageError,
-      actions: slots?.messageActions,
-      authorName: slots?.messageAuthorName,
-      streamingIndicator: slots?.streamingIndicator,
-    };
-    const innerMessageSlotProps: ChatMessageSlotProps = {
-      root: slotProps?.messageRoot,
-      avatar: slotProps?.messageAvatar,
-      content: slotProps?.messageContent,
-      meta: slotProps?.messageMeta,
-      inlineMeta: slotProps?.messageInlineMeta,
-      error: slotProps?.messageError,
-      actions: slotProps?.messageActions,
-      authorName: slotProps?.messageAuthorName,
-      streamingIndicator: slotProps?.streamingIndicator,
-    };
-
-    // Track whether the avatar slot is explicitly nulled — used to mirror the
-    // `noAvatar` class on the group wrapper so any descendant CSS that reads
-    // `var(--MuiChatMessage-avatarSize)` can collapse the reserved space.
-    const hasAvatar = slots?.messageAvatar !== null;
-
-    // `authorName` is rendered by the headless MessageGroup (group-level), but
-    // consumer-facing it lives under the flat `messageAuthorName` key so all
-    // per-row overrides cluster in one namespace. Null hides the label entirely.
-    const authorNameOverride = slots?.messageAuthorName;
-    const AuthorNameSlot =
-      authorNameOverride === null
-        ? (HiddenAuthorName as React.ElementType)
-        : ((authorNameOverride ?? ChatMessageGroupAuthorNameStyled) as React.ElementType);
-
-    // Render priority:
-    // 1. Explicit `children` (legacy: caller provided their own composition)
-    // 2. Inner ChatMessage instance with the mapped short slot map.
-    let resolvedChildren = children;
-    if (children === undefined) {
-      resolvedChildren = messageId ? (
-        <ChatMessage
-          messageId={messageId}
-          slots={innerMessageSlots}
-          slotProps={innerMessageSlotProps}
-        />
-      ) : null;
-    }
-
-    return (
-      <MessageGroup
-        ref={ref}
-        messageId={messageId}
-        {...(messageGroupGroupKey !== undefined ? { groupKey: messageGroupGroupKey } : {})}
-        {...(messageGroupIndex !== undefined ? { index: messageGroupIndex } : {})}
-        {...(messageGroupItems !== undefined ? { items: messageGroupItems } : {})}
-        {...other}
-        slots={{
-          group: (slots?.messageGroup ?? ChatMessageGroupStyled) as React.ElementType,
-          authorName: AuthorNameSlot,
-          groupTimestamp: ChatMessageGroupTimestampStyled,
-        }}
-        slotProps={{
-          group: mergeSlotProps(
-            {
-              className: clsx(classes.group, !hasAvatar && classes.noAvatar, className),
-              sx,
-            },
-            messageGroupWrapperProps as any,
-          ) as any,
-          authorName: slotProps?.messageAuthorName as any,
-        }}
-      >
-        {resolvedChildren}
-      </MessageGroup>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatMessageGroup.propTypes /* remove-proptypes */ = {

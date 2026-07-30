@@ -8,30 +8,7 @@ export const TimelineGridTitleRow = React.forwardRef(function TimelineGridTitleR
   componentProps: TimelineGridTitleRow.Props,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {
-    // Rendering props
-    className,
-    render,
-    style,
-    // Props forwarded to the DOM element
-    ...elementProps
-  } = componentProps;
-
-  const { rowRef, handleKeyDown, handleFocus } = useTimelineGridRowKeyboard({
-    columnType: 'title',
-  });
-
-  return useRenderElement('div', componentProps, {
-    ref: [forwardedRef, rowRef],
-    props: [
-      elementProps,
-      {
-        tabIndex: 0,
-        onKeyDown: handleKeyDown,
-        onFocus: handleFocus,
-      },
-    ],
-  });
+    throw new Error("STUB");
 });
 
 export namespace TimelineGridTitleRow {

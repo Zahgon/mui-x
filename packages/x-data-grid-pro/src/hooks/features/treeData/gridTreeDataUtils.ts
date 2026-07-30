@@ -76,17 +76,7 @@ export const filterRowTreeFromTreeData = (
     let filteredDescendantCount = 0;
     if (node.type === 'group') {
       node.children.forEach((childId) => {
-        const childNode = rowTree[childId];
-        const childSubTreeSize = filterTreeNode(
-          childNode,
-          isMatchingFilters ?? isParentMatchingFilters,
-          areAncestorsExpanded && !!node.childrenExpanded,
-        );
-
-        filteredDescendantCount += childSubTreeSize;
-        if (childSubTreeSize > 0) {
-          filteredChildrenCount += 1;
-        }
+          throw new Error("STUB");
       });
     }
 

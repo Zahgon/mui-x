@@ -14,52 +14,16 @@ import type { GridColumnMenuContainerProps } from './GridColumnMenuProps';
 
 const StyledMenuList = styled(NotRendered<GridSlotProps['baseMenuList']>, {
   slot: 'internal',
-})(() => ({
-  minWidth: 248,
-}));
+})(() => { throw new Error("STUB"); });
 
 function handleMenuScrollCapture(event: React.WheelEvent | React.TouchEvent) {
-  if (!event.currentTarget.contains(event.target as Node)) {
-    return;
-  }
-
-  event.stopPropagation();
+    throw new Error("STUB");
 }
 
 const GridColumnMenuContainer = forwardRef<HTMLUListElement, GridColumnMenuContainerProps>(
   function GridColumnMenuContainer(props, ref) {
-    const { hideMenu, colDef, id, labelledby, className, children, open, ...other } = props;
-    const rootProps = useGridRootProps();
-
-    const handleListKeyDown = React.useCallback(
-      (event: React.KeyboardEvent) => {
-        if (event.key === 'Tab') {
-          event.preventDefault();
-        }
-        if (isHideMenuKey(event.key)) {
-          hideMenu(event);
-        }
-      },
-      [hideMenu],
-    );
-
-    return (
-      <StyledMenuList
-        as={rootProps.slots.baseMenuList}
-        id={id}
-        className={clsx(gridClasses.menuList, className)}
-        aria-labelledby={labelledby}
-        onKeyDown={handleListKeyDown}
-        onWheel={handleMenuScrollCapture}
-        onTouchMove={handleMenuScrollCapture}
-        autoFocus={open}
-        {...other}
-        ref={ref}
-      >
-        {children}
-      </StyledMenuList>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridColumnMenuContainer.propTypes /* remove-proptypes */ = {

@@ -27,21 +27,7 @@ function barClipPathPropsInterpolator(
   from: BarClipPathInterpolatedProps,
   to: BarClipPathInterpolatedProps,
 ) {
-  const interpolateX = interpolateNumber(from.x, to.x);
-  const interpolateY = interpolateNumber(from.y, to.y);
-  const interpolateWidth = interpolateNumber(from.width, to.width);
-  const interpolateHeight = interpolateNumber(from.height, to.height);
-  const interpolateBorderRadius = interpolateNumber(from.borderRadius, to.borderRadius);
-
-  return (t: number) => {
-    return {
-      x: interpolateX(t),
-      y: interpolateY(t),
-      width: interpolateWidth(t),
-      height: interpolateHeight(t),
-      borderRadius: interpolateBorderRadius(t),
-    };
-  };
+    throw new Error("STUB");
 }
 
 export function useAnimateBarClipPath(props: UseAnimateBarClipPathParams) {
@@ -63,20 +49,7 @@ export function useAnimateBarClipPath(props: UseAnimateBarClipPathParams) {
     },
     {
       createInterpolator: barClipPathPropsInterpolator,
-      transformProps: (p) => ({
-        d: generateClipPath(
-          props.hasNegative,
-          props.hasPositive,
-          props.layout,
-          p.x,
-          p.y,
-          p.width,
-          p.height,
-          props.xOrigin,
-          props.yOrigin,
-          p.borderRadius,
-        ),
-      }),
+      transformProps: (p) => { throw new Error("STUB"); },
       applyProps(element: SVGPathElement, { d }) {
         if (d) {
           element.setAttribute('d', d);

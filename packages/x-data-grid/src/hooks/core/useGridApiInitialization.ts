@@ -19,7 +19,7 @@ export function unwrapPrivateAPI<
   PrivateApi extends GridPrivateApiCommon,
   Api extends GridApiCommon,
 >(publicApi: Api): PrivateApi {
-  return (publicApi as any)[SYMBOL_API_PRIVATE];
+    throw new Error("STUB");
 }
 
 let globalId = 0;
@@ -41,30 +41,10 @@ function createPrivateAPI<PrivateApi extends GridPrivateApiCommon, Api extends G
 
   globalId += 1;
 
-  privateApi.getPublicApi = () => publicApiRef.current;
+  privateApi.getPublicApi = () => { throw new Error("STUB"); };
 
   privateApi.register = (visibility, methods) => {
-    Object.keys(methods).forEach((methodName) => {
-      const method = (methods as any)[methodName];
-
-      const currentPrivateMethod = privateApi[methodName as keyof typeof privateApi] as any;
-      if (currentPrivateMethod?.spying === true) {
-        currentPrivateMethod.target = method;
-      } else {
-        privateApi[methodName as keyof typeof privateApi] = method;
-      }
-
-      if (visibility === 'public') {
-        const publicApi = publicApiRef.current;
-
-        const currentPublicMethod = publicApi[methodName as keyof typeof publicApi] as any;
-        if (currentPublicMethod?.spying === true) {
-          currentPublicMethod.target = method;
-        } else {
-          publicApi[methodName as keyof typeof publicApi] = method;
-        }
-      }
-    });
+      throw new Error("STUB");
   };
 
   privateApi.register('private', {
@@ -86,7 +66,7 @@ function createPublicAPI<PrivateApi extends GridPrivateApiCommon, Api extends Gr
       return privateApiRef.current.store;
     },
     get instanceId() {
-      return privateApiRef.current.instanceId;
+        throw new Error("STUB");
     },
     [SYMBOL_API_PRIVATE]: privateApiRef.current,
   } as any as Api;
@@ -114,31 +94,15 @@ export function useGridApiInitialization<
 
   const publishEvent = React.useCallback<GridCoreApi['publishEvent']>(
     (...args: any[]) => {
-      const [name, params, event = {}] = args;
-      event.defaultMuiPrevented = false;
-
-      if (isSyntheticEvent(event) && event.isPropagationStopped()) {
-        return;
-      }
-
-      const details =
-        props.signature === GridSignature.DataGridPro ||
-        props.signature === GridSignature.DataGridPremium
-          ? { api: privateApiRef.current.getPublicApi() }
-          : {};
-      privateApiRef.current.eventManager.emit(name, params, event, details);
-    },
+          throw new Error("STUB");
+      },
     [privateApiRef, props.signature],
   );
 
   const subscribeEvent = React.useCallback<GridCoreApi['subscribeEvent']>(
     (event, handler, options?) => {
-      privateApiRef.current.eventManager.on(event, handler, options);
-      const api = privateApiRef.current;
-      return () => {
-        api.eventManager.removeListener(event, handler);
-      };
-    },
+          throw new Error("STUB");
+      },
     [privateApiRef],
   );
 
@@ -148,14 +112,10 @@ export function useGridApiInitialization<
     inputApiRef.current = publicApiRef.current;
   }
 
-  React.useImperativeHandle(inputApiRef, () => publicApiRef.current, [publicApiRef]);
+  React.useImperativeHandle(inputApiRef, () => { throw new Error("STUB"); }, [publicApiRef]);
 
   React.useEffect(() => {
-    const api = privateApiRef.current;
-
-    return () => {
-      api.publishEvent('unmount');
-    };
+      throw new Error("STUB");
   }, [privateApiRef]);
 
   return privateApiRef;

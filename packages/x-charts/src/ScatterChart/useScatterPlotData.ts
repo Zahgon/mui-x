@@ -11,35 +11,6 @@ export function useScatterPlotData(
   isPointInside: (x: number, y: number) => boolean,
 ) {
   return React.useMemo(() => {
-    const getXPosition = getValueToPositionMapper(xScale);
-    const getYPosition = getValueToPositionMapper(yScale);
-
-    const temp: (ScatterValueType & {
-      dataIndex: number;
-      seriesId: SeriesId;
-      type: 'scatter';
-    })[] = [];
-
-    for (let i = 0; i < series.data.length; i += 1) {
-      const scatterPoint = series.data[i];
-
-      const x = getXPosition(scatterPoint.x);
-      const y = getYPosition(scatterPoint.y);
-
-      const isInRange = isPointInside(x, y);
-
-      if (isInRange) {
-        temp.push({
-          x,
-          y,
-          id: scatterPoint.id,
-          seriesId: series.id,
-          type: 'scatter',
-          dataIndex: i,
-        });
-      }
-    }
-
-    return temp;
+      throw new Error("STUB");
   }, [xScale, yScale, series.data, series.id, isPointInside]);
 }

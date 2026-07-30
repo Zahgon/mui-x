@@ -29,11 +29,7 @@ export interface HeatmapClasses {
 export type HeatmapClassKey = keyof HeatmapClasses;
 
 export function getHeatmapUtilityClass(slot: string) {
-  // Those should be common to all charts
-  if (['highlighted', 'faded'].includes(slot)) {
-    return generateUtilityClass('Charts', slot);
-  }
-  return generateUtilityClass('MuiHeatmap', slot);
+    throw new Error("STUB");
 }
 
 export const heatmapClasses: HeatmapClasses = {

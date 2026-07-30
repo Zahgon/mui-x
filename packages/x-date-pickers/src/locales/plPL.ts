@@ -18,9 +18,7 @@ const plPLPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Otwórz poprzedni widok',
   openNextView: 'Otwórz następny widok',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'otwarty jest widok roku, przełącz na widok kalendarza'
-      : 'otwarty jest widok kalendarza, przełącz na widok roku',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Początek',
@@ -46,25 +44,25 @@ const plPLPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Wybierz ${timeViews[view]}. ${!formattedTime ? 'Nie wybrano czasu' : `Wybrany czas to ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} godzin`,
-  minutesClockNumberText: (minutes) => `${minutes} minut`,
-  secondsClockNumberText: (seconds) => `${seconds} sekund`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Wybierz ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Numer tygodnia',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Tydzień ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Wybierz datę, obecnie wybrana data to ${formattedDate}` : 'Wybierz datę',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Wybierz czas, obecnie wybrany czas to ${formattedTime}` : 'Wybierz czas',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Wyczyść',
 

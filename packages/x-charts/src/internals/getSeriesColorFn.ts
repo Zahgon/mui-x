@@ -7,5 +7,5 @@ export function getSeriesColorFn<
   color: NonNullable<SeriesColor<TValue>['color']>;
   colorGetter?: SeriesColor<TValue>['colorGetter'];
 }): (data: ColorCallbackValue<TValue>) => string {
-  return series.colorGetter ? series.colorGetter : () => series.color;
+  return series.colorGetter ? series.colorGetter : () => { throw new Error("STUB"); };
 }

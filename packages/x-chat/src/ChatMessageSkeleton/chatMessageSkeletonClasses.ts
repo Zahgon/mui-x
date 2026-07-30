@@ -12,7 +12,7 @@ export interface ChatMessageSkeletonClasses {
 export type ChatMessageSkeletonClassKey = keyof ChatMessageSkeletonClasses;
 
 export function getChatMessageSkeletonUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatMessageSkeleton', slot);
+    throw new Error("STUB");
 }
 
 export const chatMessageSkeletonClasses: ChatMessageSkeletonClasses = generateUtilityClasses(

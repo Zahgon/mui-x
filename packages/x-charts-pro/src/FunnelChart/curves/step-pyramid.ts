@@ -43,9 +43,13 @@ export class StepPyramid implements FunnelCurveGenerator {
     this.max = max ?? { x: 0, y: 0 };
   }
 
-  areaStart(): void {}
+  areaStart(): void {
+      throw new Error("STUB");
+  }
 
-  areaEnd(): void {}
+  areaEnd(): void {
+      throw new Error("STUB");
+  }
 
   lineStart(): void {}
 
@@ -72,114 +76,23 @@ export class StepPyramid implements FunnelCurveGenerator {
   }
 
   slopeStart(index: number): Point {
-    if (this.isIncreasing) {
-      if (this.isHorizontal) {
-        return {
-          x: this.min.x,
-          y: (this.min.y + this.max.y) / 2,
-        };
-      }
-      return {
-        x: (this.min.x + this.max.x) / 2,
-        y: this.min.y,
-      };
-    }
-
-    if (this.isHorizontal) {
-      if (index <= 1) {
-        return this.min;
-      }
-
-      return {
-        x: this.min.x,
-        y: this.max.y,
-      };
-    }
-
-    if (index <= 1) {
-      return {
-        x: this.max.x,
-        y: this.min.y,
-      };
-    }
-
-    return this.min;
+      throw new Error("STUB");
   }
 
   slopeEnd(index: number): Point {
-    if (this.isIncreasing) {
-      if (this.isHorizontal) {
-        if (index <= 1) {
-          return {
-            x: this.max.x,
-            y: this.min.y,
-          };
-        }
-        return this.max;
-      }
-
-      if (index <= 1) {
-        return this.max;
-      }
-      return {
-        x: this.min.x,
-        y: this.max.y,
-      };
-    }
-
-    if (this.isHorizontal) {
-      return {
-        x: this.max.x,
-        y: (this.max.y + this.min.y) / 2,
-      };
-    }
-    return {
-      x: (this.max.x + this.min.x) / 2,
-      y: this.max.y,
-    };
+      throw new Error("STUB");
   }
 
   initialX(index: number, points: Point[]): number {
-    if (this.isIncreasing) {
-      return index === 0 || index === 1 ? points.at(1)!.x : points.at(2)!.x;
-    }
-
-    return index === 0 || index === 1 ? points.at(0)!.x : points.at(3)!.x;
+      throw new Error("STUB");
   }
 
   initialY(index: number, points: Point[]): number {
-    if (this.isIncreasing) {
-      return index === 0 || index === 1 ? points.at(1)!.y : points.at(2)!.y;
-    }
-
-    return index === 0 || index === 1 ? points.at(0)!.y : points.at(3)!.y;
+      throw new Error("STUB");
   }
 
   processPoints(points: Point[]): Point[] {
-    // Replace funnel points by pyramids ones.
-    const processedPoints = points.map((point, index) => {
-      const slopeStart = this.slopeStart(index);
-      const slopeEnd = this.slopeEnd(index);
-
-      if (this.isHorizontal) {
-        const yGetter = lerpY(slopeStart.x, slopeStart.y, slopeEnd.x, slopeEnd.y);
-        const xInitial = this.initialX(index, points);
-
-        return {
-          x: point.x,
-          y: yGetter(xInitial),
-        };
-      }
-
-      const xGetter = lerpX(slopeStart.x, slopeStart.y, slopeEnd.x, slopeEnd.y);
-      const yInitial = this.initialY(index, points);
-      return {
-        x: xGetter(yInitial),
-        y: point.y,
-      };
-    });
-
-    return processedPoints;
+      throw new Error("STUB");
   }
 
   point(xIn: number, yIn: number): void {

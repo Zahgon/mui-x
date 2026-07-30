@@ -17,80 +17,13 @@ const FIXED_CELL_WIDTH = 28;
 const MonthViewRow = styled(CalendarGrid.DayRow, {
   name: 'MuiEventCalendar',
   slot: 'MonthViewRow',
-})(({ theme }) => ({
-  display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fit, minmax(0, 1fr))',
-  '&[data-show-week-number]': {
-    gridTemplateColumns: `${FIXED_CELL_WIDTH}px repeat(auto-fit, minmax(0, 1fr))`,
-  },
-  '&:not(:last-child)': {
-    borderBlockEnd: `1px solid ${(theme.vars || theme).palette.divider}`,
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const MonthViewWeekNumberCell = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'MonthViewWeekNumberCell',
-})(({ theme }) => ({
-  padding: theme.spacing(1, 0),
-  textAlign: 'center',
-  fontSize: theme.typography.caption.fontSize,
-  lineHeight: '18px',
-  color: (theme.vars || theme).palette.text.secondary,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 export default function MonthViewWeekRow(props: MonthViewWeekRowProps) {
-  const { rowIndex, maxEvents, days, occurrencesMap, firstDayRef } = props;
-
-  const adapter = useAdapterContext();
-  const store = useEventCalendarStoreContext();
-  const showWeekNumber = useStore(store, eventCalendarPreferenceSelectors.showWeekNumber);
-  const weekStartsOn = useStore(store, eventCalendarPreferenceSelectors.weekStartsOn);
-  const { schedulerId, classes, localeText } = useEventCalendarStyledContext();
-  const occurrences = useEventOccurrencesWithDayGridPosition({ days, occurrencesMap, maxEvents });
-  const weekNumber = getWeekNumber(adapter, days[0].value, weekStartsOn);
-
-  const { start, end } = React.useMemo(
-    () => ({
-      start: days[0].value,
-      end: adapter.endOfDay(days[days.length - 1].value),
-    }),
-    [adapter, days],
-  );
-
-  const weekNumberId = showWeekNumber
-    ? `${schedulerId}-MonthViewWeekNumber-${weekNumber}`
-    : undefined;
-
-  return (
-    <MonthViewRow
-      className={classes.monthViewRow}
-      start={start}
-      end={end}
-      rowIndex={rowIndex}
-      data-show-week-number={showWeekNumber || undefined}
-    >
-      {showWeekNumber && (
-        <MonthViewWeekNumberCell
-          className={classes.monthViewWeekNumberCell}
-          id={weekNumberId}
-          aria-label={localeText.weekNumberAriaLabel(weekNumber)}
-          aria-hidden="true"
-        >
-          {weekNumber}
-        </MonthViewWeekNumberCell>
-      )}
-      {occurrences.days.map((day, dayIdx) => (
-        <MonthViewCell
-          ref={dayIdx === 0 ? firstDayRef : undefined}
-          key={day.key}
-          day={day}
-          maxEvents={maxEvents}
-          row={occurrences}
-          colIndex={dayIdx + 1}
-          ariaLabelledBy={weekNumberId}
-        />
-      ))}
-    </MonthViewRow>
-  );
+    throw new Error("STUB");
 }

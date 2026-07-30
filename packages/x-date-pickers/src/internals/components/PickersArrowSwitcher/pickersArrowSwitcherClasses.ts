@@ -21,7 +21,7 @@ export interface PickersArrowSwitcherClasses {
 export type PickersArrowSwitcherClassKey = keyof PickersArrowSwitcherClasses;
 
 export function getPickersArrowSwitcherUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickersArrowSwitcher', slot);
+    throw new Error("STUB");
 }
 
 export const pickersArrowSwitcherClasses = generateUtilityClasses('MuiPickersArrowSwitcher', [

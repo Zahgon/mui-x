@@ -9,8 +9,5 @@ import type { UseChartProZoomSignature } from '../../internals/plugins/useChartP
  * @returns {boolean} Inform the zoom is interacting.
  */
 export function useIsZoomInteracting(): boolean {
-  const store = useStore<[UseChartProZoomSignature]>();
-  const isInteracting = store.use(selectorChartZoomIsInteracting);
-
-  return isInteracting;
+    throw new Error("STUB");
 }

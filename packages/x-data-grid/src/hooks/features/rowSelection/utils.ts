@@ -37,7 +37,7 @@ function getGridRowGroupSelectableDescendants(
 
   const descendants: GridRowId[] = [];
 
-  const startIndex = sortedRowIds.findIndex((id) => id === groupId) + 1;
+  const startIndex = sortedRowIds.findIndex((id) => { throw new Error("STUB"); }) + 1;
   for (
     let index = startIndex;
     index < sortedRowIds.length && rowTree[sortedRowIds[index]]?.depth > groupNode.depth;
@@ -73,71 +73,7 @@ export const checkboxPropsSelector = createSelector(
       autoSelectParents: boolean;
     },
   ) => {
-    const groupNode = rowTree[groupId];
-
-    const rowParams: GridRowParams = {
-      id: groupId,
-      row: rowsLookup[groupId],
-      columns,
-    };
-
-    let isSelectable = true;
-    if (typeof isRowSelectable === 'function' && rowsLookup[groupId]) {
-      isSelectable = isRowSelectable(rowParams);
-    }
-
-    if (!groupNode || groupNode.type !== 'group' || rowSelectionManager.has(groupId)) {
-      return {
-        isIndeterminate: false,
-        isChecked: rowSelectionManager.has(groupId),
-        isSelectable,
-      };
-    }
-
-    let hasSelectedDescendant = false;
-    let hasUnSelectedDescendant = false;
-
-    const traverseDescendants = (itemToTraverseId: GridRowId) => {
-      if (
-        filteredRowsLookup[itemToTraverseId] === false ||
-        // Perf: Skip checking the rest of the descendants if we already
-        // know that there is a selected and an unselected descendant
-        (hasSelectedDescendant && hasUnSelectedDescendant)
-      ) {
-        return;
-      }
-      const node = rowTree[itemToTraverseId];
-      if (node?.type === 'group') {
-        node.children.forEach(traverseDescendants);
-      }
-      // Check if row is selectable before considering it for parent selection state
-      const descendantRowParams: GridRowParams = {
-        id: itemToTraverseId,
-        row: rowsLookup[itemToTraverseId],
-        columns,
-      };
-      const rowIsSelectable =
-        typeof isRowSelectable === 'function' && rowsLookup[itemToTraverseId]
-          ? isRowSelectable(descendantRowParams)
-          : true;
-
-      // Only consider selectable rows when determining parent selection state
-      if (rowIsSelectable) {
-        if (rowSelectionManager.has(itemToTraverseId)) {
-          hasSelectedDescendant = true;
-        } else {
-          hasUnSelectedDescendant = true;
-        }
-      }
-    };
-
-    traverseDescendants(groupId);
-
-    return {
-      isIndeterminate: hasSelectedDescendant && hasUnSelectedDescendant,
-      isChecked: autoSelectParents ? hasSelectedDescendant && !hasUnSelectedDescendant : false,
-      isSelectable,
-    };
+      throw new Error("STUB");
   },
 );
 
@@ -187,7 +123,7 @@ const getFilteredRowNodeSiblings = (
 
   const parentNode = tree[parent] as GridGroupNode;
 
-  return parentNode.children.filter((childId) => childId !== id && filteredRows[childId] !== false);
+  return parentNode.children.filter((childId) => { throw new Error("STUB"); });
 };
 
 export const findRowsToSelect = (
@@ -212,8 +148,7 @@ export const findRowsToSelect = (
     if (rowNode?.type === 'group') {
       const descendants = getGridRowGroupSelectableDescendants(apiRef, selectedRow);
       descendants.forEach((rowId) => {
-        addRow(rowId);
-        selectedDescendants.add(rowId);
+          throw new Error("STUB");
       });
     }
   }
@@ -245,11 +180,7 @@ export const findRowsToSelect = (
       const siblings: GridRowId[] = getFilteredRowNodeSiblings(tree, filteredRows, rowId);
       // Check if all selectable siblings are selected
       const allSelectableSiblingsSelected = siblings.every((siblingId) => {
-        // Non-selectable siblings don't affect parent selection
-        if (!apiRef.current.isRowSelectable(siblingId)) {
-          return true;
-        }
-        return checkAllDescendantsSelected(siblingId);
+          throw new Error("STUB");
       });
 
       if (siblings.length === 0 || allSelectableSiblingsSelected) {
@@ -292,10 +223,7 @@ export const findRowsToDeselect = (
   if (autoSelectParents) {
     const allParents = getRowNodeParents(tree, deselectedRow);
     allParents.forEach((parent) => {
-      const isSelected = rowSelectionManager.has(parent);
-      if (isSelected) {
-        removeRow(parent);
-      }
+        throw new Error("STUB");
     });
   }
 
@@ -304,7 +232,7 @@ export const findRowsToDeselect = (
     if (rowNode?.type === 'group') {
       const descendants = getGridRowGroupSelectableDescendants(apiRef, deselectedRow);
       descendants.forEach((descendant) => {
-        removeRow(descendant);
+          throw new Error("STUB");
       });
     }
   }

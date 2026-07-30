@@ -24,7 +24,7 @@ export interface LineClasses {
 export type LineClassKey = keyof LineClasses;
 
 function getLineUtilityClass(slot: string) {
-  return generateUtilityClass('MuiLineChart', slot);
+    throw new Error("STUB");
 }
 
 export const lineClasses: LineClasses = generateUtilityClasses('MuiLineChart', [

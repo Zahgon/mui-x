@@ -40,13 +40,8 @@ export function useCompositeListItem<Metadata>(
     externalIndex ??
       (indexGuessBehavior === IndexGuessBehavior.GuessFromOrder
         ? () => {
-            if (indexRef.current === -1) {
-              const newIndex = nextIndexRef.current;
-              nextIndexRef.current += 1;
-              indexRef.current = newIndex;
-            }
-            return indexRef.current;
-          }
+            throw new Error("STUB");
+        }
         : -1),
   );
 
@@ -54,56 +49,21 @@ export function useCompositeListItem<Metadata>(
 
   const ref = React.useCallback(
     (node: HTMLElement | null) => {
-      componentRef.current = node;
-
-      if (index !== -1 && node !== null) {
-        elementsRef.current[index] = node;
-
-        if (labelsRef) {
-          const isLabelDefined = label !== undefined;
-          labelsRef.current[index] = isLabelDefined
-            ? label
-            : (textRef?.current?.textContent ?? node.textContent);
-        }
-      }
-    },
+          throw new Error("STUB");
+      },
     [index, elementsRef, labelsRef, label, textRef],
   );
 
   useIsoLayoutEffect(() => {
-    if (externalIndex != null) {
-      return undefined;
-    }
-
-    const node = componentRef.current;
-    if (node) {
-      register(node, metadata);
-      return () => {
-        unregister(node);
-      };
-    }
-    return undefined;
+      throw new Error("STUB");
   }, [externalIndex, register, unregister, metadata]);
 
   useIsoLayoutEffect(() => {
-    if (externalIndex != null) {
-      return undefined;
-    }
-
-    return subscribeMapChange((map) => {
-      const i = componentRef.current ? map.get(componentRef.current)?.index : null;
-
-      if (i != null) {
-        setIndex(i);
-      }
-    });
+      throw new Error("STUB");
   }, [externalIndex, subscribeMapChange, setIndex]);
 
   return React.useMemo(
-    () => ({
-      ref,
-      index,
-    }),
+    () => { throw new Error("STUB"); },
     [index, ref],
   );
 }

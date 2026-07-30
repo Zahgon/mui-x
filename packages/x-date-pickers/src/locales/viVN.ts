@@ -18,9 +18,7 @@ const viVNPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Mở xem trước',
   openNextView: 'Mở xem sau',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'đang mở xem năm, chuyển sang xem lịch'
-      : 'đang mở xem lịch, chuyển sang xem năm',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Bắt đầu',
@@ -46,25 +44,25 @@ const viVNPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Chọn ${views[view]}. ${!formattedTime ? 'Không có giờ được chọn' : `Giờ được chọn là ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} giờ`,
-  minutesClockNumberText: (minutes) => `${minutes} phút`,
-  secondsClockNumberText: (seconds) => `${seconds} giây`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Chọn ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Số tuần',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Tuần ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Chọn ngày, ngày đã chọn là ${formattedDate}` : 'Chọn ngày',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Chọn giờ, giờ đã chọn là ${formattedTime}` : 'Chọn giờ',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Xóa giá trị',
 
@@ -73,14 +71,14 @@ const viVNPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'chọn ngày',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Năm',

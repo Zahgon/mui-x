@@ -52,7 +52,7 @@ export class MinimalTreeViewStore<
   public readonly disposables = new DisposableStack();
 
   private eventManager = this.disposables.adopt(new EventManager(), (manager) =>
-    manager.removeAllListeners(),
+    { throw new Error("STUB"); },
   );
 
   public instanceName: string;
@@ -60,7 +60,7 @@ export class MinimalTreeViewStore<
   public parameters: Parameters;
 
   public timeoutManager = this.disposables.adopt(new TimeoutManager(), (manager) =>
-    manager.clearAll(),
+    { throw new Error("STUB"); },
   );
 
   public itemPluginManager = new TreeViewItemPluginManager<this>();
@@ -80,24 +80,7 @@ export class MinimalTreeViewStore<
     instanceName: string,
     mapper: TreeViewParametersToStateMapper<R, Multiple, State, Parameters>,
   ) {
-    const minimalInitialState = createMinimalInitialState(parameters);
-    const initialState = mapper.getInitialState(minimalInitialState, parameters);
-    super(initialState);
-
-    this.parameters = parameters;
-    this.instanceName = instanceName;
-    this.mapper = mapper;
-
-    // We mount the plugins in the constructor to make sure all the methods of the store are available to the plugins during their construction.
-    this.items = new TreeViewItemsPlugin<R>(this);
-    this.focus = new TreeViewFocusPlugin(this);
-    this.expansion = new TreeViewExpansionPlugin(this);
-    this.selection = new TreeViewSelectionPlugin<Multiple>(this);
-    this.keyboardNavigation = new TreeViewKeyboardNavigationPlugin(this);
-
-    if (process.env.NODE_ENV !== 'production') {
-      this.initialParameters = parameters;
-    }
+      throw new Error("STUB");
   }
 
   /**
@@ -188,33 +171,23 @@ export class MinimalTreeViewStore<
    * by stores that kick off work on mount (e.g. lazy-loading fetches). Safe to
    * call more than once (StrictMode replays mount effects).
    */
-  public mountEffect = () => {};
+  public mountEffect = () => {
+      throw new Error("STUB");
+  };
 
   /**
    * Disposes the store synchronously when the component unmounts. `useDisposable`
    * handles React StrictMode's simulated unmount, so this runs once on real unmount.
    */
   [disposeSymbol](): void {
-    if (this.disposables.disposed) {
-      return;
-    }
-    try {
-      this.disposables.dispose();
-    } catch (error) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error(
-          'MUI X Tree View: error while disposing the store.',
-          ...unwrapSuppressedErrors(error),
-        );
-      }
-    }
+      throw new Error("STUB");
   }
 
   /**
    * Whether updates based on `props.items` change should be ignored.
    */
   public shouldIgnoreItemsStateUpdate = () => {
-    return this.mapper.shouldIgnoreItemsStateUpdate(this.parameters);
+      throw new Error("STUB");
   };
 
   /**
@@ -224,17 +197,7 @@ export class MinimalTreeViewStore<
     selector: (state: State) => Value,
     effect: (previous: Value, next: Value) => void,
   ) => {
-    let previousValue = selector(this.state);
-
-    this.disposables.defer(
-      this.subscribe((state) => {
-        const nextValue = selector(state);
-        if (nextValue !== previousValue) {
-          effect(previousValue, nextValue);
-          previousValue = nextValue;
-        }
-      }),
-    );
+      throw new Error("STUB");
   };
 
   /**

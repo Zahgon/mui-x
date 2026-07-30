@@ -5,7 +5,7 @@ import type { SeriesProcessor } from '@mui/x-charts/internals';
 import type { DefaultizedOHLCSeriesType } from '../../models';
 
 const candlestickValueFormatter: DefaultizedOHLCSeriesType['valueFormatter'] = (v) =>
-  v == null ? '' : v.toLocaleString();
+  { throw new Error("STUB"); };
 
 const seriesProcessor: SeriesProcessor<'ohlc'> = (params, dataset, isItemVisible) => {
   const { seriesOrder, series } = params;
@@ -24,7 +24,7 @@ Either provide a data property to the series or use the dataset prop.`,
     }
 
     const missingKeys = (['open', 'high', 'low', 'close'] as const).filter(
-      (key) => typeof datasetKeys?.[key] !== 'string',
+      (key) => { throw new Error("STUB"); },
     );
 
     if (datasetKeys && missingKeys.length > 0) {
@@ -33,34 +33,10 @@ Either provide a data property to the series or use the dataset prop.`,
 
     let data: DefaultizedOHLCSeriesType['data'];
     if (seriesData.valueGetter) {
-      data = dataset!.map((d) => seriesData.valueGetter!(d));
+      data = dataset!.map((d) => { throw new Error("STUB"); });
     } else if (datasetKeys) {
       data = dataset!.map((d) => {
-        const open = d[datasetKeys.open];
-        const high = d[datasetKeys.high];
-        const low = d[datasetKeys.low];
-        const close = d[datasetKeys.close];
-
-        if (
-          typeof open !== 'number' ||
-          typeof high !== 'number' ||
-          typeof low !== 'number' ||
-          typeof close !== 'number'
-        ) {
-          if (process.env.NODE_ENV !== 'production') {
-            for (const key of ['open', 'high', 'low', 'close'] as const) {
-              if (d[datasetKeys[key]] !== null && typeof d[datasetKeys[key]] !== 'number') {
-                warnOnce([
-                  `MUI X Charts: Your dataset key "${key}" is used for plotting a candlestick, but contains non-numerical elements.`,
-                  'Candlestick charts only support numbers.',
-                ]);
-              }
-            }
-          }
-          return null;
-        }
-
-        return [open, high, low, close];
+          throw new Error("STUB");
       });
     } else {
       data = series[id].data!;

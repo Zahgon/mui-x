@@ -125,7 +125,7 @@ export function useRovingFocus(params: UseRovingFocusParameters): UseRovingFocus
   // the tab stop is derived per render so it tracks list changes (e.g. the
   // newest message) without state churn.
   const [focusedId, setFocusedIdState] = React.useState<string | undefined>(() =>
-    storedFocusedId != null && itemIds.includes(storedFocusedId) ? storedFocusedId : undefined,
+    { throw new Error("STUB"); },
   );
   const itemRefs = React.useRef(new Map<string, HTMLElement | null>());
   const pendingFocusIdRef = React.useRef<string | null>(null);
@@ -140,63 +140,28 @@ export function useRovingFocus(params: UseRovingFocusParameters): UseRovingFocus
   }
 
   const focusItem = React.useCallback((id: string | undefined) => {
-    if (id == null) {
-      return;
-    }
-
-    const element = itemRefs.current.get(id);
-    if (element != null) {
-      pendingFocusIdRef.current = null;
-      element.focus();
-    } else {
-      // Windowing seam: the target row isn't mounted — retry on registration.
-      pendingFocusIdRef.current = id;
-    }
+      throw new Error("STUB");
   }, []);
 
   const registerItemRef = React.useCallback((id: string, element: HTMLElement | null) => {
-    if (element == null) {
-      itemRefs.current.delete(id);
-      return;
-    }
-
-    itemRefs.current.set(id, element);
-
-    if (pendingFocusIdRef.current === id) {
-      pendingFocusIdRef.current = null;
-      element.focus();
-    }
+      throw new Error("STUB");
   }, []);
 
   const setFocusedId = React.useCallback(
     (id: string) => {
-      setFocusedIdState(id);
-      writeStoredId(restoreKey, scope, id);
-    },
+          throw new Error("STUB");
+      },
     [restoreKey, scope],
   );
 
   React.useEffect(() => {
-    if (restoreFocusIdRef.current == null) {
-      return;
-    }
-
-    focusItem(restoreFocusIdRef.current);
-    restoreFocusIdRef.current = null;
+      throw new Error("STUB");
   }, [focusItem]);
 
   const moveFocus = React.useCallback(
     (targetIndex: number) => {
-      const boundedIndex = Math.max(0, Math.min(targetIndex, itemIds.length - 1));
-      const targetId = itemIds[boundedIndex];
-
-      if (targetId == null) {
-        return;
-      }
-
-      setFocusedId(targetId);
-      focusItem(targetId);
-    },
+          throw new Error("STUB");
+      },
     [focusItem, itemIds, setFocusedId],
   );
 
@@ -210,109 +175,15 @@ export function useRovingFocus(params: UseRovingFocusParameters): UseRovingFocus
 
   const moveFocusToLabelPrefix = React.useCallback(
     (prefix: string, fromIndex: number) => {
-      if (prefix === '' || getTypeAheadLabel == null) {
-        return;
-      }
-
-      const lowercase = prefix.toLowerCase();
-      const total = itemIds.length;
-
-      for (let offset = 1; offset <= total; offset += 1) {
-        const candidateId = itemIds[(fromIndex + offset) % total];
-        const label = (
-          candidateId == null ? undefined : getTypeAheadLabel(candidateId)
-        )?.toLowerCase();
-
-        if (label != null && label.startsWith(lowercase)) {
-          setFocusedId(candidateId);
-          focusItem(candidateId);
-          return;
-        }
-      }
-    },
+          throw new Error("STUB");
+      },
     [focusItem, getTypeAheadLabel, itemIds, setFocusedId],
   );
 
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLElement>, id: string) => {
-      const currentIndex = itemIds.indexOf(id);
-
-      if (currentIndex === -1) {
-        return;
-      }
-
-      // Page-size moves a percentage of the list at a time, with a sane
-      // minimum so short lists still move by at least one item.
-      const pageSize = Math.max(1, Math.floor(itemIds.length / pageSizeDivisor));
-
-      switch (event.key) {
-        case 'ArrowDown':
-          event.preventDefault();
-          moveFocus(currentIndex + 1);
-          return;
-        case 'ArrowUp':
-          event.preventDefault();
-          moveFocus(currentIndex - 1);
-          return;
-        case 'Home':
-          event.preventDefault();
-          moveFocus(0);
-          return;
-        case 'End':
-          event.preventDefault();
-          moveFocus(itemIds.length - 1);
-          return;
-        case 'PageDown':
-          if (enablePageKeys) {
-            event.preventDefault();
-            moveFocus(currentIndex + pageSize);
-          }
-          return;
-        case 'PageUp':
-          if (enablePageKeys) {
-            event.preventDefault();
-            moveFocus(currentIndex - pageSize);
-          }
-          return;
-        case 'Enter':
-        case ' ':
-        case 'Spacebar':
-          if (onActivate != null) {
-            event.preventDefault();
-            onActivate(id);
-          }
-          return;
-        default:
-          break;
-      }
-
-      if (getTypeAheadLabel == null) {
-        return;
-      }
-
-      // Type-ahead: a single printable character (no modifier) appends to a
-      // small buffer and jumps focus to the first item whose label starts
-      // with that buffer.
-      const isPrintable =
-        event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey;
-
-      if (!isPrintable) {
-        return;
-      }
-
-      event.preventDefault();
-      typeAheadRef.current.buffer += event.key;
-
-      if (typeAheadRef.current.resetTimer != null) {
-        clearTimeout(typeAheadRef.current.resetTimer);
-      }
-      typeAheadRef.current.resetTimer = setTimeout(() => {
-        typeAheadRef.current.buffer = '';
-        typeAheadRef.current.resetTimer = null;
-      }, 800);
-
-      moveFocusToLabelPrefix(typeAheadRef.current.buffer, currentIndex);
-    },
+          throw new Error("STUB");
+      },
     [
       enablePageKeys,
       getTypeAheadLabel,
@@ -325,11 +196,7 @@ export function useRovingFocus(params: UseRovingFocusParameters): UseRovingFocus
   );
 
   React.useEffect(
-    () => () => {
-      if (typeAheadRef.current.resetTimer != null) {
-        clearTimeout(typeAheadRef.current.resetTimer);
-      }
-    },
+    () => { throw new Error("STUB"); },
     [],
   );
 

@@ -79,44 +79,7 @@ const FunnelChart = React.forwardRef(function FunnelChart(
   props: FunnelChartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const themedProps = useThemeProps({ props, name: 'MuiFunnelChart' });
-
-  const {
-    chartsContainerProps,
-    funnelPlotProps,
-    overlayProps,
-    legendProps,
-    chartsAxisProps,
-    chartsWrapperProps,
-    axisHighlightProps,
-    children,
-  } = useFunnelChartProps(themedProps);
-  const { chartsDataProviderProProps, chartsSurfaceProps } =
-    useChartsContainerProProps(chartsContainerProps);
-
-  const Tooltip = themedProps.slots?.tooltip ?? ChartsTooltip;
-
-  return (
-    <ChartsDataProviderPro<'funnel', FunnelChartPluginSignatures>
-      {...chartsDataProviderProProps}
-      gap={themedProps.gap}
-      seriesConfig={seriesConfig}
-      plugins={FUNNEL_CHART_PLUGINS}
-    >
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {!themedProps.hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsSurface {...chartsSurfaceProps}>
-          <FunnelPlot {...funnelPlotProps} />
-          <ChartsOverlay {...overlayProps} />
-          <ChartsAxisHighlight {...axisHighlightProps} />
-          <ChartsAxis {...chartsAxisProps} />
-          <FocusedFunnelSection />
-          {children}
-        </ChartsSurface>
-        {!themedProps.loading && <Tooltip trigger="item" {...themedProps.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProviderPro>
-  );
+    throw new Error("STUB");
 });
 
 FunnelChart.propTypes /* remove-proptypes */ = {

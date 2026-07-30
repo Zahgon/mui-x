@@ -22,74 +22,16 @@ export const useGridTreeData = (
 ) => {
   const handleCellKeyDown = React.useCallback<GridEventListener<'cellKeyDown'>>(
     (params, event) => {
-      const cellParams = apiRef.current.getCellParams(params.id, params.field);
-      if (
-        cellParams.colDef.field === GRID_TREE_DATA_GROUPING_FIELD &&
-        (event.key === ' ' || event.key === 'Enter') &&
-        !event.shiftKey
-      ) {
-        if (params.rowNode.type !== 'group') {
-          return;
-        }
-
-        if (props.dataSource && !params.rowNode.childrenExpanded) {
-          apiRef.current.dataSource.fetchRows(params.id);
-          return;
-        }
-
-        apiRef.current.setRowChildrenExpansion(params.id, !params.rowNode.childrenExpanded);
-      }
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.dataSource],
   );
 
   const isValidRowReorderProp = props.isValidRowReorder;
   const isRowReorderValid = React.useCallback<GridPipeProcessor<'isRowReorderValid'>>(
     (initialValue, { sourceRowId, targetRowId, dropPosition, dragDirection }) => {
-      if (gridRowMaximumTreeDepthSelector(apiRef) === 1 || !props.treeData) {
-        return initialValue;
-      }
-
-      const expandedSortedRowIndexLookup = gridExpandedSortedRowIndexLookupSelector(apiRef);
-      const expandedSortedRowIds = gridExpandedSortedRowIdsSelector(apiRef);
-      const rowTree = gridRowTreeSelector(apiRef);
-      const targetRowIndex = expandedSortedRowIndexLookup[targetRowId];
-      const sourceNode = rowTree[sourceRowId];
-      const targetNode = rowTree[targetRowId];
-      const prevNode =
-        targetRowIndex > 0 ? rowTree[expandedSortedRowIds[targetRowIndex - 1]] : null;
-      const nextNode =
-        targetRowIndex < expandedSortedRowIds.length - 1
-          ? rowTree[expandedSortedRowIds[targetRowIndex + 1]]
-          : null;
-
-      // Basic validity checks
-      if (!sourceNode || !targetNode) {
-        return false;
-      }
-
-      // Create context object
-      const context: ReorderValidationContext = {
-        apiRef,
-        sourceNode,
-        targetNode,
-        prevNode,
-        nextNode,
-        dropPosition,
-        dragDirection,
-      };
-
-      // First apply internal validation
-      let isValid = treeDataReorderValidator.validate(context);
-
-      // If internal validation passes AND user provided additional validation
-      if (isValid && isValidRowReorderProp) {
-        // Apply additional user restrictions
-        isValid = isValidRowReorderProp(context);
-      }
-
-      return isValid;
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.treeData, isValidRowReorderProp],
   );
 

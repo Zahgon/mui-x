@@ -32,59 +32,7 @@ export const cleanFieldResponse = <
   openPickerAriaLabel: string;
   textFieldProps: Partial<PickersTextFieldProps>;
 } => {
-  const {
-    readOnly,
-    onClear,
-    clearable,
-    clearButtonPosition,
-    openPickerButtonPosition,
-    openPickerAriaLabel,
-    // TODO v10: remove
-    // Explicitly discard legacy props that are no longer supported on `PickersTextField`.
-    // Without this, any leftover values would silently leak into `...other` and end up spread
-    // as unknown attributes on the underlying form control.
-    InputProps: legacyInputProps,
-    inputProps: legacyHtmlInputProps,
-    InputLabelProps: legacyInputLabelProps,
-    FormHelperTextProps: legacyFormHelperTextProps,
-    ...other
-  } = fieldResponse as TFieldResponse & {
-    InputProps?: unknown;
-    inputProps?: unknown;
-    InputLabelProps?: unknown;
-    FormHelperTextProps?: unknown;
-  };
-
-  if (process.env.NODE_ENV !== 'production') {
-    if (
-      legacyInputProps ||
-      legacyHtmlInputProps ||
-      legacyInputLabelProps ||
-      legacyFormHelperTextProps
-    ) {
-      warnOnce([
-        'MUI X: The `InputProps`, `inputProps`, `InputLabelProps` and `FormHelperTextProps` props are no longer supported on Picker / Field components.',
-        'They have been silently dropped because they would otherwise be forwarded as unknown attributes on the underlying form control.',
-        'Use the `slotProps` shape instead (`slotProps.input`, `slotProps.htmlInput`, `slotProps.inputLabel`, `slotProps.formHelperText`).',
-        'See https://mui.com/x/migration/migration-pickers-v8/#textfield-props for migration details.',
-      ]);
-    }
-  }
-
-  return {
-    clearable,
-    onClear,
-    clearButtonPosition,
-    openPickerButtonPosition,
-    openPickerAriaLabel,
-    textFieldProps: {
-      ...other,
-      slotProps: {
-        ...other?.slotProps,
-        input: { ...other?.slotProps?.input, readOnly },
-      },
-    },
-  };
+    throw new Error("STUB");
 };
 
 export const PickerFieldUIContext = React.createContext<PickerFieldUIContextValue>({
@@ -98,194 +46,7 @@ export const PickerFieldUIContext = React.createContext<PickerFieldUIContextValu
  * @ignore - internal component.
  */
 export function PickerFieldUI<TProps extends UseFieldProps>(props: PickerFieldUIProps<TProps>) {
-  const { fieldResponse, defaultOpenPickerIcon } = props;
-
-  const translations = usePickerTranslations();
-  const pickerContext = useNullablePickerContext();
-  const pickerFieldUIContext = React.useContext(PickerFieldUIContext);
-  const {
-    textFieldProps,
-    onClear,
-    clearable,
-    openPickerAriaLabel,
-    clearButtonPosition: clearButtonPositionProp = 'end',
-    openPickerButtonPosition: openPickerButtonPositionProp = 'end',
-  } = cleanFieldResponse(fieldResponse);
-  const ownerState = useFieldOwnerState(textFieldProps);
-
-  const handleClickOpeningButton = useEventCallback((event: React.MouseEvent) => {
-    event.preventDefault();
-    // Force open instead of toggling to avoid conflicts with field-level open-on-focus logic
-    pickerContext?.setOpen(true);
-  });
-
-  const triggerStatus = pickerContext ? pickerContext.triggerStatus : 'hidden';
-  const clearButtonPosition = clearable ? clearButtonPositionProp : null;
-  const openPickerButtonPosition = triggerStatus !== 'hidden' ? openPickerButtonPositionProp : null;
-
-  const TextField = pickerFieldUIContext.slots.textField ?? PickersTextField;
-
-  const InputAdornment = pickerFieldUIContext.slots.inputAdornment ?? MuiInputAdornment;
-  const { ownerState: startInputAdornmentOwnerState, ...startInputAdornmentProps } = useSlotProps({
-    elementType: InputAdornment,
-    externalSlotProps: pickerFieldUIContext.slotProps.inputAdornment,
-    additionalProps: {
-      position: 'start' as const,
-    },
-    ownerState: { ...ownerState, position: 'start' },
-  });
-  const { ownerState: endInputAdornmentOwnerState, ...endInputAdornmentProps } = useSlotProps({
-    elementType: InputAdornment,
-    externalSlotProps: pickerFieldUIContext.slotProps.inputAdornment,
-    additionalProps: {
-      position: 'end' as const,
-    },
-    ownerState: { ...ownerState, position: 'end' },
-  });
-
-  const OpenPickerButton = pickerFieldUIContext.slots.openPickerButton ?? MuiIconButton;
-  // We don't want to forward the `ownerState` to the `<IconButton />` component, see mui/material-ui#34056
-  const {
-    ownerState: openPickerButtonOwnerState,
-    ...openPickerButtonProps
-  }: IconButtonProps & { ownerState: any } = useSlotProps({
-    elementType: OpenPickerButton,
-    externalSlotProps: pickerFieldUIContext.slotProps.openPickerButton,
-    additionalProps: {
-      disabled: triggerStatus === 'disabled',
-      onClick: handleClickOpeningButton,
-      'aria-label': openPickerAriaLabel,
-      // Mark this element so field handlers can ignore its events
-      'data-mui-picker-open-button': 'true',
-      edge:
-        // open button is always rendered at the edge
-        textFieldProps.variant !== 'standard' ? openPickerButtonPosition : false,
-    },
-    ownerState,
-  });
-
-  const OpenPickerIcon = pickerFieldUIContext.slots.openPickerIcon ?? defaultOpenPickerIcon;
-  const openPickerIconProps = useSlotProps({
-    elementType: OpenPickerIcon,
-    externalSlotProps: pickerFieldUIContext.slotProps.openPickerIcon,
-    ownerState,
-  });
-
-  const ClearButton = pickerFieldUIContext.slots.clearButton ?? MuiIconButton;
-  // We don't want to forward the `ownerState` to the `<IconButton />` component, see mui/material-ui#34056
-  const { ownerState: clearButtonOwnerState, ...clearButtonProps } = useSlotProps({
-    elementType: ClearButton,
-    externalSlotProps: pickerFieldUIContext.slotProps.clearButton,
-    className: 'clearButton',
-    additionalProps: {
-      title: translations.fieldClearLabel,
-      tabIndex: -1,
-      onClick: onClear,
-      disabled: fieldResponse.disabled || fieldResponse.readOnly,
-      edge:
-        // clear button can only be at the edge if it's position differs from the open button
-        textFieldProps.variant !== 'standard' && clearButtonPosition !== openPickerButtonPosition
-          ? clearButtonPosition
-          : false,
-    },
-    ownerState,
-  });
-
-  const ClearIcon = pickerFieldUIContext.slots.clearIcon ?? MuiClearIcon;
-  const clearIconProps = useSlotProps({
-    elementType: ClearIcon,
-    externalSlotProps: pickerFieldUIContext.slotProps.clearIcon,
-    additionalProps: {
-      fontSize: 'small',
-    },
-    ownerState,
-  });
-
-  textFieldProps.ref = useForkRef(textFieldProps.ref, pickerContext?.rootRef);
-
-  const externalInputSlotProps = textFieldProps.slotProps?.input;
-  const additionalInputSlotProps: NonNullable<PickersTextFieldProps['slotProps']>['input'] = {};
-
-  const forkedInputRef = useForkRef(externalInputSlotProps?.ref, pickerContext?.triggerRef);
-  if (pickerContext) {
-    additionalInputSlotProps.ref = forkedInputRef;
-  }
-
-  if (
-    !externalInputSlotProps?.startAdornment &&
-    (clearButtonPosition === 'start' || openPickerButtonPosition === 'start')
-  ) {
-    additionalInputSlotProps.startAdornment = (
-      <InputAdornment {...startInputAdornmentProps}>
-        {openPickerButtonPosition === 'start' && (
-          <OpenPickerButton {...openPickerButtonProps}>
-            <OpenPickerIcon {...openPickerIconProps} />
-          </OpenPickerButton>
-        )}
-        {clearButtonPosition === 'start' && (
-          <ClearButton {...clearButtonProps}>
-            <ClearIcon {...clearIconProps} />
-          </ClearButton>
-        )}
-      </InputAdornment>
-    );
-  }
-
-  if (
-    !externalInputSlotProps?.endAdornment &&
-    (clearButtonPosition === 'end' || openPickerButtonPosition === 'end')
-  ) {
-    additionalInputSlotProps.endAdornment = (
-      <InputAdornment {...endInputAdornmentProps}>
-        {clearButtonPosition === 'end' && (
-          <ClearButton {...clearButtonProps}>
-            <ClearIcon {...clearIconProps} />
-          </ClearButton>
-        )}
-        {openPickerButtonPosition === 'end' && (
-          <OpenPickerButton {...openPickerButtonProps}>
-            <OpenPickerIcon {...openPickerIconProps} />
-          </OpenPickerButton>
-        )}
-      </InputAdornment>
-    );
-  }
-  // handle the case of showing custom `inputAdornment` for Field components
-  if (
-    !additionalInputSlotProps.endAdornment &&
-    !additionalInputSlotProps.startAdornment &&
-    pickerFieldUIContext.slots.inputAdornment
-  ) {
-    additionalInputSlotProps.endAdornment = <InputAdornment {...endInputAdornmentProps} />;
-  }
-
-  if (clearButtonPosition != null) {
-    textFieldProps.sx = [
-      {
-        '& .clearButton': {
-          opacity: 1,
-        },
-        '@media (pointer: fine)': {
-          '& .clearButton': {
-            opacity: 0,
-          },
-          '&:hover, &:focus-within': {
-            '.clearButton': {
-              opacity: 1,
-            },
-          },
-        },
-      },
-      ...(Array.isArray(textFieldProps.sx) ? textFieldProps.sx : [textFieldProps.sx]),
-    ];
-  }
-
-  textFieldProps.slotProps = {
-    ...textFieldProps.slotProps,
-    input: { ...externalInputSlotProps, ...additionalInputSlotProps },
-  };
-
-  return <TextField {...textFieldProps} />;
+    throw new Error("STUB");
 }
 
 export interface ExportedPickerFieldUIProps {
@@ -397,10 +158,7 @@ export function mergeSlotProps<TProps extends {}, TOwnerState extends FieldOwner
   }
 
   return (ownerState: TOwnerState) => {
-    return {
-      ...resolveComponentProps(slotPropsB, ownerState),
-      ...resolveComponentProps(slotPropsA, ownerState),
-    };
+      throw new Error("STUB");
   };
 }
 
@@ -492,18 +250,11 @@ export function useFieldTextFieldProps<TProps extends UseFieldOwnerStateParamete
     };
 
     (textFieldProps as any).onFocus = (event: React.FocusEvent) => {
-      prevOnFocus?.(event);
-      // Avoid opening if event was prevented by user code
-      if (!event.isDefaultPrevented() && !isFromOpenButton(event)) {
-        pickerContext.setOpen(true);
-      }
+        throw new Error("STUB");
     };
 
     (textFieldProps as any).onMouseDown = (event: React.MouseEvent) => {
-      prevOnMouseDown?.(event);
-      if (!event.isDefaultPrevented() && !isFromOpenButton(event)) {
-        pickerContext.setOpen(true);
-      }
+        throw new Error("STUB");
     };
   }
 
@@ -521,48 +272,7 @@ interface UseFieldTextFieldPropsParameters {
 }
 
 export function PickerFieldUIContextProvider(props: PickerFieldUIContextProviderProps) {
-  const { slots = {}, slotProps = {}, inputRef, children } = props;
-
-  const contextValue = React.useMemo<PickerFieldUIContextValue>(
-    () => ({
-      inputRef,
-      slots: {
-        openPickerButton: slots.openPickerButton,
-        openPickerIcon: slots.openPickerIcon,
-        textField: slots.textField,
-        inputAdornment: slots.inputAdornment,
-        clearIcon: slots.clearIcon,
-        clearButton: slots.clearButton,
-      },
-      slotProps: {
-        openPickerButton: slotProps.openPickerButton,
-        openPickerIcon: slotProps.openPickerIcon,
-        textField: slotProps.textField,
-        inputAdornment: slotProps.inputAdornment,
-        clearIcon: slotProps.clearIcon,
-        clearButton: slotProps.clearButton,
-      },
-    }),
-    [
-      inputRef,
-      slots.openPickerButton,
-      slots.openPickerIcon,
-      slots.textField,
-      slots.inputAdornment,
-      slots.clearIcon,
-      slots.clearButton,
-      slotProps.openPickerButton,
-      slotProps.openPickerIcon,
-      slotProps.textField,
-      slotProps.inputAdornment,
-      slotProps.clearIcon,
-      slotProps.clearButton,
-    ],
-  );
-
-  return (
-    <PickerFieldUIContext.Provider value={contextValue}>{children}</PickerFieldUIContext.Provider>
-  );
+    throw new Error("STUB");
 }
 
 interface PickerFieldUIContextProviderProps {

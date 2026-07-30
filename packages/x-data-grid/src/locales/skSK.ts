@@ -33,13 +33,7 @@ const skSKGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Skryť filtre ',
   toolbarFiltersTooltipShow: 'Zobraziť filtre',
   toolbarFiltersTooltipActive: (count) => {
-    let pluralForm = 'aktívnych filtrov';
-    if (count > 1 && count < 5) {
-      pluralForm = 'aktívne filtre';
-    } else if (count === 1) {
-      pluralForm = 'aktívny filter';
-    }
-    return `${count} ${pluralForm}`;
+      throw new Error("STUB");
   },
 
   // Quick filter toolbar field
@@ -136,7 +130,7 @@ const skSKGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Menu',
-  columnMenuAriaLabel: (columnName: string) => `Ponuka stĺpca ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Zobraziť stĺpce',
   columnMenuManageColumns: 'Spravovať stĺpce',
   columnMenuFilter: 'Filter',
@@ -149,26 +143,14 @@ const skSKGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) => {
-    let pluralForm = 'aktívnych filtrov';
-    if (count > 1 && count < 5) {
-      pluralForm = 'aktívne filtre';
-    } else if (count === 1) {
-      pluralForm = 'aktívny filter';
-    }
-    return `${count} ${pluralForm}`;
+      throw new Error("STUB");
   },
   columnHeaderFiltersLabel: 'Zobraziť filtre',
   columnHeaderSortIconLabel: 'Filtrovať',
 
   // Rows selected footer text
   footerRowSelected: (count) => {
-    let pluralForm = 'vybraných záznamov';
-    if (count > 1 && count < 5) {
-      pluralForm = 'vybrané záznamy';
-    } else if (count === 1) {
-      pluralForm = 'vybraný záznam';
-    }
-    return `${count} ${pluralForm}`;
+      throw new Error("STUB");
   },
 
   // Total row amount footer text
@@ -176,13 +158,7 @@ const skSKGrid: Partial<GridLocaleText> = {
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) => {
-    const str = totalCount.toString();
-    const firstDigit = str[0];
-    const op =
-      ['4', '6', '7'].includes(firstDigit) || (firstDigit === '1' && str.length % 3 === 0)
-        ? 'zo'
-        : 'z';
-    return `${visibleCount.toLocaleString()} ${op} ${totalCount.toLocaleString()}`;
+      throw new Error("STUB");
   },
 
   // Checkbox selection text
@@ -215,8 +191,8 @@ const skSKGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Skupina',
-  groupColumn: (name) => `Zoskupiť podľa ${name}`,
-  unGroupColumn: (name) => `Prestať zoskupovať podľa ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Prepnúť detail panelu',
@@ -226,27 +202,10 @@ const skSKGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Riadkov na stránke:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} z ${count !== -1 ? formatNumber(count) : `viac ako ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `približne ${formatNumber(estimated)}`
-        : `viac ako ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} z ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Ísť na prvú stránku';
-    }
-    if (type === 'last') {
-      return 'Ísť na poslednú stránku';
-    }
-    if (type === 'next') {
-      return 'Ísť na ďaľšiu stránku';
-    }
-    // if (type === 'previous') {
-    return 'Ísť na predchádzajúcu stránku';
+      throw new Error("STUB");
   },
 
   // Row reordering text

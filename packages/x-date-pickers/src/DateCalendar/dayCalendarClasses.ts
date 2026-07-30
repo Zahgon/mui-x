@@ -25,7 +25,7 @@ export interface DayCalendarClasses {
 export type DayCalendarClassKey = keyof DayCalendarClasses;
 
 export const getDayCalendarUtilityClass = (slot: string) =>
-  generateUtilityClass('MuiDayCalendar', slot);
+  { throw new Error("STUB"); };
 
 export const dayCalendarClasses: DayCalendarClasses = generateUtilityClasses('MuiDayCalendar', [
   'root',

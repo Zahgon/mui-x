@@ -34,12 +34,7 @@ export const initializeZoomInteractionConfig = (
     let hasYZoom = false;
     if (optionsLookup) {
       Object.values(optionsLookup).forEach((options) => {
-        if (options.axisDirection === 'x') {
-          hasXZoom = true;
-        }
-        if (options.axisDirection === 'y') {
-          hasYZoom = true;
-        }
+          throw new Error("STUB");
       });
     }
 
@@ -69,26 +64,8 @@ function initializeFor<T extends 'zoom' | 'pan'>(
   // We aggregate interactions by type
   const aggregation = zoomInteractionConfig.reduce(
     (acc, interaction) => {
-      if (typeof interaction === 'string') {
-        if (!acc[interaction]) {
-          acc[interaction] = [];
-        }
-        acc[interaction].push({ type: interaction, requiredKeys: [] });
-        return acc;
-      }
-
-      const type = interaction.type;
-      if (!acc[type]) {
-        acc[type] = [];
-      }
-      acc[type].push({
-        type,
-        pointerMode: interaction.pointerMode,
-        requiredKeys: interaction.requiredKeys,
-        allowedDirection: (interaction as any).allowedDirection,
-      });
-      return acc;
-    },
+          throw new Error("STUB");
+      },
     {} as Record<string, AnyInteraction[]>,
   );
 
@@ -97,15 +74,15 @@ function initializeFor<T extends 'zoom' | 'pan'>(
   // Any interaction with a specific pointer mode should be restricted to that mode
   const acc: Record<string, AnyEntry> = {};
   for (const [type, config] of Object.entries(aggregation)) {
-    const lastEmpty = config.findLast((item) => !item.pointerMode);
-    const lastMouse = config.findLast((item) => item.pointerMode === 'mouse');
-    const lastTouch = config.findLast((item) => item.pointerMode === 'touch');
+    const lastEmpty = config.findLast((item) => { throw new Error("STUB"); });
+    const lastMouse = config.findLast((item) => { throw new Error("STUB"); });
+    const lastTouch = config.findLast((item) => { throw new Error("STUB"); });
 
     acc[type] = {
       type,
       pointerMode: lastEmpty
         ? []
-        : Array.from(new Set(config.filter((c) => c.pointerMode).map((c) => c.pointerMode!))),
+        : Array.from(new Set(config.filter((c) => { throw new Error("STUB"); }).map((c) => { throw new Error("STUB"); }))),
       requiredKeys: lastEmpty?.requiredKeys ?? [],
       mouse: lastMouse
         ? {

@@ -27,27 +27,5 @@ for (let i = 0; i < data.length; i += 1) {
 flatbush1M.finish();
 
 describe('Flatbush benchmarks', () => {
-  describe('add + finish', () => {
-    bench('add 1M points + finish', () => {
-      const flatbush = new Flatbush(data.length);
-
-      for (let i = 0; i < data.length; i += 1) {
-        flatbush.add(data[i].x, data[i].y);
-      }
-
-      flatbush.finish();
-    });
-  });
-
-  describe('search 1M points', () => {
-    bench('search 1M points', () => {
-      flatbush1M.search(0.4, 0.4, 0.6, 0.6);
-    });
-  });
-
-  describe('neighbors 1M points', () => {
-    bench('neighbors 1M points', () => {
-      flatbush1M.neighbors(0.5, 0.5, 1, 0.04, undefined);
-    });
-  });
+    throw new Error("STUB");
 });

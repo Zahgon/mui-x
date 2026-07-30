@@ -28,29 +28,7 @@ export const useZoomOnPinch = (
     enabled: isZoomOnPinchEnabled,
     requiredKeys: config?.requiredKeys,
     onPinch: (point, deltaScale, direction) => {
-      setZoomDataCallback((prev) => {
-        return prev.map((zoom) => {
-          const option = optionsLookup[zoom.axisId];
-          if (!option) {
-            return zoom;
-          }
-
-          const isZoomIn = direction > 0;
-          const scaleRatio = 1 + deltaScale;
-
-          const centerRatio =
-            option.axisDirection === 'x'
-              ? getHorizontalCenterRatio(point, drawingArea, option.reverse)
-              : getVerticalCenterRatio(point, drawingArea, option.reverse);
-
-          const [newMinRange, newMaxRange] = zoomAtPoint(centerRatio, scaleRatio, zoom, option);
-
-          if (!isSpanValid(newMinRange, newMaxRange, isZoomIn, option)) {
-            return zoom;
-          }
-          return { axisId: zoom.axisId, start: newMinRange, end: newMaxRange };
-        });
-      });
+        throw new Error("STUB");
     },
   });
 };

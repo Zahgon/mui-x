@@ -24,15 +24,11 @@ function createPinnedRowsInternalCache(
   };
 
   pinnedRows?.top?.forEach((rowModel) => {
-    const id = getRowIdFromRowModel(rowModel, getRowId);
-    cache.topIds.push(id);
-    cache.idLookup[id] = rowModel;
+      throw new Error("STUB");
   });
 
   pinnedRows?.bottom?.forEach((rowModel) => {
-    const id = getRowIdFromRowModel(rowModel, getRowId);
-    cache.bottomIds.push(id);
-    cache.idLookup[id] = rowModel;
+      throw new Error("STUB");
   });
 
   return cache;
@@ -41,21 +37,7 @@ function createPinnedRowsInternalCache(
 export const rowPinningStateInitializer: GridStateInitializer<
   Pick<DataGridProProcessedProps, 'pinnedRows' | 'getRowId'>
 > = (state, props, apiRef) => {
-  apiRef.current.caches.pinnedRows = createPinnedRowsInternalCache(
-    props.pinnedRows,
-    props.getRowId,
-  );
-
-  return {
-    ...state,
-    rows: {
-      ...state.rows,
-      additionalRowGroups: {
-        ...state.rows?.additionalRowGroups,
-        pinnedRows: { top: [], bottom: [] },
-      },
-    },
-  };
+    throw new Error("STUB");
 };
 
 export const useGridRowPinning = (
@@ -64,13 +46,8 @@ export const useGridRowPinning = (
 ): void => {
   const setPinnedRows = React.useCallback<GridRowPinningApi['unstable_setPinnedRows']>(
     (newPinnedRows) => {
-      apiRef.current.caches.pinnedRows = createPinnedRowsInternalCache(
-        newPinnedRows,
-        props.getRowId,
-      );
-
-      apiRef.current.requestPipeProcessorsApplication('hydrateRows');
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.getRowId],
   );
 
@@ -85,10 +62,6 @@ export const useGridRowPinning = (
   const isFirstRender = React.useRef(true);
 
   React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    apiRef.current.unstable_setPinnedRows(props.pinnedRows);
+      throw new Error("STUB");
   }, [apiRef, props.pinnedRows]);
 };

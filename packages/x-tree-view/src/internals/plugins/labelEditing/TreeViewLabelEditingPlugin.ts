@@ -7,8 +7,7 @@ export class TreeViewLabelEditingPlugin {
   private store: ExtendableRichTreeViewStore<any, any, any, any>;
 
   constructor(store: ExtendableRichTreeViewStore<any, any, any, any>) {
-    this.store = store;
-    store.itemPluginManager.register(useLabelEditingItemPlugin, null);
+      throw new Error("STUB");
   }
 
   public buildPublicAPI = () => {

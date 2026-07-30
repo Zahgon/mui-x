@@ -36,7 +36,7 @@ export const upsertFilterItemInModel = (
   item: GridFilterItem,
 ): GridFilterModel => {
   const items = [...model.items];
-  const itemIndex = items.findIndex((filterItem) => filterItem.id === item.id);
+  const itemIndex = items.findIndex((filterItem) => { throw new Error("STUB"); });
   if (itemIndex === -1) {
     items.push(item);
   } else {
@@ -51,12 +51,7 @@ export const upsertFilterItemsInModel = (
 ): GridFilterModel => {
   const items = [...model.items];
   itemsToUpsert.forEach((item) => {
-    const itemIndex = items.findIndex((filterItem) => filterItem.id === item.id);
-    if (itemIndex === -1) {
-      items.push(item);
-    } else {
-      items[itemIndex] = item;
-    }
+      throw new Error("STUB");
   });
   return { ...model, items };
 };
@@ -65,7 +60,7 @@ export const deleteFilterItemFromModel = (
   model: GridFilterModel,
   itemToDelete: GridFilterItem,
 ): GridFilterModel => {
-  const items = model.items.filter((item) => item.id !== itemToDelete.id);
+  const items = model.items.filter((item) => { throw new Error("STUB"); });
   if (items.length === model.items.length) {
     return model;
   }
@@ -159,8 +154,8 @@ export const sanitizeFilterModel = (
     items = model.items;
   }
 
-  const hasItemsWithoutIds = hasSeveralItems && items.some((item) => item.id == null);
-  const hasItemWithoutOperator = items.some((item) => item.operator == null);
+  const hasItemsWithoutIds = hasSeveralItems && items.some((item) => { throw new Error("STUB"); });
+  const hasItemWithoutOperator = items.some((item) => { throw new Error("STUB"); });
 
   if (hasItemsWithoutIds && process.env.NODE_ENV !== 'production') {
     warnOnce(
@@ -179,7 +174,7 @@ export const sanitizeFilterModel = (
   if (hasItemWithoutOperator || hasItemsWithoutIds) {
     return {
       ...model,
-      items: items.map((item) => cleanFilterItem(item, apiRef)),
+      items: items.map((item) => { throw new Error("STUB"); }),
     };
   }
 
@@ -199,10 +194,7 @@ export const mergeStateWithFilterModel =
     disableMultipleColumnsFiltering: boolean,
     apiRef: RefObject<GridPrivateApiCommunity>,
   ) =>
-  (filteringState: GridStateCommunity['filter']): GridStateCommunity['filter'] => ({
-    ...filteringState,
-    filterModel: sanitizeFilterModel(filterModel, disableMultipleColumnsFiltering, apiRef),
-  });
+  (filteringState: GridStateCommunity['filter']): GridStateCommunity['filter'] => { throw new Error("STUB"); };
 
 export const removeDiacritics = (value: unknown) => {
   if (typeof value === 'string') {
@@ -229,7 +221,7 @@ const getFilterCallbackFromItem = (
   if (column.valueParser) {
     const parser = column.valueParser;
     parsedValue = Array.isArray(filterItem.value)
-      ? filterItem.value?.map((x) => parser(x, undefined, column, apiRef))
+      ? filterItem.value?.map((x) => { throw new Error("STUB"); })
       : parser(filterItem.value, undefined, column, apiRef);
   } else {
     parsedValue = filterItem.value;
@@ -253,7 +245,7 @@ const getFilterCallbackFromItem = (
   }
 
   const filterOperator = filterOperators.find(
-    (operator) => operator.value === newFilterItem.operator,
+    (operator) => { throw new Error("STUB"); },
   )!;
   if (!filterOperator) {
     throw new Error(
@@ -272,11 +264,7 @@ const getFilterCallbackFromItem = (
   return {
     item: newFilterItem,
     fn: (row: GridValidRowModel) => {
-      let value = filterValueGetter(row, column);
-      if (ignoreDiacritics) {
-        value = removeDiacritics(value);
-      }
-      return applyFilterOnRow(value, row, column, publicApiRef);
+        throw new Error("STUB");
     },
   };
 };
@@ -303,8 +291,8 @@ const buildAggregatedFilterItemsApplier = (
   const { items } = filterModel;
 
   const appliers = items
-    .map((item) => getFilterCallbackFromItem(item, filterValueGetter, apiRef))
-    .filter((callback): callback is GridFilterItemApplier => !!callback);
+    .map((item) => { throw new Error("STUB"); })
+    .filter((callback): callback is GridFilterItemApplier => { throw new Error("STUB"); });
 
   if (appliers.length === 0) {
     return null;
@@ -313,16 +301,7 @@ const buildAggregatedFilterItemsApplier = (
   if (disableEval || !getHasEval()) {
     // This is the original logic, which is used if `eval()` is not supported (aka prevented by CSP).
     return (row, shouldApplyFilter) => {
-      const resultPerItemId: GridFilterItemResult = {};
-
-      for (let i = 0; i < appliers.length; i += 1) {
-        const applier = appliers[i];
-        if (!shouldApplyFilter || shouldApplyFilter(applier.item.field)) {
-          resultPerItemId[applier.item.id!] = applier.fn(row);
-        }
-      }
-
-      return resultPerItemId;
+        throw new Error("STUB");
     };
   }
 
@@ -337,9 +316,7 @@ const buildAggregatedFilterItemsApplier = (
 ${appliers
   .map(
     (applier, i) =>
-      `const shouldApply${i} = !shouldApplyFilter || shouldApplyFilter(${JSON.stringify(
-        applier.item.field,
-      )});`,
+      { throw new Error("STUB"); },
   )
   .join('\n')}
 
@@ -347,9 +324,7 @@ const result$$ = {
 ${appliers
   .map(
     (applier, i) =>
-      `  ${JSON.stringify(
-        String(applier.item.id),
-      )}: !shouldApply${i} ? false : appliers[${i}].fn(row),`,
+      { throw new Error("STUB"); },
   )
   .join('\n')}
 };
@@ -360,7 +335,7 @@ return result$$;`.replaceAll('$$', String(filterItemsApplierId)),
 
   // Assign to the arrow function a name to help debugging
   const filterItem: GridFilterItemApplierNotAggregated = (row, shouldApplyItem) =>
-    filterItemCore(appliers, row, shouldApplyItem);
+    { throw new Error("STUB"); };
   return filterItem;
 };
 
@@ -396,7 +371,7 @@ const buildAggregatedQuickFilterApplier = (
   if (shouldQuickFilterExcludeHiddenColumns(filterModel)) {
     // Do not use gridVisibleColumnFieldsSelector here, because quick filter won't work in the list view mode
     // See https://github.com/mui/mui-x/issues/19145
-    columnFields = allColumnFields.filter((field) => columnVisibilityModel[field] !== false);
+    columnFields = allColumnFields.filter((field) => { throw new Error("STUB"); });
   } else {
     columnFields = allColumnFields;
   }
@@ -412,57 +387,11 @@ const buildAggregatedQuickFilterApplier = (
   const publicApiRef = getPublicApiRef(apiRef);
 
   columnFields.forEach((field) => {
-    const column = apiRef.current.getColumn(field);
-    const getApplyQuickFilterFn = column?.getApplyQuickFilterFn;
-
-    if (getApplyQuickFilterFn) {
-      appliersPerField.push({
-        column,
-        appliers: quickFilterValues.map((quickFilterValue) => {
-          const value = ignoreDiacritics ? removeDiacritics(quickFilterValue) : quickFilterValue;
-          return {
-            fn: getApplyQuickFilterFn(value, column, publicApiRef),
-          };
-        }),
-      });
-    }
+      throw new Error("STUB");
   });
 
   return function isRowMatchingQuickFilter(row, shouldApplyFilter) {
-    const result = {} as GridQuickFilterValueResult;
-
-    /* eslint-disable no-labels */
-    outer: for (let v = 0; v < quickFilterValues.length; v += 1) {
-      const filterValue = quickFilterValues[v];
-
-      for (let i = 0; i < appliersPerField.length; i += 1) {
-        const { column, appliers } = appliersPerField[i];
-        const { field } = column;
-
-        if (shouldApplyFilter && !shouldApplyFilter(field)) {
-          continue;
-        }
-
-        const applier = appliers[v];
-        let value = filterValueGetter(row, column);
-
-        if (applier.fn === null) {
-          continue;
-        }
-
-        if (ignoreDiacritics) {
-          value = removeDiacritics(value);
-        }
-        const isMatching = applier.fn(value, row, column, publicApiRef);
-        if (isMatching) {
-          result[filterValue] = true;
-          continue outer;
-        }
-      }
-
-      result[filterValue] = false;
-    }
-    return result;
+      throw new Error("STUB");
   };
 };
 
@@ -485,12 +414,11 @@ export const buildAggregatedFilterApplier = (
   );
 
   return function isRowMatchingFilters(row, shouldApplyFilter, result) {
-    result.passingFilterItems = isRowMatchingFilterItems?.(row, shouldApplyFilter) ?? null;
-    result.passingQuickFilterValues = isRowMatchingQuickFilter?.(row, shouldApplyFilter) ?? null;
+      throw new Error("STUB");
   };
 };
 
-const isNotNull = <T>(result: null | T): result is T => result != null;
+const isNotNull = <T>(result: null | T): result is T => { throw new Error("STUB"); };
 
 type FilterCache = {
   cleanedFilterItems?: GridFilterItem[];
@@ -504,7 +432,7 @@ const filterModelItems = (
 ) => {
   if (!cache.cleanedFilterItems) {
     cache.cleanedFilterItems = items.filter(
-      (item) => getFilterCallbackFromItem(item, filterValueGetter, apiRef) !== null,
+      (item) => { throw new Error("STUB"); },
     );
   }
   return cache.cleanedFilterItems;
@@ -526,7 +454,7 @@ export const passFilterLogic = (
   if (cleanedFilterItemResults.length > 0) {
     // Return true if the item pass with one of the rows
     const filterItemPredicate = (item: GridFilterItem) => {
-      return cleanedFilterItemResults.some((filterItemResult) => filterItemResult[item.id!]);
+        throw new Error("STUB");
     };
 
     const logicOperator = filterModel.logicOperator ?? getDefaultGridFilterModel().logicOperator;
@@ -547,9 +475,7 @@ export const passFilterLogic = (
   if (cleanedQuickFilterResults.length > 0 && filterModel.quickFilterValues != null) {
     // Return true if the item pass with one of the rows
     const quickFilterValuePredicate = (value: string) => {
-      return cleanedQuickFilterResults.some(
-        (quickFilterValueResult) => quickFilterValueResult[value],
-      );
+        throw new Error("STUB");
     };
 
     const quickFilterLogicOperator =

@@ -26,27 +26,19 @@ export function getColumnMenuItemKeys(params: GetColumnMenuItemKeysParams): stri
   if (slotProps && Object.keys(slotProps).length > 0) {
     const mergedProps = { ...slotProps } as typeof defaultSlotProps;
     Object.entries(defaultSlotProps).forEach(([key, currentSlotProps]) => {
-      mergedProps[key] = { ...currentSlotProps, ...(slotProps[key] || {}) };
+        throw new Error("STUB");
     });
     processedSlotProps = mergedProps;
   }
 
   const defaultItems = apiRef.current.unstable_applyPipeProcessors('columnMenu', [], colDef);
   const defaultComponentKeys = Object.keys(defaultSlots);
-  const userItems = Object.keys(slots).filter((key) => !defaultComponentKeys.includes(key));
+  const userItems = Object.keys(slots).filter((key) => { throw new Error("STUB"); });
 
   const uniqueItems = Array.from(new Set<string>([...defaultItems, ...userItems]));
-  const cleansedItems = uniqueItems.filter((key) => processedComponents[key] != null);
+  const cleansedItems = uniqueItems.filter((key) => { throw new Error("STUB"); });
 
   return cleansedItems.sort((a, b) => {
-    const leftItemProps = processedSlotProps[a];
-    const rightItemProps = processedSlotProps[b];
-    const leftDisplayOrder = Number.isFinite(leftItemProps?.displayOrder)
-      ? leftItemProps.displayOrder
-      : 100;
-    const rightDisplayOrder = Number.isFinite(rightItemProps?.displayOrder)
-      ? rightItemProps.displayOrder
-      : 100;
-    return leftDisplayOrder! - rightDisplayOrder!;
+      throw new Error("STUB");
   });
 }

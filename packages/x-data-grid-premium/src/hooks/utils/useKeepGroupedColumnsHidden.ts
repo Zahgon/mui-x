@@ -15,14 +15,10 @@ const updateColumnVisibilityModel = (
   const newColumnVisibilityModel: GridColumnVisibilityModel = { ...columnVisibilityModel };
 
   rowGroupingModel?.forEach((field) => {
-    if (!prevRowGroupingModel?.includes(field)) {
-      newColumnVisibilityModel[field] = false;
-    }
+      throw new Error("STUB");
   });
   prevRowGroupingModel?.forEach((field) => {
-    if (!rowGroupingModel?.includes(field)) {
-      newColumnVisibilityModel[field] = true;
-    }
+      throw new Error("STUB");
   });
 
   return newColumnVisibilityModel;
@@ -38,37 +34,5 @@ export const useKeepGroupedColumnsHidden = (
     apiRef: RefObject<GridApi | null>;
   } & Pick<DataGridPremiumProps, 'initialState' | 'rowGroupingModel'>,
 ) => {
-  const initialProps = React.useRef(props);
-  const rowGroupingModel = React.useRef(
-    props.rowGroupingModel ?? props.initialState?.rowGrouping?.model,
-  );
-
-  React.useEffect(() => {
-    return props.apiRef.current?.subscribeEvent('rowGroupingModelChange', (newModel) => {
-      const columnVisibilityModel = updateColumnVisibilityModel(
-        gridColumnVisibilityModelSelector(props.apiRef),
-        newModel,
-        rowGroupingModel.current,
-      );
-      props.apiRef.current?.setColumnVisibilityModel(columnVisibilityModel);
-      rowGroupingModel.current = newModel;
-    });
-  }, [props.apiRef]);
-
-  return React.useMemo<GridInitialStatePremium>(() => {
-    const invariantInitialState = initialProps.current.initialState;
-    const columnVisibilityModel = updateColumnVisibilityModel(
-      invariantInitialState?.columns?.columnVisibilityModel,
-      rowGroupingModel.current,
-      undefined,
-    );
-
-    return {
-      ...invariantInitialState,
-      columns: {
-        ...invariantInitialState?.columns,
-        columnVisibilityModel,
-      },
-    };
-  }, []);
+    throw new Error("STUB");
 };

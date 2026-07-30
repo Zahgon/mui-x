@@ -17,7 +17,7 @@ export interface ChartsReferenceLineClasses {
 export type ChartsReferenceLineClassKey = keyof ChartsReferenceLineClasses;
 
 export function getReferenceLineUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsReferenceLine', slot);
+    throw new Error("STUB");
 }
 
 export const referenceLineClasses: ChartsReferenceLineClasses = generateUtilityClasses(

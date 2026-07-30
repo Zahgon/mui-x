@@ -3,5 +3,5 @@ export interface GridPinnedRowsProps {
 }
 
 export function GridPinnedRows(_: GridPinnedRowsProps) {
-  return null;
+    throw new Error("STUB");
 }

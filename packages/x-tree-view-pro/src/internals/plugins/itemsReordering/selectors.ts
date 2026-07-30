@@ -7,48 +7,30 @@ export const itemsReorderingSelectors = {
   /**
    * Gets the properties of the current reordering.
    */
-  currentReorder: createSelector((state: RichTreeViewProState<any, any>) => state.currentReorder),
+  currentReorder: createSelector((state: RichTreeViewProState<any, any>) => { throw new Error("STUB"); }),
   /**
    * Gets the properties of the dragged item.
    */
   draggedItemProperties: createSelectorMemoized(
-    (state: RichTreeViewProState<any, any>) => state.currentReorder,
+    (state: RichTreeViewProState<any, any>) => { throw new Error("STUB"); },
     itemsSelectors.itemMetaLookup,
     (currentReorder, itemMetaLookup, itemId: TreeViewItemId) => {
-      if (
-        !currentReorder ||
-        currentReorder.targetItemId !== itemId ||
-        currentReorder.action == null
-      ) {
-        return null;
-      }
-
-      const targetDepth =
-        currentReorder.newPosition?.parentId == null
-          ? 0
-          : // The depth is always defined because drag&drop is only usable with Rich Tree View components.
-            itemMetaLookup[itemId].depth! + 1;
-
-      return {
-        newPosition: currentReorder.newPosition,
-        action: currentReorder.action,
-        targetDepth,
-      };
+        throw new Error("STUB");
     },
   ),
   /**
    * Checks whether an item is being dragged.
    */
   isDragging: createSelector(
-    (state: RichTreeViewProState<any, any>) => !!state.currentReorder?.draggedItemId,
+    (state: RichTreeViewProState<any, any>) => { throw new Error("STUB"); },
   ),
   /**
    * Checks whether an item can be reordered.
    */
   canItemBeReordered: createSelector(
-    (state: RichTreeViewProState<any, any>) => state.isItemReorderable,
+    (state: RichTreeViewProState<any, any>) => { throw new Error("STUB"); },
     labelSelectors.isAnyItemBeingEdited,
     (isItemReorderable, isEditing, itemId: TreeViewItemId) =>
-      !isEditing && isItemReorderable(itemId),
+      { throw new Error("STUB"); },
   ),
 };

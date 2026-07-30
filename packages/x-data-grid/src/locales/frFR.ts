@@ -33,7 +33,7 @@ const frFRGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Masquer les filtres',
   toolbarFiltersTooltipShow: 'Afficher les filtres',
   toolbarFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} filtres actifs` : `${count} filtre actif`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Rechercher…',
@@ -129,7 +129,7 @@ const frFRGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Menu',
-  columnMenuAriaLabel: (columnName: string) => `Menu pour la colonne ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Afficher les colonnes',
   columnMenuManageColumns: 'Gérer les colonnes',
   columnMenuFilter: 'Filtrer',
@@ -142,22 +142,20 @@ const frFRGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count > 1 ? `${count} filtres actifs` : `${count} filtre actif`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Afficher les filtres',
   columnHeaderSortIconLabel: 'Trier',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count > 1
-      ? `${count.toLocaleString()} lignes sélectionnées`
-      : `${count.toLocaleString()} ligne sélectionnée`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Total de lignes :',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} sur ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Sélection',
@@ -189,8 +187,8 @@ const frFRGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Groupe',
-  groupColumn: (name) => `Grouper par ${name}`,
-  unGroupColumn: (name) => `Arrêter de grouper par ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Afficher/masquer les détails',
@@ -200,27 +198,10 @@ const frFRGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Lignes par page :',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} sur ${count !== -1 ? formatNumber(count) : `plus de ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `environ ${formatNumber(estimated)}`
-        : `plus de ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} sur ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Aller à la première page';
-    }
-    if (type === 'last') {
-      return 'Aller à la dernière page';
-    }
-    if (type === 'next') {
-      return 'Aller à la page suivante';
-    }
-    // if (type === 'previous') {
-    return 'Aller à la page précédente';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -279,8 +260,8 @@ const frFRGrid: Partial<GridLocaleText> = {
   // chartsFieldBlocked: 'This field cannot be added to any section',
   chartsCategories: 'Catégories',
   chartsSeries: 'Séries',
-  chartsMenuAddToDimensions: (dimensionLabel: string) => `Ajouter aux ${dimensionLabel}`,
-  chartsMenuAddToValues: (valuesLabel: string) => `Ajouter aux ${valuesLabel}`,
+  chartsMenuAddToDimensions: (dimensionLabel: string) => { throw new Error("STUB"); },
+  chartsMenuAddToValues: (valuesLabel: string) => { throw new Error("STUB"); },
   chartsMenuMoveUp: 'Déplacer vers le haut',
   chartsMenuMoveDown: 'Déplacer vers le bas',
   chartsMenuMoveToTop: 'Déplacer en haut',
@@ -288,9 +269,9 @@ const frFRGrid: Partial<GridLocaleText> = {
   chartsMenuOptions: 'Options du champ',
   chartsMenuRemove: 'Supprimer',
   chartsDragToDimensions: (dimensionLabel: string) =>
-    `Faites glisser ici pour utiliser la colonne comme ${dimensionLabel}`,
+    { throw new Error("STUB"); },
   chartsDragToValues: (valuesLabel: string) =>
-    `Faites glisser ici pour utiliser la colonne comme ${valuesLabel}`,
+    { throw new Error("STUB"); },
 
   // AI Assistant panel
   // aiAssistantPanelTitle: 'AI Assistant',

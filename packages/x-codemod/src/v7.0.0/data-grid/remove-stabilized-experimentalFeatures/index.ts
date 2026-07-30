@@ -15,7 +15,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   };
 
   propKeys.forEach((propKey) => {
-    removeObjectProperty({ root, j, propName, componentsNames, propKey });
+      throw new Error("STUB");
   });
 
   return root.toSource(printOptions);

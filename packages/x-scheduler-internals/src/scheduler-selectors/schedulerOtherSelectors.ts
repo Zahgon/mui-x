@@ -7,32 +7,32 @@ export const schedulerOtherSelectors = {
    * Returns `true` if the occurrence with the given key is the currently active occurrence.
    */
   isEditedOccurrence: createSelector(
-    (state: State) => state.editedOccurrenceKey,
+    (state: State) => { throw new Error("STUB"); },
     (editedOccurrenceKey, occurrenceKey: string | undefined) =>
-      editedOccurrenceKey === occurrenceKey,
+      { throw new Error("STUB"); },
   ),
   visibleDate: createSelectorMemoized(
-    (state: State) => state.adapter,
-    (state: State) => state.visibleDate,
-    (state: State) => state.displayTimezone,
-    (adapter, visibleDate, timezone) => adapter.setTimezone(visibleDate, timezone),
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
+    (adapter, visibleDate, timezone) => { throw new Error("STUB"); },
   ),
   isRecurringScopeDialogOpen: createSelector(
-    (state: State) => state.pendingRecurringEventOperation != null,
+    (state: State) => { throw new Error("STUB"); },
   ),
   /**
    * The default event color used when no color is specified on the event or its resource.
    */
-  defaultEventColor: createSelector((state: State) => state.eventColor),
-  displayTimezone: createSelector((state: State) => state.displayTimezone),
+  defaultEventColor: createSelector((state: State) => { throw new Error("STUB"); }),
+  displayTimezone: createSelector((state: State) => { throw new Error("STUB"); }),
   /**
    * Whether each event must be assigned to a resource. When true, the resource cannot be cleared in the edit dialog and the form cannot be submitted without one.
    */
-  shouldEventRequireResource: createSelector((state: State) => state.shouldEventRequireResource),
-  recurringEventsPlugin: createSelector((state: State) => state.recurringEventsPlugin),
+  shouldEventRequireResource: createSelector((state: State) => { throw new Error("STUB"); }),
+  recurringEventsPlugin: createSelector((state: State) => { throw new Error("STUB"); }),
   areRecurringEventsAvailable: createSelector(
-    (state: State) => state.recurringEventsPlugin != null,
+    (state: State) => { throw new Error("STUB"); },
   ),
-  isLoading: createSelector((state: State) => state.isLoading),
-  errors: createSelector((state: State) => state.errors),
+  isLoading: createSelector((state: State) => { throw new Error("STUB"); }),
+  errors: createSelector((state: State) => { throw new Error("STUB"); }),
 };

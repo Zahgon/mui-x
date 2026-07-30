@@ -8,18 +8,10 @@ export const labelSelectors = {
    * Checks whether an item is editable.
    */
   isItemEditable: createSelector(
-    (state: RichTreeViewState<any, any>) => state.isItemEditable,
+    (state: RichTreeViewState<any, any>) => { throw new Error("STUB"); },
     itemsSelectors.itemModel,
     (isItemEditable, itemModel, _itemId: TreeViewItemId) => {
-      if (!itemModel || isItemEditable == null) {
-        return false;
-      }
-
-      if (typeof isItemEditable === 'boolean') {
-        return isItemEditable;
-      }
-
-      return isItemEditable(itemModel);
+        throw new Error("STUB");
     },
   ),
   /**
@@ -27,12 +19,12 @@ export const labelSelectors = {
    */
   isItemBeingEdited: createSelector(
     (state: RichTreeViewState<any, any>, itemId: TreeViewItemId | null) =>
-      itemId == null ? false : state.editedItemId === itemId,
+      { throw new Error("STUB"); },
   ),
   /**
    * Checks whether any item is being edited.
    */
   isAnyItemBeingEdited: createSelector(
-    (state: RichTreeViewState<any, any>) => !!state.editedItemId,
+    (state: RichTreeViewState<any, any>) => { throw new Error("STUB"); },
   ),
 };

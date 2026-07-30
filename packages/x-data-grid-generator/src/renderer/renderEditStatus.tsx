@@ -13,73 +13,9 @@ import { STATUS_OPTIONS } from '../services/static-data';
 import { useEditDropdownState } from '../hooks/useEditDropdownState';
 
 function EditStatus(props: GridRenderEditCellParams<any, string>) {
-  const { id, value, field, hasFocus } = props;
-
-  const {
-    open,
-    setOpen,
-    inputRef,
-    shouldAutoOpen,
-    handleSelectKeyDown,
-    handleSelectMenuClose,
-    handleSelectMenuListKeyDown,
-    createSelectChangeHandler,
-  } = useEditDropdownState({ id, field, hasFocus });
-
-  const handleChange = createSelectChangeHandler((event) => event.target.value);
-
-  return (
-    <Select
-      value={value}
-      onChange={handleChange}
-      onKeyDown={handleSelectKeyDown}
-      onOpen={() => setOpen(true)}
-      inputRef={inputRef}
-      MenuProps={{
-        onClose: handleSelectMenuClose,
-        slotProps: {
-          list: {
-            onKeyDown: handleSelectMenuListKeyDown,
-          },
-        },
-      }}
-      sx={{
-        height: '100%',
-        '& .MuiSelect-select': {
-          display: 'flex',
-          alignItems: 'center',
-          pl: 1,
-        },
-      }}
-      autoFocus={shouldAutoOpen}
-      fullWidth
-      open={open}
-    >
-      {STATUS_OPTIONS.map((option) => {
-        let IconComponent: any = null;
-        if (option === 'Rejected') {
-          IconComponent = ReportProblemIcon;
-        } else if (option === 'Open') {
-          IconComponent = InfoIcon;
-        } else if (option === 'Partially Filled') {
-          IconComponent = AutorenewIcon;
-        } else if (option === 'Filled') {
-          IconComponent = DoneIcon;
-        }
-
-        return (
-          <MenuItem key={option} value={option}>
-            <ListItemIcon sx={{ minWidth: 36 }}>
-              <IconComponent fontSize="small" />
-            </ListItemIcon>
-            <ListItemText primary={option} sx={{ overflow: 'hidden' }} />
-          </MenuItem>
-        );
-      })}
-    </Select>
-  );
+    throw new Error("STUB");
 }
 
 export function renderEditStatus(params: GridRenderEditCellParams<any, string>) {
-  return <EditStatus {...params} />;
+    throw new Error("STUB");
 }

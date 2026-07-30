@@ -58,35 +58,11 @@ export function useDraggableEvent(
   };
 
   React.useEffect(() => {
-    if (!isDraggable || !ref.current) {
-      return;
-    }
-
-    // eslint-disable-next-line consistent-return
-    return draggable({
-      element: ref.current,
-      getInitialData: ({ input }) => getDragData(input),
-      onGenerateDragPreview: ({ nativeSetDragImage }) => {
-        disableNativeDragPreview({ nativeSetDragImage });
-      },
-      onDragStart: ({ location }) => {
-        preview.actions.onDragStart(location);
-      },
-      onDrag: ({ location }) => {
-        preview.actions.onDrag(location);
-      },
-      onDrop: () => {
-        store.setOccurrencePlaceholder(null);
-        preview.actions.onDrop();
-      },
-    });
+      throw new Error("STUB");
   }, [ref, getDragData, isDraggable, store, preview.actions]);
 
   const contextValue: useDraggableEvent.ContextValue = React.useMemo(
-    () => ({
-      doesEventStartBeforeCollectionStart: adapter.isBefore(start.value, collectionStart),
-      doesEventEndAfterCollectionEnd: adapter.isAfter(end.value, collectionEnd),
-    }),
+    () => { throw new Error("STUB"); },
     [adapter, start, end, collectionStart, collectionEnd],
   );
 

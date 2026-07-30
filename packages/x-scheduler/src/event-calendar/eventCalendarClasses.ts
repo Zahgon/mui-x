@@ -302,7 +302,7 @@ export interface EventCalendarClasses
 export type EventCalendarClassKey = keyof EventCalendarClasses;
 
 export function getEventCalendarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiEventCalendar', slot);
+    throw new Error("STUB");
 }
 
 export const eventCalendarClasses: EventCalendarClasses = generateUtilityClasses(

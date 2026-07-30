@@ -50,45 +50,8 @@ export type PivotPanelTriggerProps = Omit<GridSlotProps['baseButton'], 'classNam
  */
 const PivotPanelTrigger = forwardRef<HTMLButtonElement, PivotPanelTriggerProps>(
   function PivotPanelTrigger(props, ref) {
-    const { render, className, onClick, onPointerUp, ...other } = props;
-    const rootProps = useGridRootProps();
-    const buttonId = useId();
-    const panelId = useId();
-    const apiRef = useGridApiContext();
-    const open = useGridSelector(apiRef, gridPivotPanelOpenSelector);
-    const active = useGridSelector(apiRef, gridPivotActiveSelector);
-    const state = { open, active };
-    const resolvedClassName = typeof className === 'function' ? className(state) : className;
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      if (open) {
-        apiRef.current.hideSidebar();
-      } else {
-        apiRef.current.showSidebar(GridSidebarValue.Pivot, panelId, buttonId);
-      }
-      onClick?.(event);
-    };
-
-    const element = useComponentRenderer(
-      rootProps.slots.baseButton,
-      render,
-      {
-        ...rootProps.slotProps?.baseButton,
-        id: buttonId,
-        // TODO: Hook up the panel/trigger IDs to the pivot panel
-        'aria-haspopup': 'true',
-        'aria-expanded': open ? 'true' : undefined,
-        'aria-controls': open ? panelId : undefined,
-        onClick: handleClick,
-        className: resolvedClassName,
-        ...other,
-        ref,
-      },
-      state,
-    );
-
-    return <React.Fragment>{element}</React.Fragment>;
-  },
+        throw new Error("STUB");
+    },
 );
 
 PivotPanelTrigger.propTypes /* remove-proptypes */ = {

@@ -69,9 +69,7 @@ function GridEditSingleSelectCell(props: GridEditSingleSelectCellProps) {
   const isSelectNative = baseSelectProps.native ?? false;
 
   useEnhancedEffect(() => {
-    if (hasFocus) {
-      inputRef.current?.focus();
-    }
+      throw new Error("STUB");
   }, [hasFocus]);
 
   if (!isSingleSelectColDef(colDef)) {
@@ -87,24 +85,7 @@ function GridEditSingleSelectCell(props: GridEditSingleSelectCellProps) {
   const getOptionLabel = colDef.getOptionLabel!;
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
-    if (!isSingleSelectColDef(colDef) || !valueOptions) {
-      return;
-    }
-
-    setOpen(false);
-    const target = event.target;
-    // NativeSelect casts the value to a string.
-    const formattedTargetValue = getValueFromValueOptions(
-      target.value,
-      valueOptions,
-      getOptionValue,
-    );
-
-    if (onValueChange) {
-      await onValueChange(event, formattedTargetValue);
-    }
-
-    await apiRef.current.setEditCellValue({ id, field, value: formattedTargetValue }, event);
+      throw new Error("STUB");
   };
 
   const handleClose = (event: React.KeyboardEvent, reason: string) => {
@@ -125,10 +106,7 @@ function GridEditSingleSelectCell(props: GridEditSingleSelectCellProps) {
   };
 
   const handleOpen: GridSlotProps['baseSelect']['onOpen'] = (event) => {
-    if (isKeyboardEvent(event) && event.key === 'Enter') {
-      return;
-    }
-    setOpen(true);
+      throw new Error("STUB");
   };
 
   if (!valueOptions || !colDef) {
@@ -156,18 +134,7 @@ function GridEditSingleSelectCell(props: GridEditSingleSelectCellProps) {
       {...rootProps.slotProps?.baseSelect}
     >
       {valueOptions.map((valueOption) => {
-        const value = getOptionValue(valueOption);
-
-        return (
-          <rootProps.slots.baseSelectOption
-            {...(rootProps.slotProps?.baseSelectOption || {})}
-            native={isSelectNative}
-            key={value}
-            value={value}
-          >
-            {getOptionLabel(valueOption)}
-          </rootProps.slots.baseSelectOption>
-        );
+          throw new Error("STUB");
       })}
     </rootProps.slots.baseSelect>
   );
@@ -245,6 +212,4 @@ GridEditSingleSelectCell.propTypes /* remove-proptypes */ = {
 
 export { GridEditSingleSelectCell };
 
-export const renderEditSingleSelectCell = (params: GridEditSingleSelectCellProps) => (
-  <GridEditSingleSelectCell {...params} />
-);
+export const renderEditSingleSelectCell = (params: GridEditSingleSelectCellProps) => { throw new Error("STUB"); };

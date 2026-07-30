@@ -12,9 +12,7 @@ export function ConversationContextProvider(props: {
   children: React.ReactNode;
   value: ConversationOwnerState;
 }) {
-  const { children, value } = props;
-
-  return <ConversationContext.Provider value={value}>{children}</ConversationContext.Provider>;
+    throw new Error("STUB");
 }
 
 export function useConversationContext() {

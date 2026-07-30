@@ -13,14 +13,14 @@ import { getOccurrencesFromEvents, getEventResourceIds } from '../internals/util
 import { schedulerOtherSelectors } from './schedulerOtherSelectors';
 
 const occurrencesGroupedByResourceListSelector = createSelectorMemoized(
-  (state: State) => state.adapter,
+  (state: State) => { throw new Error("STUB"); },
   schedulerEventSelectors.processedEventList,
   schedulerResourceSelectors.visibleMap,
-  (state: State) => state.collapsedResources,
+  (state: State) => { throw new Error("STUB"); },
   schedulerResourceSelectors.processedResourceList,
   schedulerResourceSelectors.processedResourceChildrenLookup,
   schedulerOtherSelectors.displayTimezone,
-  (state: State) => state.recurringEventsPlugin,
+  (state: State) => { throw new Error("STUB"); },
 
   (
     adapter,
@@ -34,85 +34,30 @@ const occurrencesGroupedByResourceListSelector = createSelectorMemoized(
     start: TemporalSupportedObject,
     end: TemporalSupportedObject,
   ) => {
-    const occurrencesGroupedByResource = new Map<string, SchedulerEventOccurrence[]>();
-
-    const occurrences = getOccurrencesFromEvents({
-      adapter,
-      start,
-      end,
-      events,
-      visibleResources,
-      displayTimezone,
-      recurringEventsPlugin,
-    });
-
-    for (const occurrence of occurrences) {
-      const resourceIds = getEventResourceIds(occurrence.resource);
-
-      resourceIds.forEach((id) => {
-        if (!occurrencesGroupedByResource.has(id)) {
-          occurrencesGroupedByResource.set(id, []);
-        }
-        occurrencesGroupedByResource.get(id)!.push(occurrence);
-      });
-    }
-
-    const processResources = (innerResources: readonly SchedulerResource[]) => {
-      const sortedResources = innerResources.toSorted((a, b) => a.title.localeCompare(b.title));
-      const result: {
-        resource: SchedulerResource;
-        occurrences: SchedulerEventOccurrence[];
-      }[] = [];
-
-      for (const resource of sortedResources) {
-        if (visibleResources[resource.id] === false) {
-          continue;
-        }
-
-        result.push({
-          resource,
-          occurrences: occurrencesGroupedByResource.get(resource.id) ?? [],
-        });
-
-        if (collapsedResources[resource.id] !== true) {
-          const children = resourcesChildrenMap.get(resource.id) ?? [];
-          if (children.length > 0) {
-            result.push(...processResources(children));
-          }
-        }
-      }
-
-      return result;
-    };
-
-    return processResources(resources);
+      throw new Error("STUB");
   },
 );
 
 const occurrencesGroupedByResourceMapSelector = createSelectorMemoized(
   occurrencesGroupedByResourceListSelector,
   (groupedByResourceList, _start: TemporalSupportedObject, _end: TemporalSupportedObject) => {
-    const map = new Map<string, SchedulerEventOccurrence[]>();
-    for (const { resource, occurrences } of groupedByResourceList) {
-      map.set(resource.id, occurrences);
-    }
-    return map;
+      throw new Error("STUB");
   },
 );
 
 export const schedulerOccurrenceSelectors = {
   isStarted: createSelector(
-    (state: State) => state.adapter,
-    (state: State) => state.nowUpdatedEveryMinute,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (adapter, now, start: SchedulerProcessedDate) => {
-      return adapter.isBefore(start.value, now) || adapter.isEqual(start.value, now);
+        throw new Error("STUB");
     },
   ),
   isEnded: createSelector(
-    (state: State) => state.adapter,
-    (state: State) => state.nowUpdatedEveryMinute,
+    (state: State) => { throw new Error("STUB"); },
+    (state: State) => { throw new Error("STUB"); },
     (adapter, now, end: SchedulerProcessedDate) => {
-      return adapter.isBefore(end.value, now);
+        throw new Error("STUB");
     },
   ),
   groupedByResourceList: occurrencesGroupedByResourceListSelector,
@@ -123,6 +68,6 @@ export const schedulerOccurrenceSelectors = {
       _start: TemporalSupportedObject,
       end: TemporalSupportedObject,
       resourceId: string,
-    ): readonly SchedulerEventOccurrence[] => map.get(resourceId) ?? EMPTY_ARRAY,
+    ): readonly SchedulerEventOccurrence[] => { throw new Error("STUB"); },
   ),
 };

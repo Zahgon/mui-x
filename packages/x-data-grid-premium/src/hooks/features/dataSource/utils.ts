@@ -24,8 +24,8 @@ export const getPropsOverrides = (
   initialColumns: Map<string, GridColDef>,
   apiRef: RefObject<GridPrivateApiPremium>,
 ): GridPivotingDynamicPropsOverrides => {
-  const visiblePivotColumns = pivotModel.columns.filter((column) => !column.hidden);
-  const visiblePivotValues = pivotModel.values.filter((value) => !value.hidden);
+  const visiblePivotColumns = pivotModel.columns.filter((column) => { throw new Error("STUB"); });
+  const visiblePivotValues = pivotModel.values.filter((value) => { throw new Error("STUB"); });
   const columns: GridColDef[] = Array.from(initialColumns.values());
 
   // Build column grouping model from pivot column paths
@@ -52,14 +52,7 @@ export const getPropsOverrides = (
     }
 
     remainingColumns.forEach((column) => {
-      processPath(
-        [
-          ...currentPath,
-          { key: column.key, field: visiblePivotColumns[level].field, value: column.group },
-        ],
-        column.children || [],
-        level + 1,
-      );
+        throw new Error("STUB");
     });
   };
   processPath([], pivotColumns, 0);
@@ -78,92 +71,7 @@ export const getPropsOverrides = (
   }[] = [];
 
   uniquePaths.forEach((columnPath) => {
-    const columnPathKeys = columnPath.map((path) => path.key);
-    const columnPathValues = columnPath.map((path) => path.value);
-    visiblePivotValues.forEach((pivotValue) => {
-      // Find the original column definition for the last field
-      const originalColumn = initialColumns.get(pivotValue.field);
-      // get the overrides defined from the data source definition
-      const overrides = pivotingColDef(pivotValue.field, columnPathKeys);
-
-      // Create new column definition based on original column
-      const newColumnDef = {
-        ...originalColumn,
-        ...overrides,
-        aggregable: false,
-        groupable: false,
-        filterable: false,
-        hideable: false,
-        editable: false,
-        disableReorder: true,
-      } as GridColDef;
-
-      const pivotFieldName = newColumnDef.field!;
-      newColumns[pivotFieldName] = newColumnDef;
-      aggregationModel[pivotFieldName] = pivotValue.aggFunc;
-
-      // Build column grouping model
-      const combinedPathValues = [...columnPathValues, pivotValue.field].map((path, index) =>
-        typeof path === 'string'
-          ? path
-          : apiRef.current.getRowValue(path, initialColumns.get(visiblePivotColumns[index].field)!),
-      );
-      columnGroupPathValues.push({
-        field: pivotFieldName,
-        pathValues: combinedPathValues.slice(0, -1),
-        pathValuesRaw: columnPathValues,
-      });
-
-      // Build the hierarchy for column groups
-      for (let i = 0; i < combinedPathValues.length - 1; i += 1) {
-        const currentField = visiblePivotColumns[i].field;
-        const groupPath = combinedPathValues.slice(0, i + 1);
-        const groupId = groupPath.join('-');
-
-        let headerName = columnPathValues[groupPath.length - 1];
-        if (typeof headerName !== 'string') {
-          headerName = apiRef.current.getRowFormattedValue(
-            headerName,
-            initialColumns.get(currentField)!,
-          );
-        }
-        if (typeof headerName === 'number') {
-          headerName = String(headerName);
-        }
-        if (typeof headerName !== 'string') {
-          throw new Error(
-            `MUI X: Header name for a column group based on ${currentField} cannot be converted to a string.`,
-          );
-        }
-
-        if (!columnGroupingModelLookup.has(groupId)) {
-          const columnGroup = {
-            groupId,
-            headerName,
-            children: [],
-          };
-
-          columnGroupingModelLookup.set(groupId, columnGroup);
-
-          if (i === 0) {
-            columnGroupingModel.push(columnGroup);
-          } else {
-            const parentGroupId = groupPath.slice(0, -1).join('-');
-            const parentGroup = columnGroupingModelLookup.get(parentGroupId);
-            if (parentGroup) {
-              parentGroup.children.push(columnGroup);
-            }
-          }
-        }
-      }
-
-      // Add the final column to the appropriate group
-      const parentGroupId = combinedPathValues.slice(0, -1).join('-');
-      const parentGroup = columnGroupingModelLookup.get(parentGroupId);
-      if (parentGroup) {
-        parentGroup.children.push({ field: pivotFieldName });
-      }
-    });
+      throw new Error("STUB");
   });
 
   for (let i = visiblePivotColumns.length - 1; i >= 0; i -= 1) {
@@ -173,15 +81,7 @@ export const getPropsOverrides = (
     }
 
     columnGroupPathValues.sort((a, b) => {
-      // Do not sort values that are returned as strings
-      if (typeof a.pathValuesRaw[i] === 'string' && typeof b.pathValuesRaw[i] === 'string') {
-        return 0;
-      }
-
-      return (
-        (sort === 'asc' ? 1 : -1) *
-        gridStringOrNumberComparator(a.pathValues[i], b.pathValues[i], {} as any, {} as any)
-      );
+        throw new Error("STUB");
     });
   }
 

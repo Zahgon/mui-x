@@ -41,30 +41,5 @@ const PickersFadeTransitionGroupRoot = styled(TransitionGroup, {
  * @ignore - do not document.
  */
 export function PickersFadeTransitionGroup(inProps: PickersFadeTransitionGroupProps) {
-  const props = useThemeProps({ props: inProps, name: 'MuiPickersFadeTransitionGroup' });
-  const { className, reduceAnimations, transKey, classes: classesProp } = props;
-  const { children, ...other } = props;
-  const classes = useUtilityClasses(classesProp);
-  const theme = useTheme();
-
-  if (reduceAnimations) {
-    return children;
-  }
-  return (
-    <PickersFadeTransitionGroupRoot className={clsx(classes.root, className)} ownerState={other}>
-      <Fade
-        appear={false}
-        mountOnEnter
-        unmountOnExit
-        key={transKey}
-        timeout={{
-          appear: theme.transitions.duration.enteringScreen,
-          enter: theme.transitions.duration.enteringScreen,
-          exit: 0,
-        }}
-      >
-        {children}
-      </Fade>
-    </PickersFadeTransitionGroupRoot>
-  );
+    throw new Error("STUB");
 }

@@ -14,26 +14,15 @@ function GridColumnMenuSortItem(props: GridColumnMenuItemProps) {
   const rootProps = useGridRootProps();
 
   const sortDirection = React.useMemo(() => {
-    if (!colDef) {
-      return null;
-    }
-    const sortItem = sortModel.find((item) => item.field === colDef.field);
-    return sortItem?.sort;
+      throw new Error("STUB");
   }, [colDef, sortModel]);
 
   const sortingOrder: readonly GridSortDirection[] = colDef.sortingOrder ?? rootProps.sortingOrder;
 
   const onSortMenuItemClick = React.useCallback(
     (event: React.MouseEvent<HTMLElement>) => {
-      onClick(event);
-      const direction = event.currentTarget.getAttribute('data-value') || null;
-      const allowMultipleSorting = rootProps.multipleColumnsSortingMode === 'always';
-      apiRef.current.sortColumn(
-        colDef!.field,
-        (direction === sortDirection ? null : direction) as GridSortDirection,
-        allowMultipleSorting,
-      );
-    },
+          throw new Error("STUB");
+      },
     [apiRef, colDef, onClick, sortDirection, rootProps.multipleColumnsSortingMode],
   );
 
@@ -41,7 +30,7 @@ function GridColumnMenuSortItem(props: GridColumnMenuItemProps) {
     rootProps.disableColumnSorting ||
     !colDef ||
     !colDef.sortable ||
-    !sortingOrder.some((item) => !!item)
+    !sortingOrder.some((item) => { throw new Error("STUB"); })
   ) {
     return null;
   }

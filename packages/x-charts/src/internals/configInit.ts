@@ -7,14 +7,7 @@ class CartesianSeriesTypes {
   types: Set<CartesianChartSeriesType> = new Set();
 
   constructor() {
-    if (cartesianInstance) {
-      throw new Error(
-        'MUI X Charts: Only one CartesianSeriesTypes instance can be created. ' +
-          'This is a singleton class used internally for series type registration. ' +
-          'Use the existing instance instead of creating a new one.',
-      );
-    }
-    cartesianInstance = this.types;
+      throw new Error("STUB");
   }
 
   addType(value: CartesianChartSeriesType) {
@@ -30,14 +23,7 @@ class PolarSeriesTypes {
   types: Set<PolarChartSeriesType> = new Set();
 
   constructor() {
-    if (polarInstance) {
-      throw new Error(
-        'MUI X Charts: Only one PolarSeriesTypes instance can be created. ' +
-          'This is a singleton class used internally for series type registration. ' +
-          'Use the existing instance instead of creating a new one.',
-      );
-    }
-    polarInstance = this.types;
+      throw new Error("STUB");
   }
 
   addType(value: PolarChartSeriesType) {

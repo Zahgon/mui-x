@@ -28,4 +28,4 @@ export const useChartProApiRef = <
     ChartType extends keyof ProPluginsPerSeriesType
       ? ProPluginsPerSeriesType[ChartType]
       : AllPluginSignatures,
->() => React.useRef<ChartProApi<ChartType, Signatures> | undefined>(undefined);
+>() => { throw new Error("STUB"); };

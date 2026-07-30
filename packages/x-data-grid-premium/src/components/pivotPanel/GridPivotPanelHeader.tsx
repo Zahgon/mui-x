@@ -79,7 +79,7 @@ function GridPivotPanelHeader(props: GridPivotPanelHeaderProps) {
           className={classes.switch}
           checked={pivotActive}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            apiRef.current.setPivotActive(event.target.checked)
+            { throw new Error("STUB"); }
           }
           size="small"
           label={
@@ -91,11 +91,8 @@ function GridPivotPanelHeader(props: GridPivotPanelHeaderProps) {
         />
         <rootProps.slots.baseIconButton
           onClick={() => {
-            apiRef.current.hideSidebar();
-            if (isEmptyPivot) {
-              apiRef.current.setPivotActive(false);
-            }
-          }}
+                      throw new Error("STUB");
+                  }}
           aria-label={apiRef.current.getLocaleText('pivotCloseButton')}
           {...rootProps.slotProps?.baseIconButton}
         >
@@ -104,9 +101,9 @@ function GridPivotPanelHeader(props: GridPivotPanelHeaderProps) {
       </GridPivotPanelHeaderRoot>
       <GridPivotPanelSearch
         value={searchValue}
-        onClear={() => onSearchValueChange('')}
+        onClear={() => { throw new Error("STUB"); }}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          onSearchValueChange(event.target.value)
+          { throw new Error("STUB"); }
         }
       />
     </SidebarHeader>

@@ -35,45 +35,7 @@ export const validateDateTimeRange: Validator<
   DateTimeRangeValidationError,
   ValidateDateTimeRangeProps
 > = ({ adapter, value, timezone, props }) => {
-  const [start, end] = value;
-
-  const { shouldDisableDate, ...otherProps } = props;
-
-  const dateTimeValidations: DateTimeRangeValidationError = [
-    validateDateTime({
-      adapter,
-      value: start,
-      timezone,
-      props: {
-        ...otherProps,
-        shouldDisableDate: (day) => !!shouldDisableDate?.(day, 'start'),
-      },
-    }),
-    validateDateTime({
-      adapter,
-      value: end,
-      timezone,
-      props: {
-        ...otherProps,
-        shouldDisableDate: (day) => !!shouldDisableDate?.(day, 'end'),
-      },
-    }),
-  ];
-
-  if (dateTimeValidations[0] || dateTimeValidations[1]) {
-    return dateTimeValidations;
-  }
-
-  // for partial input
-  if (start === null || end === null) {
-    return [null, null];
-  }
-
-  if (!isRangeValid(adapter, value)) {
-    return ['invalidRange', 'invalidRange'];
-  }
-
-  return [null, null];
+    throw new Error("STUB");
 };
 
 validateDateTimeRange.valueManager = rangeValueManager;

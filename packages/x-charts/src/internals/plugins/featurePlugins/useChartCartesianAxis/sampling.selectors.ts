@@ -30,7 +30,7 @@ export function getFullRangeZoom(axisId: AxisId): ZoomData {
 export const selectorChartSamplingState: ChartRootSelector<
   UseChartCartesianAxisSignature,
   'sampling'
-> = (state) => state.sampling;
+> = (state) => { throw new Error("STUB"); };
 
 /**
  * Built sampling structures keyed by series id. Memoized, so rebuilt only on data change. Builds
@@ -45,32 +45,7 @@ export const selectorChartSamplingPyramids = createSelectorMemoized(
     processedSeries,
     seriesConfig,
   ): SampledSeriesLookup {
-    if (!samplingState?.enabled) {
-      return EMPTY_PYRAMIDS;
-    }
-
-    let sampled: SampledSeriesLookup | undefined;
-    (Object.keys(processedSeries) as ChartSeriesType[]).forEach((seriesType) => {
-      const method = samplingState.methods[seriesType];
-      if (!method || method === 'none') {
-        return;
-      }
-      const sampler = seriesConfig[seriesType]?.sampler;
-      const typeData = processedSeries[seriesType];
-      if (!sampler || !typeData) {
-        return;
-      }
-
-      for (const seriesId of typeData.seriesOrder) {
-        const built = sampler.build(typeData.series[seriesId] as never);
-        if (built) {
-          sampled ??= {};
-          sampled[seriesId] = built;
-        }
-      }
-    });
-
-    return sampled ?? EMPTY_PYRAMIDS;
+      throw new Error("STUB");
   },
 );
 
@@ -95,38 +70,6 @@ export const selectorChartHighlightBucketSize = createSelectorMemoized(
     zoomOptions,
     seriesConfig,
   ): Map<AxisId, number> {
-    if (!samplingState?.enabled) {
-      return EMPTY_BUCKET_SIZES;
-    }
-    const bucketSizeAt =
-      seriesConfig.bar?.sampler?.bucketSizeAt ?? seriesConfig.line?.sampler?.bucketSizeAt;
-    if (!bucketSizeAt) {
-      return EMPTY_BUCKET_SIZES;
-    }
-
-    const bucketSizes = new Map<AxisId, number>();
-    (
-      [
-        [xAxis, drawingArea.width],
-        [yAxis, drawingArea.height],
-      ] as const
-    ).forEach(([axes, availableSize]) => {
-      axes.axisIds.forEach((axisId) => {
-        const data = axes.axis[axisId].data;
-        const zoom = zoomMap?.get(axisId) ?? getFullRangeZoom(axisId);
-        const minSpan = zoomOptions[axisId]?.minSpan ?? 0;
-        if (data) {
-          bucketSizes.set(
-            axisId,
-            bucketSizeAt(zoom.end - zoom.start, {
-              dataLength: data.length,
-              availableSize,
-              minSpan,
-            }),
-          );
-        }
-      });
-    });
-    return bucketSizes;
+      throw new Error("STUB");
   },
 );

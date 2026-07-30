@@ -20,20 +20,7 @@ export const useIsDateDisabled = ({
 
   return React.useCallback(
     (day: PickerValidDate | null) =>
-      validateDate({
-        adapter,
-        value: day,
-        timezone,
-        props: {
-          shouldDisableDate,
-          shouldDisableMonth,
-          shouldDisableYear,
-          minDate,
-          maxDate,
-          disableFuture,
-          disablePast,
-        },
-      }) !== null,
+      { throw new Error("STUB"); },
     [
       adapter,
       shouldDisableDate,

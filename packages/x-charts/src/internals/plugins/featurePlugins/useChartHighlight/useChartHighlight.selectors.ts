@@ -18,7 +18,7 @@ import type { ChartSeriesConfig } from '../../corePlugins/useChartSeriesConfig';
 import type { HighlightState } from '../../../../hooks/useItemHighlightState';
 
 const selectHighlight: ChartRootSelector<UseChartHighlightSignature<ChartSeriesType>> = (state) =>
-  state.highlight;
+  { throw new Error("STUB"); };
 
 type HighlightLookUp<SeriesType extends ChartSeriesType> = {
   [K in SeriesType]?: Map<SeriesId, HighlightScope<K>>;
@@ -27,21 +27,7 @@ type HighlightLookUp<SeriesType extends ChartSeriesType> = {
 export const selectorChartsHighlightScopePerSeriesId = createSelectorMemoized(
   selectorChartSeriesProcessed,
   (processedSeries): HighlightLookUp<ChartSeriesType> => {
-    const map: HighlightLookUp<ChartSeriesType> = {};
-
-    (Object.keys(processedSeries) as ChartSeriesType[]).forEach(
-      <SeriesType extends ChartSeriesType>(seriesType: SeriesType) => {
-        map[seriesType] = new Map();
-        const seriesData = processedSeries[seriesType as ChartSeriesType];
-        seriesData?.seriesOrder?.forEach((seriesId) => {
-          const seriesItem = seriesData?.series[seriesId];
-          if (seriesItem?.highlightScope !== undefined) {
-            map[seriesType]?.set(seriesId, seriesItem.highlightScope);
-          }
-        });
-      },
-    );
-    return map;
+      throw new Error("STUB");
   },
 );
 
@@ -49,9 +35,7 @@ export const selectorChartsHighlightedItem = createSelectorMemoized(
   selectHighlight,
   selectorChartsKeyboardItem,
   function selectorChartsHighlightedItem(highlight, keyboardItem) {
-    return highlight.isControlled || highlight.lastUpdate === 'pointer'
-      ? highlight.item
-      : keyboardItem;
+      throw new Error("STUB");
   },
 );
 
@@ -62,21 +46,10 @@ export const selectorChartsHighlightScope = createSelector(
     seriesIdToHighlightScope: HighlightLookUp<ChartSeriesType>,
     highlightedItem: HighlightItemIdentifierWithType<SeriesType> | null,
   ): HighlightScope<SeriesType> | null {
-    if (!highlightedItem) {
-      return null;
-    }
-    const highlightScope = seriesIdToHighlightScope[highlightedItem.type]?.get(
-      highlightedItem.seriesId,
-    );
-
-    if (highlightScope === undefined) {
-      return null;
-    }
-
-    return highlightScope;
+      throw new Error("STUB");
   },
 );
-const alwaysNone = (): HighlightState => 'none';
+const alwaysNone = (): HighlightState => { throw new Error("STUB"); };
 
 const selectorChartsHighlightStateCallbackImpl = createSelectorMemoized(
   selectorChartsHighlightScope,
@@ -89,21 +62,7 @@ const selectorChartsHighlightStateCallbackImpl = createSelectorMemoized(
   ): (
     item: HighlightItemIdentifierWithType<ComposableChartSeriesType<SeriesType>> | null,
   ) => HighlightState {
-    if (highlightedItem === null || highlightScope === null) {
-      return alwaysNone;
-    }
-    const config = seriesConfig[highlightedItem.type as keyof typeof seriesConfig];
-    const isHighlighted = config.isHighlightedCreator(highlightScope, highlightedItem);
-    const isFaded = config.isFadedCreator(highlightScope, highlightedItem);
-    return (item) => {
-      if (isHighlighted(item)) {
-        return 'highlighted';
-      }
-      if (isFaded(item)) {
-        return 'faded';
-      }
-      return 'none';
-    };
+      throw new Error("STUB");
   },
 );
 
@@ -118,7 +77,7 @@ export function selectorChartsHighlightStateCallback<SeriesType extends ChartSer
 ): (
   item: HighlightItemIdentifierWithType<ComposableChartSeriesType<SeriesType>> | null,
 ) => HighlightState {
-  return selectorChartsHighlightStateCallbackImpl(state);
+    throw new Error("STUB");
 }
 
 const selectorChartsHighlightStateImpl = createSelectorMemoized(
@@ -129,7 +88,7 @@ const selectorChartsHighlightStateImpl = createSelectorMemoized(
     ) => HighlightState,
     item: HighlightItemIdentifierWithType<ComposableChartSeriesType<SeriesType>> | null,
   ): HighlightState {
-    return getHighlightState(item);
+      throw new Error("STUB");
   },
 );
 
@@ -143,7 +102,7 @@ export function selectorChartsHighlightState(
   state: Parameters<typeof selectorChartsHighlightStateImpl>[0],
   item: Parameters<typeof selectorChartsHighlightStateImpl>[1],
 ): HighlightState {
-  return selectorChartsHighlightStateImpl(state, item);
+    throw new Error("STUB");
 }
 
 // ==========================================================================================
@@ -162,7 +121,7 @@ export const selectorChartIsSeriesHighlighted = createSelector(
     item: HighlightItemIdentifierWithType<SeriesType> | null,
     seriesId: SeriesId,
   ) {
-    return isSeriesHighlighted(scope, item, seriesId);
+      throw new Error("STUB");
   },
 );
 
@@ -174,7 +133,7 @@ export const selectorChartIsSeriesFaded = createSelector(
     item: HighlightItemIdentifierWithType<SeriesType> | null,
     seriesId: SeriesId,
   ) {
-    return isSeriesFaded(scope, item, seriesId);
+      throw new Error("STUB");
   },
 );
 
@@ -186,7 +145,7 @@ export const selectorChartSeriesUnfadedItem = createSelector(
     item: HighlightItemIdentifierWithType<SeriesType> | null,
     seriesId: SeriesId,
   ) {
-    return getSeriesUnfadedDataIndex(scope, item, seriesId);
+      throw new Error("STUB");
   },
 );
 
@@ -198,6 +157,6 @@ export const selectorChartSeriesHighlightedItem = createSelector(
     item: HighlightItemIdentifierWithType<SeriesType> | null,
     seriesId: SeriesId,
   ) {
-    return getSeriesHighlightedDataIndex(scope, item, seriesId);
+      throw new Error("STUB");
   },
 );

@@ -25,50 +25,6 @@ export const selectorTooltipItemPosition: TooltipItemPositionSelector<'bar'> =
        */
       placement: 'top' | 'bottom' | 'left' | 'right' | undefined,
     ) {
-      if (!identifier || identifier.type !== 'bar' || identifier.dataIndex === undefined) {
-        return null;
-      }
-
-      const itemSeries = series.bar?.series[identifier.seriesId];
-
-      if (!series.bar || !itemSeries) {
-        return null;
-      }
-
-      const xAxis = xAxes.axis[itemSeries.xAxisId ?? xAxes.axisIds[0]];
-      const yAxis = yAxes.axis[itemSeries.yAxisId ?? yAxes.axisIds[0]];
-
-      if (!xAxis || !yAxis) {
-        return null;
-      }
-
-      const groupIndex = series.bar.stackingGroups.findIndex((group) =>
-        group.ids.includes(itemSeries.id),
-      );
-
-      const dimensions = createGetBarDimensions({
-        verticalLayout: itemSeries.layout === 'vertical',
-        xAxisConfig: xAxis,
-        yAxisConfig: yAxis,
-        series: itemSeries,
-        numberOfGroups: series.bar.stackingGroups.length,
-      })(identifier.dataIndex, groupIndex);
-
-      if (dimensions == null) {
-        return null;
-      }
-
-      const { x, y, width, height } = dimensions;
-      switch (placement) {
-        case 'right':
-          return { x: x + width, y: y + height / 2 };
-        case 'bottom':
-          return { x: x + width / 2, y: y + height };
-        case 'left':
-          return { x, y: y + height / 2 };
-        case 'top':
-        default:
-          return { x: x + width / 2, y };
-      }
+        throw new Error("STUB");
     },
   );

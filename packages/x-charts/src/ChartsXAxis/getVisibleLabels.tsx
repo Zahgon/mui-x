@@ -23,7 +23,7 @@ export function getVisibleLabels<T extends TickItem>(
     },
 ): Set<T> {
   if (typeof tickLabelInterval === 'function') {
-    return new Set(xTicks.filter((item, index) => tickLabelInterval(item.value, index)));
+    return new Set(xTicks.filter((item, index) => { throw new Error("STUB"); }));
   }
 
   // Filter label to avoid overlap
@@ -31,50 +31,14 @@ export function getVisibleLabels<T extends TickItem>(
   const direction = reverse ? -1 : 1;
 
   const candidateTickLabels = xTicks.filter((item) => {
-    const { offset, labelOffset, formattedValue } = item;
-
-    if (formattedValue === '') {
-      return false;
-    }
-
-    const textPosition = offset + labelOffset;
-
-    return isXInside(textPosition);
+      throw new Error("STUB");
   });
 
   const sizeMap = measureTickLabels(candidateTickLabels, style);
 
   return new Set(
     candidateTickLabels.filter((item, labelIndex) => {
-      const { offset, labelOffset } = item;
-
-      const textPosition = offset + labelOffset;
-
-      if (
-        labelIndex > 0 &&
-        direction * textPosition < direction * (previousTextLimit + tickLabelMinGap)
-      ) {
-        return false;
-      }
-
-      const { width, height } = isMounted
-        ? getTickLabelSize(sizeMap, item)
-        : { width: 0, height: 0 };
-
-      const distance = getMinXTranslation(width, height, style?.angle);
-
-      const currentTextLimit = textPosition - (direction * distance) / 2;
-      if (
-        labelIndex > 0 &&
-        direction * currentTextLimit < direction * (previousTextLimit + tickLabelMinGap)
-      ) {
-        // Except for the first label, we skip all label that overlap with the last accepted.
-        // Notice that the early return prevents `previousTextLimit` from being updated.
-        return false;
-      }
-
-      previousTextLimit = textPosition + (direction * distance) / 2;
-      return true;
+        throw new Error("STUB");
     }),
   );
 }
@@ -106,7 +70,7 @@ function measureTickLabels<T extends TickItem>(ticks: T[], style: ChartsTextStyl
 
   for (const tick of ticks) {
     if (tick.formattedValue) {
-      tick.formattedValue.split('\n').forEach((line) => strings.add(line));
+      tick.formattedValue.split('\n').forEach((line) => { throw new Error("STUB"); });
     }
   }
 

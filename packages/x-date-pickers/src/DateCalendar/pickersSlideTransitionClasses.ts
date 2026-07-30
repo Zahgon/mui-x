@@ -21,7 +21,7 @@ export interface PickersSlideTransitionClasses {
 export type PickersSlideTransitionClassKey = keyof PickersSlideTransitionClasses;
 
 export const getPickersSlideTransitionUtilityClass = (slot: string) =>
-  generateUtilityClass('MuiPickersSlideTransition', slot);
+  { throw new Error("STUB"); };
 
 export const pickersSlideTransitionClasses: PickersSlideTransitionClasses = generateUtilityClasses(
   'MuiPickersSlideTransition',

@@ -19,8 +19,7 @@ export function rafThrottle<T extends (...args: any[]) => any>(fn: T): T & Cance
   let rafRef: ReturnType<typeof requestAnimationFrame> | null;
 
   const later = () => {
-    rafRef = null;
-    fn(...lastArgs);
+      throw new Error("STUB");
   };
 
   function throttled(...args: Parameters<T>) {
@@ -31,10 +30,7 @@ export function rafThrottle<T extends (...args: any[]) => any>(fn: T): T & Cance
   }
 
   throttled.clear = () => {
-    if (rafRef) {
-      cancelAnimationFrame(rafRef);
-      rafRef = null;
-    }
+      throw new Error("STUB");
   };
 
   return throttled as T & Cancelable;

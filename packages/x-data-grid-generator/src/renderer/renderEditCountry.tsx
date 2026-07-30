@@ -9,89 +9,12 @@ import { COUNTRY_ISO_OPTIONS } from '../services/static-data';
 import type { CountryIsoOption } from '../services/static-data';
 import { useEditDropdownState } from '../hooks/useEditDropdownState';
 
-const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
-  height: '100%',
-  [`& .${autocompleteClasses.inputRoot}`]: {
-    ...theme.typography.body2,
-    padding: '1px 0',
-    height: '100%',
-    '& input': {
-      padding: '0 16px',
-      height: '100%',
-    },
-  },
-})) as typeof Autocomplete;
+const StyledAutocomplete = styled(Autocomplete)(({ theme }) => { throw new Error("STUB"); }) as typeof Autocomplete;
 
 function EditCountry(props: GridRenderEditCellParams<CountryIsoOption>) {
-  const { id, value, field, hasFocus } = props;
-
-  const {
-    open,
-    setOpen,
-    inputRef,
-    shouldAutoOpen,
-    handleAutocompleteInputKeyDown,
-    handleAutocompleteWrapperKeyDown,
-    createAutocompleteChangeHandler,
-  } = useEditDropdownState({ id, field, hasFocus });
-
-  const handleChange = createAutocompleteChangeHandler<CountryIsoOption>();
-
-  return (
-    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-    <div onKeyDown={handleAutocompleteWrapperKeyDown} style={{ height: '100%', width: '100%' }}>
-      <StyledAutocomplete<CountryIsoOption, false, true, false>
-        value={value}
-        onChange={handleChange}
-        options={COUNTRY_ISO_OPTIONS}
-        getOptionLabel={(option: any) => option.label}
-        autoHighlight
-        fullWidth
-        open={open}
-        onOpen={() => setOpen(true)}
-        onClose={() => setOpen(false)}
-        disableClearable
-        renderOption={(optionProps, option: any) => (
-          <Box
-            component="li"
-            sx={{
-              '& > img': {
-                mr: 1.5,
-                flexShrink: 0,
-              },
-            }}
-            {...optionProps}
-            key={option.code}
-          >
-            <img
-              loading="lazy"
-              width="20"
-              src={`https://flagcdn.com/w20/${option.code.toLowerCase()}.png`}
-              srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
-              alt=""
-            />
-            {option.label}
-          </Box>
-        )}
-        renderInput={(params) => (
-          <InputBase
-            autoFocus={shouldAutoOpen}
-            fullWidth
-            id={params.id}
-            inputRef={inputRef}
-            onKeyDown={handleAutocompleteInputKeyDown}
-            inputProps={{
-              ...params.slotProps.htmlInput,
-              autoComplete: 'new-password', // disable autocomplete and autofill
-            }}
-            {...params.slotProps.input}
-          />
-        )}
-      />
-    </div>
-  );
+    throw new Error("STUB");
 }
 
 export function renderEditCountry(params: GridRenderEditCellParams<CountryIsoOption>) {
-  return <EditCountry {...params} />;
+    throw new Error("STUB");
 }

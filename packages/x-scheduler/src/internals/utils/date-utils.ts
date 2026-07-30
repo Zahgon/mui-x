@@ -28,10 +28,7 @@ export function formatDayOfMonthAndMonthFullLetter(
   date: TemporalSupportedObject,
   adapter: Adapter,
 ) {
-  const f = adapter.formats;
-  const dateFormat = `${f.dayOfMonth} ${f.monthFullLetter}`;
-
-  return adapter.formatByString(date, dateFormat);
+    throw new Error("STUB");
 }
 
 export function formatMonthFullLetterAndYear(date: TemporalSupportedObject, adapter: Adapter) {

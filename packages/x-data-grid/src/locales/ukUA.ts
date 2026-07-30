@@ -51,11 +51,7 @@ const ukUAGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Приховати фільтри',
   toolbarFiltersTooltipShow: 'Показати фільтри',
   toolbarFiltersTooltipActive: (count) =>
-    getPluralForm(count, {
-      one: 'активний фільтр',
-      few: 'активні фільтри',
-      many: 'активних фільтрів',
-    }),
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Пошук…',
@@ -164,28 +160,20 @@ const ukUAGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    getPluralForm(count, {
-      one: 'активний фільтр',
-      few: 'активні фільтри',
-      many: 'активних фільтрів',
-    }),
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Показати фільтри',
   columnHeaderSortIconLabel: 'Сортувати',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    getPluralForm(count, {
-      one: 'вибраний рядок',
-      few: 'вибрані рядки',
-      many: 'вибраних рядків',
-    }),
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Усього рядків:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} з ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Вибір прапорця',
@@ -217,8 +205,8 @@ const ukUAGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Група',
-  groupColumn: (name) => `Групувати за ${name}`,
-  unGroupColumn: (name) => `Відмінити групування за ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Перемикач панелі деталей',
@@ -228,28 +216,10 @@ const ukUAGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Рядків на сторінці:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    const unknownRowCount = count == null || count === -1;
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} з ${!unknownRowCount ? formatNumber(count) : `більше ніж ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `близько ${formatNumber(estimated)}`
-        : `більше ніж ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} з ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Перейти на першу сторінку';
-    }
-    if (type === 'last') {
-      return 'Перейти на останню сторінку';
-    }
-    if (type === 'next') {
-      return 'Перейти на наступну сторінку';
-    }
-    // if (type === 'previous') {
-    return 'Перейти на попередню сторінку';
+      throw new Error("STUB");
   },
 
   // Row reordering text

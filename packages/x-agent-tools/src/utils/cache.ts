@@ -21,12 +21,7 @@ export class LRUCache {
     max_cache_size: number = DEFAULT_MAX_CACHE_SIZE,
     clean_up_freq_ms: number = DEFAULT_CLEAN_UP_FREQ_MS,
   ) {
-    this.cache = new Map();
-    this.cache_ttl_ms = cache_ttl_ms;
-    this.max_cache_size = max_cache_size;
-    // Periodically evict expired entries. `unref()` so the timer never keeps the process alive.
-    this.cleanupTimer = setInterval(() => this.cleanupExpiredEntries(), clean_up_freq_ms);
-    this.cleanupTimer.unref?.();
+      throw new Error("STUB");
   }
 
   // Stop the cleanup timer when discarding a cache so it can be garbage collected.
@@ -71,12 +66,7 @@ export class LRUCache {
   }
 
   private cleanupExpiredEntries(): void {
-    const now = Date.now();
-    for (const [key, entry] of this.cache.entries()) {
-      if (now - entry.timestamp >= this.cache_ttl_ms) {
-        this.cache.delete(key);
-      }
-    }
+      throw new Error("STUB");
   }
 }
 

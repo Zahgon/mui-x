@@ -9,7 +9,7 @@ export interface PickersToolbarButtonClasses {
 export type PickersToolbarButtonClassKey = keyof PickersToolbarButtonClasses;
 
 export function getPickersToolbarButtonUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickersToolbarButton', slot);
+    throw new Error("STUB");
 }
 
 export const pickersToolbarButtonClasses = generateUtilityClasses('MuiPickersToolbarButton', [

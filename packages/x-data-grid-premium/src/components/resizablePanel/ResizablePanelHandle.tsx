@@ -30,14 +30,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const ResizablePanelHandleRoot = styled('div', {
   name: 'MuiDataGrid',
   slot: 'ResizablePanelHandle',
-  overridesResolver: ({ ownerState }: { ownerState: OwnerState }, styles) => [
-    {
-      [`&.${gridClasses[`resizablePanelHandle--${ownerState.direction}`]}`]:
-        styles[`resizablePanelHandle--${ownerState.direction}`],
-    },
-
-    styles.resizablePanelHandle,
-  ],
+  overridesResolver: ({ ownerState }: { ownerState: OwnerState }, styles) => { throw new Error("STUB"); },
 })<{ ownerState: OwnerState; direction: 'horizontal' | 'vertical' }>({
   position: 'absolute',
   zIndex: 3,
@@ -88,16 +81,10 @@ function ResizablePanelHandle(props: ResizablePanelHandleProps) {
   const { ref } = useResize({
     direction,
     getInitialSize: () => {
-      return direction === 'horizontal'
-        ? rootRef.current!.offsetWidth
-        : rootRef.current!.offsetHeight;
+        throw new Error("STUB");
     },
     onSizeChange: (newSize) => {
-      if (direction === 'horizontal') {
-        rootRef.current!.style.width = `${newSize}px`;
-      } else {
-        rootRef.current!.style.height = `${newSize}px`;
-      }
+        throw new Error("STUB");
     },
   });
 

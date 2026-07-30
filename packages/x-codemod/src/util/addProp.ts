@@ -37,24 +37,9 @@ export default function addProp({
   return root
     .find(j.JSXElement)
     .filter((path) => {
-      return componentNames.includes((path.value.openingElement.name as any).name);
+        throw new Error("STUB");
     })
     .forEach((path) => {
-      const hasProp = path.value.openingElement.attributes?.some((attr) => {
-        return attr.type === 'JSXAttribute' && (attr.name as any).name === propName;
-      });
-
-      if (!hasProp) {
-        const fn = position === 'start' ? ('unshift' as const) : ('push' as const);
-
-        path.value.openingElement.attributes?.[fn](
-          j.jsxAttribute(
-            j.jsxIdentifier(propName),
-            typeof propValue === 'boolean' && propValue
-              ? null
-              : j.jsxExpressionContainer(j.literal(propValue)),
-          ),
-        );
-      }
+        throw new Error("STUB");
     });
 }

@@ -59,9 +59,9 @@ export type QuickFilterProps = Omit<React.HTMLAttributes<HTMLDivElement>, 'class
   onExpandedChange?: (expanded: boolean) => void;
 };
 
-const DEFAULT_PARSER = (searchText: string) => searchText.split(' ').filter((word) => word !== '');
+const DEFAULT_PARSER = (searchText: string) => { throw new Error("STUB"); };
 
-const DEFAULT_FORMATTER = (values: string[]) => values.join(' ');
+const DEFAULT_FORMATTER = (values: string[]) => { throw new Error("STUB"); };
 
 /**
  * The top level Quick Filter component that provides context to child components.
@@ -99,10 +99,7 @@ function QuickFilter(props: QuickFilterProps) {
   );
   const expandedValue = expanded ?? internalExpanded;
   const state = React.useMemo(
-    () => ({
-      value,
-      expanded: expandedValue,
-    }),
+    () => { throw new Error("STUB"); },
     [value, expandedValue],
   );
   const resolvedClassName = typeof className === 'function' ? className(state) : className;
@@ -111,97 +108,48 @@ function QuickFilter(props: QuickFilterProps) {
 
   const handleExpandedChange = React.useCallback(
     (newExpanded: boolean) => {
-      if (onExpandedChange) {
-        onExpandedChange(newExpanded);
-      }
-      if (expanded === undefined) {
-        setInternalExpanded(newExpanded);
-      }
-    },
+          throw new Error("STUB");
+      },
     [onExpandedChange, expanded],
   );
 
   const prevQuickFilterValuesRef = React.useRef(quickFilterValues);
 
   React.useEffect(() => {
-    if (!isDeepEqual(prevQuickFilterValuesRef.current, quickFilterValues)) {
-      // The model of quick filter value has been updated
-      prevQuickFilterValuesRef.current = quickFilterValues;
-
-      // Update the input value if needed to match the new model
-      setValue((prevSearchValue) =>
-        isDeepEqual(parser(prevSearchValue), quickFilterValues)
-          ? prevSearchValue
-          : formatter(quickFilterValues ?? []),
-      );
-    }
+      throw new Error("STUB");
   }, [quickFilterValues, formatter, parser]);
 
   const isFirstRender = React.useRef(true);
   const previousExpandedValue = React.useRef(expandedValue);
   React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
-    // Ensure the expanded state has actually changed before focusing
-    if (previousExpandedValue.current !== expandedValue) {
-      if (expandedValue) {
-        // Ensures the focus does not interupt CSS transitions and animations on the control
-        requestAnimationFrame(() => {
-          controlRef.current?.focus({ preventScroll: true });
-        });
-      } else {
-        triggerRef.current?.focus({ preventScroll: true });
-      }
-      previousExpandedValue.current = expandedValue;
-    }
+      throw new Error("STUB");
   }, [expandedValue]);
 
   const setQuickFilterValueDebounced = React.useMemo(
     () =>
-      debounce((newValue: string) => {
-        const newQuickFilterValues = parser(newValue);
-        prevQuickFilterValuesRef.current = newQuickFilterValues;
-        apiRef.current.setQuickFilterValues(newQuickFilterValues);
-      }, debounceMs),
+      { throw new Error("STUB"); },
     [apiRef, debounceMs, parser],
   );
-  React.useEffect(() => setQuickFilterValueDebounced.clear, [setQuickFilterValueDebounced]);
+  React.useEffect(() => { throw new Error("STUB"); }, [setQuickFilterValueDebounced]);
 
   const handleValueChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.target.value;
-      setValue(newValue);
-      setQuickFilterValueDebounced(newValue);
-    },
+          throw new Error("STUB");
+      },
     [setQuickFilterValueDebounced],
   );
 
   const handleClearValue = React.useCallback(() => {
-    setValue('');
-    apiRef.current.setQuickFilterValues([]);
-    controlRef.current?.focus();
+      throw new Error("STUB");
   }, [apiRef, controlRef]);
 
   const contextValue = React.useMemo(
-    () => ({
-      controlRef,
-      triggerRef,
-      state,
-      controlId,
-      clearValue: handleClearValue,
-      onValueChange: handleValueChange,
-      onExpandedChange: handleExpandedChange,
-    }),
+    () => { throw new Error("STUB"); },
     [controlId, state, handleValueChange, handleClearValue, handleExpandedChange],
   );
 
   useEnhancedEffect(() => {
-    if (ref.current && triggerRef.current) {
-      ref.current.style.setProperty('--trigger-width', `${triggerRef.current?.offsetWidth}px`);
-    }
+      throw new Error("STUB");
   }, []);
 
   const element = useComponentRenderer(

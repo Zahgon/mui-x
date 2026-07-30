@@ -34,57 +34,7 @@ export const useZoomOnPinch = (
   usePinchGesture(instance, {
     enabled,
     onPinch: (point, deltaScale) => {
-      if (!projection || !projection.invert) {
-        return;
-      }
-
-      // Same clamp-then-derive-factor flow as the wheel, so pinch obeys the identical bounds.
-      const currentZoom = store.state.geoProjectionZoom.zoomLevel ?? 1;
-      const nextZoom = clampZoomLevel(currentZoom * (1 + deltaScale));
-      const factor = nextZoom / currentZoom;
-      if (factor === 1) {
-        return;
-      }
-
-      const geoPoint = projection.invert([point.x, point.y]) as [number, number] | null;
-      if (!geoPoint) {
-        return;
-      }
-      const nextRotation = getRotation(
-        projection,
-        geoPoint,
-        [point.x, point.y],
-        factor,
-        rotationAllowed,
-      );
-      const scale = projection.scale();
-      const rotate = projection.rotate?.();
-      if (nextRotation) {
-        projection.rotate?.([-nextRotation[0], -nextRotation[1], nextRotation[2]]);
-      }
-      projection.scale(scale * factor);
-      const translation = getTranslation(
-        store,
-        projection,
-        geoPoint,
-        [point.x, point.y],
-        translationAllowed,
-        maxEmptySpace,
-        store.state.geoProjectionZoom.translation ?? [0, 0],
-      );
-      projection.rotate?.(rotate);
-      projection.scale(scale);
-
-      if (nextRotation || translation) {
-        applyView({
-          zoomLevel: nextZoom,
-          center: nextRotation
-            ? [nextRotation[0], nextRotation[1]]
-            : (store.state.geoProjectionZoom.center ?? [0, 0]),
-          translation: translation ?? store.state.geoProjectionZoom.translation ?? [0, 0],
-          roll: nextRotation ? nextRotation[2] : (store.state.geoProjectionZoom.roll ?? 0),
-        });
-      }
+        throw new Error("STUB");
     },
   });
 };

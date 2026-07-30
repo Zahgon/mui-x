@@ -7,11 +7,11 @@ import { selectorIsItemVisibleGetter } from '../../featurePlugins/useChartVisibi
 import { selectorChartSeriesConfig } from '../useChartSeriesConfig/useChartSeriesConfig.selectors';
 
 export const selectorChartSeriesState: ChartRootSelector<UseChartSeriesSignature> = (state) =>
-  state.series;
+  { throw new Error("STUB"); };
 
 export const selectorChartDefaultizedSeries = createSelector(
   selectorChartSeriesState,
-  (seriesState) => seriesState.defaultizedSeries,
+  (seriesState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -20,7 +20,7 @@ export const selectorChartDefaultizedSeries = createSelector(
  */
 export const selectorChartsDataset = createSelector(
   selectorChartSeriesState,
-  (seriesState) => seriesState.dataset,
+  (seriesState) => { throw new Error("STUB"); },
 );
 
 /**
@@ -34,7 +34,7 @@ export const selectorChartSeriesProcessed = createSelectorMemoized(
   selectorChartsDataset,
   selectorIsItemVisibleGetter,
   function selectorChartSeriesProcessed(defaultizedSeries, seriesConfig, dataset, isItemVisible) {
-    return applySeriesProcessors(defaultizedSeries, seriesConfig, dataset, isItemVisible);
+      throw new Error("STUB");
   },
 );
 
@@ -45,22 +45,6 @@ export const selectorChartSeriesConfigGetter = createSelectorMemoized(
   selectorChartSeriesConfig,
   selectorChartSeriesProcessed,
   (seriesConfig, processedSeries) => {
-    return function getSeriesConfigById(seriesId: SeriesId) {
-      for (const type in processedSeries) {
-        if (!Object.hasOwn(processedSeries, type)) {
-          continue;
-        }
-
-        const seriesGroup = processedSeries[type as keyof typeof processedSeries];
-        if (seriesGroup?.series) {
-          const item = seriesGroup.series[seriesId];
-          if (item) {
-            return seriesConfig[type as keyof typeof processedSeries];
-          }
-        }
-      }
-
-      return null;
-    };
+      throw new Error("STUB");
   },
 );

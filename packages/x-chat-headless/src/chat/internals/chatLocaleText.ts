@@ -70,7 +70,7 @@ export interface ChatLocaleText {
 }
 
 function getUserLabel(user: ChatLocaleTypingUser) {
-  return user.displayName ?? user.id;
+    throw new Error("STUB");
 }
 
 function formatMessageTimestamp(dateTime: string): string {
@@ -125,7 +125,7 @@ export const CHAT_DEFAULT_LOCALE_TEXT: ChatLocaleText = {
   composerAttachButtonLabel: 'Add attachment',
   composerAttachInputLabel: 'Upload file',
   composerAttachmentFallbackLabel: 'Attachment',
-  composerRemoveAttachmentLabel: (fileName) => `Remove ${fileName}`,
+  composerRemoveAttachmentLabel: (fileName) => { throw new Error("STUB"); },
   messageCopyButtonLabel: 'Copy',
   messageCopyCodeButtonLabel: 'Copy code',
   messageCopiedCodeButtonLabel: 'Copied',
@@ -147,20 +147,14 @@ export const CHAT_DEFAULT_LOCALE_TEXT: ChatLocaleText = {
   threadNoMessagesHelperText: 'Type a message to get started',
   genericErrorLabel: 'Something went wrong',
   loadingLabel: 'Loading…',
-  messageStatusLabel: (status) => messageStatusLabels[status],
-  toolStateLabel: (state) => toolStateLabels[state],
-  messageTimestampLabel: (dateTime) => formatMessageTimestamp(dateTime),
-  conversationTimestampLabel: (dateTime) => formatConversationTimestamp(dateTime),
+  messageStatusLabel: (status) => { throw new Error("STUB"); },
+  toolStateLabel: (state) => { throw new Error("STUB"); },
+  messageTimestampLabel: (dateTime) => { throw new Error("STUB"); },
+  conversationTimestampLabel: (dateTime) => { throw new Error("STUB"); },
   typingIndicatorLabel: (users) => {
-    const names = users.map(getUserLabel).join(', ');
-
-    if (users.length === 1) {
-      return `${names} is typing`;
-    }
-
-    return `${names} are typing`;
+      throw new Error("STUB");
   },
-  scrollToBottomWithCountLabel: (unseenCount) => `Scroll to bottom, ${unseenCount} new messages`,
+  scrollToBottomWithCountLabel: (unseenCount) => { throw new Error("STUB"); },
   suggestionsLabel: 'Suggested prompts',
   messageListLabel: 'Message log',
   messageLabel: 'Message',

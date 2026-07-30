@@ -27,24 +27,8 @@ export const GRID_COLUMN_MENU_SLOT_PROPS = {
 
 const GridGenericColumnMenu = forwardRef<HTMLUListElement, GridGenericColumnMenuProps>(
   function GridGenericColumnMenu(props, ref) {
-    const { defaultSlots, defaultSlotProps, slots, slotProps, ...other } = props;
-
-    const orderedSlots = useGridColumnMenuSlots({
-      ...other,
-      defaultSlots,
-      defaultSlotProps,
-      slots,
-      slotProps,
-    });
-
-    return (
-      <GridColumnMenuContainer {...other} ref={ref}>
-        {orderedSlots.map(([Component, otherProps], index) => (
-          <Component key={index} {...otherProps} />
-        ))}
-      </GridColumnMenuContainer>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridGenericColumnMenu.propTypes /* remove-proptypes */ = {
@@ -82,15 +66,8 @@ GridGenericColumnMenu.propTypes /* remove-proptypes */ = {
 
 const GridColumnMenu = forwardRef<HTMLUListElement, GridColumnMenuProps>(
   function GridColumnMenu(props, ref) {
-    return (
-      <GridGenericColumnMenu
-        {...props}
-        ref={ref}
-        defaultSlots={GRID_COLUMN_MENU_SLOTS}
-        defaultSlotProps={GRID_COLUMN_MENU_SLOT_PROPS}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 ) as GridColumnMenuComponent;
 
 GridColumnMenu.defaultSlots = GRID_COLUMN_MENU_SLOTS;

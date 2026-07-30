@@ -25,21 +25,7 @@ import { ChartsAccessibilityProxy } from '../internals/components/ChartsAccessib
 const ChartsLayerContainerDiv = styled('div', {
   name: 'MuiChartsLayerContainer',
   slot: 'Root',
-})<{ ownerState: { width?: number; height?: number } }>(({ ownerState }) => ({
-  width: ownerState.width ?? '100%',
-  height: ownerState.height ?? '100%',
-  display: 'flex',
-  position: 'relative',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  touchAction: 'pan-y',
-  userSelect: 'none',
-  gridArea: 'chart',
-  '&:focus': {
-    outline: 'none', // By default, don't show focus outline
-  },
-}));
+})<{ ownerState: { width?: number; height?: number } }>(({ ownerState }) => { throw new Error("STUB"); });
 
 export interface ChartsLayerContainerProps extends React.ComponentProps<'div'> {
   /**
@@ -61,76 +47,8 @@ export interface ChartsLayerContainerProps extends React.ComponentProps<'div'> {
  */
 const ChartsLayerContainer = React.forwardRef<HTMLDivElement, ChartsLayerContainerProps>(
   function ChartsLayerContainer(inProps, ref) {
-    const { store, instance } = useChartsContext<
-      [],
-      [UseChartInteractionSignature, UseChartItemClickSignature]
-    >();
-    const propsWidth = store.use(selectorChartPropsWidth);
-    const propsHeight = store.use(selectorChartPropsHeight);
-    const isKeyboardNavigationEnabled = store.use(selectorChartsIsKeyboardNavigationEnabled);
-
-    useRegisterPointerInteractions();
-
-    const themeProps = useThemeProps({ props: inProps, name: 'MuiChartsLayerContainer' });
-    const { children, title, desc, className, ...other } = themeProps;
-
-    const classes = useUtilityClasses();
-
-    const chartsLayerContainerRef = useChartsLayerContainerRef();
-    const handleRef = useForkRef(chartsLayerContainerRef, ref);
-    const descId = useId();
-
-    if (process.env.NODE_ENV !== 'production') {
-      React.Children.forEach(children, (child) => {
-        if (
-          typeof child === 'object' &&
-          child != null &&
-          'type' in child &&
-          child.type === ChartsSurface
-        ) {
-          warnOnce(
-            'MUI X Charts: ChartsSurface should not be used inside ChartsLayerContainer. Render a ChartsSvgLayer instead.',
-            'error',
-          );
-        }
-      });
-    }
-
-    return (
-      // `role="none"` is an alias for `role="presentation"`, but aria-query treats them differently.
-      // See https://github.com/jsx-eslint/eslint-plugin-jsx-a11y/issues/1090
-      // eslint-disable-next-line jsx-a11y/role-supports-aria-props
-      <ChartsLayerContainerDiv
-        ref={handleRef}
-        ownerState={{ width: propsWidth, height: propsHeight }}
-        role="none"
-        aria-label={title}
-        aria-describedby={desc ? descId : undefined}
-        className={clsx(classes.root, className)}
-        {...other}
-        onPointerEnter={(event) => {
-          other.onPointerEnter?.(event);
-          instance.handlePointerEnter?.(event);
-        }}
-        onPointerLeave={(event) => {
-          other.onPointerLeave?.(event);
-          instance.handlePointerLeave?.(event);
-        }}
-        onClick={(event) => {
-          other.onClick?.(event);
-          instance.handleClick?.(event);
-        }}
-      >
-        {isKeyboardNavigationEnabled && <ChartsAccessibilityProxy />}
-        {desc && (
-          <span id={descId} style={{ display: 'none' }}>
-            {desc}
-          </span>
-        )}
-        {children}
-      </ChartsLayerContainerDiv>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChartsLayerContainer.propTypes /* remove-proptypes */ = {

@@ -62,7 +62,7 @@ export function calculateTargetIndex(
   if (sourceNode.parent === targetNode.parent && !isLastChild) {
     // Same parent: find target's position in parent's children
     const parent = rowTree[sourceNode.parent!] as GridGroupNode;
-    return parent.children.findIndex((id) => id === targetNode.id);
+    return parent.children.findIndex((id) => { throw new Error("STUB"); });
   }
 
   if (isLastChild) {
@@ -73,7 +73,7 @@ export function calculateTargetIndex(
 
   // Find position in target parent
   const targetParent = rowTree[targetNode.parent!] as GridGroupNode;
-  const targetIndex = targetParent.children.findIndex((id) => id === targetNode.id);
+  const targetIndex = targetParent.children.findIndex((id) => { throw new Error("STUB"); });
   return targetIndex >= 0 ? targetIndex : 0;
 }
 
@@ -85,12 +85,7 @@ export const collectAllLeafDescendants = (
   const leafIds: GridRowId[] = [];
 
   const collectFromNode = (nodeId: GridRowId) => {
-    const node = tree[nodeId];
-    if (node.type === 'leaf') {
-      leafIds.push(nodeId);
-    } else if (node.type === 'group') {
-      (node as GridGroupNode).children.forEach(collectFromNode);
-    }
+      throw new Error("STUB");
   };
 
   groupNode.children.forEach(collectFromNode);
@@ -105,13 +100,7 @@ export const collectAllDescendants = (
   const descendants: GridTreeNode[] = [];
 
   const collectFromNode = (nodeId: GridRowId) => {
-    const node = tree[nodeId];
-    if (node) {
-      descendants.push(node);
-      if (node.type === 'group') {
-        (node as GridGroupNode).children.forEach(collectFromNode);
-      }
-    }
+      throw new Error("STUB");
   };
 
   groupNode.children.forEach(collectFromNode);
@@ -143,17 +132,7 @@ export const updateDescendantDepths = (
   depthDiff: number,
 ): void => {
   const updateNodeDepth = (nodeId: GridRowId) => {
-    const node = tree[nodeId];
-    if (node) {
-      tree[nodeId] = {
-        ...node,
-        depth: node.depth + depthDiff,
-      };
-
-      if (node.type === 'group') {
-        (node as GridGroupNode).children.forEach(updateNodeDepth);
-      }
-    }
+      throw new Error("STUB");
   };
 
   group.children.forEach(updateNodeDepth);
@@ -211,7 +190,7 @@ export function removeEmptyAncestors(
       break;
     }
 
-    const remainingChildren = group.children.filter((childId) => !removedGroups.has(childId));
+    const remainingChildren = group.children.filter((childId) => { throw new Error("STUB"); });
 
     if (remainingChildren.length > 0) {
       break;
@@ -335,9 +314,7 @@ export class BatchRowUpdater {
 
     // Use Promise.all with wrapped promises to avoid Promise.allSettled (browser support)
     const promises = rowIds.map((rowId) => {
-      return new Promise<void>((resolve) => {
-        handleRowUpdate(rowId).then(resolve).catch(resolve);
-      });
+        throw new Error("STUB");
     });
 
     this.apiRef.current.setLoading(true);

@@ -35,24 +35,8 @@ export type ExportPrintProps = GridSlotProps['baseButton'] & {
  */
 const ExportPrint = forwardRef<HTMLButtonElement, ExportPrintProps>(
   function ExportPrint(props, ref) {
-    const { render, options, onClick, ...other } = props;
-    const rootProps = useGridRootProps();
-    const apiRef = useGridApiContext();
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      apiRef.current.exportDataAsPrint(options);
-      onClick?.(event);
-    };
-
-    const element = useComponentRenderer(rootProps.slots.baseButton, render, {
-      ...rootProps.slotProps?.baseButton,
-      onClick: handleClick,
-      ...other,
-      ref,
-    });
-
-    return <React.Fragment>{element}</React.Fragment>;
-  },
+        throw new Error("STUB");
+    },
 );
 
 ExportPrint.propTypes /* remove-proptypes */ = {

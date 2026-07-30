@@ -20,11 +20,7 @@ import { createRangePickerStepNavigation } from '../../utils/createRangePickerSt
 
 const PickerStaticLayout = styled(PickersLayout, {
   slot: 'internal',
-})(({ theme }) => ({
-  overflow: 'hidden',
-  minWidth: DIALOG_WIDTH,
-  backgroundColor: (theme.vars || theme).palette.background.paper,
-})) as typeof PickersLayout;
+})(({ theme }) => { throw new Error("STUB"); }) as typeof PickersLayout;
 
 /**
  * Hook managing all the range static pickers:

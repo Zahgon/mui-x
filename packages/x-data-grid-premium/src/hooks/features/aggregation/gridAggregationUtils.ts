@@ -75,20 +75,12 @@ export const getAvailableAggregationFunctions = ({
   isDataSource: boolean;
 }) =>
   Object.keys(aggregationFunctions).filter((aggregationFunctionName) =>
-    canColumnHaveAggregationFunction({
-      colDef,
-      aggregationFunctionName,
-      aggregationFunction: aggregationFunctions[aggregationFunctionName],
-      isDataSource,
-    }),
+    { throw new Error("STUB"); },
   );
 
 export const mergeStateWithAggregationModel =
   (aggregationModel: GridAggregationModel) =>
-  (state: GridStatePremium): GridStatePremium => ({
-    ...state,
-    aggregation: { ...state.aggregation, model: aggregationModel },
-  });
+  (state: GridStatePremium): GridStatePremium => { throw new Error("STUB"); };
 
 export const getAggregationRules = (
   columnsLookup: GridColumnRawLookup,
@@ -210,10 +202,7 @@ export const addFooterRows = ({
     }
 
     groupNode.children.forEach((childId) => {
-      const childNode = newGroupingParams.tree[childId];
-      if (childNode.type === 'group') {
-        updateGroupFooter(childNode);
-      }
+        throw new Error("STUB");
     });
   };
 
@@ -237,18 +226,7 @@ export const areAggregationRulesEqual = (
   }
 
   return newFields.every((field) => {
-    const previousRule = previousValue?.[field];
-    const newRule = newValue[field];
-
-    if (previousRule?.aggregationFunction !== newRule?.aggregationFunction) {
-      return false;
-    }
-
-    if (previousRule?.aggregationFunctionName !== newRule?.aggregationFunctionName) {
-      return false;
-    }
-
-    return true;
+      throw new Error("STUB");
   });
 };
 
@@ -275,4 +253,4 @@ export const getAggregationFunctionLabel = ({
 };
 
 export const defaultGetAggregationPosition = (groupNode: GridGroupNode) =>
-  groupNode.depth === -1 ? 'footer' : 'inline';
+  { throw new Error("STUB"); };

@@ -44,22 +44,7 @@ function RadialBarPlot(props: RadialBarPlotProps): React.JSX.Element {
       className={clsx(classes.root, className)}
       transform={`translate(${cx} ${cy})`}
     >
-      {completedData.map(({ seriesId, data }) => (
-        <g key={seriesId} data-series={seriesId} className={classes.series}>
-          {data.map(({ dataIndex, color, startAngle, endAngle, innerRadius, outerRadius }) => (
-            <RadialBarElement
-              key={dataIndex}
-              seriesId={seriesId}
-              dataIndex={dataIndex}
-              color={color}
-              startAngle={startAngle}
-              endAngle={endAngle}
-              innerRadius={innerRadius}
-              outerRadius={outerRadius}
-            />
-          ))}
-        </g>
-      ))}
+      {completedData.map(({ seriesId, data }) => { throw new Error("STUB"); })}
     </RadialBarPlotRoot>
   );
 }

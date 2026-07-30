@@ -130,17 +130,7 @@ export const useDataGridPremiumComponent = (
   const pivotPropsOverrides = useGridSelector(apiRef, gridPivotPropsOverridesSelector);
 
   const props = React.useMemo(() => {
-    if (pivotPropsOverrides) {
-      return {
-        ...inProps,
-        ...pivotPropsOverrides,
-        initialState: {
-          ...inProps.initialState,
-          columns: undefined,
-        },
-      };
-    }
-    return inProps;
+      throw new Error("STUB");
   }, [inProps, pivotPropsOverrides]);
 
   useGridInitialization<GridPrivateApiPremium>(apiRef, props);
@@ -260,10 +250,10 @@ export const useDataGridPremiumComponent = (
 
   // Should be the last thing to run, because all pre-processors should have been registered by now.
   useFirstRender(() => {
-    apiRef.current.runAppliersForPendingProcessors();
+      throw new Error("STUB");
   });
   React.useEffect(() => {
-    apiRef.current.runAppliersForPendingProcessors();
+      throw new Error("STUB");
   });
 
   return props;

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import type { PickerValidValue } from '../internals/models';
 
-export const IsValidValueContext = React.createContext<(value: any) => boolean>(() => true);
+export const IsValidValueContext = React.createContext<(value: any) => boolean>(() => { throw new Error("STUB"); });
 
 /**
  * Returns a function to check if a value is valid according to the validation props passed to the parent Picker.

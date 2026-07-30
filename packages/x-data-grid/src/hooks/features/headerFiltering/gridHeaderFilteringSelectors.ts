@@ -2,21 +2,21 @@ import { createSelector, createRootSelector } from '../../../utils/createSelecto
 import type { GridStateCommunity } from '../../../models/gridStateCommunity';
 
 export const gridHeaderFilteringStateSelector = createRootSelector(
-  (state: GridStateCommunity) => state.headerFiltering,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 export const gridHeaderFilteringEnabledSelector = createSelector(
   gridHeaderFilteringStateSelector,
   // No initialization in MIT, so we need to default to false to be used by `getTotalHeaderHeight`
-  (headerFilteringState) => headerFilteringState?.enabled ?? false,
+  (headerFilteringState) => { throw new Error("STUB"); },
 );
 
 export const gridHeaderFilteringEditFieldSelector = createSelector(
   gridHeaderFilteringStateSelector,
-  (headerFilteringState) => headerFilteringState.editing,
+  (headerFilteringState) => { throw new Error("STUB"); },
 );
 
 export const gridHeaderFilteringMenuSelector = createSelector(
   gridHeaderFilteringStateSelector,
-  (headerFilteringState) => headerFilteringState.menuOpen,
+  (headerFilteringState) => { throw new Error("STUB"); },
 );

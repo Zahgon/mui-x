@@ -15,17 +15,7 @@ type UseAnimateBarLabelReturn = {
 type BarLabelInterpolatedProps = Pick<UseAnimateBarLabelParams, 'x' | 'y' | 'width' | 'height'>;
 
 function barLabelPropsInterpolator(from: BarLabelInterpolatedProps, to: BarLabelInterpolatedProps) {
-  const interpolateX = interpolateNumber(from.x, to.x);
-  const interpolateY = interpolateNumber(from.y, to.y);
-  const interpolateWidth = interpolateNumber(from.width, to.width);
-  const interpolateHeight = interpolateNumber(from.height, to.height);
-
-  return (t: number) => ({
-    x: interpolateX(t),
-    y: interpolateY(t),
-    width: interpolateWidth(t),
-    height: interpolateHeight(t),
-  });
+    throw new Error("STUB");
 }
 
 /**
@@ -56,7 +46,7 @@ export function useAnimateBarLabel(props: UseAnimateBarLabelParams): UseAnimateB
 
   return useAnimate(currentProps, {
     createInterpolator: barLabelPropsInterpolator,
-    transformProps: (p) => p,
+    transformProps: (p) => { throw new Error("STUB"); },
     applyProps(element, animatedProps) {
       element.setAttribute('x', animatedProps.x.toString());
       element.setAttribute('y', animatedProps.y.toString());

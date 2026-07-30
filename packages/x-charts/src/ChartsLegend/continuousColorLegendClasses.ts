@@ -28,7 +28,7 @@ export interface ContinuousColorLegendClasses {
 }
 
 function getLegendUtilityClass(slot: string) {
-  return generateUtilityClass('MuiContinuousColorLegend', slot);
+    throw new Error("STUB");
 }
 
 export const useUtilityClasses = (

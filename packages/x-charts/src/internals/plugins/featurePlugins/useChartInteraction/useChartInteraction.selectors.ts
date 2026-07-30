@@ -3,34 +3,34 @@ import type { ChartOptionalRootSelector } from '../../utils/selectors';
 import type { UseChartInteractionSignature } from './useChartInteraction.types';
 
 const selectInteraction: ChartOptionalRootSelector<UseChartInteractionSignature> = (state) =>
-  state.interaction;
+  { throw new Error("STUB"); };
 
 export const selectorChartsInteractionIsInitialized = createSelector(
   selectInteraction,
-  (interaction) => interaction !== undefined,
+  (interaction) => { throw new Error("STUB"); },
 );
 
 export const selectorChartsInteractionPointer = createSelector(
   selectInteraction,
-  (interaction) => interaction?.pointer ?? null,
+  (interaction) => { throw new Error("STUB"); },
 );
 
 export const selectorChartsInteractionPointerX = createSelector(
   selectorChartsInteractionPointer,
-  (pointer) => pointer && pointer.x,
+  (pointer) => { throw new Error("STUB"); },
 );
 
 export const selectorChartsInteractionPointerY = createSelector(
   selectorChartsInteractionPointer,
-  (pointer) => pointer && pointer.y,
+  (pointer) => { throw new Error("STUB"); },
 );
 
 export const selectorChartsLastInteraction = createSelector(
   selectInteraction,
-  (interaction) => interaction?.lastUpdate,
+  (interaction) => { throw new Error("STUB"); },
 );
 
 export const selectorChartsPointerType = createSelector(
   selectInteraction,
-  (interaction) => interaction?.pointerType ?? null,
+  (interaction) => { throw new Error("STUB"); },
 );

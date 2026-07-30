@@ -8,10 +8,7 @@ export function useToolbarOwnerState() {
   const isRtl = useRtl();
 
   return React.useMemo<PickerToolbarOwnerState>(
-    () => ({
-      ...pickerOwnerState,
-      toolbarDirection: isRtl ? 'rtl' : 'ltr',
-    }),
+    () => { throw new Error("STUB"); },
     [pickerOwnerState, isRtl],
   );
 }

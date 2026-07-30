@@ -18,9 +18,7 @@ const trTRPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Sonraki görünüm',
   openNextView: 'Önceki görünüm',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'yıl görünümü açık, takvim görünümüne geç'
-      : 'takvim görünümü açık, yıl görünümüne geç',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Başlangıç',
@@ -46,25 +44,25 @@ const trTRPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `${timeViews[view]} seç.  ${!formattedTime ? 'Zaman seçilmedi' : `Seçilen zaman: ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} saat`,
-  minutesClockNumberText: (minutes) => `${minutes} dakika`,
-  secondsClockNumberText: (seconds) => `${seconds} saniye`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Seç ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Hafta numarası',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Hafta ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Tarih seçin, seçilen tarih: ${formattedDate}` : 'Tarih seç',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Saat seçin, seçilen saat: ${formattedTime}` : 'Saat seç',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   // fieldClearLabel: 'Clear',
 
@@ -73,14 +71,14 @@ const trTRPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'tarih seç',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'AAA' : 'AA'),
-  fieldDayPlaceholder: () => 'GG',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'HHH' : 'HH'),
-  fieldHoursPlaceholder: () => 'ss',
-  fieldMinutesPlaceholder: () => 'dd',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   // year: 'Year',

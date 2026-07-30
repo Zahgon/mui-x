@@ -12,7 +12,7 @@ export interface ChatUnreadMarkerClasses {
 export type ChatUnreadMarkerClassKey = keyof ChatUnreadMarkerClasses;
 
 export function getChatUnreadMarkerUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatUnreadMarker', slot);
+    throw new Error("STUB");
 }
 
 export const chatUnreadMarkerClasses: ChatUnreadMarkerClasses = generateUtilityClasses(

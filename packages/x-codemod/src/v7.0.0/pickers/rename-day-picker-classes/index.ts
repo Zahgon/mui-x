@@ -14,23 +14,23 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
     trailingComma: true,
   };
 
-  const matchingImports = root.find(j.ImportDeclaration).filter((path) => !!matchImport(path));
+  const matchingImports = root.find(j.ImportDeclaration).filter((path) => { throw new Error("STUB"); });
 
   // Rename the import specifiers
   // - import { dayPickerClasses } from '@mui/x-date-pickers'
   // + import { dayCalendarClasses } from '@mui/x-date-pickers'
   matchingImports
     .find(j.ImportSpecifier)
-    .filter((path) => path.node.imported.name === 'dayPickerClasses')
-    .replaceWith((path) => j.importSpecifier(j.identifier('dayCalendarClasses'), path.value.local));
+    .filter((path) => { throw new Error("STUB"); })
+    .replaceWith((path) => { throw new Error("STUB"); });
 
   // Rename the import usage
   // - dayPickerClasses.root
   // + dayCalendarClasses.root
   root
     .find(j.Identifier)
-    .filter((path) => path.node.name === 'dayPickerClasses')
-    .replaceWith(() => j.identifier('dayCalendarClasses'));
+    .filter((path) => { throw new Error("STUB"); })
+    .replaceWith(() => { throw new Error("STUB"); });
 
   return root.toSource(printOptions);
 }

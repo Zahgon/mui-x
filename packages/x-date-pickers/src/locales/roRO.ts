@@ -19,9 +19,7 @@ const roROPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Deschideți vizualizarea anterioară',
   openNextView: 'Deschideți vizualizarea următoare',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'Vizualizarea anuală este deschisă, comutați la vizualizarea calendarului'
-      : 'Vizualizarea calendarului este deschisă, comutați la vizualizarea anuală',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Început',
@@ -47,29 +45,27 @@ const roROPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Selectați ${timeViews[view] ?? view}. ${!formattedTime ? 'Nicio oră selectată' : `Ora selectată este ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} ${timeViews.hours}`,
-  minutesClockNumberText: (minutes) => `${minutes} ${timeViews.minutes}`,
-  secondsClockNumberText: (seconds) => `${seconds}  ${timeViews.seconds}`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Selectați ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Număr săptămână',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Săptămâna ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Selectați data, data selectată este ${formattedDate}` : 'Selectați data',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Selectați ora, ora selectată este ${formattedTime}` : 'Selectați ora',
+    { throw new Error("STUB"); },
   openRangePickerDialogue: (formattedRange) =>
-    formattedRange
-      ? `Selectați intervalul, intervalul selectat este ${formattedRange}`
-      : 'Selectați intervalul',
+    { throw new Error("STUB"); },
   fieldClearLabel: 'Golire conținut',
 
   // Table labels
@@ -77,14 +73,14 @@ const roROPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'Selectați data',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'A'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'LLLL' : 'LL'),
-  fieldDayPlaceholder: () => 'ZZ',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'ZZZZ' : 'ZZ'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'An',

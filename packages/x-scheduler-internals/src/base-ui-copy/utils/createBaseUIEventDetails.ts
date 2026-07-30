@@ -122,28 +122,7 @@ export function createChangeEventDetails<
   trigger?: HTMLElement,
   customProperties?: CustomProperties,
 ): BaseUIChangeEventDetails<Reason, CustomProperties> {
-  let canceled = false;
-  let allowPropagation = false;
-  const custom = customProperties ?? (EMPTY_OBJECT as CustomProperties);
-  const details: BaseUIChangeEventDetail<Reason, CustomProperties> = {
-    reason,
-    event: (event ?? new Event('base-ui')) as ReasonToEvent<Reason>,
-    cancel() {
-      canceled = true;
-    },
-    allowPropagation() {
-      allowPropagation = true;
-    },
-    get isCanceled() {
-      return canceled;
-    },
-    get isPropagationAllowed() {
-      return allowPropagation;
-    },
-    trigger,
-    ...custom,
-  };
-  return details as BaseUIChangeEventDetails<Reason, CustomProperties>;
+    throw new Error("STUB");
 }
 
 export function createGenericEventDetails<
@@ -154,11 +133,5 @@ export function createGenericEventDetails<
   event?: ReasonToEvent<Reason>,
   customProperties?: CustomProperties,
 ): BaseUIGenericEventDetails<Reason, CustomProperties> {
-  const custom = customProperties ?? (EMPTY_OBJECT as CustomProperties);
-  const details: BaseUIGenericEventDetail<Reason, CustomProperties> = {
-    reason,
-    event: (event ?? new Event('base-ui')) as ReasonToEvent<Reason>,
-    ...custom,
-  };
-  return details as BaseUIGenericEventDetails<Reason, CustomProperties>;
+    throw new Error("STUB");
 }

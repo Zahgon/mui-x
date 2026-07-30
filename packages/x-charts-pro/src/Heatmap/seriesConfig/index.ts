@@ -18,7 +18,7 @@ cartesianSeriesTypes.addType('heatmap');
 export const heatmapSeriesConfig: ChartSeriesTypeConfig<'heatmap'> = {
   seriesProcessor,
   colorProcessor: getColor,
-  legendGetter: () => [],
+  legendGetter: () => { throw new Error("STUB"); },
   tooltipGetter,
   selectorTooltipItemPosition,
   xExtremumGetter: getBaseExtremum,

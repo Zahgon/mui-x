@@ -8,7 +8,7 @@ export interface ChartsSvgLayerClasses {
 }
 
 function getSvgLayerUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsSvgLayer', slot);
+    throw new Error("STUB");
 }
 
 export const useUtilityClasses = () => {

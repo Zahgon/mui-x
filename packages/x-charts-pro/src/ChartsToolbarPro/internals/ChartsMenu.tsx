@@ -22,21 +22,11 @@ function ChartsMenu(props: ChartsMenuProps) {
 
   const savedFocusRef = React.useRef<HTMLElement | null>(null);
   useEnhancedEffect(() => {
-    if (open) {
-      savedFocusRef.current =
-        document.activeElement instanceof HTMLElement ? document.activeElement : null;
-    } else {
-      savedFocusRef.current?.focus?.();
-      savedFocusRef.current = null;
-    }
+      throw new Error("STUB");
   }, [open]);
 
   const handleClickAway = (event: MouseEvent | TouchEvent) => {
-    if (event.target && (target === event.target || target?.contains(event.target as Node))) {
-      return;
-    }
-
-    onClose(event);
+      throw new Error("STUB");
   };
 
   return (

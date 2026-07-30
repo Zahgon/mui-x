@@ -92,7 +92,7 @@ export const selectorChartLeftAxisSize = createSelector(
   selectorChartCartesianAxesGap,
   selectorChartYAxisAutoSizes,
   function selectorChartLeftAxisSize(yAxis, axesGap, autoSizes) {
-    return selectYAxisSize(yAxis, axesGap, 'left', autoSizes);
+      throw new Error("STUB");
   },
 );
 
@@ -101,7 +101,7 @@ export const selectorChartRightAxisSize = createSelector(
   selectorChartCartesianAxesGap,
   selectorChartYAxisAutoSizes,
   function selectorChartRightAxisSize(yAxis, axesGap, autoSizes) {
-    return selectYAxisSize(yAxis, axesGap, 'right', autoSizes);
+      throw new Error("STUB");
   },
 );
 
@@ -110,7 +110,7 @@ export const selectorChartTopAxisSize = createSelector(
   selectorChartCartesianAxesGap,
   selectorChartXAxisAutoSizes,
   function selectorChartTopAxisSize(xAxis, axesGap, autoSizes) {
-    return selectXAxisSize(xAxis, axesGap, 'top', autoSizes);
+      throw new Error("STUB");
   },
 );
 
@@ -119,7 +119,7 @@ export const selectorChartBottomAxisSize = createSelector(
   selectorChartCartesianAxesGap,
   selectorChartXAxisAutoSizes,
   function selectorChartBottomAxisSize(xAxis, axesGap, autoSizes) {
-    return selectXAxisSize(xAxis, axesGap, 'bottom', autoSizes);
+      throw new Error("STUB");
   },
 );
 
@@ -129,11 +129,6 @@ export const selectorChartAxisSizes = createSelectorMemoized(
   selectorChartTopAxisSize,
   selectorChartBottomAxisSize,
   function selectorChartAxisSizes(left, right, top, bottom) {
-    return {
-      left,
-      right,
-      top,
-      bottom,
-    };
+      throw new Error("STUB");
   },
 );

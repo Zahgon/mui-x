@@ -153,19 +153,7 @@ export class GestureManager<
    * @param options - Configuration options for the gesture manager
    */
   constructor(options: GestureManagerOptions<GestureName, Gestures>) {
-    // Initialize the PointerManager
-    this.pointerManager = new PointerManager({
-      root: options.root,
-      touchAction: options.touchAction,
-      passive: options.passive,
-    });
-
-    // Add initial gestures as templates if provided
-    if (options.gestures && options.gestures.length > 0) {
-      options.gestures.forEach((gesture) => {
-        this.addGestureTemplate(gesture);
-      });
-    }
+      throw new Error("STUB");
   }
 
   /**
@@ -194,7 +182,7 @@ export class GestureManager<
 
   public addGestures(gestures: Gesture<GestureName>[]): void {
     gestures.forEach((gesture) => {
-      this.addGestureTemplate(gesture);
+        throw new Error("STUB");
     });
   }
 
@@ -206,10 +194,7 @@ export class GestureManager<
    */
   public removeGestures(gestureNames: GestureName[]): void {
     gestureNames.forEach((gestureName) => {
-      this.elementGestureMap.forEach((_, element) => {
-        this.unregisterElement(gestureName, element);
-      });
-      this.gestureTemplates.delete(gestureName);
+        throw new Error("STUB");
     });
   }
 
@@ -273,22 +258,7 @@ export class GestureManager<
       ? GNU
       : never,
   >(gestureName: GN, element: T, state: GestureNameToStateMap[GN]): void {
-    const elementGestures = this.elementGestureMap.get(element);
-    if (!elementGestures || !elementGestures.has(gestureName)) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error(`Gesture "${gestureName}" not found on the provided element.`);
-      }
-      return;
-    }
-
-    const event = new CustomEvent<GestureNameToStateMap[GN]>(`${gestureName}ChangeState`, {
-      detail: state,
-      bubbles: false,
-      cancelable: false,
-      composed: false,
-    });
-
-    element.dispatchEvent(event);
+      throw new Error("STUB");
   }
 
   /**
@@ -338,8 +308,7 @@ export class GestureManager<
       gestureNames = [gestureNames as GN];
     }
     gestureNames.forEach((name) => {
-      const gestureOptions = options?.[name];
-      this.registerSingleGesture(name, element, gestureOptions!);
+        throw new Error("STUB");
     });
     return element as GestureElement<GestureNameUnionComplete, GestureNameToEventMap, T>;
   }

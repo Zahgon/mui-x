@@ -127,7 +127,7 @@ const PromptIcon = styled('svg', {
   slot: 'PromptIcon',
 })<{ ownerState: OwnerState }>`
   color: ${({ ownerState }) =>
-    ownerState.variant === 'error' ? vars.colors.foreground.error : vars.colors.foreground.muted};
+    { throw new Error("STUB"); }};
   @media (prefers-reduced-motion: no-preference) {
     animation: ${fadeIn} ${vars.transitions.duration.short} ${vars.transitions.easing.easeInOut};
   }
@@ -214,219 +214,54 @@ function GridPrompt(props: GridPromptProps) {
   const changesListId = useId();
 
   const getColumnName = React.useCallback(
-    (column: string) => columns[column]?.headerName ?? column,
+    (column: string) => { throw new Error("STUB"); },
     [columns],
   );
 
   const getGroupingChanges = React.useCallback(
     (grouping: PromptResponse['grouping']) => {
-      return grouping.map((group) => ({
-        label: getColumnName(group.column),
-        description: apiRef.current.getLocaleText('promptChangeGroupDescription')(
-          getColumnName(group.column),
-        ),
-        icon: rootProps.slots.promptGroupIcon,
-      }));
-    },
+          throw new Error("STUB");
+      },
     [apiRef, getColumnName, rootProps.slots.promptGroupIcon],
   );
 
   const getAggregationChanges = React.useCallback(
     (aggregation: PromptResponse['aggregation']) => {
-      return Object.keys(aggregation).map((column) => ({
-        label: apiRef.current.getLocaleText('promptChangeAggregationLabel')(
-          getColumnName(column),
-          aggregation[column],
-        ),
-        description: apiRef.current.getLocaleText('promptChangeAggregationDescription')(
-          getColumnName(column),
-          aggregation[column],
-        ),
-        icon: rootProps.slots.promptAggregationIcon,
-      }));
-    },
+          throw new Error("STUB");
+      },
     [apiRef, getColumnName, rootProps.slots.promptAggregationIcon],
   );
 
   const getFilterChanges = React.useCallback(
     (filters: PromptResponse['filters']) => {
-      return filters.map((filter) => {
-        const filterOperator = apiRef.current.getLocaleText(
-          `filterOperator${capitalize(filter.operator)}` as 'filterOperatorContains',
-        );
-        let filterValue = filter.value;
-
-        if (isSingleSelectColDef(columns[filter.column])) {
-          const allOptions =
-            getValueOptions(columns[filter.column] as GridSingleSelectColDef) ?? [];
-          const colDef = columns[filter.column] as GridSingleSelectColDef;
-          const getOptionLabel =
-            colDef.getOptionLabel ??
-            ((option) => (typeof option === 'object' ? option.label : String(option)));
-          const getOptionValue =
-            colDef.getOptionValue ??
-            ((option) => (typeof option === 'object' ? option.value : option));
-
-          if (Array.isArray(filterValue)) {
-            filterValue = filterValue
-              .map((filterVal) => {
-                const option = allOptions.find(
-                  (opt) => String(getOptionValue(opt)) === String(filterVal),
-                );
-                return option ? getOptionLabel(option) : String(filterVal);
-              })
-              .join(', ');
-          } else {
-            const option = allOptions.find(
-              (opt) => String(getOptionValue(opt)) === String(filterValue),
-            );
-            filterValue = option ? getOptionLabel(option) : String(filterValue);
-          }
-        }
-
-        return {
-          label: apiRef.current.getLocaleText('promptChangeFilterLabel')(
-            getColumnName(filter.column),
-            filterOperator,
-            filterValue as string,
-          ),
-          description: apiRef.current.getLocaleText('promptChangeFilterDescription')(
-            getColumnName(filter.column),
-            filterOperator,
-            filterValue as string,
-          ),
-          icon: rootProps.slots.promptFilterIcon,
-        };
-      });
-    },
+          throw new Error("STUB");
+      },
     [apiRef, columns, getColumnName, rootProps.slots.promptFilterIcon],
   );
 
   const getSortingChanges = React.useCallback(
     (sorting: PromptResponse['sorting']) => {
-      return sorting.map((sort) => ({
-        label: getColumnName(sort.column),
-        description: apiRef.current.getLocaleText('promptChangeSortDescription')(
-          getColumnName(sort.column),
-          sort.direction,
-        ),
-        icon:
-          sort.direction === 'asc'
-            ? rootProps.slots.promptSortAscIcon
-            : rootProps.slots.promptSortDescIcon,
-      }));
-    },
+          throw new Error("STUB");
+      },
     [apiRef, getColumnName, rootProps.slots.promptSortAscIcon, rootProps.slots.promptSortDescIcon],
   );
 
   const getPivotingChanges = React.useCallback(
     (pivoting: PromptResponse['pivoting']) => {
-      // Type guard, neccessary because pivoting can be an empty object
-      if (!('columns' in pivoting)) {
-        return [];
-      }
-      const changes = [
-        {
-          label: apiRef.current.getLocaleText('promptChangePivotEnableLabel'),
-          icon: rootProps.slots.promptPivotIcon,
-          description: apiRef.current.getLocaleText('promptChangePivotEnableDescription'),
-        },
-      ];
-
-      if (pivoting.columns.length) {
-        changes.push({
-          label: apiRef.current.getLocaleText('promptChangePivotColumnsLabel')(
-            pivoting.columns.length,
-          ),
-          icon: rootProps.slots.columnMenuManageColumnsIcon,
-          description: pivoting.columns
-            .map((column) =>
-              apiRef.current.getLocaleText('promptChangePivotColumnsDescription')(
-                getColumnName(column.column),
-                column.direction,
-              ),
-            )
-            .join(`, `),
-        });
-      }
-
-      if (pivoting.rows.length) {
-        changes.push({
-          label: apiRef.current.getLocaleText('promptChangePivotRowsLabel')(pivoting.rows.length),
-          icon: rootProps.slots.densityStandardIcon,
-          description: pivoting.rows.map((column) => getColumnName(column)).join(`, `),
-        });
-      }
-
-      if (pivoting.values.length) {
-        changes.push({
-          label: apiRef.current.getLocaleText('promptChangePivotValuesLabel')(
-            pivoting.values.length,
-          ),
-          icon: rootProps.slots.promptAggregationIcon,
-          description: pivoting.values
-            .map((aggregation) =>
-              Object.keys(aggregation).map((column) =>
-                apiRef.current.getLocaleText('promptChangePivotValuesDescription')(
-                  getColumnName(column),
-                  aggregation[column],
-                ),
-              ),
-            )
-            .join(`, `),
-        });
-      }
-
-      return changes;
-    },
+          throw new Error("STUB");
+      },
     [apiRef, getColumnName, rootProps.slots],
   );
 
   const getChartChanges = React.useCallback(
     (chart: NonNullable<PromptResponse['chart']>) => {
-      return {
-        label: apiRef.current.getLocaleText('toolbarCharts'),
-        description: apiRef.current.getLocaleText('promptChangeChartsLabel')(
-          chart.dimensions.length,
-          chart.values.length,
-        ),
-        icon: rootProps.slots.promptChartsIcon,
-      };
-    },
+          throw new Error("STUB");
+      },
     [apiRef, rootProps.slots.promptChartsIcon],
   );
 
   const changeList = React.useMemo(() => {
-    if (!response) {
-      return [];
-    }
-
-    const changes: {
-      label: string;
-      description?: string;
-      icon: React.ElementType;
-    }[] = [];
-
-    if (response.grouping.length) {
-      changes.push(...getGroupingChanges(response.grouping));
-    }
-    if (response.aggregation && Object.keys(response.aggregation).length) {
-      changes.push(...getAggregationChanges(response.aggregation));
-    }
-    if (response.filters.length) {
-      changes.push(...getFilterChanges(response.filters));
-    }
-    if (response.sorting.length) {
-      changes.push(...getSortingChanges(response.sorting));
-    }
-    if (response.pivoting && 'columns' in response.pivoting) {
-      changes.push(...getPivotingChanges(response.pivoting));
-    }
-    if (response.chart) {
-      changes.push(getChartChanges(response.chart));
-    }
-
-    return changes;
+      throw new Error("STUB");
   }, [
     response,
     getGroupingChanges,
@@ -465,7 +300,7 @@ function GridPrompt(props: GridPromptProps) {
               className={classes.changesToggle}
               aria-expanded={showChanges}
               aria-controls={changesListId}
-              onClick={() => setShowChanges(!showChanges)}
+              onClick={() => { throw new Error("STUB"); }}
             >
               {apiRef.current.getLocaleText('promptAppliedChanges')}
               <PromptChangesToggleIcon
@@ -480,15 +315,7 @@ function GridPrompt(props: GridPromptProps) {
                 ownerState={ownerState}
                 className={classes.changeList}
               >
-                {changeList.map((change) => (
-                  <rootProps.slots.baseTooltip key={change.label} title={change.description}>
-                    <rootProps.slots.baseChip
-                      label={change.label}
-                      icon={<change.icon />}
-                      size="small"
-                    />
-                  </rootProps.slots.baseTooltip>
-                ))}
+                {changeList.map((change) => { throw new Error("STUB"); })}
               </PromptChangeList>
             )}
           </React.Fragment>

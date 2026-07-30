@@ -11,30 +11,7 @@ import { defaultProps } from '../ChartsXAxis/utilities';
  * @param axisId The id of the X axis.
  */
 export function useXAxisTicks(axisId: AxisId): TickItem[] {
-  const { xAxis: xAxes } = useXAxes();
-  const axis = xAxes[axisId];
-
-  // FIXME: `useAxisTicksProps` does this, but should we do it here?
-  // eslint-disable-next-line mui/material-ui-name-matches-component-name
-  const themedProps = useThemeProps({ props: axis, name: 'MuiChartsXAxis' });
-
-  const defaultizedProps = {
-    ...defaultProps,
-    ...themedProps,
-  };
-
-  return useTicks({
-    scale: axis.scale,
-    tickNumber: axis.tickNumber,
-    valueFormatter: defaultizedProps.valueFormatter,
-    tickInterval: defaultizedProps.tickInterval,
-    tickPlacement: defaultizedProps.tickPlacement,
-    tickLabelPlacement: defaultizedProps.tickLabelPlacement,
-    tickSpacing: defaultizedProps.tickSpacing,
-    direction: 'x',
-    ordinalTimeTicks:
-      'ordinalTimeTicks' in defaultizedProps ? defaultizedProps.ordinalTimeTicks : undefined,
-  });
+    throw new Error("STUB");
 }
 
 /**
@@ -43,28 +20,5 @@ export function useXAxisTicks(axisId: AxisId): TickItem[] {
  * @param axisId The id of the Y axis.
  */
 export function useYAxisTicks(axisId: AxisId): TickItem[] {
-  const { yAxis: yAxes } = useYAxes();
-  const axis = yAxes[axisId];
-
-  // FIXME: `useAxisTicksProps` does this, but should we do it here?
-  // eslint-disable-next-line mui/material-ui-name-matches-component-name
-  const themedProps = useThemeProps({ props: axis, name: 'MuiChartsYAxis' });
-
-  const defaultizedProps = {
-    ...defaultProps,
-    ...themedProps,
-  };
-
-  return useTicks({
-    scale: axis.scale,
-    tickNumber: axis.tickNumber,
-    valueFormatter: defaultizedProps.valueFormatter,
-    tickInterval: defaultizedProps.tickInterval,
-    tickPlacement: defaultizedProps.tickPlacement,
-    tickLabelPlacement: defaultizedProps.tickLabelPlacement,
-    tickSpacing: defaultizedProps.tickSpacing,
-    direction: 'y',
-    // @ts-expect-error
-    ordinalTimeTicks: defaultizedProps.ordinalTimeTicks,
-  });
+    throw new Error("STUB");
 }

@@ -49,54 +49,7 @@ export type PromptFieldProps = Omit<
  * - [PromptField API](https://mui.com/x/api/data-grid/prompt-field/)
  */
 const PromptField = forwardRef<HTMLDivElement, PromptFieldProps>(function PromptField(props, ref) {
-  const { render, className, lang, onRecordError, onSubmit, ...other } = props;
-  const [value, setValue] = React.useState('');
-  const [recording, setRecording] = React.useState(false);
-  const [disabled, setDisabled] = React.useState(false);
-  const state = React.useMemo(
-    () => ({
-      value,
-      recording,
-      disabled,
-    }),
-    [value, recording, disabled],
-  );
-  const resolvedClassName = typeof className === 'function' ? className(state) : className;
-
-  const handleOnSubmit = React.useCallback(
-    async (prompt: string) => {
-      setDisabled(true);
-      setValue('');
-      await onSubmit(prompt);
-      setDisabled(false);
-    },
-    [onSubmit],
-  );
-
-  const contextValue = React.useMemo(
-    () => ({
-      state,
-      lang,
-      onValueChange: setValue,
-      onRecordingChange: setRecording,
-      onSubmit: handleOnSubmit,
-      onError: onRecordError,
-    }),
-    [state, lang, onRecordError, handleOnSubmit],
-  );
-
-  const element = useComponentRenderer(
-    'div',
-    render,
-    {
-      className: resolvedClassName,
-      ...other,
-      ref,
-    },
-    state,
-  );
-
-  return <PromptFieldContext.Provider value={contextValue}>{element}</PromptFieldContext.Provider>;
+    throw new Error("STUB");
 });
 
 PromptField.propTypes /* remove-proptypes */ = {

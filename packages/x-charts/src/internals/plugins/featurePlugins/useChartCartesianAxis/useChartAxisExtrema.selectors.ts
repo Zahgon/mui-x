@@ -22,23 +22,7 @@ export const selectorChartXAxisExtrema = createSelectorMemoized(
   selectorChartSeriesProcessed,
   selectorChartSeriesConfig,
   function selectorChartXAxisExtrema(axes, formattedSeries, seriesConfig) {
-    const extrema: Record<AxisId, [number, number]> = {};
-    let hasExtrema = false;
-
-    axes?.forEach((axis, axisIndex) => {
-      if (!isBandScaleConfig(axis) && !isPointScaleConfig(axis)) {
-        extrema[axis.id] = getAxisExtrema(
-          axis,
-          'x',
-          seriesConfig as ChartSeriesConfig<CartesianChartSeriesType>,
-          axisIndex,
-          formattedSeries,
-        );
-        hasExtrema = true;
-      }
-    });
-
-    return hasExtrema ? extrema : EMPTY_EXTREMA;
+      throw new Error("STUB");
   },
 );
 
@@ -51,22 +35,6 @@ export const selectorChartYAxisExtrema = createSelectorMemoized(
   selectorChartSeriesProcessed,
   selectorChartSeriesConfig,
   function selectorChartYAxisExtrema(axes, formattedSeries, seriesConfig) {
-    const extrema: Record<AxisId, [number, number]> = {};
-    let hasExtrema = false;
-
-    axes?.forEach((axis, axisIndex) => {
-      if (!isBandScaleConfig(axis) && !isPointScaleConfig(axis)) {
-        extrema[axis.id] = getAxisExtrema(
-          axis,
-          'y',
-          seriesConfig as ChartSeriesConfig<CartesianChartSeriesType>,
-          axisIndex,
-          formattedSeries,
-        );
-        hasExtrema = true;
-      }
-    });
-
-    return hasExtrema ? extrema : EMPTY_EXTREMA;
+      throw new Error("STUB");
   },
 );

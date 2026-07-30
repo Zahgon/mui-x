@@ -13,22 +13,19 @@ export const ProgressRoot = React.forwardRef<HTMLDivElement>(function ProgressRo
   props: any,
   ref,
 ) {
-  const { ownerState, ...other } = props;
-  return <Progress.Root {...other} ref={ref} />;
+    throw new Error("STUB");
 });
 
 export const ProgressTrack = React.forwardRef<HTMLDivElement>(function ProgressTrack(
   props: any,
   ref,
 ) {
-  const { ownerState, ...other } = props;
-  return <Progress.Track {...other} ref={ref} />;
+    throw new Error("STUB");
 });
 
 export const ProgressIndicator = React.forwardRef<HTMLDivElement>(function ProgressIndicator(
   props: any,
   ref,
 ) {
-  const { ownerState, ...other } = props;
-  return <Progress.Indicator {...other} ref={ref} />;
+    throw new Error("STUB");
 });

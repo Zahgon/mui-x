@@ -70,15 +70,13 @@ export function getNormalizedAxisScale(
   if (isBandScaleConfig(axis)) {
     const categoryGapRatio = axis.categoryGapRatio ?? DEFAULT_CATEGORY_GAP_RATIO;
     return getCachedOrdinalScale(domain, `band:${categoryGapRatio}`, () =>
-      scaleBand<{ toString(): string }>(domain, range)
-        .paddingInner(categoryGapRatio)
-        .paddingOuter(categoryGapRatio / 2),
+      { throw new Error("STUB"); },
     );
   }
 
   if (isPointScaleConfig(axis)) {
     return getCachedOrdinalScale(domain, 'point', () =>
-      scalePoint<{ toString(): string }>(domain, range),
+      { throw new Error("STUB"); },
     );
   }
 

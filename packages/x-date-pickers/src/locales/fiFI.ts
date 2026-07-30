@@ -18,9 +18,7 @@ const fiFIPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Avaa edellinen näkymä',
   openNextView: 'Avaa seuraava näkymä',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'vuosinäkymä on auki, vaihda kalenterinäkymään'
-      : 'kalenterinäkymä on auki, vaihda vuosinäkymään',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Alku',
@@ -46,25 +44,25 @@ const fiFIPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Valitse ${views[view]}. ${!formattedTime ? 'Ei aikaa valittuna' : `Valittu aika on ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} tuntia`,
-  minutesClockNumberText: (minutes) => `${minutes} minuuttia`,
-  secondsClockNumberText: (seconds) => `${seconds} sekuntia`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Valitse ${views[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Viikko',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Viikko ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Valitse päivä, valittu päivä on ${formattedDate}` : 'Valitse päivä',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Valitse aika, valittu aika on ${formattedTime}` : 'Valitse aika',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Tyhjennä arvo',
 
@@ -73,14 +71,14 @@ const fiFIPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'valitse päivä',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'V'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'KKKK' : 'KK'),
-  fieldDayPlaceholder: () => 'PP',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'tt',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Vuosi',

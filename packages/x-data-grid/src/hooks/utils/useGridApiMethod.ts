@@ -18,8 +18,7 @@ export function useGridApiMethod<
   const isFirstRender = React.useRef(true);
 
   useEnhancedEffect(() => {
-    isFirstRender.current = false;
-    privateApiRef.current.register(visibility, apiMethods);
+      throw new Error("STUB");
   }, [privateApiRef, visibility, apiMethods]);
 
   if (isFirstRender.current) {

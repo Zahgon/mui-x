@@ -14,10 +14,10 @@ const EMPTY_CACHES: RowSpanningCaches = {
 };
 
 const selectors = {
-  state: (state: Rowspan.State) => state.rowSpanning,
-  hiddenCells: (state: Rowspan.State) => state.rowSpanning.caches.hiddenCells,
-  spannedCells: (state: Rowspan.State) => state.rowSpanning.caches.spannedCells,
-  hiddenCellsOriginMap: (state: Rowspan.State) => state.rowSpanning.caches.hiddenCellOriginMap,
+  state: (state: Rowspan.State) => { throw new Error("STUB"); },
+  hiddenCells: (state: Rowspan.State) => { throw new Error("STUB"); },
+  spannedCells: (state: Rowspan.State) => { throw new Error("STUB"); },
+  hiddenCellsOriginMap: (state: Rowspan.State) => { throw new Error("STUB"); },
 };
 
 export const Rowspan = {
@@ -33,12 +33,7 @@ export namespace Rowspan {
 }
 
 function initializeState(params: ParamsWithDefaults): Rowspan.State {
-  return {
-    rowSpanning: params.initialState?.rowSpanning ?? {
-      caches: EMPTY_CACHES,
-      processedRange: EMPTY_RANGE,
-    },
-  };
+    throw new Error("STUB");
 }
 
 function useRowspan(
@@ -46,7 +41,5 @@ function useRowspan(
   _params: ParamsWithDefaults,
   _api: Virtualization.API,
 ) {
-  const getHiddenCellsOrigin = () => selectors.hiddenCellsOriginMap(store.state);
-
-  return { getHiddenCellsOrigin };
+    throw new Error("STUB");
 }

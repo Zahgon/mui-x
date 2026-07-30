@@ -13,26 +13,11 @@ export function useRadarMetricData() {
   const cy = drawingArea.top + drawingArea.height / 2;
 
   const metrics = rotationScale.domain() as string[];
-  const angles = metrics.map((key) => rotationScale(key)!);
+  const angles = metrics.map((key) => { throw new Error("STUB"); });
 
   return {
     corners: metrics.map((metric, dataIndex) => {
-      const radiusScale = radiusAxis[metric].scale;
-
-      const r = radiusScale.range()[1] + labelGap;
-      const angle = angles[dataIndex];
-      const defaultTickLabel = metric;
-      return {
-        x: cx + r * Math.sin(angle),
-        y: cy - r * Math.cos(angle),
-        angle: rad2deg(angle),
-        label:
-          valueFormatter?.(metric, {
-            location: 'tick',
-            scale: rotationScale,
-            defaultTickLabel,
-          }) ?? defaultTickLabel,
-      };
+        throw new Error("STUB");
     }),
   };
 }

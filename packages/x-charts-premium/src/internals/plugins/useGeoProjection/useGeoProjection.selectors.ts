@@ -23,66 +23,66 @@ const ZERO_COORDINATES: [number, number] = [0, 0];
 
 export const selectorChartGeoProjectionState = (
   state: ChartState<[], [UseGeoProjectionSignature]>,
-): UseGeoProjectionState['geoProjection'] | undefined => state.geoProjection;
+): UseGeoProjectionState['geoProjection'] | undefined => { throw new Error("STUB"); };
 
 const selectorChartGeoProjectionZoomState = (
   state: ChartState<[], [UseGeoProjectionZoomSignature]>,
-): UseGeoProjectionZoomState['geoProjectionZoom'] | undefined => state.geoProjectionZoom;
+): UseGeoProjectionZoomState['geoProjectionZoom'] | undefined => { throw new Error("STUB"); };
 
 export const selectorChartGeoData: (
   state: ChartState<[], [UseGeoProjectionSignature]>,
 ) => ExtendedFeatureCollection | null = createSelector(
   selectorChartGeoProjectionState,
-  (geoProjection) => geoProjection?.geoData ?? null,
+  (geoProjection) => { throw new Error("STUB"); },
 );
 
 export const selectorChartGeoFeatureKey = createSelector(
   selectorChartGeoProjectionState,
-  (geoProjection) => geoProjection?.geoFeatureKey ?? 'name',
+  (geoProjection) => { throw new Error("STUB"); },
 );
 
 export const selectorChartRawProjection = createSelector(
   selectorChartGeoProjectionState,
-  (geoProjection): GeoProjectionInput | null => geoProjection?.projection ?? null,
+  (geoProjection): GeoProjectionInput | null => { throw new Error("STUB"); },
 );
 
 export const selectorChartZoomLevel = createSelector(
   selectorChartGeoProjectionZoomState,
   function selectorChartZoomLevel(geoProjectionZoom): number {
-    return geoProjectionZoom?.zoomLevel ?? 1;
+      throw new Error("STUB");
   },
 );
 const selectorChartCenter = createSelectorMemoized(
   selectorChartGeoProjectionZoomState,
   function selectorChartCenter(geoProjectionZoom): [number, number] {
-    return geoProjectionZoom?.center ?? ZERO_COORDINATES;
+      throw new Error("STUB");
   },
 );
 const selectorChartTranslation = createSelectorMemoized(
   selectorChartGeoProjectionZoomState,
   function selectorChartTranslation(geoProjectionZoom): [number, number] | null {
-    return geoProjectionZoom?.translation ?? null;
+      throw new Error("STUB");
   },
 );
 
 const selectorChartRoll = createSelector(
   selectorChartGeoProjectionZoomState,
   function selectorChartRoll(geoProjectionZoom): number {
-    return geoProjectionZoom?.roll ?? 0;
+      throw new Error("STUB");
   },
 );
 
 const selectorChartInitialCenter = createSelectorMemoized(
   selectorChartGeoProjectionZoomState,
   function selectorChartInitialCenter(geoProjectionZoom): [number, number] | null {
-    return geoProjectionZoom?.initialCenter ?? ZERO_COORDINATES;
+      throw new Error("STUB");
   },
 );
 
 const selectorChartParallels = createSelectorMemoized(
   selectorChartGeoProjectionState,
   function selectorChartParallels(geoProjection): [number, number] {
-    return getParallels(geoProjection?.parallels);
+      throw new Error("STUB");
   },
 );
 
@@ -97,25 +97,7 @@ export const selectorChartGeoFeatureIndexesByName = createSelectorMemoized(
   selectorChartGeoData,
   selectorChartGeoFeatureKey,
   (geoData, geoFeatureKey): ReadonlyMap<string, number[]> => {
-    const map = new Map<string, number[]>();
-    if (!geoData) {
-      return map;
-    }
-    geoData.features.forEach((feature, index) => {
-      const name =
-        typeof geoFeatureKey === 'function'
-          ? geoFeatureKey(feature)
-          : feature.properties?.[geoFeatureKey];
-      if (typeof name !== 'string') {
-        return;
-      }
-      if (map.has(name)) {
-        map.get(name)!.push(index);
-        return;
-      }
-      map.set(name, [index]);
-    });
-    return map;
+      throw new Error("STUB");
   },
 );
 
@@ -133,23 +115,7 @@ export const selectorFitScale = createSelector(
     geoData,
     drawingArea,
   ): number | null {
-    if (!geoData || projectionInput === null || initialCenter === null) {
-      return null;
-    }
-
-    const projection = resolveProjectionInstance(projectionInput, parallels);
-    if (projection === null) {
-      return null;
-    }
-    projection.rotate?.([-initialCenter[0], -initialCenter[1]]);
-
-    const [[x0, y0], [x1, y1]] = geoPath(projection).bounds(geoData);
-    const currentScale = projection.scale();
-
-    return Math.min(
-      currentScale * (drawingArea.width / (x1 - x0)),
-      currentScale * (drawingArea.height / (y1 - y0)),
-    );
+      throw new Error("STUB");
   },
 );
 
@@ -186,28 +152,7 @@ export const selectorChartProjection = createSelectorMemoized(
     drawingArea,
     fitScale,
   ): GeoProjection | null => {
-    const projection = resolveProjectionInstance(projectionInput, parallels);
-    if (!projection) {
-      return null;
-    }
-
-    if (!geoData || fitScale == null) {
-      return projection;
-    }
-
-    projection.rotate?.([-center[0], -center[1], roll]);
-    // Edge case with conic conformal and albers:
-    // rotate impacts the center of the projection, so we need to reset it.
-    projection.center?.([0, 0]);
-
-    // `fitScale` is the `zoomLevel === 1` reference scale, computed independently in
-    // `selectorFitScale` so it stays stable across pan/zoom transforms.
-    projection.scale(zoomLevel != null && zoomLevel !== 1 ? fitScale * zoomLevel : fitScale);
-    projection.translate([
-      drawingArea.left + drawingArea.width / 2 + (translation?.[0] ?? 0) * drawingArea.width,
-      drawingArea.top + drawingArea.height / 2 + (translation?.[1] ?? 0) * drawingArea.height,
-    ]);
-    return projection;
+      throw new Error("STUB");
   },
 );
 
@@ -218,10 +163,7 @@ export const selectorChartProjection = createSelectorMemoized(
 export const selectorChartGeoPath = createSelectorMemoized(
   selectorChartProjection,
   (projection): GeoPath | null => {
-    if (!projection) {
-      return null;
-    }
-    return geoPath(projection);
+      throw new Error("STUB");
   },
 );
 
@@ -234,10 +176,6 @@ export const selectorGeoTooltipPosition = createSelectorMemoized(
     projection,
     featureIndexesByName,
   ): GeoTooltipPosition {
-    return {
-      geoData,
-      projection,
-      featureIndexesByName,
-    };
+      throw new Error("STUB");
   },
 );

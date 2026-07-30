@@ -26,7 +26,7 @@ export class Store<State> {
   subscribe = (fn: Listener<State>) => {
     this.listeners.add(fn);
     return () => {
-      this.listeners.delete(fn);
+        throw new Error("STUB");
     };
   };
 
@@ -73,7 +73,7 @@ export class Store<State> {
   }
 
   public use = ((selector: any, a1?: unknown, a2?: unknown, a3?: unknown) => {
-    return useStore(this, selector, a1, a2, a3);
+      throw new Error("STUB");
   }) as <F extends (...args: any) => any>(selector: F, ...args: SelectorArgs<F>) => ReturnType<F>;
 }
 

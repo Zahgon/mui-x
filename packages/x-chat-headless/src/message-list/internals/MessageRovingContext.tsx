@@ -35,7 +35,7 @@ export function useMessageRovingContext(): MessageRovingContextValue | null {
   return React.useContext(MessageRovingContext);
 }
 
-const noopSubscribe = () => () => {};
+const noopSubscribe = () => { throw new Error("STUB"); };
 
 /**
  * Per-article subscription to the roving state. Only re-renders the consuming
@@ -49,13 +49,13 @@ export function useMessageRovingItem(messageId: string): {
   const context = React.useContext(MessageRovingContext);
   const focused = React.useSyncExternalStore(
     context?.subscribe ?? noopSubscribe,
-    () => (context == null ? false : context.getState().focusedId === messageId),
-    () => (context == null ? false : context.getState().focusedId === messageId),
+    () => { throw new Error("STUB"); },
+    () => { throw new Error("STUB"); },
   );
   const actionable = React.useSyncExternalStore(
     context?.subscribe ?? noopSubscribe,
-    () => (context == null ? false : context.getState().actionableId === messageId),
-    () => false,
+    () => { throw new Error("STUB"); },
+    () => { throw new Error("STUB"); },
   );
 
   return { enabled: context != null, focused, actionable };
@@ -79,8 +79,8 @@ export function useMessageActionable(): boolean {
   const { messageId } = useMessageContext();
   const actionable = React.useSyncExternalStore(
     context?.subscribe ?? noopSubscribe,
-    () => (context == null ? true : context.getState().actionableId === messageId),
-    () => context == null,
+    () => { throw new Error("STUB"); },
+    () => { throw new Error("STUB"); },
   );
 
   return actionable;
@@ -165,100 +165,13 @@ export function useMessageRovingController(
   const listenersRef = React.useRef(new Set<() => void>());
 
   const contextValue = React.useMemo<MessageRovingContextValue>(() => {
-    const notify = () => {
-      listenersRef.current.forEach((listener) => listener());
-    };
-
-    const setState = (partial: Partial<MessageRovingState>) => {
-      const current = stateRef.current!;
-      const next = { ...current, ...partial };
-      if (next.focusedId === current.focusedId && next.actionableId === current.actionableId) {
-        return;
-      }
-      stateRef.current = next;
-      notify();
-    };
-
-    return {
-      subscribe: (listener: () => void) => {
-        listenersRef.current.add(listener);
-        return () => {
-          listenersRef.current.delete(listener);
-        };
-      },
-      getState: () => stateRef.current!,
-      registerItemRef: (id: string, element: HTMLElement | null) => {
-        // An unmounting article fires no focusout, so a message removed while
-        // drilled into (conversation switch, list churn) would leave a stale
-        // actionable id behind — clear it on deregistration.
-        if (element == null && stateRef.current!.actionableId === id) {
-          setState({ actionableId: undefined });
-        }
-        rovingRef.current.registerItemRef(id, element);
-      },
-      onItemFocus: (id: string) => {
-        // Any focus landing inside a message (keyboard or mouse) claims the
-        // roving tab stop for that message.
-        rovingRef.current.setFocusedId(id);
-      },
-      onItemKeyDown: (event: React.KeyboardEvent<HTMLElement>, id: string) => {
-        if (event.target !== event.currentTarget) {
-          // Focus is on a descendant (drilled in). Arrow keys & co. must not
-          // move between messages; only Escape returns to the article.
-          if (event.key === 'Escape') {
-            event.preventDefault();
-            event.stopPropagation();
-            setState({ actionableId: undefined });
-            rovingRef.current.focusItem(id);
-          }
-          return;
-        }
-
-        if (event.key === 'Enter') {
-          // Drill into the message's interior controls. No-op when the
-          // message has no focusable content.
-          const article = event.currentTarget as HTMLElement;
-          if (hasFocusableContent(article)) {
-            event.preventDefault();
-            if (stateRef.current!.actionableId === id) {
-              // Already actionable (e.g. the user clicked back onto the
-              // article while drilled in): no state flip happens, so the
-              // article's focus effect won't re-run — move focus directly.
-              focusFirstFocusableDescendant(article);
-            } else {
-              setState({ actionableId: id });
-            }
-          }
-          return;
-        }
-
-        rovingRef.current.handleKeyDown(event, id);
-      },
-      onItemBlur: (event: React.FocusEvent<HTMLElement>, id: string) => {
-        if (stateRef.current!.actionableId !== id) {
-          return;
-        }
-
-        // Focus left the article entirely (e.g. Tab to the composer): exit
-        // drill-in so this message's controls leave the tab order again, but
-        // do not steal focus back.
-        const nextTarget = event.relatedTarget as Node | null;
-        const article = event.currentTarget as HTMLElement;
-        if (nextTarget == null || !article.contains(nextTarget)) {
-          setState({ actionableId: undefined });
-        }
-      },
-    };
+      throw new Error("STUB");
   }, []);
 
   // Publish roving focus changes to subscribers (before paint, so the
   // tabindex topology is correct by the time the frame is shown).
   useEnhancedEffect(() => {
-    const current = stateRef.current!;
-    if (current.focusedId !== roving.effectiveFocusedId) {
-      stateRef.current = { ...current, focusedId: roving.effectiveFocusedId };
-      listenersRef.current.forEach((listener) => listener());
-    }
+      throw new Error("STUB");
   }, [roving.effectiveFocusedId]);
 
   return enabled ? contextValue : null;

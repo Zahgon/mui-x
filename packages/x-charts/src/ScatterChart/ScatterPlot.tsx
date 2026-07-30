@@ -96,7 +96,7 @@ function ScatterPlot(props: ScatterPlotProps) {
   const seriesIds = seriesData?.seriesOrder ?? EMPTY_SERIES_IDS;
   const isProgressive = store.use(selectorShouldUseProgressiveRenderer, seriesIds, renderer);
   React.useEffect(
-    () => instance.registerProgressivePlan(plotId, seriesIds, renderer),
+    () => { throw new Error("STUB"); },
     [instance, plotId, seriesIds, renderer],
   );
 
@@ -122,37 +122,7 @@ function ScatterPlot(props: ScatterPlotProps) {
   return (
     <ScatterPlotRoot className={clsx(classes.root, className)}>
       {seriesOrder.map((seriesId) => {
-        const { id, xAxisId, yAxisId, colorAxisId, zAxisId, sizeAxisId, color, hidden } =
-          series[seriesId];
-
-        if (hidden) {
-          return null;
-        }
-
-        const colorGetter = scatterSeriesConfig.colorProcessor(
-          series[seriesId],
-          xAxis[xAxisId ?? defaultXAxisId],
-          yAxis[yAxisId ?? defaultYAxisId],
-          zAxis[colorAxisId ?? zAxisId ?? defaultZAxisId],
-        );
-        const sizeGetter = getMarkerSize(series[seriesId], zAxis[sizeAxisId ?? defaultZAxisId]);
-        const xScale = xAxis[xAxisId ?? defaultXAxisId].scale;
-        const yScale = yAxis[yAxisId ?? defaultYAxisId].scale;
-        return (
-          <ScatterItems
-            key={id}
-            xScale={xScale}
-            yScale={yScale}
-            color={color}
-            colorGetter={colorGetter}
-            sizeGetter={sizeGetter}
-            series={series[seriesId]}
-            onItemClick={onItemClick}
-            slots={slots}
-            slotProps={slotProps}
-            {...slotProps?.scatter}
-          />
-        );
+          throw new Error("STUB");
       })}
     </ScatterPlotRoot>
   );

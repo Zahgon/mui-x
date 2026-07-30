@@ -38,9 +38,7 @@ function SankeyNodeLabelPlot(props: SankeyNodeLabelPlotProps) {
 
   return (
     <g className={classes.nodeLabels}>
-      {layout.nodes.map((node) => (
-        <SankeyNodeLabel key={`label-node-${node.id}`} seriesId={sankeySeries.id} node={node} />
-      ))}
+      {layout.nodes.map((node) => { throw new Error("STUB"); })}
     </g>
   );
 }

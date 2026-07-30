@@ -45,24 +45,12 @@ const useUtilityClasses = (classes: Partial<TimeRangePickerTabsClasses> | undefi
 const TimeRangePickerTabsRoot = styled(Tabs, {
   name: 'MuiTimeRangePickerTabs',
   slot: 'Root',
-})(({ theme }) => ({
-  boxShadow: `0 -1px 0 0 inset ${(theme.vars || theme).palette.divider}`,
-  '&:last-child': {
-    boxShadow: `0 1px 0 0 inset ${(theme.vars || theme).palette.divider}`,
-    [`& .${tabsClasses.indicator}`]: {
-      bottom: 'auto',
-      top: 0,
-    },
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const TimeRangePickerTab = styled(Tab, {
   name: 'MuiTimeRangePickerTabs',
   slot: 'Tab',
-})(({ theme }) => ({
-  minHeight: '48px',
-  gap: theme.spacing(1),
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 /**
  * Demos:
@@ -91,12 +79,7 @@ const TimeRangePickerTabs = function TimeRangePickerTabs(inProps: TimeRangePicke
   const classes = useUtilityClasses(classesProp);
 
   const handleChange = (event: React.SyntheticEvent, value: RangePosition) => {
-    if (rangePosition !== value) {
-      setRangePosition(value);
-    }
-    if (view !== 'hours') {
-      setView('hours');
-    }
+      throw new Error("STUB");
   };
 
   if (hidden) {

@@ -190,19 +190,7 @@ export class TurnWheelGesture<GestureName extends string> extends Gesture<Gestur
   private passive: boolean;
 
   constructor(options: TurnWheelGestureOptions<GestureName>) {
-    super(options);
-    this.sensitivity = options.sensitivity ?? 1;
-    this.max = options.max ?? Number.MAX_SAFE_INTEGER;
-    this.min = options.min ?? Number.MIN_SAFE_INTEGER;
-    this.initialDelta = options.initialDelta ?? 0;
-    this.invert = options.invert ?? false;
-    // If `preventDefault` is true, we must set `passive` to false to allow calling `preventDefault()` on the source event.
-    // Otherwise, default to `true` (passive) and let consumers opt out to call `preventDefault()` themselves.
-    this.passive = this.preventDefault ? false : (options.passive ?? true);
-
-    this.state.totalDeltaX = this.initialDelta;
-    this.state.totalDeltaY = this.initialDelta;
-    this.state.totalDeltaZ = this.initialDelta;
+      throw new Error("STUB");
   }
 
   public clone(overrides?: Record<string, unknown>): TurnWheelGesture<GestureName> {
@@ -258,13 +246,7 @@ export class TurnWheelGesture<GestureName extends string> extends Gesture<Gestur
   }
 
   protected updateOptions(options: typeof this.mutableOptionsType): void {
-    super.updateOptions(options);
-
-    this.sensitivity = options.sensitivity ?? this.sensitivity;
-    this.max = options.max ?? this.max;
-    this.min = options.min ?? this.min;
-    this.initialDelta = options.initialDelta ?? this.initialDelta;
-    this.invert = options.invert ?? this.invert;
+      throw new Error("STUB");
   }
 
   /**
@@ -273,35 +255,7 @@ export class TurnWheelGesture<GestureName extends string> extends Gesture<Gestur
    * @param event The original wheel event
    */
   private handleWheelEvent = (event: WheelEvent): void => {
-    // Check if this gesture should be prevented by active gestures
-    if (this.shouldPreventGesture(this.element, 'mouse')) {
-      return;
-    }
-
-    // Get pointers from the PointerManager to use for centroid calculation
-    const pointers = this.pointerManager.getPointers() || new Map();
-    const pointersArray = Array.from(pointers.values());
-
-    // Update total deltas with scaled values, clamped to [min, max].
-    // Inlined per axis to avoid allocating an array and a closure on every
-    // wheel event, which is a high-frequency event.
-    const scale = this.sensitivity * (this.invert ? -1 : 1);
-    const { min, max } = this;
-    this.state.totalDeltaX = Math.min(
-      max,
-      Math.max(min, this.state.totalDeltaX + event.deltaX * scale),
-    );
-    this.state.totalDeltaY = Math.min(
-      max,
-      Math.max(min, this.state.totalDeltaY + event.deltaY * scale),
-    );
-    this.state.totalDeltaZ = Math.min(
-      max,
-      Math.max(min, this.state.totalDeltaZ + event.deltaZ * scale),
-    );
-
-    // Emit the wheel event
-    this.emitWheelEvent(pointersArray, event);
+      throw new Error("STUB");
   };
 
   /**
@@ -310,53 +264,6 @@ export class TurnWheelGesture<GestureName extends string> extends Gesture<Gestur
    * @param event The original wheel event
    */
   private emitWheelEvent(pointers: PointerData[], event: WheelEvent): void {
-    // Calculate centroid - either from existing pointers or from the wheel event position
-    const centroid =
-      pointers.length > 0 ? calculateCentroid(pointers) : { x: event.clientX, y: event.clientY };
-
-    // Get list of active gestures
-    const activeGestures = this.gesturesRegistry.getActiveGestures(this.element);
-
-    // Create custom event data
-    const customEventData: TurnWheelGestureEventData = {
-      gestureName: this.name,
-      centroid,
-      target: event.target,
-      srcEvent: event,
-      phase: 'ongoing', // Wheel events are always in "ongoing" state
-      pointers,
-      timeStamp: event.timeStamp,
-      deltaX: event.deltaX * this.sensitivity * (this.invert ? -1 : 1),
-      deltaY: event.deltaY * this.sensitivity * (this.invert ? -1 : 1),
-      deltaZ: event.deltaZ * this.sensitivity * (this.invert ? -1 : 1),
-      deltaMode: event.deltaMode,
-      totalDeltaX: this.state.totalDeltaX,
-      totalDeltaY: this.state.totalDeltaY,
-      totalDeltaZ: this.state.totalDeltaZ,
-      activeGestures,
-      customData: this.customData,
-    };
-
-    // Apply default event behavior if configured
-    if (this.preventDefault) {
-      event.preventDefault();
-    }
-
-    if (this.stopPropagation) {
-      event.stopPropagation();
-    }
-
-    // Event names to trigger
-    const eventName = createEventName(this.name, 'ongoing');
-
-    // Dispatch custom events on the element
-    const domEvent = new CustomEvent(eventName, {
-      bubbles: true,
-      cancelable: true,
-      composed: true,
-      detail: customEventData,
-    });
-
-    this.element.dispatchEvent(domEvent);
+      throw new Error("STUB");
   }
 }

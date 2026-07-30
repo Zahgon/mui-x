@@ -59,25 +59,12 @@ export function useTimeGridEvent(
   const isLessThan15Minutes = durationMinutes <= 15;
 
   const rootDataAttributes = React.useMemo(
-    () => ({
-      'data-under-hour': (isLessThan30Minutes || isBetween30and60Minutes || undefined) as
-        true | undefined,
-      'data-under-fifteen-minutes': (isLessThan15Minutes || undefined) as true | undefined,
-      'data-recurrent': (isRecurring || undefined) as true | undefined,
-      'data-palette': palette,
-    }),
+    () => { throw new Error("STUB"); },
     [isLessThan30Minutes, isBetween30and60Minutes, isLessThan15Minutes, isRecurring, palette],
   );
 
   const rootPositionProps = React.useMemo(
-    () => ({
-      start: occurrence.displayTimezone.start,
-      end: occurrence.displayTimezone.end,
-      style: {
-        '--first-index': occurrence.position.firstIndex,
-        '--last-index': occurrence.position.lastIndex,
-      } as React.CSSProperties,
-    }),
+    () => { throw new Error("STUB"); },
     [
       occurrence.displayTimezone.start,
       occurrence.displayTimezone.end,

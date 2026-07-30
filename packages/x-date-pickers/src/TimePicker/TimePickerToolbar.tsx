@@ -73,13 +73,7 @@ const TimePickerToolbarSeparator = styled(PickersToolbarText, {
 const TimePickerToolbarHourMinuteLabel = styled('div', {
   name: 'MuiTimePickerToolbar',
   slot: 'HourMinuteLabel',
-  overridesResolver: (props, styles) => [
-    {
-      [`&.${timePickerToolbarClasses.hourMinuteLabelLandscape}`]: styles.hourMinuteLabelLandscape,
-      [`&.${timePickerToolbarClasses.hourMinuteLabelReverse}`]: styles.hourMinuteLabelReverse,
-    },
-    styles.hourMinuteLabel,
-  ],
+  overridesResolver: (props, styles) => { throw new Error("STUB"); },
 })<{
   ownerState: PickerToolbarOwnerState;
 }>({
@@ -105,11 +99,7 @@ const TimePickerToolbarHourMinuteLabel = styled('div', {
 const TimePickerToolbarAmPmSelection = styled('div', {
   name: 'MuiTimePickerToolbar',
   slot: 'AmPmSelection',
-  overridesResolver: (props, styles) => [
-    { [`.${timePickerToolbarClasses.ampmLabel}`]: styles.ampmLabel },
-    { [`&.${timePickerToolbarClasses.ampmLandscape}`]: styles.ampmLandscape },
-    styles.ampmSelection,
-  ],
+  overridesResolver: (props, styles) => { throw new Error("STUB"); },
 })<{
   ownerState: PickerToolbarOwnerState;
 }>({
@@ -157,7 +147,7 @@ function TimePickerToolbar(inProps: TimePickerToolbarProps) {
 
   const showAmPmControl = Boolean(ampm && !ampmInClock && views.includes('hours'));
   const { meridiemMode, handleMeridiemChange } = useMeridiemMode(value, ampm, (newValue) =>
-    setValue(newValue, { changeImportance: 'set', source: 'view' }),
+    { throw new Error("STUB"); },
   );
 
   const formatSection = (format: keyof AdapterFormats) => {
@@ -192,7 +182,7 @@ function TimePickerToolbar(inProps: TimePickerToolbarProps) {
             data-testid="hours"
             tabIndex={-1}
             variant="h3"
-            onClick={() => setView('hours')}
+            onClick={() => { throw new Error("STUB"); }}
             selected={view === 'hours'}
             value={formatSection(ampm ? 'hours12h' : 'hours24h')}
           />
@@ -204,7 +194,7 @@ function TimePickerToolbar(inProps: TimePickerToolbarProps) {
             data-testid="minutes"
             tabIndex={-1}
             variant="h3"
-            onClick={() => setView('minutes')}
+            onClick={() => { throw new Error("STUB"); }}
             selected={view === 'minutes'}
             value={formatSection('minutes')}
           />
@@ -215,7 +205,7 @@ function TimePickerToolbar(inProps: TimePickerToolbarProps) {
           <PickersToolbarButton
             data-testid="seconds"
             variant="h3"
-            onClick={() => setView('seconds')}
+            onClick={() => { throw new Error("STUB"); }}
             selected={view === 'seconds'}
             value={formatSection('seconds')}
           />
@@ -230,7 +220,7 @@ function TimePickerToolbar(inProps: TimePickerToolbarProps) {
             selected={meridiemMode === 'am'}
             typographyClassName={classes.ampmLabel}
             value={formatMeridiem(adapter, 'am')}
-            onClick={readOnly ? undefined : () => handleMeridiemChange('am')}
+            onClick={readOnly ? undefined : () => { throw new Error("STUB"); }}
             disabled={disabled}
           />
           <PickersToolbarButton
@@ -240,7 +230,7 @@ function TimePickerToolbar(inProps: TimePickerToolbarProps) {
             selected={meridiemMode === 'pm'}
             typographyClassName={classes.ampmLabel}
             value={formatMeridiem(adapter, 'pm')}
-            onClick={readOnly ? undefined : () => handleMeridiemChange('pm')}
+            onClick={readOnly ? undefined : () => { throw new Error("STUB"); }}
             disabled={disabled}
           />
         </TimePickerToolbarAmPmSelection>

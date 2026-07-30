@@ -50,12 +50,7 @@ function useStoreR19(
   a2?: unknown,
   a3?: unknown,
 ): unknown {
-  const getSelection = React.useCallback(
-    () => selector(store.getSnapshot(), a1, a2, a3),
-    [store, selector, a1, a2, a3],
-  );
-
-  return useSyncExternalStore(store.subscribe, getSelection, getSelection);
+    throw new Error("STUB");
 }
 
 function useStoreLegacy(
@@ -65,10 +60,5 @@ function useStoreLegacy(
   a2?: unknown,
   a3?: unknown,
 ): unknown {
-  return useSyncExternalStoreWithSelector(
-    store.subscribe,
-    store.getSnapshot,
-    store.getSnapshot,
-    (state) => selector(state, a1, a2, a3),
-  );
+    throw new Error("STUB");
 }

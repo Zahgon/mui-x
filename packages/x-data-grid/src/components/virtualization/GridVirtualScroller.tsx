@@ -56,8 +56,7 @@ const Scroller = styled('div', {
   name: 'MuiDataGrid',
   slot: 'VirtualScroller',
   overridesResolver: (props, styles) => {
-    const { ownerState } = props;
-    return [styles.virtualScroller, ownerState.hasScrollX && styles['virtualScroller--hasScrollX']];
+      throw new Error("STUB");
   },
 })<{ ownerState: OwnerState }>({
   position: 'relative',
@@ -107,7 +106,7 @@ const Viewport = styled('div', {
 });
 
 const hasPinnedRightSelector = (apiRef: RefObject<GridApiCommunity>) =>
-  apiRef.current.state.dimensions.rightPinnedWidth > 0;
+  { throw new Error("STUB"); };
 
 export interface GridVirtualScrollerProps {
   children?: React.ReactNode;

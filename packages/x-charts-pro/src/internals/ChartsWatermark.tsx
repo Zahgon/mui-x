@@ -9,13 +9,5 @@ interface ChartsWatermarkProps {
   packageInfo: CommercialPackageInfo;
 }
 export function ChartsWatermark(props: ChartsWatermarkProps) {
-  const layerContainerRef = useChartsLayerContainerRef();
-
-  if (!layerContainerRef.current) {
-    return <Watermark packageInfo={props.packageInfo} />;
-  }
-  return ReactDOM.createPortal(
-    <Watermark packageInfo={props.packageInfo} />,
-    layerContainerRef.current,
-  );
+    throw new Error("STUB");
 }

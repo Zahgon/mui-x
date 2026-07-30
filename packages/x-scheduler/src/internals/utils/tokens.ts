@@ -365,37 +365,5 @@ export const getCellFocusBackground = (theme: Theme) =>
   theme.alpha((theme.vars || theme).palette.primary.light, 0.12);
 
 export const getPaletteVariants = (theme: Theme) => {
-  return Object.entries(eventColorTokens).map(([colorName, colorValues]) => ({
-    props: { 'data-palette': colorName as PaletteName },
-    style: {
-      '--event-main': colorValues.light.main,
-      '--event-surface-bold': colorValues.light['surface-bold'],
-      '--event-on-surface-bold': colorValues.light['on-surface-bold'],
-      '--event-surface-bold-hover':
-        colorValues.light['surface-bold-hover'] ||
-        'color-mix(in srgb, var(--event-surface-bold), black 4%);',
-      '--event-surface-subtle': colorValues.light['surface-subtle'],
-      '--event-surface-subtle-hover': colorValues.light['surface-subtle-hover'],
-      '--event-surface-accent': colorValues.light['surface-accent'],
-      '--event-on-surface-subtle-primary': colorValues.light['on-surface-subtle-primary'],
-      '--event-on-surface-subtle-secondary': colorValues.light['on-surface-subtle-secondary'],
-      '--event-surface-selected': colorValues.light['surface-selected'],
-      '--event-surface-selected-hover': colorValues.light['surface-selected-hover'],
-      '--event-on-surface-selected': colorValues.light['on-surface-selected'],
-      ...theme.applyStyles('dark', {
-        '--event-main': colorValues.dark.main,
-        '--event-surface-bold': colorValues.dark['surface-bold'],
-        '--event-on-surface-bold': colorValues.dark['on-surface-bold'],
-        '--event-surface-bold-hover': colorValues.dark['surface-bold-hover'],
-        '--event-surface-subtle': colorValues.dark['surface-subtle'],
-        '--event-surface-subtle-hover': colorValues.dark['surface-subtle-hover'],
-        '--event-surface-accent': colorValues.dark['surface-accent'],
-        '--event-on-surface-subtle-primary': colorValues.dark['on-surface-subtle-primary'],
-        '--event-on-surface-subtle-secondary': colorValues.dark['on-surface-subtle-secondary'],
-        '--event-surface-selected': colorValues.dark['surface-selected'],
-        '--event-surface-selected-hover': colorValues.dark['surface-selected-hover'],
-        '--event-on-surface-selected': colorValues.dark['on-surface-selected'],
-      }),
-    } as CSSObject,
-  }));
+  return Object.entries(eventColorTokens).map(([colorName, colorValues]) => { throw new Error("STUB"); });
 };

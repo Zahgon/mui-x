@@ -5,19 +5,11 @@ const getColor: ColorProcessor<'heatmap'> = (series, xAxis, yAxis, zAxis) => {
 
   if (zColorScale) {
     return (value: number | null) => {
-      if (value === null) {
-        return '';
-      }
-
-      const color = zColorScale(value);
-      if (color === null) {
-        return '';
-      }
-      return color;
+        throw new Error("STUB");
     };
   }
 
-  return () => '';
+  return () => { throw new Error("STUB"); };
 };
 
 export default getColor;

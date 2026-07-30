@@ -42,40 +42,8 @@ export type ChartsPanelTriggerProps = Omit<GridSlotProps['baseButton'], 'classNa
  */
 const ChartsPanelTrigger = forwardRef<HTMLButtonElement, ChartsPanelTriggerProps>(
   function ChartsPanelTrigger(props, ref) {
-    const { render, className, onClick, onPointerUp, ...other } = props;
-    const rootProps = useGridRootProps();
-    const buttonId = useId();
-    const panelId = useId();
-    const apiRef = useGridApiContext();
-    const open = useGridSelector(apiRef, gridChartsPanelOpenSelector);
-    const state = { open };
-    const resolvedClassName = typeof className === 'function' ? className(state) : className;
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      apiRef.current.setChartsPanelOpen(!open);
-      onClick?.(event);
-    };
-
-    const element = useComponentRenderer(
-      rootProps.slots.baseButton,
-      render,
-      {
-        ...rootProps.slotProps?.baseButton,
-        id: buttonId,
-        // TODO: Hook up the panel/trigger IDs to the charts configuration panel
-        'aria-haspopup': 'true',
-        'aria-expanded': open ? 'true' : undefined,
-        'aria-controls': open ? panelId : undefined,
-        onClick: handleClick,
-        className: resolvedClassName,
-        ...other,
-        ref,
-      },
-      state,
-    );
-
-    return <React.Fragment>{element}</React.Fragment>;
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChartsPanelTrigger.propTypes /* remove-proptypes */ = {

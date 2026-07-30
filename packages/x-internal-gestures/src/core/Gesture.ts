@@ -237,22 +237,7 @@ export abstract class Gesture<GestureName extends string> {
    * @param options - Configuration options for this gesture
    */
   constructor(options: GestureOptions<GestureName>) {
-    if (!options || !options.name) {
-      throw new Error('MUI X: Gesture must be initialized with a valid name.');
-    }
-    if (options.name in eventList) {
-      throw new Error(
-        `MUI X: Gesture can't be created with a native event name. Tried to use "${options.name}". Please use a custom name instead.`,
-      );
-    }
-
-    this.name = options.name;
-    this.preventDefault = options.preventDefault ?? false;
-    this.stopPropagation = options.stopPropagation ?? false;
-    this.preventIf = options.preventIf ?? [];
-    this.requiredKeys = options.requiredKeys ?? [];
-    this.pointerMode = options.pointerMode ?? [];
-    this.pointerOptions = options.pointerOptions ?? {};
+      throw new Error("STUB");
   }
 
   /**
@@ -288,9 +273,7 @@ export abstract class Gesture<GestureName extends string> {
    * @param event Custom event with new options in the detail property
    */
   private handleOptionsChange = (event: CustomEvent<typeof this.mutableOptionsType>): void => {
-    if (event && event.detail) {
-      this.updateOptions(event.detail);
-    }
+      throw new Error("STUB");
   };
 
   /**
@@ -298,13 +281,7 @@ export abstract class Gesture<GestureName extends string> {
    * @param options Object containing properties to update
    */
   protected updateOptions(options: typeof this.mutableOptionsType): void {
-    // Update common options
-    this.preventDefault = options.preventDefault ?? this.preventDefault;
-    this.stopPropagation = options.stopPropagation ?? this.stopPropagation;
-    this.preventIf = options.preventIf ?? this.preventIf;
-    this.requiredKeys = options.requiredKeys ?? this.requiredKeys;
-    this.pointerMode = options.pointerMode ?? this.pointerMode;
-    this.pointerOptions = options.pointerOptions ?? this.pointerOptions;
+      throw new Error("STUB");
   }
 
   /**
@@ -312,9 +289,7 @@ export abstract class Gesture<GestureName extends string> {
    * Change this function in child classes to provide different defaults.
    */
   protected getBaseConfig() {
-    return {
-      requiredKeys: this.requiredKeys,
-    };
+      throw new Error("STUB");
   }
 
   /**
@@ -325,21 +300,7 @@ export abstract class Gesture<GestureName extends string> {
    * @returns The effective configuration object
    */
   protected getEffectiveConfig<T>(pointerType: PointerMode, baseConfig: T): T {
-    if (pointerType !== 'mouse' && pointerType !== 'touch' && pointerType !== 'pen') {
-      // Unknown pointer type, return base config
-      return baseConfig;
-    }
-
-    // Apply pointer mode-specific overrides
-    const pointerModeOverrides = this.pointerOptions[pointerType];
-    if (pointerModeOverrides) {
-      return {
-        ...baseConfig,
-        ...pointerModeOverrides,
-      };
-    }
-
-    return baseConfig;
+      throw new Error("STUB");
   }
 
   /**
@@ -347,9 +308,7 @@ export abstract class Gesture<GestureName extends string> {
    * @param event Custom event with new state values in the detail property
    */
   private handleStateChange = (event: CustomEvent<typeof this.mutableStateType>): void => {
-    if (event && event.detail) {
-      this.updateState(event.detail);
-    }
+      throw new Error("STUB");
   };
 
   /**
@@ -377,17 +336,7 @@ export abstract class Gesture<GestureName extends string> {
    * @returns The matching element or null if no match is found
    */
   protected getTargetElement(event: Event): TargetElement | null {
-    if (
-      this.isActive ||
-      this.element === event.target ||
-      ('contains' in this.element && this.element.contains(event.target as Node)) ||
-      ('getRootNode' in this.element &&
-        this.element.getRootNode() instanceof ShadowRoot &&
-        event.composedPath().includes(this.element))
-    ) {
-      return this.element;
-    }
-    return null;
+      throw new Error("STUB");
   }
 
   /** Whether the gesture is currently active */
@@ -412,25 +361,7 @@ export abstract class Gesture<GestureName extends string> {
    * @returns true if the gesture should be prevented, false otherwise
    */
   protected shouldPreventGesture(element: TargetElement, pointerType: string): boolean {
-    // Get effective configuration for this pointer type
-    const effectiveConfig = this.getEffectiveConfig(
-      pointerType as PointerMode,
-      this.getBaseConfig(),
-    );
-
-    // First check if required keyboard keys are pressed
-    if (!this.keyboardManager.areKeysPressed(effectiveConfig.requiredKeys)) {
-      return true; // Prevent the gesture if required keys are not pressed
-    }
-
-    if (this.preventIf.length === 0) {
-      return false; // No prevention rules, allow the gesture
-    }
-
-    const activeGestures = this.gesturesRegistry.getActiveGestures(element);
-
-    // Check if any of the gestures that would prevent this one are active
-    return this.preventIf.some((gestureName) => activeGestures[gestureName]);
+      throw new Error("STUB");
   }
 
   /**
@@ -440,13 +371,7 @@ export abstract class Gesture<GestureName extends string> {
    * @returns true if the pointer type is allowed, false otherwise.
    */
   protected isPointerTypeAllowed(pointerType: string): boolean {
-    // If no pointer mode is specified, all pointer types are allowed
-    if (!this.pointerMode || this.pointerMode.length === 0) {
-      return true;
-    }
-
-    // Check if the pointer type is in the allowed types list
-    return this.pointerMode.includes(pointerType as PointerMode);
+      throw new Error("STUB");
   }
 
   /**

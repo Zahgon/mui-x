@@ -34,34 +34,8 @@ export type QuickFilterTriggerProps = Omit<GridSlotProps['baseButton'], 'classNa
  */
 const QuickFilterTrigger = forwardRef<HTMLButtonElement, QuickFilterTriggerProps>(
   function QuickFilterTrigger(props, ref) {
-    const { render, className, onClick, ...other } = props;
-    const rootProps = useGridRootProps();
-    const { state, controlId, onExpandedChange, triggerRef } = useQuickFilterContext();
-    const resolvedClassName = typeof className === 'function' ? className(state) : className;
-    const handleRef = useForkRef(triggerRef, ref);
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      onExpandedChange(!state.expanded);
-      onClick?.(event);
-    };
-
-    const element = useComponentRenderer(
-      rootProps.slots.baseButton,
-      render,
-      {
-        ...rootProps.slotProps?.baseButton,
-        className: resolvedClassName,
-        'aria-controls': controlId,
-        'aria-expanded': state.expanded,
-        ...other,
-        onClick: handleClick,
-        ref: handleRef,
-      },
-      state,
-    );
-
-    return <React.Fragment>{element}</React.Fragment>;
-  },
+        throw new Error("STUB");
+    },
 );
 
 QuickFilterTrigger.propTypes /* remove-proptypes */ = {

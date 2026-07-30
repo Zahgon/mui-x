@@ -22,25 +22,8 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 
 const GridAggregationRowOverlay = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
   function GridAggregationRowOverlay(props, forwardedRef) {
-    const apiRef = useGridApiContext();
-    const rootProps = useGridRootProps();
-    const classes = useUtilityClasses({ classes: rootProps.classes });
-    const aggregationModel = useGridSelector(apiRef, gridAggregationModelSelector);
-
-    const visibleColumns = new Set(Object.keys(aggregationModel));
-
-    return (
-      <div className={classes.root}>
-        <GridSkeletonLoadingOverlayInner
-          {...props}
-          skeletonRowsCount={1}
-          visibleColumns={visibleColumns}
-          showFirstRowBorder
-          ref={forwardedRef}
-        />
-      </div>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 export { GridAggregationRowOverlay };

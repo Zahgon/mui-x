@@ -107,31 +107,7 @@ function PieArcPlot(props: PieArcPlotProps) {
 
   return (
     <PieArcPlotRoot {...other}>
-      {transformedData.map((item, index) => (
-        <Arc
-          key={item.dataIndex}
-          startAngle={item.startAngle}
-          endAngle={item.endAngle}
-          paddingAngle={item.paddingAngle}
-          innerRadius={item.innerRadius}
-          outerRadius={item.outerRadius}
-          cornerRadius={item.cornerRadius}
-          skipAnimation={skipAnimation ?? false}
-          seriesId={seriesId}
-          color={item.color}
-          dataIndex={index}
-          isFaded={item.isFaded}
-          isHighlighted={item.isHighlighted}
-          isFocused={item.isFocused}
-          onClick={
-            onItemClick &&
-            ((event) => {
-              onItemClick(event, { type: 'pie', seriesId, dataIndex: index }, item);
-            })
-          }
-          {...slotProps?.pieArc}
-        />
-      ))}
+      {transformedData.map((item, index) => { throw new Error("STUB"); })}
     </PieArcPlotRoot>
   );
 }

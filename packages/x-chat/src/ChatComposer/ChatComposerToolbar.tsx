@@ -19,41 +19,13 @@ export interface ChatComposerToolbarProps extends ComposerToolbarProps {
 const ChatComposerToolbarStyled = styled('div', {
   name: 'MuiChatComposer',
   slot: 'Toolbar',
-  overridesResolver: (_, styles) => styles.toolbar,
-})(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'space-between',
-  gap: theme.spacing(0.5),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatComposerToolbar = React.forwardRef<HTMLDivElement, ChatComposerToolbarProps>(
   function ChatComposerToolbar(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatComposerToolbar' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatComposerUtilityClasses(classesProp);
-
-    return (
-      <ComposerToolbar
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          toolbar: slots?.toolbar ?? ChatComposerToolbarStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          toolbar: mergeSlotProps(
-            {
-              className: clsx(classes.toolbar, className),
-              sx,
-            },
-            slotProps?.toolbar,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatComposerToolbar.propTypes /* remove-proptypes */ = {

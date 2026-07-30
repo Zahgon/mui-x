@@ -55,7 +55,7 @@ function GridFilterInputDate(props: GridFilterInputDateProps) {
   const rootSlotProps = slotProps?.root.slotProps;
   const filterTimeout = useTimeout();
   const [filterValueState, setFilterValueState] = React.useState(() =>
-    convertFilterItemValueToInputValue(item.value, type),
+    { throw new Error("STUB"); },
   );
   const [applying, setIsApplying] = React.useState(false);
   const id = useId();
@@ -64,30 +64,13 @@ function GridFilterInputDate(props: GridFilterInputDateProps) {
 
   const onFilterChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      filterTimeout.clear();
-      const value = event.target.value;
-      setFilterValueState(value);
-
-      const date = new Date(value);
-      const newItem = { ...item, value: Number.isNaN(date.getTime()) ? undefined : date };
-
-      if (debounceMs === 0) {
-        applyValue(newItem);
-        return;
-      }
-
-      setIsApplying(true);
-      filterTimeout.start(debounceMs, () => {
-        applyValue(newItem);
-        setIsApplying(false);
-      });
-    },
+          throw new Error("STUB");
+      },
     [applyValue, item, debounceMs, filterTimeout],
   );
 
   React.useEffect(() => {
-    const value = convertFilterItemValueToInputValue(item.value, type);
-    setFilterValueState(value);
+      throw new Error("STUB");
   }, [item.value, type]);
 
   return (
@@ -153,14 +136,8 @@ GridFilterInputDate.propTypes /* remove-proptypes */ = {
     PropTypes.func,
     PropTypes.shape({
       current: (props, propName) => {
-        if (props[propName] == null) {
-          return null;
-        }
-        if (typeof props[propName] !== 'object' || props[propName].nodeType !== 1) {
-          return new Error(`Expected prop '${propName}' to be of type Element`);
-        }
-        return null;
-      },
+            throw new Error("STUB");
+        },
     }),
   ]),
   /**

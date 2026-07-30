@@ -91,58 +91,7 @@ function RangeBarPlot(props: RangeBarPlotProps): React.JSX.Element {
 }
 
 function RangeBarSvgPlot(props: Omit<RangeBarPlotProps, 'renderer'>): React.JSX.Element {
-  const { skipAnimation: inSkipAnimation, onItemClick, borderRadius, ...other } = props;
-  const isZoomInteracting = useIsZoomInteracting();
-  const skipAnimation = useSkipAnimation(isZoomInteracting || inSkipAnimation);
-  const { xAxis: xAxes } = useXAxes();
-  const { yAxis: yAxes } = useYAxes();
-  const completedData = useRangeBarPlotData(useDrawingArea(), xAxes, yAxes);
-
-  const classes = useUtilityClasses();
-  const slots: BarElementSlots = {
-    ...props.slots,
-    bar: props.slots?.bar ?? AnimatedRangeBarElement,
-  };
-
-  return (
-    <RangeBarPlotRoot className={classes.root}>
-      {completedData.map(({ seriesId, layout, xOrigin, yOrigin, data }) => {
-        return (
-          <g key={seriesId} data-series={seriesId} className={classes.series}>
-            {data.map(({ dataIndex, color, x, y, width, height, hidden }) => {
-              return (
-                <BarElement
-                  key={dataIndex}
-                  seriesId={seriesId}
-                  dataIndex={dataIndex}
-                  color={color}
-                  skipAnimation={skipAnimation ?? false}
-                  layout={layout ?? 'vertical'}
-                  x={x}
-                  xOrigin={xOrigin}
-                  y={y}
-                  yOrigin={yOrigin}
-                  width={width}
-                  height={height}
-                  hidden={hidden}
-                  rx={borderRadius}
-                  ry={borderRadius}
-                  {...other}
-                  slots={slots}
-                  onClick={
-                    onItemClick &&
-                    ((event) => {
-                      onItemClick(event, { type: 'rangeBar', seriesId, dataIndex });
-                    })
-                  }
-                />
-              );
-            })}
-          </g>
-        );
-      })}
-    </RangeBarPlotRoot>
-  );
+    throw new Error("STUB");
 }
 
 RangeBarSvgPlot.propTypes /* remove-proptypes */ = {

@@ -9,7 +9,7 @@ export interface ChartsRadialAxisHighlightClasses {
 export type ChartsRadialAxisHighlightClassKey = keyof ChartsRadialAxisHighlightClasses;
 
 export function getRadialAxisHighlightUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsRadialAxisHighlight', slot);
+    throw new Error("STUB");
 }
 
 export const chartsRadialAxisHighlightClasses: ChartsRadialAxisHighlightClasses =

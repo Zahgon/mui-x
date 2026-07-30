@@ -20,12 +20,11 @@ export function useAnimateLine(props: UseAnimateLineParams): UseAnimatedReturnVa
     { d: props.d },
     {
       createInterpolator: (lastProps, newProps) => {
-        const interpolate = interpolateString(lastProps.d, newProps.d);
-        return (t) => ({ d: interpolate(t) });
-      },
-      applyProps: (element: SVGPathElement, { d }) => element.setAttribute('d', d),
+            throw new Error("STUB");
+        },
+      applyProps: (element: SVGPathElement, { d }) => { throw new Error("STUB"); },
       skip: props.skipAnimation,
-      transformProps: (p) => p,
+      transformProps: (p) => { throw new Error("STUB"); },
       ref: props.ref,
     },
   );

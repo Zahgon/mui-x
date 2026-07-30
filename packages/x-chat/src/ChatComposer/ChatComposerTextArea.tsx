@@ -26,66 +26,13 @@ export interface ChatComposerTextAreaProps extends ComposerTextAreaProps {
 const ChatComposerTextAreaStyled = styled('textarea', {
   name: 'MuiChatComposer',
   slot: 'TextArea',
-  overridesResolver: (_, styles) => styles.textArea,
-})(({ theme }) => ({
-  flex: 1,
-  resize: 'none',
-  border: 'none',
-  borderRadius: 0,
-  padding: theme.spacing(0.5),
-  fontFamily: theme.typography.fontFamily,
-  fontSize: theme.typography.body2.fontSize,
-  lineHeight: theme.typography.body2.lineHeight,
-  color: (theme.vars || theme).palette.text.primary,
-  backgroundColor: 'transparent',
-  outline: 'none',
-  boxSizing: 'border-box',
-  minHeight: 40,
-  maxHeight: 200,
-  overflowY: 'auto',
-  scrollbarWidth: 'thin',
-  '&:disabled': {
-    color: (theme.vars || theme).palette.text.disabled,
-    cursor: 'not-allowed',
-  },
-  '&::placeholder': {
-    color: (theme.vars || theme).palette.text.disabled,
-  },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatComposerTextArea = React.forwardRef<HTMLTextAreaElement, ChatComposerTextAreaProps>(
   function ChatComposerTextArea(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatComposerTextArea' });
-    const { slots, slotProps, className, classes: classesProp, sx, maxRows, ...other } = props;
-    const classes = useChatComposerUtilityClasses(classesProp);
-
-    return (
-      <ComposerTextArea
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          input: slots?.input ?? ChatComposerTextAreaStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          input: mergeSlotProps(
-            {
-              className: clsx(classes.textArea, className),
-              sx,
-              ...(maxRows != null
-                ? {
-                    style: MAX_ROWS_STYLE,
-                    rows: 1,
-                  }
-                : {}),
-            },
-            slotProps?.input,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatComposerTextArea.propTypes /* remove-proptypes */ = {

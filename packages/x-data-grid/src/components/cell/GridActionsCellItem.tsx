@@ -30,49 +30,7 @@ export type GridActionsCellItemProps = GridActionsCellItemCommonProps &
   );
 
 const GridActionsCellItem = forwardRef<HTMLElement, GridActionsCellItemProps>((props, ref) => {
-  const rootProps = useGridRootProps();
-
-  if (!props.showInMenu) {
-    const { label, icon, showInMenu, onClick, ...other } = props;
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      onClick?.(event);
-    };
-
-    return (
-      <rootProps.slots.baseIconButton
-        size="small"
-        role="menuitem"
-        aria-label={label}
-        {...other}
-        onClick={handleClick}
-        {...rootProps.slotProps?.baseIconButton}
-        ref={ref as React.RefObject<HTMLButtonElement>}
-      >
-        {React.cloneElement(icon!, { fontSize: 'inherit' })}
-      </rootProps.slots.baseIconButton>
-    );
-  }
-
-  const { label, icon, showInMenu, onClick, closeMenuOnClick = true, closeMenu, ...other } = props;
-
-  const handleClick = (event: React.MouseEvent<HTMLLIElement>) => {
-    onClick?.(event);
-    if (closeMenuOnClick) {
-      closeMenu?.();
-    }
-  };
-
-  return (
-    <rootProps.slots.baseMenuItem
-      ref={ref}
-      {...(other as any)}
-      onClick={handleClick}
-      iconStart={icon}
-    >
-      {label}
-    </rootProps.slots.baseMenuItem>
-  );
+    throw new Error("STUB");
 });
 
 GridActionsCellItem.propTypes /* remove-proptypes */ = {

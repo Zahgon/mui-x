@@ -114,7 +114,7 @@ export function applyTickSpacing<T>(domain: T[], range: [number, number], tickSp
     return domain;
   }
 
-  return domain.filter((_, index) => index % every === 0);
+  return domain.filter((_, index) => { throw new Error("STUB"); });
 }
 
 function getTimeTicks<T extends { toString(): string }>(
@@ -131,10 +131,10 @@ function getTimeTicks<T extends { toString(): string }>(
   const isReversed = scale.range()[0] > scale.range()[1];
   // Indexes are inclusive regarding the entire band.
   const startIndex = domain.findIndex((value) => {
-    return isInside(getTickPosition(scale, value, isReversed ? 'start' : 'end'));
+      throw new Error("STUB");
   });
   const endIndex = domain.findLastIndex((value) =>
-    isInside(getTickPosition(scale, value, isReversed ? 'end' : 'start')),
+    { throw new Error("STUB"); },
   );
 
   const start = domain[0];
@@ -229,21 +229,14 @@ export function getTicks(options: GetTicksOptions) {
       domain,
       tickNumber,
       ordinalTimeTicks.map((tickDef) =>
-        typeof tickDef === 'string' ? tickFrequencies[tickDef] : tickDef,
+        { throw new Error("STUB"); },
       ),
       scale,
       isInside,
     );
 
     return ticksIndexes.map(({ index, formatter }) => {
-      const value = domain[index];
-      const formattedValue = formatter(value as Date);
-      return {
-        value,
-        formattedValue,
-        offset: getTickPosition(scale, value, tickPlacement),
-        labelOffset: 0,
-      };
+        throw new Error("STUB");
     });
   }
 
@@ -277,27 +270,15 @@ export function getTicks(options: GetTicksOptions) {
       const isReversed = scale.range()[0] > scale.range()[1];
       // Indexes are inclusive regarding the entire band.
       const startIndex = filteredDomain.findIndex((value) => {
-        return isInside(getTickPosition(scale, value, isReversed ? 'start' : 'end'));
+          throw new Error("STUB");
       });
       const endIndex = filteredDomain.findLastIndex((value) =>
-        isInside(getTickPosition(scale, value, isReversed ? 'end' : 'start')),
+        { throw new Error("STUB"); },
       );
 
       return [
         ...filteredDomain.slice(startIndex, endIndex + 1).map((value) => {
-          const defaultTickLabel = `${value}`;
-
-          return {
-            value,
-            formattedValue:
-              valueFormatter?.(value, { location: 'tick', scale, tickNumber, defaultTickLabel }) ??
-              defaultTickLabel,
-            offset: getTickPosition(scale, value, tickPlacement),
-            labelOffset:
-              tickLabelPlacement === 'tick'
-                ? 0
-                : scale.step() * (offsetRatio[tickLabelPlacement] - offsetRatio[tickPlacement]),
-          };
+            throw new Error("STUB");
         }),
 
         ...(tickPlacement === 'extremities' &&
@@ -316,19 +297,7 @@ export function getTicks(options: GetTicksOptions) {
 
     // scale type = 'point'
     return filteredDomain.map((value) => {
-      const defaultTickLabel = `${value}`;
-      return {
-        value,
-        formattedValue:
-          valueFormatter?.(value, {
-            location: 'tick',
-            scale,
-            tickNumber,
-            defaultTickLabel,
-          }) ?? defaultTickLabel,
-        offset: scale(value)!,
-        labelOffset: 0,
-      };
+        throw new Error("STUB");
     });
   }
 
@@ -385,11 +354,11 @@ function getDefaultTicks(scale: D3ContinuousScale, tickNumber: number) {
   return scale.ticks(tickNumber);
 }
 
-const alwaysTrue = () => true;
+const alwaysTrue = () => { throw new Error("STUB"); };
 
 // Avoid ticks on more than 360° for rotation axis.
 const isInsideRotation = (scale: D3Scale) => (rotation: number) =>
-  Math.abs(scale.range()[0] - rotation) < Math.PI * 2 - EPSILON;
+  { throw new Error("STUB"); };
 
 function getIsInside(
   scale: D3Scale,
@@ -401,7 +370,7 @@ function getIsInside(
       return isInsideRotation(scale);
 
     case 'radius':
-      return (radiusOffset: number) => radiusOffset >= 1;
+      return (radiusOffset: number) => { throw new Error("STUB"); };
 
     case 'x':
       return instance.isXInside;
@@ -432,17 +401,7 @@ export function useTicks(
 
   return React.useMemo(
     () =>
-      getTicks({
-        scale,
-        tickNumber,
-        tickPlacement,
-        tickInterval,
-        tickLabelPlacement,
-        tickSpacing,
-        valueFormatter,
-        isInside: getIsInside(scale, direction, instance),
-        ordinalTimeTicks,
-      }),
+      { throw new Error("STUB"); },
     [
       scale,
       tickNumber,

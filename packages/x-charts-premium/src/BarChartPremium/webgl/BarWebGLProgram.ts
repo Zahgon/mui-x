@@ -27,39 +27,15 @@ export class BarWebGLProgram {
   private readonly uResolution: WebGLUniformLocation | null;
 
   constructor(private gl: WebGL2RenderingContext) {
-    setupStandardBlending(gl);
-
-    const linked = linkProgram(gl, barVertexShaderSource, barFragmentShaderSource);
-    this.program = linked.program;
-    this.shaders.push(...linked.shaders);
-
-    this.uResolution = gl.getUniformLocation(this.program, 'u_resolution');
-
-    this.quadBuffer = uploadQuadBuffer(gl);
-    this.vao = gl.createVertexArray();
-    gl.bindVertexArray(this.vao);
-
-    bindQuadBuffer(gl, this.program, this.quadBuffer);
-    this.centers = createInstancedAttribute(gl, this.program, 'a_center', 2);
-    this.halfSizes = createInstancedAttribute(gl, this.program, 'a_halfSize', 2);
-    this.colors = createInstancedAttribute(gl, this.program, 'a_color', 4, gl.UNSIGNED_BYTE, true);
-    this.cornerRadii = createInstancedAttribute(gl, this.program, 'a_cornerRadii', 4);
-
-    gl.bindVertexArray(null);
+      throw new Error("STUB");
   }
 
   setResolution(width: number, height: number) {
-    this.gl.useProgram(this.program);
-    this.gl.uniform2f(this.uResolution, width, height);
+      throw new Error("STUB");
   }
 
   plot(plotData: BarWebGLPlotData) {
-    const gl = this.gl;
-    uploadGrowableBuffer(gl, this.centers.buffer, plotData.centers);
-    uploadGrowableBuffer(gl, this.halfSizes.buffer, plotData.halfSizes);
-    uploadGrowableBuffer(gl, this.colors.buffer, plotData.colors);
-    uploadGrowableBuffer(gl, this.cornerRadii.buffer, plotData.cornerRadii);
-    logWebGLErrors(gl);
+      throw new Error("STUB");
   }
 
   render(count: number) {
@@ -82,6 +58,6 @@ export class BarWebGLProgram {
     gl.deleteBuffer(this.halfSizes.buffer.buffer);
     gl.deleteBuffer(this.colors.buffer.buffer);
     gl.deleteBuffer(this.cornerRadii.buffer.buffer);
-    this.shaders.forEach((shader) => gl.deleteShader(shader));
+    this.shaders.forEach((shader) => { throw new Error("STUB"); });
   }
 }

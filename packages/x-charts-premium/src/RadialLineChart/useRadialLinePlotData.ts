@@ -33,61 +33,6 @@ export function useRadialLinePlotData() {
   const seriesData = useRadialLineSeriesContext();
 
   return React.useMemo(() => {
-    if (seriesData === undefined || !radiusAxisMap || !rotationAxisMap) {
-      return [];
-    }
-
-    const { series, stackingGroups } = seriesData;
-    const plotData: RadialLinePlotDataPoint[] = [];
-
-    for (const stackingGroup of stackingGroups) {
-      for (const seriesId of stackingGroup.ids) {
-        const {
-          stackedData,
-          data,
-          hidden,
-          area = false,
-          closePath,
-          curve,
-          shape,
-          rotationAxisId = rotationAxisIds[0],
-          radiusAxisId = radiusAxisIds[0],
-        } = series[seriesId];
-
-        const radiusAxis = radiusAxisMap[radiusAxisId];
-        const rotationAxis = rotationAxisMap[rotationAxisId];
-        const rotationPosition = getValueToPositionMapper(rotationAxis.scale);
-
-        const points: RadialLinePoint[] = [];
-
-        for (let dataIndex = 0; dataIndex < data.length; dataIndex += 1) {
-          if (data[dataIndex] == null) {
-            continue;
-          }
-
-          const value = stackedData[dataIndex]?.[1] ?? data[dataIndex];
-          const baseValue = stackedData[dataIndex]?.[0] ?? radiusAxis.scale.domain()[0];
-          const radius = radiusAxis.scale(value as number)!;
-          const baseRadius = radiusAxis.scale(baseValue as number)!;
-          const angle = rotationPosition(rotationAxis.data![dataIndex]);
-
-          const [x, y] = instance.polar2svg(radius, angle);
-          points.push({ x, y, radius, baseRadius, angle, dataIndex });
-        }
-        plotData.push({
-          color: series[seriesId].color,
-          points,
-          seriesId,
-          hidden,
-          showMark: Boolean(series[seriesId].showMark),
-          shape: shape ?? 'circle',
-          area,
-          curve,
-          closePath,
-        });
-      }
-    }
-
-    return plotData;
+      throw new Error("STUB");
   }, [seriesData, radiusAxisMap, rotationAxisMap, radiusAxisIds, rotationAxisIds, instance]);
 }

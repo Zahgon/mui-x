@@ -56,67 +56,17 @@ const GridLongTextCellContent = styled('div', {
 const GridLongTextCellPopperContent = styled('div', {
   name: 'MuiDataGrid',
   slot: 'LongTextCellPopperContent',
-})(({ theme }) => ({
-  ...theme.typography.body2,
-  letterSpacing: 'normal',
-  paddingBlock: 15.5,
-  paddingInline: 9,
-  maxHeight: 52 * 3,
-  overflow: 'auto',
-  whiteSpace: 'pre-wrap',
-  wordBreak: 'break-word',
-  width: 'var(--_width)',
-  border: `1px solid ${(theme.vars || theme).palette.divider}`,
-  boxSizing: 'border-box',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const GridLongTextCellCornerButton = styled('button', {
   name: 'MuiDataGrid',
   slot: 'LongTextCellCornerButton',
-})(({ theme }) => ({
-  lineHeight: 0,
-  position: 'absolute',
-  bottom: 1,
-  right: 0,
-  border: '1px solid',
-  color: (theme.vars || theme).palette.text.secondary,
-  borderColor: (theme.vars || theme).palette.divider,
-  backgroundColor: (theme.vars || theme).palette.background.paper,
-  borderRadius: 0,
-  fontSize: '0.875rem',
-  padding: 2,
-  '&:focus-visible': {
-    outline: 'none',
-  },
-  '&:hover': {
-    backgroundColor: (theme.vars || theme).palette.background.paper,
-    color: (theme.vars || theme).palette.text.primary,
-  },
-  [`&.${gridClasses.longTextCellExpandButton}`]: {
-    right: -9,
-    opacity: 0,
-    [`.${gridClasses.longTextCell}:hover &, .${gridClasses.longTextCell}.Mui-focused &`]: {
-      opacity: 1,
-    },
-  },
-  [`&.${gridClasses.longTextCellCollapseButton}`]: {
-    bottom: 2,
-    right: 2,
-    border: 'none',
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const GridLongTextCellPopper = styled(NotRendered<GridSlotProps['basePopper']>, {
   name: 'MuiDataGrid',
   slot: 'LongTextCellPopper',
-})<{ ownerState: OwnerState }>(({ theme }) => ({
-  zIndex: vars.zIndex.menu,
-  background: (theme.vars || theme).palette.background.paper,
-  '&[data-popper-reference-hidden]': {
-    visibility: 'hidden',
-    pointerEvents: 'none',
-  },
-}));
+})<{ ownerState: OwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 export interface GridLongTextCellProps extends GridRenderCellParams<any, string | null> {
   /**
@@ -169,46 +119,23 @@ function GridLongTextCell(props: GridLongTextCellProps) {
   const cornerButtonRef = React.useRef<HTMLButtonElement>(null);
 
   React.useEffect(() => {
-    if (hasFocus && !popupOpen) {
-      if (cornerButtonRef.current && cornerButtonRef.current !== document.activeElement) {
-        cornerButtonRef.current.focus();
-      }
-    }
-    if (!hasFocus) {
-      setPopupOpen(false);
-    }
+      throw new Error("STUB");
   }, [hasFocus, popupOpen]);
 
   const handleExpandClick = (event: React.MouseEvent) => {
-    // event.detail === 0 means keyboard-triggered click (Enter keyup on focused button)
-    // Ignore these to prevent popup from opening when focus moves to this cell via Enter
-    if (event.detail === 0) {
-      return;
-    }
-    event.stopPropagation();
-    setPopupOpen(true);
+      throw new Error("STUB");
   };
 
   const handleExpandKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === ' ' && !event.shiftKey) {
-      event.preventDefault(); // Prevent native button click on keyup
-      event.stopPropagation(); // Prevent grid row selection
-      setPopupOpen((prev) => !prev);
-    }
-    if (event.key === 'Escape' && popupOpen) {
-      event.stopPropagation(); // Prevent grid cell navigation
-      setPopupOpen(false);
-    }
+      throw new Error("STUB");
   };
 
   const handleClickAway = () => {
-    setPopupOpen(false);
+      throw new Error("STUB");
   };
 
   const handleCollapseClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-    setPopupOpen(false);
-    apiRef.current.getCellElement(id, colDef.field)?.focus();
+      throw new Error("STUB");
   };
 
   return (
@@ -267,11 +194,7 @@ function GridLongTextCell(props: GridLongTextCellProps) {
         <GridLongTextCellPopperContent
           tabIndex={-1}
           onKeyDown={(event) => {
-            if (event.key === 'Escape') {
-              event.stopPropagation();
-              setPopupOpen(false);
-              apiRef.current.getCellElement(id, colDef.field)?.focus();
-            }
+              throw new Error("STUB");
           }}
           {...slotProps?.popperContent}
           className={clsx(classes.popperContent, slotProps?.popperContent?.className)}
@@ -367,6 +290,4 @@ GridLongTextCell.propTypes /* remove-proptypes */ = {
 
 export { GridLongTextCell };
 
-export const renderLongTextCell = (params: GridLongTextCellProps) => (
-  <GridLongTextCell {...params} />
-);
+export const renderLongTextCell = (params: GridLongTextCellProps) => { throw new Error("STUB"); };

@@ -26,26 +26,5 @@ export const ConversationSubtitle = React.forwardRef(function ConversationSubtit
   props: ConversationSubtitleProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    ...other
-  } = props as ConversationSubtitleProps & {
-    ownerState?: ConversationSubtitleOwnerState;
-  };
-  const ownerState = useConversationContext();
-  void ownerStateProp;
-  const Subtitle = slots?.subtitle ?? 'div';
-  const subtitleProps = useSlotProps({
-    elementType: Subtitle,
-    externalSlotProps: slotProps?.subtitle,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  return <Subtitle {...subtitleProps}>{ownerState.conversation?.subtitle ?? null}</Subtitle>;
+    throw new Error("STUB");
 }) as ConversationSubtitleComponent;

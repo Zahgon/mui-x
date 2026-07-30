@@ -24,8 +24,7 @@ export function createInstancedAttribute(
   glType: GLenum = gl.FLOAT,
   normalized: boolean = false,
 ): InstancedAttribute {
-  const buffer = createGrowableBuffer(gl);
-  return bindInstancedAttribute(gl, program, name, buffer, size, glType, normalized);
+    throw new Error("STUB");
 }
 
 /**
@@ -48,18 +47,5 @@ export function bindInstancedAttribute(
   glType: GLenum = gl.FLOAT,
   normalized: boolean = false,
 ): InstancedAttribute {
-  const location = gl.getAttribLocation(program, name);
-  if (location === -1) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.warn(
-        `WebGL attribute "${name}" not found in shader program (misspelled or optimized out).`,
-      );
-    }
-    return { buffer, location, size, glType, normalized };
-  }
-  gl.bindBuffer(gl.ARRAY_BUFFER, buffer.buffer);
-  gl.enableVertexAttribArray(location);
-  gl.vertexAttribPointer(location, size, glType, normalized, 0, 0);
-  gl.vertexAttribDivisor(location, 1);
-  return { buffer, location, size, glType, normalized };
+    throw new Error("STUB");
 }

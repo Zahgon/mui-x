@@ -27,13 +27,4 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   }).toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'replace-heatmap-hide-legend-false',
-  specFiles: [
-    {
-      name: 'imports',
-      actual: readFile(path.join(import.meta.dirname, 'actual.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

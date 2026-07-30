@@ -39,43 +39,7 @@ const createCalendarStateReducer =
       | ReducerAction<'setVisibleDate', SetVisibleDatePayload>
       | ReducerAction<'changeMonthTimezone', { newTimezone: string }>,
   ): CalendarState => {
-    switch (action.type) {
-      case 'setVisibleDate':
-        return {
-          ...state,
-          slideDirection: action.direction,
-          currentMonth: action.month,
-          isMonthSwitchingAnimating:
-            !adapter.isSameMonth(action.month, state.currentMonth) &&
-            !reduceAnimations &&
-            !action.skipAnimation,
-          focusedDay: action.focusedDay,
-        };
-
-      case 'changeMonthTimezone': {
-        const newTimezone = action.newTimezone;
-        if (adapter.getTimezone(state.currentMonth) === newTimezone) {
-          return state;
-        }
-        let newCurrentMonth = adapter.setTimezone(state.currentMonth, newTimezone);
-        if (adapter.getMonth(newCurrentMonth) !== adapter.getMonth(state.currentMonth)) {
-          newCurrentMonth = adapter.setMonth(newCurrentMonth, adapter.getMonth(state.currentMonth));
-        }
-        return {
-          ...state,
-          currentMonth: newCurrentMonth,
-        };
-      }
-
-      case 'finishMonthSwitchingAnimation':
-        return {
-          ...state,
-          isMonthSwitchingAnimating: false,
-        };
-
-      default:
-        throw /* minify-error-disabled */ new Error('missing support');
-    }
+      throw new Error("STUB");
   };
 
 interface UseCalendarStateParameters extends Pick<
@@ -132,15 +96,8 @@ export const useCalendarState = (
 
   const referenceDate = React.useMemo<PickerValidDate>(
     () => {
-      return singleItemValueManager.getInitialReferenceValue({
-        value,
-        adapter,
-        timezone,
-        props: params,
-        referenceDate: referenceDateProp,
-        granularity: SECTION_TYPE_GRANULARITY.day,
-      });
-    },
+          throw new Error("STUB");
+      },
     // We want the `referenceDate` to update on prop and `timezone` change (https://github.com/mui/mui-x/issues/10804)
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [referenceDateProp, timezone],
@@ -169,75 +126,15 @@ export const useCalendarState = (
   // Ensure that `calendarState.currentMonth` timezone is updated when `referenceDate` (or timezone changes)
   // https://github.com/mui/mui-x/issues/10804
   React.useEffect(() => {
-    dispatch({
-      type: 'changeMonthTimezone',
-      newTimezone: adapter.getTimezone(referenceDate),
-    });
+      throw new Error("STUB");
   }, [referenceDate, adapter]);
 
   const setVisibleDate = useEventCallback(({ target, reason }: SetVisibleDateParameters) => {
-    if (
-      reason === 'cell-interaction' &&
-      calendarState.focusedDay != null &&
-      adapter.isSameDay(target, calendarState.focusedDay)
-    ) {
-      return;
-    }
-
-    const skipAnimation = reason === 'cell-interaction';
-    let month: PickerValidDate;
-    let focusedDay: PickerValidDate | null;
-    if (reason === 'cell-interaction') {
-      month = getCurrentMonthFromVisibleDate(target, calendarState.currentMonth);
-      focusedDay = target;
-    } else {
-      month = adapter.isSameMonth(target, calendarState.currentMonth)
-        ? calendarState.currentMonth
-        : adapter.startOfMonth(target);
-      focusedDay = target;
-
-      // If the date is disabled, we try to find a non-disabled date inside the same month.
-      if (isDateDisabled(focusedDay)) {
-        const startOfMonth = adapter.startOfMonth(target);
-        const endOfMonth = adapter.endOfMonth(target);
-        focusedDay = findClosestEnabledDate({
-          adapter,
-          date: focusedDay,
-          minDate: adapter.isBefore(minDate, startOfMonth) ? startOfMonth : minDate,
-          maxDate: adapter.isAfter(maxDate, endOfMonth) ? endOfMonth : maxDate,
-          disablePast,
-          disableFuture,
-          isDateDisabled,
-          timezone,
-        });
-      }
-    }
-
-    const hasChangedMonth = !adapter.isSameMonth(calendarState.currentMonth, month);
-    const hasChangedYear = !adapter.isSameYear(calendarState.currentMonth, month);
-    if (hasChangedMonth) {
-      onMonthChange?.(month);
-    }
-    if (hasChangedYear) {
-      onYearChange?.(adapter.startOfYear(month));
-    }
-
-    dispatch({
-      type: 'setVisibleDate',
-      month,
-      direction: adapter.isAfterDay(month, calendarState.currentMonth) ? 'left' : 'right',
-      focusedDay:
-        calendarState.focusedDay != null &&
-        focusedDay != null &&
-        adapter.isSameDay(focusedDay, calendarState.focusedDay)
-          ? calendarState.focusedDay
-          : focusedDay,
-      skipAnimation,
-    });
+      throw new Error("STUB");
   });
 
   const onMonthSwitchingAnimationEnd = React.useCallback(() => {
-    dispatch({ type: 'finishMonthSwitchingAnimation' });
+      throw new Error("STUB");
   }, []);
 
   return {

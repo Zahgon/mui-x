@@ -30,7 +30,7 @@ export function useScatterSeries(): UseScatterSeriesReturnValue[];
  */
 export function useScatterSeries(seriesIds: SeriesId[]): UseScatterSeriesReturnValue[];
 export function useScatterSeries(seriesIds?: SeriesId | SeriesId[]) {
-  return useSeriesOfType('scatter', seriesIds);
+    throw new Error("STUB");
 }
 
 /**

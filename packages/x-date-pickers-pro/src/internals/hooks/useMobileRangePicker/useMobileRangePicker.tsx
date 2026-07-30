@@ -60,7 +60,7 @@ export const useMobileRangePicker = <
     localeText,
     getStepNavigation,
     onPopperExited: useEventCallback(() =>
-      rangePositionResponse.setRangePosition(props.defaultRangePosition ?? 'start'),
+      { throw new Error("STUB"); },
     ),
   });
 
@@ -118,11 +118,8 @@ export const useMobileRangePicker = <
     },
     ...((fieldType === 'multi-input' && {
       textField: (slotOwnerState: FieldOwnerState & { position: 'start' | 'end' }) => {
-        return {
-          ...resolveComponentProps(innerSlotProps?.textField, slotOwnerState),
-          id: `${labelId}-${slotOwnerState.position}`,
-        };
-      },
+            throw new Error("STUB");
+        },
     }) as any),
   };
 

@@ -34,12 +34,7 @@ const sanitizer: NonNullable<MarkdownToJSX.Options['sanitizer']> = (value) => {
 // with Enter, keeping the whole list a single Tab stop. Mouse clicks work
 // throughout, and outside a roving list the tab order is untouched.
 function MarkdownLink({ children, ...other }: React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-  const contentTabIndex = useMessageContentTabIndex();
-  return (
-    <a target="_blank" rel="noopener noreferrer" tabIndex={contentTabIndex} {...other}>
-      {children}
-    </a>
-  );
+    throw new Error("STUB");
 }
 
 const markdownOptions: MarkdownToJSX.Options = {
@@ -57,14 +52,7 @@ const markdownOptions: MarkdownToJSX.Options = {
   // Route fenced code blocks to the themed ChatCodeBlock, which owns the copy
   // button, language label, and optional highlighter slot.
   renderRule(next, node, _renderChildren, state) {
-    if (node.type === RuleType.codeBlock) {
-      return (
-        <ChatCodeBlock key={state.key} language={node.lang || undefined}>
-          {node.text}
-        </ChatCodeBlock>
-      );
-    }
-    return next();
+      throw new Error("STUB");
   },
 };
 
@@ -88,15 +76,11 @@ export function renderMarkdown(text: string): React.ReactNode {
  * syntax arriving mid-stream renders cleanly instead of leaking raw markers.
  */
 function StreamingMarkdownText({ text }: { text: string }): React.ReactElement {
-  const repair = useStreamingMarkdownRepair();
-  const source = React.useMemo(() => repair(text), [repair, text]);
-  return <Markdown options={markdownOptions}>{source}</Markdown>;
+    throw new Error("STUB");
 }
 
 /**
  * Default `renderText` for the `text` part. Stable module-level identity so it does
  * not churn the headless `TextPart` `useMemo`.
  */
-export const renderStreamingMarkdown = (text: string): React.ReactNode => (
-  <StreamingMarkdownText text={text} />
-);
+export const renderStreamingMarkdown = (text: string): React.ReactNode => { throw new Error("STUB"); };

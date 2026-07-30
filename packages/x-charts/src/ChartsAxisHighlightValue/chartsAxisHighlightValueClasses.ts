@@ -18,7 +18,7 @@ export interface ChartsAxisHighlightValueClasses {
 export type ChartsAxisHighlightValueClassKey = keyof ChartsAxisHighlightValueClasses;
 
 export function getChartsAxisHighlightValueUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsAxisHighlightValue', slot);
+    throw new Error("STUB");
 }
 
 export const useUtilityClasses = (ownerState: {

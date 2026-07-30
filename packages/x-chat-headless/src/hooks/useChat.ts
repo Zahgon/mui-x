@@ -46,9 +46,13 @@ export interface UseChatValue<Cursor = string> {
   reconnectRealtime(): Promise<void>;
 }
 
-const noopAsync = async () => {};
+const noopAsync = async () => {
+    throw new Error("STUB");
+};
 
-const noopAsyncWithArg = async (_arg?: string) => {};
+const noopAsyncWithArg = async (_arg?: string) => {
+    throw new Error("STUB");
+};
 
 export function useChat<Cursor = string>(): UseChatValue<Cursor> {
   const store = useChatStore<Cursor>();
@@ -83,50 +87,7 @@ export function useChat<Cursor = string>(): UseChatValue<Cursor> {
   const error = useStore(store, selectError);
 
   return React.useMemo(
-    () => ({
-      messages,
-      conversations,
-      activeConversationId,
-      isStreaming,
-      hasMoreHistory,
-      isLoadingHistory,
-      error,
-      sendMessage: actions.sendMessage,
-      stopStreaming: actions.stopStreaming,
-      loadMoreHistory: actions.loadMoreHistory,
-      setActiveConversation: actions.setActiveConversation,
-      retry: actions.retry,
-      regenerate: actions.regenerate,
-      setError: actions.setError,
-      addToolApprovalResponse: actions.addToolApprovalResponse,
-      reloadConversations:
-        process.env.NODE_ENV !== 'production'
-          ? async () => {
-              throw new Error(
-                'MUI X Chat: reloadConversations is not yet implemented.\n' +
-                  'This method is a planned API stub. Remove the call until it is implemented.',
-              );
-            }
-          : noopAsync,
-      reloadMessages:
-        process.env.NODE_ENV !== 'production'
-          ? async (_arg?: string) => {
-              throw new Error(
-                'MUI X Chat: reloadMessages is not yet implemented.\n' +
-                  'This method is a planned API stub. Remove the call until it is implemented.',
-              );
-            }
-          : noopAsyncWithArg,
-      reconnectRealtime:
-        process.env.NODE_ENV !== 'production'
-          ? async () => {
-              throw new Error(
-                'MUI X Chat: reconnectRealtime is not yet implemented.\n' +
-                  'This method is a planned API stub. Remove the call until it is implemented.',
-              );
-            }
-          : noopAsync,
-    }),
+    () => { throw new Error("STUB"); },
     [
       actions.addToolApprovalResponse,
       actions.loadMoreHistory,

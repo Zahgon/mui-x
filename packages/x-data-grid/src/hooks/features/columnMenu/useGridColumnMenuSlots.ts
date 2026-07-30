@@ -29,42 +29,16 @@ const useGridColumnMenuSlots = (props: UseGridColumnMenuSlotsProps) => {
   } = props;
 
   const processedComponents = React.useMemo(
-    () => ({ ...defaultSlots, ...slots }),
+    () => { throw new Error("STUB"); },
     [defaultSlots, slots],
   );
 
   const processedSlotProps = React.useMemo(() => {
-    if (!slotProps || Object.keys(slotProps).length === 0) {
-      return defaultSlotProps;
-    }
-    const mergedProps = { ...slotProps } as typeof defaultSlotProps;
-    Object.entries(defaultSlotProps).forEach(([key, currentSlotProps]) => {
-      mergedProps[key] = { ...currentSlotProps, ...(slotProps[key] || {}) };
-    });
-    return mergedProps;
+      throw new Error("STUB");
   }, [defaultSlotProps, slotProps]);
 
   return React.useMemo(() => {
-    const sortedKeys = getColumnMenuItemKeys({
-      apiRef,
-      colDef,
-      defaultSlots,
-      defaultSlotProps,
-      slots,
-      slotProps,
-    });
-
-    return sortedKeys.reduce<UseGridColumnMenuSlotsResponse>((acc, key, index) => {
-      let itemProps = { colDef, onClick: hideMenu };
-      const processedComponentProps = processedSlotProps[key];
-      if (processedComponentProps) {
-        const { displayOrder, ...customProps } = processedComponentProps;
-        itemProps = { ...itemProps, ...customProps };
-      }
-      return addDividers && index !== sortedKeys.length - 1
-        ? [...acc, [processedComponents[key]!, itemProps], [rootProps.slots.baseDivider, {}]]
-        : [...acc, [processedComponents[key]!, itemProps]];
-    }, []);
+      throw new Error("STUB");
   }, [
     addDividers,
     apiRef,

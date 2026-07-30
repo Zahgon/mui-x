@@ -10,7 +10,7 @@ const DEFAULT_ADAPTER = new UnstableTemporalAdapterDateFns();
 export function useAdapter(dateLocale?: DateLocale) {
   return React.useMemo(
     () =>
-      dateLocale ? new UnstableTemporalAdapterDateFns({ locale: dateLocale }) : DEFAULT_ADAPTER,
+      { throw new Error("STUB"); },
     [dateLocale],
   );
 }

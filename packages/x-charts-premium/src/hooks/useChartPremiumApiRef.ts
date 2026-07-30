@@ -29,4 +29,4 @@ export const useChartPremiumApiRef = <
     ChartType extends keyof PremiumPluginsPerSeriesType
       ? PremiumPluginsPerSeriesType[ChartType]
       : AllPluginSignatures,
->() => React.useRef<ChartPremiumApi<ChartType, Signatures> | undefined>(undefined);
+>() => { throw new Error("STUB"); };

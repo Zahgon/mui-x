@@ -12,27 +12,7 @@ import type {
 } from '../models/chartsSlotsComponentsProps';
 
 export function useNoData() {
-  const seriesPerType = useSeries();
-
-  return Object.values(seriesPerType).every((seriesOfGivenType) => {
-    if (!seriesOfGivenType) {
-      return true;
-    }
-    const { series, seriesOrder } = seriesOfGivenType;
-
-    return seriesOrder.every((seriesId: SeriesId) => {
-      const seriesItem = series[seriesId];
-
-      // These prevent a type error when building the package.
-      // @ts-ignore, sankey type is not declared in the base package
-      if (seriesItem.type === 'sankey') {
-        // @ts-ignore, sankey type is not declared in the base package
-        return seriesItem.data.links.length === 0;
-      }
-
-      return seriesItem.data.length === 0;
-    });
-  });
+    throw new Error("STUB");
 }
 
 export type CommonOverlayProps = React.SVGAttributes<SVGTextElement> & {
@@ -79,15 +59,5 @@ export interface ChartsOverlayProps {
 }
 
 export function ChartsOverlay(props: ChartsOverlayProps) {
-  const noData = useNoData();
-
-  if (props.loading) {
-    const LoadingOverlay = props.slots?.loadingOverlay ?? ChartsLoadingOverlay;
-    return <LoadingOverlay {...props.slotProps?.loadingOverlay} />;
-  }
-  if (noData) {
-    const NoDataOverlay = props.slots?.noDataOverlay ?? ChartsNoDataOverlay;
-    return <NoDataOverlay {...props.slotProps?.noDataOverlay} />;
-  }
-  return null;
+    throw new Error("STUB");
 }

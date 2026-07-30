@@ -9,7 +9,7 @@ export interface ChartsAxisHighlightClasses {
 export type ChartsAxisHighlightClassKey = keyof ChartsAxisHighlightClasses;
 
 export function getAxisHighlightUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsAxisHighlight', slot);
+    throw new Error("STUB");
 }
 
 export const chartsAxisHighlightClasses: ChartsAxisHighlightClasses = generateUtilityClasses(

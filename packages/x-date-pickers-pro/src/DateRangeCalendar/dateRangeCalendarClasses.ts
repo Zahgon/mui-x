@@ -13,7 +13,7 @@ export interface DateRangeCalendarClasses {
 export type DateRangeCalendarClassKey = keyof DateRangeCalendarClasses;
 
 export const getDateRangeCalendarUtilityClass = (slot: string) =>
-  generateUtilityClass('MuiDateRangeCalendar', slot);
+  { throw new Error("STUB"); };
 
 export const dateRangeCalendarClasses: DateRangeCalendarClasses = generateUtilityClasses(
   'MuiDateRangeCalendar',

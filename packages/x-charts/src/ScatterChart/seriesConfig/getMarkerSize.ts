@@ -23,26 +23,11 @@ const getMarkerSize = (
   const sizeScale = sizeZAxis?.sizeScale;
 
   if (!sizeScale) {
-    return () => series.markerSize;
+    return () => { throw new Error("STUB"); };
   }
 
   return (dataIndex: number) => {
-    if (sizeZAxis?.data?.[dataIndex] !== undefined) {
-      const size = sizeScale(sizeZAxis.data[dataIndex]);
-      if (size != null && !Number.isNaN(size)) {
-        return size;
-      }
-    }
-
-    const value = series.data[dataIndex];
-    if (value != null) {
-      const size = sizeScale(value.sizeValue);
-      if (size != null && !Number.isNaN(size)) {
-        return size;
-      }
-    }
-
-    return series.markerSize;
+      throw new Error("STUB");
   };
 };
 

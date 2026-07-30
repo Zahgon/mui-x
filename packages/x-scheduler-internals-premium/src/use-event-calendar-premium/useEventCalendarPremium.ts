@@ -9,10 +9,10 @@ export function useEventCalendarPremium<TEvent extends object, TResource extends
   parameters: EventCalendarPremiumParameters<TEvent, TResource>,
 ): EventCalendarPremiumStore<TEvent, TResource> {
   const adapter = useAdapter(parameters.dateLocale);
-  const store = useDisposable(() => new EventCalendarPremiumStore(parameters, adapter));
+  const store = useDisposable(() => { throw new Error("STUB"); });
 
   useIsoLayoutEffect(
-    () => store.updateStateFromParameters(parameters, adapter),
+    () => { throw new Error("STUB"); },
     [store, adapter, parameters],
   );
 

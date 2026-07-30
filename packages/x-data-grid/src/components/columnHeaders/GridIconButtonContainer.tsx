@@ -25,25 +25,10 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const GridIconButtonContainerRoot = styled('div', {
   name: 'MuiDataGrid',
   slot: 'IconButtonContainer',
-})<{ ownerState: OwnerState }>(() => ({
-  display: 'flex',
-  visibility: 'hidden',
-  width: 0,
-}));
+})<{ ownerState: OwnerState }>(() => { throw new Error("STUB"); });
 
 export const GridIconButtonContainer = forwardRef<HTMLDivElement, GridIconButtonContainerProps>(
   function GridIconButtonContainer(props, ref) {
-    const { className, ...other } = props;
-    const rootProps = useGridRootProps();
-    const classes = useUtilityClasses(rootProps);
-
-    return (
-      <GridIconButtonContainerRoot
-        className={clsx(classes.root, className)}
-        ownerState={rootProps}
-        {...other}
-        ref={ref}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );

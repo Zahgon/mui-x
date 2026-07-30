@@ -42,7 +42,7 @@ function GridChartsPanelDataFieldMenu(props: GridChartsPanelDataFieldMenuProps) 
   const values = useGridSelector(apiRef, gridChartsValuesSelector, activeChartId);
   const isAvailableField = section === null;
   const fieldIndexInModel = !isAvailableField
-    ? (section === 'dimensions' ? dimensions : values).findIndex((item) => item.field === field)
+    ? (section === 'dimensions' ? dimensions : values).findIndex((item) => { throw new Error("STUB"); })
     : -1;
   const modelLength = !isAvailableField
     ? (section === 'dimensions' ? dimensions : values).length
@@ -54,76 +54,7 @@ function GridChartsPanelDataFieldMenu(props: GridChartsPanelDataFieldMenuProps) 
   const triggerRef = React.useRef<HTMLButtonElement>(null);
 
   const menuItems = React.useMemo((): (MenuAction | MenuDivider)[] => {
-    if (isAvailableField) {
-      return [
-        {
-          key: 'dimensions',
-          label: apiRef.current.getLocaleText('chartsMenuAddToDimensions')(dimensionsLabel),
-        },
-        {
-          key: 'values',
-          label: apiRef.current.getLocaleText('chartsMenuAddToValues')(valuesLabel),
-        },
-      ].filter((item) => !blockedSections?.includes(item.key)) as MenuAction[];
-    }
-
-    const moveMenuItems: (MenuAction | MenuDivider)[] = [
-      {
-        key: 'up',
-        label: apiRef.current.getLocaleText('chartsMenuMoveUp'),
-        icon: <rootProps.slots.chartsMenuMoveUpIcon />,
-        disabled: !canMoveUp,
-      },
-      {
-        key: 'down',
-        label: apiRef.current.getLocaleText('chartsMenuMoveDown'),
-        icon: <rootProps.slots.chartsMenuMoveDownIcon />,
-        disabled: !canMoveDown,
-      },
-      { divider: true },
-      {
-        key: 'top',
-        label: apiRef.current.getLocaleText('chartsMenuMoveToTop'),
-        icon: <rootProps.slots.chartsMenuMoveToTopIcon />,
-        disabled: !canMoveUp,
-      },
-      {
-        key: 'bottom',
-        label: apiRef.current.getLocaleText('chartsMenuMoveToBottom'),
-        icon: <rootProps.slots.chartsMenuMoveToBottomIcon />,
-        disabled: !canMoveDown,
-      },
-      { divider: true },
-    ];
-
-    const removeMenuItem = [
-      {
-        key: null,
-        label: apiRef.current.getLocaleText('chartsMenuRemove'),
-        icon: <rootProps.slots.chartsMenuRemoveIcon />,
-      },
-    ];
-
-    const addToSectionMenuItems: (MenuAction | MenuDivider)[] = [
-      {
-        key: 'dimensions',
-        label: apiRef.current.getLocaleText('chartsMenuAddToDimensions')(dimensionsLabel),
-        icon: <span />,
-      },
-      {
-        key: 'values',
-        label: apiRef.current.getLocaleText('chartsMenuAddToValues')(valuesLabel),
-        icon: <span />,
-      },
-    ].filter(
-      (item) => item.key !== section && !blockedSections?.includes(item.key),
-    ) as MenuAction[];
-
-    if (addToSectionMenuItems.length > 0) {
-      addToSectionMenuItems.push({ divider: true });
-    }
-
-    return [...moveMenuItems, ...addToSectionMenuItems, ...removeMenuItem];
+      throw new Error("STUB");
   }, [
     isAvailableField,
     apiRef,
@@ -230,19 +161,7 @@ function GridChartsPanelDataFieldMenu(props: GridChartsPanelDataFieldMenuProps) 
           {...rootProps.slotProps?.baseMenuList}
         >
           {menuItems.map((item, index) =>
-            'divider' in item ? (
-              <rootProps.slots.baseDivider key={`divider-${index}`} />
-            ) : (
-              <rootProps.slots.baseMenuItem
-                key={item.key}
-                disabled={item.disabled}
-                onClick={() => handleMove(item.key)}
-                iconStart={item.icon}
-                {...rootProps.slotProps?.baseMenuItem}
-              >
-                {item.label}
-              </rootProps.slots.baseMenuItem>
-            ),
+            { throw new Error("STUB"); },
           )}
         </rootProps.slots.baseMenuList>
       </GridMenu>

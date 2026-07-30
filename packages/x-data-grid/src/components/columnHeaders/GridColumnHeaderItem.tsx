@@ -137,17 +137,7 @@ function GridColumnHeaderItem(props: GridColumnHeaderItemProps) {
   const hasKnownDefaultColumnMenu = defaultSlots != null && defaultSlotProps != null;
 
   const columnMenuItemKeys = React.useMemo(() => {
-    if (!hasKnownDefaultColumnMenu) {
-      return [];
-    }
-    return getColumnMenuItemKeys({
-      apiRef,
-      colDef,
-      defaultSlots,
-      defaultSlotProps,
-      slots: columnMenuSlotProps?.slots,
-      slotProps: columnMenuSlotProps?.slotProps,
-    });
+      throw new Error("STUB");
   }, [
     apiRef,
     colDef,
@@ -181,72 +171,36 @@ function GridColumnHeaderItem(props: GridColumnHeaderItemProps) {
   const classes = useUtilityClasses(ownerState);
 
   const publish = React.useCallback(
-    (eventName: keyof GridColumnHeaderEventLookup) => (event: React.SyntheticEvent) => {
-      // Ignore portal
-      // See https://github.com/mui/mui-x/issues/1721
-      if (isEventTargetInPortal(event)) {
-        return;
-      }
-      apiRef.current.publishEvent(
-        eventName,
-        apiRef.current.getColumnHeaderParams(colDef.field),
-        event as any,
-      );
-    },
+    (eventName: keyof GridColumnHeaderEventLookup) => { throw new Error("STUB"); },
     [apiRef, colDef.field],
   );
 
   const mouseEventsHandlers = React.useMemo(
-    () => ({
-      onClick: publish('columnHeaderClick'),
-      onContextMenu: publish('columnHeaderContextMenu'),
-      onDoubleClick: publish('columnHeaderDoubleClick'),
-      onMouseOver: publish('columnHeaderOver'), // TODO remove as it's not used
-      onMouseOut: publish('columnHeaderOut'), // TODO remove as it's not used
-      onMouseEnter: publish('columnHeaderEnter'), // TODO remove as it's not used
-      onMouseLeave: publish('columnHeaderLeave'), // TODO remove as it's not used
-      onKeyDown: publish('columnHeaderKeyDown'),
-      onFocus: publish('columnHeaderFocus'),
-      onBlur: publish('columnHeaderBlur'),
-    }),
+    () => { throw new Error("STUB"); },
     [publish],
   );
 
   const draggableEventHandlers = React.useMemo(
     () =>
-      isDraggable
-        ? {
-            onDragStart: publish('columnHeaderDragStart'),
-            onDragEnter: publish('columnHeaderDragEnter'),
-            onDragOver: publish('columnHeaderDragOver'),
-            onDragEndCapture: publish('columnHeaderDragEnd'),
-          }
-        : {},
+      { throw new Error("STUB"); },
     [isDraggable, publish],
   );
 
   const columnHeaderSeparatorProps = React.useMemo(
-    () => ({
-      onMouseDown: publish('columnSeparatorMouseDown'),
-      onDoubleClick: publish('columnSeparatorDoubleClick'),
-    }),
+    () => { throw new Error("STUB"); },
     [publish],
   );
 
   React.useEffect(() => {
-    if (!showColumnMenuIcon && columnMenuOpen) {
-      setShowColumnMenuIcon(columnMenuOpen);
-    }
+      throw new Error("STUB");
   }, [showColumnMenuIcon, columnMenuOpen]);
 
   React.useEffect(() => {
-    if (hasKnownDefaultColumnMenu && columnMenuOpen && !hasColumnMenuItems) {
-      apiRef.current.hideColumnMenu();
-    }
+      throw new Error("STUB");
   }, [apiRef, columnMenuOpen, hasColumnMenuItems, hasKnownDefaultColumnMenu]);
 
   const handleExited = React.useCallback(() => {
-    setShowColumnMenuIcon(false);
+      throw new Error("STUB");
   }, []);
 
   const columnMenuIconButton = !rootProps.disableColumnMenu &&
@@ -304,15 +258,7 @@ function GridColumnHeaderItem(props: GridColumnHeaderItemProps) {
   );
 
   React.useLayoutEffect(() => {
-    const columnMenuState = apiRef.current.state.columnMenu;
-    if (hasFocus && !columnMenuState.open) {
-      const focusableElement = headerCellRef.current!.querySelector<HTMLElement>('[tabindex="0"]');
-      const elementToFocus = focusableElement || headerCellRef.current;
-      if (!elementToFocus) {
-        return;
-      }
-      focusElement(elementToFocus, apiRef);
-    }
+      throw new Error("STUB");
   }, [apiRef, hasFocus]);
 
   const headerClassName =
@@ -325,12 +271,7 @@ function GridColumnHeaderItem(props: GridColumnHeaderItemProps) {
   const pinnedScrollOffset = usePinnedScrollOffset(apiRef, pinnedPosition);
   const style = React.useMemo(
     () =>
-      attachPinnedStyle(
-        { ...props.style },
-        isRtl,
-        pinnedPosition,
-        pinnedOffset !== undefined ? pinnedOffset + pinnedScrollOffset : undefined,
-      ),
+      { throw new Error("STUB"); },
     [pinnedPosition, pinnedOffset, pinnedScrollOffset, props.style, isRtl],
   );
 

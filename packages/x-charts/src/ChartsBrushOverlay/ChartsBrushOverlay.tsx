@@ -18,15 +18,7 @@ import type { UseChartBrushSignature } from '../internals/plugins/featurePlugins
 import { useStore } from '../internals/store/useStore';
 
 function BrushRect(props: React.SVGProps<SVGRectElement>) {
-  return (
-    <rect
-      className={brushOverlayClasses.rect}
-      strokeWidth={1}
-      fillOpacity={0.2}
-      pointerEvents={'none'}
-      {...props}
-    />
-  );
+    throw new Error("STUB");
 }
 
 export interface ChartsBrushOverlayProps {

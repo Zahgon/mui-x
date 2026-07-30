@@ -88,18 +88,11 @@ export function useValidation<TValue extends PickerValidValue, TError, TValidati
   const hasValidationError = validator.valueManager.hasError(validationError);
 
   React.useEffect(() => {
-    if (
-      onError &&
-      !validator.valueManager.isSameError(validationError, previousValidationErrorRef.current)
-    ) {
-      onError(validationError, value);
-    }
-
-    previousValidationErrorRef.current = validationError;
+      throw new Error("STUB");
   }, [validator, onError, validationError, value]);
 
   const getValidationErrorForNewValue = useEventCallback((newValue: TValue) => {
-    return validator({ adapter, value: newValue, timezone, props });
+      throw new Error("STUB");
   });
 
   return { validationError, hasValidationError, getValidationErrorForNewValue };

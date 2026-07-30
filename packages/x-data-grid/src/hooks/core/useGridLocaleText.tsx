@@ -10,11 +10,8 @@ export const useGridLocaleText = (
 ): void => {
   const getLocaleText = React.useCallback<GridLocaleTextApi['getLocaleText']>(
     (key) => {
-      if (props.localeText[key] == null) {
-        throw new Error(`MUI X: Missing translation for key ${key}.`);
-      }
-      return props.localeText[key];
-    },
+          throw new Error("STUB");
+      },
     [props.localeText],
   );
 

@@ -31,7 +31,7 @@ const urPKGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'فلٹرز چھپائیں',
   toolbarFiltersTooltipShow: 'فلٹرز دکھائیں',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} فعال فلٹرز` : `${count} فلٹرز فعال`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'تلاش کریں۔۔۔',
@@ -140,20 +140,20 @@ const urPKGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} فعال فلٹرز` : `${count} فلٹرز فعال`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'فلٹرز دکھائیں',
   columnHeaderSortIconLabel: 'Sort',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1 ? `${count.toLocaleString()} منتخب قطاریں` : `${count.toLocaleString()} منتخب قطار`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'کل قطاریں:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${totalCount.toLocaleString()} میں سے ${visibleCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'چیک باکس منتخب کریں',
@@ -185,8 +185,8 @@ const urPKGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'گروپ',
-  groupColumn: (name) => `${name} سے گروپ کریں`,
-  unGroupColumn: (name) => `${name} سے گروپ ختم کریں`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'ڈیٹیل پینل کھولیں / بند کریں',
@@ -209,17 +209,7 @@ const urPKGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'پہلے صفحے پر جائیں';
-    }
-    if (type === 'last') {
-      return 'آخری صفحے پر جائیں';
-    }
-    if (type === 'next') {
-      return 'اگلے صفحے پر جائیں';
-    }
-    // if (type === 'previous') {
-    return 'پچھلے صفحے پر جائیں';
+      throw new Error("STUB");
   },
 
   // Row reordering text

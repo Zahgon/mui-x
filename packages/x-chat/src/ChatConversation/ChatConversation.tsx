@@ -26,43 +26,13 @@ export interface ChatConversationProps extends ConversationRootProps {
 const ChatConversationStyled = styled('div', {
   name: 'MuiChatConversation',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  flex: 1,
-  minHeight: 0,
-  minWidth: 0,
-  overflow: 'hidden',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(() => { throw new Error("STUB"); });
 
 const ChatConversation = React.forwardRef<HTMLDivElement, ChatConversationProps>(
   function ChatConversation(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatConversation' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatConversationUtilityClasses(classesProp);
-
-    return (
-      <ConversationRoot
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          root: slots?.root ?? ChatConversationStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          root: mergeSlotProps(
-            {
-              className: clsx(classes.root, className),
-              sx,
-            },
-            slotProps?.root,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatConversation.propTypes /* remove-proptypes */ = {

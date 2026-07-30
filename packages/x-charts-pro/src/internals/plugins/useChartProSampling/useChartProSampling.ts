@@ -9,18 +9,7 @@ export const useChartProSampling: ChartPlugin<UseChartProSamplingSignature> = ({
   params,
   store,
 }) => {
-  const { sampling } = params;
-
-  useEffectAfterFirstRender(() => {
-    // Skip the update when unchanged so an inlined `sampling` config (a new object each render, e.g.
-    // in composition) doesn't replace the state and force the pyramids to recompute every render.
-    const next = toSamplingState(sampling);
-    if (!isDeepEqual(store.state.sampling, next)) {
-      store.set('sampling', next);
-    }
-  }, [sampling, store]);
-
-  return {};
+    throw new Error("STUB");
 };
 
 /** Maps the per-series-type `sampling` config to the internal state (enabled methods per type). */
@@ -28,10 +17,7 @@ function toSamplingState(sampling: SamplingConfig = {}): SamplingState {
   const methods: SamplingState['methods'] = {};
   // Iterate generically so a new series type only needs its `sampling` config entry, no edit here.
   (Object.keys(sampling) as (keyof SamplingConfig)[]).forEach((seriesType) => {
-    const method = sampling[seriesType];
-    if (method && method !== 'none') {
-      methods[seriesType] = method;
-    }
+      throw new Error("STUB");
   });
   return {
     enabled: Object.keys(methods).length > 0,
@@ -43,11 +29,6 @@ useChartProSampling.params = {
   sampling: true,
 };
 
-useChartProSampling.getDefaultizedParams = ({ params }) => ({
-  ...params,
-  sampling: params.sampling ?? {},
-});
+useChartProSampling.getDefaultizedParams = ({ params }) => { throw new Error("STUB"); };
 
-useChartProSampling.getInitialState = ({ sampling }) => ({
-  sampling: toSamplingState(sampling),
-});
+useChartProSampling.getInitialState = ({ sampling }) => { throw new Error("STUB"); };

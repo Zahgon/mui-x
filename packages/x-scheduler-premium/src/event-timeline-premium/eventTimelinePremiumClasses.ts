@@ -64,7 +64,7 @@ export interface EventTimelinePremiumClasses
 export type EventTimelinePremiumClassKey = keyof EventTimelinePremiumClasses;
 
 export function getEventTimelinePremiumUtilityClass(slot: string) {
-  return generateUtilityClass('MuiEventTimeline', slot);
+    throw new Error("STUB");
 }
 
 export const eventTimelinePremiumClasses: EventTimelinePremiumClasses = generateUtilityClasses(

@@ -53,62 +53,7 @@ const STEPS: PickerRangeStep[] = [
 const rendererInterceptor = function RendererInterceptor(
   props: PickerRendererInterceptorProps<PickerRangeValue, DateTimeRangePickerView, any>,
 ) {
-  const { viewRenderers, popperView, rendererProps } = props;
-  const { rangePosition } = usePickerRangePositionContext();
-  const { view, openTo, ...otherRendererProps } = rendererProps;
-
-  const finalProps = {
-    ...otherRendererProps,
-    sx: [
-      {
-        width: DIALOG_WIDTH,
-        [`.${multiSectionDigitalClockSectionClasses.root}`]: {
-          flex: 1,
-          // account for the border on `MultiSectionDigitalClock`
-          maxHeight: VIEW_HEIGHT - 1,
-          [`.${multiSectionDigitalClockSectionClasses.item}`]: {
-            width: 'auto',
-          },
-        },
-        [`&.${digitalClockClasses.root}`]: {
-          maxHeight: RANGE_VIEW_HEIGHT,
-          [`.${digitalClockClasses.item}`]: {
-            justifyContent: 'center',
-          },
-        },
-        [`&.${multiSectionDigitalClockClasses.root}, .${multiSectionDigitalClockSectionClasses.root}`]:
-          {
-            maxHeight: RANGE_VIEW_HEIGHT - 1,
-          },
-      },
-    ],
-  };
-  const isTimeView = isInternalTimeView(popperView);
-  const viewRenderer = viewRenderers[popperView];
-  if (!viewRenderer) {
-    return null;
-  }
-  if (isTimeView) {
-    return (
-      <DateTimeRangePickerTimeWrapper
-        {...finalProps}
-        viewRenderer={viewRenderer as PickerViewRenderer<PickerRangeValue, any>}
-        view={view && isInternalTimeView(view) ? view : 'hours'}
-        views={finalProps.views as TimeViewWithMeridiem[]}
-        openTo={isInternalTimeView(openTo) ? openTo : 'hours'}
-      />
-    );
-  }
-  // avoiding problem of `props: never`
-  const typedViewRenderer = viewRenderer as PickerViewRenderer<PickerRangeValue, any>;
-
-  return typedViewRenderer({
-    ...finalProps,
-    availableRangePositions: [rangePosition],
-    views: finalProps.views.filter(isDatePickerView),
-    view: view && isDatePickerView(view) ? view : 'day',
-    openTo: isDatePickerView(openTo) ? openTo : 'day',
-  });
+    throw new Error("STUB");
 };
 
 type MobileDateRangePickerComponent = ((
@@ -129,72 +74,7 @@ const MobileDateTimeRangePicker = React.forwardRef(function MobileDateTimeRangeP
   inProps: MobileDateTimeRangePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-  // Props with the default values common to all date time range pickers
-  const defaultizedProps = useDateTimeRangePickerDefaultizedProps<MobileDateTimeRangePickerProps>(
-    inProps,
-    'MuiMobileDateTimeRangePicker',
-  );
-
-  const renderTimeView = defaultizedProps.shouldRenderTimeInASingleColumn
-    ? renderDigitalClockTimeView
-    : renderMultiSectionDigitalClockTimeView;
-
-  const viewRenderers: PickerViewRendererLookup<any, any, any> = {
-    day: renderDateRangeViewCalendar,
-    hours: renderTimeView,
-    minutes: renderTimeView,
-    seconds: renderTimeView,
-    meridiem: renderTimeView,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  const props = {
-    ...defaultizedProps,
-    viewRenderers,
-    format: resolveDateTimeFormat(
-      adapter,
-      { ...defaultizedProps, views: defaultizedProps.viewsForFormatting },
-      true,
-    ),
-    // Force one calendar on mobile to avoid layout issues
-    calendars: 1,
-    // force true to correctly handle `renderTimeViewClock` as a renderer
-    ampmInClock: true,
-    // force current calendar position, since we only have one calendar
-    currentMonthCalendarPosition: 1,
-    slots: {
-      field: SingleInputDateTimeRangeField,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      tabs: {
-        hidden: false,
-        ...defaultizedProps.slotProps?.tabs,
-      },
-      toolbar: {
-        hidden: false,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useMobileRangePicker<DateTimeRangePickerView, typeof props>({
-    ref,
-    props,
-    valueManager: rangeValueManager,
-    valueType: 'date-time',
-    validator: validateDateTimeRange,
-    rendererInterceptor,
-    steps: STEPS,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as MobileDateRangePickerComponent;
 
 MobileDateTimeRangePicker.propTypes /* remove-proptypes */ = {

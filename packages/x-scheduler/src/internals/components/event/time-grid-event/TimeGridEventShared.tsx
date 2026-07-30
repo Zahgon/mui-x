@@ -55,31 +55,4 @@ export const getTimeGridEventRootStyles = (theme: Theme): CSSObject => ({
 export const TimeGridEventPlaceholder = styled(CalendarGrid.TimeEventPlaceholder, {
   name: 'MuiEventCalendar',
   slot: 'TimeGridEventPlaceholder',
-})<{ palette?: PaletteName }>(({ theme }) => ({
-  '--time-grid-event-column-gap': '12px',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: 'var(--event-surface-subtle-hover)',
-  border: `1px dashed var(--event-on-surface-subtle-secondary)`,
-  color: 'var(--event-on-surface-subtle-primary)',
-  position: 'absolute',
-  left: 'calc(((100% - var(--time-grid-event-column-gap)) / var(--columns-count)) * (var(--first-index) - 1))',
-  right:
-    'calc(((100% - var(--time-grid-event-column-gap)) * (var(--columns-count) - var(--last-index))) / var(--columns-count) + var(--time-grid-event-column-gap))',
-  top: 'var(--y-position)',
-  bottom: 'calc(100% - var(--y-position) - var(--height))',
-  zIndex: 2,
-  padding: theme.spacing(0.5, 2, 0.5, 1.5),
-  containerType: 'size',
-  minHeight: 11.5,
-  '&[data-under-fifteen-minutes="true"]': {
-    padding: theme.spacing(0, 1),
-  },
-  variants: getPaletteVariants(theme),
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-  },
-  [eventCalendarContentCompactQuery]: {
-    '--time-grid-event-column-gap': '0px',
-  },
-}));
+})<{ palette?: PaletteName }>(({ theme }) => { throw new Error("STUB"); });

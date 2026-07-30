@@ -8,7 +8,7 @@ import type { AxisId } from '../models/axis';
  */
 export function useChartGradientIdBuilder() {
   const chartId = useChartId();
-  return React.useCallback((axisId: AxisId) => `${chartId}-gradient-${axisId}`, [chartId]);
+  return React.useCallback((axisId: AxisId) => { throw new Error("STUB"); }, [chartId]);
 }
 
 /**
@@ -17,7 +17,7 @@ export function useChartGradientIdBuilder() {
 export function useChartGradientIdObjectBoundBuilder() {
   const chartId = useChartId();
   return React.useCallback(
-    (axisId: AxisId) => `${chartId}-gradient-${axisId}-object-bound`,
+    (axisId: AxisId) => { throw new Error("STUB"); },
     [chartId],
   );
 }
@@ -33,7 +33,7 @@ export function useChartGradientIdObjectBoundBuilder() {
  * @returns the gradient id
  */
 export function useChartGradientId(axisId: AxisId) {
-  return useChartGradientIdBuilder()(axisId);
+    throw new Error("STUB");
 }
 
 /**
@@ -47,5 +47,5 @@ export function useChartGradientId(axisId: AxisId) {
  * @returns the gradient id
  */
 export function useChartGradientIdObjectBound(axisId: AxisId) {
-  return useChartGradientIdObjectBoundBuilder()(axisId);
+    throw new Error("STUB");
 }

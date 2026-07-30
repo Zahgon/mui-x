@@ -41,5 +41,5 @@ export function useRadarSeries(seriesIds?: SeriesId | SeriesId[]) {
  * @returns the radar series
  */
 export function useRadarSeriesContext(): UseRadarSeriesContextReturnValue {
-  return useAllSeriesOfType('radar');
+    throw new Error("STUB");
 }

@@ -28,20 +28,7 @@ const useUtilityClasses = <R extends {}, Multiple extends boolean | undefined>(
   const { classes } = ownerState;
 
   return React.useMemo(() => {
-    const slots = {
-      root: ['root'],
-      item: ['item'],
-      itemContent: ['itemContent'],
-      itemGroupTransition: ['itemGroupTransition'],
-      itemIconContainer: ['itemIconContainer'],
-      itemLabel: ['itemLabel'],
-      itemLabelInput: ['itemLabelInput'],
-      itemCheckbox: ['itemCheckbox'],
-      // itemDragAndDropOverlay: ['itemDragAndDropOverlay'], => feature not available on this component
-      // itemErrorIcon: ['itemErrorIcon'], => feature not available on this component
-    };
-
-    return composeClasses(slots, getRichTreeViewUtilityClass, classes);
+      throw new Error("STUB");
   }, [classes]);
 };
 
@@ -74,68 +61,7 @@ const RichTreeView = React.forwardRef(function RichTreeView<
   R extends TreeViewValidItem<R>,
   Multiple extends boolean | undefined = undefined,
 >(inProps: RichTreeViewProps<R, Multiple>, forwardedRef: React.Ref<HTMLUListElement>) {
-  const props = useThemeProps({ props: inProps, name: 'MuiRichTreeView' });
-  if (process.env.NODE_ENV !== 'production') {
-    if ((props as any).children != null) {
-      warnOnce([
-        'MUI X: The Rich Tree View component does not support JSX children.',
-        'If you want to add items, you need to use the `items` prop.',
-        'Check the documentation for more details: https://mui.com/x/react-tree-view/rich-tree-view/items/.',
-      ]);
-    }
-  }
-
-  const {
-    slots: inSlots,
-    slotProps,
-    apiRef,
-    parameters,
-    forwardedProps,
-  } = useExtractRichTreeViewParameters(props);
-
-  // Context hooks
-  const store = useTreeViewStore(RichTreeViewStore, parameters);
-
-  // Ref hooks
-  const ref = React.useRef<HTMLUListElement | null>(null);
-  const handleRef = useMergedRefs(forwardedRef, ref);
-
-  // Selector hooks
-  const isLoading = useStore(store, lazyLoadingSelectors.isItemLoading, null);
-  const error = useStore(store, lazyLoadingSelectors.itemError, null);
-
-  // Feature hooks
-  const classes = useUtilityClasses(props);
-  const slots = React.useMemo(() => ({ root: RichTreeViewRoot, ...inSlots }), [inSlots]);
-
-  if (isLoading) {
-    return <Typography>Loading…</Typography>;
-  }
-
-  if (error) {
-    return <Alert severity="error">{error.message}</Alert>;
-  }
-
-  return (
-    <TreeViewProvider
-      store={store}
-      classes={classes}
-      slots={slots}
-      slotProps={slotProps}
-      apiRef={apiRef}
-      rootRef={ref}
-    >
-      <TreeViewItemDepthContext.Provider value={itemsSelectors.itemDepth}>
-        <RichTreeViewItems
-          slots={slots}
-          slotProps={slotProps}
-          forwardedProps={forwardedProps}
-          ownerState={props}
-          rootRef={handleRef}
-        />
-      </TreeViewItemDepthContext.Provider>
-    </TreeViewProvider>
-  );
+    throw new Error("STUB");
 }) as RichTreeViewComponent;
 
 RichTreeView.propTypes /* remove-proptypes */ = {

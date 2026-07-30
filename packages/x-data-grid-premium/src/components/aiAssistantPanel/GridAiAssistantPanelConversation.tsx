@@ -52,22 +52,13 @@ function GridAiAssistantPanelConversation(props: GridAiAssistantPanelConversatio
 
   // Scroll to the bottom of the conversation when the prompt list changes
   React.useEffect(() => {
-    ref.current?.scrollTo({
-      top: ref.current?.scrollHeight,
-      behavior: 'smooth',
-    });
+      throw new Error("STUB");
   }, [conversation]);
 
   return (
     <AiAssistantPanelConversationRoot className={classes.root} ownerState={rootProps} ref={ref}>
       <AiAssistantPanelConversationList className={classes.list} ownerState={rootProps}>
-        {conversation.prompts.map((item) => (
-          <GridPrompt
-            key={item.createdAt.toISOString()}
-            {...item}
-            onRerun={() => apiRef.current.aiAssistant.processPrompt(item.value)}
-          />
-        ))}
+        {conversation.prompts.map((item) => { throw new Error("STUB"); })}
       </AiAssistantPanelConversationList>
     </AiAssistantPanelConversationRoot>
   );

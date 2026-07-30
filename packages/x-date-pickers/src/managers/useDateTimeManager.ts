@@ -20,15 +20,7 @@ import { usePickerAdapter, usePickerTranslations } from '../hooks';
 
 export function useDateTimeManager(): UseDateTimeManagerReturnValue {
   return React.useMemo(
-    () => ({
-      valueType: 'date-time',
-      validator: validateDateTime,
-      internal_valueManager: singleItemValueManager,
-      internal_fieldValueManager: singleItemFieldValueManager,
-      internal_useApplyDefaultValuesToFieldInternalProps:
-        useApplyDefaultValuesToDateTimeFieldInternalProps,
-      internal_useOpenPickerButtonAriaLabel: useOpenPickerButtonAriaLabel,
-    }),
+    () => { throw new Error("STUB"); },
     [],
   );
 }
@@ -38,32 +30,14 @@ function useOpenPickerButtonAriaLabel(value: PickerValue) {
   const translations = usePickerTranslations();
 
   return React.useMemo(() => {
-    const formattedValue = adapter.isValid(value) ? adapter.format(value, 'fullDate') : null;
-    return translations.openDatePickerDialogue(formattedValue);
+      throw new Error("STUB");
   }, [value, translations, adapter]);
 }
 
 function useApplyDefaultValuesToDateTimeFieldInternalProps(
   internalProps: DateTimeManagerFieldInternalProps,
 ): PickerManagerFieldInternalPropsWithDefaults<UseDateTimeManagerReturnValue> {
-  const adapter = usePickerAdapter();
-  const validationProps = useApplyDefaultValuesToDateTimeValidationProps(internalProps);
-
-  const ampm = React.useMemo(
-    () => internalProps.ampm ?? adapter.is12HourCycleInCurrentLocale(),
-    [internalProps.ampm, adapter],
-  );
-
-  return React.useMemo(
-    () => ({
-      ...internalProps,
-      ...validationProps,
-      format:
-        internalProps.format ??
-        (ampm ? adapter.formats.keyboardDateTime12h : adapter.formats.keyboardDateTime24h),
-    }),
-    [internalProps, validationProps, ampm, adapter],
-  );
+    throw new Error("STUB");
 }
 
 type SharedDateTimeAndDateTimeRangeValidationProps =
@@ -79,17 +53,7 @@ export function useApplyDefaultValuesToDateTimeValidationProps(
   const defaultDates = useDefaultDates();
 
   return React.useMemo(
-    () => ({
-      disablePast: props.disablePast ?? false,
-      disableFuture: props.disableFuture ?? false,
-      // TODO: Explore if we can remove it from the public API
-      disableIgnoringDatePartForTimeValidation:
-        !!props.minDateTime || !!props.maxDateTime || !!props.disableFuture || !!props.disablePast,
-      minDate: applyDefaultDate(adapter, props.minDateTime ?? props.minDate, defaultDates.minDate),
-      maxDate: applyDefaultDate(adapter, props.maxDateTime ?? props.maxDate, defaultDates.maxDate),
-      minTime: props.minDateTime ?? props.minTime,
-      maxTime: props.maxDateTime ?? props.maxTime,
-    }),
+    () => { throw new Error("STUB"); },
     [
       props.minDateTime,
       props.maxDateTime,

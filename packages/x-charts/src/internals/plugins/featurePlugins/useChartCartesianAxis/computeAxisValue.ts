@@ -187,117 +187,11 @@ export function computeAxisValue<SeriesType extends ChartSeriesType>({
 
   const completeAxis: ComputedAxisConfig<ChartsAxisProps> = {};
   allAxis.forEach((eachAxis) => {
-    const axis = eachAxis as Readonly<DefaultedAxis<ScaleName, any, Readonly<ChartsAxisProps>>>;
-    const scale = scales[axis.id];
-    const zoom = zoomMap?.get(axis.id);
-    const zoomRange: [number, number] = zoom ? [zoom.start, zoom.end] : [0, 100];
-    const range = getRange(drawingArea, axisDirection, axis.reverse ?? false);
-
-    const rawTickNumber = domains[axis.id].tickNumber!;
-
-    const triggerTooltip = !axis.ignoreTooltip && axisIdsTriggeringTooltip.has(axis.id);
-    const tickNumber = scaleTickNumberByRange(rawTickNumber, zoomRange);
-    const resolvedSize = resolveAxisSize(axis, autoSizes, axisDirection);
-
-    const data = axis.data ?? [];
-    const resolvedOffset = resolvedOffsets[axis.id] ?? axis.offset ?? 0;
-
-    if (isOrdinalScale(scale)) {
-      const scaleRange = axisDirection === 'y' ? [range[1], range[0]] : range;
-
-      if (isBandScale(scale) && isBandScaleConfig(axis)) {
-        const desiredCategoryGapRatio = axis.categoryGapRatio ?? DEFAULT_CATEGORY_GAP_RATIO;
-        const ignoreGapRatios = shouldIgnoreGapRatios(scale, desiredCategoryGapRatio);
-        const categoryGapRatio = ignoreGapRatios ? 0 : desiredCategoryGapRatio;
-        const barGapRatio = ignoreGapRatios ? 0 : (axis.barGapRatio ?? DEFAULT_BAR_GAP_RATIO);
-
-        completeAxis[axis.id] = {
-          categoryGapRatio,
-          barGapRatio,
-          triggerTooltip,
-          ...axis,
-          offset: resolvedOffset,
-          ...(axisDirection === 'x' ? { height: resolvedSize } : { width: resolvedSize }),
-          data,
-          /* Doing this here is technically wrong, but acceptable in practice.
-           * In theory, this should be done in the normalized scale selector, but then we'd need that selector to depend
-           * on the zoom range, which would void its goal (which is to be independent of zoom).
-           * Since we only ignore gap ratios when they're practically invisible, the small errors caused by this
-           * discrepancy will hopefully not be noticeable. */
-          scale: ignoreGapRatios ? scale.copy().padding(0) : scale,
-          tickNumber,
-          colorScale:
-            axis.colorMap &&
-            (axis.colorMap.type === 'ordinal'
-              ? getOrdinalColorScale({ values: axis.data, ...axis.colorMap })
-              : getColorScale(axis.colorMap)),
-        } as ComputedAxis<'band', any, ChartsAxisProps>;
-      }
-
-      if (isPointScaleConfig(axis)) {
-        completeAxis[axis.id] = {
-          triggerTooltip,
-          ...axis,
-          offset: resolvedOffset,
-          ...(axisDirection === 'x' ? { height: resolvedSize } : { width: resolvedSize }),
-          data,
-          scale,
-          tickNumber,
-          colorScale:
-            axis.colorMap &&
-            (axis.colorMap.type === 'ordinal'
-              ? getOrdinalColorScale({ values: axis.data, ...axis.colorMap })
-              : getColorScale(axis.colorMap)),
-        } as ComputedAxis<'point', any, ChartsAxisProps>;
-      }
-
-      if (isDateData(axis.data)) {
-        const dateFormatter = createDateFormatter(axis.data, scaleRange, axis.tickNumber);
-        completeAxis[axis.id].valueFormatter = axis.valueFormatter ?? dateFormatter;
-      }
-
-      return;
-    }
-
-    if (axis.scaleType === 'band' || axis.scaleType === 'point') {
-      // Could be merged with the two previous "if conditions" but then TS does not get that `axis.scaleType` can't be `band` or `point`.
-      return;
-    }
-
-    const continuousAxis = axis as Readonly<
-      DefaultedAxis<ContinuousScaleName, any, Readonly<ChartsAxisProps>>
-    >;
-    const scaleType = continuousAxis.scaleType ?? ('linear' as const);
-
-    completeAxis[axis.id] = {
-      triggerTooltip,
-      ...continuousAxis,
-      offset: resolvedOffset,
-      // Override height/width with resolved numeric value (in case 'auto' was set)
-      ...(axisDirection === 'x' ? { height: resolvedSize } : { width: resolvedSize }),
-      data,
-      scaleType,
-      scale,
-      tickNumber,
-      colorScale: continuousAxis.colorMap && getSequentialColorScale(continuousAxis.colorMap),
-      valueFormatter:
-        axis.valueFormatter ??
-        (createScalarFormatter(
-          tickNumber,
-          getScale(
-            scaleType as ContinuousScaleName,
-            range.map((v) => scale.invert(v)),
-            range,
-          ),
-        ) as <TScaleName extends ScaleName>(
-          value: any,
-          context: AxisValueFormatterContext<TScaleName>,
-        ) => string),
-    } as ComputedAxis<ContinuousScaleName, any, ChartsAxisProps>;
+      throw new Error("STUB");
   });
 
   return {
     axis: completeAxis,
-    axisIds: allAxis.map(({ id }) => id),
+    axisIds: allAxis.map(({ id }) => { throw new Error("STUB"); }),
   };
 }

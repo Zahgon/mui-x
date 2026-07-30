@@ -6,12 +6,7 @@ import { useEventTimelinePremium } from '../use-event-timeline-premium';
 export function EventTimelinePremiumProvider<TEvent extends object, TResource extends object>(
   props: EventTimelinePremiumProvider.Props<TEvent, TResource>,
 ) {
-  const { children, ...parameters } = props;
-  const store = useEventTimelinePremium(parameters);
-
-  return (
-    <SchedulerStoreContext.Provider value={store as any}>{children}</SchedulerStoreContext.Provider>
-  );
+    throw new Error("STUB");
 }
 
 export namespace EventTimelinePremiumProvider {

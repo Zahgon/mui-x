@@ -15,7 +15,7 @@ export interface YearCalendarClasses {
 export type YearCalendarClassKey = keyof YearCalendarClasses;
 
 export function getYearCalendarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiYearCalendar', slot);
+    throw new Error("STUB");
 }
 
 export const yearCalendarClasses = generateUtilityClasses('MuiYearCalendar', [

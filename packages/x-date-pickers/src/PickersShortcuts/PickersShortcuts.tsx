@@ -74,16 +74,7 @@ function PickersShortcuts<TValue extends PickerValidValue>(props: PickersShortcu
   }
 
   const resolvedItems = items.map(({ getValue, ...item }) => {
-    const newValue = getValue({ isValid: isValidValue });
-
-    return {
-      ...item,
-      label: item.label,
-      onClick: () => {
-        setValue(newValue, { changeImportance, shortcut: item, source: 'view' });
-      },
-      disabled: !isValidValue(newValue),
-    };
+      throw new Error("STUB");
   });
 
   return (
@@ -100,11 +91,7 @@ function PickersShortcuts<TValue extends PickerValidValue>(props: PickersShortcu
       {...other}
     >
       {resolvedItems.map((item) => {
-        return (
-          <ListItem key={item.id ?? item.label}>
-            <Chip {...item} />
-          </ListItem>
-        );
+          throw new Error("STUB");
       })}
     </PickersShortcutsRoot>
   );

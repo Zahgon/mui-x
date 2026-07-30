@@ -39,10 +39,7 @@ export function useCharts<TSignatures extends readonly ChartAnyPluginSignature[]
 
   const plugins = React.useMemo(
     () =>
-      [
-        ...CHART_CORE_PLUGINS,
-        ...inPlugins,
-      ] as unknown as ConvertSignaturesIntoPlugins<TSignaturesWithCorePluginSignatures>,
+      { throw new Error("STUB"); },
     [inPlugins],
   );
 
@@ -66,40 +63,19 @@ export function useCharts<TSignatures extends readonly ChartAnyPluginSignature[]
     } as ChartState<TSignaturesWithCorePluginSignatures> & UseChartInteractionState;
 
     plugins.forEach((plugin) => {
-      if (plugin.getInitialState) {
-        Object.assign(initialState, plugin.getInitialState(pluginParams, initialState));
-      }
+        throw new Error("STUB");
     });
     storeRef.current = new Store<ChartState<TSignaturesWithCorePluginSignatures>>(initialState);
   }
 
   const runPlugin = (plugin: ChartPlugin<ChartAnyPluginSignature>) => {
-    const pluginResponse = plugin({
-      instance,
-      params: pluginParams,
-      plugins: plugins as ChartPlugin<ChartAnyPluginSignature>[],
-      store: storeRef.current as Store<
-        ChartState<TSignaturesWithCorePluginSignatures> & UseChartInteractionState
-      >,
-    });
-
-    if (pluginResponse.publicAPI) {
-      Object.assign(publicAPI.current, pluginResponse.publicAPI);
-    }
-
-    if (pluginResponse.instance) {
-      Object.assign(instance, pluginResponse.instance);
-    }
+      throw new Error("STUB");
   };
 
   plugins.forEach(runPlugin);
 
   const contextValue = React.useMemo(
-    () => ({
-      store: storeRef.current!,
-      publicAPI: publicAPI.current,
-      instance,
-    }),
+    () => { throw new Error("STUB"); },
     [instance, publicAPI],
   );
 

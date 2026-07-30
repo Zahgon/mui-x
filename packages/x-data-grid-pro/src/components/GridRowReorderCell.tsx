@@ -54,18 +54,7 @@ function GridRowReorderCell(params: GridRenderCellParams) {
   const isRowReorderable = rootProps.isRowReorderable;
   // TODO: remove sortModel check once row reorder is compatible
   const isDraggable = React.useMemo(() => {
-    const baseCondition =
-      !!rootProps.rowReordering && !sortModel.length && Object.keys(editRowsState).length === 0;
-
-    if (!baseCondition) {
-      return false;
-    }
-
-    if (isRowReorderable) {
-      return isRowReorderable({ row: params.row, rowNode: params.rowNode });
-    }
-
-    return true;
+      throw new Error("STUB");
   }, [
     rootProps.rowReordering,
     isRowReorderable,
@@ -83,62 +72,29 @@ function GridRowReorderCell(params: GridRenderCellParams) {
       eventName: keyof GridRowEventLookup,
       propHandler?: React.MouseEventHandler<HTMLDivElement> | undefined,
     ): React.MouseEventHandler<HTMLDivElement> =>
-      (event) => {
-        // Ignore portal
-        if (isEventTargetInPortal(event)) {
-          return;
-        }
-
-        // The row might have been deleted
-        if (!apiRef.current.getRow(params.id)) {
-          return;
-        }
-
-        apiRef.current.publishEvent(eventName, apiRef.current.getRowParams(params.id), event);
-
-        if (propHandler) {
-          propHandler(event);
-        }
-      },
+      { throw new Error("STUB"); },
     [apiRef, params.id],
   );
 
   const handleMouseDown = React.useCallback(() => {
-    // Prevent text selection as it will block all the drag events. More context: https://github.com/mui/mui-x/issues/16303
-    apiRef.current.rootElementRef?.current?.classList.add(
-      gridClasses['root--disableUserSelection'],
-    );
+      throw new Error("STUB");
   }, [apiRef]);
 
   const handleMouseUp = React.useCallback(() => {
-    apiRef.current.rootElementRef?.current?.classList.remove(
-      gridClasses['root--disableUserSelection'],
-    );
+      throw new Error("STUB");
   }, [apiRef]);
 
   const handleDragEnd = React.useCallback(
     (event: DragEvent) => {
-      handleMouseUp();
-      if (apiRef.current.getRow(params.id)) {
-        apiRef.current.publishEvent('rowDragEnd', apiRef.current.getRowParams(params.id), event);
-      }
-
-      listenerNodeRef.current!.removeEventListener('dragend', handleDragEnd);
-      listenerNodeRef.current = null;
-    },
+          throw new Error("STUB");
+      },
     [apiRef, params.id, handleMouseUp],
   );
 
   const handleDragStart = React.useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
-      if (!cellRef.current) {
-        return;
-      }
-      publish('rowDragStart')(event);
-      cellRef.current.addEventListener('dragend', handleDragEnd);
-      // cache the node to remove the listener when the drag ends
-      listenerNodeRef.current = cellRef.current;
-    },
+          throw new Error("STUB");
+      },
     [publish, handleDragEnd],
   );
 
@@ -227,8 +183,5 @@ GridRowReorderCell.propTypes /* remove-proptypes */ = {
 export { GridRowReorderCell };
 
 export const renderRowReorderCell = (params: GridRenderCellParams) => {
-  if (params.rowNode.type === 'footer' || params.rowNode.type === 'pinnedRow') {
-    return null;
-  }
-  return <GridRowReorderCell {...params} />;
+    throw new Error("STUB");
 };

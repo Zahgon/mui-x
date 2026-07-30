@@ -29,12 +29,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
 const CollapsibleRoot = styled('div', {
   name: 'MuiDataGrid',
   slot: 'Collapsible',
-})<{ ownerState: OwnerState }>(({ ownerState }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  flex: ownerState.open ? '1 0 auto' : '0 0 auto',
-  borderRadius: vars.radius.base,
-}));
+})<{ ownerState: OwnerState }>(({ ownerState }) => { throw new Error("STUB"); });
 
 function Collapsible(props: CollapsibleProps) {
   const { className, children, initiallyOpen = true, ...other } = props;
@@ -45,7 +40,7 @@ function Collapsible(props: CollapsibleProps) {
   const classes = useUtilityClasses(ownerState);
 
   const contextValue = React.useMemo(
-    () => ({ open, onOpenChange: setOpen, panelId }),
+    () => { throw new Error("STUB"); },
     [open, setOpen, panelId],
   );
 

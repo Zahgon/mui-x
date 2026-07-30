@@ -34,62 +34,13 @@ export const usePanOnDrag = (
   useDragGesture(instance, {
     enabled,
     onPanStart: (event) => {
-      if (!projection || !projection.invert) {
-        return;
-      }
-      geoPoint.current = projection.invert([
-        event.detail.srcEvent.offsetX,
-        event.detail.srcEvent.offsetY,
-      ]) as [number, number] | null;
-      dragStartPoint.current = [event.detail.srcEvent.offsetX, event.detail.srcEvent.offsetY];
-      dragCurrentPoint.current = [event.detail.srcEvent.offsetX, event.detail.srcEvent.offsetY];
+        throw new Error("STUB");
     },
     onPanEnd: () => {
-      geoPoint.current = null;
-      dragStartPoint.current = null;
-      dragCurrentPoint.current = null;
+        throw new Error("STUB");
     },
     onPan: (delta) => {
-      if (!projection || dragCurrentPoint.current === null || geoPoint.current === null) {
-        return;
-      }
-      dragCurrentPoint.current = [
-        dragCurrentPoint.current[0] + delta.x,
-        dragCurrentPoint.current[1] + delta.y,
-      ];
-      const nextRotation = getRotation(
-        projection,
-        geoPoint.current,
-        dragCurrentPoint.current,
-        1,
-        rotationAllowed,
-      );
-
-      const rotate = projection.rotate?.();
-      if (nextRotation) {
-        projection.rotate?.([-nextRotation[0], -nextRotation[1], nextRotation[2]]);
-      }
-      const translation = getTranslation(
-        store,
-        projection,
-        geoPoint.current,
-        dragCurrentPoint.current,
-        translationAllowed,
-        maxEmptySpace,
-      );
-
-      projection.rotate?.(rotate);
-
-      if (nextRotation || translation) {
-        applyView({
-          zoomLevel: store.state.geoProjectionZoom.zoomLevel ?? 1,
-          center: nextRotation
-            ? [nextRotation[0], nextRotation[1]]
-            : (store.state.geoProjectionZoom.center ?? [0, 0]),
-          translation: translation ?? store.state.geoProjectionZoom.translation ?? [0, 0],
-          roll: nextRotation ? nextRotation[2] : (store.state.geoProjectionZoom.roll ?? 0),
-        });
-      }
+        throw new Error("STUB");
     },
   });
 };

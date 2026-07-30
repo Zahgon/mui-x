@@ -13,15 +13,15 @@ export function getValueToPositionMapper<
   Range = number,
 >(scale: D3Scale<Domain, Range>): (value: any) => number {
   if (isOrdinalScale(scale)) {
-    return (value: any) => (scale(value) ?? 0) + scale.bandwidth() / 2;
+    return (value: any) => { throw new Error("STUB"); };
   }
 
   const domain = scale.domain();
 
   // Fixes https://github.com/mui/mui-x/issues/18999#issuecomment-3173787401
   if (domain[0] === domain[1]) {
-    return (value: any) => (value === domain[0] ? scale(value) : NaN);
+    return (value: any) => { throw new Error("STUB"); };
   }
 
-  return (value: any) => scale(value) as number;
+  return (value: any) => { throw new Error("STUB"); };
 }

@@ -13,7 +13,7 @@ export function cubicRoots(P: [number, number, number, number]) {
       if (c === 0) {
         return []; // constant case
       }
-      return [-d / c].filter((r) => r >= 0 && r <= 1); // linear case
+      return [-d / c].filter((r) => { throw new Error("STUB"); }); // linear case
     }
 
     // quadratic case
@@ -22,7 +22,7 @@ export function cubicRoots(P: [number, number, number, number]) {
       return [];
     }
     const sqrtDisc = Math.sqrt(discriminant);
-    return [(-c + sqrtDisc) / (2 * b), (-c - sqrtDisc) / (2 * b)].filter((r) => r >= 0 && r <= 1);
+    return [(-c + sqrtDisc) / (2 * b), (-c - sqrtDisc) / (2 * b)].filter((r) => { throw new Error("STUB"); });
   }
 
   // cubic case
@@ -45,12 +45,12 @@ export function cubicRoots(P: [number, number, number, number]) {
     result.push(-A / 3 + (S + T)); // real root
 
     if (S - T !== 0) {
-      return result.filter((r) => r >= 0 && r <= 1);
+      return result.filter((r) => { throw new Error("STUB"); });
     }
 
     result.push(-A / 3 - (S + T) / 2); // real part of complex root
     result.push(-A / 3 - (S + T) / 2); // real part of complex root
-    return result.filter((r) => r >= 0 && r <= 1);
+    return result.filter((r) => { throw new Error("STUB"); });
   }
 
   const th = Math.acos(R / Math.sqrt(-Math.pow(Q, 3)));
@@ -59,5 +59,5 @@ export function cubicRoots(P: [number, number, number, number]) {
   result.push(2 * Math.sqrt(-Q) * Math.cos((th + 2 * Math.PI) / 3) - A / 3);
   result.push(2 * Math.sqrt(-Q) * Math.cos((th + 4 * Math.PI) / 3) - A / 3);
 
-  return result.filter((r) => r >= 0 && r <= 1);
+  return result.filter((r) => { throw new Error("STUB"); });
 }

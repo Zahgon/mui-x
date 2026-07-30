@@ -73,7 +73,7 @@ function ChartsAxisHighlightValue(props: ChartsAxisHighlightValueProps) {
     return null;
   }
 
-  const content = items.map((itemProps) => <ChartsAxisHighlightValueItem {...itemProps} sx={sx} />);
+  const content = items.map((itemProps) => { throw new Error("STUB"); });
 
   if (!chartsLayerContainerRef.current) {
     return content;

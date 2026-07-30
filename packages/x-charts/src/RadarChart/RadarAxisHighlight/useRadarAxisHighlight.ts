@@ -99,20 +99,7 @@ export function useRadarAxisHighlight(): UseRadarAxisHighlightReturnValue | null
     highlightedAngle: angle,
     series: radarSeries,
     points: radarSeries.map((series) => {
-      const value = series.data[highlightedIndex];
-
-      const r = radiusScale(value)!;
-      const [x, y] = instance.polar2svg(r, angle);
-
-      const returnedValue: Point = {
-        x,
-        y,
-        r,
-        angle,
-        value,
-      };
-
-      return returnedValue;
+        throw new Error("STUB");
     }),
   };
 }

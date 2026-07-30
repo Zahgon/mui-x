@@ -35,44 +35,15 @@ export const useGridCsvExport = (
 
   const getDataAsCsv = React.useCallback<GridCsvExportApi['getDataAsCsv']>(
     (options = {}) => {
-      logger.debug(`Get data as CSV`);
-
-      const exportedColumns = getColumnsToExport({
-        apiRef,
-        options,
-      });
-
-      const getRowsToExport = options.getRowsToExport ?? defaultGetRowsToExport;
-      const exportedRowIds = getRowsToExport({ apiRef });
-
-      return buildCSV({
-        columns: exportedColumns,
-        rowIds: exportedRowIds,
-        csvOptions: {
-          delimiter: options.delimiter || ',',
-          shouldAppendQuotes: options.shouldAppendQuotes ?? true,
-          includeHeaders: options.includeHeaders ?? true,
-          includeColumnGroupsHeaders: options.includeColumnGroupsHeaders ?? true,
-          escapeFormulas: options.escapeFormulas ?? true,
-        },
-        ignoreValueFormatter,
-        apiRef,
-      });
-    },
+          throw new Error("STUB");
+      },
     [logger, apiRef, ignoreValueFormatter],
   );
 
   const exportDataAsCsv = React.useCallback<GridCsvExportApi['exportDataAsCsv']>(
     (options): void => {
-      logger.debug(`Export data as CSV`);
-      const csv = getDataAsCsv(options);
-
-      const blob = new Blob([options?.utf8WithBom ? new Uint8Array([0xef, 0xbb, 0xbf]) : '', csv], {
-        type: 'text/csv',
-      });
-
-      exportAs(blob, 'csv', options?.fileName);
-    },
+          throw new Error("STUB");
+      },
     [logger, getDataAsCsv],
   );
 
@@ -88,17 +59,8 @@ export const useGridCsvExport = (
    */
   const addExportMenuButtons = React.useCallback<GridPipeProcessor<'exportMenu'>>(
     (initialValue, options: { csvOptions: GridCsvExportOptions & GridExportDisplayOptions }) => {
-      if (options.csvOptions?.disableToolbarButton) {
-        return initialValue;
-      }
-      return [
-        ...initialValue,
-        {
-          component: <GridCsvExportMenuItem options={options.csvOptions} />,
-          componentName: 'csvExport',
-        },
-      ];
-    },
+          throw new Error("STUB");
+      },
     [],
   );
 

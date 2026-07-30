@@ -32,40 +32,8 @@ export type PromptFieldControlProps = Omit<GridSlotProps['baseTextField'], 'clas
  */
 const PromptFieldControl = forwardRef<HTMLInputElement, PromptFieldControlProps>(
   function PromptFieldControl(props, ref) {
-    const { render, className, onChange, onKeyDown, ...other } = props;
-    const rootProps = useGridRootProps();
-    const { state, onValueChange, onSubmit } = usePromptFieldContext();
-    const resolvedClassName = typeof className === 'function' ? className(state) : className;
-
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      onValueChange(event.target.value);
-      onChange?.(event);
-    };
-
-    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-      if (event.key === 'Enter' && state.value.trim()) {
-        onSubmit(state.value);
-      }
-      onKeyDown?.(event);
-    };
-
-    const element = useComponentRenderer(
-      rootProps.slots.baseTextField,
-      render,
-      {
-        ...rootProps.slotProps?.baseTextField,
-        value: state.value,
-        className: resolvedClassName,
-        ...other,
-        onChange: handleChange,
-        onKeyDown: handleKeyDown,
-        ref,
-      },
-      state,
-    );
-
-    return <React.Fragment>{element}</React.Fragment>;
-  },
+        throw new Error("STUB");
+    },
 );
 
 PromptFieldControl.propTypes /* remove-proptypes */ = {

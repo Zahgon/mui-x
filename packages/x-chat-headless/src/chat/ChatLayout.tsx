@@ -51,14 +51,7 @@ function resolvePaneChildren(children: React.ReactNode) {
   const unassignedChildren: React.ReactNode[] = [];
 
   allChildren.forEach((child) => {
-    const paneKind = getChatLayoutPaneKind(child);
-
-    if (paneKind === null) {
-      unassignedChildren.push(child);
-      return;
-    }
-
-    assignPaneChild(paneChildren, paneKind, child);
+      throw new Error("STUB");
   });
 
   if (allChildren.length <= 1) {
@@ -92,12 +85,7 @@ function resolvePaneChildren(children: React.ReactNode) {
   }
 
   unassignedChildren.forEach((child) => {
-    if (paneChildren.conversations.length === 0) {
-      assignPaneChild(paneChildren, 'conversations', child);
-      return;
-    }
-
-    assignPaneChild(paneChildren, 'thread', child);
+      throw new Error("STUB");
   });
 
   if (
@@ -123,72 +111,5 @@ export const ChatLayout = React.forwardRef(function ChatLayout(
   props: ChatLayoutProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { children, slots, slotProps, style, ...other } = props;
-  const paneChildren = resolvePaneChildren(children);
-  const ownerState: ChatLayoutOwnerState = {
-    hasConversationsPane: paneChildren.conversations.length > 0,
-    hasThreadPane: paneChildren.thread.length > 0,
-  };
-  const Root = slots?.root ?? 'div';
-  const ConversationsPane = slots?.conversationsPane ?? 'div';
-  const ThreadPane = slots?.threadPane ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-      style: {
-        display: 'flex',
-        ...style,
-      },
-    },
-  });
-  const conversationsPaneProps = useSlotProps({
-    elementType: ConversationsPane,
-    externalSlotProps: slotProps?.conversationsPane,
-    ownerState: {
-      pane: 'conversations',
-    },
-    additionalProps: {
-      style: {
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: 0,
-        minWidth: 0,
-        overflow: 'hidden',
-      },
-    },
-  });
-  const threadPaneProps = useSlotProps({
-    elementType: ThreadPane,
-    externalSlotProps: slotProps?.threadPane,
-    ownerState: {
-      pane: 'thread',
-    },
-    additionalProps: {
-      style: {
-        display: 'flex',
-        flexDirection: 'column',
-        flex: 1,
-        minHeight: 0,
-        minWidth: 0,
-        overflow: 'hidden',
-      },
-    },
-  });
-
-  return (
-    <Root {...rootProps}>
-      {ownerState.hasConversationsPane ? (
-        <ConversationsPane {...conversationsPaneProps}>
-          {paneChildren.conversations}
-        </ConversationsPane>
-      ) : null}
-      {ownerState.hasThreadPane ? (
-        <ThreadPane {...threadPaneProps}>{paneChildren.thread}</ThreadPane>
-      ) : null}
-    </Root>
-  );
+    throw new Error("STUB");
 }) as ChatLayoutComponent;

@@ -39,25 +39,7 @@ export function formatCodegenText(result: {
   files: { filename: string; contents: string }[];
   muiPairing?: MuiPairing;
 }): string {
-  const parts: string[] = [];
-  if (result.explanation?.trim()) {
-    parts.push(result.explanation.trim());
-  }
-  for (const file of result.files) {
-    const lang = file.filename.split('.').pop() ?? '';
-    // Use a fence longer than any backtick run in the file, or the closing fence collides with
-    // embedded backticks and cuts the file off.
-    const longest = Math.max(0, ...(file.contents.match(/`+/g) ?? []).map((m) => m.length));
-    const fence = '`'.repeat(Math.max(3, longest + 1));
-    parts.push(`### ${file.filename}\n\n${fence}${lang}\n${file.contents}\n${fence}`);
-  }
-  const body = parts.join('\n\n') || 'Generated code.';
-  // Footer so clients reading only `content` can still echo the threadId next call; the pairing
-  // line tells the user what was targeted.
-  const pairingLine = result.muiPairing
-    ? `\nmuiPairing: \`${result.muiPairing.material}\` + \`${result.muiPairing.muiX}\` (effective targeting)`
-    : '';
-  return `${body}\n\n---\nthreadId: \`${result.threadId}\` (pass on follow-up calls to continue this conversation).${pairingLine}`;
+    throw new Error("STUB");
 }
 
 export function createGenerateReactCodeTool(options: CreateGenerateReactCodeToolOptions) {
@@ -72,83 +54,7 @@ export function createGenerateReactCodeTool(options: CreateGenerateReactCodeTool
     inputSchema,
     outputSchema,
     execute: async (input, context) => {
-      const signal = context?.signal;
-      const authedFetch = createAuthedFetch({
-        fetcher,
-        getToken: options.getToken,
-        invalidateToken: options.invalidateToken,
-        signal,
-      });
-
-      // 1. Kick off the run.
-      const generateResponse = await authedFetch(
-        `${recipesBackendBaseUrl}${CODEGEN_GENERATE_PATH}`,
-        (token) => ({
-          method: 'POST',
-          headers: {
-            authorization: `Bearer ${token}`,
-            'content-type': 'application/json',
-            accept: 'application/json',
-          },
-          body: JSON.stringify(input),
-          // Fail on redirects so the Bearer token can't be resent to another origin.
-          redirect: 'error',
-          signal,
-        }),
-      );
-
-      if (!generateResponse.ok) {
-        const body = await safeJson(generateResponse);
-        throw new Error(
-          `MUI X Agent Tools: ${translateBackendError(generateResponse.status, body)}`,
-        );
-      }
-
-      // Wrap raw JSON/schema parse errors (e.g. a 2xx HTML proxy page) in the prefixed message below.
-      let generated: z.infer<typeof generateResponseSchema>;
-      try {
-        generated = generateResponseSchema.parse(await generateResponse.json());
-      } catch (error) {
-        // A cancellation during the body read rejects with AbortError from the same signal;
-        // let it through so hosts detect cancellation, not a fake "unexpected response".
-        if (error instanceof Error && error.name === 'AbortError') {
-          throw error;
-        }
-        throw new Error(
-          'MUI X Agent Tools: The codegen backend returned an unexpected response (not valid JSON, or missing runId). Check that MUI_RECIPES_BACKEND_BASE_URL points at recipes-backend (not a proxy or error page), then retry.',
-        );
-      }
-
-      // 2. Open the SSE stream + buffer chunks until `[DONE]`.
-      const streamResponse = await authedFetch(
-        `${recipesBackendBaseUrl}${codegenRunPath(generated.runId)}`,
-        (token) => ({
-          method: 'GET',
-          headers: {
-            authorization: `Bearer ${token}`,
-            accept: 'text/event-stream',
-          },
-          redirect: 'error',
-          signal,
-        }),
-      );
-
-      if (!streamResponse.ok) {
-        const body = await safeJson(streamResponse);
-        throw new Error(`MUI X Agent Tools: ${translateBackendError(streamResponse.status, body)}`);
-      }
-
-      const { files, explanation } = await consumeCodegenStream(
-        streamResponse,
-        context?.onProgress,
-        options.logger,
-      );
-      return {
-        threadId: generated.threadId,
-        files,
-        explanation,
-        ...(generated.muiPairing && { muiPairing: generated.muiPairing }),
-      };
+        throw new Error("STUB");
     },
   });
 }

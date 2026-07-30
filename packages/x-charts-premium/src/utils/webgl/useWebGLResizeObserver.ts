@@ -25,38 +25,6 @@ function getDevicePixelContentBoxSize(entry: ResizeObserverEntry) {
  */
 export function useWebGLResizeObserver(gl: WebGL2RenderingContext | null, onResize: () => void) {
   useEnhancedEffect(() => {
-    const canvas = gl?.canvas;
-
-    if (!(canvas instanceof HTMLCanvasElement)) {
-      return undefined;
-    }
-
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const { width, height } = getDevicePixelContentBoxSize(entry);
-
-        canvas.width = Math.max(1, width);
-        canvas.height = Math.max(1, height);
-
-        // Update WebGL viewport
-        gl?.viewport(0, 0, width, height);
-
-        onResize();
-      }
-    });
-
-    try {
-      /* We use 'device-pixel-content-box' to observe the size of the canvas in device pixels, rather than CSS pixels.
-       * This ensures that we correctly handle high-DPI displays and browser zoom.
-       * However, this is not supported in Safari, which throws, so we fall back to 'content-box'.
-       * WebKit Bug: https://www2.webkit.org/show_bug.cgi?id=219005 */
-      observer.observe(canvas, { box: 'device-pixel-content-box' });
-    } catch {
-      observer.observe(canvas, { box: 'content-box' });
-    }
-
-    return () => {
-      observer.disconnect();
-    };
+      throw new Error("STUB");
   }, [gl, gl?.canvas, onResize]);
 }

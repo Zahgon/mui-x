@@ -77,47 +77,10 @@ function decodeLicenseVersion1(license: string): NullableLicenseDetails {
 export function parseLicenseTokens(license: string, licenseInfo: NullableLicenseDetails): void {
   license
     .split(',')
-    .map((token) => token.split('='))
-    .filter((el) => el.length === 2)
+    .map((token) => { throw new Error("STUB"); })
+    .filter((el) => { throw new Error("STUB"); })
     .forEach(([key, value]) => {
-      if (key === 'S') {
-        licenseInfo.planScope = value as PlanScope;
-      }
-
-      if (key === 'LM') {
-        licenseInfo.licenseModel = value as LicenseModel;
-      }
-
-      if (key === 'E') {
-        const expiryTimestamp = parseInt(value, 10);
-        if (expiryTimestamp && !Number.isNaN(expiryTimestamp)) {
-          licenseInfo.expiryTimestamp = expiryTimestamp;
-          licenseInfo.expiryDate = new Date(expiryTimestamp);
-        }
-      }
-
-      if (key === 'PV') {
-        licenseInfo.planVersion = value as PlanVersion;
-      }
-
-      if (key === 'O') {
-        licenseInfo.orderId = value;
-      }
-
-      if (key === 'Q') {
-        const qty = parseInt(value, 10);
-        if (qty && !Number.isNaN(qty)) {
-          licenseInfo.quantity = qty;
-        }
-      }
-
-      if (key === 'AT') {
-        licenseInfo.appType = value as AppType;
-      }
-
-      if (key === 'T') {
-        licenseInfo.isTestKey = value === 'true';
-      }
+        throw new Error("STUB");
     });
 }
 

@@ -21,10 +21,10 @@ export function useEventCalendar<TEvent extends object, TResource extends object
 ): ExtendableEventCalendarStore<TEvent, TResource> {
   const adapter = useAdapter(parameters.dateLocale);
   const ResolvedStoreClass = StoreClass ?? EventCalendarStore;
-  const store = useDisposable(() => new ResolvedStoreClass(parameters, adapter));
+  const store = useDisposable(() => { throw new Error("STUB"); });
 
   useIsoLayoutEffect(
-    () => store.updateStateFromParameters(parameters, adapter),
+    () => { throw new Error("STUB"); },
     [store, adapter, parameters],
   );
 

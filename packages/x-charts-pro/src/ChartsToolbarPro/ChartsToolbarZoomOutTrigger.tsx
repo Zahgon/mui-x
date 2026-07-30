@@ -24,20 +24,7 @@ const ChartsToolbarZoomOutTrigger = React.forwardRef<
   HTMLButtonElement,
   React.PropsWithChildren<ChartsToolbarZoomOutTriggerProps>
 >(function ChartsToolbarZoomOutTrigger({ render, ...other }, ref) {
-  const { slots, slotProps } = useChartsSlots();
-  const { instance, store } =
-    useChartsContext<[UseChartCartesianAxisSignature, UseChartProZoomSignature]>();
-  const disabled = !store.use(selectorChartCanZoomOut);
-
-  const element = useComponentRenderer(slots.baseButton, render, {
-    ...slotProps.baseButton,
-    onClick: () => instance.zoomOut(),
-    disabled,
-    ...other,
-    ref,
-  });
-
-  return <React.Fragment>{element}</React.Fragment>;
+    throw new Error("STUB");
 });
 
 ChartsToolbarZoomOutTrigger.propTypes /* remove-proptypes */ = {

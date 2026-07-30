@@ -32,11 +32,7 @@ export const resolveDateTimeFormat = (
   const timeViews: TimeView[] = [];
 
   views.forEach((view) => {
-    if (isTimeView(view)) {
-      timeViews.push(view as TimeView);
-    } else if (isDatePickerView(view)) {
-      dateViews.push(view as DateView);
-    }
+      throw new Error("STUB");
   });
 
   if (timeViews.length === 0) {
@@ -61,7 +57,7 @@ const resolveViews = <TView extends DateOrTimeViewWithMeridiem = DateOrTimeViewW
   shouldUseSingleColumn: boolean,
 ): TView[] => {
   if (shouldUseSingleColumn) {
-    return views.filter((view) => !isInternalTimeView(view) || view === 'hours') as TView[];
+    return views.filter((view) => { throw new Error("STUB"); }) as TView[];
   }
   return (ampm ? [...views, 'meridiem'] : views) as TView[];
 };

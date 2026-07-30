@@ -31,13 +31,7 @@ const hyAMGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Թաքցնել զտիչները',
   toolbarFiltersTooltipShow: 'Ցուցադրել զտիչները',
   toolbarFiltersTooltipActive: (count) => {
-    let pluralForm = 'ակտիվ զտիչ';
-    if (count === 1) {
-      pluralForm = 'ակտիվ զտիչ';
-    } else {
-      pluralForm = 'ակտիվ զտիչներ';
-    }
-    return `${count} ${pluralForm}`;
+      throw new Error("STUB");
   },
 
   // Quick filter toolbar field
@@ -134,7 +128,7 @@ const hyAMGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Մենյու',
-  columnMenuAriaLabel: (columnName: string) => `${columnName} սյունակի մենյու`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Ցուցադրել սյունակները',
   columnMenuManageColumns: 'Կառավարել սյունակները',
   columnMenuFilter: 'Զտիչ',
@@ -147,24 +141,14 @@ const hyAMGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) => {
-    let pluralForm = 'ակտիվ զտիչներ';
-    if (count === 1) {
-      pluralForm = 'ակտիվ զտիչ';
-    }
-    return `${count} ${pluralForm}`;
+      throw new Error("STUB");
   },
   columnHeaderFiltersLabel: 'Ցուցադրել զտիչները',
   columnHeaderSortIconLabel: 'Դասավորել',
 
   // Rows selected footer text
   footerRowSelected: (count) => {
-    let pluralForm = 'ընտրված տող';
-    if (count === 1) {
-      pluralForm = 'ընտրված տող';
-    } else {
-      pluralForm = 'ընտրված տողեր';
-    }
-    return `${count} ${pluralForm}`;
+      throw new Error("STUB");
   },
 
   // Total row amount footer text
@@ -172,7 +156,7 @@ const hyAMGrid: Partial<GridLocaleText> = {
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) => {
-    return `${visibleCount.toLocaleString()} / ${totalCount.toLocaleString()}`;
+      throw new Error("STUB");
   },
 
   // Checkbox selection text
@@ -205,8 +189,8 @@ const hyAMGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Խմբավորում',
-  groupColumn: (name) => `Խմբավորել ըստ ${name}`,
-  unGroupColumn: (name) => `Չխմբավորել ըստ ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Փոխարկել մանրամասն տեսքը',

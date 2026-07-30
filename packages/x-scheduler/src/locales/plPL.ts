@@ -38,29 +38,20 @@ const plPLDialog: Partial<EventDialogLocaleText> = {
   recurrenceMainSelectCustomLabel: 'Powtarzanie',
   recurrenceWeeklyFrequencyLabel: 'tygodnie',
   recurrenceWeeklyPresetLabel: ({ weekday }) => {
-    const map = {
-      monday: 'w poniedziałek',
-      tuesday: 'we wtorek',
-      wednesday: 'w środę',
-      thursday: 'w czwartek',
-      friday: 'w piątek',
-      saturday: 'w sobotę',
-      sunday: 'w niedzielę',
-    };
-    return `Powtarza się co tydzień ${map[weekday]}`;
+      throw new Error("STUB");
   },
   recurrenceMonthlyFrequencyLabel: 'miesiące',
-  recurrenceMonthlyDayOfMonthLabel: (dayNumber) => `Dzień ${dayNumber}`,
-  recurrenceMonthlyLastWeekAriaLabel: (weekDay) => `${weekDay} w ostatnim tygodniu miesiąca`,
-  recurrenceMonthlyLastWeekLabel: (weekDay) => `${weekDay}, ostatni tydzień`,
-  recurrenceMonthlyPresetLabel: (dayNumber) => `Powtarza się co miesiąc w dniu ${dayNumber}`,
-  recurrenceMonthlyWeekNumberAriaLabel: (ord, weekDay) => `${weekDay}, tydzień ${ord} miesiąca`,
-  recurrenceMonthlyWeekNumberLabel: (ord, weekDay) => `${weekDay}, tydzień ${ord}`,
+  recurrenceMonthlyDayOfMonthLabel: (dayNumber) => { throw new Error("STUB"); },
+  recurrenceMonthlyLastWeekAriaLabel: (weekDay) => { throw new Error("STUB"); },
+  recurrenceMonthlyLastWeekLabel: (weekDay) => { throw new Error("STUB"); },
+  recurrenceMonthlyPresetLabel: (dayNumber) => { throw new Error("STUB"); },
+  recurrenceMonthlyWeekNumberAriaLabel: (ord, weekDay) => { throw new Error("STUB"); },
+  recurrenceMonthlyWeekNumberLabel: (ord, weekDay) => { throw new Error("STUB"); },
   recurrenceWeeklyMonthlySpecificInputsLabel: 'W',
   recurrenceYearlyFrequencyLabel: 'lata',
-  recurrenceYearlyPresetLabel: (date) => `Powtarza się co roku w ${date}`,
+  recurrenceYearlyPresetLabel: (date) => { throw new Error("STUB"); },
   noResourceAriaLabel: 'Brak określonego zasobu',
-  selectColorAriaLabel: (color) => `Wybierz ${color} jako kolor wydarzenia`,
+  selectColorAriaLabel: (color) => { throw new Error("STUB"); },
   resourceLabel: 'Zasób',
   requiredResourceError: 'Należy wybrać zasób.',
   saveChanges: 'Zapisz',
@@ -111,7 +102,7 @@ const plPLCalendar: Partial<Omit<EventCalendarLocaleText, keyof EventDialogLocal
   showEmptyDaysInAgenda: 'Pokaż puste dni',
   showWeekNumber: 'Pokaż numer tygodnia',
   timeFormat: 'Format czasu',
-  viewSpecificOptions: (view) => `Opcje widoku ${view}`,
+  viewSpecificOptions: (view) => { throw new Error("STUB"); },
   startWeekOn: 'Początek tygodnia',
   weekdaySunday: 'Niedziela',
   weekdayMonday: 'Poniedziałek',
@@ -119,15 +110,15 @@ const plPLCalendar: Partial<Omit<EventCalendarLocaleText, keyof EventDialogLocal
 
   // WeekView
   allDay: 'Cały dzień',
-  hiddenEvents: (hiddenEventsCount) => `${hiddenEventsCount} więcej..`,
-  nextTimeSpan: (timeSpan) => `Następny ${timeSpan}`,
-  previousTimeSpan: (timeSpan) => `Poprzedni ${timeSpan}`,
-  resourceAriaLabel: (resourceName) => `Zasób: ${resourceName}`,
+  hiddenEvents: (hiddenEventsCount) => { throw new Error("STUB"); },
+  nextTimeSpan: (timeSpan) => { throw new Error("STUB"); },
+  previousTimeSpan: (timeSpan) => { throw new Error("STUB"); },
+  resourceAriaLabel: (resourceName) => { throw new Error("STUB"); },
   weekAbbreviation: 'T',
-  weekNumberAriaLabel: (weekNumber) => `Tydzień ${weekNumber}`,
+  weekNumberAriaLabel: (weekNumber) => { throw new Error("STUB"); },
 
   // EventItem
-  eventItemMultiDayLabel: (endDate) => `Kończy się ${endDate}`,
+  eventItemMultiDayLabel: (endDate) => { throw new Error("STUB"); },
 
   // MiniCalendar
   miniCalendarLabel: 'Kalendarz',

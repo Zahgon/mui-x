@@ -40,43 +40,7 @@ const getAggregationValueWrappedRenderCell: ColumnPropertyWrapper<'renderCell'> 
   getCellAggregationResult,
   apiRef,
 }) => {
-  const pivotActive = gridPivotActiveSelector(apiRef);
-  const wrappedRenderCell: GridBaseColDef['renderCell'] = (params) => {
-    const cellAggregationResult = getCellAggregationResult(params.id, params.field);
-    if (cellAggregationResult != null) {
-      if (!renderCell) {
-        if (cellAggregationResult.position === 'footer') {
-          return <GridFooterCell {...params} />;
-        }
-
-        if (pivotActive && cellAggregationResult.value === 0) {
-          return null;
-        }
-
-        return params.formattedValue;
-      }
-
-      if (pivotActive && cellAggregationResult.value === 0) {
-        return null;
-      }
-
-      const aggregationMeta: GridAggregationCellMeta = {
-        hasCellUnit: aggregationRule!.aggregationFunction.hasCellUnit ?? true,
-        aggregationFunctionName: aggregationRule!.aggregationFunctionName,
-        position: cellAggregationResult.position,
-      };
-
-      return renderCell({ ...params, aggregation: aggregationMeta });
-    }
-
-    if (!renderCell) {
-      return params.formattedValue;
-    }
-
-    return renderCell(params);
-  };
-
-  return wrappedRenderCell;
+    throw new Error("STUB");
 };
 
 /**
@@ -86,21 +50,7 @@ const getWrappedRenderHeader: ColumnPropertyWrapper<'renderHeader'> = ({
   value: renderHeader,
   aggregationRule,
 }) => {
-  const wrappedRenderHeader: GridBaseColDef['renderHeader'] = (params) => {
-    // TODO: investigate why colDef is undefined
-    if (!params.colDef) {
-      return null;
-    }
-    return (
-      <GridAggregationHeader
-        {...params}
-        aggregation={{ aggregationRule }}
-        renderHeader={renderHeader}
-      />
-    );
-  };
-
-  return wrappedRenderHeader;
+    throw new Error("STUB");
 };
 
 /**
@@ -203,11 +153,7 @@ export const unwrapColumnFromAggregation = (column: GridColDef) => {
     column as GridColDefWithAggregationWrappers;
 
   aggregationWrappedProperties.forEach(({ name, originalValue, wrappedValue }) => {
-    // The value changed since we wrapped it
-    if (wrappedValue !== unwrappedColumn[name]) {
-      return;
-    }
-    unwrappedColumn[name] = originalValue as any;
+      throw new Error("STUB");
   });
 
   return unwrappedColumn;

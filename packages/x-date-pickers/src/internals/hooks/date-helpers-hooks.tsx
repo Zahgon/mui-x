@@ -23,11 +23,7 @@ export function useNextMonthDisabled(
 ) {
   const adapter = usePickerAdapter();
   return React.useMemo(() => {
-    const now = adapter.date(undefined, timezone);
-    const lastEnabledMonth = adapter.startOfMonth(
-      disableFuture && adapter.isBefore(now, maxDate) ? now : maxDate,
-    );
-    return !adapter.isAfter(lastEnabledMonth, month);
+      throw new Error("STUB");
   }, [disableFuture, maxDate, month, adapter, timezone]);
 }
 
@@ -42,11 +38,7 @@ export function usePreviousMonthDisabled(
   const adapter = usePickerAdapter();
 
   return React.useMemo(() => {
-    const now = adapter.date(undefined, timezone);
-    const firstEnabledMonth = adapter.startOfMonth(
-      disablePast && adapter.isAfter(now, minDate) ? now : minDate,
-    );
-    return !adapter.isBefore(firstEnabledMonth, adapter.startOfMonth(month));
+      throw new Error("STUB");
   }, [disablePast, minDate, month, adapter, timezone]);
 }
 
@@ -57,16 +49,14 @@ export function useMeridiemMode(
   selectionState?: PickerSelectionState,
 ) {
   const adapter = usePickerAdapter();
-  const cleanDate = React.useMemo(() => (!adapter.isValid(date) ? null : date), [adapter, date]);
+  const cleanDate = React.useMemo(() => { throw new Error("STUB"); }, [adapter, date]);
 
   const meridiemMode = getMeridiem(cleanDate, adapter);
 
   const handleMeridiemChange = React.useCallback(
     (mode: 'am' | 'pm') => {
-      const timeWithMeridiem =
-        cleanDate == null ? null : convertToMeridiem(cleanDate, mode, Boolean(ampm), adapter);
-      onChange(timeWithMeridiem, selectionState ?? 'partial');
-    },
+          throw new Error("STUB");
+      },
     [ampm, cleanDate, onChange, selectionState, adapter],
   );
 

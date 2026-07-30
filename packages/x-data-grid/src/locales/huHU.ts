@@ -30,7 +30,7 @@ const huHUGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: 'Szűrők megjelenítése',
   toolbarFiltersTooltipHide: 'Szűrők elrejtése',
   toolbarFiltersTooltipShow: 'Szűrők megjelenítése',
-  toolbarFiltersTooltipActive: (count) => `${count} aktív szűrő`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Keresés…',
@@ -138,19 +138,19 @@ const huHUGrid: Partial<GridLocaleText> = {
   // columnMenuManageCharts: 'Manage charts',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) => `${count} aktív szűrő`,
+  columnHeaderFiltersTooltipActive: (count) => { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Szűrők megjelenítése',
   columnHeaderSortIconLabel: 'Átrendezés',
 
   // Rows selected footer text
-  footerRowSelected: (count) => `${count.toLocaleString()} sor kiválasztva`,
+  footerRowSelected: (count) => { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Összesen:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} (összesen: ${totalCount.toLocaleString()})`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Jelölőnégyzetes kijelölés',
@@ -182,8 +182,8 @@ const huHUGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Csoportosítás',
-  groupColumn: (name) => `Csoportosítás ${name} szerint`,
-  unGroupColumn: (name) => `${name} szerinti csoportosítás törlése`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Részletek panel váltása',
@@ -206,17 +206,7 @@ const huHUGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Első oldalra';
-    }
-    if (type === 'last') {
-      return 'Utolsó oldalra';
-    }
-    if (type === 'next') {
-      return 'Következő oldalra';
-    }
-    // if (type === 'previous') {
-    return 'Előző oldalra';
+      throw new Error("STUB");
   },
 
   // Row reordering text

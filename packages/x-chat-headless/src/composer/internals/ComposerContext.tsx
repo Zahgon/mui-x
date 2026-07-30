@@ -27,23 +27,31 @@ const defaultOwnerState: ComposerOwnerState = {
 const ComposerContext = React.createContext<ComposerContextValue>({
   ...defaultOwnerState,
   value: '',
-  setValue: () => {},
-  submit: async () => {},
-  addAttachment: () => {},
-  removeAttachment: () => {},
+  setValue: () => {
+      throw new Error("STUB");
+  },
+  submit: async () => {
+      throw new Error("STUB");
+  },
+  addAttachment: () => {
+      throw new Error("STUB");
+  },
+  removeAttachment: () => {
+      throw new Error("STUB");
+  },
   attachments: [],
   attachmentConfig: undefined,
   error: null,
-  setComposerIsComposing: () => {},
+  setComposerIsComposing: () => {
+      throw new Error("STUB");
+  },
 });
 
 export function ComposerContextProvider(props: {
   children: React.ReactNode;
   value: ComposerContextValue;
 }) {
-  const { children, value } = props;
-
-  return <ComposerContext.Provider value={value}>{children}</ComposerContext.Provider>;
+    throw new Error("STUB");
 }
 
 export function useComposerContext() {

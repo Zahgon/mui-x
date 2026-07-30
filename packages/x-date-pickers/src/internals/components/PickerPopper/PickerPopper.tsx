@@ -108,9 +108,7 @@ const useUtilityClasses = (classes: Partial<PickerPopperClasses> | undefined) =>
 const PickerPopperRoot = styled(MuiPopper, {
   name: 'MuiPickerPopper',
   slot: 'Root',
-})<{ ownerState: PickerOwnerState }>(({ theme }) => ({
-  zIndex: theme.zIndex.modal,
-}));
+})<{ ownerState: PickerOwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 const PickerPopperPaper = styled(MuiPaper, {
   name: 'MuiPickerPopper',
@@ -122,7 +120,7 @@ const PickerPopperPaper = styled(MuiPaper, {
   transformOrigin: 'top center',
   variants: [
     {
-      props: ({ popperPlacement }) => new Set(['top', 'top-start', 'top-end']).has(popperPlacement),
+      props: ({ popperPlacement }) => { throw new Error("STUB"); },
       style: {
         transformOrigin: 'bottom center',
       },
@@ -131,10 +129,7 @@ const PickerPopperPaper = styled(MuiPaper, {
 });
 
 function clickedRootScrollbar(event: MouseEvent, doc: Document) {
-  return (
-    doc.documentElement.clientWidth < event.clientX ||
-    doc.documentElement.clientHeight < event.clientY
-  );
+    throw new Error("STUB");
 }
 
 type OnClickAway = (event: MouseEvent | TouchEvent) => void;
@@ -150,134 +145,7 @@ function useClickAwayListener(
   active: boolean,
   onClickAway: OnClickAway,
 ): [React.Ref<Element>, React.MouseEventHandler, React.TouchEventHandler] {
-  const movedRef = React.useRef(false);
-  const syntheticEventRef = React.useRef(false);
-
-  const nodeRef = React.useRef<Element>(null);
-
-  const activatedRef = React.useRef(false);
-  React.useEffect(() => {
-    if (!active) {
-      return undefined;
-    }
-
-    // Ensure that this hook is not "activated" synchronously.
-    // https://github.com/react/react/issues/20074
-    function armClickAwayListener() {
-      activatedRef.current = true;
-    }
-
-    document.addEventListener('mousedown', armClickAwayListener, true);
-    document.addEventListener('touchstart', armClickAwayListener, true);
-
-    return () => {
-      document.removeEventListener('mousedown', armClickAwayListener, true);
-      document.removeEventListener('touchstart', armClickAwayListener, true);
-      activatedRef.current = false;
-    };
-  }, [active]);
-
-  // The handler doesn't take event.defaultPrevented into account:
-  //
-  // event.preventDefault() is meant to stop default behaviors like
-  // clicking a checkbox to check it, hitting a button to submit a form,
-  // and hitting left arrow to move the cursor in a text input etc.
-  // Only special HTML elements have these default behaviors.
-  const handleClickAway = useEventCallback((event: MouseEvent | TouchEvent) => {
-    if (!activatedRef.current) {
-      // Reset syntheticEventRef to avoid stale state when a programmatic click
-      // (e.g., ButtonBase Enter key handler) sets it without a preceding mousedown.
-      syntheticEventRef.current = false;
-      return;
-    }
-
-    // Given developers can stop the propagation of the synthetic event,
-    // we can only be confident with a positive value.
-    const insideReactTree = syntheticEventRef.current;
-    syntheticEventRef.current = false;
-
-    const doc = ownerDocument(nodeRef.current);
-
-    // 1. IE 11 support, which trigger the handleClickAway even after the unbind
-    // 2. The child might render null.
-    // 3. Behave like a blur listener.
-    if (
-      !nodeRef.current ||
-      // is a TouchEvent?
-      ('clientX' in event && clickedRootScrollbar(event, doc))
-    ) {
-      return;
-    }
-
-    // Do not act if user performed touchmove
-    if (movedRef.current) {
-      movedRef.current = false;
-      return;
-    }
-
-    let insideDOM;
-
-    // If not enough, can use https://github.com/DieterHolvoet/event-propagation-path/blob/master/propagationPath.js
-    if (event.composedPath) {
-      insideDOM = event.composedPath().indexOf(nodeRef.current) > -1;
-    } else {
-      insideDOM =
-        !doc.documentElement.contains(event.target as Node | null) ||
-        nodeRef.current.contains(event.target as Node | null);
-    }
-
-    if (!insideDOM && !insideReactTree) {
-      onClickAway(event);
-    }
-  });
-
-  // Keep track of mouse/touch events that bubbled up through the portal.
-  const handleSynthetic = (event: MuiEvent<React.SyntheticEvent>) => {
-    // Ignore events handled by our internal components
-    if (!event.defaultMuiPrevented) {
-      syntheticEventRef.current = true;
-    }
-  };
-
-  React.useEffect(() => {
-    if (active) {
-      const doc = ownerDocument(nodeRef.current);
-
-      const handleTouchMove = () => {
-        movedRef.current = true;
-      };
-
-      doc.addEventListener('touchstart', handleClickAway);
-      doc.addEventListener('touchmove', handleTouchMove);
-
-      return () => {
-        doc.removeEventListener('touchstart', handleClickAway);
-        doc.removeEventListener('touchmove', handleTouchMove);
-      };
-    }
-    return undefined;
-  }, [active, handleClickAway]);
-
-  React.useEffect(() => {
-    // TODO This behavior is not tested automatically
-    // It's unclear whether this is due to different update semantics in test (batched in act() vs discrete on click).
-    // Or if this is a timing related issues due to different Transition components
-    // Once we get rid of all the manual scheduling (for example setTimeout(update, 0)) we can revisit this code+test.
-    if (active) {
-      const doc = ownerDocument(nodeRef.current);
-
-      doc.addEventListener('click', handleClickAway);
-
-      return () => {
-        doc.removeEventListener('click', handleClickAway);
-        // cleanup `handleClickAway`
-        syntheticEventRef.current = false;
-      };
-    }
-    return undefined;
-  }, [active, handleClickAway]);
-
-  return [nodeRef, handleSynthetic, handleSynthetic];
+    throw new Error("STUB");
 }
 
 interface PickerPopperPaperWrapperProps {
@@ -292,219 +160,14 @@ interface PickerPopperPaperWrapperProps {
 
 const PickerPopperPaperWrapper = React.forwardRef(
   (props: PickerPopperPaperWrapperProps, ref: React.Ref<HTMLDivElement>) => {
-    const {
-      PaperComponent,
-      ownerState,
-      children,
-      paperSlotProps,
-      paperClasses,
-      onPaperClick,
-      onPaperTouchStart,
-      // picks up the style props provided by `Transition`
-      // https://mui.com/material-ui/transitions/#child-requirement
-      ...other
-    } = props;
-
-    const paperProps: MuiPaperProps = useSlotProps({
-      elementType: PaperComponent,
-      externalSlotProps: paperSlotProps,
-      additionalProps: {
-        tabIndex: -1,
-        elevation: 8,
-        ref,
-      },
-      className: paperClasses,
-      ownerState,
-    });
-    return (
-      <PaperComponent
-        {...other}
-        {...paperProps}
-        onClick={(event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-          onPaperClick(event);
-          paperProps.onClick?.(event);
-        }}
-        onTouchStart={(event: React.TouchEvent<HTMLDivElement>) => {
-          onPaperTouchStart(event);
-          paperProps.onTouchStart?.(event);
-        }}
-        ownerState={ownerState}
-      >
-        {children}
-      </PaperComponent>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 const isEventTargetInteractive = (eventTarget: EventTarget) => {
-  const element = eventTarget instanceof HTMLElement ? eventTarget : null;
-  if (!element) {
-    return false;
-  }
-  return isElementInteractive(element);
+    throw new Error("STUB");
 };
 
 export function PickerPopper(inProps: PickerPopperProps) {
-  const props = useThemeProps({ props: inProps, name: 'MuiPickerPopper' });
-  const { children, placement = 'bottom-start', slots, slotProps, classes: classesProp } = props;
-
-  const { open, popupRef, reduceAnimations, keepOpenDuringFieldFocus } = usePickerContext();
-  const { ownerState: pickerOwnerState, rootRefObject } = usePickerPrivateContext();
-  const { dismissViews, getCurrentViewMode, onPopperExited, triggerElement, viewContainerRole } =
-    usePickerPrivateContext();
-
-  React.useEffect(() => {
-    function handleKeyDown(nativeEvent: KeyboardEvent) {
-      if (open && nativeEvent.key === 'Escape') {
-        dismissViews();
-      }
-    }
-
-    document.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [dismissViews, open]);
-
-  const lastFocusedElementRef = React.useRef<Element | null>(null);
-
-  React.useEffect(() => {
-    if (viewContainerRole === 'tooltip' || getCurrentViewMode() === 'field') {
-      return;
-    }
-
-    if (open) {
-      lastFocusedElementRef.current = getActiveElement(rootRefObject.current);
-    } else if (
-      lastFocusedElementRef.current &&
-      lastFocusedElementRef.current instanceof HTMLElement
-    ) {
-      // make sure the button is flushed with updated label, before returning focus to it
-      // avoids issue, where screen reader could fail to announce selected date after selection
-      setTimeout(() => {
-        if (lastFocusedElementRef.current instanceof HTMLElement) {
-          lastFocusedElementRef.current.focus();
-        }
-      });
-    }
-  }, [open, viewContainerRole, getCurrentViewMode, rootRefObject]);
-
-  const classes = useUtilityClasses(classesProp);
-
-  const handleClickAway: OnClickAway = useEventCallback((event) => {
-    // Do not close when clicking inside the field if keepOpenDuringFieldFocus is enabled
-    if (
-      keepOpenDuringFieldFocus &&
-      triggerElement &&
-      event &&
-      'target' in event &&
-      triggerElement.contains(event.target as Node)
-    ) {
-      return;
-    }
-
-    if (viewContainerRole === 'tooltip') {
-      executeInTheNextEventLoopTick(() => {
-        if (
-          rootRefObject.current?.contains(getActiveElement(rootRefObject.current)) ||
-          popupRef.current?.contains(getActiveElement(popupRef.current))
-        ) {
-          return;
-        }
-
-        dismissViews();
-      });
-    } else {
-      // Get all the targets of this event.
-      const eventTargets = event.composedPath();
-      // https://github.com/mui/mui-x/pull/13434
-      // Check if the click is on an interactive element.
-      // If it is, we don't want to refocus the last focused element.
-      if (eventTargets.some(isEventTargetInteractive)) {
-        lastFocusedElementRef.current = null;
-      }
-      dismissViews();
-    }
-  });
-
-  const [clickAwayRef, onPaperClick, onPaperTouchStart] = useClickAwayListener(
-    open,
-    handleClickAway,
-  );
-  const paperRef = React.useRef<HTMLDivElement>(null);
-  const handleRef = useForkRef(paperRef, popupRef);
-  const handlePaperRef = useForkRef(handleRef, clickAwayRef as React.Ref<HTMLDivElement>);
-
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      // stop the propagation to avoid closing parent modal
-      event.stopPropagation();
-      dismissViews();
-    }
-  };
-
-  const Transition = (slots?.desktopTransition ?? reduceAnimations) ? Fade : Grow;
-  const FocusTrap = slots?.desktopTrapFocus ?? BaseFocusTrap;
-
-  const Paper = slots?.desktopPaper ?? PickerPopperPaper;
-  const Popper = slots?.popper ?? PickerPopperRoot;
-  const popperProps = useSlotProps({
-    elementType: Popper,
-    externalSlotProps: slotProps?.popper,
-    additionalProps: {
-      transition: true,
-      role: viewContainerRole == null ? undefined : viewContainerRole,
-      open,
-      placement,
-      anchorEl: triggerElement,
-      onKeyDown: handleKeyDown,
-    },
-    className: classes.root,
-    ownerState: pickerOwnerState,
-  });
-
-  const ownerState: PickerPopperOwnerState = React.useMemo(
-    () => ({ ...pickerOwnerState, popperPlacement: popperProps.placement }),
-    [pickerOwnerState, popperProps.placement],
-  );
-
-  return (
-    <Popper {...popperProps}>
-      {({ TransitionProps }) => (
-        <FocusTrap
-          open={open}
-          disableAutoFocus
-          // pickers are managing focus position manually
-          // without this prop the focus is returned to the button before `aria-label` is updated
-          // which would force screen readers to read too old label
-          disableRestoreFocus
-          disableEnforceFocus={viewContainerRole === 'tooltip'}
-          {...slotProps?.desktopTrapFocus}
-        >
-          <Transition
-            {...TransitionProps}
-            {...slotProps?.desktopTransition}
-            onExited={(event) => {
-              onPopperExited?.();
-              slotProps?.desktopTransition?.onExited?.(event);
-              TransitionProps?.onExited?.();
-            }}
-          >
-            <PickerPopperPaperWrapper
-              PaperComponent={Paper}
-              ownerState={ownerState}
-              ref={handlePaperRef}
-              onPaperClick={onPaperClick}
-              onPaperTouchStart={onPaperTouchStart}
-              paperClasses={classes.paper}
-              paperSlotProps={slotProps?.desktopPaper}
-            >
-              {children}
-            </PickerPopperPaperWrapper>
-          </Transition>
-        </FocusTrap>
-      )}
-    </Popper>
-  );
+    throw new Error("STUB");
 }

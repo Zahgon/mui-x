@@ -30,7 +30,7 @@ import { selectorChartDrawingArea } from '../../corePlugins/useChartDimensions/u
 
 const selectorChartControlledCartesianAxisTooltip = (
   state: ChartState<[], [UseChartCartesianAxisSignature]>,
-) => state.controlledCartesianAxisTooltip;
+) => { throw new Error("STUB"); };
 
 const EMPTY_ARRAY: AxisItemIdentifier[] = [];
 
@@ -65,31 +65,7 @@ export const selectorChartsInteractionTooltipXAxes = createSelectorMemoizedWithO
   selectorChartsLastInteraction,
   selectorChartsKeyboardXAxisIndex,
   (controlledValues, value, axes, lastInteraction, keyboardIndex) => {
-    if (controlledValues !== undefined) {
-      if (controlledValues.length === 0) {
-        return EMPTY_ARRAY;
-      }
-      const ids = new Set(axes.axisIds);
-
-      const filteredArray = controlledValues.filter(({ axisId }) => ids.has(axisId));
-      return filteredArray.length === controlledValues.length ? controlledValues : filteredArray;
-    }
-
-    if (lastInteraction === 'keyboard') {
-      return getKeyboardAxisTooltip(keyboardIndex, axes);
-    }
-
-    if (value === null) {
-      return EMPTY_ARRAY;
-    }
-
-    return axes.axisIds
-      .filter((id) => axes.axis[id].triggerTooltip)
-      .map((axisId): AxisItemIdentifier => ({
-        axisId,
-        dataIndex: getAxisIndex(axes.axis[axisId], value),
-      }))
-      .filter(({ dataIndex }) => dataIndex >= 0);
+      throw new Error("STUB");
   },
 );
 
@@ -110,31 +86,7 @@ export const selectorChartsInteractionTooltipYAxes = createSelectorMemoizedWithO
   selectorChartsLastInteraction,
   selectorChartsKeyboardYAxisIndex,
   (controlledValues, value, axes, lastInteraction, keyboardIndex) => {
-    if (controlledValues !== undefined) {
-      if (controlledValues.length === 0) {
-        return EMPTY_ARRAY;
-      }
-      const ids = new Set(axes.axisIds);
-
-      const filteredArray = controlledValues.filter(({ axisId }) => ids.has(axisId));
-      return filteredArray.length === controlledValues.length ? controlledValues : filteredArray;
-    }
-
-    if (lastInteraction === 'keyboard') {
-      return getKeyboardAxisTooltip(keyboardIndex, axes);
-    }
-
-    if (value === null) {
-      return EMPTY_ARRAY;
-    }
-
-    return axes.axisIds
-      .filter((id) => axes.axis[id].triggerTooltip)
-      .map((axisId): AxisItemIdentifier => ({
-        axisId,
-        dataIndex: getAxisIndex(axes.axis[axisId], value),
-      }))
-      .filter(({ dataIndex }) => dataIndex >= 0);
+      throw new Error("STUB");
   },
 );
 
@@ -144,7 +96,7 @@ export const selectorChartsInteractionTooltipYAxes = createSelectorMemoizedWithO
 export const selectorChartsInteractionAxisTooltip = createSelector(
   selectorChartsInteractionTooltipXAxes,
   selectorChartsInteractionTooltipYAxes,
-  (xTooltip, yTooltip) => xTooltip.length > 0 || yTooltip.length > 0,
+  (xTooltip, yTooltip) => { throw new Error("STUB"); },
 );
 
 function getCoordinatesFromAxis(
@@ -181,44 +133,6 @@ export const selectorChartsTooltipAxisPosition = createSelectorMemoized(
     drawingArea: ChartDrawingArea,
     placement: 'top' | 'bottom' | 'left' | 'right' | undefined,
   ) {
-    if (xAxesIdentifiers.length === 0 && yAxesIdentifiers.length === 0) {
-      return null;
-    }
-
-    if (xAxesIdentifiers.length > 0) {
-      const x = getCoordinatesFromAxis(xAxesIdentifiers[0], xAxes);
-      if (x === null) {
-        return null;
-      }
-      switch (placement) {
-        case 'left':
-        case 'right':
-          return { x, y: drawingArea.top + drawingArea.height / 2 };
-        case 'bottom':
-          return { x, y: drawingArea.top + drawingArea.height };
-        case 'top':
-        default:
-          return { x, y: drawingArea.top };
-      }
-    }
-
-    if (yAxesIdentifiers.length > 0) {
-      const y = getCoordinatesFromAxis(yAxesIdentifiers[0], yAxes);
-      if (y === null) {
-        return null;
-      }
-
-      switch (placement) {
-        case 'right':
-          return { x: drawingArea.left + drawingArea.width / 2, y };
-        case 'bottom':
-        case 'top':
-          return { x: drawingArea.left + drawingArea.width / 2, y };
-        case 'left':
-        default:
-          return { x: drawingArea.left + drawingArea.width / 2, y };
-      }
-    }
-    return null;
+      throw new Error("STUB");
   },
 );

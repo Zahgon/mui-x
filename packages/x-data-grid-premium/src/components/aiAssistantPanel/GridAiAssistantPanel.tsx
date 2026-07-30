@@ -131,19 +131,7 @@ function GridAiAssistantPanel() {
     activeConversation?.title || apiRef.current.getLocaleText('aiAssistantPanelNewConversation');
 
   const createConversation = React.useCallback(() => {
-    const newConversation = conversations.findIndex((conversation) => !conversation.prompts.length);
-    if (newConversation !== -1) {
-      apiRef.current.aiAssistant.setActiveConversationIndex(newConversation);
-    } else {
-      apiRef.current.aiAssistant.setConversations((newConversations) => [
-        ...newConversations,
-        {
-          title: apiRef.current.getLocaleText('aiAssistantPanelNewConversation'),
-          prompts: [],
-        },
-      ]);
-      apiRef.current.aiAssistant.setActiveConversationIndex(conversations.length);
-    }
+      throw new Error("STUB");
   }, [apiRef, conversations]);
 
   return (

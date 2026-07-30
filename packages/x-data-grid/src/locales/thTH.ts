@@ -32,7 +32,7 @@ const thTHGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: 'แสดงตัวกรอง',
   toolbarFiltersTooltipHide: 'ซ่อนตัวกรอง',
   toolbarFiltersTooltipShow: 'แสดงตัวกรอง',
-  toolbarFiltersTooltipActive: (count) => `ตัวกรองที่ใช้งาน ${count} รายการ`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'ค้นหา…',
@@ -128,7 +128,7 @@ const thTHGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'เมนู',
-  columnMenuAriaLabel: (columnName: string) => `เมนูคอลัมน์ ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'แสดงคอลัมน์',
   columnMenuManageColumns: 'จัดการคอลัมน์',
   columnMenuFilter: 'กรอง',
@@ -140,19 +140,19 @@ const thTHGrid: Partial<GridLocaleText> = {
   columnMenuManageCharts: 'จัดการแผนภูมิ',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) => `ตัวกรองที่ใช้งาน ${count} รายการ`,
+  columnHeaderFiltersTooltipActive: (count) => { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'แสดงตัวกรอง',
   columnHeaderSortIconLabel: 'เรียงลำดับ',
 
   // Rows selected footer text
-  footerRowSelected: (count) => `เลือกแล้ว ${count.toLocaleString()} แถว`,
+  footerRowSelected: (count) => { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'จำนวนแถวทั้งหมด:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} จาก ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'เลือกด้วยช่องทำเครื่องหมาย',
@@ -184,8 +184,8 @@ const thTHGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'กลุ่ม',
-  groupColumn: (name) => `จัดกลุ่มตาม ${name}`,
-  unGroupColumn: (name) => `ยกเลิกจัดกลุ่มตาม ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'สลับแผงรายละเอียด',
@@ -195,26 +195,10 @@ const thTHGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'แถวต่อหน้า:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    const unknownRowCount = count == null || count === -1;
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} จาก ${!unknownRowCount ? formatNumber(count) : `มากกว่า ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated > to ? `ประมาณ ${formatNumber(estimated)}` : `มากกว่า ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} จาก ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'ไปหน้าแรก';
-    }
-    if (type === 'last') {
-      return 'ไปหน้าสุดท้าย';
-    }
-    if (type === 'next') {
-      return 'ไปหน้าถัดไป';
-    }
-    // if (type === 'previous') {
-    return 'ไปหน้าก่อนหน้า';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -273,8 +257,8 @@ const thTHGrid: Partial<GridLocaleText> = {
   chartsFieldBlocked: 'ไม่สามารถเพิ่มฟิลด์นี้ไปยังส่วนใดได้',
   chartsCategories: 'หมวดหมู่',
   chartsSeries: 'ชุดข้อมูล',
-  chartsMenuAddToDimensions: (dimensionLabel: string) => `เพิ่มไปยัง${dimensionLabel}`,
-  chartsMenuAddToValues: (valuesLabel: string) => `เพิ่มไปยัง${valuesLabel}`,
+  chartsMenuAddToDimensions: (dimensionLabel: string) => { throw new Error("STUB"); },
+  chartsMenuAddToValues: (valuesLabel: string) => { throw new Error("STUB"); },
   chartsMenuMoveUp: 'ย้ายขึ้น',
   chartsMenuMoveDown: 'ย้ายลง',
   chartsMenuMoveToTop: 'ย้ายไปบนสุด',
@@ -282,8 +266,8 @@ const thTHGrid: Partial<GridLocaleText> = {
   chartsMenuOptions: 'ตัวเลือกฟิลด์',
   chartsMenuRemove: 'ลบ',
   chartsDragToDimensions: (dimensionLabel: string) =>
-    `ลากมาที่นี่เพื่อใช้คอลัมน์เป็น${dimensionLabel}`,
-  chartsDragToValues: (valuesLabel: string) => `ลากมาที่นี่เพื่อใช้คอลัมน์เป็น${valuesLabel}`,
+    { throw new Error("STUB"); },
+  chartsDragToValues: (valuesLabel: string) => { throw new Error("STUB"); },
 
   // AI Assistant panel
   aiAssistantPanelTitle: 'ผู้ช่วย AI',
@@ -309,36 +293,30 @@ const thTHGrid: Partial<GridLocaleText> = {
   promptAppliedChanges: 'นำการเปลี่ยนแปลงไปใช้แล้ว',
 
   // Prompt changes
-  promptChangeGroupDescription: (column: string) => `จัดกลุ่มตาม ${column}`,
+  promptChangeGroupDescription: (column: string) => { throw new Error("STUB"); },
   promptChangeAggregationLabel: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeAggregationDescription: (column: string, aggregation: string) =>
-    `รวมค่า ${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeFilterLabel: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `${column} เป็นหนึ่งใน: ${value}`;
-    }
-    return `${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeFilterDescription: (column: string, operator: string, value: string) => {
-    if (operator === 'is any of') {
-      return `กรองโดยที่ ${column} เป็นหนึ่งใน: ${value}`;
-    }
-    return `กรองโดยที่ ${column} ${operator} ${value}`;
+      throw new Error("STUB");
   },
   promptChangeSortDescription: (column: string, direction: string) =>
-    `เรียงตาม ${column} (${direction})`,
+    { throw new Error("STUB"); },
   promptChangePivotEnableLabel: 'Pivot',
   promptChangePivotEnableDescription: 'เปิดใช้งาน Pivot',
-  promptChangePivotColumnsLabel: (count: number) => `คอลัมน์ (${count})`,
+  promptChangePivotColumnsLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotColumnsDescription: (column: string, direction: string) =>
-    `${column}${direction ? ` (${direction})` : ''}`,
-  promptChangePivotRowsLabel: (count: number) => `แถว (${count})`,
-  promptChangePivotValuesLabel: (count: number) => `ค่า (${count})`,
+    { throw new Error("STUB"); },
+  promptChangePivotRowsLabel: (count: number) => { throw new Error("STUB"); },
+  promptChangePivotValuesLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotValuesDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeChartsLabel: (dimensionsCount: number, valuesCount: number) =>
-    `มิติ (${dimensionsCount}), ค่า (${valuesCount})`,
+    { throw new Error("STUB"); },
 };
 
 export const thTH: Localization = getGridLocalization(thTHGrid);

@@ -33,7 +33,7 @@ function GridPivotPanelFieldMenu(props: GridPivotPanelFieldMenuProps) {
   const isAvailableField = modelKey === null;
   const pivotModel = useGridSelector(apiRef, gridPivotModelSelector);
   const fieldIndexInModel = !isAvailableField
-    ? pivotModel[modelKey].findIndex((item) => item.field === field)
+    ? pivotModel[modelKey].findIndex((item) => { throw new Error("STUB"); })
     : -1;
   const modelLength = !isAvailableField ? pivotModel[modelKey].length : 0;
   const canMoveUp = fieldIndexInModel > 0;
@@ -43,63 +43,7 @@ function GridPivotPanelFieldMenu(props: GridPivotPanelFieldMenuProps) {
   const triggerRef = React.useRef<HTMLButtonElement>(null);
 
   const getMenuItems = React.useCallback((): (MenuAction | MenuDivider)[] => {
-    if (isAvailableField) {
-      return [
-        { key: 'rows', label: apiRef.current.getLocaleText('pivotMenuAddToRows') },
-        { key: 'columns', label: apiRef.current.getLocaleText('pivotMenuAddToColumns') },
-        { key: 'values', label: apiRef.current.getLocaleText('pivotMenuAddToValues') },
-      ];
-    }
-
-    return [
-      {
-        key: 'up',
-        label: apiRef.current.getLocaleText('pivotMenuMoveUp'),
-        icon: <rootProps.slots.pivotMenuMoveUpIcon />,
-        disabled: !canMoveUp,
-      },
-      {
-        key: 'down',
-        label: apiRef.current.getLocaleText('pivotMenuMoveDown'),
-        icon: <rootProps.slots.pivotMenuMoveDownIcon />,
-        disabled: !canMoveDown,
-      },
-      { divider: true },
-      {
-        key: 'top',
-        label: apiRef.current.getLocaleText('pivotMenuMoveToTop'),
-        icon: <rootProps.slots.pivotMenuMoveToTopIcon />,
-        disabled: !canMoveUp,
-      },
-      {
-        key: 'bottom',
-        label: apiRef.current.getLocaleText('pivotMenuMoveToBottom'),
-        icon: <rootProps.slots.pivotMenuMoveToBottomIcon />,
-        disabled: !canMoveDown,
-      },
-      { divider: true },
-      {
-        key: 'rows',
-        label: apiRef.current.getLocaleText('pivotMenuRows'),
-        icon: modelKey === 'rows' ? <rootProps.slots.pivotMenuCheckIcon /> : <span />,
-      },
-      {
-        key: 'columns',
-        label: apiRef.current.getLocaleText('pivotMenuColumns'),
-        icon: modelKey === 'columns' ? <rootProps.slots.pivotMenuCheckIcon /> : <span />,
-      },
-      {
-        key: 'values',
-        label: apiRef.current.getLocaleText('pivotMenuValues'),
-        icon: modelKey === 'values' ? <rootProps.slots.pivotMenuCheckIcon /> : <span />,
-      },
-      { divider: true },
-      {
-        key: null,
-        label: apiRef.current.getLocaleText('pivotMenuRemove'),
-        icon: <rootProps.slots.pivotMenuRemoveIcon />,
-      },
-    ];
+      throw new Error("STUB");
   }, [isAvailableField, apiRef, rootProps, canMoveUp, canMoveDown, modelKey]);
 
   const handleClick = () => {
@@ -191,19 +135,7 @@ function GridPivotPanelFieldMenu(props: GridPivotPanelFieldMenuProps) {
           {...rootProps.slotProps?.baseMenuList}
         >
           {getMenuItems().map((item, index) =>
-            'divider' in item ? (
-              <rootProps.slots.baseDivider key={`divider-${index}`} />
-            ) : (
-              <rootProps.slots.baseMenuItem
-                key={item.key}
-                disabled={item.disabled}
-                onClick={() => handleMove(item.key)}
-                iconStart={item.icon}
-                {...rootProps.slotProps?.baseMenuItem}
-              >
-                {item.label}
-              </rootProps.slots.baseMenuItem>
-            ),
+            { throw new Error("STUB"); },
           )}
         </rootProps.slots.baseMenuList>
       </GridMenu>

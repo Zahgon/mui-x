@@ -42,34 +42,7 @@ export async function extrapolateSeed(
   data: GridDemoData,
 ): Promise<GridDemoData> {
   return new Promise<any>((resolve) => {
-    const seed = data.rows;
-    const rows = data.rows.slice();
-    const tasks = { current: rowLength - seed.length };
-
-    function work() {
-      const row = {} as any;
-
-      for (let j = 0; j < data.columns.length; j += 1) {
-        const column = data.columns[j];
-        const index = Math.round(Math.random() * (seed.length - 1));
-
-        if (column.field === 'id') {
-          row.id = `id-${tasks.current + seed.length}`;
-        } else {
-          row[column.field] = seed[index][column.field];
-        }
-      }
-
-      rows.push(row);
-
-      tasks.current -= 1;
-    }
-
-    asyncWorker({
-      work,
-      done: () => resolve({ ...data, rows }),
-      tasks,
-    });
+      throw new Error("STUB");
   });
 }
 
@@ -100,10 +73,10 @@ export const getColumnsFromOptions = (options: ColumnsOptions): GridColDefGenera
     options.dataSet === 'Commodity' ? getCommodityColumns(options.editable) : getEmployeeColumns();
 
   if (!options.multiSelect) {
-    columns = columns.filter((col) => col.type !== 'multiSelect');
+    columns = columns.filter((col) => { throw new Error("STUB"); });
   }
   if (options.visibleFields) {
-    columns = columns.map((col) => ({ ...col, hide: !options.visibleFields?.includes(col.field) }));
+    columns = columns.map((col) => { throw new Error("STUB"); });
   }
   if (options.maxColumns) {
     columns = columns.slice(0, options.maxColumns);
@@ -114,9 +87,7 @@ export const getColumnsFromOptions = (options: ColumnsOptions): GridColDefGenera
 export const getInitialState = (options: UseDemoDataOptions, columns: GridColDefGenerator[]) => {
   const columnVisibilityModel: GridColumnVisibilityModel = {};
   columns.forEach((col) => {
-    if (col.hide) {
-      columnVisibilityModel[col.field] = false;
-    }
+      throw new Error("STUB");
   });
 
   const groupingField = options.treeData?.groupingField;
@@ -133,13 +104,7 @@ export const useDemoData = (options: UseDemoDataOptions): DemoDataReturnType => 
   const [loading, setLoading] = React.useState(true);
 
   const columns = React.useMemo(() => {
-    return getColumnsFromOptions({
-      dataSet: options.dataSet,
-      editable: options.editable,
-      maxColumns: options.maxColumns,
-      visibleFields: options.visibleFields,
-      multiSelect: options.multiSelect,
-    });
+      throw new Error("STUB");
   }, [
     options.dataSet,
     options.editable,
@@ -149,68 +114,11 @@ export const useDemoData = (options: UseDemoDataOptions): DemoDataReturnType => 
   ]);
 
   const [data, setData] = React.useState<DemoTreeDataValue>(() => {
-    return addTreeDataOptionsToDemoData(
-      {
-        columns,
-        rows: [],
-        initialState: getInitialState(options, columns),
-      },
-      options.treeData,
-    );
+      throw new Error("STUB");
   });
 
   React.useEffect(() => {
-    const treeDataKey =
-      (options.treeData?.maxDepth ?? 1) > 1
-        ? `${options.treeData?.maxDepth}-${options.treeData?.averageChildren ?? 2}-${options.treeData?.groupingField ?? ''}`
-        : 'false';
-    const cacheKey = `${options.dataSet}-${rowLength}-${index}-${options.maxColumns}-multiSelect:${options.multiSelect ? 'true' : 'false'}-treeData:${treeDataKey}`;
-
-    // Cache to allow fast switch between the JavaScript and TypeScript version
-    // of the demos.
-    if (dataCache.has(cacheKey)) {
-      const newData = dataCache.get(cacheKey)!;
-      setData(newData);
-      setLoading(false);
-      return undefined;
-    }
-
-    let active = true;
-
-    (async () => {
-      setLoading(true);
-
-      let newData: DemoTreeDataValue;
-      if (rowLength > 1000) {
-        newData = await getRealGridData(1000, columns);
-        newData = await extrapolateSeed(rowLength, newData);
-      } else {
-        newData = await getRealGridData(rowLength, columns);
-      }
-
-      if (!active) {
-        return;
-      }
-
-      newData = addTreeDataOptionsToDemoData(newData, {
-        maxDepth: options.treeData?.maxDepth,
-        groupingField: options.treeData?.groupingField,
-        averageChildren: options.treeData?.averageChildren,
-      });
-
-      // It's quite slow. No need for it in production.
-      if (process.env.NODE_ENV !== 'production') {
-        deepFreeze(newData);
-      }
-
-      dataCache.set(cacheKey, newData);
-      setData(newData);
-      setLoading(false);
-    })();
-
-    return () => {
-      active = false;
-    };
+      throw new Error("STUB");
   }, [
     rowLength,
     options.dataSet,
@@ -228,7 +136,7 @@ export const useDemoData = (options: UseDemoDataOptions): DemoDataReturnType => 
     loading,
     setRowLength,
     loadNewData: () => {
-      setIndex((oldIndex) => oldIndex + 1);
+        throw new Error("STUB");
     },
   };
 };

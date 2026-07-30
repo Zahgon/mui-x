@@ -28,7 +28,7 @@ export function useFunnelSeries(seriesId?: undefined): UseFunnelSeriesReturnValu
  */
 export function useFunnelSeries(seriesIds: SeriesId[]): UseFunnelSeriesReturnValue[];
 export function useFunnelSeries(seriesIds?: SeriesId | SeriesId[] | undefined) {
-  return useSeriesOfType('funnel', seriesIds);
+    throw new Error("STUB");
 }
 
 /**

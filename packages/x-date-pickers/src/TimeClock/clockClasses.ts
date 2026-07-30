@@ -25,7 +25,7 @@ export interface ClockClasses {
 export type ClockClassKey = keyof ClockClasses;
 
 export function getClockUtilityClass(slot: string) {
-  return generateUtilityClass('MuiClock', slot);
+    throw new Error("STUB");
 }
 
 export const clockClasses: ClockClasses = generateUtilityClasses('MuiClock', [

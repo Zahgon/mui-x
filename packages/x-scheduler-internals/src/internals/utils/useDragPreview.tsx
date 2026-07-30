@@ -17,54 +17,11 @@ export function useDragPreview(parameters: useDragPreview.Parameters): useDragPr
   });
 
   const element = React.useMemo(() => {
-    if (state.dragPosition == null) {
-      return null;
-    }
-
-    return (
-      <div
-        style={{
-          position: 'fixed',
-          top: state.dragPosition.clientY,
-          left: state.dragPosition.clientX,
-          pointerEvents: 'none',
-          zIndex: 9999,
-        }}
-      >
-        {renderDragPreview({ data, type } as RenderDragPreviewParameters)}
-      </div>
-    );
+      throw new Error("STUB");
   }, [state.dragPosition, renderDragPreview, data, type]);
 
   const actions = React.useMemo(
-    () => ({
-      onDragStart: (location: useDragPreview.DragLocationHistory) => {
-        setState({
-          isDragging: true,
-          dragPosition: showPreviewOnDragStart ? location.current.input : null,
-        });
-      },
-      onDrag: (location: useDragPreview.DragLocationHistory) => {
-        let shouldShowPreview = true;
-        if (
-          store &&
-          type === 'internal-event' &&
-          !schedulerEventSelectors.canDropEventsToTheOutside(store.state)
-        ) {
-          shouldShowPreview = false;
-        } else if (location.current.dropTargets.some((el) => el.data.isSchedulerDropTarget)) {
-          shouldShowPreview = false;
-        }
-
-        setState({
-          isDragging: true,
-          dragPosition: shouldShowPreview ? location.current.input : null,
-        });
-      },
-      onDrop: () => {
-        setState({ isDragging: false, dragPosition: null });
-      },
-    }),
+    () => { throw new Error("STUB"); },
     [store, showPreviewOnDragStart, type],
   );
 

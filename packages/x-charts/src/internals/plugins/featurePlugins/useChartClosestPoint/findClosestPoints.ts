@@ -27,10 +27,7 @@ export function findClosestPoints(
   originalYScale.range([0, 1]);
 
   const excludeIfOutsideDrawingArea = function excludeIfOutsideDrawingArea(index: number) {
-    const x = originalXScale(seriesData[index].x)!;
-    const y = originalYScale(seriesData[index].y)!;
-
-    return x >= xZoomStart && x <= xZoomEnd && y >= yZoomStart && y <= yZoomEnd;
+      throw new Error("STUB");
   };
 
   // We need to convert the distance from the original range [0, 1] to the current drawing area
@@ -45,10 +42,10 @@ export function findClosestPoints(
   }
 
   const pointX = originalXScale(
-    invertScale(xScale, svgPointX, (dataIndex) => seriesData[dataIndex]?.x),
+    invertScale(xScale, svgPointX, (dataIndex) => { throw new Error("STUB"); }),
   );
   const pointY = originalYScale(
-    invertScale(yScale, svgPointY, (dataIndex) => seriesData[dataIndex]?.y),
+    invertScale(yScale, svgPointY, (dataIndex) => { throw new Error("STUB"); }),
   );
 
   if (pointX === undefined || pointY === undefined) {
@@ -89,19 +86,19 @@ export function findClosestPoints(
     const edge = Math.sqrt(centerDistSq) - getItemRadius(i);
     ranked.push({ index: i, edge, centerDistSq });
   }
-  ranked.sort((a, b) => a.edge - b.edge);
+  ranked.sort((a, b) => { throw new Error("STUB"); });
 
   // The pointer is inside multiple marks, we sort them by distance to the center. Priority is
   // 1. marks that are under the pointer (negative edge distance) sorted by distance to the center
   // 2. marks that are outside the pointer (positive edge distance) by distance to the edge
-  const splitIndex = ranked.findLastIndex((d) => d.edge < 0);
+  const splitIndex = ranked.findLastIndex((d) => { throw new Error("STUB"); });
   if (splitIndex !== -1) {
     ranked = [
-      ...ranked.slice(0, splitIndex + 1).sort((a, b) => a.centerDistSq - b.centerDistSq),
+      ...ranked.slice(0, splitIndex + 1).sort((a, b) => { throw new Error("STUB"); }),
       ...ranked.slice(splitIndex + 1),
     ];
   }
-  return ranked.slice(0, Math.min(ranked.length, maxResults)).map((d) => d.index);
+  return ranked.slice(0, Math.min(ranked.length, maxResults)).map((d) => { throw new Error("STUB"); });
 }
 
 function invertScale<T>(scale: D3Scale, value: number, getDataPoint: (dataIndex: number) => T) {

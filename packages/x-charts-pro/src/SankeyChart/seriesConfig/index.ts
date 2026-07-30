@@ -13,17 +13,10 @@ import descriptionGetter from './descriptionGetter';
 // Simple passthrough functions for sankey chart
 const seriesProcessor = (series: any) => series;
 const colorProcessor = (series: any) => series;
-const legendGetter = () => [];
+const legendGetter = () => { throw new Error("STUB"); };
 
 const seriesLayout: SeriesLayoutGetter<'sankey'> = (series, drawingArea) => {
-  if (series.seriesOrder.length === 0) {
-    return {};
-  }
-  return {
-    [series.seriesOrder[0]]: {
-      sankeyLayout: calculateSankeyLayout(series.series[series.seriesOrder[0]], drawingArea),
-    },
-  };
+    throw new Error("STUB");
 };
 
 export const sankeySeriesConfig: ChartSeriesTypeConfig<'sankey'> = {

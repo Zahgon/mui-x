@@ -30,40 +30,5 @@ export const ConversationListPreview = React.forwardRef(function ConversationLis
   props: ConversationListPreviewProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    conversation,
-    selected = false,
-    unread = false,
-    focused = false,
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    ...other
-  } = props as ConversationListPreviewProps & {
-    ownerState?: ConversationListPreviewOwnerState;
-  };
-  const ownerState: ConversationListPreviewOwnerState = {
-    conversation,
-    selected,
-    unread,
-    focused,
-  };
-  void ownerStateProp;
-
-  const Root = slots?.root ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  if (!conversation.subtitle) {
-    return null;
-  }
-
-  return <Root {...rootProps}>{conversation.subtitle}</Root>;
+    throw new Error("STUB");
 }) as ConversationListPreviewComponent;

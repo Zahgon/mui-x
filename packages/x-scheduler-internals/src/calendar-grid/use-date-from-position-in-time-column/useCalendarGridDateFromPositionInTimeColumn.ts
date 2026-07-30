@@ -7,18 +7,7 @@ import { useCalendarGridTimeColumnContext } from '../time-column/CalendarGridTim
 export function useCalendarGridGetDateFromPositionInColumn(
   parameters: useCalendarGridGetDateFromPositionInColumn.Parameters,
 ): useCalendarGridGetDateFromPositionInColumn.ReturnValue {
-  const { elementRef, snapMinutes } = parameters;
-  const adapter = useAdapterContext();
-  const { getCursorPositionInElementMs, start } = useCalendarGridTimeColumnContext();
-
-  return React.useCallback(
-    (clientY: number): TemporalSupportedObject => {
-      const offsetMs = getCursorPositionInElementMs({ input: { clientY }, elementRef });
-      const anchor = adapter.addMilliseconds(start, offsetMs);
-      return adapter.addMinutes(anchor, -(adapter.getMinutes(anchor) % snapMinutes));
-    },
-    [adapter, getCursorPositionInElementMs, elementRef, snapMinutes, start],
-  );
+    throw new Error("STUB");
 }
 
 export namespace useCalendarGridGetDateFromPositionInColumn {

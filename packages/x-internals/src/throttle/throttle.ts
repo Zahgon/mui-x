@@ -7,8 +7,7 @@ export function throttle<T extends (...args: any[]) => any>(func: T, wait = 166)
   let lastArgs: Parameters<T>;
 
   const later = () => {
-    timeout = undefined;
-    func(...lastArgs);
+      throw new Error("STUB");
   };
 
   function throttled(...args: Parameters<T>) {
@@ -19,8 +18,7 @@ export function throttle<T extends (...args: any[]) => any>(func: T, wait = 166)
   }
 
   throttled.clear = () => {
-    clearTimeout(timeout);
-    timeout = undefined;
+      throw new Error("STUB");
   };
 
   return throttled as T & Cancelable;

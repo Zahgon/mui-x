@@ -24,13 +24,7 @@ export function useChatStatus(): UseChatStatusValue {
   const typingUserIds = useStore(store, chatSelectors.typingUserIdsForActiveConversation);
 
   return React.useMemo(
-    () => ({
-      isStreaming,
-      hasMoreHistory,
-      isLoadingHistory,
-      error,
-      typingUserIds,
-    }),
+    () => { throw new Error("STUB"); },
     [error, hasMoreHistory, isLoadingHistory, isStreaming, typingUserIds],
   );
 }

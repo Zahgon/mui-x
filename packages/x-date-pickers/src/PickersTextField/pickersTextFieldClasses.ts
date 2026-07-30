@@ -16,7 +16,7 @@ export interface PickersTextFieldClasses {
 export type PickersTextFieldClassKey = keyof PickersTextFieldClasses;
 
 export function getPickersTextFieldUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickersTextField', slot);
+    throw new Error("STUB");
 }
 
 export const pickersTextFieldClasses = generateUtilityClasses<PickersTextFieldClassKey>(

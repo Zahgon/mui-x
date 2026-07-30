@@ -33,7 +33,7 @@ const nbNOGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Skjul filter',
   toolbarFiltersTooltipShow: 'Vis filter',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktive filter` : `${count} aktivt filter`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Søk…',
@@ -129,7 +129,7 @@ const nbNOGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Meny',
-  columnMenuAriaLabel: (columnName: string) => `${columnName} kolonnemeny`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Vis kolonner',
   columnMenuManageColumns: 'Administrer kolonner',
   columnMenuFilter: 'Filter',
@@ -142,20 +142,20 @@ const nbNOGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktive filter` : `${count} aktivt filter`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Vis filter',
   columnHeaderSortIconLabel: 'Sorter',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1 ? `${count.toLocaleString()} rader valgt` : `${count.toLocaleString()} rad valgt`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Totalt antall rader:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} av ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Avmerkingsboks',
@@ -187,8 +187,8 @@ const nbNOGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Grupper',
-  groupColumn: (name) => `Grupper på ${name}`,
-  unGroupColumn: (name) => `Slutt å grupper på ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Utvid/kollaps detalj panel',
@@ -198,27 +198,10 @@ const nbNOGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Rader per side:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} av ${count !== -1 ? formatNumber(count) : `mer enn ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `omtrent ${formatNumber(estimated)}`
-        : `mer enn ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} av ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Gå til første side';
-    }
-    if (type === 'last') {
-      return 'Gå til siste side';
-    }
-    if (type === 'next') {
-      return 'Gå til neste side';
-    }
-    // if (type === 'previous') {
-    return 'Gå til forrige side';
+      throw new Error("STUB");
   },
 
   // Row reordering text

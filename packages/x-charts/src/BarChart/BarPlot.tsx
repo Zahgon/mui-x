@@ -116,15 +116,7 @@ function BarPlot(props: BarPlotProps): React.JSX.Element {
         borderRadius={borderRadius}
         {...other}
       />
-      {completedData.map((processedSeries) => (
-        <BarLabelPlot
-          key={processedSeries.seriesId}
-          className={classes.seriesLabels}
-          processedSeries={processedSeries}
-          skipAnimation={skipAnimation}
-          {...other}
-        />
-      ))}
+      {completedData.map((processedSeries) => { throw new Error("STUB"); })}
     </BarPlotRoot>
   );
 }

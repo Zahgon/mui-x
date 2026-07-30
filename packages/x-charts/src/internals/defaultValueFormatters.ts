@@ -13,21 +13,6 @@ export function createScalarFormatter(tickNumber: number, zoomScale: D3Continuou
     value: any,
     context: AxisValueFormatterContext<S>,
   ): string {
-    if (context.location === 'tick') {
-      const domain = context.scale.domain();
-      const zeroSizeDomain = domain[0] === domain[1];
-
-      if (zeroSizeDomain) {
-        return context.scale.tickFormat(1)(value);
-      }
-
-      return context.scale.tickFormat(tickNumber)(value);
-    }
-
-    if (context.location === 'zoom-slider-tooltip') {
-      return zoomScale.tickFormat(2)(value);
-    }
-
-    return `${value}`;
+      throw new Error("STUB");
   };
 }

@@ -22,19 +22,6 @@ export function getSeriesLegendItems<T extends SeriesTypeWithLegendFields>(
   const { seriesOrder, series } = params;
 
   return seriesOrder.reduce((acc, seriesId) => {
-    const formattedLabel = getLabel(series[seriesId].label, 'legend');
-
-    if (formattedLabel === undefined) {
-      return acc;
-    }
-
-    acc.push({
-      type,
-      markType: series[seriesId].labelMarkType ?? defaultMarkType,
-      seriesId,
-      color: series[seriesId].color,
-      label: formattedLabel,
-    });
-    return acc;
+      throw new Error("STUB");
   }, [] as SeriesLegendItemParams[]);
 }

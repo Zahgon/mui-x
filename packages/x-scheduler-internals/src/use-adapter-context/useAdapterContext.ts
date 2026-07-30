@@ -19,11 +19,11 @@ export function useAdapterContext() {
   const store = React.useContext(SchedulerStoreContext) as SchedulerStoreInContext<any, any> | null;
 
   const subscribe = React.useCallback(
-    (cb: () => void) => (store ? store.subscribe(cb) : () => {}),
+    (cb: () => void) => { throw new Error("STUB"); },
     [store],
   );
   const getSnapshot = React.useCallback(
-    () => (store ? getAdapter(store.state) : DEFAULT_ADAPTER),
+    () => { throw new Error("STUB"); },
     [store],
   );
 

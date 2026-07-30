@@ -26,24 +26,5 @@ export const MessageActions = React.forwardRef(function MessageActions(
   props: MessageActionsProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    ...other
-  } = props as MessageActionsProps & { ownerState?: MessageActionsOwnerState };
-  const ownerState = useMessageContext();
-  void ownerStateProp;
-  const Actions = slots?.actions ?? 'div';
-  const actionsProps = useSlotProps({
-    elementType: Actions,
-    externalSlotProps: slotProps?.actions,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  return <Actions {...actionsProps} />;
+    throw new Error("STUB");
 }) as MessageActionsComponent;

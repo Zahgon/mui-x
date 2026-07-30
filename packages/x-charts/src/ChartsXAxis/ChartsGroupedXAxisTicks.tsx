@@ -71,43 +71,7 @@ function ChartsGroupedXAxisTicks(inProps: ChartsGroupedXAxisProps) {
   return (
     <React.Fragment>
       {xTicks.map((item, index) => {
-        const { offset: tickOffset, labelOffset } = item;
-        const xTickLabel = labelOffset ?? 0;
-
-        const showTick = instance.isXInside(tickOffset);
-        const tickLabel = item.formattedValue;
-        const ignoreTick = item.ignoreTick ?? false;
-        const groupIndex = item.groupIndex ?? 0;
-        const groupConfig = getGroupingConfig(groups, groupIndex, tickSize, computedGroupTickSizes);
-
-        const tickYSize = positionSign * groupConfig.tickSize;
-        const labelPositionY = positionSign * (groupConfig.tickSize + TICK_LABEL_GAP);
-
-        return (
-          <g
-            key={index}
-            transform={`translate(${tickOffset}, 0)`}
-            className={classes.tickContainer}
-            data-group-index={groupIndex}
-          >
-            {!disableTicks && !ignoreTick && showTick && (
-              <Tick y2={tickYSize} className={classes.tick} {...slotProps?.axisTick} />
-            )}
-
-            {tickLabel !== undefined && (
-              <TickLabel
-                x={xTickLabel}
-                y={labelPositionY}
-                {...axisTickLabelProps}
-                style={{
-                  ...axisTickLabelProps.style,
-                  ...groupConfig.tickLabelStyle,
-                }}
-                text={tickLabel}
-              />
-            )}
-          </g>
-        );
+          throw new Error("STUB");
       })}
     </React.Fragment>
   );

@@ -33,7 +33,7 @@ const arSDGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'إخفاء المرشِحات',
   toolbarFiltersTooltipShow: 'اظهر المرشِحات',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} من المرشِحات النشطة` : `مرشِح نشط`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'بحث…',
@@ -142,20 +142,20 @@ const arSDGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} من المرشِحات النشطة` : `مرشِح نشط`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'إظهار المرشحات',
   columnHeaderSortIconLabel: 'فرز',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1 ? `تم تحديد ${count.toLocaleString()} من الصفوف` : `تم تحديد صف واحد`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'إجمالي الصفوف:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} من ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'تحديد خانة الاختيار',
@@ -187,8 +187,8 @@ const arSDGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'تجميع',
-  groupColumn: (name) => `تجميع حسب ${name}`,
-  unGroupColumn: (name) => `إيقاف التجميع حسب ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'اظهار/اخفاء لوحة التفاصيل',
@@ -198,27 +198,10 @@ const arSDGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'عدد الصفوف في الصفحة:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `\u200E${formatNumber(to)}-${formatNumber(from)}\u200E من ${count !== -1 ? formatNumber(count) : `أكثر من ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `حوالي ${formatNumber(estimated)}`
-        : `أكثر من ${formatNumber(to)}`;
-    return `\u200E${formatNumber(to)}-${formatNumber(from)}\u200E من ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'انتقل إلى الصفحة الأولى';
-    }
-    if (type === 'last') {
-      return 'انتقل إلى الصفحة الأخيرة';
-    }
-    if (type === 'next') {
-      return 'انتقل إلى الصفحة التالية';
-    }
-    // if (type === 'previous') {
-    return 'انتقل إلى الصفحة السابقة';
+      throw new Error("STUB");
   },
 
   // Row reordering text

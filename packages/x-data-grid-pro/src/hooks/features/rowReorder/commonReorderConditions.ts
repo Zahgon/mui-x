@@ -7,99 +7,64 @@ import type { ReorderValidationContext as Ctx } from './models';
  */
 export const commonReorderConditions = {
   // Node type checks
-  isGroupToGroup: (ctx: Ctx) => ctx.sourceNode.type === 'group' && ctx.targetNode.type === 'group',
+  isGroupToGroup: (ctx: Ctx) => { throw new Error("STUB"); },
 
-  isLeafToLeaf: (ctx: Ctx) => ctx.sourceNode.type === 'leaf' && ctx.targetNode.type === 'leaf',
+  isLeafToLeaf: (ctx: Ctx) => { throw new Error("STUB"); },
 
-  isLeafToGroup: (ctx: Ctx) => ctx.sourceNode.type === 'leaf' && ctx.targetNode.type === 'group',
+  isLeafToGroup: (ctx: Ctx) => { throw new Error("STUB"); },
 
-  isGroupToLeaf: (ctx: Ctx) => ctx.sourceNode.type === 'group' && ctx.targetNode.type === 'leaf',
+  isGroupToLeaf: (ctx: Ctx) => { throw new Error("STUB"); },
 
   // Drop position checks
-  isDropAbove: (ctx: Ctx) => ctx.dropPosition === 'above',
-  isDropBelow: (ctx: Ctx) => ctx.dropPosition === 'below',
+  isDropAbove: (ctx: Ctx) => { throw new Error("STUB"); },
+  isDropBelow: (ctx: Ctx) => { throw new Error("STUB"); },
 
   // Depth checks
-  sameDepth: (ctx: Ctx) => ctx.sourceNode.depth === ctx.targetNode.depth,
+  sameDepth: (ctx: Ctx) => { throw new Error("STUB"); },
 
-  sourceDepthGreater: (ctx: Ctx) => ctx.sourceNode.depth > ctx.targetNode.depth,
+  sourceDepthGreater: (ctx: Ctx) => { throw new Error("STUB"); },
 
-  targetDepthIsSourceMinusOne: (ctx: Ctx) => ctx.targetNode.depth === ctx.sourceNode.depth - 1,
+  targetDepthIsSourceMinusOne: (ctx: Ctx) => { throw new Error("STUB"); },
 
   // Parent checks
-  sameParent: (ctx: Ctx) => ctx.sourceNode.parent === ctx.targetNode.parent,
+  sameParent: (ctx: Ctx) => { throw new Error("STUB"); },
 
   // Node state checks
   targetGroupExpanded: (ctx: Ctx) =>
-    (ctx.targetNode.type === 'group' && (ctx.targetNode as GridGroupNode).childrenExpanded) ??
-    false,
+    { throw new Error("STUB"); },
 
   targetGroupCollapsed: (ctx: Ctx) =>
-    ctx.targetNode.type === 'group' && !(ctx.targetNode as GridGroupNode).childrenExpanded,
+    { throw new Error("STUB"); },
 
   // Previous/Next node checks
-  hasPrevNode: (ctx: Ctx) => ctx.prevNode !== null,
-  hasNextNode: (ctx: Ctx) => ctx.nextNode !== null,
+  hasPrevNode: (ctx: Ctx) => { throw new Error("STUB"); },
+  hasNextNode: (ctx: Ctx) => { throw new Error("STUB"); },
 
-  prevIsLeaf: (ctx: Ctx) => ctx.prevNode?.type === 'leaf',
-  prevIsGroup: (ctx: Ctx) => ctx.prevNode?.type === 'group',
-  nextIsLeaf: (ctx: Ctx) => ctx.nextNode?.type === 'leaf',
-  nextIsGroup: (ctx: Ctx) => ctx.nextNode?.type === 'group',
+  prevIsLeaf: (ctx: Ctx) => { throw new Error("STUB"); },
+  prevIsGroup: (ctx: Ctx) => { throw new Error("STUB"); },
+  nextIsLeaf: (ctx: Ctx) => { throw new Error("STUB"); },
+  nextIsGroup: (ctx: Ctx) => { throw new Error("STUB"); },
 
-  prevDepthEquals: (ctx: Ctx, depth: number) => ctx.prevNode?.depth === depth,
+  prevDepthEquals: (ctx: Ctx, depth: number) => { throw new Error("STUB"); },
 
-  prevDepthEqualsSource: (ctx: Ctx) => ctx.prevNode?.depth === ctx.sourceNode.depth,
+  prevDepthEqualsSource: (ctx: Ctx) => { throw new Error("STUB"); },
 
   // Complex checks
   prevBelongsToSource: (ctx: Ctx) => {
-    if (!ctx.prevNode) {
-      return false;
-    }
-    // Check if prevNode.parent OR any of its ancestors === sourceNode.id
-    let currentId = ctx.prevNode.parent;
-    while (currentId) {
-      if (currentId === ctx.sourceNode.id) {
-        return true;
-      }
-      const node = gridRowTreeSelector(ctx.apiRef)[currentId];
-      if (!node) {
-        break;
-      }
-      currentId = node.parent;
-    }
-    return false;
+      throw new Error("STUB");
   },
 
   // Position checks
   isAdjacentPosition: (ctx: Ctx) => {
-    const expandedSortedRowIndexLookup = gridExpandedSortedRowIndexLookupSelector(ctx.apiRef);
-    const sourceRowIndex = expandedSortedRowIndexLookup[ctx.sourceNode.id];
-    const targetRowIndex = expandedSortedRowIndexLookup[ctx.targetNode.id];
-    const dropPosition = ctx.dropPosition;
-    return (
-      (dropPosition === 'above' && targetRowIndex === sourceRowIndex + 1) ||
-      (dropPosition === 'below' && targetRowIndex === sourceRowIndex - 1)
-    );
+      throw new Error("STUB");
   },
 
   // First child check
   targetFirstChildIsGroupWithSourceDepth: (ctx: Ctx) => {
-    if (ctx.targetNode.type !== 'group') {
-      return false;
-    }
-    const rowTree = gridRowTreeSelector(ctx.apiRef);
-    const targetGroup = ctx.targetNode as GridGroupNode;
-    const firstChild = targetGroup.children?.[0] ? rowTree[targetGroup.children[0]] : null;
-    return firstChild?.type === 'group' && firstChild.depth === ctx.sourceNode.depth;
+      throw new Error("STUB");
   },
 
   targetFirstChildDepthEqualsSource: (ctx: Ctx) => {
-    if (ctx.targetNode.type !== 'group') {
-      return false;
-    }
-    const rowTree = gridRowTreeSelector(ctx.apiRef);
-    const targetGroup = ctx.targetNode as GridGroupNode;
-    const firstChild = targetGroup.children?.[0] ? rowTree[targetGroup.children[0]] : null;
-    return firstChild ? firstChild.depth === ctx.sourceNode.depth : false;
+      throw new Error("STUB");
   },
 };

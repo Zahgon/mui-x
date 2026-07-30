@@ -47,20 +47,13 @@ export function useCandlestickChartProps(props: CandlestickChartProps) {
 
   const xAxisWithDefault: XAxis[] | undefined = React.useMemo(
     () =>
-      xAxis?.map((axis) => ({
-        scaleType: 'band',
-        ordinalTimeTicks: ['years', 'quarterly', 'months', 'biweekly', 'weeks', 'days', 'hours'],
-        ...axis,
-      })),
+      { throw new Error("STUB"); },
     [xAxis],
   );
 
   const seriesWithDefault = React.useMemo(
     () =>
-      series.map((s) => ({
-        type: 'ohlc' as const,
-        ...s,
-      })),
+      { throw new Error("STUB"); },
     [series],
   );
 

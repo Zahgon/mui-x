@@ -3,7 +3,7 @@ import type { MinimalTreeViewState } from '../../MinimalTreeViewStore';
 import type { TreeViewItemId } from '../../../models';
 
 const treeIdSelector = createSelector(
-  (state: MinimalTreeViewState<any, any>) => state.providedTreeId ?? state.treeId,
+  (state: MinimalTreeViewState<any, any>) => { throw new Error("STUB"); },
 );
 
 export const idSelectors = {
@@ -19,11 +19,7 @@ export const idSelectors = {
   treeItemIdAttribute: createSelector(
     treeIdSelector,
     (treeId, itemId: TreeViewItemId, providedIdAttribute: string | undefined) => {
-      if (providedIdAttribute != null) {
-        return providedIdAttribute;
-      }
-
-      return `${treeId ?? ''}-${itemId}`;
+        throw new Error("STUB");
     },
   ),
 };

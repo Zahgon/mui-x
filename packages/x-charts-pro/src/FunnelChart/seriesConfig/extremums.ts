@@ -12,67 +12,17 @@ const getValueExtremum = (
       // Keep only series that are associated with the current axis
       .reduce(
         (acc, seriesId) => {
-          const yAxisId = series[seriesId].yAxisId;
-          const xAxisId = series[seriesId].xAxisId;
-          const { dataPoints } = series[seriesId];
-
-          if (
-            // We skip except if the axis id is not defined for the direction and we are on the default one.
-            !(isDefaultAxis && yAxisId === undefined && direction === 'y') &&
-            !(isDefaultAxis && xAxisId === undefined && direction === 'x')
-          ) {
-            return acc;
-          }
-
-          if (
-            axis.scaleType === 'band' ||
-            (!isHorizontal && direction === 'x') ||
-            (isHorizontal && direction === 'y')
-          ) {
-            const [seriesMin, seriesMax] = dataPoints
-              .map((v) => v.map((t) => t[direction]))
-              ?.reduce(
-                (seriesAcc, values) => {
-                  return [Math.min(...values, seriesAcc[0]), Math.max(...values, seriesAcc[1])];
-                },
-                [Infinity, -Infinity],
-              ) ?? [Infinity, -Infinity];
-
-            return [Math.min(seriesMin, acc[0]), Math.max(seriesMax, acc[1])];
-          }
-
-          const seriesMin = dataPoints
-            .flatMap((v) =>
-              v.map((t) => t[direction]).reduce((min, value) => Math.min(value, min), Infinity),
-            )
-            .reduce((sumAcc, value) => sumAcc + value, 0);
-          const seriesMax = dataPoints
-            .flatMap((v) =>
-              v.map((t) => t[direction]).reduce((max, value) => Math.max(value, max), -Infinity),
-            )
-            .reduce((sumAcc, value) => sumAcc + value, 0);
-
-          return [Math.min(seriesMin, acc[0]), Math.max(seriesMax, acc[1])];
-        },
+              throw new Error("STUB");
+          },
         [Infinity, -Infinity],
       )
   );
 };
 
 export const getExtremumX: CartesianExtremumGetter<'funnel'> = (params) => {
-  const isHorizontal = Object.keys(params.series).some(
-    (seriesId) => params.series[seriesId].layout === 'horizontal',
-  );
-  if (isHorizontal) {
-    const [min, max] = getValueExtremum('x', isHorizontal, params);
-    return [max, min];
-  }
-  return getValueExtremum('x', isHorizontal, params);
+    throw new Error("STUB");
 };
 
 export const getExtremumY: CartesianExtremumGetter<'funnel'> = (params) => {
-  const isHorizontal = Object.keys(params.series).some(
-    (seriesId) => params.series[seriesId].layout === 'horizontal',
-  );
-  return getValueExtremum('y', isHorizontal, params);
+    throw new Error("STUB");
 };

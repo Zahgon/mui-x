@@ -27,18 +27,7 @@ const TimeRangePicker = React.forwardRef(function TimeRangePicker(
   inProps: TimeRangePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiTimeRangePicker' });
-
-  const { desktopModeMediaQuery = DEFAULT_DESKTOP_MODE_MEDIA_QUERY, ...other } = props;
-
-  // defaults to `true` in environments where `window.matchMedia` would not be available (i.e. test/jsdom)
-  const isDesktop = useMediaQuery(desktopModeMediaQuery, { defaultMatches: true });
-
-  if (isDesktop) {
-    return <DesktopTimeRangePicker ref={ref} {...other} />;
-  }
-
-  return <MobileTimeRangePicker ref={ref} {...other} />;
+    throw new Error("STUB");
 }) as TimePickerComponent;
 
 TimeRangePicker.propTypes /* remove-proptypes */ = {

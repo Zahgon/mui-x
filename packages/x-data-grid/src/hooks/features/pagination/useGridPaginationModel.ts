@@ -91,54 +91,24 @@ export const useGridPaginationModel = (
    */
   const setPage = React.useCallback<GridPaginationModelApi['setPage']>(
     (page) => {
-      const currentModel = gridPaginationModelSelector(apiRef);
-      if (page === currentModel.page) {
-        return;
-      }
-      logger.debug(`Setting page to ${page}`);
-      apiRef.current.setPaginationModel({ page, pageSize: currentModel.pageSize });
-    },
+          throw new Error("STUB");
+      },
     [apiRef, logger],
   );
 
-  const debouncedSetPage = React.useMemo(() => debounce(setPage, 0), [setPage]);
+  const debouncedSetPage = React.useMemo(() => { throw new Error("STUB"); }, [setPage]);
 
   const setPageSize = React.useCallback<GridPaginationModelApi['setPageSize']>(
     (pageSize) => {
-      const currentModel = gridPaginationModelSelector(apiRef);
-      if (pageSize === currentModel.pageSize) {
-        return;
-      }
-
-      logger.debug(`Setting page size to ${pageSize}`);
-      apiRef.current.setPaginationModel({ pageSize, page: currentModel.page });
-    },
+          throw new Error("STUB");
+      },
     [apiRef, logger],
   );
 
   const setPaginationModel = React.useCallback<GridPaginationModelApi['setPaginationModel']>(
     (paginationModel) => {
-      const currentModel = gridPaginationModelSelector(apiRef);
-      if (paginationModel === currentModel) {
-        return;
-      }
-      logger.debug("Setting 'paginationModel' to", paginationModel);
-
-      apiRef.current.setState(
-        (state) => ({
-          ...state,
-          pagination: {
-            ...state.pagination,
-            paginationModel: getDerivedPaginationModel(
-              state.pagination,
-              props.signature,
-              paginationModel,
-            ),
-          },
-        }),
-        'setPaginationModel',
-      );
-    },
+          throw new Error("STUB");
+      },
     [apiRef, logger, props.signature],
   );
 
@@ -155,31 +125,8 @@ export const useGridPaginationModel = (
    */
   const stateExportPreProcessing = React.useCallback<GridPipeProcessor<'exportState'>>(
     (prevState, context) => {
-      const paginationModel = gridPaginationModelSelector(apiRef);
-
-      const shouldExportPaginationModel =
-        // Always export if the `exportOnlyDirtyModels` property is not activated
-        !context.exportOnlyDirtyModels ||
-        // Always export if the `paginationModel` is controlled
-        props.paginationModel != null ||
-        // Always export if the `paginationModel` has been initialized
-        props.initialState?.pagination?.paginationModel != null ||
-        // Export if `page` or `pageSize` is not equal to the default value
-        (paginationModel.page !== 0 &&
-          paginationModel.pageSize !== defaultPageSize(props.autoPageSize));
-
-      if (!shouldExportPaginationModel) {
-        return prevState;
-      }
-
-      return {
-        ...prevState,
-        pagination: {
-          ...prevState.pagination,
-          paginationModel,
-        },
-      };
-    },
+          throw new Error("STUB");
+      },
     [
       apiRef,
       props.paginationModel,
@@ -190,28 +137,8 @@ export const useGridPaginationModel = (
 
   const stateRestorePreProcessing = React.useCallback<GridPipeProcessor<'restoreState'>>(
     (params, context) => {
-      const paginationModel = context.stateToRestore.pagination?.paginationModel
-        ? {
-            ...getDefaultGridPaginationModel(props.autoPageSize),
-            ...context.stateToRestore.pagination?.paginationModel,
-          }
-        : gridPaginationModelSelector(apiRef);
-      apiRef.current.setState(
-        (state) => ({
-          ...state,
-          pagination: {
-            ...state.pagination,
-            paginationModel: getDerivedPaginationModel(
-              state.pagination,
-              props.signature,
-              paginationModel,
-            ),
-          },
-        }),
-        'stateRestorePreProcessing',
-      );
-      return params;
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.autoPageSize, props.signature],
   );
 
@@ -222,47 +149,17 @@ export const useGridPaginationModel = (
    * EVENTS
    */
   const handlePaginationModelChange: GridEventListener<'paginationModelChange'> = () => {
-    const paginationModel = gridPaginationModelSelector(apiRef);
-    if (apiRef.current.virtualScrollerRef?.current) {
-      apiRef.current.scrollToIndexes({
-        rowIndex: paginationModel.page * paginationModel.pageSize,
-      });
-    }
+      throw new Error("STUB");
   };
 
   const handleUpdateAutoPageSize = React.useCallback(() => {
-    if (!props.autoPageSize) {
-      return;
-    }
-
-    const dimensions = apiRef.current.getRootDimensions();
-
-    const maximumPageSizeWithoutScrollBar = Math.max(
-      1,
-      Math.floor(dimensions.viewportInnerSize.height / rowHeight),
-    );
-
-    apiRef.current.setPageSize(maximumPageSizeWithoutScrollBar);
+      throw new Error("STUB");
   }, [apiRef, props.autoPageSize, rowHeight]);
 
   const handleRowCountChange = React.useCallback(
     (newRowCount: GridPaginationState['rowCount']) => {
-      if (newRowCount == null) {
-        return;
-      }
-
-      const paginationModel = gridPaginationModelSelector(apiRef);
-      if (paginationModel.page === 0) {
-        return;
-      }
-
-      const pageCount = gridPageCountSelector(apiRef);
-      if (paginationModel.page > pageCount - 1) {
-        queueMicrotask(() => {
-          debouncedSetPage(Math.max(0, pageCount - 1));
-        });
-      }
-    },
+          throw new Error("STUB");
+      },
     [apiRef, debouncedSetPage],
   );
 
@@ -270,20 +167,11 @@ export const useGridPaginationModel = (
    * Goes to the first row of the grid
    */
   const navigateToStart = React.useCallback(() => {
-    const paginationModel = gridPaginationModelSelector(apiRef);
-    if (paginationModel.page !== 0) {
-      debouncedSetPage(0);
-    }
-
-    // If the page was not changed it might be needed to scroll to the top
-    const scrollPosition = apiRef.current.getScrollPosition();
-    if (scrollPosition.top !== 0) {
-      apiRef.current.scroll({ top: 0 });
-    }
+      throw new Error("STUB");
   }, [apiRef, debouncedSetPage]);
 
   const debouncedNavigateToStart = React.useMemo(
-    () => debounce(navigateToStart, 0),
+    () => { throw new Error("STUB"); },
     [navigateToStart],
   );
 
@@ -295,19 +183,8 @@ export const useGridPaginationModel = (
    */
   const handleFilterModelChange = React.useCallback<GridEventListener<'filterModelChange'>>(
     (filterModel) => {
-      const currentActiveFilters = {
-        ...filterModel,
-        // replace items with the active items
-        items: gridFilterActiveItemsSelector(apiRef),
-      };
-
-      if (isDeepEqual(currentActiveFilters, previousFilterModel.current)) {
-        return;
-      }
-
-      previousFilterModel.current = currentActiveFilters;
-      debouncedNavigateToStart();
-    },
+          throw new Error("STUB");
+      },
     [apiRef, debouncedNavigateToStart],
   );
 
@@ -322,45 +199,11 @@ export const useGridPaginationModel = (
    */
   const isFirstRender = React.useRef(true);
   React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-    if (!props.pagination) {
-      return;
-    }
-    apiRef.current.setState((state) => ({
-      ...state,
-      pagination: {
-        ...state.pagination,
-        paginationModel: getDerivedPaginationModel(
-          state.pagination,
-          props.signature,
-          props.paginationModel,
-        ),
-      },
-    }));
+      throw new Error("STUB");
   }, [apiRef, props.paginationModel, props.signature, props.pagination]);
 
   React.useEffect(() => {
-    apiRef.current.setState((state) => {
-      const isEnabled = props.pagination === true;
-      if (
-        state.pagination.paginationMode === props.paginationMode &&
-        state.pagination.enabled === isEnabled
-      ) {
-        return state;
-      }
-
-      return {
-        ...state,
-        pagination: {
-          ...state.pagination,
-          paginationMode: props.paginationMode,
-          enabled: isEnabled,
-        },
-      };
-    });
+      throw new Error("STUB");
   }, [apiRef, props.paginationMode, props.pagination]);
 
   React.useEffect(handleUpdateAutoPageSize, [handleUpdateAutoPageSize]);

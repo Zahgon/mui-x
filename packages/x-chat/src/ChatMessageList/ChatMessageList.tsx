@@ -60,45 +60,21 @@ export interface ChatMessageListProps extends Omit<
 const ChatMessageListStyled = styled('div', {
   name: 'MuiChatMessageList',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(({ theme }) => ({
-  position: 'relative',
-  display: 'flex',
-  flexDirection: 'column',
-  flex: 1,
-  minHeight: 0,
-  overflow: 'hidden',
-  backgroundColor: (theme.vars || theme).palette.background.default,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatMessageListScrollerStyled = styled('div', {
   name: 'MuiChatMessageList',
   slot: 'Scroller',
-  overridesResolver: (_, styles) => styles.scroller,
-})(() => ({
-  flex: 1,
-  overflowY: 'auto',
-  overflowX: 'hidden',
-  scrollbarWidth: 'thin',
-  minHeight: 0,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(() => { throw new Error("STUB"); });
 
 const ChatMessageListContentStyled = styled('div', {
   name: 'MuiChatMessageList',
   slot: 'Content',
-  overridesResolver: (_, styles) => styles.content,
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
 })<{ ownerState?: { density?: string } }>(({ theme, ownerState }) => {
-  const densityPaddingBlock: Record<string, string> = {
-    compact: theme.spacing(0.5),
-    standard: theme.spacing(1),
-    comfortable: theme.spacing(1.5),
-  };
-  return {
-    display: 'flex',
-    flexDirection: 'column',
-    paddingBlock: densityPaddingBlock[ownerState?.density ?? 'standard'],
-    boxSizing: 'border-box',
-  };
+    throw new Error("STUB");
 });
 
 // The row renderer wants the flat message-pipeline keys (group wrapper, dividers,
@@ -121,137 +97,8 @@ const ROW_SLOT_KEYS: ReadonlyArray<keyof ChatMessageRowSlots> = [
 
 const ChatMessageList = React.forwardRef<MessageListRootHandle, ChatMessageListProps>(
   function ChatMessageList(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatMessageList' });
-    const {
-      renderItem: renderItemProp,
-      slots,
-      slotProps,
-      features,
-      className,
-      classes: classesProp,
-      sx,
-      ...other
-    } = props;
-    const classes = useChatMessageListUtilityClasses(classesProp);
-    const density = useChatDensity();
-
-    // Partition slots/slotProps: row-level keys go to the default renderer,
-    // list-level keys go to MessageListRoot. Row-level entries are extracted
-    // even when a custom renderItem is provided so they don't get forwarded to
-    // MessageListRoot — which would reject unknown slot keys at runtime.
-    const { rowSlots, listSlots } = React.useMemo(() => {
-      const row: Partial<ChatMessageRowSlots> = {};
-      const list: Partial<MessageListRootSlots> = {};
-      if (slots) {
-        for (const key of Object.keys(slots) as Array<keyof ChatMessageListSlots>) {
-          if ((ROW_SLOT_KEYS as ReadonlyArray<string>).includes(key)) {
-            (row as any)[key] = slots[key];
-          } else {
-            (list as any)[key] = slots[key];
-          }
-        }
-      }
-      return { rowSlots: row, listSlots: list };
-    }, [slots]);
-
-    const { rowSlotProps, listSlotProps } = React.useMemo(() => {
-      const row: ChatMessageRowSlotProps = {};
-      const list: MessageListRootSlotProps = {};
-      if (slotProps) {
-        for (const key of Object.keys(slotProps) as Array<keyof ChatMessageListSlotProps>) {
-          if ((ROW_SLOT_KEYS as ReadonlyArray<string>).includes(key)) {
-            (row as any)[key] = slotProps[key];
-          } else {
-            (list as any)[key] = slotProps[key];
-          }
-        }
-      }
-      return { rowSlotProps: row, listSlotProps: list };
-    }, [slotProps]);
-
-    // Normalize the row feature flags into an identity-stable object so an
-    // inline `features={{ ... }}` doesn't churn the memoized rows on every render.
-    const showDateDivider = features?.dateDivider === true;
-    const showUnreadMarker = features?.unreadMarker === true;
-    const streamingIndicator = features?.streamingIndicator ?? 'auto';
-    const rowFeatures = React.useMemo<ChatMessageListFeatures>(
-      () => ({
-        dateDivider: showDateDivider,
-        unreadMarker: showUnreadMarker,
-        streamingIndicator,
-      }),
-      [showDateDivider, showUnreadMarker, streamingIndicator],
-    );
-
-    // Keep the default renderer stable; read latest slot overrides and the resolved
-    // `items` from refs so updates don't churn the virtualized list. `items` is read
-    // without destructuring so it still flows to MessageListRoot via `...other`.
-    const rowSlotsRef = React.useRef(rowSlots);
-    const rowSlotPropsRef = React.useRef(rowSlotProps);
-    const rowFeaturesRef = React.useRef(rowFeatures);
-    const itemsRef = React.useRef<string[] | undefined>(undefined);
-    rowSlotsRef.current = rowSlots;
-    rowSlotPropsRef.current = rowSlotProps;
-    rowFeaturesRef.current = rowFeatures;
-    itemsRef.current = (other as { items?: string[] }).items;
-
-    // Forward `index` (rendered-list relative) and the rendered `items` so the group
-    // computes grouping against the rendered list — otherwise a custom `items` subset
-    // would regroup against the full conversation and drop avatars/author labels.
-    const defaultRenderItem = React.useCallback(
-      ({ id, index }: { id: string; index: number }) => (
-        <DefaultMessageItem
-          key={id}
-          id={id}
-          index={index}
-          items={itemsRef.current}
-          slots={rowSlotsRef.current}
-          slotProps={rowSlotPropsRef.current}
-          features={rowFeaturesRef.current}
-        />
-      ),
-      [],
-    );
-
-    const renderItem = renderItemProp ?? defaultRenderItem;
-
-    return (
-      <MessageListRoot
-        ref={ref}
-        {...other}
-        renderItem={renderItem}
-        slots={{
-          ...listSlots,
-          messageList: listSlots.messageList ?? ChatMessageListStyled,
-          messageListScroller: listSlots.messageListScroller ?? ChatMessageListScrollerStyled,
-          messageListContent: listSlots.messageListContent ?? ChatMessageListContentStyled,
-        }}
-        slotProps={{
-          ...listSlotProps,
-          messageList: mergeSlotProps(
-            {
-              className: clsx(classes.root, className),
-              sx,
-            },
-            listSlotProps?.messageList,
-          ) as any,
-          messageListScroller: mergeSlotProps(
-            {
-              className: classes.scroller,
-            },
-            listSlotProps?.messageListScroller,
-          ) as any,
-          messageListContent: mergeSlotProps(
-            {
-              className: classes.content,
-              ownerState: { density },
-            },
-            listSlotProps?.messageListContent,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatMessageList.propTypes /* remove-proptypes */ = {

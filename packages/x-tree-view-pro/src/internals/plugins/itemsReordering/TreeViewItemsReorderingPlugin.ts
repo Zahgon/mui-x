@@ -10,8 +10,7 @@ export class TreeViewItemsReorderingPlugin {
   private store: RichTreeViewProStore<any, any>;
 
   constructor(store: RichTreeViewProStore<any, any>) {
-    this.store = store;
-    store.itemPluginManager.register(useTreeViewItemsReorderingItemPlugin, null);
+      throw new Error("STUB");
   }
 
   /**
@@ -47,24 +46,7 @@ export class TreeViewItemsReorderingPlugin {
     };
 
     const checkIfPositionIsValid = (positionAfterAction: TreeViewItemReorderPosition) => {
-      let isValid: boolean;
-      // If the new position is equal to the old one, we don't want to show any dropping UI.
-      if (
-        positionAfterAction.parentId === oldPosition.parentId &&
-        positionAfterAction.index === oldPosition.index
-      ) {
-        isValid = false;
-      } else if (canMoveItemToNewPosition) {
-        isValid = canMoveItemToNewPosition({
-          itemId: currentReorder.draggedItemId,
-          oldPosition,
-          newPosition: positionAfterAction,
-        });
-      } else {
-        isValid = true;
-      }
-
-      return isValid;
+        throw new Error("STUB");
     };
 
     const positionsAfterAction: Record<
@@ -104,10 +86,7 @@ export class TreeViewItemsReorderingPlugin {
 
     const validActions: TreeViewItemItemReorderingValidActions = {};
     Object.keys(positionsAfterAction).forEach((action) => {
-      const positionAfterAction = positionsAfterAction[action as TreeViewItemsReorderingAction];
-      if (positionAfterAction != null && checkIfPositionIsValid(positionAfterAction)) {
-        validActions[action as TreeViewItemsReorderingAction] = positionAfterAction;
-      }
+        throw new Error("STUB");
     });
 
     return validActions;

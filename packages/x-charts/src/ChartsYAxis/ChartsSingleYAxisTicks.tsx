@@ -75,49 +75,12 @@ function ChartsSingleYAxisTicks(inProps: ChartsSingleYAxisProps) {
 
   const tickLabels = isHydrated
     ? shortenLabels(yTicks, drawingArea, tickLabelsMaxWidth, isRtl, axisTickLabelProps.style)
-    : new Map(Array.from(yTicks).map((item) => [item, item.formattedValue]));
+    : new Map(Array.from(yTicks).map((item) => { throw new Error("STUB"); }));
 
   return (
     <React.Fragment>
       {yTicks.map((item, index) => {
-        const { offset: tickOffset, labelOffset, value } = item;
-        const xTickLabel = positionSign * (tickSize + TICK_LABEL_GAP);
-        const yTickLabel = labelOffset;
-        const skipLabel =
-          typeof tickLabelInterval === 'function' && !tickLabelInterval?.(value, index);
-
-        const showLabel = instance.isYInside(tickOffset);
-        const tickLabel = tickLabels.get(item);
-
-        if (!showLabel) {
-          return null;
-        }
-
-        return (
-          <g
-            key={index}
-            transform={`translate(0, ${tickOffset})`}
-            className={classes.tickContainer}
-          >
-            {!disableTicks && (
-              <Tick
-                x2={positionSign * tickSize}
-                className={classes.tick}
-                {...slotProps?.axisTick}
-              />
-            )}
-
-            {tickLabel !== undefined && !skipLabel && (
-              <TickLabel
-                x={xTickLabel}
-                y={yTickLabel}
-                data-testid="ChartsYAxisTickLabel"
-                text={tickLabel}
-                {...axisTickLabelProps}
-              />
-            )}
-          </g>
-        );
+          throw new Error("STUB");
       })}
     </React.Fragment>
   );

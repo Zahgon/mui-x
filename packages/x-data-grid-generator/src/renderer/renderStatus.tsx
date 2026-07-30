@@ -7,52 +7,14 @@ import Chip from '@mui/material/Chip';
 import type { GridRenderCellParams } from '@mui/x-data-grid-premium';
 import { styled } from '@mui/material/styles';
 
-const StyledChip = styled(Chip)(({ theme }) => ({
-  justifyContent: 'left',
-  '& .icon': {
-    color: 'inherit',
-  },
-  '&.Open': {
-    color: (theme.vars || theme).palette.info.dark,
-    border: `1px solid ${(theme.vars || theme).palette.info.main}`,
-  },
-  '&.Filled': {
-    color: (theme.vars || theme).palette.success.dark,
-    border: `1px solid ${(theme.vars || theme).palette.success.main}`,
-  },
-  '&.PartiallyFilled': {
-    color: (theme.vars || theme).palette.warning.dark,
-    border: `1px solid ${(theme.vars || theme).palette.warning.main}`,
-  },
-  '&.Rejected': {
-    color: (theme.vars || theme).palette.error.dark,
-    border: `1px solid ${(theme.vars || theme).palette.error.main}`,
-  },
-}));
+const StyledChip = styled(Chip)(({ theme }) => { throw new Error("STUB"); });
 
 interface StatusProps {
   status: string;
 }
 
 const Status = React.memo((props: StatusProps) => {
-  const { status } = props;
-
-  let icon: any = null;
-  if (status === 'Rejected') {
-    icon = <ReportProblemIcon className="icon" />;
-  } else if (status === 'Open') {
-    icon = <InfoIcon className="icon" />;
-  } else if (status === 'Partially Filled') {
-    icon = <AutorenewIcon className="icon" />;
-  } else if (status === 'Filled') {
-    icon = <DoneIcon className="icon" />;
-  }
-
-  const className = status.replace(' ', '');
-
-  return (
-    <StyledChip className={className} icon={icon} size="small" label={status} variant="outlined" />
-  );
+    throw new Error("STUB");
 });
 
 export function renderStatus(params: GridRenderCellParams<any, string>) {

@@ -138,46 +138,7 @@ const Heatmap = React.forwardRef(function Heatmap(
   inProps: HeatmapProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiHeatmap' });
-  const { sx, slots, slotProps, loading, hideLegend, showToolbar = false } = props;
-
-  const {
-    chartsDataProviderProProps,
-    chartsWrapperProps,
-    chartsAxisProps,
-    clipPathProps,
-    clipPathGroupProps,
-    legendProps,
-    heatmapPlotProps,
-    overlayProps,
-    children,
-  } = useHeatmapProps(props);
-
-  const Tooltip = slots?.tooltip ?? HeatmapTooltip;
-  const Toolbar = slots?.toolbar ?? ChartsToolbarPro;
-
-  return (
-    <ChartsDataProviderPro<'heatmap', HeatmapPluginSignatures> {...chartsDataProviderProProps}>
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {showToolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsLayerContainer>
-          <ChartsSvgLayer sx={sx}>
-            <g {...clipPathGroupProps}>
-              <HeatmapPlot {...heatmapPlotProps} />
-              <FocusedHeatmapCell />
-              <ChartsOverlay {...overlayProps} />
-            </g>
-            <ChartsAxis {...chartsAxisProps} />
-            <ChartsClipPath {...clipPathProps} />
-            <ChartsBrushOverlay />
-            {children}
-          </ChartsSvgLayer>
-        </ChartsLayerContainer>
-        {!loading && <Tooltip {...slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProviderPro>
-  );
+    throw new Error("STUB");
 });
 
 Heatmap.propTypes /* remove-proptypes */ = {

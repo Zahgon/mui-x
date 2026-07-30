@@ -107,40 +107,7 @@ const PickersLayout = React.forwardRef(function PickersLayout<TValue extends Pic
   inProps: PickersLayoutProps<TValue>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiPickersLayout' });
-
-  const { toolbar, content, tabs, actionBar, shortcuts, ownerState } = usePickerLayout(props);
-  const { orientation, variant } = usePickerContext();
-  const { sx, className, classes: classesProp, children, slots, slotProps, ...other } = props;
-
-  const classes = useUtilityClasses(classesProp, ownerState);
-
-  return (
-    <PickersLayoutRoot
-      ref={ref}
-      sx={sx}
-      className={clsx(classes.root, className)}
-      ownerState={ownerState}
-      {...other}
-    >
-      {orientation === 'landscape' ? shortcuts : toolbar}
-      {orientation === 'landscape' ? toolbar : shortcuts}
-      <PickersLayoutContentWrapper className={classes.contentWrapper} ownerState={ownerState}>
-        {variant === 'desktop' ? (
-          <React.Fragment>
-            {content}
-            {tabs}
-          </React.Fragment>
-        ) : (
-          <React.Fragment>
-            {tabs}
-            {content}
-          </React.Fragment>
-        )}
-      </PickersLayoutContentWrapper>
-      {actionBar}
-    </PickersLayoutRoot>
-  );
+    throw new Error("STUB");
 }) as PickersLayoutComponent;
 
 PickersLayout.propTypes /* remove-proptypes */ = {

@@ -31,13 +31,7 @@ const Element = styled('div', {
   name: 'MuiDataGrid',
   slot: 'Main',
   overridesResolver: (props, styles) => {
-    const { ownerState, loadingOverlayVariant, overlayType } = props;
-    const hideContent = loadingOverlayVariant === 'skeleton' || overlayType === 'noColumnsOverlay';
-    return [
-      styles.main,
-      ownerState.hasPinnedRight && styles['main--hasPinnedRight'],
-      hideContent && styles['main--hiddenContent'],
-    ];
+      throw new Error("STUB");
   },
 })<{ ownerState: OwnerState }>({
   flexGrow: 1,
@@ -54,22 +48,5 @@ export const GridMainContainer = forwardRef<
     ownerState: OwnerState;
   }>
 >((props, ref) => {
-  const { ownerState } = props;
-  const rootProps = useGridRootProps();
-  const configuration = useGridConfiguration();
-  const ariaAttributes = configuration.hooks.useGridAriaAttributes();
-
-  return (
-    <Element
-      ownerState={ownerState}
-      className={props.className}
-      tabIndex={-1}
-      {...ariaAttributes}
-      {...rootProps.slotProps?.main}
-      ref={ref}
-    >
-      <GridPanelAnchor role="none" data-id="gridPanelAnchor" />
-      {props.children}
-    </Element>
-  );
+    throw new Error("STUB");
 });

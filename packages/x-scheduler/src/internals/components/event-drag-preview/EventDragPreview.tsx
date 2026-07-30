@@ -13,32 +13,15 @@ import { EventCalendarStyledContext } from '../../../event-calendar/EventCalenda
 const EventDragPreviewRoot = styled('div', {
   name: 'MuiEventCalendar',
   slot: 'EventDragPreview',
-})<{ palette?: PaletteName }>(({ theme }) => ({
-  padding: theme.spacing(0.5, 1),
-  borderRadius: theme.spacing(0.5),
-  fontSize: theme.typography.body2.fontSize,
-  backgroundColor: 'var(--event-surface-bold)',
-  color: 'var(--event-on-surface-bold)',
-  variants: getPaletteVariants(theme),
-}));
+})<{ palette?: PaletteName }>(({ theme }) => { throw new Error("STUB"); });
 
 const fakeStore = {
-  subscribe: () => {},
-  getSnapshot: () => ({}),
+  subscribe: () => {
+        throw new Error("STUB");
+    },
+  getSnapshot: () => { throw new Error("STUB"); },
 } as unknown as Store<any>;
 
 export function EventDragPreview(props: RenderDragPreviewParameters) {
-  const store = useSchedulerStoreContext(true);
-  const styledContext = React.useContext(EventCalendarStyledContext);
-  const color = useStore(
-    store ?? fakeStore,
-    store ? schedulerEventSelectors.color : () => 'teal' as const,
-    props.data.id,
-  );
-
-  return (
-    <EventDragPreviewRoot className={styledContext?.classes.eventDragPreview} data-palette={color}>
-      {props.data.title}
-    </EventDragPreviewRoot>
-  );
+    throw new Error("STUB");
 }

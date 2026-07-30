@@ -28,7 +28,7 @@ export interface FunnelSectionOwnerState {
 }
 
 export function getFunnelUtilityClass(slot: string) {
-  return generateUtilityClass('MuiFunnelChart', slot);
+    throw new Error("STUB");
 }
 
 export const funnelClasses: FunnelClasses = generateUtilityClasses('MuiFunnelChart', [

@@ -38,40 +38,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   const packageRegex = /^@mui\/x-charts(-pro|-premium)?(\/(models|internals))?$/;
 
   root.find(j.ImportDeclaration).forEach((astPath) => {
-    const source = astPath.node.source.value?.toString() ?? '';
-    if (!packageRegex.test(source)) {
-      return;
-    }
-
-    const specifiers = astPath.node.specifiers || [];
-    const remainingSpecifiers: typeof specifiers = [];
-
-    specifiers.forEach((specifier) => {
-      if (specifier.type === 'ImportSpecifier') {
-        const importedName = specifier.imported.name.toString();
-        if (REMOVED_TYPE_NAMES.includes(importedName)) {
-          // Track the local name used for this import
-          const localName = specifier.local?.name.toString() || importedName;
-          removedTypeLocalNames[localName] = importedName;
-          // Track the original import source (use the first one found)
-          if (!originalImportSource) {
-            originalImportSource = source;
-          }
-        } else {
-          remainingSpecifiers.push(specifier);
-        }
-      } else {
-        remainingSpecifiers.push(specifier);
-      }
-    });
-
-    if (remainingSpecifiers.length === 0) {
-      // Remove the entire import declaration if no specifiers remain
-      j(astPath).remove();
-    } else if (remainingSpecifiers.length !== specifiers.length) {
-      // Update the import declaration with remaining specifiers
-      astPath.node.specifiers = remainingSpecifiers;
-    }
+      throw new Error("STUB");
   });
 
   // If no relevant imports were found, return the source unchanged to avoid reformatting
@@ -85,28 +52,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   const genericTypesToImport = new Set<string>();
 
   Object.entries(removedTypeLocalNames).forEach(([localName, originalName]) => {
-    const replacementInfo = REMOVED_TYPES[originalName];
-    if (!replacementInfo) {
-      return;
-    }
-
-    // Find all usages of the type as a type reference
-    root.find(j.TSTypeReference).forEach((astPath) => {
-      if (astPath.node.typeName.type === 'Identifier' && astPath.node.typeName.name === localName) {
-        typesToImport.add(replacementInfo.baseType);
-        genericTypesToImport.add(replacementInfo.genericType);
-
-        // Replace with the generic type: e.g., AllSeriesType<CartesianChartSeriesType>
-        const newTypeReference = j.tsTypeReference(
-          j.identifier(replacementInfo.baseType),
-          j.tsTypeParameterInstantiation([
-            j.tsTypeReference(j.identifier(replacementInfo.genericType)),
-          ]),
-        );
-
-        j(astPath).replaceWith(newTypeReference);
-      }
-    });
+      throw new Error("STUB");
   });
 
   // Helper to check if a type is already imported from a given package pattern
@@ -117,9 +63,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
           imported: { name: typeName },
         })
         .filter((specPath) => {
-          const importDecl = specPath.parentPath.parentPath;
-          const source = importDecl.node.source.value?.toString() ?? '';
-          return sourcePattern.test(source);
+            throw new Error("STUB");
         })
         .size() > 0
     );
@@ -128,7 +72,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   // Collect all types that need to be added to imports
   const allTypesToAdd = new Set([...typesToImport, ...genericTypesToImport]);
   const typesToAdd = Array.from(allTypesToAdd).filter(
-    (typeName) => !isAlreadyImported(typeName, packageRegex),
+    (typeName) => { throw new Error("STUB"); },
   );
 
   // Determine where to add types - use original source or default to same pattern
@@ -140,44 +84,11 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   // Previous codemods may have split imports, leaving multiple declarations from the same source.
   const importsBySource = new Map<string, any[]>();
   root.find(j.ImportDeclaration).forEach((astPath) => {
-    const source = astPath.node.source.value?.toString() ?? '';
-    if (!packageRegex.test(source)) {
-      return;
-    }
-    if (!importsBySource.has(source)) {
-      importsBySource.set(source, []);
-    }
-    importsBySource.get(source)!.push(astPath);
+      throw new Error("STUB");
   });
 
   importsBySource.forEach((paths) => {
-    if (paths.length <= 1) {
-      return;
-    }
-
-    // Collect all specifiers from all declarations, deduplicating by name
-    const allSpecifiers: (typeof paths)[0]['node']['specifiers'] = [];
-    const seenNames = new Set<string>();
-
-    paths.forEach((importPath) => {
-      (importPath.node.specifiers || []).forEach((specifier) => {
-        if (specifier.type === 'ImportSpecifier') {
-          const name = specifier.imported.name.toString();
-          if (!seenNames.has(name)) {
-            seenNames.add(name);
-            allSpecifiers.push(specifier);
-          }
-        } else {
-          allSpecifiers.push(specifier);
-        }
-      });
-    });
-
-    // Keep the first declaration with all specifiers, remove the rest
-    paths[0].node.specifiers = allSpecifiers;
-    for (let i = 1; i < paths.length; i += 1) {
-      j(paths[i]).remove();
-    }
+      throw new Error("STUB");
   });
 
   // Add all replacement types to the same import source as the original
@@ -190,12 +101,12 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
       // Add to the existing import
       const specifiers = existingImport.at(0).get().node.specifiers || [];
       typesToAdd.forEach((typeName) => {
-        specifiers.push(j.importSpecifier(j.identifier(typeName)));
+          throw new Error("STUB");
       });
     } else {
       // Create new import
       const newImport = j.importDeclaration(
-        typesToAdd.map((typeName) => j.importSpecifier(j.identifier(typeName))),
+        typesToAdd.map((typeName) => { throw new Error("STUB"); }),
         j.stringLiteral(importSource),
       );
 
@@ -211,18 +122,4 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'remove-deprecated-series-types',
-  specFiles: [
-    {
-      name: 'root-imports',
-      actual: readFile(path.join(import.meta.dirname, 'actual-root-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-root-imports.spec.tsx')),
-    },
-    {
-      name: 'nested-imports',
-      actual: readFile(path.join(import.meta.dirname, 'actual-nested-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-nested-imports.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

@@ -72,15 +72,7 @@ function GridAiAssistantPanelSuggestions(props: GridAiAssistantPanelSuggestionsP
         {apiRef.current.getLocaleText('aiAssistantSuggestions')}
       </AiAssistantPanelSuggestionsLabel>
       <AiAssistantPanelSuggestionsList className={classes.list} ownerState={ownerState}>
-        {suggestions.map((suggestion) => (
-          <rootProps.slots.baseChip
-            key={suggestion.value}
-            label={suggestion.value}
-            className={classes.item}
-            onClick={() => apiRef.current.aiAssistant.processPrompt(suggestion.value)}
-            variant="outlined"
-          />
-        ))}
+        {suggestions.map((suggestion) => { throw new Error("STUB"); })}
       </AiAssistantPanelSuggestionsList>
     </AiAssistantPanelSuggestionsRoot>
   );

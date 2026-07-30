@@ -22,13 +22,6 @@ export const CompactWeekView = React.memo(
     props: CompactWeekViewProps,
     forwardedRef: React.ForwardedRef<HTMLDivElement>,
   ) {
-    // Feature hooks
-    const { days } = useEventCalendarView(COMPACT_WEEK_VIEW_DEFINITION);
-
-    return (
-      <DayTimeGridInternalRenderersContext.Provider value={COMPACT_WEEK_VIEW_RENDERERS}>
-        <DayTimeGrid ref={forwardedRef} days={days} {...props} />
-      </DayTimeGridInternalRenderersContext.Provider>
-    );
+      throw new Error("STUB");
   }),
 );

@@ -35,7 +35,7 @@ import { buildDependenciesState } from '../internals/utils/dependency-utils';
 // `Object.keys` insertion order, which is not a stable contract.
 const PRESET_ZOOM_ORDER: EventTimelinePremiumPreset[] = (
   Object.keys(EVENT_TIMELINE_PREMIUM_PRESET_CONFIGS) as EventTimelinePremiumPreset[]
-).sort((a, b) => getPresetPxPerDay(b) - getPresetPxPerDay(a));
+).sort((a, b) => { throw new Error("STUB"); });
 
 export const DEFAULT_PRESETS: EventTimelinePremiumPreset[] = PRESET_ZOOM_ORDER;
 export const DEFAULT_PRESET: EventTimelinePremiumPreset = PRESET_ZOOM_ORDER[0];
@@ -55,7 +55,7 @@ function sortPresetsByZoomOrder(
           `See https://mui.com/x/react-scheduler/event-timeline/presets/ for more details.`,
       );
     }
-    const unknown = presets.filter((preset) => !PRESET_ZOOM_ORDER.includes(preset));
+    const unknown = presets.filter((preset) => { throw new Error("STUB"); });
     if (unknown.length > 0) {
       // TODO: fix mui/no-guarded-throw
       // eslint-disable-next-line mui/no-guarded-throw
@@ -70,7 +70,7 @@ function sortPresetsByZoomOrder(
   // Iterating over `PRESET_ZOOM_ORDER` (instead of the input) yields a canonical,
   // duplicate-free output even when runtime inputs (storage, URL params, dynamic
   // registries) bypass the compile-time `EventTimelinePremiumPreset` union.
-  return PRESET_ZOOM_ORDER.filter((preset) => presets.includes(preset));
+  return PRESET_ZOOM_ORDER.filter((preset) => { throw new Error("STUB"); });
 }
 
 const deriveStateFromParameters = <TEvent extends object, TResource extends object>(
@@ -99,35 +99,10 @@ const mapper: SchedulerParametersToStateMapper<
   EventTimelinePremiumStoreParameters<any, any>
 > = {
   getInitialState: (schedulerInitialState, parameters) => {
-    const shouldEventRequireResource =
-      parameters.shouldEventRequireResource ?? DEFAULT_SHOULD_EVENT_REQUIRE_RESOURCE;
-    warnIfShouldEventRequireResourceMisconfigured(shouldEventRequireResource, parameters.resources);
-    return {
-      ...schedulerInitialState,
-      ...deriveStateFromParameters(parameters),
-      ...buildDependenciesState(parameters.dependencies),
-      preset: parameters.preset ?? parameters.defaultPreset ?? DEFAULT_PRESET,
-      preferences: parameters.preferences ?? parameters.defaultPreferences ?? EMPTY_OBJECT,
-      shouldEventRequireResource,
-      hasInitialized: false,
-    };
-  },
+        throw new Error("STUB");
+    },
   updateStateFromParameters: (newSchedulerState, parameters, updateModel) => {
-    const shouldEventRequireResource =
-      parameters.shouldEventRequireResource ?? DEFAULT_SHOULD_EVENT_REQUIRE_RESOURCE;
-    warnIfShouldEventRequireResourceMisconfigured(shouldEventRequireResource, parameters.resources);
-    const newState: Partial<EventTimelinePremiumState> = {
-      ...newSchedulerState,
-      ...deriveStateFromParameters(parameters),
-      ...buildDependenciesState(parameters.dependencies),
-      shouldEventRequireResource,
-      hasInitialized: true,
-    };
-
-    updateModel(newState, 'preset', 'defaultPreset');
-    updateModel(newState, 'preferences', 'defaultPreferences');
-
-    return newState;
+      throw new Error("STUB");
   },
 };
 
@@ -152,34 +127,11 @@ export class EventTimelinePremiumStore<
     parameters: EventTimelinePremiumStoreParameters<TEvent, TResource>,
     adapter: Adapter,
   ) {
-    super(parameters, adapter, 'EventTimelinePremiumStore', mapper, schedulerRecurringEventsPlugin);
-
-    if (process.env.NODE_ENV !== 'production') {
-      // Assert the initial state validity; `subscribe` only fires on subsequent state changes.
-      this.assertPresetValidity(this.state.preset);
-      this.disposables.defer(
-        this.subscribe((state) => {
-          this.assertPresetValidity(state.preset);
-          return null;
-        }),
-      );
-    }
-
-    this.scheduling = this.disposables.use(new SchedulerSchedulingPlugin(this));
-    this.schedulingPlugin = this.scheduling;
-    this.lazyLoading = this.disposables.use(new EventTimelinePremiumLazyLoadingPlugin(this));
+      throw new Error("STUB");
   }
 
   private assertPresetValidity(preset: EventTimelinePremiumPreset) {
-    const presets = this.state.presets;
-    if (!presets.includes(preset)) {
-      throw new Error(
-        `MUI X Scheduler: EventTimelinePremium received the preset "${preset}", which is not part of the \`presets\` prop (received: ${presets.join(', ')}). ` +
-          `This leaves the timeline in an inconsistent state where the current preset is not one of the allowed options. ` +
-          `Add "${preset}" to the \`presets\` prop, or pass a preset that is already included. ` +
-          `See https://mui.com/x/react-scheduler/event-timeline/presets/ for more details.`,
-      );
-    }
+      throw new Error("STUB");
   }
 
   public buildPublicAPI() {
@@ -194,45 +146,21 @@ export class EventTimelinePremiumStore<
    * Goes to the next visible date span based on the current preset.
    */
   public goToNextVisibleDate = (event: React.UIEvent) => {
-    const { adapter, visibleDate, preset } = this.state;
-    const { unitCount, navigate } = EVENT_TIMELINE_PREMIUM_PRESET_CONFIGS[preset];
-    this.setVisibleDate({
-      visibleDate: navigate(adapter, visibleDate, unitCount),
-      event,
-    });
+      throw new Error("STUB");
   };
 
   /**
    * Goes to the previous visible date span based on the current preset.
    */
   public goToPreviousVisibleDate = (event: React.UIEvent) => {
-    const { adapter, visibleDate, preset } = this.state;
-    const { unitCount, navigate } = EVENT_TIMELINE_PREMIUM_PRESET_CONFIGS[preset];
-    this.setVisibleDate({
-      visibleDate: navigate(adapter, visibleDate, -unitCount),
-      event,
-    });
+      throw new Error("STUB");
   };
 
   /**
    * Sets the preset of the timeline.
    */
   public setPreset = (preset: EventTimelinePremiumPreset, event: Event) => {
-    const { preset: presetProp, onPresetChange } = this.parameters;
-    if (process.env.NODE_ENV !== 'production' && presetProp !== undefined && !onPresetChange) {
-      warn(
-        'MUI X Scheduler: EventTimelinePremium is controlled (received a `preset` prop) but `onPresetChange` is not provided. Preset changes will be silently ignored.',
-      );
-    }
-    if (preset !== this.state.preset) {
-      this.assertPresetValidity(preset);
-      const eventDetails = createChangeEventDetails('none', event);
-      onPresetChange?.(preset, eventDetails);
-
-      if (!eventDetails.isCanceled && presetProp === undefined) {
-        this.set('preset', preset);
-      }
-    }
+      throw new Error("STUB");
   };
 
   /**
@@ -242,11 +170,11 @@ export class EventTimelinePremiumStore<
    */
   public addDependency = (
     properties: SchedulerDependencyCreationProperties,
-  ): SchedulerAddDependencyResult => this.scheduling.addDependency(properties);
+  ): SchedulerAddDependencyResult => { throw new Error("STUB"); };
 
   /**
    * Deletes a dependency.
    */
   public deleteDependency = (dependencyId: SchedulerDependencyId) =>
-    this.scheduling.deleteDependency(dependencyId);
+    { throw new Error("STUB"); };
 }

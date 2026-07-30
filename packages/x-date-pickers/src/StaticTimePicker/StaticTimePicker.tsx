@@ -28,47 +28,7 @@ const StaticTimePicker = React.forwardRef(function StaticTimePicker(
   inProps: StaticTimePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const defaultizedProps = useTimePickerDefaultizedProps<TimeView, StaticTimePickerProps>(
-    inProps,
-    'MuiStaticTimePicker',
-  );
-
-  const displayStaticWrapperAs = defaultizedProps.displayStaticWrapperAs ?? 'mobile';
-  const ampmInClock = defaultizedProps.ampmInClock ?? displayStaticWrapperAs === 'desktop';
-
-  const viewRenderers: TimePickerViewRenderers<TimeView> = {
-    hours: renderTimeViewClock,
-    minutes: renderTimeViewClock,
-    seconds: renderTimeViewClock,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  // Props with the default values specific to the static variant
-  const props = {
-    ...defaultizedProps,
-    viewRenderers,
-    displayStaticWrapperAs,
-    ampmInClock,
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      toolbar: {
-        hidden: displayStaticWrapperAs === 'desktop',
-        ampmInClock,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useStaticPicker<TimeView, typeof props>({
-    ref,
-    props,
-    valueManager: singleItemValueManager,
-    valueType: 'time',
-    validator: validateTime,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as StaticTimePickerComponent;
 
 StaticTimePicker.propTypes /* remove-proptypes */ = {

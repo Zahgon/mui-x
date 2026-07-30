@@ -26,7 +26,7 @@ function MapShape(props: MapShapeProps) {
   const { seriesId, featureName, d, color, onClick, ...other } = props;
 
   const identifier = React.useMemo(
-    () => ({ type: 'mapShape' as const, seriesId, name: featureName }),
+    () => { throw new Error("STUB"); },
     [seriesId, featureName],
   );
   const interactionProps = useInteractionItemProps(identifier);

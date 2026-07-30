@@ -17,7 +17,7 @@ export interface ChartsLabelGradientClasses {
 }
 
 export function getLabelGradientUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsLabelGradient', slot);
+    throw new Error("STUB");
 }
 
 export const labelGradientClasses: ChartsLabelGradientClasses = generateUtilityClasses(

@@ -34,23 +34,7 @@ export type ExportCsvProps = GridSlotProps['baseButton'] & {
  * - [ExportCsv API](https://mui.com/x/api/data-grid/export-csv/)
  */
 const ExportCsv = forwardRef<HTMLButtonElement, ExportCsvProps>(function ExportCsv(props, ref) {
-  const { render, options, onClick, ...other } = props;
-  const rootProps = useGridRootProps();
-  const apiRef = useGridApiContext();
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    apiRef.current.exportDataAsCsv(options);
-    onClick?.(event);
-  };
-
-  const element = useComponentRenderer(rootProps.slots.baseButton, render, {
-    ...rootProps.slotProps?.baseButton,
-    onClick: handleClick,
-    ...other,
-    ref,
-  });
-
-  return <React.Fragment>{element}</React.Fragment>;
+    throw new Error("STUB");
 });
 
 ExportCsv.propTypes /* remove-proptypes */ = {

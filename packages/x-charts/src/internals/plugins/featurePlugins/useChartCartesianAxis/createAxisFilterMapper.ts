@@ -16,14 +16,7 @@ export function createDiscreteScaleGetAxisFilter(
   const maxVal = Math.ceil((zoomEnd * maxIndex) / 100);
 
   return function filterAxis(value, dataIndex) {
-    const val = value[direction] ?? axisData?.[dataIndex];
-
-    if (val == null) {
-      // If the value does not exist because of missing data point, or out of range index, we just ignore.
-      return true;
-    }
-
-    return dataIndex >= minVal && dataIndex < maxVal;
+      throw new Error("STUB");
   };
 }
 
@@ -41,31 +34,12 @@ export function createContinuousScaleGetAxisFilter(
   const maxVal = min + (zoomEnd * (max - min)) / 100;
 
   return function filterAxis(value, dataIndex) {
-    const val = value[direction] ?? axisData?.[dataIndex];
-
-    if (val == null) {
-      // If the value does not exist because of missing data point, or out of range index, we just ignore.
-      return true;
-    }
-
-    return val >= minVal && val <= maxVal;
+      throw new Error("STUB");
   };
 }
 
 export const createGetAxisFilters =
   (filters: ZoomAxisFilters): GetZoomAxisFilters =>
   ({ currentAxisId, seriesXAxisId, seriesYAxisId, isDefaultAxis }) => {
-    return (value, dataIndex) => {
-      const axisId = currentAxisId === seriesXAxisId ? seriesYAxisId : seriesXAxisId;
-
-      if (!axisId || isDefaultAxis) {
-        return Object.values(filters ?? {})[0]?.(value, dataIndex) ?? true;
-      }
-
-      const data = [seriesYAxisId, seriesXAxisId]
-        .filter((id) => id !== currentAxisId)
-        .map((id) => filters[id ?? ''])
-        .filter(isDefined);
-      return data.every((f) => f(value, dataIndex));
-    };
+      throw new Error("STUB");
   };

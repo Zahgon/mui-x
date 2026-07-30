@@ -20,5 +20,5 @@ export const identifierSerializerSeriesIdDataIndex = <
   seriesId: SeriesId;
   dataIndex?: number;
 }) => {
-  return `${typeSerializer(identifier.type)}${seriesIdSerializer(identifier.seriesId)}${dataIndexSerializer(identifier.dataIndex)}`;
+    throw new Error("STUB");
 };

@@ -61,11 +61,7 @@ export const useLineChartProps = (props: LineChartProps) => {
 
   const seriesWithDefault = React.useMemo(
     () =>
-      series.map((s) => ({
-        disableHighlight: !!disableLineItemHighlight,
-        type: 'line' as const,
-        ...s,
-      })),
+      { throw new Error("STUB"); },
     [disableLineItemHighlight, series],
   );
   const chartsContainerProps: ChartsContainerProps<'line', LineChartPluginSignatures> = {
@@ -81,8 +77,8 @@ export const useLineChartProps = (props: LineChartProps) => {
         id: DEFAULT_X_AXIS_KEY,
         scaleType: 'point',
         data: Array.from(
-          { length: Math.max(...series.map((s) => (s.data ?? dataset ?? []).length)) },
-          (_, index) => index,
+          { length: Math.max(...series.map((s) => { throw new Error("STUB"); })) },
+          (_, index) => { throw new Error("STUB"); },
         ),
       },
     ],

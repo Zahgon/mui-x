@@ -14,9 +14,8 @@ function GridExcelExportMenuItem(props: GridExcelExportMenuItemProps) {
   return (
     <rootProps.slots.baseMenuItem
       onClick={() => {
-        apiRef.current.exportDataAsExcel(options);
-        hideMenu?.();
-      }}
+              throw new Error("STUB");
+          }}
       {...other}
     >
       {apiRef.current.getLocaleText('toolbarExportExcel')}

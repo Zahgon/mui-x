@@ -19,9 +19,7 @@ const csCZPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Otevřít předchozí zobrazení',
   openNextView: 'Otevřít další zobrazení',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'roční zobrazení otevřeno, přepněte do zobrazení kalendáře'
-      : 'zobrazení kalendáře otevřeno, přepněte do zobrazení roku',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Začátek',
@@ -47,25 +45,25 @@ const csCZPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `${timeViews[view] ?? view} vybrány. ${!formattedTime ? 'Není vybrán čas' : `Vybraný čas je ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} hodin`,
-  minutesClockNumberText: (minutes) => `${minutes} minut`,
-  secondsClockNumberText: (seconds) => `${seconds} sekund`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Vyberte ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Týden v roce',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `${weekNumber} týden v roce`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Vyberte datum, vybrané datum je ${formattedDate}` : 'Vyberte datum',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Vyberte čas, vybraný čas je ${formattedTime}` : 'Vyberte čas',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   fieldClearLabel: 'Vymazat',
 
@@ -74,14 +72,14 @@ const csCZPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'vyberte datum',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Rok',

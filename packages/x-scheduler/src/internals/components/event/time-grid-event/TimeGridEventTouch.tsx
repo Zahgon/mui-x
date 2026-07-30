@@ -19,17 +19,7 @@ import {
 const TimeGridEventTouchRoot = styled(CalendarGrid.TimeEvent, {
   name: 'MuiEventCalendar',
   slot: 'TimeGridEventTouchRoot',
-})<{ palette?: PaletteName }>(({ theme }) => ({
-  ...getTimeGridEventRootStyles(theme),
-  padding: theme.spacing(0.5, 0.7, 0.5, 0.7),
-  '&[data-under-fifteen-minutes="true"]': {
-    padding: theme.spacing(0, 0.5),
-  },
-  '&[data-editing]': {
-    backgroundColor: 'var(--event-surface-selected)',
-    color: 'var(--event-on-surface-selected)',
-  },
-}));
+})<{ palette?: PaletteName }>(({ theme }) => { throw new Error("STUB"); });
 
 const TOUCH_TITLE_LINE_HEIGHT_PX = 12;
 const TOUCH_TITLE_MAX_LINES = 24;
@@ -46,19 +36,7 @@ for (let lines = 2; lines <= TOUCH_TITLE_MAX_LINES; lines += 1) {
 const TimeGridEventTouchTitle = styled(Typography, {
   name: 'MuiEventCalendar',
   slot: 'TimeGridEventTouchTitle',
-})(({ theme }) => ({
-  margin: 0,
-  color: 'var(--event-on-surface-subtle-primary)',
-  fontWeight: theme.typography.fontWeightMedium,
-  fontSize: 'var(--EventCalendar-fontSize-eventTitle, 0.75rem)',
-  lineHeight: `${TOUCH_TITLE_LINE_HEIGHT_PX}px`,
-  '[data-editing] &': {
-    color: 'var(--event-on-surface-selected)',
-  },
-  ...linesClampStyles(1),
-  maxHeight: `${TOUCH_TITLE_LINE_HEIGHT_PX}px`,
-  ...touchTitleLineClampSteps,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const TimeGridEventTouchResizeHandler = styled(CalendarGrid.TimeEventResizeHandler, {
   name: 'MuiEventCalendar',
@@ -82,61 +60,5 @@ export const TimeGridEventTouch = React.forwardRef(function TimeGridEventTouch(
   props: TimeGridEventProps,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const { occurrence, variant, className, ...other } = props;
-
-  const { classes } = useEventCalendarStyledContext();
-  const { isDraggable, isStartResizable, isEndResizable, rootDataAttributes, rootPositionProps } =
-    useTimeGridEvent(occurrence);
-
-  const content = (
-    <TimeGridEventTouchTitle className={classes.timeGridEventTitle}>
-      {occurrence.title}
-    </TimeGridEventTouchTitle>
-  );
-
-  const sharedProps = {
-    ...rootPositionProps,
-    ref: forwardedRef,
-    ...other,
-    className: clsx(className, occurrence.className),
-  };
-
-  if (variant === 'placeholder') {
-    return (
-      <TimeGridEventPlaceholder
-        aria-hidden={true}
-        {...rootDataAttributes}
-        {...sharedProps}
-        className={clsx(classes.timeGridEventPlaceholder, sharedProps.className)}
-      >
-        {content}
-      </TimeGridEventPlaceholder>
-    );
-  }
-
-  return (
-    <TimeGridEventTouchRoot
-      isDraggable={isDraggable}
-      eventId={occurrence.id}
-      occurrenceKey={occurrence.key}
-      renderDragPreview={(parameters) => <EventDragPreview {...parameters} />}
-      {...rootDataAttributes}
-      {...sharedProps}
-      className={clsx(classes.timeGridEvent, sharedProps.className)}
-    >
-      {isStartResizable && (
-        <TimeGridEventTouchResizeHandler
-          className={classes.timeGridEventResizeHandler}
-          side="start"
-        />
-      )}
-      {content}
-      {isEndResizable && (
-        <TimeGridEventTouchResizeHandler
-          className={classes.timeGridEventResizeHandler}
-          side="end"
-        />
-      )}
-    </TimeGridEventTouchRoot>
-  );
+    throw new Error("STUB");
 });

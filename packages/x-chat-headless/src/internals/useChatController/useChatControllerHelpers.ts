@@ -5,8 +5,8 @@ import type { ChatRealtimeEvent } from '../../types/chat-realtime';
 
 export function getMessages(store: ChatStore<unknown>): ChatMessage[] {
   return store.state.messageIds
-    .map((id) => store.state.messagesById[id])
-    .filter((message): message is ChatMessage => message != null);
+    .map((id) => { throw new Error("STUB"); })
+    .filter((message): message is ChatMessage => { throw new Error("STUB"); });
 }
 
 export function createRuntimeError(
@@ -32,9 +32,7 @@ export function getErrorMessage(fallbackMessage: string, error: unknown): string
 }
 
 export function getMessageIdFromError(error: ChatError | null): string | undefined {
-  const messageId = error?.details?.messageId;
-
-  return typeof messageId === 'string' && messageId !== '' ? messageId : undefined;
+    throw new Error("STUB");
 }
 
 export function findAssistantMessageIdsForRetry(
@@ -98,71 +96,7 @@ export function resolveRegenerateAnchor(
   messageId: string,
   assistantMessageIdByUserMessageId: Map<string, string>,
 ): { anchorUserMessageId: string; assistantMessageIds: string[] } | null {
-  const message = store.state.messagesById[messageId];
-
-  if (!message) {
-    return null;
-  }
-
-  const messageIndex = store.state.messageIds.indexOf(messageId);
-
-  if (messageIndex === -1) {
-    return null;
-  }
-
-  let anchorUserMessageId: string | undefined;
-
-  if (message.role === 'user') {
-    anchorUserMessageId = messageId;
-  } else {
-    // Walk backwards to the nearest preceding user message.
-    for (let index = messageIndex - 1; index >= 0; index -= 1) {
-      const candidateId = store.state.messageIds[index];
-      const candidate = store.state.messagesById[candidateId];
-
-      if (candidate?.role === 'user') {
-        anchorUserMessageId = candidateId;
-        break;
-      }
-    }
-  }
-
-  if (anchorUserMessageId === undefined) {
-    return null;
-  }
-
-  const anchorIndex = store.state.messageIds.indexOf(anchorUserMessageId);
-  const assistantMessageIds = new Set<string>();
-
-  // Contiguous forward scan from the anchor: every assistant message until the
-  // next user message.
-  for (let index = anchorIndex + 1; index < store.state.messageIds.length; index += 1) {
-    const nextMessageId = store.state.messageIds[index];
-    const nextMessage = store.state.messagesById[nextMessageId];
-
-    if (!nextMessage) {
-      continue;
-    }
-
-    if (nextMessage.role === 'user') {
-      break;
-    }
-
-    if (nextMessage.role === 'assistant') {
-      assistantMessageIds.add(nextMessage.id);
-    }
-  }
-
-  // Union in the mapped id (if any) — never as a substitute for the scan.
-  const mappedAssistantMessageId = assistantMessageIdByUserMessageId.get(anchorUserMessageId);
-  if (mappedAssistantMessageId && store.state.messagesById[mappedAssistantMessageId]) {
-    assistantMessageIds.add(mappedAssistantMessageId);
-  }
-
-  return {
-    anchorUserMessageId,
-    assistantMessageIds: Array.from(assistantMessageIds),
-  };
+    throw new Error("STUB");
 }
 
 export function removeAssistantMessageIds(
@@ -191,40 +125,12 @@ export function applyPresenceUpdate(
   store: ChatStore<unknown>,
   event: Extract<ChatRealtimeEvent, { type: 'presence' }>,
 ) {
-  for (const conversationId of store.state.conversationIds) {
-    const conversation = store.state.conversationsById[conversationId];
-
-    if (!conversation?.participants?.length) {
-      continue;
-    }
-
-    let didChange = false;
-    const participants = conversation.participants.map((participant) => {
-      if (participant.id !== event.userId || participant.isOnline === event.isOnline) {
-        return participant;
-      }
-      didChange = true;
-      return { ...participant, isOnline: event.isOnline };
-    });
-
-    if (didChange) {
-      store.updateConversation(conversationId, { participants });
-    }
-  }
+    throw new Error("STUB");
 }
 
 export function applyReadUpdate(
   store: ChatStore<unknown>,
   event: Extract<ChatRealtimeEvent, { type: 'read' }>,
 ) {
-  const conversation = store.state.conversationsById[event.conversationId];
-
-  if (!conversation) {
-    return;
-  }
-
-  store.updateConversation(event.conversationId, {
-    readState: 'read',
-    unreadCount: 0,
-  });
+    throw new Error("STUB");
 }

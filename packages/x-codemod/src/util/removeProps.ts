@@ -35,19 +35,11 @@ export default function removeProps({
   return root
     .find(j.JSXElement)
     .filter((path) => {
-      return componentNames.includes((path.value.openingElement.name as any).name);
+        throw new Error("STUB");
     })
     .find(j.JSXAttribute)
-    .filter((attribute) => props.includes(attribute.node.name.name as string))
+    .filter((attribute) => { throw new Error("STUB"); })
     .forEach((attribute) => {
-      // Only remove props from components in componentNames. Not nested ones.
-      const attributeParent = attribute.parentPath.parentPath;
-      if (
-        attributeParent.value.type === 'JSXOpeningElement' &&
-        componentNames.includes(attributeParent.value.name.name) &&
-        (!shouldRemove || shouldRemove(attribute.node))
-      ) {
-        j(attribute).remove();
-      }
+        throw new Error("STUB");
     });
 }

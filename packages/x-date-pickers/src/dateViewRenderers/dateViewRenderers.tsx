@@ -53,45 +53,4 @@ export const renderDateViewCalendar = ({
   fixedWeekNumber,
   displayWeekNumber,
   timezone,
-}: DateViewRendererProps<DateView>) => (
-  <DateCalendar
-    view={view}
-    onViewChange={onViewChange}
-    views={views.filter(isDatePickerView)}
-    focusedView={focusedView && isDatePickerView(focusedView) ? focusedView : null}
-    onFocusedViewChange={onFocusedViewChange}
-    value={value}
-    defaultValue={defaultValue}
-    referenceDate={referenceDate}
-    onChange={onChange}
-    className={className}
-    classes={classes}
-    disableFuture={disableFuture}
-    disablePast={disablePast}
-    minDate={minDate}
-    maxDate={maxDate}
-    shouldDisableDate={shouldDisableDate}
-    shouldDisableMonth={shouldDisableMonth}
-    shouldDisableYear={shouldDisableYear}
-    reduceAnimations={reduceAnimations}
-    onMonthChange={onMonthChange}
-    monthsPerRow={monthsPerRow}
-    onYearChange={onYearChange}
-    yearsOrder={yearsOrder}
-    yearsPerRow={yearsPerRow}
-    slots={slots}
-    slotProps={slotProps}
-    loading={loading}
-    renderLoading={renderLoading}
-    disableHighlightToday={disableHighlightToday}
-    readOnly={readOnly}
-    disabled={disabled}
-    showDaysOutsideCurrentMonth={showDaysOutsideCurrentMonth}
-    dayOfWeekFormatter={dayOfWeekFormatter}
-    sx={sx}
-    autoFocus={autoFocus}
-    fixedWeekNumber={fixedWeekNumber}
-    displayWeekNumber={displayWeekNumber}
-    timezone={timezone}
-  />
-);
+}: DateViewRendererProps<DateView>) => { throw new Error("STUB"); };

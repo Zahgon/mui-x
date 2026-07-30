@@ -92,20 +92,7 @@ function pruneMessageErrorsById(
   messageErrorsById: Record<string, ChatError | undefined>,
   messageIds: string[],
 ): Record<string, ChatError | undefined> {
-  if (messageIds.length === 0) {
-    return {};
-  }
-
-  const allowedIds = new Set(messageIds);
-  const nextMessageErrorsById: Record<string, ChatError | undefined> = {};
-
-  for (const [messageId, error] of Object.entries(messageErrorsById)) {
-    if (allowedIds.has(messageId) && error != null) {
-      nextMessageErrorsById[messageId] = error;
-    }
-  }
-
-  return nextMessageErrorsById;
+    throw new Error("STUB");
 }
 
 /**
@@ -114,21 +101,7 @@ function pruneMessageErrorsById(
  * (e.g. `useMessageIds()`) when only message bodies changed.
  */
 function stableIds(prevIds: string[], nextIds: string[]): string[] {
-  if (prevIds === nextIds) {
-    return prevIds;
-  }
-
-  if (prevIds.length !== nextIds.length) {
-    return nextIds;
-  }
-
-  for (let i = 0; i < prevIds.length; i += 1) {
-    if (prevIds[i] !== nextIds[i]) {
-      return nextIds;
-    }
-  }
-
-  return prevIds;
+    throw new Error("STUB");
 }
 
 function deriveStateFromParameters<Cursor = string>(parameters: ChatStoreParameters<Cursor>) {
@@ -164,74 +137,27 @@ export class ChatStore<Cursor = string> extends Store<ChatInternalState<Cursor>>
 
   /** Local (sending) user: explicit prop → members list → active conversation participants. */
   get currentUser(): ChatUser | undefined {
-    return this.getMemberByRole('user', this.parameters.currentUser);
+      throw new Error("STUB");
   }
 
   /** Assistant member: members list → active conversation participants. */
   get assistantUser(): ChatUser | undefined {
-    return this.getMemberByRole('assistant');
+      throw new Error("STUB");
   }
 
   private getMemberByRole(role: 'user' | 'assistant', explicit?: ChatUser): ChatUser | undefined {
-    if (explicit) {
-      return explicit;
-    }
-    if (this.parameters.members) {
-      return this.parameters.members.find((m) => m.role === role);
-    }
-    const convId = this.state.activeConversationId;
-    const conv = convId ? this.state.conversationsById[convId] : undefined;
-    const fromParticipants = conv?.participants?.find((p) => p.role === role);
-    if (fromParticipants) {
-      return fromParticipants;
-    }
-    // Derive from message authors as last resort
-    for (const msg of Object.values(this.state.messagesById)) {
-      if (msg.author?.role === role) {
-        return msg.author;
-      }
-    }
-    return undefined;
+      throw new Error("STUB");
   }
 
   private dirtyControlledModels = new Set<ControlledModel>();
 
   /** Whether any controlled model has been internally mutated since the last parameter sync. */
   get hasDirtyControlledModels(): boolean {
-    return this.dirtyControlledModels.size > 0;
+      throw new Error("STUB");
   }
 
   public constructor(parameters: ChatStoreParameters<Cursor> = {}) {
-    const {
-      messageIds,
-      messagesById,
-      conversationIds,
-      conversationsById,
-      activeConversationId,
-      composerValue,
-    } = deriveStateFromParameters(parameters);
-
-    super({
-      conversationIds,
-      conversationsById,
-      activeConversationId,
-      messageIds,
-      messagesById,
-      messageErrorsById: {},
-      typingByConversation: {},
-      activeStreamAbortController: null,
-      isStreaming: false,
-      streamingConversationId: undefined,
-      hasMoreHistory: false,
-      isLoadingHistory: false,
-      historyCursor: undefined,
-      composerValue,
-      composerIsComposing: false,
-      composerAttachments: [],
-      error: null,
-    });
-
-    this.parameters = parameters;
+      throw new Error("STUB");
   }
 
   public updateStateFromParameters = (parameters: ChatStoreParameters<Cursor>) => {
@@ -289,33 +215,14 @@ export class ChatStore<Cursor = string> extends Store<ChatInternalState<Cursor>>
    * Called by `useChatInstance` when the store instance changes or the component unmounts.
    */
   public disposeEffect = (): (() => void) => {
-    return () => {
-      this.state.activeStreamAbortController?.abort();
-
-      if (this.state.activeStreamAbortController || this.state.isStreaming) {
-        this.update({
-          activeStreamAbortController: null,
-          isStreaming: false,
-          streamingConversationId: undefined,
-        });
-      }
-    };
+      throw new Error("STUB");
   };
 
   public registerStoreEffect = <Value>(
     selector: (state: ChatInternalState<Cursor>) => Value,
     effect: (previous: Value, next: Value) => void,
   ) => {
-    let previousValue = selector(this.state);
-
-    return this.subscribe((state) => {
-      const nextValue = selector(state);
-
-      if (!Object.is(previousValue, nextValue)) {
-        effect(previousValue, nextValue);
-        previousValue = nextValue;
-      }
-    });
+      throw new Error("STUB");
   };
 
   public addMessage = (message: ChatMessage) => {
@@ -353,60 +260,15 @@ export class ChatStore<Cursor = string> extends Store<ChatInternalState<Cursor>>
   };
 
   public removeMessage = (id: string) => {
-    if (!this.state.messagesById[id]) {
-      return;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { [id]: _removedMessage, ...messagesById } = this.state.messagesById;
-    const nextMessageErrorsById = { ...this.state.messageErrorsById };
-    delete nextMessageErrorsById[id];
-
-    this.dirtyControlledModels.add('messages');
-    this.update({
-      messageIds: this.state.messageIds.filter((messageId) => messageId !== id),
-      messagesById,
-      messageErrorsById: nextMessageErrorsById,
-    });
+      throw new Error("STUB");
   };
 
   public prependMessages = (messages: ChatMessage[]) => {
-    if (messages.length === 0) {
-      return;
-    }
-
-    const nextMessagesById = { ...this.state.messagesById };
-    const nextMessageIds: string[] = [];
-    const existingMessageIds = new Set(this.state.messageIds);
-    const prependedMessageIds = new Set<string>();
-
-    for (const message of messages) {
-      nextMessagesById[message.id] = message;
-
-      if (!existingMessageIds.has(message.id) && !prependedMessageIds.has(message.id)) {
-        prependedMessageIds.add(message.id);
-        nextMessageIds.push(message.id);
-      }
-    }
-
-    this.dirtyControlledModels.add('messages');
-    const messageIds = [...nextMessageIds, ...this.state.messageIds];
-    this.update({
-      messageIds,
-      messagesById: nextMessagesById,
-      messageErrorsById: pruneMessageErrorsById(this.state.messageErrorsById, messageIds),
-    });
+      throw new Error("STUB");
   };
 
   public setMessages = (messages: ChatMessage[]) => {
-    const { ids: messageIds, byId: messagesById } = normalizeById(messages);
-
-    this.dirtyControlledModels.add('messages');
-    this.update({
-      messageIds,
-      messagesById,
-      messageErrorsById: pruneMessageErrorsById(this.state.messageErrorsById, messageIds),
-    });
+      throw new Error("STUB");
   };
 
   public setConversations = (conversations: ChatConversation[]) => {
@@ -420,52 +282,15 @@ export class ChatStore<Cursor = string> extends Store<ChatInternalState<Cursor>>
   };
 
   public addConversation = (conversation: ChatConversation) => {
-    const nextConversationIds = this.state.conversationsById[conversation.id]
-      ? this.state.conversationIds
-      : [...this.state.conversationIds, conversation.id];
-
-    this.dirtyControlledModels.add('conversations');
-    this.update({
-      conversationIds: nextConversationIds,
-      conversationsById: {
-        ...this.state.conversationsById,
-        [conversation.id]: conversation,
-      },
-    });
+      throw new Error("STUB");
   };
 
   public updateConversation = (id: string, patch: Partial<ChatConversation>) => {
-    const currentConversation = this.state.conversationsById[id];
-
-    if (!currentConversation) {
-      return;
-    }
-
-    this.dirtyControlledModels.add('conversations');
-    this.update({
-      conversationsById: {
-        ...this.state.conversationsById,
-        [id]: {
-          ...currentConversation,
-          ...patch,
-        },
-      },
-    });
+      throw new Error("STUB");
   };
 
   public removeConversation = (id: string) => {
-    if (!this.state.conversationsById[id]) {
-      return;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const { [id]: _removedConversation, ...conversationsById } = this.state.conversationsById;
-
-    this.dirtyControlledModels.add('conversations');
-    this.update({
-      conversationIds: this.state.conversationIds.filter((conversationId) => conversationId !== id),
-      conversationsById,
-    });
+      throw new Error("STUB");
   };
 
   public setActiveConversation = (id: string | undefined) => {
@@ -474,26 +299,11 @@ export class ChatStore<Cursor = string> extends Store<ChatInternalState<Cursor>>
   };
 
   public setTypingUser = (conversationId: string, userId: string, isTyping: boolean) => {
-    const current = this.state.typingByConversation[conversationId] ?? {};
-
-    if (current[userId] === isTyping) {
-      return;
-    }
-
-    this.update({
-      typingByConversation: {
-        ...this.state.typingByConversation,
-        [conversationId]: {
-          ...current,
-          [userId]: isTyping,
-        },
-      },
-    });
+      throw new Error("STUB");
   };
 
   public setComposerValue = (value: string) => {
-    this.dirtyControlledModels.add('composerValue');
-    this.set('composerValue', value);
+      throw new Error("STUB");
   };
 
   public setComposerIsComposing = (value: boolean) => {
@@ -501,49 +311,31 @@ export class ChatStore<Cursor = string> extends Store<ChatInternalState<Cursor>>
   };
 
   public setComposerAttachments = (attachments: ChatDraftAttachment[]) => {
-    this.set('composerAttachments', attachments);
+      throw new Error("STUB");
   };
 
   public addComposerAttachment = (attachment: ChatDraftAttachment) => {
-    this.setComposerAttachments([...this.state.composerAttachments, attachment]);
+      throw new Error("STUB");
   };
 
   public removeComposerAttachment = (localId: string) => {
-    const nextAttachments = this.state.composerAttachments.filter(
-      (attachment) => attachment.localId !== localId,
-    );
-
-    if (nextAttachments.length === this.state.composerAttachments.length) {
-      return;
-    }
-
-    this.setComposerAttachments(nextAttachments);
+      throw new Error("STUB");
   };
 
   public clearComposer = () => {
-    this.dirtyControlledModels.add('composerValue');
-    this.update({
-      composerValue: '',
-      composerIsComposing: false,
-      composerAttachments: [],
-    });
+      throw new Error("STUB");
   };
 
   public setStreaming = (value: boolean, conversationId?: string) => {
-    this.update({
-      isStreaming: value,
-      // Without a conversation id the stream is unscoped: the indicator gating
-      // treats `undefined` as "show regardless of the active conversation".
-      streamingConversationId: value ? conversationId : undefined,
-    });
+      throw new Error("STUB");
   };
 
   public setHistoryLoading = (value: boolean) => {
-    this.set('isLoadingHistory', value);
+      throw new Error("STUB");
   };
 
   public setActiveStreamAbortController = (value: AbortController | null) => {
-    this.set('activeStreamAbortController', value);
+      throw new Error("STUB");
   };
 
   public setError = (error: ChatError | null) => {
@@ -551,33 +343,15 @@ export class ChatStore<Cursor = string> extends Store<ChatInternalState<Cursor>>
   };
 
   public setMessageError = (messageId: string, error: ChatError | null) => {
-    const currentError = this.state.messageErrorsById[messageId];
-
-    if (currentError === error) {
-      return;
-    }
-
-    const nextMessageErrorsById = { ...this.state.messageErrorsById };
-
-    if (error == null) {
-      delete nextMessageErrorsById[messageId];
-    } else {
-      nextMessageErrorsById[messageId] = error;
-    }
-
-    this.set('messageErrorsById', nextMessageErrorsById);
+      throw new Error("STUB");
   };
 
   public clearMessageError = (messageId: string) => {
-    this.setMessageError(messageId, null);
+      throw new Error("STUB");
   };
 
   public clearAllMessageErrors = () => {
-    if (Object.keys(this.state.messageErrorsById).length === 0) {
-      return;
-    }
-
-    this.set('messageErrorsById', {});
+      throw new Error("STUB");
   };
 
   public setHistoryState = ({
@@ -587,26 +361,11 @@ export class ChatStore<Cursor = string> extends Store<ChatInternalState<Cursor>>
     cursor: Cursor | undefined;
     hasMore: boolean;
   }) => {
-    this.update({
-      historyCursor: cursor,
-      hasMoreHistory: hasMore,
-    });
+      throw new Error("STUB");
   };
 
   public resetMessages = () => {
-    this.dirtyControlledModels.add('messages');
-    this.update({
-      messageIds: [],
-      messagesById: {},
-      messageErrorsById: {},
-      activeStreamAbortController: null,
-      isStreaming: false,
-      streamingConversationId: undefined,
-      hasMoreHistory: false,
-      isLoadingHistory: false,
-      historyCursor: undefined,
-      error: null,
-    });
+      throw new Error("STUB");
   };
 }
 

@@ -86,16 +86,7 @@ function MarkPlot(props: MarkPlotProps) {
   const xAxisHighlightIndexes = store.use(selectorChartsHighlightXAxisIndex);
 
   const highlightedItems = React.useMemo(() => {
-    const rep: Record<AxisId, Set<number>> = {};
-
-    for (const { dataIndex, axisId } of xAxisHighlightIndexes) {
-      if (rep[axisId] === undefined) {
-        rep[axisId] = new Set([dataIndex]);
-      } else {
-        rep[axisId].add(dataIndex);
-      }
-    }
-    return rep;
+      throw new Error("STUB");
   }, [xAxisHighlightIndexes]);
 
   const completedData = useMarkPlotData(xAxis, yAxis);
@@ -104,40 +95,7 @@ function MarkPlot(props: MarkPlotProps) {
   return (
     <MarkPlotRoot className={clsx(classes.markPlot, className)} {...other}>
       {completedData.map(({ seriesId, clipId, shape, xAxisId, marks, hidden }) => {
-        const Mark = slots?.mark ?? (shape === 'circle' ? CircleMarkElement : MarkElement);
-
-        const identifier = { type: 'line' as const, seriesId };
-
-        const seriesHighlightState = getHighlightState(identifier);
-        const isSeriesHighlighted = seriesHighlightState === 'highlighted';
-        const isSeriesFaded = seriesHighlightState === 'faded';
-
-        return (
-          <g key={seriesId} clipPath={`url(#${clipId})`} data-series={seriesId}>
-            {marks.map(({ x, y, index, color }) => {
-              return (
-                <Mark
-                  key={`${seriesId}-${index}`}
-                  seriesId={seriesId}
-                  dataIndex={index}
-                  shape={shape}
-                  color={color}
-                  x={x}
-                  y={y}
-                  skipAnimation={skipAnimation}
-                  onClick={
-                    onItemClick &&
-                    ((event) => onItemClick(event, { type: 'line', seriesId, dataIndex: index }))
-                  }
-                  isHighlighted={highlightedItems[xAxisId]?.has(index) || isSeriesHighlighted}
-                  isFaded={isSeriesFaded}
-                  hidden={hidden}
-                  {...slotProps?.mark}
-                />
-              );
-            })}
-          </g>
-        );
+          throw new Error("STUB");
       })}
     </MarkPlotRoot>
   );

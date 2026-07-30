@@ -25,33 +25,7 @@ const selectorTooltipItemPosition: TooltipItemPositionSelector<'mapShape'> = cre
     projection,
     position: 'top' | 'bottom' | 'left' | 'right' | undefined,
   ) => {
-    if (identifier?.type !== 'mapShape' || identifier.name === undefined) {
-      return null;
-    }
-
-    if (projection == null || geoData == null) {
-      return null;
-    }
-
-    const featureIndex = featureIndexesByName.get(identifier.name)?.[0];
-
-    if (featureIndex === undefined) {
-      return null;
-    }
-
-    const [[x0, y0], [x1, y1]] = geoPath(projection).bounds(geoData.features[featureIndex]);
-
-    switch (position) {
-      case 'right':
-        return { x: x1, y: (y0 + y1) / 2 };
-      case 'bottom':
-        return { x: (x0 + x1) / 2, y: y1 };
-      case 'left':
-        return { x: x0, y: (y0 + y1) / 2 };
-      case 'top':
-      default:
-        return { x: (x0 + x1) / 2, y: y0 };
-    }
+      throw new Error("STUB");
   },
 );
 

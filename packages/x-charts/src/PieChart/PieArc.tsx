@@ -39,74 +39,7 @@ export type PieArcProps = Omit<React.SVGProps<SVGPathElement>, 'ref'> &
   };
 
 const PieArc = React.forwardRef<SVGPathElement, PieArcProps>(function PieArc(props, ref) {
-  const {
-    className,
-    classes: innerClasses,
-    color,
-    dataIndex,
-    seriesId,
-    isFaded,
-    isHighlighted,
-    isFocused,
-    onClick,
-    cornerRadius,
-    startAngle,
-    endAngle,
-    innerRadius,
-    outerRadius,
-    paddingAngle,
-    skipAnimation,
-    stroke: strokeProp,
-    skipInteraction,
-    ...other
-  } = props;
-
-  const theme = useTheme();
-  const stroke = strokeProp ?? (theme.vars || theme).palette.background.paper;
-
-  const ownerState = {
-    seriesId,
-    dataIndex,
-    classes: innerClasses,
-    color,
-    isFaded,
-    isHighlighted,
-    isFocused,
-  };
-  const classes = usePieUtilityClasses(ownerState);
-
-  const interactionProps = useInteractionItemProps({ type: 'pie', seriesId, dataIndex });
-  const animatedProps = useAnimatePieArc({
-    cornerRadius,
-    startAngle,
-    endAngle,
-    innerRadius,
-    outerRadius,
-    paddingAngle,
-    skipAnimation,
-    ref,
-  });
-
-  return (
-    <PieArcRoot
-      onClick={onClick}
-      cursor={onClick ? 'pointer' : 'unset'}
-      ownerState={ownerState}
-      className={clsx(classes.arc, className)}
-      fill={color}
-      opacity={isFaded ? 0.3 : 1}
-      filter={isHighlighted ? 'brightness(120%)' : 'none'}
-      stroke={stroke}
-      strokeWidth={1}
-      strokeLinejoin="round"
-      data-highlighted={isHighlighted || undefined}
-      data-faded={isFaded || undefined}
-      data-index={dataIndex}
-      {...other}
-      {...interactionProps}
-      {...animatedProps}
-    />
-  );
+    throw new Error("STUB");
 });
 
 PieArc.propTypes /* remove-proptypes */ = {

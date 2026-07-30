@@ -26,36 +26,26 @@ function GridFilterInputMultipleSingleSelect(props: GridFilterInputMultipleSingl
   const getOptionLabel = resolvedColumn!.getOptionLabel;
 
   const isOptionEqualToValue = React.useCallback(
-    (option: ValueOptions, value: ValueOptions) => getOptionValue(option) === getOptionValue(value),
+    (option: ValueOptions, value: ValueOptions) => { throw new Error("STUB"); },
     [getOptionValue],
   );
 
   const resolvedValueOptions = React.useMemo(() => {
-    return getValueOptions(resolvedColumn!) || [];
+      throw new Error("STUB");
   }, [resolvedColumn]);
 
   // The value is computed from the item.value and used directly
   // If it was done by a useEffect/useState, the Autocomplete could receive incoherent value and options
   const filteredValues = React.useMemo(() => {
-    if (!Array.isArray(item.value)) {
-      return [];
-    }
-
-    return item.value.reduce<ValueOptions[]>((acc, value) => {
-      const resolvedValue = resolvedValueOptions.find((v) => getOptionValue(v) === value);
-      if (resolvedValue != null) {
-        acc.push(resolvedValue);
-      }
-      return acc;
-    }, [] as ValueOptions[]);
+      throw new Error("STUB");
   }, [getOptionValue, item.value, resolvedValueOptions]);
 
   const handleChange = React.useCallback<
     NonNullable<AutocompleteProps<ValueOptions, true, false, true>['onChange']>
   >(
     (event, value) => {
-      applyValue({ ...item, value: value.map(getOptionValue) });
-    },
+          throw new Error("STUB");
+      },
     [applyValue, item, getOptionValue],
   );
 
@@ -116,14 +106,8 @@ GridFilterInputMultipleSingleSelect.propTypes /* remove-proptypes */ = {
     PropTypes.func,
     PropTypes.shape({
       current: (props, propName) => {
-        if (props[propName] == null) {
-          return null;
-        }
-        if (typeof props[propName] !== 'object' || props[propName].nodeType !== 1) {
-          return new Error(`Expected prop '${propName}' to be of type Element`);
-        }
-        return null;
-      },
+            throw new Error("STUB");
+        },
     }),
   ]),
   /**

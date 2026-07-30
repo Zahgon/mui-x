@@ -11,20 +11,11 @@ import { INITIAL_STATE, useGridDataSourceBasePro } from './useGridDataSourceBase
 import type { GridGetRowsParamsPro } from './models';
 
 function getKeyPro(params: GridGetRowsParamsPro) {
-  return JSON.stringify([
-    params.filterModel,
-    params.sortModel,
-    params.groupKeys,
-    params.start,
-    params.end,
-  ]);
+    throw new Error("STUB");
 }
 
 export const dataSourceStateInitializer: GridStateInitializer = (state) => {
-  return {
-    ...state,
-    dataSource: INITIAL_STATE,
-  };
+    throw new Error("STUB");
 };
 
 const options = {
@@ -37,42 +28,5 @@ export const useGridDataSourcePro = (
   apiRef: RefObject<GridPrivateApiPro>,
   props: DataGridProProcessedProps,
 ) => {
-  const {
-    api,
-    flatTreeStrategyProcessor,
-    groupedDataStrategyProcessor,
-    nestedDataStrategyProcessor,
-    events,
-    setStrategyAvailability,
-  } = useGridDataSourceBasePro(apiRef, props, options);
-
-  useGridApiMethod(apiRef, api.public, 'public');
-  useGridApiMethod(apiRef, api.private, 'private');
-
-  useGridRegisterStrategyProcessor(
-    apiRef,
-    flatTreeStrategyProcessor.strategyName,
-    flatTreeStrategyProcessor.group,
-    flatTreeStrategyProcessor.processor,
-  );
-  useGridRegisterStrategyProcessor(
-    apiRef,
-    groupedDataStrategyProcessor.strategyName,
-    groupedDataStrategyProcessor.group,
-    groupedDataStrategyProcessor.processor,
-  );
-  useGridRegisterStrategyProcessor(
-    apiRef,
-    nestedDataStrategyProcessor.strategyName,
-    nestedDataStrategyProcessor.group,
-    nestedDataStrategyProcessor.processor,
-  );
-
-  Object.entries(events).forEach(([event, handler]) => {
-    addEventHandler(apiRef, event as keyof GridEventLookup, handler);
-  });
-
-  React.useEffect(() => {
-    setStrategyAvailability();
-  }, [setStrategyAvailability]);
+    throw new Error("STUB");
 };

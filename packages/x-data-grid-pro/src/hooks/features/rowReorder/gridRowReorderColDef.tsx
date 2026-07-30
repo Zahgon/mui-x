@@ -18,7 +18,7 @@ export const GRID_REORDER_COL_DEF: GridColDef = {
   // @ts-ignore
   aggregable: false,
   chartable: false,
-  renderHeader: () => ' ',
+  renderHeader: () => { throw new Error("STUB"); },
   renderCell: renderRowReorderCell,
-  rowSpanValueGetter: (_, row, __, apiRef) => gridRowIdSelector(apiRef, row),
+  rowSpanValueGetter: (_, row, __, apiRef) => { throw new Error("STUB"); },
 };

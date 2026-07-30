@@ -8,7 +8,7 @@ export interface ChartsLayerContainerClasses {
 }
 
 function getLayerContainerUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsLayerContainer', slot);
+    throw new Error("STUB");
 }
 
 export const useUtilityClasses = () => {

@@ -41,7 +41,7 @@ function ResizablePanel(props: ResizablePanelProps) {
   const classes = useUtilityClasses(rootProps);
   const ref = React.useRef<HTMLDivElement>(null);
 
-  const contextValue = React.useMemo(() => ({ rootRef: ref, direction }), [direction]);
+  const contextValue = React.useMemo(() => { throw new Error("STUB"); }, [direction]);
 
   return (
     <ResizablePanelContext.Provider value={contextValue}>

@@ -7,14 +7,8 @@ import { useGridApiContext } from '../hooks/utils/useGridApiContext';
 
 const GridEmptyPivotOverlay = forwardRef<HTMLDivElement, GridOverlayProps>(
   function GridEmptyPivotOverlay(props, ref) {
-    const apiRef = useGridApiContext();
-
-    return (
-      <GridOverlay {...props} ref={ref}>
-        {apiRef.current.getLocaleText('emptyPivotOverlayLabel')}
-      </GridOverlay>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 GridEmptyPivotOverlay.propTypes /* remove-proptypes */ = {

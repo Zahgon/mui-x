@@ -50,10 +50,7 @@ const useUtilityClasses = (ownerState: OwnerState) => {
   return composeClasses(slots, getDataGridUtilityClass, classes);
 };
 
-export const columnReorderStateInitializer: GridStateInitializer = (state) => ({
-  ...state,
-  columnReorder: { dragCol: '' },
-});
+export const columnReorderStateInitializer: GridStateInitializer = (state) => { throw new Error("STUB"); };
 
 /**
  * @requires useGridColumns (method)
@@ -83,57 +80,13 @@ export const useGridColumnReorder = (
   const isRtl = useRtl();
 
   React.useEffect(() => {
-    return () => {
-      clearTimeout(removeDnDStylesTimeout.current);
-    };
+      throw new Error("STUB");
   }, []);
 
   const handleDragEnd = React.useCallback<GridEventListener<'columnHeaderDragEnd'>>(
     (params, event): void => {
-      const dragColField = gridColumnReorderDragColSelector(apiRef);
-      if (props.disableColumnReorder || !dragColField) {
-        return;
-      }
-
-      logger.debug('End dragging col');
-      event.preventDefault();
-      // Prevent drag events propagation.
-      // For more information check here https://github.com/mui/mui-x/issues/2680.
-      event.stopPropagation();
-
-      clearTimeout(removeDnDStylesTimeout.current);
-
-      // For more information check here https://github.com/mui/mui-x/issues/14678
-      if (dragColNode.current!.classList.contains(classes.columnHeaderDragging)) {
-        dragColNode.current!.classList.remove(classes.columnHeaderDragging);
-      }
-
-      dragColNode.current = null;
-
-      // Check if the column was dropped outside the grid.
-      if (event.dataTransfer.dropEffect === 'none' && !props.keepColumnPositionIfDraggedOutside) {
-        // Accessing params.field may contain the wrong field as header elements are reused
-        apiRef.current.setColumnIndex(dragColField, originColumnIndex.current!);
-        originColumnIndex.current = null;
-      } else {
-        const draggedColumn = apiRef.current.getColumn(dragColField);
-        if (draggedColumn) {
-          // Emit the columnOrderChange event only once when the reordering stops.
-          const columnOrderChangeParams: GridColumnOrderChangeParams = {
-            column: draggedColumn,
-            targetIndex: apiRef.current.getColumnIndexRelativeToVisibleColumns(dragColField),
-            oldIndex: originColumnIndex.current!,
-          };
-
-          apiRef.current.publishEvent('columnOrderChange', columnOrderChangeParams);
-        }
-      }
-
-      apiRef.current.setState((state) => ({
-        ...state,
-        columnReorder: { ...state.columnReorder, dragCol: '' },
-      }));
-    },
+          throw new Error("STUB");
+      },
     [
       apiRef,
       props.disableColumnReorder,
@@ -145,246 +98,28 @@ export const useGridColumnReorder = (
 
   const handleDragStart = React.useCallback<GridEventListener<'columnHeaderDragStart'>>(
     (params, event) => {
-      if (props.disableColumnReorder || params.colDef.disableReorder) {
-        return;
-      }
-
-      logger.debug(`Start dragging col ${params.field}`);
-      // Prevent drag events propagation.
-      // For more information check here https://github.com/mui/mui-x/issues/2680.
-      event.stopPropagation();
-
-      dragColNode.current = event.currentTarget;
-      dragColNode.current.classList.add(classes.columnHeaderDragging);
-
-      const handleDragEndEvent = (dragEndEvent: DragEvent) => {
-        dragColNode.current!.removeEventListener('dragend', handleDragEndEvent);
-        apiRef.current.publishEvent('columnHeaderDragEndNative', params, dragEndEvent);
-      };
-      dragColNode.current.addEventListener('dragend', handleDragEndEvent);
-
-      if (event.dataTransfer) {
-        event.dataTransfer.effectAllowed = 'move';
-      }
-      apiRef.current.setState((state) => ({
-        ...state,
-        columnReorder: { ...state.columnReorder, dragCol: params.field },
-      }));
-
-      removeDnDStylesTimeout.current = setTimeout(() => {
-        dragColNode.current!.classList.remove(classes.columnHeaderDragging);
-      });
-
-      originColumnIndex.current = apiRef.current.getColumnIndex(params.field, false);
-
-      const draggingColumnGroupPath = apiRef.current.getColumnGroupPath(params.field);
-
-      const columnIndex = originColumnIndex.current;
-      const allColumns = apiRef.current.getAllColumns();
-      const groupsLookup = apiRef.current.getAllGroupDetails();
-
-      const getGroupPathFromColumnIndex = (colIndex: number) => {
-        const field = allColumns[colIndex].field;
-        return apiRef.current.getColumnGroupPath(field);
-      };
-
-      // The limitingGroupId is the id of the group from which the dragged column should not escape
-      let limitingGroupId: string | null = null;
-
-      draggingColumnGroupPath.forEach((groupId) => {
-        if (!groupsLookup[groupId]?.freeReordering) {
-          // Only consider group that are made of more than one column
-          if (columnIndex > 0 && getGroupPathFromColumnIndex(columnIndex - 1).includes(groupId)) {
-            limitingGroupId = groupId;
-          } else if (
-            columnIndex + 1 < allColumns.length &&
-            getGroupPathFromColumnIndex(columnIndex + 1).includes(groupId)
-          ) {
-            limitingGroupId = groupId;
-          }
-        }
-      });
-
-      forbiddenIndexes.current = {};
-
-      for (let indexToForbid = 0; indexToForbid < allColumns.length; indexToForbid += 1) {
-        const leftIndex = indexToForbid <= columnIndex ? indexToForbid - 1 : indexToForbid;
-        const rightIndex = indexToForbid < columnIndex ? indexToForbid : indexToForbid + 1;
-
-        if (limitingGroupId !== null) {
-          // verify this indexToForbid will be linked to the limiting group. Otherwise forbid it
-          let allowIndex = false;
-          if (leftIndex >= 0 && getGroupPathFromColumnIndex(leftIndex).includes(limitingGroupId)) {
-            allowIndex = true;
-          } else if (
-            rightIndex < allColumns.length &&
-            getGroupPathFromColumnIndex(rightIndex).includes(limitingGroupId)
-          ) {
-            allowIndex = true;
-          }
-          if (!allowIndex) {
-            forbiddenIndexes.current[indexToForbid] = true;
-          }
-        }
-
-        // Verify we are not splitting another group
-        if (leftIndex >= 0 && rightIndex < allColumns.length) {
-          getGroupPathFromColumnIndex(rightIndex).forEach((groupId) => {
-            if (getGroupPathFromColumnIndex(leftIndex).includes(groupId)) {
-              if (!draggingColumnGroupPath.includes(groupId)) {
-                // moving here split the group groupId in two distincts chunks
-                if (!groupsLookup[groupId]?.freeReordering) {
-                  forbiddenIndexes.current[indexToForbid] = true;
-                }
-              }
-            }
-          });
-        }
-      }
-    },
+          throw new Error("STUB");
+      },
     [props.disableColumnReorder, classes.columnHeaderDragging, logger, apiRef],
   );
 
   const handleDragEnter = React.useCallback<
     GridEventListener<'cellDragEnter' | 'columnHeaderDragEnter'>
   >((params, event) => {
-    event.preventDefault();
-    // Prevent drag events propagation.
-    // For more information check here https://github.com/mui/mui-x/issues/2680.
-    event.stopPropagation();
+      throw new Error("STUB");
   }, []);
 
   const handleDragOver = React.useCallback<
     GridEventListener<'cellDragOver' | 'columnHeaderDragOver'>
   >(
     (params, event) => {
-      const dragColField = gridColumnReorderDragColSelector(apiRef);
-      if (!dragColField) {
-        return;
-      }
-
-      logger.debug(`Dragging over col ${params.field}`);
-      event.preventDefault();
-      // Prevent drag events propagation.
-      // For more information check here https://github.com/mui/mui-x/issues/2680.
-      event.stopPropagation();
-
-      const coordinates = { x: event.clientX, y: event.clientY };
-
-      if (
-        params.field !== dragColField &&
-        hasCursorPositionChanged(cursorPosition.current, coordinates)
-      ) {
-        const targetColIndex = apiRef.current.getColumnIndex(params.field, false);
-        const targetColVisibleIndex = apiRef.current.getColumnIndex(params.field, true);
-        const targetCol = apiRef.current.getColumn(params.field);
-        if (!targetCol) {
-          return;
-        }
-        const dragColIndex = apiRef.current.getColumnIndex(dragColField, false);
-        const visibleColumns = apiRef.current.getVisibleColumns();
-        const allColumns = apiRef.current.getAllColumns();
-
-        const cursorMoveDirectionX = getCursorMoveDirectionX(cursorPosition.current, coordinates);
-        const hasMovedLeft =
-          cursorMoveDirectionX === CURSOR_MOVE_DIRECTION_LEFT &&
-          (isRtl ? dragColIndex < targetColIndex : targetColIndex < dragColIndex);
-        const hasMovedRight =
-          cursorMoveDirectionX === CURSOR_MOVE_DIRECTION_RIGHT &&
-          (isRtl ? targetColIndex < dragColIndex : dragColIndex < targetColIndex);
-
-        if (hasMovedLeft || hasMovedRight) {
-          let canBeReordered: boolean;
-          let indexOffsetInHiddenColumns = 0;
-          if (!targetCol.disableReorder) {
-            canBeReordered = true;
-          } else if (hasMovedLeft) {
-            canBeReordered =
-              targetColVisibleIndex > 0 &&
-              !visibleColumns[targetColVisibleIndex - 1].disableReorder;
-          } else {
-            canBeReordered =
-              targetColVisibleIndex < visibleColumns.length - 1 &&
-              !visibleColumns[targetColVisibleIndex + 1].disableReorder;
-          }
-
-          if (forbiddenIndexes.current[targetColIndex]) {
-            let nextVisibleColumnField: string | null;
-            let indexWithOffset = targetColIndex + indexOffsetInHiddenColumns;
-            if (hasMovedLeft) {
-              nextVisibleColumnField =
-                targetColVisibleIndex > 0 ? visibleColumns[targetColVisibleIndex - 1].field : null;
-              while (
-                indexWithOffset > 0 &&
-                allColumns[indexWithOffset].field !== nextVisibleColumnField &&
-                forbiddenIndexes.current[indexWithOffset]
-              ) {
-                indexOffsetInHiddenColumns -= 1;
-                indexWithOffset = targetColIndex + indexOffsetInHiddenColumns;
-              }
-            } else {
-              nextVisibleColumnField =
-                targetColVisibleIndex + 1 < visibleColumns.length
-                  ? visibleColumns[targetColVisibleIndex + 1].field
-                  : null;
-              while (
-                indexWithOffset < allColumns.length - 1 &&
-                allColumns[indexWithOffset].field !== nextVisibleColumnField &&
-                forbiddenIndexes.current[indexWithOffset]
-              ) {
-                indexOffsetInHiddenColumns += 1;
-                indexWithOffset = targetColIndex + indexOffsetInHiddenColumns;
-              }
-            }
-
-            if (
-              forbiddenIndexes.current[indexWithOffset] ||
-              allColumns[indexWithOffset].field === nextVisibleColumnField
-            ) {
-              // If we ended up on a visible column, or a forbidden one, we cannot do the reorder
-              canBeReordered = false;
-            }
-          }
-
-          const canBeReorderedProcessed = apiRef.current.unstable_applyPipeProcessors(
-            'canBeReordered',
-            canBeReordered,
-            { targetIndex: targetColVisibleIndex },
-          );
-
-          if (canBeReorderedProcessed) {
-            apiRef.current.setColumnIndex(
-              dragColField,
-              targetColIndex + indexOffsetInHiddenColumns,
-            );
-          }
-        }
-
-        cursorPosition.current = coordinates;
-      }
-    },
+          throw new Error("STUB");
+      },
     [apiRef, logger, isRtl],
   );
 
   React.useEffect(() => {
-    if (!props.keepColumnPositionIfDraggedOutside) {
-      return () => {};
-    }
-
-    const doc = ownerDocument(apiRef.current.rootElementRef!.current);
-    const listener = (event: DragEvent) => {
-      if (event.dataTransfer) {
-        // keep the drop effect if we are keeping the column position if dragged outside
-        // https://github.com/mui/mui-x/issues/19183#issuecomment-3202307783
-        event.preventDefault();
-        event.dataTransfer.dropEffect = 'move';
-      }
-    };
-
-    doc.addEventListener('dragover', listener);
-    return () => {
-      doc.removeEventListener('dragover', listener);
-    };
+      throw new Error("STUB");
   }, [apiRef, props.keepColumnPositionIfDraggedOutside]);
 
   useGridEvent(apiRef, 'columnHeaderDragStart', handleDragStart);

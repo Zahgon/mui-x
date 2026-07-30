@@ -54,7 +54,7 @@ const usePickerLayout = <TValue extends PickerValidValue>(
   const { children, slots, slotProps, classes: classesProp } = props;
 
   const ownerState = React.useMemo<PickerLayoutOwnerState>(
-    () => ({ ...pickerOwnerState, layoutDirection: isRtl ? 'rtl' : 'ltr', hasShortcuts: false }),
+    () => { throw new Error("STUB"); },
     [pickerOwnerState, isRtl],
   );
   const classes = useUtilityClasses(classesProp, ownerState);

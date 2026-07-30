@@ -22,42 +22,14 @@ export interface ChatConversationHeaderInfoProps extends ConversationHeaderInfoP
 const ChatConversationHeaderInfoStyled = styled('div', {
   name: 'MuiChatConversation',
   slot: 'HeaderInfo',
-  overridesResolver: (_, styles) => styles.headerInfo,
-})(() => ({
-  display: 'flex',
-  flexDirection: 'column',
-  minWidth: 0,
-  overflow: 'hidden',
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(() => { throw new Error("STUB"); });
 
 const ChatConversationHeaderInfo = React.forwardRef<
   HTMLDivElement,
   ChatConversationHeaderInfoProps
 >(function ChatConversationHeaderInfo(inProps, ref) {
-  const props = useThemeProps({ props: inProps, name: 'MuiChatConversationHeaderInfo' });
-  const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-  const classes = useChatConversationUtilityClasses(classesProp);
-
-  return (
-    <ConversationHeaderInfo
-      ref={ref}
-      {...other}
-      slots={{
-        ...slots,
-        headerInfo: slots?.headerInfo ?? ChatConversationHeaderInfoStyled,
-      }}
-      slotProps={{
-        ...slotProps,
-        headerInfo: mergeSlotProps(
-          {
-            className: clsx(classes.headerInfo, className),
-            sx,
-          },
-          slotProps?.headerInfo,
-        ) as any,
-      }}
-    />
-  );
+    throw new Error("STUB");
 });
 
 ChatConversationHeaderInfo.propTypes /* remove-proptypes */ = {

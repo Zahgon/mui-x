@@ -24,12 +24,12 @@ export function useFieldHiddenInputProps(
   } = parameters;
 
   const handleChange = useEventCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    updateValueFromValueStr(event.target.value);
+      throw new Error("STUB");
   });
 
   const valueStr = React.useMemo(
     () =>
-      areAllSectionsEmpty ? '' : fieldValueManager.getHiddenInputValueFromSections(state.sections),
+      { throw new Error("STUB"); },
     [areAllSectionsEmpty, state.sections, fieldValueManager],
   );
 

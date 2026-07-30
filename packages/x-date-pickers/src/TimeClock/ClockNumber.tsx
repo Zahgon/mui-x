@@ -58,86 +58,12 @@ const useUtilityClasses = (
 const ClockNumberRoot = styled('span', {
   name: 'MuiClockNumber',
   slot: 'Root',
-  overridesResolver: (_, styles) => [
-    styles.root,
-    { [`&.${clockNumberClasses.disabled}`]: styles.disabled },
-    { [`&.${clockNumberClasses.selected}`]: styles.selected },
-  ],
-})<{ ownerState: ClockNumberOwnerState }>(({ theme }) => ({
-  height: CLOCK_HOUR_WIDTH,
-  width: CLOCK_HOUR_WIDTH,
-  position: 'absolute',
-  left: `calc((100% - ${CLOCK_HOUR_WIDTH}px) / 2)`,
-  display: 'inline-flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  borderRadius: '50%',
-  color: (theme.vars || theme).palette.text.primary,
-  fontFamily: theme.typography.fontFamily,
-  '&:focused': {
-    backgroundColor: (theme.vars || theme).palette.background.paper,
-  },
-  [`&.${clockNumberClasses.selected}`]: {
-    color: (theme.vars || theme).palette.primary.contrastText,
-  },
-  [`&.${clockNumberClasses.disabled}`]: {
-    pointerEvents: 'none',
-    color: (theme.vars || theme).palette.text.disabled,
-  },
-  variants: [
-    {
-      props: { isClockNumberInInnerRing: true },
-      style: {
-        ...theme.typography.body2,
-        color: (theme.vars || theme).palette.text.secondary,
-      },
-    },
-  ],
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})<{ ownerState: ClockNumberOwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 /**
  * @ignore - internal component.
  */
 export function ClockNumber(inProps: ClockNumberProps) {
-  const props = useThemeProps({ props: inProps, name: 'MuiClockNumber' });
-  const {
-    className,
-    classes: classesProp,
-    disabled,
-    index,
-    inner,
-    label,
-    selected,
-    ...other
-  } = props;
-
-  const { ownerState: pickerOwnerState } = usePickerPrivateContext();
-  const ownerState: ClockNumberOwnerState = {
-    ...pickerOwnerState,
-    isClockNumberInInnerRing: inner,
-    isClockNumberSelected: selected,
-    isClockNumberDisabled: disabled,
-  };
-  const classes = useUtilityClasses(classesProp, ownerState);
-
-  const angle = ((index % 12) / 12) * Math.PI * 2 - Math.PI / 2;
-  const length = ((CLOCK_WIDTH - CLOCK_HOUR_WIDTH - 2) / 2) * (inner ? 0.65 : 1);
-  const x = Math.round(Math.cos(angle) * length);
-  const y = Math.round(Math.sin(angle) * length);
-
-  return (
-    <ClockNumberRoot
-      className={clsx(classes.root, className)}
-      aria-disabled={disabled ? true : undefined}
-      aria-selected={selected ? true : undefined}
-      role="option"
-      style={{
-        transform: `translate(${x}px, ${y + (CLOCK_WIDTH - CLOCK_HOUR_WIDTH) / 2}px`,
-      }}
-      ownerState={ownerState}
-      {...other}
-    >
-      {label}
-    </ClockNumberRoot>
-  );
+    throw new Error("STUB");
 }

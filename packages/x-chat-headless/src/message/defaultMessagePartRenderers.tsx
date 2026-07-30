@@ -15,76 +15,42 @@ import type { ChatPartRenderer } from '../renderers/chatPartRenderer';
 import { safeFileUri, safeUri } from './parts/partUtils';
 
 function JsonBlock(props: { value: unknown }) {
-  const { value } = props;
-
-  return <pre>{JSON.stringify(value, null, 2)}</pre>;
+    throw new Error("STUB");
 }
 
-export const renderDefaultTextPart: ChatPartRenderer<ChatTextMessagePart> = ({ part }) => (
-  <div>{part.text}</div>
-);
+export const renderDefaultTextPart: ChatPartRenderer<ChatTextMessagePart> = ({ part }) => { throw new Error("STUB"); };
 
 export const renderDefaultReasoningPart: ChatPartRenderer<ChatReasoningMessagePart> = ({
   part,
-}) => (
-  <details>
-    <summary>Reasoning</summary>
-    <div>{part.text}</div>
-  </details>
-);
+}) => { throw new Error("STUB"); };
 
 function ToolRenderer(props: { part: ChatToolMessagePart | ChatDynamicToolMessagePart }) {
-  const { part } = props;
-  const { toolInvocation } = part;
-
-  return (
-    <div>
-      <div>{toolInvocation.title ?? toolInvocation.toolName}</div>
-      <div>{toolInvocation.state}</div>
-      {toolInvocation.input !== undefined ? <JsonBlock value={toolInvocation.input} /> : null}
-      {toolInvocation.output !== undefined ? <JsonBlock value={toolInvocation.output} /> : null}
-      {toolInvocation.approval !== undefined ? <JsonBlock value={toolInvocation.approval} /> : null}
-      {toolInvocation.errorText ? <div>{toolInvocation.errorText}</div> : null}
-    </div>
-  );
+    throw new Error("STUB");
 }
 
-export const renderDefaultToolPart: ChatPartRenderer<ChatToolMessagePart> = ({ part }) => (
-  <ToolRenderer part={part} />
-);
+export const renderDefaultToolPart: ChatPartRenderer<ChatToolMessagePart> = ({ part }) => { throw new Error("STUB"); };
 
 export const renderDefaultDynamicToolPart: ChatPartRenderer<ChatDynamicToolMessagePart> = ({
   part,
-}) => <ToolRenderer part={part} />;
+}) => { throw new Error("STUB"); };
 
 export const renderDefaultFilePart: ChatPartRenderer<ChatFileMessagePart> = ({ part }) => {
-  if (part.mediaType.startsWith('image/')) {
-    return <img alt={part.filename ?? ''} src={part.url} />;
-  }
-
-  return <a href={safeFileUri(part.url) || undefined}>{part.filename ?? part.url}</a>;
+    throw new Error("STUB");
 };
 
 export const renderDefaultSourceUrlPart: ChatPartRenderer<ChatSourceUrlMessagePart> = ({
   part,
-}) => <a href={safeUri(part.url) || undefined}>{part.title ?? part.url}</a>;
+}) => { throw new Error("STUB"); };
 
 export const renderDefaultSourceDocumentPart: ChatPartRenderer<ChatSourceDocumentMessagePart> = ({
   part,
-}) => (
-  <div>
-    {part.title ? <div>{part.title}</div> : null}
-    {part.text ? <div>{part.text}</div> : null}
-  </div>
-);
+}) => { throw new Error("STUB"); };
 
-export const renderDefaultStepStartPart: ChatPartRenderer<ChatStepStartMessagePart> = () => (
-  <div role="separator" />
-);
+export const renderDefaultStepStartPart: ChatPartRenderer<ChatStepStartMessagePart> = () => { throw new Error("STUB"); };
 
 export const renderDefaultDataPart: ChatPartRenderer<
   Extract<ChatMessagePart, { type: `data-${string}` }>
-> = ({ part }) => <JsonBlock value={part.data} />;
+> = ({ part }) => { throw new Error("STUB"); };
 
 export function getDefaultMessagePartRenderer(part: ChatMessagePart): ChatPartRenderer<any> | null {
   switch (part.type) {

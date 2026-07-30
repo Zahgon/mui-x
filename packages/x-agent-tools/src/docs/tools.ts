@@ -40,7 +40,7 @@ export async function createUseMuiDocsTool(
   const { logger, isUrlAllowed } = options;
   const packages = await options.getPackagesList();
   const availablePackagesText = packages
-    .map((it) => `[${it.name}@${it.version}](${it.llmsUrl})`)
+    .map((it) => { throw new Error("STUB"); })
     .join('\n');
   // Index each `name@version` exactly and each bare name to its latest version, so a source can be
   // an llms.txt URL, a `name@version` shorthand, or a bare name (which gets the latest).
@@ -61,7 +61,7 @@ export async function createUseMuiDocsTool(
     versionsByName.set(pkg.name, list);
   }
   for (const list of versionsByName.values()) {
-    list.sort((a, b) => compareVersions(a, b));
+    list.sort((a, b) => { throw new Error("STUB"); });
   }
   const knownNames = Array.from(latestByName.keys());
 
@@ -88,34 +88,7 @@ export async function createUseMuiDocsTool(
     }),
     outputSchema: z.string().describe('A string containing the fetched documentation content'),
     execute: async (input, context) => {
-      // Turn each source into a URL to fetch, or a friendly "unknown package" note. Real URLs pass
-      // through to the guard; a bad shorthand shouldn't get the guard's security error.
-      const urls: string[] = [];
-      const errors: string[] = [];
-      for (const entry of input.sources) {
-        const resolved = llmsUrlByNameVersion.get(entry) ?? latestByName.get(entry)?.llmsUrl;
-        if (resolved) {
-          urls.push(resolved);
-        } else if (isUrlLike(entry)) {
-          urls.push(entry);
-        } else {
-          errors.push(formatUnknownSourceError(entry, versionsByName, knownNames));
-        }
-      }
-
-      const fetched = urls.length
-        ? await urlListFetcher(queue, fetcher, urls, {
-            cache,
-            logger,
-            isUrlAllowed,
-            resolveDocLinks: true,
-            signal: context?.signal,
-          })
-        : '';
-
-      return (
-        [fetched, ...errors].filter(Boolean).join('\n\n') || 'No documentation could be retrieved'
-      );
+        throw new Error("STUB");
     },
   });
 }
@@ -144,12 +117,7 @@ Use this tool after useMuiDocs to:
         'The concatenated list of all fetched documentation content converted to markdown, or an error message if the request fails or the URL is blocked (only MUI documentation origins are allowed).',
       ),
     execute: async (input, context) => {
-      return urlListFetcher(queue, fetcher, input.urls, {
-        cache,
-        logger,
-        isUrlAllowed,
-        signal: context?.signal,
-      });
+        throw new Error("STUB");
     },
   });
 }

@@ -35,32 +35,7 @@ const ChatMessageInlineMetaContainer = styled('span', {
   name: 'MuiChatMessage',
   slot: 'InlineMeta',
 })<{ ownerState?: { role?: string; isOwnMessage?: boolean } }>(({ theme, ownerState }) => {
-  const isOwn = ownerState?.isOwnMessage ?? false;
-
-  return {
-    position: 'absolute',
-    bottom: theme.spacing(0.75),
-    insetInlineEnd: theme.spacing(1.5),
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: theme.spacing(0.25),
-    fontSize: theme.typography.caption.fontSize,
-    lineHeight: 1,
-    whiteSpace: 'nowrap',
-    pointerEvents: 'none',
-    userSelect: 'none',
-    // Light mode: primary.main is dark blue → white meta is readable.
-    // Dark mode (own): primary.main becomes a lighter blue → switch to dark meta for contrast.
-    color: isOwn ? 'rgba(255,255,255,0.65)' : (theme.vars || theme).palette.text.disabled,
-    ...(isOwn &&
-      theme.applyStyles('dark', {
-        color: 'rgba(0,0,0,0.55)',
-      })),
-    ...(!isOwn &&
-      theme.applyStyles('dark', {
-        color: 'rgba(255,255,255,0.45)',
-      })),
-  };
+    throw new Error("STUB");
 });
 
 const InlineStatusStyled = styled('span', {
@@ -80,17 +55,7 @@ const InlineStatusSlot = React.forwardRef<HTMLSpanElement, any>(function InlineS
   { ownerState, children, ...other },
   ref,
 ) {
-  const status = ownerState?.message?.status;
-  const isSent = status === 'sent';
-  const isRead = status === 'read';
-
-  return (
-    <InlineStatusStyled ref={ref} {...other}>
-      {isSent && <DoneIcon sx={{ fontSize: '1em' }} aria-hidden="true" />}
-      {isRead && <DoneAllIcon sx={{ fontSize: '1em' }} aria-hidden="true" />}
-      {!isSent && !isRead && children}
-    </InlineStatusStyled>
-  );
+    throw new Error("STUB");
 });
 
 export interface ChatMessageInlineMetaProps extends MessageMetaProps {}

@@ -23,7 +23,7 @@ function GridAiAssistantPanelConversationsMenu() {
   const triggerRef = React.useRef<HTMLButtonElement>(null);
 
   const handleOpen = () => {
-    setOpen(!open);
+      throw new Error("STUB");
   };
 
   const handleClose = () => {
@@ -32,19 +32,7 @@ function GridAiAssistantPanelConversationsMenu() {
 
   // Ordered by most recent prompt in conversations
   const sortedConversations = React.useMemo(() => {
-    return [...conversations].sort((a, b) => {
-      if (!a.prompts.length) {
-        return -1;
-      }
-      // New conversations should be at the top
-      if (!b.prompts.length) {
-        return 1;
-      }
-      return (
-        b.prompts[b.prompts.length - 1].createdAt.getTime() -
-        a.prompts[a.prompts.length - 1].createdAt.getTime()
-      );
-    });
+      throw new Error("STUB");
   }, [conversations]);
 
   return (
@@ -77,19 +65,7 @@ function GridAiAssistantPanelConversationsMenu() {
           {...rootProps.slotProps?.baseMenuList}
         >
           {sortedConversations.map((conversation, sortedIndex) => {
-            const conversationIndex = conversations.findIndex((c) => c === conversation);
-            return (
-              <rootProps.slots.baseMenuItem
-                key={`${conversation.id}-${sortedIndex}`}
-                selected={conversationIndex === activeConversationIndex}
-                onClick={() => {
-                  apiRef.current.aiAssistant.setActiveConversationIndex(conversationIndex);
-                  handleClose();
-                }}
-              >
-                {conversation.title}
-              </rootProps.slots.baseMenuItem>
-            );
+              throw new Error("STUB");
           })}
         </rootProps.slots.baseMenuList>
       </GridMenu>

@@ -81,11 +81,7 @@ export function getWeeklyDays(
   visibleDate: TemporalSupportedObject,
   weekStartsOn?: WeekStartsOn,
 ): { code: RecurringEventWeekDayCode; date: TemporalSupportedObject }[] {
-  const start = getStartOfWeek(adapter, visibleDate, weekStartsOn);
-  return Array.from({ length: 7 }, (_, i) => {
-    const date = adapter.addDays(start, i);
-    return { code: getWeekDayCode(adapter, date), date };
-  });
+    throw new Error("STUB");
 }
 
 export function getMonthlyReference(
@@ -97,10 +93,5 @@ export function getMonthlyReference(
   ord: number;
   date: TemporalSupportedObject;
 } {
-  return {
-    dayOfMonth: adapter.getDate(date.value),
-    code: getWeekDayCode(adapter, date.value),
-    ord: computeMonthlyOrdinal(adapter, date.value),
-    date: date.value,
-  };
+    throw new Error("STUB");
 }

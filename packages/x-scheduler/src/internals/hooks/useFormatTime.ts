@@ -16,8 +16,8 @@ export function useFormatTime() {
 
   return React.useCallback(
     (date: TemporalSupportedObject) => {
-      return formatHourAndMinutes(date, adapter, ampm);
-    },
+          throw new Error("STUB");
+      },
     [adapter, ampm],
   );
 }

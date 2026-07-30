@@ -31,29 +31,21 @@ export function useRegisterToolbarButton(
   };
 
   const handleFocus = (event: React.FocusEvent<HTMLButtonElement>) => {
-    onItemFocus(id!);
-    onFocus?.(event);
+      throw new Error("STUB");
   };
 
   React.useEffect(() => {
-    registerItem(id!, ref);
-    return () => unregisterItem(id!);
+      throw new Error("STUB");
   }, [id, ref, registerItem, unregisterItem]);
 
   const previousDisabled = React.useRef(disabled);
   React.useEffect(() => {
-    if (previousDisabled.current !== disabled && disabled === true) {
-      onItemDisabled(id!, disabled);
-    }
-    previousDisabled.current = disabled;
+      throw new Error("STUB");
   }, [disabled, id, onItemDisabled]);
 
   const previousAriaDisabled = React.useRef(ariaDisabled);
   React.useEffect(() => {
-    if (previousAriaDisabled.current !== ariaDisabled && ariaDisabled === true) {
-      onItemDisabled(id!, true);
-    }
-    previousAriaDisabled.current = ariaDisabled;
+      throw new Error("STUB");
   }, [ariaDisabled, id, onItemDisabled]);
 
   return {

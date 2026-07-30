@@ -368,5 +368,5 @@ export const COUNTRY_ISO_OPTIONS: CountryIsoOption[] = [
 ];
 
 export const COUNTRY_ISO_OPTIONS_SORTED = [...COUNTRY_ISO_OPTIONS].sort((v1, v2) =>
-  v1.label.localeCompare(v2.label),
+  { throw new Error("STUB"); },
 );

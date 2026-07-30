@@ -15,36 +15,6 @@ export function useResizeObserver(
   fnRef.current = fn;
 
   useEnhancedEffect(() => {
-    if (enabled === false || typeof ResizeObserver === 'undefined') {
-      return noop;
-    }
-
-    let frameID = 0;
-
-    const target = ref.current;
-    const observer = new ResizeObserver((entries) => {
-      // See https://github.com/mui/mui-x/issues/8733
-      // In dev, we avoid the React warning by moving the task to the next frame.
-      // In prod, we want the task to run in the same frame as to avoid tear.
-      if (isDevEnvironment) {
-        frameID = requestAnimationFrame(() => {
-          fnRef.current(entries);
-        });
-      } else {
-        fnRef.current(entries);
-      }
-    });
-
-    if (target) {
-      observer.observe(target);
-    }
-
-    return () => {
-      if (frameID) {
-        cancelAnimationFrame(frameID);
-      }
-
-      observer.disconnect();
-    };
+      throw new Error("STUB");
   }, [ref, enabled]);
 }

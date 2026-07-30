@@ -12,4 +12,4 @@ export const multiInputTimeRangeFieldClasses: MultiInputRangeFieldClasses = gene
 );
 
 export const getMultiInputTimeRangeFieldUtilityClass = (slot: string) =>
-  generateUtilityClass('MuiMultiInputTimeRangeField', slot);
+  { throw new Error("STUB"); };

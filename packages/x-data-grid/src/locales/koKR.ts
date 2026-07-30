@@ -32,7 +32,7 @@ const koKRGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: '필터 표시',
   toolbarFiltersTooltipHide: '필터 숨기기',
   toolbarFiltersTooltipShow: '필터 표시',
-  toolbarFiltersTooltipActive: (count) => `${count}건의 필터를 적용중`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: '검색…',
@@ -128,7 +128,7 @@ const koKRGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: '메뉴',
-  columnMenuAriaLabel: (columnName: string) => `${columnName} 열 메뉴`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: '열 표시',
   columnMenuManageColumns: '열 관리',
   columnMenuFilter: '필터',
@@ -140,19 +140,19 @@ const koKRGrid: Partial<GridLocaleText> = {
   // columnMenuManageCharts: 'Manage charts',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) => `${count}건의 필터를 적용중`,
+  columnHeaderFiltersTooltipActive: (count) => { throw new Error("STUB"); },
   columnHeaderFiltersLabel: '필터 표시',
   columnHeaderSortIconLabel: '정렬',
 
   // Rows selected footer text
-  footerRowSelected: (count) => `${count}행 선택중`,
+  footerRowSelected: (count) => { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: '총 행수:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} / ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: '선택',
@@ -184,8 +184,8 @@ const koKRGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: '그룹',
-  groupColumn: (name) => `${name} 값으로 그룹 생성`,
-  unGroupColumn: (name) => `${name} 값으로 그룹 해제`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: '상세 패널 토글',
@@ -195,25 +195,10 @@ const koKRGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: '페이지 당 행:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} of ${count !== -1 ? formatNumber(count) : `${formatNumber(to)} 이상`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to ? `약 ${formatNumber(estimated)}` : `${formatNumber(to)} 이상`;
-    return `${formatNumber(from)}–${formatNumber(to)} of ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return '첫 번째 페이지로 이동';
-    }
-    if (type === 'last') {
-      return '마지막 페이지로 이동';
-    }
-    if (type === 'next') {
-      return '다음 페이지로 이동';
-    }
-    // if (type === 'previous') {
-    return '이전 페이지로 이동';
+      throw new Error("STUB");
   },
 
   // Row reordering text
@@ -307,11 +292,11 @@ const koKRGrid: Partial<GridLocaleText> = {
   promptAppliedChanges: '변경사항 적용하기',
 
   // Prompt changes
-  promptChangeGroupDescription: (column: string) => `${column} 값으로 그룹 생성`,
+  promptChangeGroupDescription: (column: string) => { throw new Error("STUB"); },
   promptChangeAggregationLabel: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   promptChangeAggregationDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation}) 집계`,
+    { throw new Error("STUB"); },
   // promptChangeFilterLabel: (column: string, operator: string, value: string) => {
   //   if (operator === 'is any of') {
   //     return `${column} is any of: ${value}`;
@@ -325,16 +310,16 @@ const koKRGrid: Partial<GridLocaleText> = {
   //   return `Filter where ${column} ${operator} ${value}`;
   // },
   promptChangeSortDescription: (column: string, direction: string) =>
-    `${column} (${direction}) 기준으로 정렬`,
+    { throw new Error("STUB"); },
   promptChangePivotEnableLabel: '피벗',
   promptChangePivotEnableDescription: '피벗 활성화',
-  promptChangePivotColumnsLabel: (count: number) => `(${count}) 개의 열`,
+  promptChangePivotColumnsLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotColumnsDescription: (column: string, direction: string) =>
-    `${column}${direction ? ` (${direction})` : ''}`,
-  promptChangePivotRowsLabel: (count: number) => `(${count}) 개의 행`,
-  promptChangePivotValuesLabel: (count: number) => `(${count}) 개의 값`,
+    { throw new Error("STUB"); },
+  promptChangePivotRowsLabel: (count: number) => { throw new Error("STUB"); },
+  promptChangePivotValuesLabel: (count: number) => { throw new Error("STUB"); },
   promptChangePivotValuesDescription: (column: string, aggregation: string) =>
-    `${column} (${aggregation})`,
+    { throw new Error("STUB"); },
   // promptChangeChartsLabel: (dimensionsCount: number, valuesCount: number) => `Dimensions (${dimensionsCount}), Values (${valuesCount})`,
 };
 

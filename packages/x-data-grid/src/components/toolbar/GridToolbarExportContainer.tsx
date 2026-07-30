@@ -25,76 +25,7 @@ const GridToolbarExportContainer = forwardRef<
   HTMLButtonElement,
   React.PropsWithChildren<GridToolbarExportContainerProps>
 >(function GridToolbarExportContainer(props, ref) {
-  const { children, slotProps = {} } = props;
-  const buttonProps = slotProps.button || {};
-  const tooltipProps = slotProps.tooltip || {};
-
-  const apiRef = useGridApiContext();
-  const rootProps = useGridRootProps();
-  const exportButtonId = useId();
-  const exportMenuId = useId();
-
-  const [open, setOpen] = React.useState(false);
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
-  const handleRef = useForkRef(ref, buttonRef);
-
-  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpen((prevOpen) => !prevOpen);
-    buttonProps.onClick?.(event);
-  };
-
-  const handleMenuClose = () => setOpen(false);
-
-  if (children == null) {
-    return null;
-  }
-
-  return (
-    <React.Fragment>
-      <rootProps.slots.baseTooltip
-        title={apiRef.current.getLocaleText('toolbarExportLabel')}
-        enterDelay={1000}
-        {...rootProps.slotProps?.baseTooltip}
-        {...tooltipProps}
-      >
-        <rootProps.slots.baseButton
-          size="small"
-          startIcon={<rootProps.slots.exportIcon />}
-          aria-expanded={open}
-          aria-label={apiRef.current.getLocaleText('toolbarExportLabel')}
-          aria-haspopup="menu"
-          aria-controls={open ? exportMenuId : undefined}
-          id={exportButtonId}
-          {...rootProps.slotProps?.baseButton}
-          {...buttonProps}
-          onClick={handleMenuOpen}
-          ref={handleRef}
-        >
-          {apiRef.current.getLocaleText('toolbarExport')}
-        </rootProps.slots.baseButton>
-      </rootProps.slots.baseTooltip>
-      <GridMenu
-        open={open}
-        target={buttonRef.current}
-        onClose={handleMenuClose}
-        position="bottom-end"
-      >
-        <rootProps.slots.baseMenuList
-          id={exportMenuId}
-          className={gridClasses.menuList}
-          aria-labelledby={exportButtonId}
-          autoFocusItem={open}
-        >
-          {React.Children.map(children, (child) => {
-            if (!React.isValidElement(child)) {
-              return child;
-            }
-            return React.cloneElement<any>(child, { hideMenu: handleMenuClose });
-          })}
-        </rootProps.slots.baseMenuList>
-      </GridMenu>
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 });
 
 GridToolbarExportContainer.propTypes /* remove-proptypes */ = {

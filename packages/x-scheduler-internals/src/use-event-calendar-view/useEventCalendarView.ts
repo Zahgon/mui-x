@@ -17,7 +17,7 @@ export function useEventCalendarView(definition: EventCalendarViewDefinition) {
   const days = useStore(store, definition.visibleDaysSelector);
 
   // Feature hooks
-  useOnMount(() => store.setViewDefinition(definition));
+  useOnMount(() => { throw new Error("STUB"); });
 
   return { days };
 }

@@ -9,21 +9,10 @@ export function initializeZoomData(
   const zoomDataMap = new Map<AxisId, ZoomData>();
 
   zoomData?.forEach((zoom) => {
-    const option = options[zoom.axisId];
-    if (option) {
-      zoomDataMap.set(zoom.axisId, zoom);
-    }
+      throw new Error("STUB");
   });
 
   return Object.values(options).map(({ axisId, minStart: start, maxEnd: end }) => {
-    if (zoomDataMap.has(axisId)) {
-      return zoomDataMap.get(axisId)!;
-    }
-
-    return {
-      axisId,
-      start,
-      end,
-    };
+      throw new Error("STUB");
   });
 }

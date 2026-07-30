@@ -15,17 +15,4 @@ export interface DateLocaleTheme {
   };
 }
 
-export const createDateLocaleTheme = (dateFnsLocale: DateLocale): DateLocaleTheme => ({
-  components: {
-    MuiEventCalendar: {
-      defaultProps: {
-        dateLocale: dateFnsLocale,
-      },
-    },
-    MuiEventTimeline: {
-      defaultProps: {
-        dateLocale: dateFnsLocale,
-      },
-    },
-  },
-});
+export const createDateLocaleTheme = (dateFnsLocale: DateLocale): DateLocaleTheme => { throw new Error("STUB"); };

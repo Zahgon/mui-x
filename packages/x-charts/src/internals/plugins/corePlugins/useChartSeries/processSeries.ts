@@ -37,37 +37,7 @@ export const defaultizeSeries = <SeriesType extends ChartSeriesType>({
   const idToType = new Map<SeriesId, ChartSeriesType>();
 
   series.forEach(<T extends SeriesType>(seriesData: AllSeriesType<T>, seriesIndex: number) => {
-    const seriesWithDefaultValues = seriesConfig[seriesData.type as T].getSeriesWithDefaultValues(
-      seriesData,
-      seriesIndex,
-      colors,
-      theme,
-    );
-
-    const id: SeriesId = seriesWithDefaultValues.id;
-
-    if (seriesGroups[seriesData.type] === undefined) {
-      seriesGroups[seriesData.type] = { series: {}, seriesOrder: [] };
-    }
-
-    if (seriesGroups[seriesData.type]?.series[id] !== undefined) {
-      throw new Error(
-        `MUI X Charts: Series id "${id}" is not unique. ` +
-          'Each series must have a unique id to be properly identified and rendered. ' +
-          'Provide a unique id for each series in your chart configuration.',
-      );
-    }
-
-    seriesGroups[seriesData.type]!.series[id] = seriesWithDefaultValues;
-    seriesGroups[seriesData.type]!.seriesOrder.push(id);
-    if (idToType.has(id)) {
-      throw new Error(
-        `MUI X Charts: Series id "${id}" is not unique across series types. ` +
-          'Each series must have a unique id even across different series types. ' +
-          'Provide a unique id for each series in your chart configuration.',
-      );
-    }
-    idToType.set(id, seriesData.type);
+      throw new Error("STUB");
   });
 
   return { defaultizedSeries: seriesGroups, idToType };
@@ -91,11 +61,7 @@ export const applySeriesProcessors = <SeriesType extends ChartSeriesType>(
 
   // Apply formatter on a type group
   (Object.keys(seriesConfig) as SeriesType[]).forEach((type) => {
-    const group = defaultizedSeries[type];
-    if (group !== undefined) {
-      processedSeries[type] =
-        seriesConfig[type]?.seriesProcessor?.(group, dataset, isItemVisible) ?? group;
-    }
+      throw new Error("STUB");
   });
 
   return processedSeries;
@@ -118,16 +84,7 @@ export const applySeriesLayout = <SeriesType extends ChartSeriesType>(
 
   // Apply processors on series type per group
   (Object.keys(processedSeries) as SeriesType[]).forEach((type) => {
-    const processor = seriesConfig[type]?.seriesLayout;
-    const thisSeries = processedSeries[type];
-    if (processor !== undefined && thisSeries !== undefined) {
-      const newValue = processor(thisSeries, drawingArea);
-
-      if (newValue && newValue !== processedSeries[type]) {
-        processingDetected = true;
-        seriesLayout[type] = newValue;
-      }
-    }
+      throw new Error("STUB");
   });
 
   if (!processingDetected) {

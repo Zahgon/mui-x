@@ -56,31 +56,7 @@ const SankeyChart = React.forwardRef(function SankeyChart(
   props: SankeyChartProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const themedProps = useThemeProps({ props, name: 'MuiSankeyChart' });
-
-  const { chartsContainerProps, sankeyPlotProps, overlayProps, chartsWrapperProps, children } =
-    useSankeyChartProps(themedProps);
-  const {
-    chartsDataProviderProProps: { series, ...chartsDataProviderProProps },
-    chartsSurfaceProps,
-  } = useChartsContainerProProps<'sankey', SankeyChartPluginSignatures>(chartsContainerProps);
-
-  const Tooltip = themedProps.slots?.tooltip ?? SankeyTooltip;
-
-  return (
-    <SankeyDataProvider series={series as SankeySeriesType[]} {...chartsDataProviderProProps}>
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        <ChartsSurface {...chartsSurfaceProps}>
-          <SankeyPlot {...sankeyPlotProps} />
-          <ChartsOverlay {...overlayProps} />
-          <FocusedSankeyNode />
-          <FocusedSankeyLink />
-          {children}
-        </ChartsSurface>
-        {!themedProps.loading && <Tooltip trigger="item" {...themedProps.slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </SankeyDataProvider>
-  );
+    throw new Error("STUB");
 });
 
 SankeyChart.propTypes /* remove-proptypes */ = {

@@ -45,33 +45,13 @@ export interface ChatMessageErrorProps extends MessageErrorProps {
 const ChatMessageErrorRoot = styled('div', {
   name: 'MuiChatMessageError',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})<{ ownerState?: MessageErrorOwnerState }>(({ theme, ownerState }) => ({
-  // Inline error card anchored in the message's `error` grid area.
-  gridArea: 'error',
-  display: 'flex',
-  alignItems: 'center',
-  gap: theme.spacing(1),
-  marginBlock: theme.spacing(0.5),
-  paddingBlock: theme.spacing(0.75),
-  paddingInline: theme.spacing(1.25),
-  maxWidth: '100%',
-  boxSizing: 'border-box',
-  border: `1px solid ${(theme.vars || theme).palette.error.main}`,
-  borderRadius: theme.shape.borderRadius,
-  color: (theme.vars || theme).palette.error.main,
-  ...getErrorCardBackgroundStyles(theme),
-  fontSize: theme.typography.body2.fontSize,
-  lineHeight: theme.typography.body2.lineHeight,
-  ...(ownerState?.isOwnMessage && {
-    justifySelf: 'end',
-  }),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})<{ ownerState?: MessageErrorOwnerState }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 const ChatMessageErrorMessage = styled('span', {
   name: 'MuiChatMessageError',
   slot: 'Message',
-  overridesResolver: (_, styles) => styles.message,
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
 })({
   flex: 1,
   minWidth: 0,
@@ -81,111 +61,19 @@ const ChatMessageErrorMessage = styled('span', {
 const ChatMessageErrorRetryButton = styled(Button, {
   name: 'MuiChatMessageError',
   slot: 'RetryButton',
-  overridesResolver: (_, styles) => styles.retryButton,
-})(({ theme }) => ({
-  flexShrink: 0,
-  minWidth: 0,
-  color: (theme.vars || theme).palette.error.main,
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const ChatMessageErrorSlot = React.forwardRef<HTMLDivElement, any>(
   function ChatMessageErrorSlot(props, ref) {
-    const { ownerState, className, children, messageClassName, retryButtonClassName, ...other } =
-      props as {
-        ownerState: MessageErrorOwnerState;
-        className?: string;
-        children?: React.ReactNode;
-        messageClassName?: string;
-        retryButtonClassName?: string;
-      } & React.HTMLAttributes<HTMLDivElement>;
-    const localeText = useChatLocaleText();
-    const message = useMessage(ownerState.messageId);
-    const { isStreaming } = useChatStatus();
-
-    // While any stream is in flight, or the message itself is busy, disable the
-    // retry button to prevent double submissions.
-    const disabled =
-      !ownerState.retryable ||
-      isStreaming ||
-      message?.status === 'sending' ||
-      message?.status === 'streaming';
-
-    return (
-      <ChatMessageErrorRoot
-        ref={ref}
-        ownerState={ownerState}
-        className={className}
-        // The headless `MessageError` injects `role="alert"` (assertive implicit
-        // live region). Loading a conversation that already contains failed
-        // messages would otherwise blast every historical error on mount,
-        // interrupting the screen reader. An explicit `aria-live="polite"` wins
-        // over the role's implicit assertive value (per WAI-ARIA), keeping the
-        // alert semantics while announcing politely. `{...other}` keeps the
-        // headless `role`. `aria-atomic` reads the whole card as one unit.
-        aria-live="polite"
-        aria-atomic="true"
-        {...other}
-      >
-        <ChatMessageErrorMessage className={messageClassName}>
-          {children ?? ownerState.chatError?.message}
-        </ChatMessageErrorMessage>
-        {ownerState.retryable ? (
-          <ChatMessageErrorRetryButton
-            type="button"
-            size="small"
-            variant="text"
-            color="error"
-            className={retryButtonClassName}
-            disabled={disabled}
-            onClick={() => {
-              void ownerState.retry();
-            }}
-          >
-            {localeText.retryButtonLabel}
-          </ChatMessageErrorRetryButton>
-        ) : null}
-      </ChatMessageErrorRoot>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 const ChatMessageError = React.forwardRef<HTMLDivElement, ChatMessageErrorProps>(
   function ChatMessageError(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatMessageError' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatMessageErrorUtilityClasses(classesProp);
-    const hasCustomRoot = Boolean(slots?.root);
-
-    return (
-      <MessageError
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          root: slots?.root ?? ChatMessageErrorSlot,
-        }}
-        slotProps={{
-          ...slotProps,
-          root: mergeSlotProps(
-            {
-              className: clsx(classes.root, className),
-              sx,
-              // Private sub-element classNames only reach the built-in slot; a
-              // custom `slots.root` shouldn't receive (and possibly leak to the
-              // DOM) these internal props.
-              ...(hasCustomRoot
-                ? {}
-                : {
-                    messageClassName: classes.message,
-                    retryButtonClassName: classes.retryButton,
-                  }),
-            },
-            slotProps?.root,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatMessageError.propTypes /* remove-proptypes */ = {

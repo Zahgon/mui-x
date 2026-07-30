@@ -8,7 +8,7 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
     transformCharts,
     transformPickers,
   ].forEach((transform) => {
-    file.source = transform(file, api, options);
+      throw new Error("STUB");
   });
 
   return file.source;

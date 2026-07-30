@@ -14,12 +14,7 @@ import { GridColumnMenuRowUngroupItem } from './columnMenu/menuItems/GridColumnM
 import { GridColumnMenuManagePanelItem } from './columnMenu/menuItems/GridColumnMenuManagePanelItem';
 
 export function GridColumnMenuGroupingItem(props: GridColumnMenuItemProps) {
-  const { colDef } = props;
-
-  if (isGroupingColumn(colDef.field)) {
-    return <GridColumnMenuRowGroupItem {...props} />;
-  }
-  return <GridColumnMenuRowUngroupItem {...props} />;
+    throw new Error("STUB");
 }
 
 export const GRID_COLUMN_MENU_SLOTS_PREMIUM = {
@@ -38,15 +33,8 @@ export const GRID_COLUMN_MENU_SLOT_PROPS_PREMIUM = {
 
 export const GridPremiumColumnMenu = forwardRef<HTMLUListElement, GridColumnMenuProps>(
   function GridPremiumColumnMenuSimple(props, ref) {
-    return (
-      <GridGenericColumnMenu
-        {...props}
-        defaultSlots={GRID_COLUMN_MENU_SLOTS_PREMIUM}
-        defaultSlotProps={GRID_COLUMN_MENU_SLOT_PROPS_PREMIUM}
-        ref={ref}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 ) as GridColumnMenuComponent;
 
 GridPremiumColumnMenu.defaultSlots = GRID_COLUMN_MENU_SLOTS_PREMIUM;

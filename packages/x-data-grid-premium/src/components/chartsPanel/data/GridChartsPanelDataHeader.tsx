@@ -14,9 +14,9 @@ function GridChartsPanelDataHeader(props: GridChartsPanelDataHeaderProps) {
     <SidebarHeader>
       <GridChartsPanelDataSearch
         value={searchValue}
-        onClear={() => onSearchValueChange('')}
+        onClear={() => { throw new Error("STUB"); }}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          onSearchValueChange(event.target.value)
+          { throw new Error("STUB"); }
         }
       />
     </SidebarHeader>

@@ -31,44 +31,5 @@ export const ComposerSendButton = React.forwardRef(function ComposerSendButton(
   props: ComposerSendButtonProps,
   ref: React.Ref<HTMLButtonElement>,
 ) {
-  const { slots, slotProps, ...other } = props;
-  const composer = useComposerContext();
-  const localeText = useChatLocaleText();
-  const ownerState: ComposerSendButtonOwnerState = {
-    isSubmitting: composer.isSubmitting,
-    hasValue: composer.hasValue,
-    isStreaming: composer.isStreaming,
-    attachmentCount: composer.attachmentCount,
-    disabled: composer.disabled,
-  };
-  const SendButton = slots?.sendButton ?? 'button';
-  const rootProps = useSlotProps({
-    elementType: SendButton,
-    externalSlotProps: slotProps?.sendButton,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-      ...getDataAttributes({
-        isSubmitting: ownerState.isSubmitting,
-        hasValue: ownerState.hasValue,
-        isStreaming: ownerState.isStreaming,
-        disabled: ownerState.disabled,
-      }),
-    },
-  }) as React.ButtonHTMLAttributes<HTMLButtonElement> & React.RefAttributes<HTMLButtonElement>;
-
-  return (
-    <SendButton
-      {...rootProps}
-      aria-label={rootProps['aria-label'] ?? localeText.composerSendButtonLabel}
-      disabled={
-        Boolean(rootProps.disabled) ||
-        (!ownerState.hasValue && ownerState.attachmentCount === 0) ||
-        ownerState.isStreaming ||
-        ownerState.disabled
-      }
-      type={rootProps.type ?? 'submit'}
-    />
-  );
+    throw new Error("STUB");
 }) as ComposerSendButtonComponent;

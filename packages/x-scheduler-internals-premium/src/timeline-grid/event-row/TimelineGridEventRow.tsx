@@ -18,145 +18,16 @@ import { TimelineGridEventRowDataAttributes } from './TimelineGridEventRowDataAt
 import { useTimelineGridRowKeyboard } from '../../internals/utils/useTimelineGridRowKeyboard';
 
 const stateAttributesMapping = {
-  resourceId: (value: SchedulerResourceId) => ({
-    [TimelineGridEventRowDataAttributes.resourceId]: String(value),
-  }),
+  resourceId: (value: SchedulerResourceId) => { throw new Error("STUB"); },
   creationDisabled: (value: boolean) =>
-    value ? { [TimelineGridEventRowDataAttributes.creationDisabled]: '' } : null,
+    { throw new Error("STUB"); },
 };
 
 export const TimelineGridEventRow = React.forwardRef(function TimelineGridEventRow(
   componentProps: TimelineGridEventRow.Props,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  const {
-    // Rendering props
-    className,
-    render,
-    style,
-    // Internal props
-    resourceId,
-    addPropertiesToDroppedEvent,
-    children: childrenProp,
-    // Props forwarded to the DOM element
-    ...elementProps
-  } = componentProps;
-
-  // Context hooks
-  const adapter = useAdapterContext();
-  const store = useEventTimelinePremiumStoreContext();
-
-  const { rowRef, hasFocus, handleKeyDown, handleFocus } = useTimelineGridRowKeyboard({
-    columnType: 'events',
-  });
-
-  // Selector hooks
-  const presetConfig = useStore(store, eventTimelinePremiumPresetSelectors.config);
-  const occurrences = useStore(
-    store,
-    schedulerOccurrenceSelectors.resourceOccurrences,
-    presetConfig.start,
-    presetConfig.end,
-    resourceId,
-  );
-
-  // Feature hooks
-  const { getCursorPositionInElementMs, ref: dropTargetRef } = useEventRowDropTarget({
-    resourceId,
-    addPropertiesToDroppedEvent,
-  });
-
-  const eventCreationProps = useEventCreation(({ event, creationConfig }) => {
-    const offsetMs = getCursorPositionInElementMs({
-      input: { clientX: event.clientX },
-      elementRef: dropTargetRef,
-    });
-    const anchor = adapter.addMilliseconds(presetConfig.start, offsetMs);
-    const startDate = adapter.addMinutes(
-      anchor,
-      -(adapter.getMinutes(anchor) % EVENT_CREATION_PRECISION_MINUTE),
-    );
-    return {
-      surfaceType: 'timeline' as const,
-      start: startDate,
-      end: adapter.addMinutes(startDate, creationConfig.duration),
-      resourceId,
-      lockSurfaceType: true,
-    };
-  });
-
-  const triggerKeyboardCreation = useKeyboardEventCreation(({ creationConfig }) => ({
-    surfaceType: 'timeline' as const,
-    start: presetConfig.start,
-    end: adapter.addMinutes(presetConfig.start, creationConfig.duration),
-    resourceId,
-    lockSurfaceType: true,
-  }));
-
-  const onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (handleKeyDown(event)) {
-      return;
-    }
-    if (event.key === 'Enter' && event.target === event.currentTarget && triggerKeyboardCreation) {
-      event.preventDefault();
-      triggerKeyboardCreation();
-    }
-  };
-
-  const contextValue: TimelineGridEventRowContext = React.useMemo(
-    () => ({ hasFocus, getCursorPositionInElementMs }),
-    [hasFocus, getCursorPositionInElementMs],
-  );
-
-  const occurrencesWithPosition = useEventOccurrencesWithTimelinePosition({
-    occurrences,
-    maxSpan: 1,
-  });
-
-  const placeholder = usePlaceholderInRow({
-    resourceId,
-    occurrences: occurrencesWithPosition.occurrences,
-    maxIndex: occurrencesWithPosition.maxIndex,
-  });
-
-  const children = React.useMemo(
-    () => childrenProp({ placeholder, ...occurrencesWithPosition }),
-    [childrenProp, placeholder, occurrencesWithPosition],
-  );
-
-  const state: TimelineGridEventRow.State = {
-    resourceId,
-    creationDisabled: !triggerKeyboardCreation,
-  };
-
-  const keyboardProps = {
-    tabIndex: 0,
-    onKeyDown,
-    onFocus: handleFocus,
-  };
-
-  const element = useRenderElement('div', componentProps, {
-    ref: [forwardedRef, dropTargetRef, rowRef],
-    state,
-    stateAttributesMapping,
-    props: [
-      elementProps,
-      {
-        children,
-        style: {
-          '--lane-count': occurrencesWithPosition.maxIndex,
-        } as React.CSSProperties,
-      },
-      keyboardProps,
-      eventCreationProps,
-    ],
-  });
-
-  return (
-    <TimelineGridEventRowContext.Provider value={contextValue}>
-      {element}
-    </TimelineGridEventRowContext.Provider>
-  );
+    throw new Error("STUB");
 });
 
 export namespace TimelineGridEventRow {

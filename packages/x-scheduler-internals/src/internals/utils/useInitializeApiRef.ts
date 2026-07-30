@@ -16,7 +16,7 @@ export function useInitializeApiRef<TStore extends SchedulerAnyStore>(
   store: TStore,
   apiRef: React.RefObject<Partial<SchedulerPublicAPI<TStore>> | undefined> | undefined,
 ) {
-  const publicAPI = useRefWithInit(() => store.buildPublicAPI())
+  const publicAPI = useRefWithInit(() => { throw new Error("STUB"); })
     .current as SchedulerPublicAPI<TStore>;
   initializeInputApiRef(publicAPI, apiRef);
 }

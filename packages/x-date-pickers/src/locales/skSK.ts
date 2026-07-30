@@ -19,9 +19,7 @@ const skSKPickers: Partial<PickersLocaleText> = {
   openPreviousView: 'Otvoriť predchádzajúce zobrazenie',
   openNextView: 'Otvoriť ďalšie zobrazenie',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'ročné zobrazenie otvorené, prepnite do zobrazenia kalendára'
-      : 'zobrazenie kalendára otvorené, prepnite do zobrazenia roka',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Začiatok',
@@ -47,25 +45,25 @@ const skSKPickers: Partial<PickersLocaleText> = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `${timeViews[view] ?? view} vybraný. ${!formattedTime ? 'Nie je vybraný čas' : `Vybraný čas je ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} hodín`,
-  minutesClockNumberText: (minutes) => `${minutes} minút`,
-  secondsClockNumberText: (seconds) => `${seconds} sekúnd`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Vyberte ${timeViews[view]}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Týždeň v roku',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `${weekNumber} týždeň v roku`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Vyberte dátum, vybraný dátum je ${formattedDate}` : 'Vyberte dátum',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Vyberte čas, vybraný čas je ${formattedTime}` : 'Vyberte čas',
+    { throw new Error("STUB"); },
   // openRangePickerDialogue: formattedRange => formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
   // fieldClearLabel: 'Clear',
 
@@ -74,14 +72,14 @@ const skSKPickers: Partial<PickersLocaleText> = {
   dateTableLabel: 'vyberte dátum',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
   // fieldWeekDayPlaceholder: params => params.contentType === 'letter' ? 'EEEE' : 'EE',
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   // year: 'Year',

@@ -123,23 +123,4 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'rename-classes',
-  specFiles: [
-    {
-      name: 'rename barElementClasses to barClasses',
-      actual: readFile(path.join(import.meta.dirname, 'actual-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-imports.spec.tsx')),
-    },
-    {
-      name: 'rename radar-specific classes only when imported from RadarChart',
-      actual: readFile(path.join(import.meta.dirname, 'actual-radar-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-radar-imports.spec.tsx')),
-    },
-    {
-      name: 'do not rename radar-specific classes when imported from root package',
-      actual: readFile(path.join(import.meta.dirname, 'actual-not-radar-imports.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected-not-radar-imports.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

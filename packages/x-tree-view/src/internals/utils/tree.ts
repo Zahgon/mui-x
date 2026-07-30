@@ -75,7 +75,7 @@ export const getNextNavigableItem = (state: MinimalTreeViewState<any, any>, item
   if (expansionSelectors.isItemExpanded(state, itemId)) {
     const firstNavigableChild = itemsSelectors
       .itemOrderedChildrenIds(state, itemId)
-      .find((childId) => itemsSelectors.canItemBeFocused(state, childId));
+      .find((childId) => { throw new Error("STUB"); });
     if (firstNavigableChild != null) {
       return firstNavigableChild;
     }
@@ -109,26 +109,13 @@ export const getNextNavigableItem = (state: MinimalTreeViewState<any, any>, item
 };
 
 export const getLastNavigableItem = (state: MinimalTreeViewState<any, any>) => {
-  let itemId: string | null = null;
-  while (itemId == null || expansionSelectors.isItemExpanded(state, itemId)) {
-    const children = itemsSelectors.itemOrderedChildrenIds(state, itemId);
-    const lastNavigableChild = getLastNavigableItemInArray(state, children);
-
-    // The item has no navigable children.
-    if (lastNavigableChild == null) {
-      return itemId!;
-    }
-
-    itemId = lastNavigableChild;
-  }
-
-  return itemId!;
+    throw new Error("STUB");
 };
 
 export const getFirstNavigableItem = (state: MinimalTreeViewState<any, any>) =>
   itemsSelectors
     .itemOrderedChildrenIds(state, null)
-    .find((itemId) => itemsSelectors.canItemBeFocused(state, itemId))!;
+    .find((itemId) => { throw new Error("STUB"); })!;
 
 /**
  * This is used to determine the start and end of a selection range so
@@ -214,59 +201,11 @@ export const getNonDisabledItemsInRange = (
   itemAId: string,
   itemBId: string,
 ) => {
-  const getNextItem = (itemId: string) => {
-    // If the item is expanded and has some children, return the first of them.
-    if (
-      expansionSelectors.isItemExpandable(state, itemId) &&
-      expansionSelectors.isItemExpanded(state, itemId)
-    ) {
-      return itemsSelectors.itemOrderedChildrenIds(state, itemId)[0];
-    }
-
-    let itemMeta: TreeViewItemMeta | null = itemsSelectors.itemMeta(state, itemId);
-    while (itemMeta != null) {
-      // Try to find the first navigable sibling after the current item.
-      const siblings = itemsSelectors.itemOrderedChildrenIds(state, itemMeta.parentId);
-      const currentItemIndex = itemsSelectors.itemIndex(state, itemMeta.id);
-
-      if (currentItemIndex < siblings.length - 1) {
-        return siblings[currentItemIndex + 1];
-      }
-
-      // If the item is the last of its siblings, go up a level to the parent and try again.
-      itemMeta = itemMeta.parentId ? itemsSelectors.itemMeta(state, itemMeta.parentId) : null;
-    }
-
-    throw new Error(
-      'MUI X Tree View: Invalid range - unable to find a path between the two items. ' +
-        'This may occur if the items are not in the same tree or the tree structure is invalid. ' +
-        'Verify that both items exist in the tree.',
-    );
-  };
-
-  const [first, last] = findOrderInTremauxTree(state, itemAId, itemBId);
-  const items = [first];
-  let current = first;
-
-  while (current !== last) {
-    current = getNextItem(current);
-    if (!itemsSelectors.isItemDisabled(state, current)) {
-      items.push(current);
-    }
-  }
-
-  return items;
+    throw new Error("STUB");
 };
 
 export const getAllNavigableItems = (state: MinimalTreeViewState<any, any>) => {
-  let item: string | null = getFirstNavigableItem(state);
-  const navigableItems: string[] = [];
-  while (item != null) {
-    navigableItems.push(item);
-    item = getNextNavigableItem(state, item);
-  }
-
-  return navigableItems;
+    throw new Error("STUB");
 };
 
 /**

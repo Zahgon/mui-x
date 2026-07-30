@@ -41,7 +41,7 @@ export const DATA_GRID_PRO_PROPS_DEFAULT_VALUES: DataGridProPropsWithDefaultValu
   disableChildrenFiltering: false,
   disableChildrenSorting: false,
   disableColumnPinning: false,
-  getDetailPanelHeight: () => 500,
+  getDetailPanelHeight: () => { throw new Error("STUB"); },
   headerFilters: false,
   keepColumnPositionIfDraggedOutside: false,
   rowSelectionPropagation: ROW_SELECTION_PROPAGATION_DEFAULT,
@@ -63,32 +63,23 @@ const defaultSlots = DATA_GRID_PRO_DEFAULT_SLOTS_COMPONENTS;
 export const useDataGridProProps = <R extends GridValidRowModel>(inProps: DataGridProProps<R>) => {
   const theme = useTheme();
   const themedProps = React.useMemo(
-    () => getThemeProps({ props: inProps, theme, name: 'MuiDataGrid' }),
+    () => { throw new Error("STUB"); },
     [theme, inProps],
   );
 
   const localeText = React.useMemo(
-    () => ({ ...GRID_DEFAULT_LOCALE_TEXT, ...themedProps.localeText }),
+    () => { throw new Error("STUB"); },
     [themedProps.localeText],
   );
 
   const slots = React.useMemo<GridProSlotsComponent>(
     () =>
-      computeSlots<GridProSlotsComponent>({
-        defaultSlots,
-        slots: themedProps.slots,
-      }),
+      { throw new Error("STUB"); },
     [themedProps.slots],
   );
 
   return React.useMemo<DataGridProProcessedProps<R>>(
-    () => ({
-      ...DATA_GRID_PRO_PROPS_DEFAULT_VALUES,
-      ...themedProps,
-      localeText,
-      slots,
-      ...getDataGridProForcedProps(themedProps),
-    }),
+    () => { throw new Error("STUB"); },
     [themedProps, localeText, slots],
   );
 };

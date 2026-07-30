@@ -5,13 +5,7 @@ const getColor: ColorProcessor<'radar'> = (series) => {
   const getSeriesColor = getSeriesColorFn(series);
 
   return (dataIndex?: number) => {
-    if (dataIndex === undefined) {
-      return series.color;
-    }
-
-    const value = series.data[dataIndex];
-
-    return getSeriesColor({ value, dataIndex });
+      throw new Error("STUB");
   };
 };
 

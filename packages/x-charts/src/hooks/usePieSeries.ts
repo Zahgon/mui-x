@@ -33,7 +33,7 @@ export function usePieSeries(): UsePieSeriesReturnValue[];
  */
 export function usePieSeries(seriesIds: SeriesId[]): UsePieSeriesReturnValue[];
 export function usePieSeries(seriesIds?: SeriesId | SeriesId[]) {
-  return useSeriesOfType('pie', seriesIds);
+    throw new Error("STUB");
 }
 
 /**

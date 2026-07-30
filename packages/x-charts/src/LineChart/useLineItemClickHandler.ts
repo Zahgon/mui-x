@@ -28,26 +28,6 @@ export function useLineItemClickHandler(
   const defaultXAxisId = xAxisIds[0];
 
   return React.useMemo(() => {
-    if (!onItemClick) {
-      return undefined;
-    }
-
-    return (event: React.MouseEvent<SVGElement, MouseEvent>, seriesId: SeriesId) => {
-      const element = chartsLayerContainerRef.current;
-      const xAxisId = seriesData?.series[seriesId]?.xAxisId ?? defaultXAxisId;
-      const xAxis = xAxisId === undefined ? undefined : xAxes[xAxisId];
-
-      if (element === null || xAxis === undefined) {
-        return;
-      }
-
-      const point = getChartPoint(element, event);
-      const dataIndex = getAxisIndex(xAxis, point.x);
-      if (dataIndex === -1) {
-        return;
-      }
-
-      onItemClick(event, { type: 'line', seriesId, dataIndex });
-    };
+      throw new Error("STUB");
   }, [onItemClick, chartsLayerContainerRef, seriesData, defaultXAxisId, xAxes]);
 }

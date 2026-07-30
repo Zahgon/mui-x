@@ -82,16 +82,7 @@ export class HeatmapData {
   private valueLookup: Map<number, Map<number, number>>;
 
   constructor(data: readonly HeatmapValueType[]) {
-    this.valueLookup = new Map();
-    for (const [xIndex, yIndex, value] of data) {
-      let column = this.valueLookup.get(xIndex);
-      if (!column) {
-        column = new Map<number, number>();
-        this.valueLookup.set(xIndex, column);
-      }
-
-      column.set(yIndex, value);
-    }
+      throw new Error("STUB");
   }
 
   getValue(xIndex: number, yIndex: number): number | null {

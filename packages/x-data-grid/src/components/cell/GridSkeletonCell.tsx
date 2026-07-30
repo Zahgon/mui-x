@@ -78,27 +78,7 @@ function GridSkeletonCell(props: GridSkeletonCellProps) {
 
   // Memo prevents the non-circular skeleton widths changing to random widths on every render
   const baseSkeletonProps = React.useMemo(() => {
-    const isCircularContent = type === 'boolean' || type === 'actions';
-
-    if (isCircularContent) {
-      return {
-        variant: 'circular',
-        width: CIRCULAR_CONTENT_SIZE,
-        height: CIRCULAR_CONTENT_SIZE,
-      } as const;
-    }
-
-    // The width of the skeleton is a random number between the min and max values
-    // The min and max values are determined by the type of the column
-    const [min, max] = type
-      ? (CONTENT_WIDTH_RANGE_BY_TYPE[type] ?? DEFAULT_CONTENT_WIDTH_RANGE)
-      : DEFAULT_CONTENT_WIDTH_RANGE;
-
-    return {
-      variant: 'text',
-      width: `${Math.round(randomNumberGenerator(min, max))}%`,
-      height: CONTENT_HEIGHT,
-    } as const;
+      throw new Error("STUB");
   }, [type]);
 
   // Merge caller overrides outside the memo so an inline `skeletonProps` object

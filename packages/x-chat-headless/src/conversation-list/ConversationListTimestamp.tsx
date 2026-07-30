@@ -31,49 +31,5 @@ export const ConversationListTimestamp = React.forwardRef(function ConversationL
   props: ConversationListTimestampProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    conversation,
-    selected = false,
-    unread = false,
-    focused = false,
-    ownerState: ownerStateProp,
-    slots,
-    slotProps,
-    ...other
-  } = props as ConversationListTimestampProps & {
-    ownerState?: ConversationListTimestampOwnerState;
-  };
-  const ownerState: ConversationListTimestampOwnerState = {
-    conversation,
-    selected,
-    unread,
-    focused,
-  };
-  void ownerStateProp;
-
-  const localeText = useChatLocaleText();
-
-  const Root = slots?.root ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: Root,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  if (!conversation.lastMessageAt) {
-    return null;
-  }
-
-  return (
-    <Root {...rootProps}>
-      {/* suppressHydrationWarning: locale-sensitive formatting can differ between server and browser */}
-      <time dateTime={conversation.lastMessageAt} suppressHydrationWarning>
-        {localeText.conversationTimestampLabel(conversation.lastMessageAt)}
-      </time>
-    </Root>
-  );
+    throw new Error("STUB");
 }) as ConversationListTimestampComponent;

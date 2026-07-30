@@ -104,7 +104,7 @@ class FallbackDisposableStack {
   private isDisposed = false;
 
   get disposed(): boolean {
-    return this.isDisposed;
+      throw new Error("STUB");
   }
 
   use<T>(value: T): T {
@@ -114,15 +114,13 @@ class FallbackDisposableStack {
       if (typeof method !== 'function') {
         throw /* minify-error-disabled */ new TypeError('MUI X: The value is not disposable.');
       }
-      this.stack.push(() => (method as () => void).call(value));
+      this.stack.push(() => { throw new Error("STUB"); });
     }
     return value;
   }
 
   adopt<T>(value: T, onDispose: (value: T) => void): T {
-    assertNotDisposed(this.isDisposed);
-    this.stack.push(() => onDispose(value));
-    return value;
+      throw new Error("STUB");
   }
 
   defer(onDispose: () => void): void {
@@ -131,12 +129,7 @@ class FallbackDisposableStack {
   }
 
   move(): FallbackDisposableStack {
-    assertNotDisposed(this.isDisposed);
-    const next = new FallbackDisposableStack();
-    next.stack = this.stack;
-    this.stack = [];
-    this.isDisposed = true;
-    return next;
+      throw new Error("STUB");
   }
 
   dispose(): void {
@@ -162,7 +155,7 @@ class FallbackDisposableStack {
   }
 
   [disposeSymbol](): void {
-    this.dispose();
+      throw new Error("STUB");
   }
 }
 
@@ -176,7 +169,7 @@ class FallbackAsyncDisposableStack {
   private isDisposed = false;
 
   get disposed(): boolean {
-    return this.isDisposed;
+      throw new Error("STUB");
   }
 
   use<T>(value: T): T {
@@ -189,15 +182,13 @@ class FallbackAsyncDisposableStack {
           'MUI X: The value is not async disposable.',
         );
       }
-      this.stack.push(() => (method as () => unknown).call(value));
+      this.stack.push(() => { throw new Error("STUB"); });
     }
     return value;
   }
 
   adopt<T>(value: T, onDisposeAsync: (value: T) => unknown): T {
-    assertNotDisposed(this.isDisposed);
-    this.stack.push(() => onDisposeAsync(value));
-    return value;
+      throw new Error("STUB");
   }
 
   defer(onDisposeAsync: () => unknown): void {
@@ -206,38 +197,15 @@ class FallbackAsyncDisposableStack {
   }
 
   move(): FallbackAsyncDisposableStack {
-    assertNotDisposed(this.isDisposed);
-    const next = new FallbackAsyncDisposableStack();
-    next.stack = this.stack;
-    this.stack = [];
-    this.isDisposed = true;
-    return next;
+      throw new Error("STUB");
   }
 
   async disposeAsync(): Promise<void> {
-    if (this.isDisposed) {
-      return;
-    }
-    this.isDisposed = true;
-    let hasError = false;
-    let error: unknown;
-    for (let i = this.stack.length - 1; i >= 0; i -= 1) {
-      try {
-        // eslint-disable-next-line no-await-in-loop
-        await this.stack[i]();
-      } catch (caught) {
-        error = hasError ? createSuppressedError(caught, error) : caught;
-        hasError = true;
-      }
-    }
-    this.stack = [];
-    if (hasError) {
-      throw error;
-    }
+      throw new Error("STUB");
   }
 
   [asyncDisposeSymbol](): Promise<void> {
-    return this.disposeAsync();
+      throw new Error("STUB");
   }
 }
 
@@ -265,17 +233,5 @@ export const AsyncDisposableStack: AsyncDisposableStackConstructor =
  * Returns `[error]` unchanged if it isn't a `SuppressedError`.
  */
 export function unwrapSuppressedErrors(error: unknown): unknown[] {
-  const failures: unknown[] = [];
-  let current: unknown = error;
-  while (
-    typeof current === 'object' &&
-    current !== null &&
-    'error' in current &&
-    'suppressed' in current
-  ) {
-    failures.push((current as { error: unknown }).error);
-    current = (current as { suppressed: unknown }).suppressed;
-  }
-  failures.push(current);
-  return failures;
+    throw new Error("STUB");
 }

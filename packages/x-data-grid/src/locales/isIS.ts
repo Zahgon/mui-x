@@ -31,7 +31,7 @@ const isISGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Fela síur',
   toolbarFiltersTooltipShow: 'Sjá síur',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} virk sía` : `${count} virkar síur`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Leita…',
@@ -140,20 +140,20 @@ const isISGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} virkar síur` : `Ein virk sía`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Sýna síur',
   columnHeaderSortIconLabel: 'Raða',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1 ? `${count.toLocaleString()} raðir valdar` : `Ein röð valin`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Heildarfjöldi lína:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} af ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Val á gátreit',
@@ -185,8 +185,8 @@ const isISGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Hópur',
-  groupColumn: (name) => `Hópa eftir ${name}`,
-  unGroupColumn: (name) => `Fjarlægja hópun eftir ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Stækka/minnka smáatriðaspjald',
@@ -209,17 +209,7 @@ const isISGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Fara á fyrstu síðu';
-    }
-    if (type === 'last') {
-      return 'Fara á síðustu síðu';
-    }
-    if (type === 'next') {
-      return 'Fara á næstu síðu';
-    }
-    // if (type === 'previous') {
-    return 'Fara á fyrri síðu';
+      throw new Error("STUB");
   },
 
   // Row reordering text

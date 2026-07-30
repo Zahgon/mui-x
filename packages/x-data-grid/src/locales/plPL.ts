@@ -32,7 +32,7 @@ const plPLGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: 'Pokaż filtry',
   toolbarFiltersTooltipHide: 'Ukryj filtry',
   toolbarFiltersTooltipShow: 'Pokaż filtry',
-  toolbarFiltersTooltipActive: (count) => `Liczba aktywnych filtrów: ${count}`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Wyszukaj…',
@@ -128,7 +128,7 @@ const plPLGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: 'Menu',
-  columnMenuAriaLabel: (columnName: string) => `Menu kolumny: ${columnName}`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: 'Pokaż wszystkie kolumny',
   columnMenuManageColumns: 'Zarządzaj kolumnami',
   columnMenuFilter: 'Filtr',
@@ -140,19 +140,19 @@ const plPLGrid: Partial<GridLocaleText> = {
   // columnMenuManageCharts: 'Manage charts',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) => `Liczba aktywnych filtrów: ${count}`,
+  columnHeaderFiltersTooltipActive: (count) => { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Pokaż filtry',
   columnHeaderSortIconLabel: 'Sortuj',
 
   // Rows selected footer text
-  footerRowSelected: (count) => `Liczba wybranych wierszy: ${count.toLocaleString()}`,
+  footerRowSelected: (count) => { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Łączna liczba wierszy:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} z ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Pole wyboru',
@@ -184,8 +184,8 @@ const plPLGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Grupa',
-  groupColumn: (name) => `Grupuj według ${name}`,
-  unGroupColumn: (name) => `Rozgrupuj ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Szczegóły',
@@ -195,27 +195,10 @@ const plPLGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: 'Wierszy na stronę:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} z ${count !== -1 ? formatNumber(count) : `więcej niż ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to
-        ? `około ${formatNumber(estimated)}`
-        : `więcej niż ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} z ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Przejdź do pierwszej strony';
-    }
-    if (type === 'last') {
-      return 'Przejdź do ostatniej strony';
-    }
-    if (type === 'next') {
-      return 'Przejdź do następnej strony';
-    }
-    // if (type === 'previous') {
-    return 'Przejdź do poprzedniej strony';
+      throw new Error("STUB");
   },
 
   // Row reordering text

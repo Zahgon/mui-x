@@ -63,53 +63,7 @@ export const consumeSlots = <
   InComponent: RenderFunction,
 ) => {
   function ConsumeSlotsInternal(props: React.PropsWithoutRef<Props>, ref: React.ForwardedRef<Ref>) {
-    const themedProps = useThemeProps({
-      props,
-      // eslint-disable-next-line mui/material-ui-name-matches-component-name
-      name,
-    });
-
-    const defaultProps =
-      typeof options.defaultProps === 'function'
-        ? options.defaultProps(themedProps as Props)
-        : (options.defaultProps ?? {});
-
-    const defaultizedProps = resolveProps(defaultProps, themedProps) as Props;
-    const { slots, slotProps, ...other } = defaultizedProps as {
-      slots?: Record<string, any>;
-      slotProps?: Record<string, any>;
-    };
-
-    const theme = useTheme();
-    const classes = options.classesResolver?.(defaultizedProps, theme);
-
-    // Can be a function component or a forward ref component.
-    const Component = slots?.[slotPropName] ?? InComponent;
-
-    const propagateSlots = options.propagateSlots && !slots?.[slotPropName];
-
-    const { ownerState, ...originalOutProps } = useSlotProps({
-      elementType: Component,
-      externalSlotProps: slotProps?.[slotPropName],
-      additionalProps: {
-        ...other,
-        classes,
-        ...(propagateSlots && { slots, slotProps }),
-      },
-      ownerState: {},
-    });
-
-    const outProps = { ...originalOutProps } as unknown as Props;
-
-    for (const prop of options.omitProps ?? []) {
-      delete (outProps as unknown as Props)[prop];
-    }
-
-    if (process.env.NODE_ENV !== 'production') {
-      Component.displayName = `${name}.slots.${slotPropName}`;
-    }
-
-    return <Component {...outProps} ref={ref} />;
+      throw new Error("STUB");
   }
 
   return React.forwardRef<Ref, Props>(ConsumeSlotsInternal);

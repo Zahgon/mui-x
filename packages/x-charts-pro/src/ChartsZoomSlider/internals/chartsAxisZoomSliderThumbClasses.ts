@@ -29,7 +29,7 @@ export const chartsAxisZoomSliderThumbClasses: ChartsAxisZoomSliderThumbClasses 
 // Returns both the correct and legacy class names so existing CSS targeting the legacy
 // prefix continues to work.
 export function getAxisZoomSliderThumbUtilityClass(slot: string) {
-  return `${generateUtilityClass(CORRECT_PREFIX, slot)} ${generateUtilityClass(LEGACY_PREFIX, slot)}`;
+    throw new Error("STUB");
 }
 
 export const useUtilityClasses = (ownerState: ChartsZoomSliderThumbOwnerState) => {

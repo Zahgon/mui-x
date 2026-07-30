@@ -43,35 +43,13 @@ function GridFilterInputValue(props: GridTypeFilterInputValueProps) {
 
   const onFilterChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      const value = sanitizeFilterItemValue(event.target.value);
-
-      setFilterValueState(value);
-
-      const newItem = {
-        ...item,
-        value: type === 'number' && !Number.isNaN(Number(value)) ? Number(value) : value,
-        fromInput: id!,
-      };
-
-      if (debounceMs === 0) {
-        applyValue(newItem);
-        return;
-      }
-
-      setIsApplying(true);
-      filterTimeout.start(debounceMs, () => {
-        applyValue(newItem);
-        setIsApplying(false);
-      });
-    },
+          throw new Error("STUB");
+      },
     [filterTimeout, debounceMs, item, type, id, applyValue],
   );
 
   React.useEffect(() => {
-    const itemPlusTag = item as ItemPlusTag;
-    if (itemPlusTag.fromInput !== id || item.value == null) {
-      setFilterValueState(sanitizeFilterItemValue(item.value));
-    }
+      throw new Error("STUB");
   }, [id, item]);
 
   return (
@@ -143,14 +121,8 @@ GridFilterInputValue.propTypes /* remove-proptypes */ = {
     PropTypes.func,
     PropTypes.shape({
       current: (props, propName) => {
-        if (props[propName] == null) {
-          return null;
-        }
-        if (typeof props[propName] !== 'object' || props[propName].nodeType !== 1) {
-          return new Error(`Expected prop '${propName}' to be of type Element`);
-        }
-        return null;
-      },
+            throw new Error("STUB");
+        },
     }),
   ]),
   /**

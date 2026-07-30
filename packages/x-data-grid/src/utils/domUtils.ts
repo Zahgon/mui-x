@@ -104,21 +104,7 @@ export function findGridCellElementsFromCol(col: HTMLElement, api: GridPrivateAp
   }
 
   queryRows(api).forEach((rowElement) => {
-    const rowId = rowElement.getAttribute('data-id');
-    if (!rowId) {
-      return;
-    }
-
-    let columnIndex = colIndex;
-
-    const cellColSpanInfo = api.unstable_getCellColSpanInfo(rowId, colIndex);
-    if (cellColSpanInfo && cellColSpanInfo.spannedByColSpan) {
-      columnIndex = cellColSpanInfo.leftVisibleCellIndex;
-    }
-    const cell = rowElement.querySelector(`[data-colindex="${columnIndex}"]`);
-    if (cell) {
-      cells.push(cell);
-    }
+      throw new Error("STUB");
   });
 
   return cells;
@@ -146,21 +132,7 @@ const findPinnedCells = ({
   const cells: HTMLElement[] = [];
 
   queryRows(api).forEach((rowElement) => {
-    const rowId = rowElement.getAttribute('data-id');
-    if (!rowId) {
-      return;
-    }
-
-    rowElement
-      .querySelectorAll(
-        `.${gridClasses[position === 'left' ? 'cell--pinnedLeft' : 'cell--pinnedRight']}`,
-      )
-      .forEach((cell) => {
-        const currentColIndex = parseCellColIndex(cell);
-        if (currentColIndex !== null && filterFn(currentColIndex)) {
-          cells.push(cell as HTMLElement);
-        }
-      });
+      throw new Error("STUB");
   });
 
   return cells;
@@ -176,7 +148,7 @@ export function findLeftPinnedCellsAfterCol(
     api,
     colIndex,
     position: isRtl ? 'right' : 'left',
-    filterFn: (index) => (isRtl ? index < colIndex! : index > colIndex!),
+    filterFn: (index) => { throw new Error("STUB"); },
   });
 }
 
@@ -190,7 +162,7 @@ export function findRightPinnedCellsBeforeCol(
     api,
     colIndex,
     position: isRtl ? 'left' : 'right',
-    filterFn: (index) => (isRtl ? index > colIndex! : index < colIndex!),
+    filterFn: (index) => { throw new Error("STUB"); },
   });
 }
 
@@ -218,10 +190,7 @@ const findPinnedHeaders = ({
       `.${gridClasses[position === 'left' ? 'columnHeader--pinnedLeft' : 'columnHeader--pinnedRight']}`,
     )
     .forEach((element) => {
-      const currentColIndex = parseCellColIndex(element);
-      if (currentColIndex !== null && filterFn(currentColIndex, element)) {
-        elements.push(element as HTMLElement);
-      }
+        throw new Error("STUB");
     });
   return elements;
 };
@@ -236,7 +205,7 @@ export function findLeftPinnedHeadersAfterCol(
     api,
     position: isRtl ? 'right' : 'left',
     colIndex,
-    filterFn: (index) => (isRtl ? index < colIndex! : index > colIndex!),
+    filterFn: (index) => { throw new Error("STUB"); },
   });
 }
 
@@ -251,10 +220,7 @@ export function findRightPinnedHeadersBeforeCol(
     position: isRtl ? 'left' : 'right',
     colIndex,
     filterFn: (index, element) => {
-      if (element.classList.contains(gridClasses['columnHeader--last'])) {
-        return false;
-      }
-      return isRtl ? index > colIndex! : index < colIndex!;
+        throw new Error("STUB");
     },
   });
 }

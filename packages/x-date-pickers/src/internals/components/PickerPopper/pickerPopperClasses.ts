@@ -11,7 +11,7 @@ export interface PickerPopperClasses {
 export type PickerPopperClassKey = keyof PickerPopperClasses;
 
 export function getPickerPopperUtilityClass(slot: string) {
-  return generateUtilityClass('MuiPickerPopper', slot);
+    throw new Error("STUB");
 }
 
 export const pickerPopperClasses = generateUtilityClasses('MuiPickerPopper', ['root', 'paper']);

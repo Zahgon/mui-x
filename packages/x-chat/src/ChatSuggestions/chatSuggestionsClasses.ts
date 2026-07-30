@@ -12,7 +12,7 @@ export interface ChatSuggestionsClasses {
 export type ChatSuggestionsClassKey = keyof ChatSuggestionsClasses;
 
 export function getChatSuggestionsUtilityClass(slot: string): string {
-  return generateUtilityClass('MuiChatSuggestions', slot);
+    throw new Error("STUB");
 }
 
 export const chatSuggestionsClasses: ChatSuggestionsClasses = generateUtilityClasses(

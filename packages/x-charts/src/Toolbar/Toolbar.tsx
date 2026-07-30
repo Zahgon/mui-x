@@ -10,19 +10,7 @@ import { chartsToolbarClasses } from './chartToolbarClasses';
 const ToolbarRoot = styled('div', {
   name: 'MuiChartsToolbar',
   slot: 'Root',
-})(({ theme }) => ({
-  flex: 0,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'end',
-  gap: theme.spacing(0.25),
-  padding: theme.spacing(0.5),
-  marginBottom: theme.spacing(1.5),
-  minHeight: 44,
-  boxSizing: 'border-box',
-  border: `1px solid ${(theme.vars || theme).palette.divider}`,
-  borderRadius: 4,
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 export interface ToolbarProps extends React.ComponentProps<'div'> {
   className?: string;
@@ -36,15 +24,7 @@ export const Toolbar = React.forwardRef<HTMLDivElement, ToolbarProps>(function T
   { className, render, ...other },
   ref,
 ) {
-  const element = useComponentRenderer(ToolbarRoot, render, {
-    role: 'toolbar',
-    'aria-orientation': 'horizontal',
-    className: clsx(chartsToolbarClasses.root, className),
-    ...other,
-    ref,
-  });
-
-  return <ToolbarContextProvider>{element}</ToolbarContextProvider>;
+    throw new Error("STUB");
 });
 
 Toolbar.propTypes /* remove-proptypes */ = {

@@ -121,7 +121,7 @@ function streamError(message: string): ChatError {
 }
 
 function getMessageText(message: ChatMessage): string {
-  return message.parts.map((part) => (part.type === 'text' ? part.text : '')).join('');
+  return message.parts.map((part) => { throw new Error("STUB"); }).join('');
 }
 
 function parseStreamLine(rawLine: string): unknown | null {
@@ -163,7 +163,9 @@ function convertToChatStream(
       signal.removeEventListener('abort', cancelReader);
       hasAbortListener = false;
     }
-    reader.cancel(signal.reason).catch(() => {});
+    reader.cancel(signal.reason).catch(() => {
+        throw new Error("STUB");
+    });
   };
   const cleanupAbortListener = () => {
     if (hasAbortListener) {
@@ -274,7 +276,9 @@ function convertToChatStream(
     },
     cancel(reason) {
       cleanupAbortListener();
-      reader.cancel(reason).catch(() => {});
+      reader.cancel(reason).catch(() => {
+          throw new Error("STUB");
+      });
     },
   });
 }
@@ -305,7 +309,7 @@ function coerceToBytes(value: unknown): Uint8Array {
   const length =
     typeof obj.byteLength === 'number'
       ? obj.byteLength
-      : Object.keys(obj).filter((k) => /^\d+$/.test(k)).length;
+      : Object.keys(obj).filter((k) => { throw new Error("STUB"); }).length;
   const out = new Uint8Array(length);
   for (let i = 0; i < length; i += 1) {
     out[i] = obj[i];
@@ -340,17 +344,17 @@ function getTrailingAssistantText(
   if (message == null) {
     return '';
   }
-  return message.parts.map((part) => (part.type === 'text' ? (part.text ?? '') : '')).join('');
+  return message.parts.map((part) => { throw new Error("STUB"); }).join('');
 }
 
 function createChatBasedAdapter(chat: AiSdkChatInstance): ChatAdapter {
   const adapter: ChatAdapter = {
     async sendMessage(input: ChatSendMessageInput) {
       const userText = getMessageText(input.message);
-      const files = input.attachments?.map((attachment) => attachment.file);
+      const files = input.attachments?.map((attachment) => { throw new Error("STUB"); });
       const lengthBefore = chat.messages.length;
 
-      const onAbort = () => chat.stop();
+      const onAbort = () => { throw new Error("STUB"); };
       input.signal.addEventListener('abort', onAbort, { once: true });
 
       try {
@@ -377,24 +381,7 @@ function createChatBasedAdapter(chat: AiSdkChatInstance): ChatAdapter {
   // falls back to a re-send otherwise.
   if (typeof chat.regenerate === 'function') {
     adapter.regenerate = async (input: ChatRegenerateInput) => {
-      const onAbort = () => chat.stop();
-      input.signal.addEventListener('abort', onAbort, { once: true });
-
-      try {
-        await chat.regenerate!({ messageId: input.messageId });
-      } finally {
-        input.signal.removeEventListener('abort', onAbort);
-      }
-
-      // AI SDK regeneration replaces the message in place, so the "new reply"
-      // length heuristic from `sendMessage` does not apply — read the trailing
-      // assistant message unconditionally.
-      const last = chat.messages[chat.messages.length - 1];
-      const replyText = getTrailingAssistantText(last);
-      const replyId =
-        last != null && last.role === 'assistant' ? last.id : `reply-${input.messageId}`;
-
-      return emitWholeReplyStream(replyText, replyId);
+        throw new Error("STUB");
     };
   }
 
@@ -449,16 +436,7 @@ export function createAiSdkAdapter(options: CreateAiSdkAdapterOptions): ChatAdap
       return convertToChatStream(upstream, input.signal, nextSyntheticMessageId);
     },
     async regenerate(input: ChatRegenerateInput) {
-      const upstream = await streamFn({
-        // The anchor user message that prompted the reply being regenerated.
-        message: input.message,
-        messages: input.messages,
-        trigger: 'regenerate-message',
-        regenerateMessageId: input.messageId,
-        signal: input.signal,
-      });
-
-      return convertToChatStream(upstream, input.signal, nextSyntheticMessageId);
+        throw new Error("STUB");
     },
   };
 }

@@ -31,7 +31,7 @@ const daDKGrid: Partial<GridLocaleText> = {
   toolbarFiltersTooltipHide: 'Skjul filtre',
   toolbarFiltersTooltipShow: 'Vis filtre',
   toolbarFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktive filtre` : `${count} aktivt filter`,
+    { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Søg…',
@@ -140,20 +140,20 @@ const daDKGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} aktive filtre` : `Ét aktivt filter`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Vis filtre',
   columnHeaderSortIconLabel: 'Sorter',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1 ? `${count.toLocaleString()} rækker valgt` : `Én række valgt`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Antal rækker i alt:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} af ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Afkrydsningsvalg',
@@ -185,8 +185,8 @@ const daDKGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Gruppe',
-  groupColumn: (name) => `Gruppér efter ${name}`,
-  unGroupColumn: (name) => `Fjern gruppering efter ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Udvid/kollaps detaljepanel',
@@ -209,17 +209,7 @@ const daDKGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Gå til den første side';
-    }
-    if (type === 'last') {
-      return 'Gå til den sidste side';
-    }
-    if (type === 'next') {
-      return 'Gå til den næste side';
-    }
-    // if (type === 'previous') {
-    return 'Gå til den forrige side';
+      throw new Error("STUB");
   },
 
   // Row reordering text

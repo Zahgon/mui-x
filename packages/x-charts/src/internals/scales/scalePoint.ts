@@ -37,12 +37,7 @@ export function scalePoint(...args: any[]): ScalePoint<any> {
   delete scale.paddingOuter;
 
   scale.copy = () => {
-    const copied = originalCopy();
-    copied.padding = copied.paddingOuter;
-    delete copied.paddingInner;
-    delete copied.paddingOuter;
-    copied.copy = scale.copy;
-    return copied;
+      throw new Error("STUB");
   };
 
   return scale;

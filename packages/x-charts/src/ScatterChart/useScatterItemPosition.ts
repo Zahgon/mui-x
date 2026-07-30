@@ -29,31 +29,5 @@ export interface ResolvedScatterItem {
 export function useScatterItemPosition(
   item: Pick<ScatterItemIdentifier, 'seriesId' | 'dataIndex'> | null | undefined,
 ): ResolvedScatterItem | null {
-  const scatterSeries = useScatterSeriesContext();
-  const { xAxis, xAxisIds } = useXAxes();
-  const { yAxis, yAxisIds } = useYAxes();
-  const { zAxis, zAxisIds } = useZAxes();
-
-  if (!item || !scatterSeries) {
-    return null;
-  }
-
-  const series = scatterSeries.series[item.seriesId];
-  if (!series || series.hidden) {
-    return null;
-  }
-
-  const scatterPoint = series.data[item.dataIndex];
-  if (!scatterPoint) {
-    return null;
-  }
-
-  const xAxisId = series.xAxisId ?? xAxisIds[0];
-  const yAxisId = series.yAxisId ?? yAxisIds[0];
-  const cx = getValueToPositionMapper(xAxis[xAxisId].scale)(scatterPoint.x);
-  const cy = getValueToPositionMapper(yAxis[yAxisId].scale)(scatterPoint.y);
-
-  const markerSize = getMarkerSize(series, zAxis[series.sizeAxisId ?? zAxisIds[0]])(item.dataIndex);
-
-  return { cx, cy, markerSize, series, scatterPoint };
+    throw new Error("STUB");
 }

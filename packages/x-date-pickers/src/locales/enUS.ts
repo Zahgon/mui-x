@@ -12,9 +12,7 @@ const enUSPickers: PickersLocaleText = {
   openPreviousView: 'Open previous view',
   openNextView: 'Open next view',
   calendarViewSwitchingButtonAriaLabel: (view) =>
-    view === 'year'
-      ? 'year view is open, switch to calendar view'
-      : 'calendar view is open, switch to year view',
+    { throw new Error("STUB"); },
 
   // DateRange labels
   start: 'Start',
@@ -40,27 +38,27 @@ const enUSPickers: PickersLocaleText = {
 
   // Clock labels
   clockLabelText: (view, formattedTime) =>
-    `Select ${view}. ${!formattedTime ? 'No time selected' : `Selected time is ${formattedTime}`}`,
-  hoursClockNumberText: (hours) => `${hours} hours`,
-  minutesClockNumberText: (minutes) => `${minutes} minutes`,
-  secondsClockNumberText: (seconds) => `${seconds} seconds`,
+    { throw new Error("STUB"); },
+  hoursClockNumberText: (hours) => { throw new Error("STUB"); },
+  minutesClockNumberText: (minutes) => { throw new Error("STUB"); },
+  secondsClockNumberText: (seconds) => { throw new Error("STUB"); },
 
   // Digital clock labels
-  selectViewText: (view) => `Select ${view}`,
+  selectViewText: (view) => { throw new Error("STUB"); },
 
   // Calendar labels
   calendarWeekNumberHeaderLabel: 'Week number',
   calendarWeekNumberHeaderText: '#',
-  calendarWeekNumberAriaLabelText: (weekNumber) => `Week ${weekNumber}`,
-  calendarWeekNumberText: (weekNumber) => `${weekNumber}`,
+  calendarWeekNumberAriaLabelText: (weekNumber) => { throw new Error("STUB"); },
+  calendarWeekNumberText: (weekNumber) => { throw new Error("STUB"); },
 
   // Open Picker labels
   openDatePickerDialogue: (formattedDate) =>
-    formattedDate ? `Choose date, selected date is ${formattedDate}` : 'Choose date',
+    { throw new Error("STUB"); },
   openTimePickerDialogue: (formattedTime) =>
-    formattedTime ? `Choose time, selected time is ${formattedTime}` : 'Choose time',
+    { throw new Error("STUB"); },
   openRangePickerDialogue: (formattedRange) =>
-    formattedRange ? `Choose range, selected range is ${formattedRange}` : 'Choose range',
+    { throw new Error("STUB"); },
   fieldClearLabel: 'Clear',
 
   // Table labels
@@ -68,14 +66,14 @@ const enUSPickers: PickersLocaleText = {
   dateTableLabel: 'pick date',
 
   // Field section placeholders
-  fieldYearPlaceholder: (params) => 'Y'.repeat(params.digitAmount),
-  fieldMonthPlaceholder: (params) => (params.contentType === 'letter' ? 'MMMM' : 'MM'),
-  fieldDayPlaceholder: () => 'DD',
-  fieldWeekDayPlaceholder: (params) => (params.contentType === 'letter' ? 'EEEE' : 'EE'),
-  fieldHoursPlaceholder: () => 'hh',
-  fieldMinutesPlaceholder: () => 'mm',
-  fieldSecondsPlaceholder: () => 'ss',
-  fieldMeridiemPlaceholder: () => 'aa',
+  fieldYearPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldMonthPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldDayPlaceholder: () => { throw new Error("STUB"); },
+  fieldWeekDayPlaceholder: (params) => { throw new Error("STUB"); },
+  fieldHoursPlaceholder: () => { throw new Error("STUB"); },
+  fieldMinutesPlaceholder: () => { throw new Error("STUB"); },
+  fieldSecondsPlaceholder: () => { throw new Error("STUB"); },
+  fieldMeridiemPlaceholder: () => { throw new Error("STUB"); },
 
   // View names
   year: 'Year',

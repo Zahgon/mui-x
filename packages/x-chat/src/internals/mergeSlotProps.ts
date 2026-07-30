@@ -34,8 +34,7 @@ function mergeRefs(
   }
 
   return (value: unknown) => {
-    setRef(baseRef, value);
-    setRef(consumerRef, value);
+      throw new Error("STUB");
   };
 }
 
@@ -110,14 +109,8 @@ function mergeResolvedSlotProps(base: AnySlotProps, consumer: AnySlotProps): Any
       handlers.length === 1
         ? handlers[0]
         : (...args: any[]) => {
-            for (const handler of handlers) {
-              handler(...args);
-
-              if (args[0] != null && typeof args[0] === 'object' && args[0].defaultPrevented) {
-                break;
-              }
-            }
-          };
+            throw new Error("STUB");
+        };
   }
 
   return result;
@@ -151,11 +144,7 @@ export function mergeSlotProps<OwnerState>(
 ): AnySlotProps | ((ownerState: OwnerState) => AnySlotProps) {
   if (typeof consumer === 'function') {
     return (ownerState: OwnerState) =>
-      mergeResolvedSlotProps(
-        base,
-        ((consumer as (os: OwnerState) => AnySlotProps | undefined)(ownerState) ??
-          {}) as AnySlotProps,
-      );
+      { throw new Error("STUB"); };
   }
   return mergeResolvedSlotProps(base, ((consumer as AnySlotProps) ?? {}) as AnySlotProps);
 }

@@ -47,7 +47,7 @@ export function calculateSankeyLayout(
     .nodeWidth(nodeWidth)
     .nodePadding(nodePadding)
     .nodeAlign(getNodeAlignFunction(nodeAlign))
-    .nodeId((d) => d.id)
+    .nodeId((d) => { throw new Error("STUB"); })
     .extent([
       [left, top],
       [width + right, height + bottom],
@@ -88,12 +88,7 @@ export function calculateSankeyLayout(
 
   // Convert d3-sankey links to our format
   const layoutLinks = (links as SankeyLayoutLink<true>[]).map((link): SankeyLayoutLink<true> => {
-    const rep = {
-      ...link,
-      path: improvedNaiveSankeyLinkPathHorizontal(link as SankeyLayoutLink<true>, curveCorrection),
-    };
-
-    return rep;
+      throw new Error("STUB");
   });
 
   return {

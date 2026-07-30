@@ -5,15 +5,7 @@ import { InternMap } from '@mui/x-charts-vendor/d3-array';
 import type { NumberValue, ScaleBand } from '@mui/x-charts-vendor/d3-scale';
 
 export function keyof(value: any): string | number {
-  if (Array.isArray(value)) {
-    return JSON.stringify(value);
-  }
-
-  if (typeof value === 'object' && value !== null) {
-    return value.valueOf();
-  }
-
-  return value;
+    throw new Error("STUB");
 }
 
 /**
@@ -84,90 +76,48 @@ function createScaleBand(seed?: ScaleBandState): ScaleBand<any> {
   };
 
   scale.domain = function (_?: Iterable<any>) {
-    if (!arguments.length) {
-      return domain.slice();
-    }
-    domain = [];
-    // @ts-expect-error, InternMap accepts two arguments.
-    index = new InternMap(undefined, keyof);
-    for (const value of _!) {
-      if (index.has(value)) {
-        continue;
-      }
-      index.set(value, domain.push(value) - 1);
-    }
-    return rescale();
+      throw new Error("STUB");
   };
 
   scale.range = function (_?: [NumberValue, NumberValue]) {
-    if (!arguments.length) {
-      return [r0, r1];
-    }
-    const [v0, v1] = _!;
-    r0 = +v0;
-    r1 = +v1;
-    return rescale();
+      throw new Error("STUB");
   };
 
   scale.rangeRound = function (_: [NumberValue, NumberValue]) {
-    const [v0, v1] = _;
-    r0 = +v0;
-    r1 = +v1;
-    isRound = true;
-    return rescale();
+      throw new Error("STUB");
   };
 
   scale.bandwidth = function () {
-    return bandwidth;
+      throw new Error("STUB");
   };
 
   scale.step = function () {
-    return step;
+      throw new Error("STUB");
   };
 
   scale.round = function (_?: boolean) {
-    if (!arguments.length) {
-      return isRound;
-    }
-    isRound = !!_;
-    return rescale();
+      throw new Error("STUB");
   };
 
   scale.padding = function (_?: number) {
-    if (!arguments.length) {
-      return paddingInner;
-    }
-    paddingInner = Math.min(1, (paddingOuter = +_!));
-    return rescale();
+      throw new Error("STUB");
   };
 
   scale.paddingInner = function (_?: number) {
-    if (!arguments.length) {
-      return paddingInner;
-    }
-    paddingInner = Math.min(1, _!);
-    return rescale();
+      throw new Error("STUB");
   };
 
   scale.paddingOuter = function (_?: number) {
-    if (!arguments.length) {
-      return paddingOuter;
-    }
-    paddingOuter = +_!;
-    return rescale();
+      throw new Error("STUB");
   };
 
   scale.align = function (_?: number) {
-    if (!arguments.length) {
-      return align;
-    }
-    align = Math.max(0, Math.min(1, _!));
-    return rescale();
+      throw new Error("STUB");
   };
 
   // Shares the immutable domain index with the copy, so copying does not rebuild it.
   scale.copy = () =>
-    createScaleBand({ index, domain, r0, r1, isRound, paddingInner, paddingOuter, align });
+    { throw new Error("STUB"); };
 
   // `rescale` returns the scale for the fluent setters; here it only seeds the
   // initial layout, so the (callable) return is intentionally discarded.

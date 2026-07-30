@@ -12,9 +12,7 @@ import { useZAxis } from './useZAxis';
 export function useXColorScale<S extends ScaleName>(
   axisId?: AxisId,
 ): AxisScaleComputedConfig[S]['colorScale'] | undefined {
-  const axis = useXAxis(axisId);
-
-  return axis.colorScale;
+    throw new Error("STUB");
 }
 
 /**
@@ -26,9 +24,7 @@ export function useXColorScale<S extends ScaleName>(
 export function useYColorScale<S extends ScaleName>(
   axisId?: AxisId,
 ): AxisScaleComputedConfig[S]['colorScale'] | undefined {
-  const axis = useYAxis(axisId);
-
-  return axis.colorScale;
+    throw new Error("STUB");
 }
 
 /**
@@ -40,7 +36,5 @@ export function useYColorScale<S extends ScaleName>(
 export function useZColorScale<S extends ScaleName>(
   axisId?: AxisId,
 ): AxisScaleComputedConfig[S]['colorScale'] | undefined {
-  const axis = useZAxis(axisId);
-
-  return axis.colorScale;
+    throw new Error("STUB");
 }

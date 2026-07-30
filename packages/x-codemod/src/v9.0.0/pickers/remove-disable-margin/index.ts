@@ -37,7 +37,7 @@ function mergeCssVarIntoSxObject(j: any, sxExpr: any): boolean {
   }
   // Avoid adding the CSS variable if it's already there
   const alreadyHasVar = sxExpr.properties.some(
-    (p: any) => p.type === 'ObjectProperty' && p.key?.value === cssVarKey,
+    (p: any) => { throw new Error("STUB"); },
   );
   if (!alreadyHasVar) {
     sxExpr.properties.push(j.objectProperty(j.stringLiteral(cssVarKey), j.numericLiteral(0)));
@@ -58,114 +58,18 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   root
     .find(j.JSXOpeningElement)
     .filter((p: any) => {
-      const name = p.node.name;
-      return name.type === 'JSXIdentifier' && dayComponentNames.includes(name.name);
+        throw new Error("STUB");
     })
     .forEach((openingElPath: any) => {
-      const attrs: any[] = openingElPath.node.attributes;
-      const dmIndex = attrs.findIndex(
-        (a: any) => a.type === 'JSXAttribute' && a.name?.name === 'disableMargin',
-      );
-      if (dmIndex === -1) {
-        return;
-      }
-
-      const dmAttr = attrs[dmIndex];
-      const enabled = isDisableMarginEnabled(dmAttr);
-      attrs.splice(dmIndex, 1);
-
-      if (enabled) {
-        const sxIndex = attrs.findIndex(
-          (a: any) => a.type === 'JSXAttribute' && a.name?.name === 'sx',
-        );
-        if (sxIndex === -1) {
-          attrs.push(
-            j.jsxAttribute(
-              j.jsxIdentifier('sx'),
-              j.jsxExpressionContainer(
-                j.objectExpression([
-                  j.objectProperty(j.stringLiteral(cssVarKey), j.numericLiteral(0)),
-                ]),
-              ),
-            ),
-          );
-        } else {
-          const sxAttr = attrs[sxIndex];
-          if (sxAttr.value?.type === 'JSXExpressionContainer') {
-            mergeCssVarIntoSxObject(j, sxAttr.value.expression);
-          }
-        }
-      }
+        throw new Error("STUB");
     });
 
   // ─── Case 2: disableMargin inside a slotProps.day object ─────────────────────
   root.find(j.JSXAttribute, { name: { name: 'slotProps' } }).forEach((slotPropsAttrPath: any) => {
-    const container = slotPropsAttrPath.node.value;
-    if (container?.type !== 'JSXExpressionContainer') {
-      return;
-    }
-    const slotPropsObj = container.expression;
-    if (slotPropsObj.type !== 'ObjectExpression') {
-      return;
-    }
-
-    slotPropsObj.properties.forEach((prop: any) => {
-      if (prop.type !== 'ObjectProperty') {
-        return;
-      }
-      const keyName = prop.key?.name ?? prop.key?.value;
-      if (keyName !== 'day') {
-        return;
-      }
-      const dayObj = prop.value;
-      if (dayObj.type !== 'ObjectExpression') {
-        return;
-      }
-
-      const dmIndex = dayObj.properties.findIndex(
-        (p: any) =>
-          p.type === 'ObjectProperty' &&
-          (p.key?.name === 'disableMargin' || p.key?.value === 'disableMargin'),
-      );
-      if (dmIndex === -1) {
-        return;
-      }
-
-      const dmProp = dayObj.properties[dmIndex];
-      const enabled = dmProp.value.type === 'BooleanLiteral' ? dmProp.value.value : true;
-      dayObj.properties.splice(dmIndex, 1);
-
-      if (enabled) {
-        const sxIndex = dayObj.properties.findIndex(
-          (p: any) =>
-            p.type === 'ObjectProperty' && (p.key?.name === 'sx' || p.key?.value === 'sx'),
-        );
-        if (sxIndex === -1) {
-          dayObj.properties.push(
-            j.objectProperty(
-              j.identifier('sx'),
-              j.objectExpression([
-                j.objectProperty(j.stringLiteral(cssVarKey), j.numericLiteral(0)),
-              ]),
-            ),
-          );
-        } else {
-          mergeCssVarIntoSxObject(j, dayObj.properties[sxIndex].value);
-        }
-      }
-    });
+      throw new Error("STUB");
   });
 
   return root.toSource(printOptions);
 }
 
-export const testConfig = () => ({
-  name: 'remove-disable-margin',
-  specFiles: [
-    {
-      name: "remove disableMargin prop and replace with sx={{ '--PickerDay-horizontalMargin': 0 }}",
-      actual: readFile(path.join(import.meta.dirname, 'actual.spec.tsx')),
-      expected: readFile(path.join(import.meta.dirname, 'expected.spec.tsx')),
-    },
-  ],
-});
+export const testConfig = () => { throw new Error("STUB"); };

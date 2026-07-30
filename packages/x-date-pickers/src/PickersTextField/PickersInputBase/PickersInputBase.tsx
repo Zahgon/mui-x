@@ -35,11 +35,7 @@ function mergePickersInputBaseSectionContentSlotProps(
   baseClassName: string,
 ): PickersSectionListSlotProps['sectionContent'] {
   return (ownerState: PickerOwnerState) => {
-    const resolved = resolveComponentProps(consumerSlotProps, ownerState) ?? {};
-    return {
-      ...resolved,
-      className: clsx(baseClassName, resolved.className),
-    };
+      throw new Error("STUB");
   };
 }
 
@@ -48,136 +44,33 @@ const round = (value: number) => Math.round(value * 1e5) / 1e5;
 export const PickersInputBaseRoot = styled('div', {
   name: 'MuiPickersInputBase',
   slot: 'Root',
-})<{ ownerState: PickerTextFieldOwnerState }>(({ theme }) => ({
-  ...theme.typography.body1,
-  color: (theme.vars || theme).palette.text.primary,
-  cursor: 'text',
-  padding: 0,
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-  position: 'relative',
-  boxSizing: 'border-box', // Prevent padding issue with fullWidth.
-  letterSpacing: `${round(0.15 / 16)}em`,
-  [`&.${pickersInputBaseClasses.disabled}`]: {
-    color: (theme.vars || theme).palette.action.disabled,
-    cursor: 'default',
-  },
-  variants: [
-    {
-      props: { isInputInFullWidth: true },
-      style: { width: '100%' },
-    },
-  ],
-}));
+})<{ ownerState: PickerTextFieldOwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 export const PickersInputBaseSectionsContainer = styled(PickersSectionListRoot, {
   name: 'MuiPickersInputBase',
   slot: 'SectionsContainer',
-})<{ ownerState: PickerTextFieldOwnerState }>(({ theme }) => ({
-  padding: '4px 0 5px',
-  fontFamily: theme.typography.fontFamily,
-  fontSize: 'inherit',
-  lineHeight: '1.4375em', // 23px
-  flexGrow: 1,
-  outline: 'none',
-  display: 'flex',
-  flexWrap: 'nowrap',
-  overflow: 'hidden',
-  letterSpacing: 'inherit',
-  // Baseline behavior
-  width: '182px',
-  variants: [
-    {
-      props: { fieldDirection: 'rtl' },
-      style: {
-        justifyContent: 'end',
-      },
-    },
-    {
-      props: { inputSize: 'small' },
-      style: {
-        paddingTop: 1,
-      },
-    },
-    {
-      // While the field is empty and blurred, the format is shown as a placeholder.
-      props: { isFieldFocused: false, isFieldValueEmpty: true },
-      style: theme.vars
-        ? {
-            opacity: theme.vars.opacity.inputPlaceholder,
-          }
-        : {
-            opacity: theme.palette.mode === 'light' ? 0.42 : 0.5,
-          },
-    },
-    {
-      // ...except when a non-shrunk label sits in the notch, where the format would overlap it.
-      // A start adornment always shrinks the label, so it never triggers this case.
-      props: {
-        isFieldFocused: false,
-        isFieldValueEmpty: true,
-        hasStartAdornment: false,
-        inputHasLabel: true,
-        isLabelShrunk: false,
-      },
-      style: {
-        opacity: 0,
-      },
-    },
-  ],
-}));
+})<{ ownerState: PickerTextFieldOwnerState }>(({ theme }) => { throw new Error("STUB"); });
 
 const PickersInputBaseSection = styled(PickersSectionListSection, {
   name: 'MuiPickersInputBase',
   slot: 'Section',
-})(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily,
-  fontSize: 'inherit',
-  letterSpacing: 'inherit',
-  lineHeight: '1.4375em', // 23px
-  display: 'inline-block',
-  whiteSpace: 'nowrap',
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const PickersInputBaseSectionContent = styled(PickersSectionListSectionContent, {
   name: 'MuiPickersInputBase',
   slot: 'SectionContent',
-  overridesResolver: (props, styles) => styles.content, // FIXME: Inconsistent naming with slot
-})(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily,
-  lineHeight: '1.4375em', // 23px
-  letterSpacing: 'inherit',
-  width: 'fit-content',
-  outline: 'none',
-  // Disables Chromium's focus-delegation onto contenteditable descendants
-  // while the field is not focused. The bug is Chromium-only, and applying
-  // `WebkitUserModify` on WebKit breaks Playwright's `fill()` editability
-  // check, so we gate on a Chromium-only CSS property (`-webkit-app-region`,
-  // a Blink/Electron extension WebKit never adopted) via `@supports`.
-  // The WebKit exclusion is empirical, not guaranteed across versions: the
-  // regression guard is the WebKit `fill()` cases in the browser e2e suite,
-  // which would fail if a future WebKit started matching this `@supports`.
-  '@supports (-webkit-app-region: drag)': {
-    [`.${pickersInputBaseClasses.root}:not(:focus-within) &`]: {
-      WebkitUserModify: 'read-only',
-      userSelect: 'none',
-    },
-  },
-}));
+  overridesResolver: (props, styles) => { throw new Error("STUB"); }, // FIXME: Inconsistent naming with slot
+})(({ theme }) => { throw new Error("STUB"); });
 
 const PickersInputBaseSectionSeparator = styled(PickersSectionListSectionSeparator, {
   name: 'MuiPickersInputBase',
   slot: 'Separator',
-})(() => ({
-  whiteSpace: 'pre',
-  letterSpacing: 'inherit',
-}));
+})(() => { throw new Error("STUB"); });
 
 const PickersInputBaseInput = styled('input', {
   name: 'MuiPickersInputBase',
   slot: 'Input',
-  overridesResolver: (props, styles) => styles.hiddenInput, // FIXME: Inconsistent naming with slot
+  overridesResolver: (props, styles) => { throw new Error("STUB"); }, // FIXME: Inconsistent naming with slot
 })({
   ...visuallyHidden,
 });
@@ -185,27 +78,7 @@ const PickersInputBaseInput = styled('input', {
 const PickersInputBaseActiveBar = styled('div', {
   name: 'MuiPickersInputBase',
   slot: 'ActiveBar',
-})<{ ownerState: { sectionOffsets: number[] } }>(({ theme, ownerState }) => ({
-  display: 'none',
-  position: 'absolute',
-  height: 2,
-  bottom: 2,
-  borderTopLeftRadius: 2,
-  borderTopRightRadius: 2,
-  transition: theme.transitions.create(['width', 'left'], {
-    duration: theme.transitions.duration.shortest,
-  }),
-  backgroundColor: (theme.vars || theme).palette.primary.main,
-  '[data-active-range-position="start"] &, [data-active-range-position="end"] &': {
-    display: 'block',
-  },
-  '[data-active-range-position="start"] &': {
-    left: ownerState.sectionOffsets[0],
-  },
-  '[data-active-range-position="end"] &': {
-    left: ownerState.sectionOffsets[1],
-  },
-}));
+})<{ ownerState: { sectionOffsets: number[] } }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 const useUtilityClasses = (
   classes: Partial<PickersInputBaseClasses> | undefined,
@@ -261,7 +134,7 @@ function resolveSectionElementWidth(
     );
     if (activeSectionElements) {
       return Array.from(activeSectionElements).reduce((currentActiveBarWidth, element) => {
-        return currentActiveBarWidth + element.offsetWidth;
+          throw new Error("STUB");
       }, 0);
     }
   }
@@ -301,215 +174,7 @@ const PickersInputBase = React.forwardRef(function PickersInputBase(
   inProps: PickersInputBaseProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({
-    props: inProps,
-    name: 'MuiPickersInputBase',
-  });
-
-  const {
-    elements,
-    areAllSectionsEmpty,
-    defaultValue,
-    label,
-    value,
-    onChange,
-    id,
-    autoFocus,
-    endAdornment,
-    startAdornment,
-    renderSuffix,
-    slots,
-    slotProps,
-    contentEditable,
-    tabIndex,
-    onInput,
-    onPaste,
-    onKeyDown,
-    fullWidth,
-    name,
-    readOnly,
-    inputRef,
-    sectionListRef,
-    onFocus,
-    onBlur,
-    classes: classesProp,
-    ownerState: ownerStateProp,
-    ...other
-  } = props;
-
-  const ownerStateContext = usePickerTextFieldOwnerState();
-  const rootRef = React.useRef<HTMLDivElement>(null);
-  const activeBarRef = React.useRef<HTMLDivElement>(null);
-  const sectionOffsetsRef = React.useRef<number[]>([]);
-  const handleRootRef = useForkRef(ref, rootRef);
-  const muiFormControl = useFormControl();
-  if (!muiFormControl) {
-    throw new Error(
-      'MUI X: PickersInputBase should always be used inside a PickersTextField component',
-    );
-  }
-
-  const ownerState = ownerStateProp ?? ownerStateContext;
-
-  const handleInputFocus = (event: React.FocusEvent<HTMLDivElement>) => {
-    muiFormControl.onFocus?.(event);
-    onFocus?.(event);
-  };
-
-  const handleHiddenInputFocus = (event: React.FocusEvent<HTMLInputElement>) => {
-    handleInputFocus(event);
-  };
-
-  const handleKeyDown = (event: MuiEvent<React.KeyboardEvent<HTMLDivElement>>) => {
-    onKeyDown?.(event);
-    if (event.key === 'Enter' && !event.defaultMuiPrevented) {
-      // Do nothing if it's a multi input field
-      if (rootRef.current?.dataset.multiInput) {
-        return;
-      }
-      const closestForm = rootRef.current?.closest<HTMLFormElement>('form');
-      const submitTrigger = closestForm?.querySelector<HTMLElement>('[type="submit"]');
-      if (!closestForm || !submitTrigger) {
-        // do nothing if there is no form or no submit button (trigger)
-        return;
-      }
-      event.preventDefault();
-      // native input trigger submit with the `submitter` field set
-      closestForm.requestSubmit(submitTrigger);
-    }
-  };
-
-  const handleInputBlur = (event: React.FocusEvent<HTMLDivElement>) => {
-    muiFormControl.onBlur?.(event);
-    onBlur?.(event);
-  };
-
-  React.useEffect(() => {
-    if (muiFormControl) {
-      muiFormControl.setAdornedStart(Boolean(startAdornment));
-    }
-  }, [muiFormControl, startAdornment]);
-
-  React.useEffect(() => {
-    if (!muiFormControl) {
-      return;
-    }
-
-    if (areAllSectionsEmpty) {
-      muiFormControl.onEmpty();
-    } else {
-      muiFormControl.onFilled();
-    }
-  }, [muiFormControl, areAllSectionsEmpty]);
-
-  const classes = useUtilityClasses(classesProp, ownerState);
-
-  const InputRoot = slots?.root || PickersInputBaseRoot;
-  const inputRootProps = useSlotProps({
-    elementType: InputRoot,
-    externalSlotProps: slotProps?.root,
-    externalForwardedProps: other,
-    additionalProps: {
-      'aria-invalid': muiFormControl.error,
-      ref: handleRootRef,
-    },
-    className: classes.root,
-    ownerState,
-  });
-
-  const InputSectionsContainer = slots?.input || PickersInputBaseSectionsContainer;
-
-  const HtmlInputComponent = slots?.htmlInput || PickersInputBaseInput;
-  const { ref: resolvedHtmlInputRef, ...htmlInputProps } = useSlotProps({
-    elementType: HtmlInputComponent,
-    externalSlotProps: slotProps?.htmlInput,
-    ownerState,
-  }) as React.ComponentPropsWithRef<'input'>;
-  const handleInputRef = useForkRef(resolvedHtmlInputRef, inputRef);
-
-  const isSingleInputRange = elements.some(
-    (element) => element.content['data-range-position'] !== undefined,
-  );
-  React.useEffect(() => {
-    if (!isSingleInputRange || !ownerState.isPickerOpen) {
-      return;
-    }
-    const { activeBarWidth, sectionOffsets } = resolveSectionWidthAndOffsets(elements, rootRef);
-    sectionOffsetsRef.current = [sectionOffsets[0], sectionOffsets[1]];
-    if (activeBarRef.current) {
-      activeBarRef.current.style.width = `${activeBarWidth}px`;
-    }
-  }, [elements, isSingleInputRange, ownerState.isPickerOpen]);
-
-  return (
-    <InputRoot {...inputRootProps}>
-      {startAdornment}
-      <PickersSectionList
-        sectionListRef={sectionListRef}
-        elements={elements}
-        contentEditable={contentEditable}
-        tabIndex={tabIndex}
-        className={classes.sectionsContainer}
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        onInput={onInput}
-        onPaste={onPaste}
-        onKeyDown={handleKeyDown}
-        slots={{
-          root: InputSectionsContainer,
-          section: PickersInputBaseSection,
-          sectionContent: PickersInputBaseSectionContent,
-          sectionSeparator: PickersInputBaseSectionSeparator,
-        }}
-        slotProps={{
-          root: {
-            ...slotProps?.input,
-            ownerState,
-          } as any,
-          sectionContent: mergePickersInputBaseSectionContentSlotProps(
-            slotProps?.sectionContent,
-            pickersInputBaseClasses.sectionContent,
-          ),
-          sectionSeparator: ({ separatorPosition }) => ({
-            className:
-              separatorPosition === 'before'
-                ? pickersInputBaseClasses.sectionBefore
-                : pickersInputBaseClasses.sectionAfter,
-          }),
-        }}
-      />
-      {endAdornment}
-      {renderSuffix
-        ? renderSuffix({
-            ...muiFormControl,
-          })
-        : null}
-      <HtmlInputComponent
-        name={name}
-        className={classes.input}
-        value={value}
-        onChange={onChange}
-        id={id}
-        aria-hidden="true"
-        tabIndex={-1}
-        readOnly={readOnly}
-        required={muiFormControl.required}
-        disabled={muiFormControl.disabled}
-        // Hidden input element cannot be focused, trigger the root focus instead
-        // This allows to maintain the ability to do `inputRef.current.focus()` to focus the field
-        onFocus={handleHiddenInputFocus}
-        {...htmlInputProps}
-        ref={handleInputRef}
-      />
-      {isSingleInputRange && (
-        <PickersInputBaseActiveBar
-          className={classes.activeBar}
-          ref={activeBarRef}
-          ownerState={{ sectionOffsets: sectionOffsetsRef.current }}
-        />
-      )}
-    </InputRoot>
-  );
+    throw new Error("STUB");
 });
 
 PickersInputBase.propTypes /* remove-proptypes */ = {

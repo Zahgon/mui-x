@@ -63,103 +63,15 @@ export interface ChatComposerProps extends ComposerRootProps {
 const ChatComposerStyled = styled('form', {
   name: 'MuiChatComposer',
   slot: 'Root',
-  overridesResolver: (props, styles) => [
-    styles.root,
-    props.ownerState?.disabled && styles.disabled,
-  ],
-})(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  position: 'relative',
-  gap: theme.spacing(0.5),
-  padding: theme.spacing(1, 1.5),
-  border: '1px solid',
-  borderColor: (theme.vars || theme).palette.divider,
-  borderRadius: (theme.vars || theme).shape.borderRadius,
-  backgroundColor: (theme.vars || theme).palette.background.paper,
-  boxSizing: 'border-box',
-  flexShrink: 0,
-  margin: theme.spacing(0, 1.5, 1.5),
-  transition: theme.transitions.create(['border-color', 'box-shadow'], {
-    duration: theme.transitions.duration.short,
-  }),
-  '@media (prefers-reduced-motion: reduce)': {
-    transition: 'none',
-  },
-  '&:focus-within:not([data-disabled])': {
-    borderColor: (theme.vars || theme).palette.primary.main,
-    boxShadow: `0 0 0 1px ${(theme.vars || theme).palette.primary.main}`,
-  },
-  '&[data-disabled]': {
-    backgroundColor: (theme.vars || theme).palette.action.disabledBackground,
-    opacity: (theme.vars || theme).palette.action.disabledOpacity,
-    pointerEvents: 'none',
-  },
-  [`&.${chatComposerClasses.variantCompact}`]: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    flexWrap: 'wrap',
-    gap: theme.spacing(0.5),
-    borderRadius: (theme.vars || theme).shape.borderRadius,
-    backgroundColor: (theme.vars || theme).palette.background.paper,
-    border: '1px solid',
-    borderColor: (theme.vars || theme).palette.divider,
-    margin: theme.spacing(0, 1, 1),
-    padding: theme.spacing(0.5),
-    boxShadow: 'none',
-    '&:focus-within:not([data-disabled])': {
-      borderColor: (theme.vars || theme).palette.primary.main,
-      boxShadow: `0 0 0 1px ${(theme.vars || theme).palette.primary.main}`,
-    },
-    [`& .${chatComposerClasses.attachmentList}`]: {
-      flexBasis: '100%',
-      order: -1,
-    },
-    [`& .${chatComposerClasses.attachButton}`]: {
-      borderRadius: '50%',
-      width: 36,
-      height: 36,
-    },
-    [`& .${chatComposerClasses.sendButton}`]: {
-      borderRadius: (theme.vars || theme).shape.borderRadius,
-      width: 36,
-      height: 36,
-      padding: 0,
-      backgroundColor: (theme.vars || theme).palette.primary.main,
-      color: (theme.vars || theme).palette.primary.contrastText,
-      '&:disabled': {
-        backgroundColor: (theme.vars || theme).palette.primary.main,
-        color: (theme.vars || theme).palette.primary.contrastText,
-        opacity: (theme.vars || theme).palette.action.disabledOpacity,
-        cursor: 'not-allowed',
-      },
-    },
-  },
-}));
+  overridesResolver: (props, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 const DefaultComposerContent = React.memo(function DefaultComposerContent({
   features,
 }: {
   features?: ChatComposerFeatures;
 }) {
-  const showAttachments = features?.attachments !== false;
-
-  return (
-    <React.Fragment>
-      {showAttachments && <ChatComposerAttachmentList />}
-      <ChatComposerTextArea />
-      <ChatComposerToolbar>
-        {showAttachments && (
-          <ChatComposerAttachButton>
-            <DefaultAttachIcon />
-          </ChatComposerAttachButton>
-        )}
-        <ChatComposerSendButton>
-          <DefaultSendIcon />
-        </ChatComposerSendButton>
-      </ChatComposerToolbar>
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 });
 
 // @ts-expect-error React.memo typing doesn't include propTypes
@@ -187,22 +99,7 @@ const CompactComposerContent = React.memo(function CompactComposerContent({
 }: {
   features?: ChatComposerFeatures;
 }) {
-  const showAttachments = features?.attachments !== false;
-
-  return (
-    <React.Fragment>
-      {showAttachments && <ChatComposerAttachmentList />}
-      {showAttachments && (
-        <ChatComposerAttachButton>
-          <DefaultAttachIcon />
-        </ChatComposerAttachButton>
-      )}
-      <ChatComposerTextArea maxRows={5} />
-      <ChatComposerSendButton>
-        <DefaultSendIcon />
-      </ChatComposerSendButton>
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 });
 
 // @ts-expect-error React.memo typing doesn't include propTypes
@@ -227,62 +124,8 @@ CompactComposerContent.propTypes /* remove-proptypes */ = {
 
 const ChatComposer = React.forwardRef<HTMLFormElement, ChatComposerProps>(
   function ChatComposer(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatComposer' });
-    const {
-      slots,
-      slotProps,
-      className,
-      classes: classesProp,
-      sx,
-      children,
-      features,
-      variant: variantProp,
-      disabled = false,
-      ...other
-    } = props;
-    const contextVariant = useChatVariant();
-    const variant = variantProp ?? contextVariant;
-    const isCompact = variant === 'compact';
-    const classes = useChatComposerUtilityClasses(classesProp);
-    const attachmentConfig =
-      typeof features?.attachments === 'object' ? features.attachments : undefined;
-
-    const defaultContent = isCompact ? (
-      <CompactComposerContent features={features} />
-    ) : (
-      <DefaultComposerContent features={features} />
-    );
-
-    return (
-      <ComposerRoot
-        ref={ref}
-        disabled={disabled}
-        {...other}
-        attachmentConfig={attachmentConfig}
-        slots={{
-          ...slots,
-          root: slots?.root ?? ChatComposerStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          root: mergeSlotProps(
-            {
-              className: clsx(
-                classes.root,
-                isCompact && classes.variantCompact,
-                disabled && classes.disabled,
-                className,
-              ),
-              sx,
-            },
-            slotProps?.root,
-          ) as any,
-        }}
-      >
-        {children ?? defaultContent}
-      </ComposerRoot>
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatComposer.propTypes /* remove-proptypes */ = {

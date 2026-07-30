@@ -77,14 +77,7 @@ export function useDateRangePickerDefaultizedProps<Props extends BaseDateRangePi
   const validationProps = useApplyDefaultValuesToDateValidationProps(themeProps);
 
   const localeText = React.useMemo<PickersInputLocaleText | undefined>(() => {
-    if (themeProps.localeText?.toolbarTitle == null) {
-      return themeProps.localeText;
-    }
-
-    return {
-      ...themeProps.localeText,
-      dateRangePickerToolbarTitle: themeProps.localeText.toolbarTitle,
-    };
+      throw new Error("STUB");
   }, [themeProps.localeText]);
 
   return {

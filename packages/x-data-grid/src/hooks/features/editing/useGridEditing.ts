@@ -18,10 +18,7 @@ import { useGridRowEditing } from './useGridRowEditing';
 import type { GridStateInitializer } from '../../utils/useGridInitializeState';
 import { gridEditRowsStateSelector } from './gridEditingSelectors';
 
-export const editingStateInitializer: GridStateInitializer = (state) => ({
-  ...state,
-  editRows: {},
-});
+export const editingStateInitializer: GridStateInitializer = (state) => { throw new Error("STUB"); };
 
 export const useGridEditing = (
   apiRef: RefObject<GridPrivateApiCommunity>,
@@ -46,20 +43,8 @@ export const useGridEditing = (
   );
   const isCellEditable = React.useCallback<GridEditingApi['isCellEditable']>(
     (params) => {
-      if (!isCellEditableFn(params)) {
-        return false;
-      }
-      if (!params.colDef.editable) {
-        return false;
-      }
-      if (!params.colDef.renderEditCell) {
-        return false;
-      }
-      if (isCellEditableProp) {
-        return isCellEditableProp(params);
-      }
-      return true;
-    },
+          throw new Error("STUB");
+      },
     [isCellEditableProp, isCellEditableFn],
   );
 
@@ -85,71 +70,30 @@ export const useGridEditing = (
 
     // To run the callback immediately without waiting the timeout
     const runImmediately = () => {
-      const [timeout] = debounceMap.current[id][field];
-      clearTimeout(timeout);
-      callback();
-      delete debounceMap.current[id][field];
+        throw new Error("STUB");
     };
 
     const timeout = setTimeout(() => {
-      callback();
-      delete debounceMap.current[id][field];
+        throw new Error("STUB");
     }, debounceMs);
 
     debounceMap.current[id][field] = [timeout, runImmediately];
   };
 
   React.useEffect(() => {
-    const debounces = debounceMap.current;
-
-    return () => {
-      Object.entries(debounces).forEach(([id, fields]) => {
-        Object.keys(fields).forEach((field) => {
-          const [timeout] = debounces[id][field];
-          clearTimeout(timeout);
-          delete debounces[id][field];
-        });
-      });
-    };
+      throw new Error("STUB");
   }, []);
 
   const runPendingEditCellValueMutation = React.useCallback<
     GridEditingPrivateApi['runPendingEditCellValueMutation']
   >((id, field) => {
-    if (!debounceMap.current[id]) {
-      return;
-    }
-    if (!field) {
-      Object.keys(debounceMap.current[id]).forEach((debouncedField) => {
-        const [, runCallback] = debounceMap.current[id][debouncedField];
-        runCallback();
-      });
-    } else if (debounceMap.current[id][field]) {
-      const [, runCallback] = debounceMap.current[id][field];
-      runCallback();
-    }
+      throw new Error("STUB");
   }, []);
 
   const setEditCellValue = React.useCallback<GridEditingApi['setEditCellValue']>(
     (params) => {
-      const { id, field, debounceMs } = params;
-
-      return new Promise((resolve) => {
-        maybeDebounce(id, field, debounceMs, async () => {
-          const setEditCellValueToCall =
-            props.editMode === GridEditModes.Row
-              ? apiRef.current.setRowEditingEditCellValue
-              : apiRef.current.setCellEditingEditCellValue;
-
-          // Check if the cell is in edit mode
-          // By the time this callback runs the user may have cancelled the editing
-          if (apiRef.current.getCellMode(id, field) === GridCellModes.Edit) {
-            const result = await setEditCellValueToCall(params);
-            resolve(result);
-          }
-        });
-      });
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.editMode],
   );
 
@@ -157,18 +101,15 @@ export const useGridEditing = (
     GridEditingSharedApi['getRowWithUpdatedValues']
   >(
     (id, field) => {
-      return props.editMode === GridEditModes.Cell
-        ? apiRef.current.getRowWithUpdatedValuesFromCellEditing(id, field)
-        : apiRef.current.getRowWithUpdatedValuesFromRowEditing(id);
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.editMode],
   );
 
   const getEditCellMeta = React.useCallback<GridEditingSharedApi['unstable_getEditCellMeta']>(
     (id, field) => {
-      const editingState = gridEditRowsStateSelector(apiRef);
-      return editingState[id]?.[field] ?? null;
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 

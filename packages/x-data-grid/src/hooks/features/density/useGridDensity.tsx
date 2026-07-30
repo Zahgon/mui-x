@@ -14,10 +14,7 @@ import type { GridPipeProcessor } from '../../core/pipeProcessing';
 
 export const densityStateInitializer: GridStateInitializer<
   Pick<DataGridProcessedProps, 'initialState' | 'density'>
-> = (state, props) => ({
-  ...state,
-  density: props.initialState?.density ?? props.density ?? 'standard',
-});
+> = (state, props) => { throw new Error("STUB"); };
 
 export const useGridDensity = (
   apiRef: RefObject<GridPrivateApiCommunity>,
@@ -34,17 +31,7 @@ export const useGridDensity = (
   });
 
   const setDensity = useEventCallback<GridDensityApi['setDensity']>((newDensity): void => {
-    const currentDensity = gridDensitySelector(apiRef);
-    if (currentDensity === newDensity) {
-      return;
-    }
-
-    logger.debug(`Set grid density to ${newDensity}`);
-
-    apiRef.current.setState((state) => ({
-      ...state,
-      density: newDensity,
-    }));
+      throw new Error("STUB");
   });
 
   const densityApi: GridDensityApi = {
@@ -55,39 +42,15 @@ export const useGridDensity = (
 
   const stateExportPreProcessing = React.useCallback<GridPipeProcessor<'exportState'>>(
     (prevState, context) => {
-      const exportedDensity = gridDensitySelector(apiRef);
-
-      const shouldExportRowCount =
-        // Always export if the `exportOnlyDirtyModels` property is not activated
-        !context.exportOnlyDirtyModels ||
-        // Always export if the `density` is controlled
-        props.density != null ||
-        // Always export if the `density` has been initialized
-        props.initialState?.density != null;
-
-      if (!shouldExportRowCount) {
-        return prevState;
-      }
-
-      return {
-        ...prevState,
-        density: exportedDensity,
-      };
-    },
+          throw new Error("STUB");
+      },
     [apiRef, props.density, props.initialState?.density],
   );
 
   const stateRestorePreProcessing = React.useCallback<GridPipeProcessor<'restoreState'>>(
     (params, context) => {
-      const restoredDensity = context.stateToRestore?.density
-        ? context.stateToRestore.density
-        : gridDensitySelector(apiRef);
-      apiRef.current.setState((state) => ({
-        ...state,
-        density: restoredDensity,
-      }));
-      return params;
-    },
+          throw new Error("STUB");
+      },
     [apiRef],
   );
 
@@ -95,8 +58,6 @@ export const useGridDensity = (
   useGridRegisterPipeProcessor(apiRef, 'restoreState', stateRestorePreProcessing);
 
   React.useEffect(() => {
-    if (props.density) {
-      apiRef.current.setDensity(props.density);
-    }
+      throw new Error("STUB");
   }, [apiRef, props.density]);
 };

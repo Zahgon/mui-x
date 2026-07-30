@@ -27,31 +27,7 @@ const StandaloneMonthViewPremium = React.forwardRef(function StandaloneMonthView
   inProps: StandaloneMonthViewPremiumProps<TEvent, TResource>,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  useLicenseVerifier(packageInfo);
-
-  // eslint-disable-next-line mui/material-ui-name-matches-component-name
-  const props = useThemeProps({ props: inProps, name: 'MuiEventCalendar' });
-
-  const { parameters, forwardedProps } = useExtractEventCalendarParameters<
-    TEvent,
-    TResource,
-    typeof props
-  >(props);
-
-  const { localeText, ...other } = forwardedProps;
-
-  return (
-    <EventCalendarProvider
-      {...parameters}
-      storeClass={EventCalendarPremiumStore}
-      localeText={localeText}
-    >
-      <EventDialogProvider optionalRenderers={PREMIUM_EVENT_DIALOG_OPTIONAL_RENDERERS}>
-        <MonthView ref={forwardedRef} {...other} />
-        {watermark}
-      </EventDialogProvider>
-    </EventCalendarProvider>
-  );
+    throw new Error("STUB");
 }) as StandaloneMonthViewPremiumComponent;
 
 StandaloneMonthViewPremium.propTypes /* remove-proptypes */ = {

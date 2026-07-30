@@ -18,28 +18,15 @@ export const useGridRegisterPipeProcessor = <
   const id = React.useRef(`mui-${Math.round(Math.random() * 1e9)}`);
 
   const registerPreProcessor = React.useCallback(() => {
-    cleanup.current = apiRef.current.registerPipeProcessor(group, id.current, callback);
+      throw new Error("STUB");
   }, [apiRef, callback, group]);
 
   useFirstRender(() => {
-    if (enabled) {
-      registerPreProcessor();
-    }
+      throw new Error("STUB");
   });
 
   const isFirstRender = React.useRef(true);
   React.useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-    } else if (enabled) {
-      registerPreProcessor();
-    }
-
-    return () => {
-      if (cleanup.current) {
-        cleanup.current();
-        cleanup.current = null;
-      }
-    };
+      throw new Error("STUB");
   }, [registerPreProcessor, enabled]);
 };

@@ -48,15 +48,7 @@ const EventDialogRoot = styled(Dialog, {
 const EventDialogPaper = styled(Paper, {
   name: 'MuiEventDialog',
   slot: 'Paper',
-})(({ theme }) => ({
-  borderWidth: 0,
-  borderTopWidth: 1,
-  height: 'fit-content',
-  overflow: 'hidden',
-  '&[data-dragging]': {
-    outline: `1px solid ${(theme.vars || theme).palette.primary.light}`,
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 interface PaperComponentProps extends PaperProps {
   anchorRef: React.RefObject<HTMLElement>;
@@ -65,52 +57,7 @@ interface PaperComponentProps extends PaperProps {
 
 // 1. Setup the Draggable Paper Logic
 const PaperComponent = function PaperComponent(props: PaperComponentProps) {
-  const nodeRef = React.useRef<HTMLDivElement>(null);
-
-  const mutateStyle = React.useCallback(
-    (style: string) => {
-      if (nodeRef.current) {
-        nodeRef.current.style.transform = style;
-      }
-    },
-    [nodeRef],
-  );
-
-  const { anchorRef, dragHandlerRef, className, ...other } = props;
-  const resetDrag = useDraggableDialog(nodeRef, dragHandlerRef, mutateStyle);
-
-  const updatePosition = React.useCallback(
-    (shouldResetDrag = false) => {
-      const position = calculatePosition(anchorRef.current, nodeRef.current, 'left');
-      if (position && nodeRef.current) {
-        nodeRef.current.style.top = `${position.top}px`;
-        nodeRef.current.style.left = `${position.left}px`;
-
-        if (shouldResetDrag) {
-          // Reset transform when position is recalculated
-          resetDrag();
-        }
-      }
-    },
-    [anchorRef, resetDrag, nodeRef],
-  );
-
-  React.useLayoutEffect(() => {
-    updatePosition(true);
-  }, [updatePosition]);
-
-  React.useEffect(() => {
-    const handleResize = () => {
-      updatePosition(false);
-      resetDrag();
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [updatePosition, resetDrag]);
-
-  return <EventDialogPaper {...other} ref={nodeRef} className={className} />;
+    throw new Error("STUB");
 } as any as DialogProps['PaperComponent'];
 
 const EventDialog = createModal<SchedulerRenderableEventOccurrence>({
@@ -124,91 +71,13 @@ export const EventDialogContent = React.forwardRef(function EventDialogContent(
   inProps: EventDialogProps,
   forwardedRef: React.ForwardedRef<HTMLDivElement>,
 ) {
-  // eslint-disable-next-line mui/material-ui-name-matches-component-name
-  const props = useThemeProps({ props: inProps, name: 'MuiEventDialog' });
-  const { style, anchorRef, occurrence, onClose, open, ...other } = props;
-  // Context hooks
-  const store = useSchedulerStoreContext();
-  const { schedulerId, classes } = useEventDialogStyledContext();
-
-  // Selector hooks
-  const isEventReadOnly = useStore(store, schedulerEventSelectors.isReadOnly, occurrence.id);
-
-  // Ref hooks
-  const dragHandlerRef = React.useRef<HTMLElement>(null);
-
-  return (
-    <EventDialogRoot
-      ref={forwardedRef}
-      open={open}
-      onClose={onClose}
-      PaperComponent={PaperComponent}
-      aria-labelledby={`${schedulerId}-event-dialog-title`}
-      aria-modal="false"
-      className={classes.eventDialog}
-      slotProps={{
-        paper: { className: classes.eventDialogPaper, anchorRef, dragHandlerRef } as PaperProps,
-      }}
-      {...other}
-    >
-      {isEventReadOnly ? (
-        <ReadonlyContent
-          occurrence={occurrence}
-          onClose={onClose}
-          dragHandlerRef={dragHandlerRef}
-        />
-      ) : (
-        <FormContent occurrence={occurrence} onClose={onClose} dragHandlerRef={dragHandlerRef} />
-      )}
-    </EventDialogRoot>
-  );
+    throw new Error("STUB");
 });
 
 export function EventDialogProvider(props: EventDialogProviderProps) {
-  const { children, optionalRenderers, ...other } = props;
-  const store = useSchedulerStoreContext();
-  const isRecurringScopeDialogOpen = useStore(
-    store,
-    schedulerOtherSelectors.isRecurringScopeDialogOpen,
-  );
-  const showRecurrence = useStore(store, schedulerOtherSelectors.areRecurringEventsAvailable);
-
-  const RecurringScopeDialogRenderer = optionalRenderers?.recurringScopeDialog;
-
-  return (
-    <EventDialogOptionalRenderersContext.Provider
-      value={optionalRenderers ?? (EMPTY_OBJECT as EventDialogOptionalRenderers)}
-    >
-      <EventDialog.Provider
-        render={({ isOpen, anchorRef, data: occurrence, onClose }) => (
-          <EventDialogContent
-            open={isOpen}
-            anchorRef={anchorRef}
-            occurrence={occurrence}
-            onClose={onClose}
-            {...other}
-          />
-        )}
-        onOpen={(occurrence) => {
-          store.setEditedOccurrenceKey(occurrence.key);
-        }}
-        onClose={() => {
-          store.setEditedOccurrenceKey(null);
-          store.setOccurrencePlaceholder(null);
-        }}
-      >
-        {children}
-        {showRecurrence && isRecurringScopeDialogOpen && RecurringScopeDialogRenderer && (
-          <RecurringScopeDialogRenderer />
-        )}
-      </EventDialog.Provider>
-    </EventDialogOptionalRenderersContext.Provider>
-  );
+    throw new Error("STUB");
 }
 
 export function EventDialogTrigger(props: EventDialogTriggerProps) {
-  const { occurrence, ...other } = props;
-  const ref = React.useRef<HTMLElement | null>(null);
-
-  return <EventDialog.Trigger ref={ref} data={occurrence} {...other} />;
+    throw new Error("STUB");
 }

@@ -45,22 +45,13 @@ function GridDetailPanel(props: GridDetailPanelProps) {
   const rowNode = gridRowNodeSelector(apiRef, rowId);
 
   React.useLayoutEffect(() => {
-    if (hasAutoHeight && typeof ResizeObserver === 'undefined') {
-      // Fallback for IE
-      apiRef.current.storeDetailPanelHeight(rowId, ref.current!.clientHeight);
-    }
+      throw new Error("STUB");
   }, [apiRef, hasAutoHeight, rowId]);
 
   useResizeObserver(
     ref,
     (entries) => {
-      const [entry] = entries;
-      const observedHeight =
-        entry.borderBoxSize && entry.borderBoxSize.length > 0
-          ? entry.borderBoxSize[0].blockSize
-          : entry.contentRect.height;
-
-      apiRef.current.storeDetailPanelHeight(rowId, observedHeight);
+        throw new Error("STUB");
     },
     hasAutoHeight,
   );

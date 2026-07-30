@@ -33,8 +33,8 @@ const configuration: GridConfiguration<GridPrivateApiPro, DataGridProProcessedPr
     useGridRowsOverridableMethods,
     useGridParamsOverridableMethods,
     useIsCellEditable,
-    useCellAggregationResult: () => null,
-    useFilterValueGetter: (apiRef) => apiRef.current.getRowValue,
+    useCellAggregationResult: () => { throw new Error("STUB"); },
+    useFilterValueGetter: (apiRef) => { throw new Error("STUB"); },
   },
 };
 const packageInfo = {
@@ -48,36 +48,7 @@ const DataGridProRaw = forwardRef(function DataGridPro<R extends GridValidRowMod
   inProps: DataGridProProps<R>,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useDataGridProProps(inProps);
-  const privateApiRef = useGridApiInitialization<GridPrivateApiPro, GridApiPro>(
-    props.apiRef,
-    props,
-  );
-  useDataGridProComponent(privateApiRef, props, configuration as GridConfiguration);
-  useLicenseVerifier(packageInfo);
-
-  if (process.env.NODE_ENV !== 'production') {
-    validateProps(props, propValidatorsDataGridPro);
-  }
-
-  return (
-    <GridContextProvider
-      privateApiRef={privateApiRef}
-      configuration={configuration as GridConfiguration}
-      props={props}
-    >
-      <GridRoot
-        className={props.className}
-        style={props.style}
-        sx={props.sx}
-        {...props.slotProps?.root}
-        ref={ref}
-      >
-        {watermark}
-        <GridMultiSelectMeasurer />
-      </GridRoot>
-    </GridContextProvider>
-  );
+    throw new Error("STUB");
 });
 
 interface DataGridProComponent {

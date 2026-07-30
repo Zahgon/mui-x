@@ -26,73 +26,13 @@ export interface GaugeContainerProps
 const GStyled = styled('g', {
   slot: 'internal',
   shouldForwardProp: undefined,
-})(({ theme }) => ({
-  '& text': {
-    fill: (theme.vars || theme).palette.text.primary,
-  },
-}));
+})(({ theme }) => { throw new Error("STUB"); });
 
 const GaugeContainer = React.forwardRef(function GaugeContainer(
   props: GaugeContainerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const {
-    width: inWidth,
-    height: inHeight,
-    margin,
-    title,
-    desc,
-    value,
-    valueMin = 0,
-    valueMax = 100,
-    startAngle,
-    endAngle,
-    outerRadius,
-    innerRadius,
-    cornerRadius,
-    cx,
-    cy,
-    children,
-    ...other
-  } = props;
-
-  return (
-    <ChartsProvider
-      pluginParams={{
-        width: inWidth,
-        height: inHeight,
-        margin: defaultizeMargin(margin, { left: 10, right: 10, top: 10, bottom: 10 }),
-      }}
-      // We just use some of the core plugins for dimension management.
-      plugins={[] as any}
-    >
-      <GaugeProvider
-        value={value}
-        valueMin={valueMin}
-        valueMax={valueMax}
-        startAngle={startAngle}
-        endAngle={endAngle}
-        outerRadius={outerRadius}
-        innerRadius={innerRadius}
-        cornerRadius={cornerRadius}
-        cx={cx}
-        cy={cy}
-      >
-        <ChartsSurface
-          title={title}
-          desc={desc}
-          role="meter"
-          aria-valuenow={value === null ? undefined : value}
-          aria-valuemin={valueMin}
-          aria-valuemax={valueMax}
-          {...other}
-          ref={ref}
-        >
-          <GStyled aria-hidden="true">{children}</GStyled>
-        </ChartsSurface>
-      </GaugeProvider>
-    </ChartsProvider>
-  );
+    throw new Error("STUB");
 });
 
 GaugeContainer.propTypes /* remove-proptypes */ = {

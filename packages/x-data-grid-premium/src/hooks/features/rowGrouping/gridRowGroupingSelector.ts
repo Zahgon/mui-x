@@ -7,16 +7,16 @@ import {
 import type { GridStatePremium } from '../../../models/gridStatePremium';
 
 const gridRowGroupingStateSelector = createRootSelector(
-  (state: GridStatePremium) => state.rowGrouping,
+  (state: GridStatePremium) => { throw new Error("STUB"); },
 );
 
 export const gridRowGroupingModelSelector = createSelector(
   gridRowGroupingStateSelector,
-  (rowGrouping) => rowGrouping.model,
+  (rowGrouping) => { throw new Error("STUB"); },
 );
 
 export const gridRowGroupingSanitizedModelSelector = createSelectorMemoized(
   gridRowGroupingModelSelector,
   gridColumnLookupSelector,
-  (model, columnsLookup) => model.filter((field) => !!columnsLookup[field]),
+  (model, columnsLookup) => { throw new Error("STUB"); },
 );

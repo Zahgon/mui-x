@@ -20,7 +20,7 @@ export interface RadialLineOrAreaProps extends Omit<
 function RadialLine(props: RadialLineOrAreaProps) {
   const { seriesId, color, hidden, points, curve, closePath, ...other } = props;
 
-  const identifier = React.useMemo(() => ({ type: 'radialLine' as const, seriesId }), [seriesId]);
+  const identifier = React.useMemo(() => { throw new Error("STUB"); }, [seriesId]);
 
   const highlightState = useItemHighlightState(identifier);
 
@@ -29,8 +29,8 @@ function RadialLine(props: RadialLineOrAreaProps) {
 
   const d =
     d3LineRadial<RadialLinePoint>()
-      .angle((p) => p.angle)
-      .radius((p) => p.radius)
+      .angle((p) => { throw new Error("STUB"); })
+      .radius((p) => { throw new Error("STUB"); })
       .curve(getCurveFactory(curve))(closePath ? [...points, points[0]] : points) || '';
 
   const fadedOpacity = isFaded ? 0.3 : 1;

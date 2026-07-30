@@ -32,7 +32,7 @@ const zhCNGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: '显示筛选器',
   toolbarFiltersTooltipHide: '隐藏筛选器',
   toolbarFiltersTooltipShow: '显示筛选器',
-  toolbarFiltersTooltipActive: (count) => `${count} 个筛选器`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: '搜索…',
@@ -128,7 +128,7 @@ const zhCNGrid: Partial<GridLocaleText> = {
 
   // Column menu text
   columnMenuLabel: '菜单',
-  columnMenuAriaLabel: (columnName: string) => `${columnName} 列菜单`,
+  columnMenuAriaLabel: (columnName: string) => { throw new Error("STUB"); },
   columnMenuShowColumns: '显示',
   columnMenuManageColumns: '管理列',
   columnMenuFilter: '筛选器',
@@ -141,19 +141,19 @@ const zhCNGrid: Partial<GridLocaleText> = {
 
   // Column header text
   columnHeaderFiltersTooltipActive: (count) =>
-    count !== 1 ? `${count} 个筛选器` : `${count} 个筛选器`,
+    { throw new Error("STUB"); },
   columnHeaderFiltersLabel: '显示筛选器',
   columnHeaderSortIconLabel: '排序',
 
   // Rows selected footer text
-  footerRowSelected: (count) => `共选中了${count.toLocaleString()}行`,
+  footerRowSelected: (count) => { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: '所有行:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} / ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: '多选框',
@@ -185,8 +185,8 @@ const zhCNGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: '组',
-  groupColumn: (name) => `用${name}分组`,
-  unGroupColumn: (name) => `不再用${name}分组`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: '详细信息',
@@ -196,24 +196,10 @@ const zhCNGrid: Partial<GridLocaleText> = {
   // Pagination
   paginationRowsPerPage: '每页行数:',
   paginationDisplayedRows: ({ from, to, count, estimated }) => {
-    if (!estimated) {
-      return `${formatNumber(from)}–${formatNumber(to)} 共 ${count !== -1 ? formatNumber(count) : `超过 ${formatNumber(to)}`}`;
-    }
-    const estimatedLabel =
-      estimated && estimated > to ? `约 ${formatNumber(estimated)}` : `超过 ${formatNumber(to)}`;
-    return `${formatNumber(from)}–${formatNumber(to)} 共 ${count !== -1 ? formatNumber(count) : estimatedLabel}`;
+      throw new Error("STUB");
   },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return '第一页';
-    }
-    if (type === 'last') {
-      return '最后一页';
-    }
-    if (type === 'next') {
-      return '下一页';
-    }
-    return '上一页';
+      throw new Error("STUB");
   },
 
   // Row reordering text

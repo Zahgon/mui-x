@@ -11,7 +11,7 @@ export interface DatePickerToolbarClasses {
 export type DatePickerToolbarClassKey = keyof DatePickerToolbarClasses;
 
 export function getDatePickerToolbarUtilityClass(slot: string) {
-  return generateUtilityClass('MuiDatePickerToolbar', slot);
+    throw new Error("STUB");
 }
 
 export const datePickerToolbarClasses: DatePickerToolbarClasses = generateUtilityClasses(

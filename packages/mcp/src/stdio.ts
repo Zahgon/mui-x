@@ -50,9 +50,7 @@ const main = async () => {
   // chained so the SDK's own close handling still runs.
   const sdkOnClose = transport.onclose;
   transport.onclose = () => {
-    shutdown.abort();
-    toolset.dispose();
-    sdkOnClose?.();
+      throw new Error("STUB");
   };
 
   // useMuiDocs needs the catalog; register it when that settles (or log if unreachable), announced
@@ -61,10 +59,5 @@ const main = async () => {
 };
 
 main().catch((error: unknown) => {
-  // Startup failure: the combined logger may not exist yet, so fall back to bare console.error.
-  console.error(
-    '\n\x1b[1mAn error was encountered while starting the MCP server.\x1b[0m\n\nPlease share the error details and your setup information in the "docs-feedback" channel of the official Discord server: \x1b[1mhttps://mui.com/r/discord\x1b[0m.\n',
-  );
-  console.error(error);
-  process.exit(1);
+    throw new Error("STUB");
 });

@@ -30,7 +30,7 @@ const bgBGGrid: Partial<GridLocaleText> = {
   toolbarFiltersLabel: 'Покажи Филтрите',
   toolbarFiltersTooltipHide: 'Скрий Филтрите',
   toolbarFiltersTooltipShow: 'Покажи Филтрите',
-  toolbarFiltersTooltipActive: (count) => `${count} активни филтри`,
+  toolbarFiltersTooltipActive: (count) => { throw new Error("STUB"); },
 
   // Quick filter toolbar field
   toolbarQuickFilterPlaceholder: 'Търси…',
@@ -138,22 +138,20 @@ const bgBGGrid: Partial<GridLocaleText> = {
   // columnMenuManageCharts: 'Manage charts',
 
   // Column header text
-  columnHeaderFiltersTooltipActive: (count) => `${count} активни филтри`,
+  columnHeaderFiltersTooltipActive: (count) => { throw new Error("STUB"); },
   columnHeaderFiltersLabel: 'Покажи Филтрите',
   columnHeaderSortIconLabel: 'Сортирай',
 
   // Rows selected footer text
   footerRowSelected: (count) =>
-    count !== 1
-      ? `${count.toLocaleString()} избрани редове`
-      : `${count.toLocaleString()} избран ред`,
+    { throw new Error("STUB"); },
 
   // Total row amount footer text
   footerTotalRows: 'Общо Редове:',
 
   // Total visible row amount footer text
   footerTotalVisibleRows: (visibleCount, totalCount) =>
-    `${visibleCount.toLocaleString()} от ${totalCount.toLocaleString()}`,
+    { throw new Error("STUB"); },
 
   // Checkbox selection text
   checkboxSelectionHeaderName: 'Избор на квадратче',
@@ -185,8 +183,8 @@ const bgBGGrid: Partial<GridLocaleText> = {
 
   // Grouping columns
   groupingColumnHeaderName: 'Група',
-  groupColumn: (name) => `Групирай по ${name}`,
-  unGroupColumn: (name) => `Спри групиране по ${name}`,
+  groupColumn: (name) => { throw new Error("STUB"); },
+  unGroupColumn: (name) => { throw new Error("STUB"); },
 
   // Master/detail
   detailPanelToggle: 'Превключване на панела с детайли',
@@ -209,17 +207,7 @@ const bgBGGrid: Partial<GridLocaleText> = {
   //   return `${formatNumber(from)}–${formatNumber(to)} of ${!unknownRowCount ? formatNumber(count) : estimatedLabel}`;
   // },
   paginationItemAriaLabel: (type) => {
-    if (type === 'first') {
-      return 'Отиди на първата страница';
-    }
-    if (type === 'last') {
-      return 'Отиди на последната страница';
-    }
-    if (type === 'next') {
-      return 'Отиди на следващата страница';
-    }
-    // if (type === 'previous') {
-    return 'Отиди на предишната страница';
+      throw new Error("STUB");
   },
 
   // Row reordering text

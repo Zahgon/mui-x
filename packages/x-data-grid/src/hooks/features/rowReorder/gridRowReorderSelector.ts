@@ -3,38 +3,35 @@ import type { GridStateCommunity } from '../../../models/gridStateCommunity';
 import type { GridRowId } from '../../../models/gridRows';
 
 export const gridRowReorderStateSelector = createRootSelector(
-  (state: GridStateCommunity) => state.rowReorder,
+  (state: GridStateCommunity) => { throw new Error("STUB"); },
 );
 
 export const gridIsRowDragActiveSelector = createSelector(
   gridRowReorderStateSelector,
-  (rowReorder) => rowReorder?.isActive ?? false,
+  (rowReorder) => { throw new Error("STUB"); },
 );
 
 // Selector for the entire drop target state
 export const gridRowDropTargetSelector = createSelector(
   gridRowReorderStateSelector,
-  (rowReorder) => rowReorder?.dropTarget ?? { rowId: null, position: null },
+  (rowReorder) => { throw new Error("STUB"); },
 );
 
 export const gridRowDropTargetRowIdSelector = createSelector(
   gridRowDropTargetSelector,
-  (dropTarget) => dropTarget.rowId ?? null,
+  (dropTarget) => { throw new Error("STUB"); },
 );
 
 // Selector for a specific row's drop position
 export const gridRowDropPositionSelector = createSelector(
   gridRowDropTargetSelector,
   (dropTarget, rowId: GridRowId) => {
-    if (dropTarget.rowId === rowId) {
-      return dropTarget.position;
-    }
-    return null;
+      throw new Error("STUB");
   },
 );
 
 // Selector for the dragged row ID
 export const gridDraggedRowIdSelector = createSelector(
   gridRowReorderStateSelector,
-  (rowReorder) => rowReorder?.draggedRowId ?? null,
+  (rowReorder) => { throw new Error("STUB"); },
 );

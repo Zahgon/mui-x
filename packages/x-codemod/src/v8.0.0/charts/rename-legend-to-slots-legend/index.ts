@@ -14,63 +14,10 @@ export default function transformer(file: JsCodeShiftFileInfo, api: JsCodeShiftA
   root
     .find(j.ImportDeclaration)
     .filter(({ node }) => {
-      return typeof node.source.value === 'string' && node.source.value.startsWith('@mui/x-charts');
+        throw new Error("STUB");
     })
     .forEach((path) => {
-      path.node.specifiers?.forEach((node) => {
-        root.findJSXElements(node.local?.name.toString()).forEach((elementPath) => {
-          if (elementPath.node.type !== 'JSXElement') {
-            return;
-          }
-
-          const legendProps = elementPath.node.openingElement.attributes?.find(
-            (elementNode) =>
-              elementNode.type === 'JSXAttribute' && elementNode.name.name === 'legend',
-          );
-
-          if (!legendProps) {
-            // No legend props to manage
-            return;
-          }
-
-          const slotProps = elementPath.node.openingElement.attributes?.find(
-            (elementNode) =>
-              elementNode.type === 'JSXAttribute' && elementNode.name.name === 'slotProps',
-          );
-
-          if (slotProps === null) {
-            // We create a new slotProps object
-            elementPath.node.openingElement.attributes?.push(
-              j.jsxAttribute(
-                j.jsxIdentifier('slotProps'),
-                j.jsxExpressionContainer(
-                  j.objectExpression([
-                    // @ts-ignore legend receives an object.
-                    j.objectProperty(j.identifier('legend'), legendProps.value.expression),
-                  ]),
-                ),
-              ),
-            );
-          } else {
-            transformNestedProp(
-              elementPath,
-              'slotProps',
-              'legend',
-              // @ts-ignore legend receives an object.
-              legendProps.value.expression,
-              j,
-            );
-          }
-
-          // Remove the legend prop
-          j(elementPath)
-            .find(j.JSXAttribute)
-            .filter((a) => a.value.name.name === 'legend')
-            .forEach((pathToRemove) => {
-              j(pathToRemove).remove();
-            });
-        });
-      });
+        throw new Error("STUB");
     });
 
   const transformed = root.findJSXElements();

@@ -16,30 +16,7 @@ export function projectRRuleToTimezone(
   targetTimezone: TemporalTimezone,
   seriesStartDataTimezone: TemporalSupportedObject,
 ): SchedulerProcessedEventRecurrenceRule {
-  let nextRule = rrule;
-
-  if (rrule.until) {
-    nextRule = {
-      ...nextRule,
-      until: adapter.setTimezone(rrule.until, targetTimezone),
-    };
-  }
-
-  if (rrule.byDay?.length) {
-    if (rrule.freq === 'WEEKLY') {
-      nextRule = {
-        ...nextRule,
-        byDay: projectWeeklyByDay(adapter, rrule.byDay, seriesStartDataTimezone, targetTimezone),
-      };
-    }
-
-    // Monthly BYDAY with ordinals (e.g. 1MO, -1FR) is intentionally NOT projected.
-    // Ordinals represent a calendar position in the event timezone and do not map
-    // to a stable or meaningful rule in the display timezone.
-    // Keeping the original rule avoids misleading UI representations.
-  }
-
-  return nextRule;
+    throw new Error("STUB");
 }
 
 // Project weekly byDay values using a real occurrence anchored to the series start.
@@ -51,21 +28,5 @@ function projectWeeklyByDay(
   seriesStartDataTimezone: TemporalSupportedObject,
   targetTimezone: TemporalTimezone,
 ): RecurringEventWeekDayCode[] {
-  const startDayCode = getWeekDayCode(adapter, seriesStartDataTimezone);
-  const startDayIndex = NOT_LOCALIZED_WEEK_DAYS_INDEXES.get(startDayCode)!;
-
-  const projected = byDay.map((value) => {
-    const { code } = tokenizeByDay(value);
-    const targetIndex = NOT_LOCALIZED_WEEK_DAYS_INDEXES.get(code)!;
-
-    const delta = (((targetIndex - startDayIndex) % 7) + 7) % 7;
-
-    const occurrenceDataTz = adapter.addDays(seriesStartDataTimezone, delta);
-
-    const occurrenceDisplayTz = adapter.setTimezone(occurrenceDataTz, targetTimezone);
-
-    return getWeekDayCode(adapter, occurrenceDisplayTz);
-  });
-
-  return Array.from(new Set(projected));
+    throw new Error("STUB");
 }

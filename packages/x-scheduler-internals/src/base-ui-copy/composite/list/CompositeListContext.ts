@@ -11,10 +11,14 @@ export interface CompositeListContextValue<Metadata> {
 }
 
 export const CompositeListContext = React.createContext<CompositeListContextValue<any>>({
-  register: () => {},
-  unregister: () => {},
+  register: () => {
+        throw new Error("STUB");
+    },
+  unregister: () => {
+      throw new Error("STUB");
+  },
   subscribeMapChange: () => {
-    return () => {};
+      throw new Error("STUB");
   },
   elementsRef: { current: [] },
   nextIndexRef: { current: 0 },

@@ -36,54 +36,7 @@ const HeatmapPremium = React.forwardRef(function HeatmapPremium(
   inProps: HeatmapPremiumProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const props = useThemeProps({ props: inProps, name: 'MuiHeatmapPremium' });
-  const { sx, slots, slotProps, loading, hideLegend, showToolbar = false } = props;
-
-  const {
-    chartsDataProviderPremiumProps,
-    chartsWrapperProps,
-    chartsAxisProps,
-    clipPathProps,
-    clipPathGroupProps,
-    legendProps,
-    heatmapPlotPremiumProps,
-    overlayProps,
-    children,
-  } = useHeatmapPremiumProps(props);
-
-  const Tooltip = slots?.tooltip ?? HeatmapTooltip;
-  const Toolbar = slots?.toolbar ?? ChartsToolbarPro;
-  const renderer = heatmapPlotPremiumProps.renderer;
-
-  return (
-    <ChartsDataProviderPremium<'heatmap', HeatmapPremiumPluginSignatures>
-      {...chartsDataProviderPremiumProps}
-    >
-      <ChartsWrapper {...chartsWrapperProps} ref={ref}>
-        {showToolbar ? <Toolbar {...props.slotProps?.toolbar} /> : null}
-        {!hideLegend && <ChartsLegend {...legendProps} />}
-        <ChartsLayerContainer>
-          {renderer === 'webgl' && (
-            <ChartsWebGLLayer>
-              <HeatmapPlotPremium {...heatmapPlotPremiumProps} />
-            </ChartsWebGLLayer>
-          )}
-          <ChartsSvgLayer sx={sx}>
-            <g {...clipPathGroupProps}>
-              {renderer !== 'webgl' && <HeatmapPlotPremium {...heatmapPlotPremiumProps} />}
-              <FocusedHeatmapCell />
-              <ChartsOverlay {...overlayProps} />
-            </g>
-            <ChartsAxis {...chartsAxisProps} />
-            <ChartsClipPath {...clipPathProps} />
-            <ChartsBrushOverlay />
-            {children}
-          </ChartsSvgLayer>
-        </ChartsLayerContainer>
-        {!loading && <Tooltip {...slotProps?.tooltip} />}
-      </ChartsWrapper>
-    </ChartsDataProviderPremium>
-  );
+    throw new Error("STUB");
 });
 
 HeatmapPremium.propTypes /* remove-proptypes */ = {

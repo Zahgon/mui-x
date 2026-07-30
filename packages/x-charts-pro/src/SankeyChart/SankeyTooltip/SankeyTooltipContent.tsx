@@ -15,35 +15,7 @@ import { useUtilityClasses } from './SankeyTooltip.classes';
 export interface SankeyTooltipContentProps extends Pick<SankeyTooltipProps, 'classes'> {}
 
 export function SankeyTooltipContent(props: SankeyTooltipContentProps) {
-  const classes = useUtilityClasses(props);
-
-  const tooltipData = useItemTooltip<'sankey'>();
-
-  if (!tooltipData) {
-    return null;
-  }
-
-  const { color, formattedValue, markType, label } = tooltipData;
-
-  return (
-    <ChartsTooltipPaper className={classes.paper}>
-      <ChartsTooltipTable className={classes.table}>
-        <tbody>
-          <ChartsTooltipRow className={classes.row}>
-            <ChartsTooltipCell className={clsx(classes.cell)} component="th">
-              <div className={classes.markContainer}>
-                <ChartsLabelMark type={markType} color={color} className={classes.mark} />
-              </div>
-              {label}
-            </ChartsTooltipCell>
-            <ChartsTooltipCell className={clsx(classes.valueCell, classes.cell)} component="td">
-              {formattedValue}
-            </ChartsTooltipCell>
-          </ChartsTooltipRow>
-        </tbody>
-      </ChartsTooltipTable>
-    </ChartsTooltipPaper>
-  );
+    throw new Error("STUB");
 }
 
 SankeyTooltipContent.propTypes /* remove-proptypes */ = {

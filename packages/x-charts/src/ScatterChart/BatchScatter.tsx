@@ -37,7 +37,7 @@ const MAX_POINTS_PER_PATH = 1000;
 const ALMOST_ZERO = 0.01;
 
 function createPath(x: number, y: number, markerSize: number) {
-  return `M${x - markerSize} ${y} a${markerSize} ${markerSize} 0 1 1 0 ${ALMOST_ZERO}`;
+    throw new Error("STUB");
 }
 
 function useCreatePaths(
@@ -49,42 +49,7 @@ function useCreatePaths(
   colorGetter?: ColorGetter<'scatter'>,
   sizeGetter?: ScatterSizeGetter,
 ) {
-  const { instance } = useChartsContext();
-  const getXPosition = getValueToPositionMapper(xScale);
-  const getYPosition = getValueToPositionMapper(yScale);
-
-  const paths = new Map<string, string[]>();
-  const temporaryPaths = new Map<string, string[]>();
-
-  for (let i = 0; i < seriesData.length; i += 1) {
-    const scatterPoint = seriesData[i];
-
-    const x = getXPosition(scatterPoint.x);
-    const y = getYPosition(scatterPoint.y);
-
-    if (!instance.isPointInside(x, y)) {
-      continue;
-    }
-
-    const radius = sizeGetter ? sizeGetter(i) : markerSize;
-    const path = createPath(x, y, radius);
-    const fill = colorGetter ? colorGetter(i) : color;
-
-    const tempPath = appendAtKey(temporaryPaths, fill, path);
-
-    if (tempPath.length >= MAX_POINTS_PER_PATH) {
-      appendAtKey(paths, fill, tempPath.join(''));
-      temporaryPaths.delete(fill);
-    }
-  }
-
-  for (const [fill, tempPath] of temporaryPaths.entries()) {
-    if (tempPath.length > 0) {
-      appendAtKey(paths, fill, tempPath.join(''));
-    }
-  }
-
-  return paths;
+    throw new Error("STUB");
 }
 
 interface BatchScatterPathsProps {
@@ -98,28 +63,7 @@ interface BatchScatterPathsProps {
 }
 
 function BatchScatterPaths(props: BatchScatterPathsProps) {
-  const { series, xScale, yScale, color, colorGetter, markerSize, sizeGetter } = props;
-  const paths = useCreatePaths(
-    series.data,
-    markerSize,
-    xScale,
-    yScale,
-    color,
-    colorGetter,
-    sizeGetter,
-  );
-
-  const children: React.ReactNode[] = [];
-
-  let i = 0;
-  for (const [fill, dArray] of paths.entries()) {
-    for (const d of dArray) {
-      children.push(<path key={i} fill={fill} d={d} />);
-      i += 1;
-    }
-  }
-
-  return <React.Fragment>{children}</React.Fragment>;
+    throw new Error("STUB");
 }
 
 const MemoBatchScatterPaths = React.memo(BatchScatterPaths);
@@ -153,76 +97,5 @@ const Group = styled('g', {
  * You can read about all the limitations [here](https://mui.com/x/react-charts/scatter/#performance).
  */
 export function BatchScatter(props: BatchScatterProps) {
-  const { series, xScale, yScale, color, colorGetter, sizeGetter, className } = props;
-
-  const { store } = useChartsContext<[UseChartHighlightSignature<'scatter'>]>();
-  const isSeriesHighlighted = store.use(selectorChartIsSeriesHighlighted, series.id);
-  const isSeriesFaded = store.use(selectorChartIsSeriesFaded, series.id);
-  const seriesHighlightedItemDataIndex = store.use(selectorChartSeriesHighlightedItem, series.id);
-  const seriesUnfadedItem = store.use(selectorChartSeriesUnfadedItem, series.id);
-  const highlightedModifier = 1.2;
-  const highlightMultiplier = isSeriesHighlighted ? highlightedModifier : 1;
-  const getMarkerRadius = (index: number) =>
-    (sizeGetter ? sizeGetter(index) : series.markerSize) * highlightMultiplier;
-  const classes = useUtilityClasses(props);
-
-  const siblings: React.ReactNode[] = [];
-  if (seriesHighlightedItemDataIndex != null) {
-    const datum = series.data[seriesHighlightedItemDataIndex];
-    const getXPosition = getValueToPositionMapper(xScale);
-    const getYPosition = getValueToPositionMapper(yScale);
-
-    siblings.push(
-      <path
-        key={`highlighted-${series.id}`}
-        fill={colorGetter ? colorGetter(seriesHighlightedItemDataIndex) : color}
-        data-highlighted
-        d={createPath(
-          getXPosition(datum.x),
-          getYPosition(datum.y),
-          getMarkerRadius(seriesHighlightedItemDataIndex) * highlightedModifier,
-        )}
-      />,
-    );
-  }
-
-  if (seriesUnfadedItem != null) {
-    const datum = series.data[seriesUnfadedItem];
-    const getXPosition = getValueToPositionMapper(xScale);
-    const getYPosition = getValueToPositionMapper(yScale);
-
-    siblings.push(
-      <path
-        key={`unfaded-${series.id}`}
-        fill={colorGetter ? colorGetter(seriesUnfadedItem) : color}
-        d={createPath(
-          getXPosition(datum.x),
-          getYPosition(datum.y),
-          getMarkerRadius(seriesUnfadedItem),
-        )}
-      />,
-    );
-  }
-
-  return (
-    <React.Fragment>
-      <Group
-        className={clsx(classes.series, className)}
-        data-series={series.id}
-        data-faded={isSeriesFaded || undefined}
-        data-highlighted={isSeriesHighlighted || undefined}
-      >
-        <MemoBatchScatterPaths
-          series={series}
-          xScale={xScale}
-          yScale={yScale}
-          color={color}
-          colorGetter={colorGetter}
-          sizeGetter={getMarkerRadius}
-          markerSize={series.markerSize}
-        />
-      </Group>
-      {siblings}
-    </React.Fragment>
-  );
+    throw new Error("STUB");
 }

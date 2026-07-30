@@ -34,24 +34,8 @@ export type ExportExcelProps = GridSlotProps['baseButton'] & {
  */
 const ExportExcel = forwardRef<HTMLButtonElement, ExportExcelProps>(
   function ExportExcel(props, ref) {
-    const { render, options, onClick, ...other } = props;
-    const rootProps = useGridRootProps();
-    const apiRef = useGridApiContext();
-
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-      apiRef.current.exportDataAsExcel(options);
-      onClick?.(event);
-    };
-
-    const element = useComponentRenderer(rootProps.slots.baseButton, render, {
-      onClick: handleClick,
-      ...rootProps.slotProps?.baseButton,
-      ...other,
-      ref,
-    });
-
-    return <React.Fragment>{element}</React.Fragment>;
-  },
+        throw new Error("STUB");
+    },
 );
 
 ExportExcel.propTypes /* remove-proptypes */ = {

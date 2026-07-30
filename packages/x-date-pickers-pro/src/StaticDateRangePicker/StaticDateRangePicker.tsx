@@ -27,45 +27,7 @@ const StaticDateRangePicker = React.forwardRef(function StaticDateRangePicker(
   inProps: StaticDateRangePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const defaultizedProps = useDateRangePickerDefaultizedProps<StaticDateRangePickerProps>(
-    inProps,
-    'MuiStaticDateRangePicker',
-  );
-
-  const displayStaticWrapperAs = defaultizedProps.displayStaticWrapperAs ?? 'mobile';
-
-  const viewRenderers: PickerViewRendererLookup<PickerRangeValue, any, any> = {
-    day: renderDateRangeViewCalendar,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  // Props with the default values specific to the static variant
-  const props = {
-    ...defaultizedProps,
-    viewRenderers,
-    displayStaticWrapperAs,
-    views: ['day'] as const,
-    openTo: 'day' as const,
-    calendars: defaultizedProps.calendars ?? (displayStaticWrapperAs === 'mobile' ? 1 : 2),
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      toolbar: {
-        hidden: displayStaticWrapperAs === 'desktop',
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-    },
-  };
-
-  const { renderPicker } = useStaticRangePicker<'day', typeof props>({
-    ref,
-    props,
-    valueManager: rangeValueManager,
-    valueType: 'date',
-    validator: validateDateRange,
-    steps: null,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as StaticDateRangePickerComponent;
 
 StaticDateRangePicker.propTypes /* remove-proptypes */ = {

@@ -37,28 +37,7 @@ const keyboardFocusHandler: KeyboardFocusHandler<'mapShape', 'mapShape'> = (even
   }
 
   return (currentItem, state) => {
-    const mapSeries = selectorChartSeriesProcessed(
-      state as ChartState<[UseChartKeyboardNavigationSignature], []>,
-    ).mapShape;
-
-    // name -> dataIndex
-    const current = currentItem
-      ? {
-          type: 'mapShape' as const,
-          seriesId: currentItem.seriesId,
-          dataIndex:
-            mapSeries?.series[currentItem.seriesId]?.lookupByName.get(currentItem.name) ?? -1,
-        }
-      : null;
-
-    const next = updateFocusedItem(current, state);
-    if (!next) {
-      return null;
-    }
-
-    // dataIndex -> name
-    const name = mapSeries?.series[next.seriesId]?.data[next.dataIndex]?.name;
-    return name === undefined ? null : { type: 'mapShape', seriesId: next.seriesId, name };
+      throw new Error("STUB");
   };
 };
 

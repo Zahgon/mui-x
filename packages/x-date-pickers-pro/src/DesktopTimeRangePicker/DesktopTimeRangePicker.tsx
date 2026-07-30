@@ -44,36 +44,7 @@ const STEPS: PickerRangeStep[] = [
 const rendererInterceptor = function RendererInterceptor(
   props: PickerRendererInterceptorProps<PickerRangeValue, TimeViewWithMeridiem, any>,
 ) {
-  const { viewRenderers, popperView, rendererProps } = props;
-  const { openTo, ...otherProps } = rendererProps;
-  const finalProps = {
-    ...otherProps,
-    sx: [
-      {
-        [`&.${multiSectionDigitalClockClasses.root}`]: {
-          [`.${multiSectionDigitalClockSectionClasses.root}`]: {
-            flex: 1,
-          },
-          [`.${multiSectionDigitalClockSectionClasses.item}`]: {
-            width: 'auto',
-            // avoid layout shift when hovering over a section with default width
-            minWidth: MULTI_SECTION_CLOCK_SECTION_WIDTH,
-          },
-        },
-        [`&.${digitalClockClasses.root} .${digitalClockClasses.item}`]: {
-          justifyContent: 'center',
-        },
-        [`&.${multiSectionDigitalClockClasses.root}, .${multiSectionDigitalClockSectionClasses.root}, &.${digitalClockClasses.root}`]:
-          {
-            maxHeight: RANGE_VIEW_HEIGHT,
-          },
-      },
-    ],
-  };
-  const viewRenderer = viewRenderers[popperView];
-  return (
-    <TimeRangePickerTimeWrapper {...finalProps} view={popperView} viewRenderer={viewRenderer} />
-  );
+    throw new Error("STUB");
 };
 
 type DesktopTimeRangePickerComponent = ((
@@ -84,83 +55,7 @@ const DesktopTimeRangePicker = React.forwardRef(function DesktopTimeRangePicker(
   inProps: DesktopTimeRangePickerProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const adapter = usePickerAdapter();
-
-  // Props with the default values common to all time range pickers
-  const defaultizedProps = useTimeRangePickerDefaultizedProps<DesktopTimeRangePickerProps>(
-    inProps,
-    'MuiDesktopTimeRangePicker',
-  );
-
-  const renderTimeView = defaultizedProps.shouldRenderTimeInASingleColumn
-    ? renderDigitalClockTimeView
-    : renderMultiSectionDigitalClockTimeView;
-
-  const viewRenderers: PickerViewRendererLookup<any, TimeViewWithMeridiem, any> = {
-    hours: renderTimeView,
-    minutes: renderTimeView,
-    seconds: renderTimeView,
-    meridiem: renderTimeView,
-    ...defaultizedProps.viewRenderers,
-  };
-
-  const shouldHoursRendererContainMeridiemView =
-    viewRenderers.hours?.name === renderMultiSectionDigitalClockTimeView.name;
-  const views = !shouldHoursRendererContainMeridiemView
-    ? defaultizedProps.views.filter((view) => view !== 'meridiem')
-    : defaultizedProps.views;
-
-  const props = {
-    ...defaultizedProps,
-    views,
-    viewRenderers,
-    ampmInClock: true,
-    format: resolveTimeFormat(adapter, {
-      ...defaultizedProps,
-      views: defaultizedProps.viewsForFormatting,
-    }),
-    slots: {
-      field: SingleInputTimeRangeField,
-      ...defaultizedProps.slots,
-    },
-    slotProps: {
-      ...defaultizedProps.slotProps,
-      field: (ownerState: PickerOwnerState) => ({
-        ...resolveComponentProps(defaultizedProps.slotProps?.field, ownerState),
-        ...extractValidationProps(defaultizedProps),
-      }),
-      tabs: {
-        hidden: true,
-        ...defaultizedProps.slotProps?.tabs,
-      },
-      toolbar: {
-        hidden: true,
-        ...defaultizedProps.slotProps?.toolbar,
-      },
-      layout: {
-        ...defaultizedProps.slotProps?.layout,
-        sx: mergeSx(defaultizedProps.slotProps?.layout?.sx, {
-          // Allow content wrapper to take full width when shortcuts are not present
-          [`&:not(:has(.${pickersLayoutClasses.shortcuts})) .${pickersLayoutClasses.contentWrapper}`]:
-            {
-              gridColumn: '1 /4',
-            },
-        }),
-      },
-    },
-  };
-
-  const { renderPicker } = useDesktopRangePicker<TimeViewWithMeridiem, typeof props>({
-    ref,
-    props,
-    valueManager: rangeValueManager,
-    valueType: 'time',
-    validator: validateTimeRange,
-    rendererInterceptor,
-    steps: STEPS,
-  });
-
-  return renderPicker();
+    throw new Error("STUB");
 }) as DesktopTimeRangePickerComponent;
 
 DesktopTimeRangePicker.propTypes /* remove-proptypes */ = {

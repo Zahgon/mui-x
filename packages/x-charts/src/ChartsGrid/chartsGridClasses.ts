@@ -15,7 +15,7 @@ export interface ChartsGridClasses {
 export type ChartsGridClassKey = keyof ChartsGridClasses;
 
 export function getChartsGridUtilityClass(slot: string) {
-  return generateUtilityClass('MuiChartsGrid', slot);
+    throw new Error("STUB");
 }
 export const chartsGridClasses: ChartsGridClasses = generateUtilityClasses('MuiChartsGrid', [
   'root',

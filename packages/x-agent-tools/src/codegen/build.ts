@@ -24,8 +24,8 @@ export function createCodegenTool(options: CreateCodegenToolOptions): GenerateRe
   });
   return createGenerateReactCodeTool({
     recipesBackendBaseUrl: options.recipesBackendBaseUrl,
-    getToken: (opts) => jwtClient.getToken(opts),
-    invalidateToken: () => jwtClient.invalidate(),
+    getToken: (opts) => { throw new Error("STUB"); },
+    invalidateToken: () => { throw new Error("STUB"); },
     logger: options.logger,
     fetcher: options.fetcher,
   });

@@ -42,47 +42,12 @@ const columnFieldsToExcludeFromPaste = [
 
 // Batches rows that are updated during clipboard paste to reduce `updateRows` calls
 function batchRowUpdates<R>(func: (rows: R[]) => void, wait?: number) {
-  let rows: R[] = [];
-
-  const debounced = debounce(() => {
-    func(rows);
-    rows = [];
-  }, wait);
-
-  return (row: R) => {
-    rows.push(row);
-    debounced();
-  };
+    throw new Error("STUB");
 }
 
 async function getTextFromClipboard(rootEl: HTMLElement) {
   return new Promise<string>((resolve) => {
-    const focusedCell = getActiveElement(document);
-
-    const el = document.createElement('input');
-    el.style.width = '0px';
-    el.style.height = '0px';
-    el.style.border = 'none';
-    el.style.margin = '0';
-    el.style.padding = '0';
-    el.style.outline = 'none';
-    el.style.position = 'absolute';
-    el.style.top = '0';
-    el.style.left = '0';
-
-    const handlePasteEvent = (event: ClipboardEvent) => {
-      el.removeEventListener('paste', handlePasteEvent);
-      const text = event.clipboardData?.getData('text/plain');
-      if (focusedCell instanceof HTMLElement) {
-        focusedCell.focus({ preventScroll: true });
-      }
-      el.remove();
-      resolve(text || '');
-    };
-
-    el.addEventListener('paste', handlePasteEvent);
-    rootEl.appendChild(el);
-    el.focus({ preventScroll: true });
+      throw new Error("STUB");
   });
 }
 
@@ -210,18 +175,10 @@ export class CellValueUpdater {
     };
 
     const promises = rowIdsToUpdate.map((rowId) => {
-      // Wrap in promise that always resolves to avoid Promise.all from stopping on first error.
-      // This is to avoid using `Promise.allSettled` that has worse browser support.
-      return new Promise((resolve) => {
-        handleRowUpdate(rowId).then(resolve).catch(resolve);
-      });
+        throw new Error("STUB");
     });
     Promise.all(promises).then(() => {
-      apiRef.current.publishEvent('clipboardPasteEnd', {
-        oldRows,
-        newRows,
-      });
-      this.rowsToUpdate.clear();
+        throw new Error("STUB");
     });
   }
 }
@@ -248,30 +205,14 @@ function defaultPasteResolver({
     let rowIndex = 0;
     let colIndex = 0;
     selectedCellsArray.forEach(({ id: rowId, field }) => {
-      if (rowId !== lastRowId) {
-        lastRowId = rowId;
-        rowIndex += 1;
-        colIndex = 0;
-      }
-
-      const rowDataArr = pastedData[isSingleValuePasted ? 0 : rowIndex];
-      const hasRowData = isSingleValuePasted ? true : rowDataArr !== undefined;
-      if (hasRowData) {
-        const cellValue = isSingleValuePasted ? rowDataArr[0] : rowDataArr[colIndex];
-        updateCell({ rowId, field, pastedCellValue: cellValue });
-      }
-
-      colIndex += 1;
+        throw new Error("STUB");
     });
 
     return;
   }
 
   const visibleColumnFields = gridVisibleColumnFieldsSelector(apiRef).filter((field) => {
-    if (columnFieldsToExcludeFromPaste.includes(field)) {
-      return false;
-    }
-    return true;
+      throw new Error("STUB");
   });
 
   if (gridRowSelectionCountSelector(apiRef) > 0 && !isSingleValuePasted) {
@@ -281,25 +222,7 @@ function defaultPasteResolver({
 
     // There's no guarantee that the selected rows are in the same order as the pasted rows
     selectedRows.forEach((row, rowId) => {
-      let rowData: string[] | undefined;
-      if (pastedRowsDataCount === 1) {
-        // If only one row is pasted - paste it to all selected rows
-        rowData = pastedData[0];
-      } else {
-        rowData = pastedData.shift();
-      }
-
-      if (rowData === undefined) {
-        return;
-      }
-
-      rowData.forEach((newCellValue, cellIndex) => {
-        updateCell({
-          rowId,
-          field: visibleColumnFields[cellIndex],
-          pastedCellValue: newCellValue,
-        });
-      });
+        throw new Error("STUB");
     });
 
     return;
@@ -327,17 +250,7 @@ function defaultPasteResolver({
 
   const selectedFieldIndex = visibleColumnFields.indexOf(selectedCell.field);
   pastedData.forEach((rowData, index) => {
-    const rowId = visibleRowIds[selectedRowIndex + index];
-
-    if (typeof rowId === 'undefined') {
-      return;
-    }
-
-    for (let i = selectedFieldIndex; i < visibleColumnFields.length; i += 1) {
-      const field = visibleColumnFields[i];
-      const stringValue = rowData[i - selectedFieldIndex];
-      updateCell({ rowId, field, pastedCellValue: stringValue });
-    }
+      throw new Error("STUB");
   });
 }
 
@@ -374,74 +287,8 @@ export const useGridClipboardImport = (
 
   const handlePaste = React.useCallback<GridEventListener<'cellKeyDown'>>(
     async (params, event) => {
-      // Ignore portal
-      // Do not apply shortcuts if the focus is not on the cell root component
-      if (isEventTargetInPortal(event)) {
-        return;
-      }
-      if (!enableClipboardPaste) {
-        return;
-      }
-      if (!isPasteShortcut(event)) {
-        return;
-      }
-
-      const focusedCell = gridFocusCellSelector(apiRef);
-      if (focusedCell !== null) {
-        const cellMode = apiRef.current.getCellMode(focusedCell.id, focusedCell.field);
-        if (cellMode === 'edit') {
-          // Do not paste data when the cell is in edit mode
-          return;
-        }
-      }
-
-      const rootEl = apiRef.current.rootElementRef?.current;
-      if (!rootEl) {
-        return;
-      }
-
-      const text = await getTextFromClipboard(rootEl);
-      if (!text) {
-        return;
-      }
-
-      const pastedData = splitClipboardPastedText(text, clipboardCopyCellDelimiter);
-      if (!pastedData) {
-        return;
-      }
-
-      if (onBeforeClipboardPasteStart) {
-        try {
-          await onBeforeClipboardPasteStart({ data: pastedData });
-        } catch (error) {
-          logger.debug('Clipboard paste operation cancelled');
-          return;
-        }
-      }
-
-      const cellUpdater = new CellValueUpdater({
-        apiRef,
-        processRowUpdate,
-        onProcessRowUpdateError,
-        getRowId,
-      });
-
-      apiRef.current.publishEvent('clipboardPasteStart', {
-        data: pastedData,
-      });
-
-      defaultPasteResolver({
-        pastedData,
-        apiRef: getPublicApiRef(apiRef),
-        updateCell: (...args) => {
-          cellUpdater.updateCell(...args);
-        },
-        pagination,
-        paginationMode,
-      });
-
-      cellUpdater.applyUpdates();
-    },
+          throw new Error("STUB");
+      },
     [
       apiRef,
       processRowUpdate,
@@ -459,12 +306,8 @@ export const useGridClipboardImport = (
 
   const checkIfCanStartEditing = React.useCallback<GridPipeProcessor<'canStartEditing'>>(
     (initialValue, { event }) => {
-      if (isPasteShortcut(event) && enableClipboardPaste) {
-        // Do not enter cell edit mode on paste
-        return false;
-      }
-      return initialValue;
-    },
+          throw new Error("STUB");
+      },
     [enableClipboardPaste],
   );
 

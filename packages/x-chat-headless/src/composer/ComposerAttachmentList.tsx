@@ -29,36 +29,5 @@ export const ComposerAttachmentList = React.forwardRef(function ComposerAttachme
   props: ComposerAttachmentListProps,
   ref: React.Ref<HTMLDivElement>,
 ) {
-  const { slots, slotProps, ...other } = props;
-  const composer = useComposerContext();
-  // Read attachments from the store (the source of truth) rather than the
-  // ComposerContext. The default attachment-list content is store-backed, so
-  // gating on the store lets the list render in a standalone/custom-layout
-  // preview where there is no `ChatComposer` ancestor (the ComposerContext
-  // default would report zero attachments and the list would never mount).
-  const store = useChatStore();
-  const attachments = useStore(store, chatSelectors.composerAttachments);
-  const ownerState: ComposerAttachmentListOwnerState = {
-    isSubmitting: composer.isSubmitting,
-    hasValue: composer.hasValue,
-    isStreaming: composer.isStreaming,
-    attachmentCount: attachments.length,
-    disabled: composer.disabled,
-  };
-  const AttachmentList = slots?.attachmentList ?? 'div';
-  const rootProps = useSlotProps({
-    elementType: AttachmentList,
-    externalSlotProps: slotProps?.attachmentList,
-    externalForwardedProps: other,
-    ownerState,
-    additionalProps: {
-      ref,
-    },
-  });
-
-  if (attachments.length === 0) {
-    return null;
-  }
-
-  return <AttachmentList {...rootProps} />;
+    throw new Error("STUB");
 }) as ComposerAttachmentListComponent;

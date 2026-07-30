@@ -30,23 +30,8 @@ const wave = keyframes`
 const ChatStreamingIndicatorStyled = styled('div', {
   name: 'MuiChatStreamingIndicator',
   slot: 'Root',
-  overridesResolver: (_, styles) => styles.root,
-})(({ theme }) => ({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: 6,
-  height: 14,
-  marginTop: theme.spacing(0.5),
-  '& > span': {
-    width: 7,
-    height: 7,
-    borderRadius: '50%',
-    background: (theme.vars || theme).palette.text.secondary,
-    animation: `${wave} 2.6s ease-in-out infinite`,
-  },
-  '& > span:nth-of-type(2)': { animationDelay: '0.18s' },
-  '& > span:nth-of-type(3)': { animationDelay: '0.36s' },
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})(({ theme }) => { throw new Error("STUB"); });
 
 /**
  * Animated dots shown while an assistant response is in flight: as a trailing
@@ -55,31 +40,8 @@ const ChatStreamingIndicatorStyled = styled('div', {
  */
 const ChatStreamingIndicator = React.forwardRef<HTMLDivElement, ChatStreamingIndicatorProps>(
   function ChatStreamingIndicator(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatStreamingIndicator' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatStreamingIndicatorUtilityClasses(classesProp);
-
-    return (
-      <StreamingIndicator
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          root: slots?.root ?? ChatStreamingIndicatorStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          root: mergeSlotProps(
-            {
-              className: clsx(classes.root, className),
-              sx,
-            },
-            slotProps?.root,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatStreamingIndicator.propTypes /* remove-proptypes */ = {

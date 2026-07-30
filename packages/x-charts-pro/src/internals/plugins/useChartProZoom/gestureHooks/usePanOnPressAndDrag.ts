@@ -18,23 +18,13 @@ export const usePanOnPressAndDrag = (
   const config = store.use(selectorPanInteractionConfig, 'pressAndDrag' as const);
 
   const isPanOnPressAndDragEnabled: boolean =
-    Object.values(optionsLookup).some((v) => v.panning) && Boolean(config);
+    Object.values(optionsLookup).some((v) => { throw new Error("STUB"); }) && Boolean(config);
 
   useDragOnPressGesture(instance, {
     config: config ?? undefined,
     enabled: isPanOnPressAndDragEnabled,
     onPan: (delta) => {
-      setZoomDataCallback((prev) =>
-        translateZoom(
-          prev,
-          { x: delta.x, y: -delta.y },
-          {
-            width: drawingArea.width,
-            height: drawingArea.height,
-          },
-          optionsLookup,
-        ),
-      );
+        throw new Error("STUB");
     },
   });
 };

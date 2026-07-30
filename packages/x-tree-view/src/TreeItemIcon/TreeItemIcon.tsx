@@ -56,13 +56,7 @@ function TreeItemIcon(props: TreeItemIconProps) {
   const Icon = slots[iconName];
   const { ownerState, ...iconProps } = useSlotProps({
     elementType: Icon as NonNullable<typeof Icon>,
-    externalSlotProps: (tempOwnerState: any) => ({
-      ...resolveComponentProps(
-        slotPropsFromTreeView[iconName as keyof typeof slotPropsFromTreeView],
-        tempOwnerState,
-      ),
-      ...resolveComponentProps(slotPropsFromTreeItem?.[iconName], tempOwnerState),
-    }),
+    externalSlotProps: (tempOwnerState: any) => { throw new Error("STUB"); },
     // TODO: Add proper ownerState
     ownerState: {},
   });

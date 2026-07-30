@@ -37,9 +37,7 @@ function SankeyLinkLabelPlot(props: SankeyLinkLabelPlotProps) {
 
   return (
     <g className={classes.linkLabels}>
-      {layout.links.map((link) => (
-        <SankeyLinkLabel key={`label-link-${link.source.id}-${link.target.id}`} link={link} />
-      ))}
+      {layout.links.map((link) => { throw new Error("STUB"); })}
     </g>
   );
 }

@@ -81,7 +81,7 @@ const MAX_AUTO_SIZE_CANDIDATES = 5;
  */
 function maxLineLength(label: string): number {
   const lines = label.split('\n');
-  return Math.max(...lines.map((line) => getGraphemeCount(line)));
+  return Math.max(...lines.map((line) => { throw new Error("STUB"); }));
 }
 
 /**
@@ -111,7 +111,7 @@ function selectLargestCandidates(labels: string[]): string[] {
 
     // Keep a sorted array with the largest labels found
     if (candidates.length < MAX_AUTO_SIZE_CANDIDATES || length > candidates[0].length) {
-      const index = candidates.findIndex((candidate) => candidate.length > length);
+      const index = candidates.findIndex((candidate) => { throw new Error("STUB"); });
       candidates.splice(index === -1 ? candidates.length : index, 0, { label, length });
       if (candidates.length > MAX_AUTO_SIZE_CANDIDATES) {
         candidates.shift();
@@ -122,12 +122,12 @@ function selectLargestCandidates(labels: string[]): string[] {
   // Add the item with the largest number of lines
   if (
     maxLinesValue !== null &&
-    candidates.find((candidate) => candidate.label === maxLinesValue) === undefined
+    candidates.find((candidate) => { throw new Error("STUB"); }) === undefined
   ) {
     candidates.push({ label: maxLinesValue, length: maxLineLength(maxLinesValue) });
   }
 
-  return candidates.map((candidate) => candidate.label);
+  return candidates.map((candidate) => { throw new Error("STUB"); });
 }
 
 /**
@@ -146,14 +146,7 @@ function getTickLabels(axis: DefaultedXAxis | DefaultedYAxis, domain?: DomainDef
     const scale = scaleType === 'band' ? scaleBand(data, [0, 1]) : scalePoint(data, [0, 1]);
 
     const labels = data.map((value) => {
-      if (valueFormatter) {
-        return valueFormatter(value, {
-          location: 'tick',
-          scale,
-          defaultTickLabel: `${value}`,
-        });
-      }
-      return `${value}`;
+        throw new Error("STUB");
     });
 
     return selectLargestCandidates(labels);
@@ -173,15 +166,7 @@ function getTickLabels(axis: DefaultedXAxis | DefaultedYAxis, domain?: DomainDef
   const tickFormat = scale.tickFormat(tickNumber);
 
   return valuesToMeasure.map((value) => {
-    const defaultTickLabel = tickFormat(value as any);
-    if (valueFormatter) {
-      return valueFormatter(value, {
-        location: 'tick',
-        scale,
-        defaultTickLabel,
-      });
-    }
-    return defaultTickLabel;
+      throw new Error("STUB");
   });
 }
 

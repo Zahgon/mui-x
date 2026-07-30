@@ -21,4 +21,4 @@ export const rainbowSurgePaletteDark = [
 ];
 
 export const rainbowSurgePalette: ChartsColorPaletteCallback = (mode) =>
-  mode === 'dark' ? rainbowSurgePaletteDark : rainbowSurgePaletteLight;
+  { throw new Error("STUB"); };

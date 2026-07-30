@@ -5,14 +5,9 @@ import { itemsSelectors } from '../items/selectors';
 import { TREE_VIEW_ROOT_PARENT_ID } from '../items';
 
 const expandedItemMapSelector = createSelectorMemoized(
-  (state: MinimalTreeViewState<any, any>) => state.expandedItems,
+  (state: MinimalTreeViewState<any, any>) => { throw new Error("STUB"); },
   (expandedItems) => {
-    const expandedItemsMap = new Map<TreeViewItemId, true>();
-    expandedItems.forEach((id) => {
-      expandedItemsMap.set(id, true);
-    });
-
-    return expandedItemsMap;
+      throw new Error("STUB");
   },
 );
 
@@ -20,7 +15,7 @@ export const expansionSelectors = {
   /**
    * Gets the expanded items as provided to the component.
    */
-  expandedItemsRaw: createSelector((state: MinimalTreeViewState<any, any>) => state.expandedItems),
+  expandedItemsRaw: createSelector((state: MinimalTreeViewState<any, any>) => { throw new Error("STUB"); }),
   /**
    * Gets the expanded items as a Map.
    */
@@ -32,39 +27,25 @@ export const expansionSelectors = {
     itemsSelectors.itemOrderedChildrenIdsLookup,
     expandedItemMapSelector,
     (itemOrderedChildrenIds, expandedItemsMap) => {
-      function appendChildren(itemId: TreeViewItemId): TreeViewItemId[] {
-        if (!expandedItemsMap.has(itemId)) {
-          return [itemId];
-        }
-
-        const itemsWithDescendants: TreeViewItemId[] = [itemId];
-        const children = itemOrderedChildrenIds[itemId] || [];
-        for (const childId of children) {
-          itemsWithDescendants.push(...appendChildren(childId));
-        }
-
-        return itemsWithDescendants;
-      }
-
-      return (itemOrderedChildrenIds[TREE_VIEW_ROOT_PARENT_ID] ?? []).flatMap(appendChildren);
+        throw new Error("STUB");
     },
   ),
   /**
    * Gets the slot that triggers the item's expansion when clicked.
    */
-  triggerSlot: createSelector((state: MinimalTreeViewState<any, any>) => state.expansionTrigger),
+  triggerSlot: createSelector((state: MinimalTreeViewState<any, any>) => { throw new Error("STUB"); }),
   /**
    * Checks whether an item is expanded.
    */
   isItemExpanded: createSelector(
     expandedItemMapSelector,
-    (expandedItemsMap, itemId: TreeViewItemId) => expandedItemsMap.has(itemId),
+    (expandedItemsMap, itemId: TreeViewItemId) => { throw new Error("STUB"); },
   ),
   /**
    * Checks whether an item is expandable.
    */
   isItemExpandable: createSelector(
     itemsSelectors.itemMeta,
-    (itemMeta, _itemId: TreeViewItemId) => itemMeta?.expandable ?? false,
+    (itemMeta, _itemId: TreeViewItemId) => { throw new Error("STUB"); },
   ),
 };

@@ -72,38 +72,10 @@ const mapper: SchedulerParametersToStateMapper<
   EventCalendarParameters<any, any>
 > = {
   getInitialState: (schedulerInitialState, parameters) => {
-    const shouldEventRequireResource =
-      parameters.shouldEventRequireResource ?? DEFAULT_SHOULD_EVENT_REQUIRE_RESOURCE;
-    warnIfShouldEventRequireResourceMisconfigured(shouldEventRequireResource, parameters.resources);
-    return {
-      ...schedulerInitialState,
-      ...deriveStateFromParameters(parameters),
-      preferences: parameters.preferences ?? parameters.defaultPreferences ?? EMPTY_OBJECT,
-      preferencesMenuConfig:
-        parameters.preferencesMenuConfig === false
-          ? parameters.preferencesMenuConfig
-          : {
-              ...DEFAULT_PREFERENCES_MENU_CONFIG,
-              ...parameters.preferencesMenuConfig,
-            },
-      viewDefinition: null,
-      view: parameters.view ?? parameters.defaultView ?? DEFAULT_VIEW,
-      shouldEventRequireResource,
-    };
-  },
+        throw new Error("STUB");
+    },
   updateStateFromParameters: (newSchedulerState, parameters, updateModel) => {
-    const shouldEventRequireResource =
-      parameters.shouldEventRequireResource ?? DEFAULT_SHOULD_EVENT_REQUIRE_RESOURCE;
-    warnIfShouldEventRequireResourceMisconfigured(shouldEventRequireResource, parameters.resources);
-    const newState: Partial<EventCalendarState> = {
-      ...newSchedulerState,
-      ...deriveStateFromParameters(parameters),
-      shouldEventRequireResource,
-    };
-
-    updateModel(newState, 'view', 'defaultView');
-    updateModel(newState, 'preferences', 'defaultPreferences');
-    return newState;
+      throw new Error("STUB");
   },
 };
 
@@ -126,30 +98,11 @@ export class ExtendableEventCalendarStore<
     instanceName: SchedulerInstanceName,
     recurringEventsPlugin: SchedulerRecurringEventsPluginInterface | null = null,
   ) {
-    super(parameters, adapter, instanceName, mapper, recurringEventsPlugin);
-
-    if (process.env.NODE_ENV !== 'production') {
-      // Assert the initial state validity; `subscribe` only fires on subsequent state changes.
-      this.assertViewValidity(this.state.view);
-      this.disposables.defer(
-        this.subscribe((state) => {
-          this.assertViewValidity(state.view);
-          return null;
-        }),
-      );
-    }
+      throw new Error("STUB");
   }
 
   private assertViewValidity(view: CalendarView) {
-    const views = this.state.views;
-    if (!views.includes(view)) {
-      throw new Error(
-        `MUI X Scheduler: EventCalendar received the view "${view}", which is not part of the \`views\` prop (received: ${views.join(', ')}). ` +
-          `This leaves the calendar in an inconsistent state where the current view is not one of the allowed options. ` +
-          `Add "${view}" to the \`views\` prop, or pass a view that is already included. ` +
-          `See https://mui.com/x/react-scheduler/event-calendar/views/ for more details.`,
-      );
-    }
+      throw new Error("STUB");
   }
 
   private setVisibleDateAndView = (
@@ -157,56 +110,11 @@ export class ExtendableEventCalendarStore<
     view: CalendarView,
     event: React.UIEvent,
   ) => {
-    const {
-      visibleDate: visibleDateProp,
-      view: viewProp,
-      onVisibleDateChange,
-      onViewChange,
-    } = this.parameters;
-
-    const hasVisibleDateChange = visibleDate !== this.state.visibleDate;
-    const hasViewChange = view !== this.state.view;
-    if (!hasVisibleDateChange && !hasViewChange) {
-      return;
-    }
-
-    this.assertViewValidity(view);
-    const eventDetails = createChangeEventDetails('none', event.nativeEvent);
-
-    if (hasVisibleDateChange) {
-      onVisibleDateChange?.(visibleDate, eventDetails);
-    }
-    if (hasViewChange) {
-      onViewChange?.(view, eventDetails);
-    }
-
-    if (eventDetails.isCanceled) {
-      return;
-    }
-
-    const canSetVisibleDate = visibleDateProp === undefined && hasVisibleDateChange;
-    const canSetView = viewProp === undefined && hasViewChange;
-    if (canSetVisibleDate || canSetView) {
-      this.update({
-        ...(canSetVisibleDate ? { visibleDate } : undefined),
-        ...(canSetView ? { view } : undefined),
-      });
-    }
+      throw new Error("STUB");
   };
 
   private setSiblingVisibleDate = (delta: 1 | -1, event: React.UIEvent) => {
-    const siblingVisibleDateGetter = this.state.viewDefinition?.siblingVisibleDateGetter;
-    if (!siblingVisibleDateGetter) {
-      warn(
-        'MUI X Scheduler: No definition found for the current view. Please use useEventCalendarView in your custom view.',
-      );
-      return;
-    }
-
-    this.setVisibleDate({
-      visibleDate: siblingVisibleDateGetter({ delta, state: this.state }),
-      event,
-    });
+      throw new Error("STUB");
   };
 
   /**
@@ -234,12 +142,12 @@ export class ExtendableEventCalendarStore<
   /**
    * Goes to the previous visible date span based on the current view.
    */
-  public goToPreviousVisibleDate = (event: React.UIEvent) => this.setSiblingVisibleDate(-1, event);
+  public goToPreviousVisibleDate = (event: React.UIEvent) => { throw new Error("STUB"); };
 
   /**
    * Goes to the next visible date span based on the current view.
    */
-  public goToNextVisibleDate = (event: React.UIEvent) => this.setSiblingVisibleDate(1, event);
+  public goToNextVisibleDate = (event: React.UIEvent) => { throw new Error("STUB"); };
 
   /**
    * Goes to a specific day and set the view to 'day'.
@@ -272,8 +180,7 @@ export class ExtendableEventCalendarStore<
    * Returns the cleanup function.
    */
   public setViewDefinition = (definition: EventCalendarViewDefinition) => {
-    this.set('viewDefinition', definition);
-    return () => this.set('viewDefinition', null);
+      throw new Error("STUB");
   };
 
   public buildPublicAPI() {

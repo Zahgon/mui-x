@@ -33,27 +33,16 @@ export class Pyramid implements FunnelCurveGenerator {
     context: CanvasRenderingContext2D,
     { isHorizontal, gap, position, sections, borderRadius, min, max, isIncreasing }: CurveOptions,
   ) {
-    this.context = context;
-    this.isHorizontal = isHorizontal ?? false;
-    this.gap = (gap ?? 0) / 2;
-    this.position = position ?? 0;
-    this.sections = sections ?? 1;
-    this.borderRadius = borderRadius ?? 0;
-    this.isIncreasing = isIncreasing ?? false;
-    this.min = min ?? { x: 0, y: 0 };
-    this.max = max ?? { x: 0, y: 0 };
-
-    if (isIncreasing) {
-      const currentMin = this.min;
-      const currentMax = this.max;
-      this.min = currentMax;
-      this.max = currentMin;
-    }
+      throw new Error("STUB");
   }
 
-  areaStart(): void {}
+  areaStart(): void {
+      throw new Error("STUB");
+  }
 
-  areaEnd(): void {}
+  areaEnd(): void {
+      throw new Error("STUB");
+  }
 
   lineStart(): void {}
 
@@ -90,59 +79,7 @@ export class Pyramid implements FunnelCurveGenerator {
   }
 
   processPoints(points: Point[]): Point[] {
-    // Replace funnel points by pyramids ones.
-    const processedPoints = points.map((point, index) => {
-      if (this.isHorizontal) {
-        const slopeEnd = {
-          x: this.max.x,
-          y: (this.max.y + this.min.y) / 2,
-        };
-        const slopeStart =
-          index <= 1
-            ? this.min
-            : {
-                x: this.min.x,
-                y: this.max.y,
-              };
-        const yGetter = lerpY(slopeStart.x, slopeStart.y, slopeEnd.x, slopeEnd.y);
-        return {
-          x: point.x,
-          y: yGetter(point.x),
-        };
-      }
-
-      const slopeEnd = {
-        x: (this.max.x + this.min.x) / 2,
-        y: this.max.y,
-      };
-      const slopeStart =
-        index <= 1
-          ? {
-              x: this.max.x,
-              y: this.min.y,
-            }
-          : this.min;
-      const xGetter = lerpX(slopeStart.x, slopeStart.y, slopeEnd.x, slopeEnd.y);
-      return {
-        x: xGetter(point.y),
-        y: point.y,
-      };
-    });
-
-    // In the last section, to form a triangle we need 3 points instead of 4
-    // Else the algorithm will break.
-    const isLastSection = this.position === this.sections - 1;
-    const isFirstSection = this.position === 0;
-
-    if (isFirstSection && this.isIncreasing) {
-      return [processedPoints[0], processedPoints[1], processedPoints[2]];
-    }
-
-    if (isLastSection && !this.isIncreasing) {
-      return [processedPoints[0], processedPoints[1], processedPoints[3]];
-    }
-
-    return processedPoints;
+      throw new Error("STUB");
   }
 
   point(xIn: number, yIn: number): void {

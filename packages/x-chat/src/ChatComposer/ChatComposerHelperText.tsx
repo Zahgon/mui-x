@@ -27,44 +27,13 @@ interface ChatComposerHelperTextOwnerState extends ComposerHelperTextOwnerState 
 const ChatComposerHelperTextStyled = styled('p', {
   name: 'MuiChatComposer',
   slot: 'HelperText',
-  overridesResolver: (_, styles) => styles.helperText,
-})<{ ownerState?: ChatComposerHelperTextOwnerState }>(({ theme, ownerState }) => ({
-  margin: 0,
-  fontSize: theme.typography.caption.fontSize,
-  lineHeight: theme.typography.caption.lineHeight,
-  color: ownerState?.error
-    ? (theme.vars || theme).palette.error.main
-    : (theme.vars || theme).palette.text.secondary,
-  paddingInline: theme.spacing(0.5),
-}));
+  overridesResolver: (_, styles) => { throw new Error("STUB"); },
+})<{ ownerState?: ChatComposerHelperTextOwnerState }>(({ theme, ownerState }) => { throw new Error("STUB"); });
 
 const ChatComposerHelperText = React.forwardRef<HTMLParagraphElement, ChatComposerHelperTextProps>(
   function ChatComposerHelperText(inProps, ref) {
-    const props = useThemeProps({ props: inProps, name: 'MuiChatComposerHelperText' });
-    const { slots, slotProps, className, classes: classesProp, sx, ...other } = props;
-    const classes = useChatComposerUtilityClasses(classesProp);
-
-    return (
-      <ComposerHelperText
-        ref={ref}
-        {...other}
-        slots={{
-          ...slots,
-          helperText: slots?.helperText ?? ChatComposerHelperTextStyled,
-        }}
-        slotProps={{
-          ...slotProps,
-          helperText: mergeSlotProps(
-            {
-              className: clsx(classes.helperText, className),
-              sx,
-            },
-            slotProps?.helperText,
-          ) as any,
-        }}
-      />
-    );
-  },
+        throw new Error("STUB");
+    },
 );
 
 ChatComposerHelperText.propTypes /* remove-proptypes */ = {

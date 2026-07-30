@@ -110,7 +110,7 @@ export const getCommodityColumns = (editable = false): GridColDefGenerator[] => 
     width: 140,
     generateData: randomQuantity,
     editable,
-    valueParser: (value) => Number(value),
+    valueParser: (value) => { throw new Error("STUB"); },
   },
   {
     field: 'filledQuantity',
@@ -141,7 +141,7 @@ export const getCommodityColumns = (editable = false): GridColDefGenerator[] => 
     renderEditCell: renderEditStatus,
     type: 'singleSelect',
     valueOptions: STATUS_OPTIONS,
-    valueFormatter: (value) => (value === 'PartiallyFilled' ? 'Partially Filled' : value),
+    valueFormatter: (value) => { throw new Error("STUB"); },
     width: 150,
     editable,
   },
@@ -151,7 +151,7 @@ export const getCommodityColumns = (editable = false): GridColDefGenerator[] => 
     generateData: randomUnitPrice,
     type: 'number',
     editable,
-    valueParser: (value) => Number(value),
+    valueParser: (value) => { throw new Error("STUB"); },
   },
   {
     field: 'unitPriceCurrency',
@@ -167,7 +167,7 @@ export const getCommodityColumns = (editable = false): GridColDefGenerator[] => 
     field: 'subTotal',
     headerName: 'Sub Total',
     valueGetter: (value, row) =>
-      row.quantity == null || row.unitPrice == null ? null : row.quantity * row.unitPrice,
+      { throw new Error("STUB"); },
     type: 'number',
     width: 120,
   },
@@ -178,15 +178,13 @@ export const getCommodityColumns = (editable = false): GridColDefGenerator[] => 
     type: 'number',
     width: 80,
     editable,
-    valueParser: (value) => Number(value),
+    valueParser: (value) => { throw new Error("STUB"); },
   },
   {
     field: 'feeAmount',
     headerName: 'Fee Amount',
     valueGetter: (value, row) =>
-      row.feeRate == null || row.quantity == null || row.unitPrice == null
-        ? null
-        : row.feeRate * row.quantity * row.unitPrice,
+      { throw new Error("STUB"); },
     type: 'number',
     width: 120,
   },
@@ -204,9 +202,7 @@ export const getCommodityColumns = (editable = false): GridColDefGenerator[] => 
     field: 'totalPrice',
     headerName: 'Total in USD',
     valueGetter: (value, row) =>
-      row.feeRate == null || row.quantity == null || row.unitPrice == null
-        ? null
-        : row.feeRate + row.quantity * row.unitPrice,
+      { throw new Error("STUB"); },
     renderCell: renderTotalPrice,
     type: 'number',
     width: 160,
@@ -263,17 +259,13 @@ export const getCommodityColumns = (editable = false): GridColDefGenerator[] => 
     renderEditCell: renderEditCountry,
     valueOptions: COUNTRY_ISO_OPTIONS_SORTED,
     valueParser: (value) => {
-      if (typeof value === 'string') {
-        return COUNTRY_ISO_OPTIONS_SORTED.find((country) => country.value === value);
-      }
-
-      return value;
+        throw new Error("STUB");
     },
-    valueFormatter: (value: { label: string }) => value?.label,
-    groupingValueGetter: (value: { label: string } | undefined) => value?.label,
+    valueFormatter: (value: { label: string }) => { throw new Error("STUB"); },
+    groupingValueGetter: (value: { label: string } | undefined) => { throw new Error("STUB"); },
     sortComparator: (v1, v2, param1, param2) =>
-      gridStringOrNumberComparator(v1.label, v2.label, param1, param2),
-    getOptionLabel: (value: { label: string }) => value?.label,
+      { throw new Error("STUB"); },
+    getOptionLabel: (value: { label: string }) => { throw new Error("STUB"); },
     editable,
     width: 120,
   } as GridColDef<any, CountryIsoOption, string>,
